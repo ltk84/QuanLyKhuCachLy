@@ -23,6 +23,18 @@ namespace QuanLyKhuCachLy
         public MainWindow()
         {
             InitializeComponent();
+            // walk up the tree to get the parent window
+            FrameworkElement parent = this.Parent;
+            while (parent != null && !parent is Window)
+            {
+                parent = parent.Parent;
+            }
+
+            // if window found, set style
+            if (parent != null && parent is Window)
+            {
+                parent.WindowStyle = WindowStyle.None;
+            }
         }
     }
 }
