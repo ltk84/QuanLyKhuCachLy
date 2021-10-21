@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e02815b38c444e64b2f52ee949f701b2" Name="Diagram1">
+        <EntityTypeShape EntityType="QLKCLModel.Account" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLKCLModel.Address" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLKCLModel.DestinationHistory" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLKCLModel.HealthInformation" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLKCLModel.InjectionRecord" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLKCLModel.QuarantineArea" Width="1.5" PointX="5.25" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLKCLModel.QuarantinePerson" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLKCLModel.QuarantineRoom" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLKCLModel.Severity" Width="1.5" PointX="0.75" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLKCLModel.Staff" Width="1.5" PointX="3" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLKCLModel.TestingResult" Width="1.5" PointX="5.25" PointY="10.625" IsExpanded="true" />
+        <AssociationConnector Association="QLKCLModel.FK__Quarantin__addre__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="QLKCLModel.FK__Quarantin__addre__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="QLKCLModel.FK__Staff__addressID__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="QLKCLModel.FK__Destinati__quara__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="QLKCLModel.FK__Quarantin__healt__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="QLKCLModel.FK__Injection__quara__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="QLKCLModel.FK__Quarantin__manag__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="QLKCLModel.FK__Quarantin__level__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="QLKCLModel.FK__Quarantin__roomI__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="QLKCLModel.FK__TestingRe__quara__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="QLKCLModel.FK__Quarantin__level__286302EC" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
