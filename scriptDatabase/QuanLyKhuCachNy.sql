@@ -68,12 +68,13 @@ create table Account
 (
 	id int identity(0,1),
 	username varchar(20),
-	password varchar(20),
+	password nvarchar(100),
 
 	/*Khóa chính*/
 	primary key (id),
 
 )
+
 
 create table Staff 
 (
@@ -195,10 +196,12 @@ create table DestinationHistory
 
 )
 
-use master
-drop check sexPerson
 
-use QLKCL
-go
-use master
-drop database QLKCL
+insert into Account(username, password) 
+values
+( N'tunglete', N'a052015c462d64835f6dd40eecffabf4'),
+( N'lamthon', N'45cdd9c9b0dcaeef9fbb154f45746a2f'),
+( N'thonle', N'5647015c4a0be08b19fcf6ac21ad2d94'),
+( N'phonluc', N'a6491f9211753cd5c857da1115492ba6')
+
+
