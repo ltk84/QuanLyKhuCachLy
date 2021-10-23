@@ -12,6 +12,7 @@ namespace QuanLyKhuCachLy.ViewModel
     {
         public bool isLoaded { get; set; }
         public ICommand loadedCommand { get; set; }
+        public ICommand qAInformationCommand { get; set; }
 
         public MainViewModel()
         {
@@ -20,7 +21,18 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 loadLoginScreen(p);
             });
-            
+
+            qAInformationCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                loadQAInformationWindow();
+            });
+
+        }
+
+        void loadQAInformationWindow()
+        {
+            QuarantineAreaInformationWindow qAreaWindow = new QuarantineAreaInformationWindow();
+            qAreaWindow.Show();
         }
 
         void loadLoginScreen(Window p)

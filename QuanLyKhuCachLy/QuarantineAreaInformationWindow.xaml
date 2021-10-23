@@ -1,0 +1,29 @@
+﻿<Window
+    x:Class="QuanLyKhuCachLy.QuarantineAreaInformationWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="QuarantineAreaInformation"
+    Width="800"
+    Height="450"
+    DataContext="{StaticResource QAVM}"
+    mc:Ignorable="d">
+    <StackPanel>
+        <Label Content="Ten" />
+        <TextBox Text="{Binding name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+        <Label Content="Tinh" />
+        <ComboBox ItemsSource="{Binding provinceList}" SelectedItem="{Binding selectedProvince}">
+        </ComboBox>
+        <Label Content="Quan" />
+        <ComboBox ItemsSource="{Binding districtList}" SelectedItem="{Binding selectedDistrict}"/>
+        <Label Content="Phuong" />
+        <ComboBox ItemsSource="{Binding wardList}" SelectedItem="{Binding selectedWard}"/>
+        <Label Content="Duong" />
+        <TextBox Text="{Binding streetName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+        <Label Content="So" />
+        <TextBox Text="{Binding apartmentNumber, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+        <Button Command="{Binding showCommand}" Content="Show"></Button>
+    </StackPanel>
+</Window>

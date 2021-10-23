@@ -30,8 +30,8 @@ namespace QuanLyKhuCachLy.ViewModel
         public LoginViewModel()
         {
             isLogin = false;
-            username = "";
-            password = "";
+            username = "tunglete";
+            password = "tunglete";
 
             loginCommand = new RelayCommand<LoginWindow>((p) => { return true; }, (p) =>
             {
@@ -50,6 +50,8 @@ namespace QuanLyKhuCachLy.ViewModel
         }
 
         #region methods
+
+        
 
         /// <summary>
         /// Xử lý đăng nhập

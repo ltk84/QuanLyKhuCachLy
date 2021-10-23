@@ -1,6 +1,8 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:viewmodel="clr-namespace:QuanLyKhuCachLy.ViewModel">
-    <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
-    <viewmodel:LoginViewModel x:Key="LoginVM"></viewmodel:LoginViewModel>
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:viewmodel="clr-namespace:QuanLyKhuCachLy.ViewModel">
+    <viewmodel:MainViewModel x:Key="MainVM" />
+    <viewmodel:LoginViewModel x:Key="LoginVM" />
+    <viewmodel:QuarantineAreaInformationViewModel x:Key="QAVM" />
 </ResourceDictionary>
