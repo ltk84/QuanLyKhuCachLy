@@ -1,8 +1,11 @@
-﻿<Application x:Class="QuanLyKhuCachLy.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:QuanLyKhuCachLy"
-             StartupUri="AuthenticationScreen.xaml">
+﻿<Application
+    x:Class="QuanLyKhuCachLy.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy"
+    xmlns:view="clr-namespace:QuanLyKhuCachLy.View"
+    xmlns:viewModel="clr-namespace:QuanLyKhuCachLy.ViewModel"
+    StartupUri="InitialSettingScreen.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -10,8 +13,17 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
-                <ResourceDictionary Source="/ResourceXAML/MainResource.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/ResourceXAML/MainResource.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type viewModel:InitialSettingFirstPageViewModel}">
+                <view:InitialSettingFirstPageView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:InitialSettingSecondPageViewModel}">
+                <view:InitialSettingSecondPageView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:InitialSettingThirdPageViewModel}">
+                <view:InitialSettingThirdPageView />
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
