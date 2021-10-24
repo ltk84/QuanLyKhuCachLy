@@ -13,52 +13,100 @@ namespace QuanLyKhuCachLy.ViewModel
     public class QuarantineAreaInformationViewModel : BaseViewModel
     {
         #region property
-        private string _name;
-        public string name { get => _name; set { _name = value; OnPropertyChanged(); } }
+        #region Quarantine Area
+        private string _QAName;
+        public string QAname { get => _QAName; set { _QAName = value; OnPropertyChanged(); } }
 
-        private string _province;
-        public string province { get => _province; set { _province = value; OnPropertyChanged(); } }
+        private string _QAStreetName;
+        public string QAStreetName { get => _QAStreetName; set { _QAStreetName = value; OnPropertyChanged(); } }
 
-        private string _district;
-        public string district { get => _district; set { _district = value; OnPropertyChanged(); } }
+        private string _QAApartmentNumber;
+        public string QAApartmentNumber { get => _QAApartmentNumber; set { _QAApartmentNumber = value; OnPropertyChanged(); } }
 
-        private string _ward;
-        public string ward { get => _ward; set { _ward = value; OnPropertyChanged(); } }
+        private string _QASelectedProvince;
+        public string QAselectedProvince { get => _QASelectedProvince; set { _QASelectedProvince = value; OnPropertyChanged();  } }
 
-        private string _streetName;
-        public string streetName { get => _streetName; set { _streetName = value; OnPropertyChanged(); } }
-
-        private string _apartmentNumber;
-        public string apartmentNumber { get => _apartmentNumber; set { _apartmentNumber = value; OnPropertyChanged(); } }
-
-        private string _selectedProvince;
-        public string selectedProvince { get => _selectedProvince; set { _selectedProvince = value; OnPropertyChanged(); province = selectedProvince; } }
-
-        private string _selectedWard;
-        public string selectedWard { get => _selectedWard; set { _selectedWard = value; OnPropertyChanged(); ward = selectedWard; } }
+        private string _QASelectedWard;
+        public string QAselectedWard { get => _QASelectedWard; set { _QASelectedWard = value; OnPropertyChanged(); } }
         
-        private string _selectedDistrict;
-        public string selectedDistrict { get => _selectedDistrict; set { _selectedDistrict = value; OnPropertyChanged(); district = selectedDistrict; } }
+        private string _QASelectedDistrict;
+        public string QASelectedDistrict { get => _QASelectedDistrict; set { _QASelectedDistrict = value; OnPropertyChanged(); } }
 
-        private ObservableCollection<string> _provinceList;
-        public ObservableCollection<string> provinceList { get => _provinceList; set {
-                _provinceList = value; OnPropertyChanged(); } }
+        private int _QATestCycle;
+        public int QAtestCycle { get => _QATestCycle; set { _QATestCycle = value; OnPropertyChanged(); } }
 
-        private ObservableCollection<string> _districtList;
-        public ObservableCollection<string> districtList
+        private int _QARequiredDayToFinish;
+        public int QARequiredDayToFinish { get => _QARequiredDayToFinish; set { _QARequiredDayToFinish = value; OnPropertyChanged(); } }
+
+        #endregion
+
+        #region Manager
+        private string _ManagerStreetName;
+        public string ManagerStreetName { get => _ManagerStreetName; set { _ManagerStreetName = value; OnPropertyChanged(); } }
+
+        private string _ManagerApartmentNumber;
+        public string ManagerApartmentNumber { get => _ManagerApartmentNumber; set { _ManagerApartmentNumber = value; OnPropertyChanged(); } }
+
+        private string _ManagerSelectedProvince;
+        public string ManagerSelectedProvince { get => _ManagerSelectedProvince; set { _ManagerSelectedProvince = value; OnPropertyChanged(); } }
+
+        private string _ManagerSelectedWard;
+        public string ManagerSelectedWard { get => _ManagerSelectedWard; set { _ManagerSelectedWard = value; OnPropertyChanged(); } }
+
+        private string _ManagerSelectedDistrict;
+        public string ManagerSelectedDistrict { get => _ManagerSelectedDistrict; set { _ManagerSelectedDistrict = value; OnPropertyChanged(); } }
+
+        private string _ManagerName;
+        public string ManagerName { get => _ManagerName; set { _ManagerName = value; OnPropertyChanged(); } }
+
+        private DateTime _ManagerDateOfBirth;
+        public DateTime ManagerDateOfBirth { get => _ManagerDateOfBirth; set { _ManagerDateOfBirth = value; OnPropertyChanged(); } }
+
+        private string _ManagerSex;
+        public string ManagerSex { get => _ManagerSex; set { _ManagerSex = value; OnPropertyChanged(); } }
+
+        private string _ManagerCitizenID;
+        public string ManagerCitizenID { get => _ManagerCitizenID; set { _ManagerCitizenID = value; OnPropertyChanged(); } }
+
+        private string _ManagerNationality;
+        public string ManagerNationality { get => _ManagerNationality; set { _ManagerNationality = value; OnPropertyChanged(); } }
+
+        private string _ManagerHealthInsuranceID;
+        public string ManagerHealthInsuranceID { get => _ManagerHealthInsuranceID; set { _ManagerHealthInsuranceID = value; OnPropertyChanged(); } }
+
+        private string _ManagerPhoneNumber;
+        public string ManagerPhoneNumber { get => _ManagerPhoneNumber; set { _ManagerPhoneNumber = value; OnPropertyChanged(); } }
+
+        private string _ManagerJobTitle;
+        public string ManagerJobTitle { get => _ManagerJobTitle; set { _ManagerJobTitle = value; OnPropertyChanged(); } }
+
+        private string _ManagerDepartment;
+        public string ManagerDepartment { get => _ManagerDepartment; set { _ManagerDepartment = value; OnPropertyChanged(); } }
+
+        #endregion
+
+
+
+        // đang dummy data (đáng lẻ nên lấy data từ đâu đó)
+        private ObservableCollection<string> _ProvinceList;
+        public ObservableCollection<string> ProvinceList { get => _ProvinceList; set {
+                _ProvinceList = value; OnPropertyChanged(); } }
+
+        private ObservableCollection<string> _DistrictList;
+        public ObservableCollection<string> DistrictList
         {
-            get => _districtList; set
+            get => _DistrictList; set
             {
-                _districtList = value; OnPropertyChanged();
+                _DistrictList = value; OnPropertyChanged();
             }
         }
 
-        private ObservableCollection<string> _wardList;
-        public ObservableCollection<string> wardList
+        private ObservableCollection<string> _WardList;
+        public ObservableCollection<string> WardList
         {
-            get => _wardList; set
+            get => _WardList; set
             {
-                _wardList = value; OnPropertyChanged();
+                _WardList = value; OnPropertyChanged();
             }
         }
 
@@ -68,20 +116,20 @@ namespace QuanLyKhuCachLy.ViewModel
 
         public QuarantineAreaInformationViewModel()
         {
-            provinceList = new ObservableCollection<string>() { 
+            ProvinceList = new ObservableCollection<string>() {
                 "HCM", "Binh Duong", "Vinh Long"
             };
-            districtList = new ObservableCollection<string>() { 
+            DistrictList = new ObservableCollection<string>() { 
                 "A", "B", "C"
             };
-            wardList = new ObservableCollection<string>()
+            WardList = new ObservableCollection<string>()
             {
                 "E", "F", "G"
             };
 
-            showCommand = new RelayCommand<object>((p) => 
+            showCommand = new RelayCommand<object>((p) =>
             {
-                if (!string.IsNullOrEmpty(name) && selectedDistrict != null && selectedProvince != null && selectedWard != null && !string.IsNullOrEmpty(streetName) && !string.IsNullOrEmpty(apartmentNumber))
+                if (!string.IsNullOrEmpty(QAname) && QASelectedDistrict != null && QAselectedProvince != null && QAselectedWard != null && !string.IsNullOrEmpty(QAStreetName) && !string.IsNullOrEmpty(QAApartmentNumber))
                     return true;
                 return false;
             }, (p) =>
@@ -90,18 +138,61 @@ namespace QuanLyKhuCachLy.ViewModel
             });
         }
 
+        #region Methods
+        // Chưa test
         void updateQuarantineAreaInformation()
         {
-            Address qAreaAddress = new Address() { 
-                province = province, district = district, apartmentNumber = apartmentNumber, streetName = streetName, ward = ward
+            Address QAreaAddress = new Address()
+            {
+                province = QAselectedProvince,
+                district = QASelectedDistrict,
+                apartmentNumber = QAApartmentNumber,
+                streetName = QAStreetName,
+                ward = QAselectedWard
             };
 
-            DataProvider.ins.db.Addresses.Add(qAreaAddress);
+            DataProvider.ins.db.Addresses.Add(QAreaAddress);
             DataProvider.ins.db.SaveChanges();
 
-            
+            Address ManagerAddress = new Address()
+            {
+                province = ManagerSelectedProvince,
+                district = ManagerSelectedDistrict,
+                apartmentNumber = ManagerApartmentNumber,
+                streetName = ManagerStreetName,
+                ward = ManagerSelectedWard
+            };
 
-           
+            DataProvider.ins.db.Addresses.Add(QAreaAddress);
+            DataProvider.ins.db.SaveChanges();
+
+            Staff Manager = new Staff()
+            {
+                addressID = ManagerAddress.id,
+                citizenID = ManagerCitizenID,
+                dateOfBirth = ManagerDateOfBirth,
+                department = ManagerDepartment,
+                healthInsuranceID = ManagerHealthInsuranceID,
+                jobTitle = ManagerJobTitle,
+                name = ManagerName,
+                nationality = ManagerNationality,
+                phoneNumber = ManagerPhoneNumber,
+                sex = ManagerSex,
+
+            };
+
+            DataProvider.ins.db.Staffs.Add(Manager);
+            DataProvider.ins.db.SaveChanges();
+
+            QuarantineArea QuarantineArea = new QuarantineArea()
+            {
+                addressID = QAreaAddress.id, name = QAname, testCycle = QAtestCycle, requiredDayToFinish = QARequiredDayToFinish, managerID = Manager.id, 
+            };
+
+            DataProvider.ins.db.QuarantineAreas.Add(QuarantineArea);
+            DataProvider.ins.db.SaveChanges();
         }
+
+        #endregion
     }
 }

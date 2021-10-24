@@ -42,7 +42,7 @@ namespace QuanLyKhuCachLy.ViewModel
             if (p == null) return;
             p.Hide();
 
-            LoginWindow loginWindow = new LoginWindow();
+            AuthenticationScreen loginWindow = new AuthenticationScreen();
             loginWindow.ShowDialog();
 
             if (loginWindow.DataContext == null) return;
@@ -51,7 +51,8 @@ namespace QuanLyKhuCachLy.ViewModel
             if (loginVM.isLogin) {
                 p.Show();
             }
-            else {
+            else
+            {
                 p.Close();
             }
 

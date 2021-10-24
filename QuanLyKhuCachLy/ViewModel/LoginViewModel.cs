@@ -33,12 +33,12 @@ namespace QuanLyKhuCachLy.ViewModel
             username = "tunglete";
             password = "tunglete";
 
-            loginCommand = new RelayCommand<LoginWindow>((p) => { return true; }, (p) =>
+            loginCommand = new RelayCommand<AuthenticationScreen>((p) => { return true; }, (p) =>
             {
                 login(p);
             });
 
-            closeCommand = new RelayCommand<LoginWindow>((p) => { return true; }, (p) =>
+            closeCommand = new RelayCommand<AuthenticationScreen>((p) => { return true; }, (p) =>
             {
                 p.Close();
             });
@@ -57,7 +57,7 @@ namespace QuanLyKhuCachLy.ViewModel
         /// Xử lý đăng nhập
         /// </summary>
         /// <param name="p"> Màn hình login</param>
-        void login(LoginWindow p)
+        void login(AuthenticationScreen p)
         {
             if (p == null) return;
 
@@ -92,7 +92,6 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (acc.password.Equals(encodePassword))
                     {
                         isLogin = true;
-                        isCorrectPass = true;
                         p.Close();
                         return;
                     }
