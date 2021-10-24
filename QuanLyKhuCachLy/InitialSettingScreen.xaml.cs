@@ -23,5 +23,10 @@ namespace QuanLyKhuCachLy
         {
             InitializeComponent();
         }
+
+        private void InitialSettingFirstPageView_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

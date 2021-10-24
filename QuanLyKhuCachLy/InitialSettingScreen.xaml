@@ -2,11 +2,10 @@
     x:Class="QuanLyKhuCachLy.InitialSettingScreen"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:control="clr-namespace:QuanLyKhuCachLy.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:QuanLyKhuCachLy"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModel="clr-namespace:QuanLyKhuCachLy.ViewModel"
     Title="InitialSettingScreen"
     Width="{Binding SystemParameters.PrimaryScreenWidth}"
     Height="{Binding SystemParameters.PrimaryScreenHeight}"
@@ -16,9 +15,6 @@
     WindowStartupLocation="CenterScreen"
     WindowState="Maximized"
     mc:Ignorable="d">
-    <Window.DataContext>
-        <viewModel:InitialSettingViewModel />
-    </Window.DataContext>
     <Viewbox
         Margin="0,0,0,80"
         HorizontalAlignment="Center"
@@ -39,10 +35,14 @@
                 Background="White"
                 CornerRadius="15">
                 <StackPanel>
-                    <ContentControl
-                        Width="1224.8"
-                        Height="644"
-                        Content="{Binding CurrentView}" />
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="644" />
+                        </Grid.RowDefinitions>
+                        <control:InitialSettingFirstPageView Panel.ZIndex="-1" Visibility="Visible" />
+                        <control:InitialSettingSecondPageView Visibility="Hidden" />
+                        <control:InitialSettingThirdPageView Panel.ZIndex="1" Visibility="Hidden" />
+                    </Grid>
                     <Grid
                         Grid.Row="3"
                         Margin="80,32,80,0"
@@ -64,7 +64,6 @@
                                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
                                 Background="#FF434A54"
                                 BorderBrush="{x:Null}"
-                                Command="{Binding PreviousPageCommand}"
                                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                                 FontSize="16"
                                 FontWeight="Bold"
@@ -80,7 +79,6 @@
                                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
                                 Background="#FF1D9583"
                                 BorderBrush="{x:Null}"
-                                Command="{Binding NextPageCommand}"
                                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                                 FontSize="12"
                                 FontWeight="Bold"
@@ -94,8 +92,9 @@
                                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                                 FontSize="16"
                                 FontWeight="Bold"
-                                Foreground="#FF434A54"
-                                Text="{Binding IndexCount}" />
+                                Foreground="#FF434A54">
+                                1/3
+                            </TextBlock>
                         </StackPanel>
                     </Grid>
                 </StackPanel>

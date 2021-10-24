@@ -1,9 +1,8 @@
 ﻿<UserControl
-    x:Class="QuanLyKhuCachLy.View.InitialSettingSecondPageView"
+    x:Class="QuanLyKhuCachLy.View.InitialSettingThirdPageView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:QuanLyKhuCachLy.View"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="740"
@@ -39,8 +38,6 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0" Grid.Column="0">
                     <TextBlock
@@ -48,7 +45,7 @@
                         FontSize="18"
                         FontWeight="Bold"
                         Foreground="#FF434A54">
-                        Thông tin cá nhân
+                        Công việc
                     </TextBlock>
                     <Separator Margin="0,5,24,2">
                         <Separator.RenderTransform>
@@ -77,7 +74,7 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Họ và tên
+                        Chức vụ
                     </TextBlock>
                     <TextBox
                         Margin="0"
@@ -85,7 +82,7 @@
                         VerticalAlignment="Top"
                         materialDesign:HintAssist.Background="Transparent"
                         materialDesign:HintAssist.Foreground="#FF434a54"
-                        materialDesign:HintAssist.Hint="Nhập họ và tên"
+                        materialDesign:HintAssist.Hint="Nhập tên chức vụ"
                         materialDesign:HintAssist.IsFloating="False"
                         materialDesign:TextFieldAssist.HasOutlinedTextField="False"
                         materialDesign:TextFieldAssist.LeadingIcon="Person"
@@ -109,7 +106,7 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Ngày sinh
+                        Phòng ban
                     </TextBlock>
                     <TextBox
                         Margin="0"
@@ -117,7 +114,7 @@
                         VerticalAlignment="Top"
                         materialDesign:HintAssist.Background="Transparent"
                         materialDesign:HintAssist.Foreground="#FF434a54"
-                        materialDesign:HintAssist.Hint="Nhập họ và tên"
+                        materialDesign:HintAssist.Hint="Nhập tên phòng ban"
                         materialDesign:HintAssist.IsFloating="False"
                         materialDesign:TextFieldAssist.HasOutlinedTextField="False"
                         materialDesign:TextFieldAssist.LeadingIcon="Person"
@@ -132,75 +129,43 @@
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
                         TextWrapping="Wrap" />
                 </StackPanel>
-                <StackPanel
-                    Grid.Row="0"
-                    Grid.Column="2"
-                    Margin="0"
-                    VerticalAlignment="Bottom">
+            </Grid>
+            <Grid Grid.Row="2" Margin="0,25,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="A" />
+                    <ColumnDefinition SharedSizeGroup="A" />
+                    <ColumnDefinition SharedSizeGroup="A" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Grid.Column="0">
                     <TextBlock
-                        Margin="5,0,0,5"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="16"
+                        FontSize="18"
+                        FontWeight="Bold"
                         Foreground="#FF434A54">
-                        Giới tính
+                        Địa chỉ
                     </TextBlock>
-                    <ComboBox
-                        materialDesign:HintAssist.Hint="Nhấp vào để chọn"
-                        materialDesign:TextFieldAssist.UnderlineBrush="#ff434a54"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="14"
-                        Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                        <ComboBoxItem>
-                            Nam
-                        </ComboBoxItem>
-                        <ComboBoxItem>
-                            Nữ
-                        </ComboBoxItem>
-                    </ComboBox>
+                    <Separator Margin="0,5,24,2">
+                        <Separator.RenderTransform>
+                            <ScaleTransform ScaleY="2" />
+                        </Separator.RenderTransform>
+                    </Separator>
                 </StackPanel>
                 <StackPanel
                     Grid.Row="1"
                     Grid.Column="0"
-                    Margin="0,25,24,0">
-                    <TextBlock
-                        Margin="5,0,0,5"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="16"
-                        Foreground="#FF434A54">
-                        Căn cước công dân
-                    </TextBlock>
-                    <TextBox
-                        Margin="0"
-                        Padding="16,16,12,14"
-                        VerticalAlignment="Top"
-                        materialDesign:HintAssist.Background="Transparent"
-                        materialDesign:HintAssist.Foreground="#FF434a54"
-                        materialDesign:HintAssist.Hint="Nhập số căn cước công dân"
-                        materialDesign:HintAssist.IsFloating="False"
-                        materialDesign:TextFieldAssist.HasOutlinedTextField="False"
-                        materialDesign:TextFieldAssist.LeadingIcon="Person"
-                        materialDesign:TextFieldAssist.TextFieldCornerRadius="10,10,10,10"
-                        materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
-                        Background="#FFEBEBEB"
-                        BorderBrush="#00000000"
-                        CaretBrush="#FF434A54"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="14"
-                        Foreground="Black"
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                        TextWrapping="Wrap" />
-                </StackPanel>
-                <StackPanel
-                    Grid.Row="1"
-                    Grid.Column="2"
-                    Margin="0,25,0,0"
+                    Margin="0,25,24,0"
                     VerticalAlignment="Bottom">
                     <TextBlock
                         Margin="5,0,0,5"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Quốc tịch
+                        Tỉnh/Thành phố
                     </TextBlock>
                     <ComboBox
                         materialDesign:HintAssist.Hint="Nhấp vào để chọn"
@@ -212,13 +177,51 @@
                 <StackPanel
                     Grid.Row="1"
                     Grid.Column="1"
+                    Margin="0,25,24,0"
+                    VerticalAlignment="Bottom">
+                    <TextBlock
+                        Margin="5,0,0,5"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        Foreground="#FF434A54">
+                        Quận/Huyện
+                    </TextBlock>
+                    <ComboBox
+                        materialDesign:HintAssist.Hint="Nhấp vào để chọn"
+                        materialDesign:TextFieldAssist.UnderlineBrush="#ff434a54"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="14"
+                        Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+                </StackPanel>
+                <StackPanel
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Margin="0,25,0,0"
+                    VerticalAlignment="Bottom">
+                    <TextBlock
+                        Margin="5,0,0,5"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        Foreground="#FF434A54">
+                        Phường/Xã
+                    </TextBlock>
+                    <ComboBox
+                        materialDesign:HintAssist.Hint="Nhấp vào để chọn"
+                        materialDesign:TextFieldAssist.UnderlineBrush="#ff434a54"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="14"
+                        Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+                </StackPanel>
+                <StackPanel
+                    Grid.Row="2"
+                    Grid.Column="0"
                     Margin="0,25,24,0">
                     <TextBlock
                         Margin="5,0,0,5"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Mã bảo hiểm y tế
+                        Đường
                     </TextBlock>
                     <TextBox
                         Margin="0"
@@ -226,7 +229,7 @@
                         VerticalAlignment="Top"
                         materialDesign:HintAssist.Background="Transparent"
                         materialDesign:HintAssist.Foreground="#FF434a54"
-                        materialDesign:HintAssist.Hint="Nhập mã bảo hiểm y tế"
+                        materialDesign:HintAssist.Hint="Nhập tên đường"
                         materialDesign:HintAssist.IsFloating="False"
                         materialDesign:TextFieldAssist.HasOutlinedTextField="False"
                         materialDesign:TextFieldAssist.LeadingIcon="Person"
@@ -243,14 +246,14 @@
                 </StackPanel>
                 <StackPanel
                     Grid.Row="2"
-                    Grid.Column="0"
+                    Grid.Column="1"
                     Margin="0,25,24,0">
                     <TextBlock
                         Margin="5,0,0,5"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Số điện thoại
+                        Số
                     </TextBlock>
                     <TextBox
                         Margin="0"
@@ -258,7 +261,7 @@
                         VerticalAlignment="Top"
                         materialDesign:HintAssist.Background="Transparent"
                         materialDesign:HintAssist.Foreground="#FF434a54"
-                        materialDesign:HintAssist.Hint="Nhập số điện thoại"
+                        materialDesign:HintAssist.Hint="Nhập số"
                         materialDesign:HintAssist.IsFloating="False"
                         materialDesign:TextFieldAssist.HasOutlinedTextField="False"
                         materialDesign:TextFieldAssist.LeadingIcon="Person"
