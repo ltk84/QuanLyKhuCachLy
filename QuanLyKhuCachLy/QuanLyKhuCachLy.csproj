@@ -63,11 +63,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="InitialSettingScreen.xaml.cs">
+      <DependentUpon>InitialSettingScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="AuthenticationScreen.xaml.cs">
       <DependentUpon>AuthenticationScreen.xaml</DependentUpon>
     </Compile>
+    <Page Include="InitialSettingScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
