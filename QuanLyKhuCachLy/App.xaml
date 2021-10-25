@@ -2,7 +2,7 @@
     x:Class="QuanLyKhuCachLy.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    StartupUri="InitialSettingScreen.xaml">
+    StartupUri="MainScreen.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
