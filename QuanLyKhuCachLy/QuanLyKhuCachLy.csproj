@@ -137,6 +137,19 @@
     <Compile Include="AuthenticationScreen.xaml.cs">
       <DependentUpon>AuthenticationScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\InitialSettingFirstPageView.xaml.cs">
+      <DependentUpon>InitialSettingFirstPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\InitialSettingSecondPageView.xaml.cs">
+      <DependentUpon>InitialSettingSecondPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\InitialSettingThirdPageView.xaml.cs">
+      <DependentUpon>InitialSettingThirdPageView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="InitialSettingScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -158,6 +171,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AuthenticationScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl\InitialSettingFirstPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl\InitialSettingSecondPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl\InitialSettingThirdPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
