@@ -8,9 +8,8 @@
     Title="QuarantineAreaInformation"
     Width="800"
     Height="450"
-    DataContext="{StaticResource QAVM}"
     mc:Ignorable="d">
-    <StackPanel>
+    <!--<StackPanel>
         <Label Content="Ten" />
         <TextBox Text="{Binding name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
         <Label Content="Tinh" />
@@ -25,5 +24,5 @@
         <Label Content="So" />
         <TextBox Text="{Binding apartmentNumber, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
         <Button Command="{Binding showCommand}" Content="Show"></Button>
-    </StackPanel>
+    </StackPanel>-->
 </Window>

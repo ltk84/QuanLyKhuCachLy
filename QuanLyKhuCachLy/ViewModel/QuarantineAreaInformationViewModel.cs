@@ -24,16 +24,16 @@ namespace QuanLyKhuCachLy.ViewModel
         public string QAApartmentNumber { get => _QAApartmentNumber; set { _QAApartmentNumber = value; OnPropertyChanged(); } }
 
         private string _QASelectedProvince;
-        public string QAselectedProvince { get => _QASelectedProvince; set { _QASelectedProvince = value; OnPropertyChanged();  } }
+        public string QASelectedProvince { get => _QASelectedProvince; set { _QASelectedProvince = value; OnPropertyChanged();  } }
 
         private string _QASelectedWard;
-        public string QAselectedWard { get => _QASelectedWard; set { _QASelectedWard = value; OnPropertyChanged(); } }
+        public string QASelectedWard { get => _QASelectedWard; set { _QASelectedWard = value; OnPropertyChanged(); } }
         
         private string _QASelectedDistrict;
         public string QASelectedDistrict { get => _QASelectedDistrict; set { _QASelectedDistrict = value; OnPropertyChanged(); } }
 
         private int _QATestCycle;
-        public int QAtestCycle { get => _QATestCycle; set { _QATestCycle = value; OnPropertyChanged(); } }
+        public int QATestCycle { get => _QATestCycle; set { _QATestCycle = value; OnPropertyChanged(); } }
 
         private int _QARequiredDayToFinish;
         public int QARequiredDayToFinish { get => _QARequiredDayToFinish; set { _QARequiredDayToFinish = value; OnPropertyChanged(); } }
@@ -85,12 +85,58 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #endregion
 
+        #region UI
+        private Visibility _Tab1;
+        private Visibility _Tab2;
+        private Visibility _Tab3;
+        public Visibility Tab1 
+        { 
+            get => _Tab1; set 
+            {
+                _Tab1 = value; OnPropertyChanged();
+            } 
+        }
+        public Visibility Tab2
+        {
+            get => _Tab2; set
+            {
+                _Tab2 = value; OnPropertyChanged();
+            }
+        }
 
+        public Visibility Tab3
+        {
+            get => _Tab3; set
+            {
+                _Tab3 = value; OnPropertyChanged();
+            }
+        }
+        public int TabIndex { get; set; }
 
+        private String _TabPostion;
+        public String TabPosition
+        {
+            get => _TabPostion; set
+            {
+                _TabPostion = value; OnPropertyChanged();
+            }
+        }
+
+        public ICommand NextTabCommand { get; set; }
+        public ICommand PreviousTabCommand { get; set; }
+
+        #endregion
+
+        #region DummyData
         // đang dummy data (đáng lẻ nên lấy data từ đâu đó)
         private ObservableCollection<string> _ProvinceList;
-        public ObservableCollection<string> ProvinceList { get => _ProvinceList; set {
-                _ProvinceList = value; OnPropertyChanged(); } }
+        public ObservableCollection<string> ProvinceList
+        {
+            get => _ProvinceList; set
+            {
+                _ProvinceList = value; OnPropertyChanged();
+            }
+        }
 
         private ObservableCollection<string> _DistrictList;
         public ObservableCollection<string> DistrictList
@@ -110,49 +156,123 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
+        private ObservableCollection<string> _NationalityList;
+        public ObservableCollection<string> NationalityList
+        {
+            get => _NationalityList; set
+            {
+                _NationalityList = value; OnPropertyChanged();
+            }
+        }
+        #endregion
+
         public ICommand showCommand { get; set; }
 
         #endregion
 
         public QuarantineAreaInformationViewModel()
         {
+            Tab1 = Visibility.Visible;
+            Tab2 = Visibility.Hidden;
+            Tab3 = Visibility.Hidden;
+            TabIndex = 1;
+            TabPosition = $"{TabIndex}/3";
+
+            NextTabCommand = new RelayCommand<object>((p) =>
+            {
+                if (TabIndex <= 3) return true;
+                return false;
+            }, (p) =>
+            {
+                HandleChangeTab(TabIndex, "next");
+            });
+
+            PreviousTabCommand = new RelayCommand<object>((p) =>
+            {
+                if (TabIndex > 1) return true;
+                return false;
+            }, (p) =>
+            {
+                HandleChangeTab(TabIndex, "previous");
+            });
+
+            NationalityList = new ObservableCollection<string>() {
+                "VietNam", "Ameriden", "Phap", "Dut", "Em"
+            };
+
             ProvinceList = new ObservableCollection<string>() {
-                "HCM", "Binh Duong", "Vinh Long"
+                "Thanh pho Ho Chi Minh", "Binh Duong", "Vinh Long"
             };
             DistrictList = new ObservableCollection<string>() { 
-                "A", "B", "C"
+                "Quan 1", "Quan 2", "Quan 3", "Quan 4"
             };
             WardList = new ObservableCollection<string>()
             {
-                "E", "F", "G"
+                "Phu Thanh", "Phu Tho Hoa", "Binh Hung Hoa"
             };
 
             showCommand = new RelayCommand<object>((p) =>
             {
-                if (!string.IsNullOrEmpty(QAname) && QASelectedDistrict != null && QAselectedProvince != null && QAselectedWard != null && !string.IsNullOrEmpty(QAStreetName) && !string.IsNullOrEmpty(QAApartmentNumber))
+                if (!string.IsNullOrEmpty(QAname) && QASelectedDistrict != null && QASelectedProvince != null && QASelectedWard != null && !string.IsNullOrEmpty(QAStreetName) && !string.IsNullOrEmpty(QAApartmentNumber))
                     return true;
                 return false;
             }, (p) =>
             {
-                updateQuarantineAreaInformation();
+                UpdateQuarantineAreaInformation();
             });
         }
 
         #region Methods
+
+        void HandleChangeTab(int index, string action)
+        {
+            if (action == "next") 
+            {
+                TabIndex++;
+            }
+            else 
+            {
+                TabIndex--;
+            }
+            TabPosition = $"{TabIndex}/3";
+
+            switch (TabIndex)
+            {
+                case 1:
+                    Tab1 = Visibility.Visible;
+                    Tab2 = Visibility.Hidden;
+                    Tab3 = Visibility.Hidden;
+                    break;
+                case 2:
+                    Tab1 = Visibility.Hidden;
+                    Tab2 = Visibility.Visible;
+                    Tab3 = Visibility.Hidden;
+                    break;
+                case 3:
+                    Tab1 = Visibility.Hidden;
+                    Tab2 = Visibility.Hidden;
+                    Tab3 = Visibility.Visible;
+                    break;
+                default:
+                    UpdateQuarantineAreaInformation();
+                    break;
+            }
+        }
+
         // Chưa test
-        void updateQuarantineAreaInformation()
+        void UpdateQuarantineAreaInformation()
         {
             Address QAreaAddress = new Address()
             {
-                province = QAselectedProvince,
+                province = QASelectedProvince,
                 district = QASelectedDistrict,
                 apartmentNumber = QAApartmentNumber,
                 streetName = QAStreetName,
-                ward = QAselectedWard
+                ward = QASelectedWard
             };
 
-            DataProvider.ins.db.Addresses.Add(QAreaAddress);
-            DataProvider.ins.db.SaveChanges();
+            //DataProvider.ins.db.Addresses.Add(QAreaAddress);
+            //DataProvider.ins.db.SaveChanges();
 
             Address ManagerAddress = new Address()
             {
@@ -163,8 +283,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 ward = ManagerSelectedWard
             };
 
-            DataProvider.ins.db.Addresses.Add(QAreaAddress);
-            DataProvider.ins.db.SaveChanges();
+            //DataProvider.ins.db.Addresses.Add(QAreaAddress);
+            //DataProvider.ins.db.SaveChanges();
 
             Staff Manager = new Staff()
             {
@@ -178,19 +298,21 @@ namespace QuanLyKhuCachLy.ViewModel
                 nationality = ManagerNationality,
                 phoneNumber = ManagerPhoneNumber,
                 sex = ManagerSex,
-
             };
 
-            DataProvider.ins.db.Staffs.Add(Manager);
-            DataProvider.ins.db.SaveChanges();
+            //DataProvider.ins.db.Staffs.Add(Manager);
+            //DataProvider.ins.db.SaveChanges();
 
             QuarantineArea QuarantineArea = new QuarantineArea()
             {
-                addressID = QAreaAddress.id, name = QAname, testCycle = QAtestCycle, requiredDayToFinish = QARequiredDayToFinish, managerID = Manager.id, 
+                addressID = QAreaAddress.id, name = QAname, testCycle = QATestCycle, requiredDayToFinish = QARequiredDayToFinish, managerID = Manager.id, 
             };
 
-            DataProvider.ins.db.QuarantineAreas.Add(QuarantineArea);
-            DataProvider.ins.db.SaveChanges();
+            //DataProvider.ins.db.QuarantineAreas.Add(QuarantineArea);
+            //DataProvider.ins.db.SaveChanges();
+
+            MessageBox.Show($"Quarantine Area address: {QAreaAddress.apartmentNumber}, {QAreaAddress.district}, {QAreaAddress.province}, {QAreaAddress.streetName},  {QAreaAddress.ward},");
+            MessageBox.Show($"Quarantine Area info: {QuarantineArea.name}, {QuarantineArea.requiredDayToFinish}, {QuarantineArea.testCycle}");
         }
 
         #endregion

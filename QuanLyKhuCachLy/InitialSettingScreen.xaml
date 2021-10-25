@@ -12,6 +12,7 @@
     MinWidth="1024"
     MinHeight="768"
     Background="#FF3D4466"
+    DataContext="{StaticResource ResourceKey=QAVM}"
     WindowStartupLocation="CenterScreen"
     WindowState="Maximized"
     mc:Ignorable="d">
@@ -39,9 +40,9 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="644" />
                         </Grid.RowDefinitions>
-                        <control:InitialSettingFirstPageView Panel.ZIndex="-1" Visibility="Visible" />
-                        <control:InitialSettingSecondPageView Visibility="Hidden" />
-                        <control:InitialSettingThirdPageView Panel.ZIndex="1" Visibility="Hidden" />
+                        <control:InitialSettingFirstPageView Panel.ZIndex="-1" Visibility="{Binding Tab1}" />
+                        <control:InitialSettingSecondPageView Visibility="{Binding Tab2}" />
+                        <control:InitialSettingThirdPageView Panel.ZIndex="1" Visibility="{Binding Tab3}" />
                     </Grid>
                     <Grid
                         Grid.Row="3"
@@ -64,6 +65,7 @@
                                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
                                 Background="#FF434A54"
                                 BorderBrush="{x:Null}"
+                                Command="{Binding PreviousTabCommand}"
                                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                                 FontSize="16"
                                 FontWeight="Bold"
@@ -79,6 +81,7 @@
                                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
                                 Background="#FF1D9583"
                                 BorderBrush="{x:Null}"
+                                Command="{Binding NextTabCommand}"
                                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                                 FontSize="12"
                                 FontWeight="Bold"
@@ -92,9 +95,8 @@
                                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                                 FontSize="16"
                                 FontWeight="Bold"
-                                Foreground="#FF434A54">
-                                1/3
-                            </TextBlock>
+                                Foreground="#FF434A54"
+                                Text="{Binding TabPosition}" />
                         </StackPanel>
                     </Grid>
                 </StackPanel>
