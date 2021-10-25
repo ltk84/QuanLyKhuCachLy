@@ -151,15 +151,9 @@
                         materialDesign:TextFieldAssist.UnderlineBrush="#ff434a54"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="14"
+                        ItemsSource="{Binding SexList}"
                         SelectedItem="{Binding ManagerSex}"
-                        Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                        <ComboBoxItem>
-                            Nam
-                        </ComboBoxItem>
-                        <ComboBoxItem>
-                            Nữ
-                        </ComboBoxItem>
-                    </ComboBox>
+                        Style="{StaticResource MaterialDesignOutlinedComboBox}" />
                 </StackPanel>
                 <StackPanel
                     Grid.Row="1"

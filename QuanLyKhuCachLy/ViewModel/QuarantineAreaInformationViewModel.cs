@@ -24,11 +24,11 @@ namespace QuanLyKhuCachLy.ViewModel
         public string QAApartmentNumber { get => _QAApartmentNumber; set { _QAApartmentNumber = value; OnPropertyChanged(); } }
 
         private string _QASelectedProvince;
-        public string QASelectedProvince { get => _QASelectedProvince; set { _QASelectedProvince = value; OnPropertyChanged();  } }
+        public string QASelectedProvince { get => _QASelectedProvince; set { _QASelectedProvince = value; OnPropertyChanged(); } }
 
         private string _QASelectedWard;
         public string QASelectedWard { get => _QASelectedWard; set { _QASelectedWard = value; OnPropertyChanged(); } }
-        
+
         private string _QASelectedDistrict;
         public string QASelectedDistrict { get => _QASelectedDistrict; set { _QASelectedDistrict = value; OnPropertyChanged(); } }
 
@@ -89,12 +89,12 @@ namespace QuanLyKhuCachLy.ViewModel
         private Visibility _Tab1;
         private Visibility _Tab2;
         private Visibility _Tab3;
-        public Visibility Tab1 
-        { 
-            get => _Tab1; set 
+        public Visibility Tab1
+        {
+            get => _Tab1; set
             {
                 _Tab1 = value; OnPropertyChanged();
-            } 
+            }
         }
         public Visibility Tab2
         {
@@ -164,9 +164,17 @@ namespace QuanLyKhuCachLy.ViewModel
                 _NationalityList = value; OnPropertyChanged();
             }
         }
-        #endregion
 
-        public ICommand showCommand { get; set; }
+        private ObservableCollection<string> _SexList;
+        public ObservableCollection<string> SexList
+        {
+            get => _SexList; set
+            {
+                _SexList = value; OnPropertyChanged();
+            }
+        }
+
+        #endregion
 
         #endregion
 
@@ -201,9 +209,9 @@ namespace QuanLyKhuCachLy.ViewModel
             };
 
             ProvinceList = new ObservableCollection<string>() {
-                "Thanh pho Ho Chi Minh", "Binh Duong", "Vinh Long"
+                "Ho Chi Minh", "Binh Duong", "Vinh Long"
             };
-            DistrictList = new ObservableCollection<string>() { 
+            DistrictList = new ObservableCollection<string>() {
                 "Quan 1", "Quan 2", "Quan 3", "Quan 4"
             };
             WardList = new ObservableCollection<string>()
@@ -211,26 +219,22 @@ namespace QuanLyKhuCachLy.ViewModel
                 "Phu Thanh", "Phu Tho Hoa", "Binh Hung Hoa"
             };
 
-            showCommand = new RelayCommand<object>((p) =>
+            SexList = new ObservableCollection<string>()
             {
-                if (!string.IsNullOrEmpty(QAname) && QASelectedDistrict != null && QASelectedProvince != null && QASelectedWard != null && !string.IsNullOrEmpty(QAStreetName) && !string.IsNullOrEmpty(QAApartmentNumber))
-                    return true;
-                return false;
-            }, (p) =>
-            {
-                UpdateQuarantineAreaInformation();
-            });
+                "Nam", "Nữ"
+            };
+
         }
 
         #region Methods
 
         void HandleChangeTab(int index, string action)
         {
-            if (action == "next") 
+            if (action == "next")
             {
                 TabIndex++;
             }
-            else 
+            else
             {
                 TabIndex--;
             }
@@ -271,8 +275,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 ward = QASelectedWard
             };
 
-            //DataProvider.ins.db.Addresses.Add(QAreaAddress);
-            //DataProvider.ins.db.SaveChanges();
+            DataProvider.ins.db.Addresses.Add(QAreaAddress);
+            DataProvider.ins.db.SaveChanges();
 
             Address ManagerAddress = new Address()
             {
@@ -283,8 +287,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 ward = ManagerSelectedWard
             };
 
-            //DataProvider.ins.db.Addresses.Add(QAreaAddress);
-            //DataProvider.ins.db.SaveChanges();
+            DataProvider.ins.db.Addresses.Add(ManagerAddress);
+            DataProvider.ins.db.SaveChanges();
 
             Staff Manager = new Staff()
             {
@@ -300,19 +304,22 @@ namespace QuanLyKhuCachLy.ViewModel
                 sex = ManagerSex,
             };
 
-            //DataProvider.ins.db.Staffs.Add(Manager);
-            //DataProvider.ins.db.SaveChanges();
+            DataProvider.ins.db.Staffs.Add(Manager);
+            DataProvider.ins.db.SaveChanges();
 
             QuarantineArea QuarantineArea = new QuarantineArea()
             {
-                addressID = QAreaAddress.id, name = QAname, testCycle = QATestCycle, requiredDayToFinish = QARequiredDayToFinish, managerID = Manager.id, 
+                addressID = QAreaAddress.id,
+                name = QAname,
+                testCycle = QATestCycle,
+                requiredDayToFinish = QARequiredDayToFinish,
+                managerID = Manager.id,
             };
 
-            //DataProvider.ins.db.QuarantineAreas.Add(QuarantineArea);
-            //DataProvider.ins.db.SaveChanges();
+            DataProvider.ins.db.QuarantineAreas.Add(QuarantineArea);
+            DataProvider.ins.db.SaveChanges();
 
-            MessageBox.Show($"Quarantine Area address: {QAreaAddress.apartmentNumber}, {QAreaAddress.district}, {QAreaAddress.province}, {QAreaAddress.streetName},  {QAreaAddress.ward},");
-            MessageBox.Show($"Quarantine Area info: {QuarantineArea.name}, {QuarantineArea.requiredDayToFinish}, {QuarantineArea.testCycle}");
+            MessageBox.Show("Them thanh cong");
         }
 
         #endregion
