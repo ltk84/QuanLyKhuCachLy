@@ -10,6 +10,10 @@ namespace QuanLyKhuCachLy
 {
     class MainScreenModel : BaseViewModel
     {
+        public DashboardModel DashboardModel { get; set; }
+
+        private object _currentView;
+
         private bool _isOnDashboard;
         private bool _isOnRoom;
         private bool _isOnPerson;
@@ -22,6 +26,16 @@ namespace QuanLyKhuCachLy
         public RelayCommand<object> ToStaffCommand { get; set; }
         public RelayCommand<object> ToStatCommand { get; set; }
         public RelayCommand<object> ToNotifyCommand { get; set; }
+
+        public object CurrentView
+        {
+            get { return _currentView; }
+            set
+            {
+                _currentView = value;
+                OnPropertyChanged();
+            }
+        }
 
         public bool IsOnDashboard
         {
@@ -104,11 +118,13 @@ namespace QuanLyKhuCachLy
 
         private void Init()
         {
+            DashboardModel = new DashboardModel();
             ToDashboard();
         }
 
         private void ToDashboard()
         {
+            CurrentView = DashboardModel;
             _isOnDashboard = true;
             _isOnRoom = false;
             _isOnPerson = false;

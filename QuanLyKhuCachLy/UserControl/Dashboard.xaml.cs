@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace QuanLyKhuCachLy.View
+namespace QuanLyKhuCachLy.UserControl
 {
     /// <summary>
-    /// Interaction logic for InitialSettingSecondPageView.xaml
+    /// Interaction logic for Dashboard.xaml
     /// </summary>
-    public partial class InitialSettingSecondPageView
+    public partial class Dashboard
     {
-        public InitialSettingSecondPageView()
+        public Dashboard()
         {
             InitializeComponent();
         }

@@ -18,7 +18,7 @@ namespace QuanLyKhuCachLy.View
     /// <summary>
     /// Interaction logic for InitialSettingThirdPageView.xaml
     /// </summary>
-    public partial class InitialSettingThirdPageView : UserControl
+    public partial class InitialSettingThirdPageView
     {
         public InitialSettingThirdPageView()
         {

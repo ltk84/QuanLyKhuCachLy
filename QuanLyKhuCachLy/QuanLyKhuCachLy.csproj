@@ -84,7 +84,11 @@
     <Compile Include="MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainScreenModel.cs" />
+    <Compile Include="ViewModel\DashboardModel.cs" />
+    <Compile Include="ViewModel\MainScreenModel.cs" />
+    <Compile Include="UserControl\Dashboard.xaml.cs">
+      <DependentUpon>Dashboard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="AuthenticationScreen.xaml.cs">
@@ -128,6 +132,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ResourceXAML\SectionButtonTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl\Dashboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
