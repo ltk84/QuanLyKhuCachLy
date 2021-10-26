@@ -12,36 +12,203 @@ namespace QuanLyKhuCachLy.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
-        public bool isLoaded { get; set; }
-        public ICommand loadedCommand { get; set; }
-        public ICommand qAInformationCommand { get; set; }
+        #region property
+        #region Handle Dashboard
+        public DashboardModel DashboardModel { get; set; }
+
+        private object _currentView;
+        private bool _isOnDashboard;
+        private bool _isOnRoom;
+        private bool _isOnPerson;
+        private bool _isOnStaff;
+        private bool _isOnStat;
+        private bool _isOnNotify;
+        public ICommand ToDashboardCommand { get; set; }
+        public ICommand ToRoomCommand { get; set; }
+        public ICommand ToPersonCommand { get; set; }
+        public ICommand ToStaffCommand { get; set; }
+        public ICommand ToStatCommand { get; set; }
+        public ICommand ToNotifyCommand { get; set; }
+
+        public object CurrentView
+        {
+            get { return _currentView; }
+            set
+            {
+                _currentView = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsOnDashboard
+        {
+            get { return _isOnDashboard; }
+            set
+            {
+                _isOnDashboard = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool IsOnRoom
+        {
+            get { return _isOnRoom; }
+            set
+            {
+                _isOnRoom = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool IsOnPerson
+        {
+            get { return _isOnPerson; }
+            set
+            {
+                _isOnPerson = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool IsOnStaff
+        {
+            get { return _isOnStaff; }
+            set
+            {
+                _isOnStaff = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool IsOnStat
+        {
+            get { return _isOnStat; }
+            set
+            {
+                _isOnStat = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool IsOnNotify
+        {
+            get { return _isOnNotify; }
+            set
+            {
+                _isOnNotify = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region Handle Login Screen
+        public bool IsLoaded { get; set; }
+        public ICommand LoadedCommand { get; set; }
+
+        #endregion
+        #endregion
 
         public MainViewModel()
         {
-            isLoaded = false;
-            loadedCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            IsLoaded = false;
+            LoadedCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-                loadLoginScreen(p);
+                LoadLoginScreenAndCheckInitSetUp(p);
             });
 
-            //qAInformationCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
-            //{
-            //    loadQAInformationWindow();
-            //});
+            Init();
 
-
-
+            ToDashboardCommand = new RelayCommand<object>((p) => { return true; }, (o) =>
+            {
+                ToDashboard();
+            });
+            ToRoomCommand = new RelayCommand<object>((p) => { return true; }, (o) =>
+            {
+                ToRoom();
+            });
+            ToPersonCommand = new RelayCommand<object>((p) => { return true; }, (o) =>
+            {
+                ToPerson();
+            });
+            ToStaffCommand = new RelayCommand<object>((p) => { return true; }, (o) =>
+            {
+                ToStaff();
+            });
+            ToStatCommand = new RelayCommand<object>((p) => { return true; }, (o) =>
+            {
+                ToStat();
+            });
+            ToNotifyCommand = new RelayCommand<object>((p) => { return true; }, (o) =>
+            {
+                ToNotify();
+            });
         }
 
-        void loadQAInformationWindow()
+        #region method
+        private void Init()
         {
-            //QuarantineAreaInformationWindow qAreaWindow = new QuarantineAreaInformationWindow();
-            //qAreaWindow.Show();
+            DashboardModel = new DashboardModel();
+            ToDashboard();
         }
 
-        void loadLoginScreen(Window p)
+        private void ToDashboard()
         {
-            isLoaded = true;
+            CurrentView = DashboardModel;
+            _isOnDashboard = true;
+            _isOnRoom = false;
+            _isOnPerson = false;
+            _isOnStaff = false;
+            _isOnStat = false;
+            _isOnNotify = false;
+        }
+
+        private void ToRoom()
+        {
+            _isOnDashboard = false;
+            _isOnRoom = true;
+            _isOnPerson = false;
+            _isOnStaff = false;
+            _isOnStat = false;
+            _isOnNotify = false;
+        }
+
+        private void ToPerson()
+        {
+            _isOnDashboard = false;
+            _isOnRoom = false;
+            _isOnPerson = true;
+            _isOnStaff = false;
+            _isOnStat = false;
+            _isOnNotify = false;
+        }
+
+        private void ToStaff()
+        {
+            _isOnDashboard = false;
+            _isOnRoom = false;
+            _isOnPerson = false;
+            _isOnStaff = true;
+            _isOnStat = false;
+            _isOnNotify = false;
+        }
+        private void ToStat()
+        {
+            _isOnDashboard = false;
+            _isOnRoom = false;
+            _isOnPerson = false;
+            _isOnStaff = false;
+            _isOnStat = true;
+            _isOnNotify = false;
+        }
+        private void ToNotify()
+        {
+            _isOnDashboard = false;
+            _isOnRoom = false;
+            _isOnPerson = false;
+            _isOnStaff = false;
+            _isOnStat = false;
+            _isOnNotify = true;
+        }
+
+        void LoadLoginScreenAndCheckInitSetUp(Window p)
+        {
+            IsLoaded = true;
             if (p == null) return;
             p.Hide();
 
@@ -78,5 +245,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
 
         }
+
+        #endregion
     }
 }

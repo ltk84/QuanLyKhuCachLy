@@ -18,7 +18,7 @@ namespace QuanLyKhuCachLy.View
     /// <summary>
     /// Interaction logic for InitialSettingFirstPageView.xaml
     /// </summary>
-    public partial class InitialSettingFirstPageView : UserControl
+    public partial class InitialSettingFirstPageView
     {
         public InitialSettingFirstPageView()
         {

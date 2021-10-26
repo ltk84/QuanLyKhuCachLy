@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace QuanLyKhuCachLy.View
+namespace QuanLyKhuCachLy
 {
     /// <summary>
-    /// Interaction logic for InitialSettingSecondPageView.xaml
+    /// Interaction logic for MainScreen.xaml
     /// </summary>
-    public partial class InitialSettingSecondPageView
+    public partial class MainScreen : Window
     {
-        public InitialSettingSecondPageView()
+        public MainScreen()
         {
             InitializeComponent();
         }

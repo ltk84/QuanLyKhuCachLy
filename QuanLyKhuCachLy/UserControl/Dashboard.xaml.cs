@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace QuanLyKhuCachLy
+namespace QuanLyKhuCachLy.UserControl
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Dashboard.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Dashboard
     {
-        public MainWindow()
+        public Dashboard()
         {
             InitializeComponent();
         }

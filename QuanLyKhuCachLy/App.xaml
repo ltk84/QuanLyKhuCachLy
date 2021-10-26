@@ -2,8 +2,10 @@
     x:Class="QuanLyKhuCachLy.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:userControl="clr-namespace:QuanLyKhuCachLy.UserControl"
+    xmlns:viewModel="clr-namespace:QuanLyKhuCachLy.ViewModel"
     ShutdownMode="OnMainWindowClose"
-    StartupUri="MainWindow.xaml">
+    StartupUri="MainScreen.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -12,7 +14,12 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
                 <ResourceDictionary Source="/ResourceXAML/MainResource.xaml" />
+                <ResourceDictionary Source="/ResourceXAML/SectionButtonTemplate.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewModel:DashboardModel}">
+                <userControl:Dashboard />
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
