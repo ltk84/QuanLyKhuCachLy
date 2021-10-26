@@ -17,7 +17,7 @@
                 <ResourceDictionary Source="/ResourceXAML/SectionButtonTemplate.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <DataTemplate DataType="{x:Type viewModel:DashboardModel}">
+            <DataTemplate DataType="{x:Type viewModel:DashboardViewModel}">
                 <userControl:Dashboard />
             </DataTemplate>
         </ResourceDictionary>

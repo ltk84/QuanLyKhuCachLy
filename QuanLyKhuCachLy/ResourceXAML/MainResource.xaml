@@ -5,5 +5,5 @@
     <viewmodel:MainViewModel x:Key="MainVM" />
     <viewmodel:LoginViewModel x:Key="LoginVM" />
     <viewmodel:QuarantineAreaInformationViewModel x:Key="QAVM" />
-    <viewmodel:DashboardModel x:Key="DashboardVM" />
+    <viewmodel:DashboardViewModel x:Key="DashboardVM" />
 </ResourceDictionary>

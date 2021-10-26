@@ -14,7 +14,7 @@ namespace QuanLyKhuCachLy.ViewModel
     {
         #region property
         #region Handle Dashboard
-        public DashboardModel DashboardModel { get; set; }
+        public DashboardViewModel DashboardModel { get; set; }
 
         private object _currentView;
         private bool _isOnDashboard;
@@ -143,7 +143,7 @@ namespace QuanLyKhuCachLy.ViewModel
         #region method
         private void Init()
         {
-            DashboardModel = new DashboardModel();
+            DashboardModel = new DashboardViewModel();
             ToDashboard();
         }
 

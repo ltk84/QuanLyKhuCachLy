@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace QuanLyKhuCachLy.ViewModel
 {
-    public class DashboardModel : BaseViewModel
+    class NotificationViewModel : BaseViewModel
     {
-        public DashboardModel() { }
+        public NotificationViewModel() { }
     }
 }
