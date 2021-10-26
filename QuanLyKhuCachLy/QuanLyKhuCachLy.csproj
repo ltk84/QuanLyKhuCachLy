@@ -140,6 +140,7 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\NotificationViewModel.cs" />
     <Compile Include="ViewModel\QuarantineAreaInformationViewModel.cs" />
     <Compile Include="AuthenticationScreen.xaml.cs">
       <DependentUpon>AuthenticationScreen.xaml</DependentUpon>
@@ -153,6 +154,10 @@
     <Compile Include="UserControl\InitialSettingThirdPageView.xaml.cs">
       <DependentUpon>InitialSettingThirdPageView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\QuarantinePersonViewModel.cs" />
+    <Compile Include="ViewModel\QuarantineRoomViewModel.cs" />
+    <Compile Include="ViewModel\ReportViewModel.cs" />
+    <Compile Include="ViewModel\StaffViewModel.cs" />
     <Page Include="InitialSettingScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -6,4 +6,9 @@
     <viewmodel:LoginViewModel x:Key="LoginVM" />
     <viewmodel:QuarantineAreaInformationViewModel x:Key="QAVM" />
     <viewmodel:DashboardViewModel x:Key="DashboardVM" />
+    <viewmodel:NotificationViewModel x:Key="NotiVM" />
+    <viewmodel:QuarantinePersonViewModel x:Key="PersonVM" />
+    <viewmodel:QuarantineRoomViewModel x:Key="RoomVM" />
+    <viewmodel:ReportViewModel x:Key="ReportVM" />
+    <viewmodel:StaffViewModel x:Key="StaffVM" />
 </ResourceDictionary>
