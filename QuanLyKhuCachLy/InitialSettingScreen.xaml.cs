@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace QuanLyKhuCachLy
 {
     /// <summary>
@@ -24,9 +25,6 @@ namespace QuanLyKhuCachLy
             InitializeComponent();
         }
 
-        private void InitialSettingFirstPageView_Loaded(object sender, RoutedEventArgs e)
-        {
 
-        }
     }
 }

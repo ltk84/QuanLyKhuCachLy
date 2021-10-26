@@ -6,9 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Name="InitScreen"
     Title="InitialSettingScreen"
-    Width="{Binding SystemParameters.PrimaryScreenWidth}"
-    Height="{Binding SystemParameters.PrimaryScreenHeight}"
     MinWidth="1024"
     MinHeight="768"
     Background="#FF3D4466"
@@ -82,13 +81,26 @@
                                 Background="#FF1D9583"
                                 BorderBrush="{x:Null}"
                                 Command="{Binding NextTabCommand}"
+                                CommandParameter="{Binding ElementName=InitScreen}"
                                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                                 FontSize="12"
                                 FontWeight="Bold"
                                 Style="{StaticResource MaterialDesignRaisedButton}">
-                                <TextBlock FontSize="16" Text="Tiếp theo" />
+                                <TextBlock FontSize="16">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Text" Value="Tiếp theo" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=TabIndicator, Path=Text}" Value="3/3">
+                                                    <Setter Property="Text" Value="Xác nhận" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
                             </Button>
                             <TextBlock
+                                x:Name="TabIndicator"
                                 Margin="25,0,0,0"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Bottom"

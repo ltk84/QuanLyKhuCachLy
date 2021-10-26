@@ -86,6 +86,8 @@ namespace QuanLyKhuCachLy.ViewModel
         #endregion
 
         #region UI
+        public bool isDoneSetUp { get; set; }
+
         private Visibility _Tab1;
         private Visibility _Tab2;
         private Visibility _Tab3;
@@ -180,28 +182,30 @@ namespace QuanLyKhuCachLy.ViewModel
 
         public QuarantineAreaInformationViewModel()
         {
+            isDoneSetUp = false;
+
             Tab1 = Visibility.Visible;
             Tab2 = Visibility.Hidden;
             Tab3 = Visibility.Hidden;
             TabIndex = 1;
             TabPosition = $"{TabIndex}/3";
 
-            NextTabCommand = new RelayCommand<object>((p) =>
+            NextTabCommand = new RelayCommand<Window>((p) =>
             {
                 if (TabIndex <= 3) return true;
                 return false;
             }, (p) =>
             {
-                HandleChangeTab(TabIndex, "next");
+                HandleChangeTab(TabIndex, "next", p);
             });
 
-            PreviousTabCommand = new RelayCommand<object>((p) =>
+            PreviousTabCommand = new RelayCommand<Window>((p) =>
             {
                 if (TabIndex > 1) return true;
                 return false;
             }, (p) =>
             {
-                HandleChangeTab(TabIndex, "previous");
+                HandleChangeTab(TabIndex, "previous", p);
             });
 
             NationalityList = new ObservableCollection<string>() {
@@ -228,7 +232,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #region Methods
 
-        void HandleChangeTab(int index, string action)
+        void HandleChangeTab(int index, string action, Window p)
         {
             if (action == "next")
             {
@@ -238,7 +242,8 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 TabIndex--;
             }
-            TabPosition = $"{TabIndex}/3";
+            if (TabIndex <= 3)
+                TabPosition = $"{TabIndex}/3";
 
             switch (TabIndex)
             {
@@ -259,6 +264,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     break;
                 default:
                     UpdateQuarantineAreaInformation();
+                    p.Close();
                     break;
             }
         }
@@ -319,7 +325,7 @@ namespace QuanLyKhuCachLy.ViewModel
             DataProvider.ins.db.QuarantineAreas.Add(QuarantineArea);
             DataProvider.ins.db.SaveChanges();
 
-            MessageBox.Show("Them thanh cong");
+            isDoneSetUp = true;
         }
 
         #endregion

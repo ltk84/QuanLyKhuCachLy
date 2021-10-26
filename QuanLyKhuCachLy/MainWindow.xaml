@@ -25,8 +25,10 @@
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding loadedCommand}" CommandParameter="{Binding ElementName=mainWindow}" />
         </i:EventTrigger>
+
+
     </i:Interaction.Triggers>
 
-    <Button Command="{Binding qAInformationCommand}" Content="Set up information" />
+    <!--<Button Command="{Binding qAInformationCommand}" Content="Set up information" />-->
 
 </Window>
