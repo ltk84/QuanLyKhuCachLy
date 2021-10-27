@@ -14,6 +14,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
                 <ResourceDictionary Source="/ResourceXAML/MainResource.xaml" />
                 <ResourceDictionary Source="/ResourceXAML/SectionButtonTemplate.xaml" />
+                <ResourceDictionary Source="/ResourceXAML/DashboardContentTemplate.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <DataTemplate DataType="{x:Type viewModel:DashboardModel}">
                 <userControl:Dashboard />
