@@ -16,7 +16,7 @@
     WindowState="Maximized"
     mc:Ignorable="d">
     <Viewbox
-        Margin="0,0,0,80"
+        Margin="0,0,0,60"
         HorizontalAlignment="Center"
         VerticalAlignment="Center">
         <StackPanel>
@@ -28,7 +28,7 @@
                 Source="/Resources/logo/logo.png" />
             <Border
                 Width="1225"
-                Height="740"
+                Height="755"
                 Margin="0,0,0,0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
@@ -37,7 +37,7 @@
                 <StackPanel>
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="644" />
+                            <RowDefinition Height="660" />
                         </Grid.RowDefinitions>
                         <control:InitialSettingFirstPageView Panel.ZIndex="-1" Visibility="{Binding Tab1}" />
                         <control:InitialSettingSecondPageView Visibility="{Binding Tab2}" />

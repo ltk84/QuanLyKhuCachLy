@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
     d:DesignHeight="740"
     d:DesignWidth="1225"
     DataContext="{StaticResource QAVM}"
@@ -31,7 +32,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Margin="0,25,0,0">
+            <Grid Grid.Row="0" Margin="0,5,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition SharedSizeGroup="A" />
                     <ColumnDefinition SharedSizeGroup="A" />
@@ -48,12 +49,37 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Tên khu cách ly
+                        Tên khu cách ly (*)
                     </TextBlock>
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập tên khu cách ly"
-                        Style="{StaticResource TextInputField}"
-                        Text="{Binding QAname}" />
+                        MaxLength="30"
+                        Style="{StaticResource TextInputField}">
+                        <TextBox.Text>
+                            <Binding Path="QAname" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vr:RequiredField />
+                                    <vr:NoSpecialChar />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1">
+                    <TextBlock
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="18"
+                        FontWeight="Bold"
+                        Foreground="#FF434A54">
+                        Lưu ý
+                    </TextBlock>
+                    <TextBlock
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        Foreground="#FF434A54"
+                        TextWrapping="Wrap">
+                        Những ô được đánh dấu (*) là thông tin bắt buộc phải điền, không được để trống.
+                    </TextBlock>
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="1" Margin="0,25,0,0">
@@ -69,6 +95,7 @@
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0" Grid.Column="0">
                     <TextBlock
+                        Margin="0,10,0,0"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="18"
                         FontWeight="Bold"
@@ -91,7 +118,7 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Tỉnh/Thành phố
+                        Tỉnh/Thành phố (*)
                     </TextBlock>
                     <ComboBox
                         ItemsSource="{Binding ProvinceList}"
@@ -108,7 +135,7 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Quận/Huyện
+                        Quận/Huyện (*)
                     </TextBlock>
                     <ComboBox
                         ItemsSource="{Binding DistrictList}"
@@ -125,7 +152,7 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Phường/Xã
+                        Phường/Xã (*)
                     </TextBlock>
                     <ComboBox
                         ItemsSource="{Binding WardList}"
@@ -145,6 +172,7 @@
                     </TextBlock>
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập tên đường"
+                        MaxLength="20"
                         Style="{StaticResource TextInputField}"
                         Text="{Binding QAStreetName}" />
                 </StackPanel>
@@ -157,12 +185,20 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Số
+                        Số (*)
                     </TextBlock>
                     <TextBox
-                        materialDesign:HintAssist.Hint="Nhập số"
-                        Style="{StaticResource TextInputField}"
-                        Text="{Binding QAApartmentNumber}" />
+                        materialDesign:HintAssist.Hint="Nhập số địa chỉ"
+                        MaxLength="20"
+                        Style="{StaticResource TextInputField}">
+                        <TextBox.Text>
+                            <Binding Path="QAApartmentNumber" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vr:RequiredField />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="2" Margin="0,25,0,0">
@@ -178,6 +214,7 @@
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0" Grid.Column="0">
                     <TextBlock
+                        Margin="0,10,0,0"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="18"
                         FontWeight="Bold"
@@ -199,12 +236,21 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Chu kỳ xét nghiệm (ngày)
+                        Chu kỳ xét nghiệm (ngày) (*)
                     </TextBlock>
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập số ngày"
-                        Style="{StaticResource TextInputField}"
-                        Text="{Binding QATestCycle}" />
+                        MaxLength="9"
+                        Style="{StaticResource TextInputField}">
+                        <TextBox.Text>
+                            <Binding Path="QATestCycle" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vr:RequiredField />
+                                    <vr:NumberField Min="0" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </StackPanel>
                 <StackPanel
                     Grid.Row="2"
@@ -215,12 +261,21 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Số ngày tối thiểu để hoàn thành cách ly
+                        Số ngày tối thiểu để hoàn thành cách ly (*)
                     </TextBlock>
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập số ngày"
-                        Style="{StaticResource TextInputField}"
-                        Text="{Binding QARequiredDayToFinish}" />
+                        MaxLength="9"
+                        Style="{StaticResource TextInputField}">
+                        <TextBox.Text>
+                            <Binding Path="QARequiredDayToFinish" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vr:RequiredField />
+                                    <vr:NumberField Min="0" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </StackPanel>
             </Grid>
         </Grid>

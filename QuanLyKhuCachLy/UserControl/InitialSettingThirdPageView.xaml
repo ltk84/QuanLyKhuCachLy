@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
     d:DesignHeight="740"
     d:DesignWidth="1225"
     DataContext="{StaticResource QAVM}"
@@ -31,7 +32,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Margin="0,25,0,0">
+            <Grid Grid.Row="0" Margin="0,5,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition SharedSizeGroup="A" />
                     <ColumnDefinition SharedSizeGroup="A" />
@@ -75,12 +76,21 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Chức vụ
+                        Chức vụ (*)
                     </TextBlock>
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập tên chức vụ"
-                        Style="{StaticResource TextInputField}"
-                        Text="{Binding ManagerJobTitle}" />
+                        MaxLength="30"
+                        Style="{StaticResource TextInputField}">
+                        <TextBox.Text>
+                            <Binding Path="ManagerJobTitle" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vr:RequiredField />
+                                    <vr:NoSpecialChar />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </StackPanel>
                 <StackPanel
                     Grid.Row="0"
@@ -91,12 +101,21 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Phòng ban
+                        Phòng ban (*)
                     </TextBlock>
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập tên phòng ban"
-                        Style="{StaticResource TextInputField}"
-                        Text="{Binding ManagerDepartment}" />
+                        MaxLength="30"
+                        Style="{StaticResource TextInputField}">
+                        <TextBox.Text>
+                            <Binding Path="ManagerDepartment" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vr:RequiredField />
+                                    <vr:NoSpecialChar />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="2" Margin="0,25,0,0">
@@ -112,6 +131,7 @@
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0" Grid.Column="0">
                     <TextBlock
+                        Margin="0,10,0,0"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="18"
                         FontWeight="Bold"
@@ -134,7 +154,7 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Tỉnh/Thành phố
+                        Tỉnh/Thành phố (*)
                     </TextBlock>
                     <ComboBox
                         ItemsSource="{Binding ProvinceList}"
@@ -151,7 +171,7 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Quận/Huyện
+                        Quận/Huyện (*)
                     </TextBlock>
                     <ComboBox
                         ItemsSource="{Binding DistrictList}"
@@ -168,7 +188,7 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Phường/Xã
+                        Phường/Xã (*)
                     </TextBlock>
                     <ComboBox
                         ItemsSource="{Binding WardList}"
@@ -188,6 +208,7 @@
                     </TextBlock>
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập tên đường"
+                        MaxLength="20"
                         Style="{StaticResource TextInputField}"
                         Text="{Binding ManagerStreetName}" />
                 </StackPanel>
@@ -200,12 +221,20 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Số
+                        Số (*)
                     </TextBlock>
                     <TextBox
-                        materialDesign:HintAssist.Hint="Nhập số"
-                        Style="{StaticResource TextInputField}"
-                        Text="{Binding ManagerApartmentNumber}" />
+                        materialDesign:HintAssist.Hint="Nhập số địa chỉ"
+                        MaxLength="20"
+                        Style="{StaticResource TextInputField}">
+                        <TextBox.Text>
+                            <Binding Path="ManagerApartmentNumber" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vr:RequiredField />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </StackPanel>
             </Grid>
         </Grid>

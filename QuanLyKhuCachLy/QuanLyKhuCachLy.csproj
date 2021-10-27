@@ -133,6 +133,11 @@
     <Compile Include="MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ValidationRules\DateFormat.cs" />
+    <Compile Include="ValidationRules\NoSpecialChar.cs" />
+    <Compile Include="ValidationRules\NumberField.cs" />
+    <Compile Include="ValidationRules\OnlyNumber.cs" />
+    <Compile Include="ValidationRules\RequiredField.cs" />
     <Compile Include="ViewModel\DashboardViewModel.cs" />
     <Compile Include="UserControl\Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>

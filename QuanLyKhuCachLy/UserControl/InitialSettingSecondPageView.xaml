@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
     d:DesignHeight="740"
     d:DesignWidth="1225"
     DataContext="{StaticResource QAVM}"
@@ -31,7 +32,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Margin="0,25,0,0">
+            <Grid Grid.Row="0" Margin="0,5,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition SharedSizeGroup="A" />
                     <ColumnDefinition SharedSizeGroup="A" />
@@ -77,12 +78,21 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Họ và tên
+                        Họ và tên (*)
                     </TextBlock>
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập họ và tên"
-                        Style="{StaticResource TextInputField}"
-                        Text="{Binding ManagerName}" />
+                        MaxLength="30"
+                        Style="{StaticResource TextInputField}">
+                        <TextBox.Text>
+                            <Binding Path="ManagerName" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vr:RequiredField />
+                                    <vr:NoSpecialChar />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </StackPanel>
                 <StackPanel
                     Grid.Row="0"
@@ -93,12 +103,24 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Ngày sinh
+                        Ngày sinh (*)
                     </TextBlock>
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập ngày sinh"
-                        Style="{StaticResource TextInputField}"
-                        Text="{Binding ManagerDateOfBirth, StringFormat='dd/MM/yyyy'}" />
+                        MaxLength="10"
+                        Style="{StaticResource TextInputField}">
+                        <TextBox.Text>
+                            <Binding
+                                Path="ManagerDateOfBirth"
+                                StringFormat="dd/MM/yyyy"
+                                UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vr:RequiredField />
+                                    <vr:DateFormat />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </StackPanel>
                 <StackPanel
                     Grid.Row="0"
@@ -110,7 +132,7 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Giới tính
+                        Giới tính (*)
                     </TextBlock>
                     <ComboBox
                         ItemsSource="{Binding SexList}"
@@ -122,7 +144,7 @@
                     Grid.Column="0"
                     Margin="0,25,24,0">
                     <TextBlock
-                        Margin="5,0,0,5"
+                        Margin="5,10,0,5"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
@@ -130,8 +152,16 @@
                     </TextBlock>
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập số căn cước công dân"
-                        Style="{StaticResource TextInputField}"
-                        Text="{Binding ManagerCitizenID}" />
+                        MaxLength="20"
+                        Style="{StaticResource TextInputField}">
+                        <TextBox.Text>
+                            <Binding Path="ManagerCitizenID" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vr:OnlyNumber />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </StackPanel>
                 <StackPanel
                     Grid.Row="1"
@@ -139,11 +169,11 @@
                     Margin="0,25,0,0"
                     VerticalAlignment="Bottom">
                     <TextBlock
-                        Margin="5,0,0,5"
+                        Margin="5,10,0,5"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Quốc tịch
+                        Quốc tịch (*)
                     </TextBlock>
                     <ComboBox
                         ItemsSource="{Binding NationalityList}"
@@ -155,7 +185,7 @@
                     Grid.Column="1"
                     Margin="0,25,24,0">
                     <TextBlock
-                        Margin="5,0,0,5"
+                        Margin="5,10,0,5"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
@@ -163,15 +193,23 @@
                     </TextBlock>
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập mã bảo hiểm y tế"
-                        Style="{StaticResource TextInputField}"
-                        Text="{Binding ManagerHealthInsuranceID}" />
+                        MaxLength="20"
+                        Style="{StaticResource TextInputField}">
+                        <TextBox.Text>
+                            <Binding Path="ManagerHealthInsuranceID" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vr:NoSpecialChar />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </StackPanel>
                 <StackPanel
                     Grid.Row="2"
                     Grid.Column="0"
                     Margin="0,25,24,0">
                     <TextBlock
-                        Margin="5,0,0,5"
+                        Margin="5,10,0,5"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
@@ -179,8 +217,16 @@
                     </TextBlock>
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập số điện thoại"
-                        Style="{StaticResource TextInputField}"
-                        Text="{Binding ManagerPhoneNumber}" />
+                        MaxLength="20"
+                        Style="{StaticResource TextInputField}">
+                        <TextBox.Text>
+                            <Binding Path="ManagerPhoneNumber" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vr:OnlyNumber />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </StackPanel>
             </Grid>
         </Grid>
