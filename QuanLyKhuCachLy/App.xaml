@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:userControl="clr-namespace:QuanLyKhuCachLy.UserControl"
     xmlns:viewModel="clr-namespace:QuanLyKhuCachLy.ViewModel"
+    ShutdownMode="OnMainWindowClose"
     StartupUri="MainScreen.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -16,7 +17,8 @@
                 <ResourceDictionary Source="/ResourceXAML/SectionButtonTemplate.xaml" />
                 <ResourceDictionary Source="/ResourceXAML/DashboardContentTemplate.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <DataTemplate DataType="{x:Type viewModel:DashboardModel}">
+
+            <DataTemplate DataType="{x:Type viewModel:DashboardViewModel}">
                 <userControl:Dashboard />
             </DataTemplate>
         </ResourceDictionary>

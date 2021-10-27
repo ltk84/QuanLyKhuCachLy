@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="740"
     d:DesignWidth="1225"
+    DataContext="{StaticResource QAVM}"
     mc:Ignorable="d">
     <StackPanel Margin="0,0,0,0">
         <TextBlock
@@ -68,6 +69,7 @@
                         FontSize="14"
                         Foreground="Black"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        Text="{Binding QAname}"
                         TextWrapping="Wrap" />
                 </StackPanel>
             </Grid>
@@ -113,6 +115,8 @@
                         materialDesign:TextFieldAssist.UnderlineBrush="#ff434a54"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="14"
+                        ItemsSource="{Binding ProvinceList}"
+                        SelectedItem="{Binding QASelectedProvince}"
                         Style="{StaticResource MaterialDesignOutlinedComboBox}" />
                 </StackPanel>
                 <StackPanel
@@ -132,6 +136,8 @@
                         materialDesign:TextFieldAssist.UnderlineBrush="#ff434a54"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="14"
+                        ItemsSource="{Binding DistrictList}"
+                        SelectedItem="{Binding QASelectedDistrict}"
                         Style="{StaticResource MaterialDesignOutlinedComboBox}" />
                 </StackPanel>
                 <StackPanel
@@ -151,6 +157,8 @@
                         materialDesign:TextFieldAssist.UnderlineBrush="#ff434a54"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="14"
+                        ItemsSource="{Binding WardList}"
+                        SelectedItem="{Binding QASelectedWard}"
                         Style="{StaticResource MaterialDesignOutlinedComboBox}" />
                 </StackPanel>
                 <StackPanel
@@ -183,6 +191,7 @@
                         FontSize="14"
                         Foreground="Black"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        Text="{Binding QAStreetName}"
                         TextWrapping="Wrap" />
                 </StackPanel>
                 <StackPanel
@@ -215,6 +224,7 @@
                         FontSize="14"
                         Foreground="Black"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        Text="{Binding QAApartmentNumber}"
                         TextWrapping="Wrap" />
                 </StackPanel>
             </Grid>
@@ -273,6 +283,7 @@
                         FontSize="14"
                         Foreground="Black"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        Text="{Binding QATestCycle}"
                         TextWrapping="Wrap" />
                 </StackPanel>
                 <StackPanel
@@ -305,6 +316,7 @@
                         FontSize="14"
                         Foreground="Black"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        Text="{Binding QARequiredDayToFinish}"
                         TextWrapping="Wrap" />
                 </StackPanel>
             </Grid>

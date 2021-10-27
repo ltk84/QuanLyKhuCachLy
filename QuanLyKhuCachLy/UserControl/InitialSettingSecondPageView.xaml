@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="740"
     d:DesignWidth="1225"
+    DataContext="{StaticResource QAVM}"
     mc:Ignorable="d">
     <StackPanel Margin="0,0,0,0">
         <TextBlock
@@ -97,6 +98,7 @@
                         FontSize="14"
                         Foreground="Black"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        Text="{Binding ManagerName}"
                         TextWrapping="Wrap" />
                 </StackPanel>
                 <StackPanel
@@ -129,6 +131,7 @@
                         FontSize="14"
                         Foreground="Black"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        Text="{Binding ManagerDateOfBirth, StringFormat='dd/MM/yyyy'}"
                         TextWrapping="Wrap" />
                 </StackPanel>
                 <StackPanel
@@ -148,14 +151,9 @@
                         materialDesign:TextFieldAssist.UnderlineBrush="#ff434a54"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="14"
-                        Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                        <ComboBoxItem>
-                            Nam
-                        </ComboBoxItem>
-                        <ComboBoxItem>
-                            Nữ
-                        </ComboBoxItem>
-                    </ComboBox>
+                        ItemsSource="{Binding SexList}"
+                        SelectedItem="{Binding ManagerSex}"
+                        Style="{StaticResource MaterialDesignOutlinedComboBox}" />
                 </StackPanel>
                 <StackPanel
                     Grid.Row="1"
@@ -187,6 +185,7 @@
                         FontSize="14"
                         Foreground="Black"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        Text="{Binding ManagerCitizenID}"
                         TextWrapping="Wrap" />
                 </StackPanel>
                 <StackPanel
@@ -206,6 +205,8 @@
                         materialDesign:TextFieldAssist.UnderlineBrush="#ff434a54"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="14"
+                        ItemsSource="{Binding NationalityList}"
+                        SelectedItem="{Binding ManagerNationality}"
                         Style="{StaticResource MaterialDesignOutlinedComboBox}" />
                 </StackPanel>
                 <StackPanel
@@ -238,6 +239,7 @@
                         FontSize="14"
                         Foreground="Black"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        Text="{Binding ManagerHealthInsuranceID}"
                         TextWrapping="Wrap" />
                 </StackPanel>
                 <StackPanel
@@ -270,6 +272,7 @@
                         FontSize="14"
                         Foreground="Black"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        Text="{Binding ManagerPhoneNumber}"
                         TextWrapping="Wrap" />
                 </StackPanel>
             </Grid>

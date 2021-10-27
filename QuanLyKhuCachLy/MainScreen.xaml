@@ -3,16 +3,17 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:local="clr-namespace:QuanLyKhuCachLy"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Name="MainWindow"
     Title="MainScreen"
     Width="{Binding SystemParameters.PrimaryScreenWidth}"
     Height="{Binding SystemParameters.PrimaryScreenHeight}"
+    DataContext="{StaticResource MainVM}"
     mc:Ignorable="d">
-    <Window.DataContext>
-        <local:MainScreenModel />
-    </Window.DataContext>
+
     <Grid
         Width="1440"
         Height="1024"
@@ -243,4 +244,11 @@
         </StackPanel>
         <ContentControl Grid.Column="1" Content="{Binding CurrentView}" />
     </Grid>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName=MainWindow}" />
+        </i:EventTrigger>
+
+
+    </i:Interaction.Triggers>
 </Window>
