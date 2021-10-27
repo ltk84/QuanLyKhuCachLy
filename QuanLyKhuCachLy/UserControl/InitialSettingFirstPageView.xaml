@@ -51,26 +51,9 @@
                         Tên khu cách ly
                     </TextBlock>
                     <TextBox
-                        Margin="0"
-                        Padding="16,16,12,14"
-                        VerticalAlignment="Top"
-                        materialDesign:HintAssist.Background="Transparent"
-                        materialDesign:HintAssist.Foreground="#FF434a54"
                         materialDesign:HintAssist.Hint="Nhập tên khu cách ly"
-                        materialDesign:HintAssist.IsFloating="False"
-                        materialDesign:TextFieldAssist.HasOutlinedTextField="False"
-                        materialDesign:TextFieldAssist.LeadingIcon="Person"
-                        materialDesign:TextFieldAssist.TextFieldCornerRadius="10,10,10,10"
-                        materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
-                        Background="#FFEBEBEB"
-                        BorderBrush="#00000000"
-                        CaretBrush="#FF434A54"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="14"
-                        Foreground="Black"
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                        Text="{Binding QAname}"
-                        TextWrapping="Wrap" />
+                        Style="{StaticResource TextInputField}"
+                        Text="{Binding QAname}" />
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="1" Margin="0,25,0,0">
@@ -111,13 +94,9 @@
                         Tỉnh/Thành phố
                     </TextBlock>
                     <ComboBox
-                        materialDesign:HintAssist.Hint="Nhấp vào để chọn"
-                        materialDesign:TextFieldAssist.UnderlineBrush="#ff434a54"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="14"
                         ItemsSource="{Binding ProvinceList}"
                         SelectedItem="{Binding QASelectedProvince}"
-                        Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+                        Style="{StaticResource ComboBoxField}" />
                 </StackPanel>
                 <StackPanel
                     Grid.Row="1"
@@ -132,13 +111,9 @@
                         Quận/Huyện
                     </TextBlock>
                     <ComboBox
-                        materialDesign:HintAssist.Hint="Nhấp vào để chọn"
-                        materialDesign:TextFieldAssist.UnderlineBrush="#ff434a54"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="14"
                         ItemsSource="{Binding DistrictList}"
                         SelectedItem="{Binding QASelectedDistrict}"
-                        Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+                        Style="{StaticResource ComboBoxField}" />
                 </StackPanel>
                 <StackPanel
                     Grid.Row="1"
@@ -153,13 +128,9 @@
                         Phường/Xã
                     </TextBlock>
                     <ComboBox
-                        materialDesign:HintAssist.Hint="Nhấp vào để chọn"
-                        materialDesign:TextFieldAssist.UnderlineBrush="#ff434a54"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="14"
                         ItemsSource="{Binding WardList}"
                         SelectedItem="{Binding QASelectedWard}"
-                        Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+                        Style="{StaticResource ComboBoxField}" />
                 </StackPanel>
                 <StackPanel
                     Grid.Row="2"
@@ -173,26 +144,9 @@
                         Đường
                     </TextBlock>
                     <TextBox
-                        Margin="0"
-                        Padding="16,16,12,14"
-                        VerticalAlignment="Top"
-                        materialDesign:HintAssist.Background="Transparent"
-                        materialDesign:HintAssist.Foreground="#FF434a54"
                         materialDesign:HintAssist.Hint="Nhập tên đường"
-                        materialDesign:HintAssist.IsFloating="False"
-                        materialDesign:TextFieldAssist.HasOutlinedTextField="False"
-                        materialDesign:TextFieldAssist.LeadingIcon="Person"
-                        materialDesign:TextFieldAssist.TextFieldCornerRadius="10,10,10,10"
-                        materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
-                        Background="#FFEBEBEB"
-                        BorderBrush="#00000000"
-                        CaretBrush="#FF434A54"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="14"
-                        Foreground="Black"
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                        Text="{Binding QAStreetName}"
-                        TextWrapping="Wrap" />
+                        Style="{StaticResource TextInputField}"
+                        Text="{Binding QAStreetName}" />
                 </StackPanel>
                 <StackPanel
                     Grid.Row="2"
@@ -206,26 +160,9 @@
                         Số
                     </TextBlock>
                     <TextBox
-                        Margin="0"
-                        Padding="16,16,12,14"
-                        VerticalAlignment="Top"
-                        materialDesign:HintAssist.Background="Transparent"
-                        materialDesign:HintAssist.Foreground="#FF434a54"
                         materialDesign:HintAssist.Hint="Nhập số"
-                        materialDesign:HintAssist.IsFloating="False"
-                        materialDesign:TextFieldAssist.HasOutlinedTextField="False"
-                        materialDesign:TextFieldAssist.LeadingIcon="Person"
-                        materialDesign:TextFieldAssist.TextFieldCornerRadius="10,10,10,10"
-                        materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
-                        Background="#FFEBEBEB"
-                        BorderBrush="#00000000"
-                        CaretBrush="#FF434A54"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="14"
-                        Foreground="Black"
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                        Text="{Binding QAApartmentNumber}"
-                        TextWrapping="Wrap" />
+                        Style="{StaticResource TextInputField}"
+                        Text="{Binding QAApartmentNumber}" />
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="2" Margin="0,25,0,0">
@@ -265,26 +202,9 @@
                         Chu kỳ xét nghiệm (ngày)
                     </TextBlock>
                     <TextBox
-                        Margin="0"
-                        Padding="16,16,12,14"
-                        VerticalAlignment="Top"
-                        materialDesign:HintAssist.Background="Transparent"
-                        materialDesign:HintAssist.Foreground="#FF434a54"
                         materialDesign:HintAssist.Hint="Nhập số ngày"
-                        materialDesign:HintAssist.IsFloating="False"
-                        materialDesign:TextFieldAssist.HasOutlinedTextField="False"
-                        materialDesign:TextFieldAssist.LeadingIcon="Person"
-                        materialDesign:TextFieldAssist.TextFieldCornerRadius="10,10,10,10"
-                        materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
-                        Background="#FFEBEBEB"
-                        BorderBrush="#00000000"
-                        CaretBrush="#FF434A54"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="14"
-                        Foreground="Black"
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                        Text="{Binding QATestCycle}"
-                        TextWrapping="Wrap" />
+                        Style="{StaticResource TextInputField}"
+                        Text="{Binding QATestCycle}" />
                 </StackPanel>
                 <StackPanel
                     Grid.Row="2"
@@ -298,26 +218,9 @@
                         Số ngày tối thiểu để hoàn thành cách ly
                     </TextBlock>
                     <TextBox
-                        Margin="0"
-                        Padding="16,16,12,14"
-                        VerticalAlignment="Top"
-                        materialDesign:HintAssist.Background="Transparent"
-                        materialDesign:HintAssist.Foreground="#FF434a54"
                         materialDesign:HintAssist.Hint="Nhập số ngày"
-                        materialDesign:HintAssist.IsFloating="False"
-                        materialDesign:TextFieldAssist.HasOutlinedTextField="False"
-                        materialDesign:TextFieldAssist.LeadingIcon="Person"
-                        materialDesign:TextFieldAssist.TextFieldCornerRadius="10,10,10,10"
-                        materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
-                        Background="#FFEBEBEB"
-                        BorderBrush="#00000000"
-                        CaretBrush="#FF434A54"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="14"
-                        Foreground="Black"
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                        Text="{Binding QARequiredDayToFinish}"
-                        TextWrapping="Wrap" />
+                        Style="{StaticResource TextInputField}"
+                        Text="{Binding QARequiredDayToFinish}" />
                 </StackPanel>
             </Grid>
         </Grid>

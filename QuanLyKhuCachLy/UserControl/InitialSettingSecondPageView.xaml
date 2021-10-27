@@ -80,26 +80,9 @@
                         Họ và tên
                     </TextBlock>
                     <TextBox
-                        Margin="0"
-                        Padding="16,16,12,14"
-                        VerticalAlignment="Top"
-                        materialDesign:HintAssist.Background="Transparent"
-                        materialDesign:HintAssist.Foreground="#FF434a54"
                         materialDesign:HintAssist.Hint="Nhập họ và tên"
-                        materialDesign:HintAssist.IsFloating="False"
-                        materialDesign:TextFieldAssist.HasOutlinedTextField="False"
-                        materialDesign:TextFieldAssist.LeadingIcon="Person"
-                        materialDesign:TextFieldAssist.TextFieldCornerRadius="10,10,10,10"
-                        materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
-                        Background="#FFEBEBEB"
-                        BorderBrush="#00000000"
-                        CaretBrush="#FF434A54"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="14"
-                        Foreground="Black"
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                        Text="{Binding ManagerName}"
-                        TextWrapping="Wrap" />
+                        Style="{StaticResource TextInputField}"
+                        Text="{Binding ManagerName}" />
                 </StackPanel>
                 <StackPanel
                     Grid.Row="0"
@@ -113,26 +96,9 @@
                         Ngày sinh
                     </TextBlock>
                     <TextBox
-                        Margin="0"
-                        Padding="16,16,12,14"
-                        VerticalAlignment="Top"
-                        materialDesign:HintAssist.Background="Transparent"
-                        materialDesign:HintAssist.Foreground="#FF434a54"
-                        materialDesign:HintAssist.Hint="Nhập họ và tên"
-                        materialDesign:HintAssist.IsFloating="False"
-                        materialDesign:TextFieldAssist.HasOutlinedTextField="False"
-                        materialDesign:TextFieldAssist.LeadingIcon="Person"
-                        materialDesign:TextFieldAssist.TextFieldCornerRadius="10,10,10,10"
-                        materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
-                        Background="#FFEBEBEB"
-                        BorderBrush="#00000000"
-                        CaretBrush="#FF434A54"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="14"
-                        Foreground="Black"
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                        Text="{Binding ManagerDateOfBirth, StringFormat='dd/MM/yyyy'}"
-                        TextWrapping="Wrap" />
+                        materialDesign:HintAssist.Hint="Nhập ngày sinh"
+                        Style="{StaticResource TextInputField}"
+                        Text="{Binding ManagerDateOfBirth, StringFormat='dd/MM/yyyy'}" />
                 </StackPanel>
                 <StackPanel
                     Grid.Row="0"
@@ -147,13 +113,9 @@
                         Giới tính
                     </TextBlock>
                     <ComboBox
-                        materialDesign:HintAssist.Hint="Nhấp vào để chọn"
-                        materialDesign:TextFieldAssist.UnderlineBrush="#ff434a54"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="14"
                         ItemsSource="{Binding SexList}"
                         SelectedItem="{Binding ManagerSex}"
-                        Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+                        Style="{StaticResource ComboBoxField}" />
                 </StackPanel>
                 <StackPanel
                     Grid.Row="1"
@@ -167,26 +129,9 @@
                         Căn cước công dân
                     </TextBlock>
                     <TextBox
-                        Margin="0"
-                        Padding="16,16,12,14"
-                        VerticalAlignment="Top"
-                        materialDesign:HintAssist.Background="Transparent"
-                        materialDesign:HintAssist.Foreground="#FF434a54"
                         materialDesign:HintAssist.Hint="Nhập số căn cước công dân"
-                        materialDesign:HintAssist.IsFloating="False"
-                        materialDesign:TextFieldAssist.HasOutlinedTextField="False"
-                        materialDesign:TextFieldAssist.LeadingIcon="Person"
-                        materialDesign:TextFieldAssist.TextFieldCornerRadius="10,10,10,10"
-                        materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
-                        Background="#FFEBEBEB"
-                        BorderBrush="#00000000"
-                        CaretBrush="#FF434A54"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="14"
-                        Foreground="Black"
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                        Text="{Binding ManagerCitizenID}"
-                        TextWrapping="Wrap" />
+                        Style="{StaticResource TextInputField}"
+                        Text="{Binding ManagerCitizenID}" />
                 </StackPanel>
                 <StackPanel
                     Grid.Row="1"
@@ -201,13 +146,9 @@
                         Quốc tịch
                     </TextBlock>
                     <ComboBox
-                        materialDesign:HintAssist.Hint="Nhấp vào để chọn"
-                        materialDesign:TextFieldAssist.UnderlineBrush="#ff434a54"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="14"
                         ItemsSource="{Binding NationalityList}"
                         SelectedItem="{Binding ManagerNationality}"
-                        Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+                        Style="{StaticResource ComboBoxField}" />
                 </StackPanel>
                 <StackPanel
                     Grid.Row="1"
@@ -221,26 +162,9 @@
                         Mã bảo hiểm y tế
                     </TextBlock>
                     <TextBox
-                        Margin="0"
-                        Padding="16,16,12,14"
-                        VerticalAlignment="Top"
-                        materialDesign:HintAssist.Background="Transparent"
-                        materialDesign:HintAssist.Foreground="#FF434a54"
                         materialDesign:HintAssist.Hint="Nhập mã bảo hiểm y tế"
-                        materialDesign:HintAssist.IsFloating="False"
-                        materialDesign:TextFieldAssist.HasOutlinedTextField="False"
-                        materialDesign:TextFieldAssist.LeadingIcon="Person"
-                        materialDesign:TextFieldAssist.TextFieldCornerRadius="10,10,10,10"
-                        materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
-                        Background="#FFEBEBEB"
-                        BorderBrush="#00000000"
-                        CaretBrush="#FF434A54"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="14"
-                        Foreground="Black"
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                        Text="{Binding ManagerHealthInsuranceID}"
-                        TextWrapping="Wrap" />
+                        Style="{StaticResource TextInputField}"
+                        Text="{Binding ManagerHealthInsuranceID}" />
                 </StackPanel>
                 <StackPanel
                     Grid.Row="2"
@@ -254,26 +178,9 @@
                         Số điện thoại
                     </TextBlock>
                     <TextBox
-                        Margin="0"
-                        Padding="16,16,12,14"
-                        VerticalAlignment="Top"
-                        materialDesign:HintAssist.Background="Transparent"
-                        materialDesign:HintAssist.Foreground="#FF434a54"
                         materialDesign:HintAssist.Hint="Nhập số điện thoại"
-                        materialDesign:HintAssist.IsFloating="False"
-                        materialDesign:TextFieldAssist.HasOutlinedTextField="False"
-                        materialDesign:TextFieldAssist.LeadingIcon="Person"
-                        materialDesign:TextFieldAssist.TextFieldCornerRadius="10,10,10,10"
-                        materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
-                        Background="#FFEBEBEB"
-                        BorderBrush="#00000000"
-                        CaretBrush="#FF434A54"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="14"
-                        Foreground="Black"
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                        Text="{Binding ManagerPhoneNumber}"
-                        TextWrapping="Wrap" />
+                        Style="{StaticResource TextInputField}"
+                        Text="{Binding ManagerPhoneNumber}" />
                 </StackPanel>
             </Grid>
         </Grid>

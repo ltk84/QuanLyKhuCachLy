@@ -78,26 +78,9 @@
                         Chức vụ
                     </TextBlock>
                     <TextBox
-                        Margin="0"
-                        Padding="16,16,12,14"
-                        VerticalAlignment="Top"
-                        materialDesign:HintAssist.Background="Transparent"
-                        materialDesign:HintAssist.Foreground="#FF434a54"
                         materialDesign:HintAssist.Hint="Nhập tên chức vụ"
-                        materialDesign:HintAssist.IsFloating="False"
-                        materialDesign:TextFieldAssist.HasOutlinedTextField="False"
-                        materialDesign:TextFieldAssist.LeadingIcon="Person"
-                        materialDesign:TextFieldAssist.TextFieldCornerRadius="10,10,10,10"
-                        materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
-                        Background="#FFEBEBEB"
-                        BorderBrush="#00000000"
-                        CaretBrush="#FF434A54"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="14"
-                        Foreground="Black"
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                        Text="{Binding ManagerJobTitle}"
-                        TextWrapping="Wrap" />
+                        Style="{StaticResource TextInputField}"
+                        Text="{Binding ManagerJobTitle}" />
                 </StackPanel>
                 <StackPanel
                     Grid.Row="0"
@@ -111,26 +94,9 @@
                         Phòng ban
                     </TextBlock>
                     <TextBox
-                        Margin="0"
-                        Padding="16,16,12,14"
-                        VerticalAlignment="Top"
-                        materialDesign:HintAssist.Background="Transparent"
-                        materialDesign:HintAssist.Foreground="#FF434a54"
                         materialDesign:HintAssist.Hint="Nhập tên phòng ban"
-                        materialDesign:HintAssist.IsFloating="False"
-                        materialDesign:TextFieldAssist.HasOutlinedTextField="False"
-                        materialDesign:TextFieldAssist.LeadingIcon="Person"
-                        materialDesign:TextFieldAssist.TextFieldCornerRadius="10,10,10,10"
-                        materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
-                        Background="#FFEBEBEB"
-                        BorderBrush="#00000000"
-                        CaretBrush="#FF434A54"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="14"
-                        Foreground="Black"
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                        Text="{Binding ManagerDepartment}"
-                        TextWrapping="Wrap" />
+                        Style="{StaticResource TextInputField}"
+                        Text="{Binding ManagerDepartment}" />
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="2" Margin="0,25,0,0">
@@ -171,13 +137,9 @@
                         Tỉnh/Thành phố
                     </TextBlock>
                     <ComboBox
-                        materialDesign:HintAssist.Hint="Nhấp vào để chọn"
-                        materialDesign:TextFieldAssist.UnderlineBrush="#ff434a54"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="14"
                         ItemsSource="{Binding ProvinceList}"
                         SelectedItem="{Binding ManagerSelectedProvince}"
-                        Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+                        Style="{StaticResource ComboBoxField}" />
                 </StackPanel>
                 <StackPanel
                     Grid.Row="1"
@@ -192,13 +154,9 @@
                         Quận/Huyện
                     </TextBlock>
                     <ComboBox
-                        materialDesign:HintAssist.Hint="Nhấp vào để chọn"
-                        materialDesign:TextFieldAssist.UnderlineBrush="#ff434a54"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="14"
                         ItemsSource="{Binding DistrictList}"
                         SelectedItem="{Binding ManagerSelectedDistrict}"
-                        Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+                        Style="{StaticResource ComboBoxField}" />
                 </StackPanel>
                 <StackPanel
                     Grid.Row="1"
@@ -213,13 +171,9 @@
                         Phường/Xã
                     </TextBlock>
                     <ComboBox
-                        materialDesign:HintAssist.Hint="Nhấp vào để chọn"
-                        materialDesign:TextFieldAssist.UnderlineBrush="#ff434a54"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="14"
                         ItemsSource="{Binding WardList}"
                         SelectedItem="{Binding ManagerSelectedWard}"
-                        Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+                        Style="{StaticResource ComboBoxField}" />
                 </StackPanel>
                 <StackPanel
                     Grid.Row="2"
@@ -233,26 +187,9 @@
                         Đường
                     </TextBlock>
                     <TextBox
-                        Margin="0"
-                        Padding="16,16,12,14"
-                        VerticalAlignment="Top"
-                        materialDesign:HintAssist.Background="Transparent"
-                        materialDesign:HintAssist.Foreground="#FF434a54"
                         materialDesign:HintAssist.Hint="Nhập tên đường"
-                        materialDesign:HintAssist.IsFloating="False"
-                        materialDesign:TextFieldAssist.HasOutlinedTextField="False"
-                        materialDesign:TextFieldAssist.LeadingIcon="Person"
-                        materialDesign:TextFieldAssist.TextFieldCornerRadius="10,10,10,10"
-                        materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
-                        Background="#FFEBEBEB"
-                        BorderBrush="#00000000"
-                        CaretBrush="#FF434A54"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="14"
-                        Foreground="Black"
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                        Text="{Binding ManagerStreetName}"
-                        TextWrapping="Wrap" />
+                        Style="{StaticResource TextInputField}"
+                        Text="{Binding ManagerStreetName}" />
                 </StackPanel>
                 <StackPanel
                     Grid.Row="2"
@@ -266,26 +203,9 @@
                         Số
                     </TextBlock>
                     <TextBox
-                        Margin="0"
-                        Padding="16,16,12,14"
-                        VerticalAlignment="Top"
-                        materialDesign:HintAssist.Background="Transparent"
-                        materialDesign:HintAssist.Foreground="#FF434a54"
                         materialDesign:HintAssist.Hint="Nhập số"
-                        materialDesign:HintAssist.IsFloating="False"
-                        materialDesign:TextFieldAssist.HasOutlinedTextField="False"
-                        materialDesign:TextFieldAssist.LeadingIcon="Person"
-                        materialDesign:TextFieldAssist.TextFieldCornerRadius="10,10,10,10"
-                        materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
-                        Background="#FFEBEBEB"
-                        BorderBrush="#00000000"
-                        CaretBrush="#FF434A54"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="14"
-                        Foreground="Black"
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                        Text="{Binding ManagerApartmentNumber}"
-                        TextWrapping="Wrap" />
+                        Style="{StaticResource TextInputField}"
+                        Text="{Binding ManagerApartmentNumber}" />
                 </StackPanel>
             </Grid>
         </Grid>
