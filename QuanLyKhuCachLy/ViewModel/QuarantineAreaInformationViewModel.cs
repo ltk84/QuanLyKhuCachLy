@@ -192,6 +192,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             NextTabCommand = new RelayCommand<Window>((p) =>
             {
+
                 if (TabIndex <= 3) return true;
                 return false;
             }, (p) =>
@@ -269,7 +270,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
-        // Chưa test
+
         void UpdateQuarantineAreaInformation()
         {
             Address QAreaAddress = new Address()
