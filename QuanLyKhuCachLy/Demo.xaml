@@ -18,7 +18,7 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn DisplayMemberBinding="{Binding id}" Header="Id" />
-                        <GridViewColumn DisplayMemberBinding="{Binding displayName}" Header="Tên" />
+                        <GridViewColumn DisplayMemberBinding="{Binding displayName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Header="Tên" />
                         <GridViewColumn DisplayMemberBinding="{Binding capacity}" Header="Sức chứa" />
                         <GridViewColumn DisplayMemberBinding="{Binding Severity.level}" Header="Mức độ" />
                     </GridView>
