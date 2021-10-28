@@ -31,6 +31,41 @@
         </Style.Triggers>
     </Style>
     <Style
+        x:Key="CalendarStyle"
+        BasedOn="{StaticResource MaterialDesignCalendarPortraitForeground}"
+        TargetType="Calendar">
+        <Setter Property="materialDesign:CalendarAssist.HeaderBackground" Value="#FF3D4466" />
+        <Setter Property="materialDesign:CalendarAssist.HeaderForeground" Value="White" />
+    </Style>
+    <Style
+        x:Key="DatePickerField"
+        BasedOn="{StaticResource MaterialDesignOutlinedDatePicker}"
+        TargetType="DatePicker">
+        <Setter Property="CalendarStyle" Value="{StaticResource CalendarStyle}" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="16,12,12,14" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="materialDesign:HintAssist.Background" Value="Transparent" />
+        <Setter Property="materialDesign:HintAssist.Foreground" Value="#FF434a54" />
+        <Setter Property="materialDesign:HintAssist.IsFloating" Value="False" />
+        <Setter Property="materialDesign:TextFieldAssist.HasOutlinedTextField" Value="True" />
+        <Setter Property="materialDesign:TextFieldAssist.TextFieldCornerRadius" Value="5,5,5,5" />
+        <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="#FF434a54" />
+        <Setter Property="FontFamily" Value="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans" />
+        <Setter Property="BorderBrush" Value="#00000000" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="materialDesign:ValidationAssist.HorizontalAlignment" Value="Right" />
+        <Setter Property="materialDesign:ValidationAssist.Background" Value="Transparent" />
+        <Setter Property="materialDesign:ValidationAssist.FontSize" Value="14" />
+        <Setter Property="materialDesign:TextFieldAssist.CharacterCounterVisibility" Value="Hidden" />
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="False">
+                <Setter Property="materialDesign:ValidationAssist.Suppress" Value="True" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style
         x:Key="ComboBoxField"
         BasedOn="{StaticResource MaterialDesignOutlinedComboBox}"
         TargetType="ComboBox">

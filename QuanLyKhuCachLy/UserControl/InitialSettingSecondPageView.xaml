@@ -105,22 +105,18 @@
                         Foreground="#FF434A54">
                         Ngày sinh (*)
                     </TextBlock>
-                    <TextBox
-                        materialDesign:HintAssist.Hint="Nhập ngày sinh"
-                        MaxLength="10"
-                        Style="{StaticResource TextInputField}">
-                        <TextBox.Text>
+                    <DatePicker materialDesign:HintAssist.Hint="Nhập ngày sinh" Style="{StaticResource DatePickerField}">
+                        <DatePicker.SelectedDate>
                             <Binding
                                 Path="ManagerDateOfBirth"
                                 StringFormat="dd/MM/yyyy"
                                 UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <vr:RequiredField />
-                                    <vr:DateFormat />
                                 </Binding.ValidationRules>
                             </Binding>
-                        </TextBox.Text>
-                    </TextBox>
+                        </DatePicker.SelectedDate>
+                    </DatePicker>
                 </StackPanel>
                 <StackPanel
                     Grid.Row="0"
