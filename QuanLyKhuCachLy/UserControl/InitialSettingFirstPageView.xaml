@@ -256,7 +256,7 @@
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập số ngày"
                         MaxLength="9"
-                        Style="{StaticResource TextInputField}">
+                        Style="{StaticResource TextInputField}" PreviewTextInput="TextBox_PreviewTextInput_1">
                         <TextBox.Text>
                             <Binding Path="QATestCycle" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
@@ -281,7 +281,7 @@
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập số ngày"
                         MaxLength="9"
-                        Style="{StaticResource TextInputField}">
+                        Style="{StaticResource TextInputField}" PreviewTextInput="TextBox_PreviewTextInput">
                         <TextBox.Text>
                             <Binding Path="QARequiredDayToFinish" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>

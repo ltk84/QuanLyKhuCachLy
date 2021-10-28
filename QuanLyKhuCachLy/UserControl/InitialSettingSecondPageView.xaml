@@ -154,7 +154,7 @@
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập số căn cước công dân"
                         MaxLength="20"
-                        Style="{StaticResource TextInputField}">
+                        Style="{StaticResource TextInputField}" PreviewTextInput="TextBox_PreviewTextInput_1">
                         <TextBox.Text>
                             <Binding Path="ManagerCitizenID" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
@@ -224,7 +224,7 @@
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập số điện thoại"
                         MaxLength="20"
-                        Style="{StaticResource TextInputField}">
+                        Style="{StaticResource TextInputField}" PreviewTextInput="TextBox_PreviewTextInput">
                         <TextBox.Text>
                             <Binding Path="ManagerPhoneNumber" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
