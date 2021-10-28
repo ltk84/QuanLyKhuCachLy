@@ -1,12 +1,258 @@
-﻿<UserControl x:Class="QuanLyKhuCachLy.UserControl.StaffDetailInfomation"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:QuanLyKhuCachLy.UserControl"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+﻿<UserControl
+    x:Class="QuanLyKhuCachLy.UserControl.Dashboard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy.UserControl"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="757"
+    d:DesignWidth="705"
+    mc:Ignorable="d">
+    <StackPanel
+         Margin="40,30,40,30"
+        >
+        <Grid
+            >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Image
+                        Margin="0, 0, 10, 0"
+                        Grid.Column="0"
+                        Width="24"
+                        Height="24"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        RenderTransformOrigin="0.5,0.5"
+                        Source="/Resources/icons/back-icon.png" />
+            <TextBlock
+                VerticalAlignment="Center"
+                Grid.Column="1" 
+                FontSize="14"
+                FontWeight="Regular"
+                Foreground="#FF434A54"
+                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                >
+                DANH SÁCH NHÂN VIÊN
+            </TextBlock>
+        </Grid>
+
+        <Grid
+            Margin="0, 30, 0, 0"
+            >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
             
-    </Grid>
+            <Button Grid.Column="1"
+                    VerticalAlignment="Bottom"
+                    Margin="0,0,60,0"
+                    Template="{StaticResource delete-button}"
+                    Content="Xóa nhân viên"/>
+
+            <Button Grid.Column="2"
+                    VerticalAlignment="Bottom"
+                    Template="{StaticResource edit-button}"
+                    Content="Chỉnh sửa"/>
+
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock
+                VerticalAlignment="Center"
+                Grid.Row="0" 
+                FontSize="22"
+                FontWeight="Bold"
+                Foreground="#FF363636"
+                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                >
+                THÔNG TIN      
+                </TextBlock>
+
+                <TextBlock
+                VerticalAlignment="Center"
+                Grid.Row="1" 
+                FontSize="20"
+                FontWeight="Light"
+                Foreground="#FF363636"
+                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                >
+                Nhân viên
+                </TextBlock>
+
+
+            </Grid>
+
+        </Grid>
+        <Separator
+            Margin="0, 10, 0, 0"  Background="#1E434A54"/>
+
+        <Grid
+            Margin="0, 10, 0, 10"
+            >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock 
+                Grid.Row="0"
+                Grid.Column="0"
+                Text="Tên"
+                Style="{StaticResource list-key-text}"/>
+
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="1"
+                Text="Trần Lê Thanh Kiều"
+                Style="{StaticResource list-value-text}"/>
+
+
+            <TextBlock 
+                Grid.Row="1"
+                Grid.Column="0"
+                Text="Giới Tính"
+                Style="{StaticResource list-key-text}"/>
+
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="1"
+                Text="Lưỡng tính"
+                Style="{StaticResource list-value-text}"/>
+
+
+            <TextBlock 
+                Grid.Row="2"
+                Grid.Column="0"
+                Text="Quốc Tịch"
+                Style="{StaticResource list-key-text}"/>
+
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="1"
+                Text="Việt Nam"
+                Style="{StaticResource list-value-text}"/>
+
+            <TextBlock 
+                Grid.Row="3"
+                Grid.Column="0"
+                Text="CMND/CCCD"
+                Style="{StaticResource list-key-text}"/>
+
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="1"
+                Text="156989664"
+                Style="{StaticResource list-value-text}"/>
+
+            <TextBlock 
+                Grid.Row="4"
+                Grid.Column="0"
+                Text="Số điện thoại"
+                Style="{StaticResource list-key-text}"/>
+
+            <TextBlock
+                Grid.Row="4"
+                Grid.Column="1"
+                Text="0336597851"
+                Style="{StaticResource list-value-text}"/>
+
+            <TextBlock 
+                Grid.Row="5"
+                Grid.Column="0"
+                Text="Mã số BHYT"
+                Style="{StaticResource list-key-text}"/>
+
+            <TextBlock
+                Grid.Row="5"
+                Grid.Column="1"
+                Text="SV19522496"
+                Style="{StaticResource list-value-text}"/>
+
+            <TextBlock 
+                VerticalAlignment="Top"
+                Grid.Row="6"
+                Grid.Column="0"
+                Text="Địa chỉ"
+                Style="{StaticResource list-key-text}"/>
+
+            <TextBlock
+                Grid.Row="6"
+                Grid.Column="1"
+                Text="440 Lê Văn Quới, Bình Hưng Hòa A, Bình Tân, Hồ Chí Minh"
+                Style="{StaticResource list-value-text}"/>
+
+
+
+
+        </Grid>
+
+        <Separator
+            Margin="0, 0, 0, 10"  Background="#1E434A54"/>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+
+            <TextBlock Text="Chức vụ"
+                       Style="{StaticResource list-key-text}"/>
+            <TextBlock
+                Grid.Column="1"
+                Style="{StaticResource list-value-text}"
+                Text="Tạp vụ"/>
+
+            <TextBlock 
+                Grid.Row="0"
+                Grid.Column="0"
+                Text="Chức vụ"
+                       Style="{StaticResource list-key-text}"/>
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="1"
+                Style="{StaticResource list-value-text}"
+                Text="Tạp vụ"/>
+
+            <TextBlock 
+                Grid.Row="1"
+                Grid.Column="0"
+                Text="Bộ phận"
+                       Style="{StaticResource list-key-text}"/>
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="1"
+                Style="{StaticResource list-value-text}"
+                Text="Giường chiếu"/>
+
+        </Grid>
+    </StackPanel>
 </UserControl>

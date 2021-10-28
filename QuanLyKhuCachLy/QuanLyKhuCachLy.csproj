@@ -133,6 +133,12 @@
     <Compile Include="MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\StaffDetailInfomation.xaml.cs">
+      <DependentUpon>StaffDetailInfomation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\StaffList.xaml.cs">
+      <DependentUpon>StaffList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ValidationRules\DateFormat.cs" />
     <Compile Include="ValidationRules\NoSpecialChar.cs" />
     <Compile Include="ValidationRules\NumberField.cs" />
@@ -183,6 +189,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ResourceXAML\ListInfomationTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ResourceXAML\MainResource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -191,7 +201,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ResourceXAML\ModifiActionTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ResourceXAML\SectionButtonTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceXAML\TableTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -208,6 +226,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControl\InitialSettingThirdPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl\StaffDetailInfomation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl\StaffList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

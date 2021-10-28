@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace QuanLyKhuCachLy.UserControl
 {
     /// <summary>
-    /// Interaction logic for StaffDetailInfomation.xaml
+    /// Interaction logic for StaffList.xaml
     /// </summary>
-    public partial class StaffDetailInfomation 
+    public partial class StaffList 
     {
-        public StaffDetailInfomation()
+        public StaffList()
         {
             InitializeComponent();
         }

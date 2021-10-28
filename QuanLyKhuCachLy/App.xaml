@@ -17,11 +17,17 @@
                 <ResourceDictionary Source="/ResourceXAML/SectionButtonTemplate.xaml" />
                 <ResourceDictionary Source="/ResourceXAML/DashboardContentTemplate.xaml" />
                 <ResourceDictionary Source="/ResourceXAML/InputTemplate.xaml" />
+                <ResourceDictionary Source="/ResourceXAML/ListInfomationTemplate.xaml" />
+                <ResourceDictionary Source="/ResourceXAML/ModifiActionTemplate.xaml" />
+                
+                
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:DashboardViewModel}">
                 <userControl:Dashboard />
             </DataTemplate>
+
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

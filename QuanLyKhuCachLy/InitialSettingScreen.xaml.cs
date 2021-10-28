@@ -25,6 +25,5 @@ namespace QuanLyKhuCachLy
             InitializeComponent();
         }
 
-
     }
 }
