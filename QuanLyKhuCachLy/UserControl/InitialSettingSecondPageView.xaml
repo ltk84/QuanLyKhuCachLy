@@ -134,10 +134,15 @@
                         Foreground="#FF434A54">
                         Giới tính (*)
                     </TextBlock>
-                    <ComboBox
-                        ItemsSource="{Binding SexList}"
-                        SelectedItem="{Binding ManagerSex}"
-                        Style="{StaticResource ComboBoxField}" />
+                    <ComboBox ItemsSource="{Binding SexList}" Style="{StaticResource ComboBoxField}">
+                        <ComboBox.SelectedItem>
+                            <Binding Path="ManagerSex" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vr:RequiredField />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </ComboBox.SelectedItem>
+                    </ComboBox>
                 </StackPanel>
                 <StackPanel
                     Grid.Row="1"
@@ -175,10 +180,15 @@
                         Foreground="#FF434A54">
                         Quốc tịch (*)
                     </TextBlock>
-                    <ComboBox
-                        ItemsSource="{Binding NationalityList}"
-                        SelectedItem="{Binding ManagerNationality}"
-                        Style="{StaticResource ComboBoxField}" />
+                    <ComboBox ItemsSource="{Binding NationalityList}" Style="{StaticResource ComboBoxField}">
+                        <ComboBox.SelectedItem>
+                            <Binding Path="ManagerNationality" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vr:RequiredField />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </ComboBox.SelectedItem>
+                    </ComboBox>
                 </StackPanel>
                 <StackPanel
                     Grid.Row="1"

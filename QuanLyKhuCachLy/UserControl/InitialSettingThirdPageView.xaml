@@ -156,10 +156,15 @@
                         Foreground="#FF434A54">
                         Tỉnh/Thành phố (*)
                     </TextBlock>
-                    <ComboBox
-                        ItemsSource="{Binding ProvinceList}"
-                        SelectedItem="{Binding ManagerSelectedProvince}"
-                        Style="{StaticResource ComboBoxField}" />
+                    <ComboBox ItemsSource="{Binding ProvinceList}" Style="{StaticResource ComboBoxField}">
+                        <ComboBox.SelectedItem>
+                            <Binding Path="ManagerSelectedProvince" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vr:RequiredField />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </ComboBox.SelectedItem>
+                    </ComboBox>
                 </StackPanel>
                 <StackPanel
                     Grid.Row="1"
@@ -173,10 +178,15 @@
                         Foreground="#FF434A54">
                         Quận/Huyện (*)
                     </TextBlock>
-                    <ComboBox
-                        ItemsSource="{Binding DistrictList}"
-                        SelectedItem="{Binding ManagerSelectedDistrict}"
-                        Style="{StaticResource ComboBoxField}" />
+                    <ComboBox ItemsSource="{Binding DistrictList}" Style="{StaticResource ComboBoxField}">
+                        <ComboBox.SelectedItem>
+                            <Binding Path="ManagerSelectedDistrict" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vr:RequiredField />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </ComboBox.SelectedItem>
+                    </ComboBox>
                 </StackPanel>
                 <StackPanel
                     Grid.Row="1"
@@ -190,10 +200,15 @@
                         Foreground="#FF434A54">
                         Phường/Xã (*)
                     </TextBlock>
-                    <ComboBox
-                        ItemsSource="{Binding WardList}"
-                        SelectedItem="{Binding ManagerSelectedWard}"
-                        Style="{StaticResource ComboBoxField}" />
+                    <ComboBox ItemsSource="{Binding WardList}" Style="{StaticResource ComboBoxField}">
+                        <ComboBox.SelectedItem>
+                            <Binding Path="ManagerSelectedWard" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vr:RequiredField />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </ComboBox.SelectedItem>
+                    </ComboBox>
                 </StackPanel>
                 <StackPanel
                     Grid.Row="2"
