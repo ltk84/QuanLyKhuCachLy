@@ -11,7 +11,7 @@ namespace QuanLyKhuCachLy.Model
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Staff
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,7 +19,7 @@ namespace QuanLyKhuCachLy.Model
         {
             this.QuarantineAreas = new HashSet<QuarantineArea>();
         }
-    
+
         public int id { get; set; }
         public string name { get; set; }
         public System.DateTime dateOfBirth { get; set; }
@@ -31,9 +31,22 @@ namespace QuanLyKhuCachLy.Model
         public int addressID { get; set; }
         public string jobTitle { get; set; }
         public string department { get; set; }
-    
+
+        private static int LIMIT = 20;
+
         public virtual Address Address { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QuarantineArea> QuarantineAreas { get; set; }
+
+        public bool CheckValidateProperty()
+        {
+            if (string.IsNullOrWhiteSpace(sex) || string.IsNullOrWhiteSpace(citizenID) || string.IsNullOrWhiteSpace(nationality) || string.IsNullOrWhiteSpace(healthInsuranceID)
+                || string.IsNullOrWhiteSpace(phoneNumber) || addressID < 0 || string.IsNullOrWhiteSpace(jobTitle) || string.IsNullOrWhiteSpace(department))
+                return false;
+            //if (sex.Length > LIMIT || citizenID.Length > LIMIT || nationality.Length > LIMIT || healthInsuranceID.Length > LIMIT || phoneNumber.Length > LIMIT
+            //     || jobTitle.Length > LIMIT || department.Length > LIMIT)
+            //    return false;
+            return true;
+        }
     }
 }

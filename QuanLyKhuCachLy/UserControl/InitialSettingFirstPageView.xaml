@@ -282,6 +282,7 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="14"
                         Foreground="Black"
+                        PreviewTextInput="TextBox_PreviewTextInput"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
                         Text="{Binding QATestCycle}"
                         TextWrapping="Wrap" />
@@ -315,6 +316,7 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="14"
                         Foreground="Black"
+                        PreviewTextInput="TextBox_PreviewTextInput_1"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
                         Text="{Binding QARequiredDayToFinish}"
                         TextWrapping="Wrap" />

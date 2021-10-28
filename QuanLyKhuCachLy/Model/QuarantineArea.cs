@@ -11,7 +11,7 @@ namespace QuanLyKhuCachLy.Model
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class QuarantineArea
     {
         public int id { get; set; }
@@ -20,8 +20,19 @@ namespace QuanLyKhuCachLy.Model
         public int requiredDayToFinish { get; set; }
         public Nullable<int> addressID { get; set; }
         public Nullable<int> managerID { get; set; }
-    
+
+        private static int LIMIT = 20;
+
         public virtual Address Address { get; set; }
         public virtual Staff Staff { get; set; }
+
+        public bool CheckValidateProperty()
+        {
+            if (string.IsNullOrWhiteSpace(name) || testCycle < 0 || requiredDayToFinish < 0)
+                return false;
+            //if (name.Length > LIMIT)
+            //    return false;
+            return true;
+        }
     }
 }

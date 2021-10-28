@@ -11,7 +11,7 @@ namespace QuanLyKhuCachLy.Model
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Address
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,19 +21,32 @@ namespace QuanLyKhuCachLy.Model
             this.QuarantinePersons = new HashSet<QuarantinePerson>();
             this.Staffs = new HashSet<Staff>();
         }
-    
+
         public int id { get; set; }
         public string province { get; set; }
         public string district { get; set; }
         public string ward { get; set; }
         public string streetName { get; set; }
         public string apartmentNumber { get; set; }
-    
+
+        //private static int LIMIT = 20;
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QuarantineArea> QuarantineAreas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QuarantinePerson> QuarantinePersons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Staff> Staffs { get; set; }
+
+        public bool CheckValidateProperty()
+        {
+            if (string.IsNullOrWhiteSpace(province) || string.IsNullOrWhiteSpace(district) || string.IsNullOrWhiteSpace(ward)
+                || string.IsNullOrWhiteSpace(streetName) || string.IsNullOrWhiteSpace(apartmentNumber))
+                return false;
+
+            //if (province.Length > LIMIT || district.Length > LIMIT || ward.Length > LIMIT || streetName.Length > LIMIT || apartmentNumber.Length > LIMIT)
+            //    return false;
+            return true;
+        }
     }
 }

@@ -72,5 +72,6 @@
             Style="{StaticResource MaterialDesignRaisedButton}">
             <TextBlock FontSize="16" />
         </Button>
+
     </StackPanel>
 </Window>
