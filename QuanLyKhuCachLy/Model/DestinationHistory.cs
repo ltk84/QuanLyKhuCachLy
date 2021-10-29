@@ -9,15 +9,36 @@
 
 namespace QuanLyKhuCachLy.Model
 {
+    using QuanLyKhuCachLy.ViewModel;
     using System;
     using System.Collections.Generic;
-    
-    public partial class DestinationHistory
+
+    public partial class DestinationHistory : BaseViewModel
     {
         public int id { get; set; }
-        public System.DateTime dateArrive { get; set; }
-        public Nullable<int> quarantinePersonID { get; set; }
-    
+
+        private System.DateTime _dateArrive;
+        public System.DateTime dateArrive
+        {
+            get => _dateArrive; set
+            {
+                _dateArrive = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Nullable<int> _quarantinePersonID;
+        public Nullable<int> quarantinePersonID
+        {
+            get => _quarantinePersonID; set
+            {
+                _quarantinePersonID = value;
+                OnPropertyChanged();
+            }
+        }
+
         public virtual QuarantinePerson QuarantinePerson { get; set; }
+
+
     }
 }

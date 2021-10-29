@@ -5,6 +5,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace QuanLyKhuCachLy.ViewModel
 {
@@ -268,6 +270,61 @@ namespace QuanLyKhuCachLy.ViewModel
         }
         #endregion
 
+        #region injection record
+        private System.DateTime _IRDateInjection;
+        public System.DateTime IRDateInjection
+        {
+            get => _IRDateInjection; set
+            {
+                _IRDateInjection = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _IRVaccineName;
+        public string IRVaccineName
+        {
+            get => _IRVaccineName; set
+            {
+                _IRVaccineName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Nullable<int> _IRQuarantinePersonID;
+        public Nullable<int> IRQuarantinePersonID
+        {
+            get => _IRQuarantinePersonID; set
+            {
+                _IRQuarantinePersonID = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region history destination
+
+        private System.DateTime _HDDateArrive;
+        public System.DateTime HDDateArrive
+        {
+            get => _HDDateArrive; set
+            {
+                _HDDateArrive = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Nullable<int> _HDQuarantinePersonID;
+        public Nullable<int> HDQuarantinePersonID
+        {
+            get => _HDQuarantinePersonID; set
+            {
+                _HDQuarantinePersonID = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
 
         #endregion
 
@@ -342,10 +399,84 @@ namespace QuanLyKhuCachLy.ViewModel
         #endregion
 
         #region command
+        public ICommand AddCommand { get; set; }
+        public ICommand EditCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
+        public ICommand CancelCommand { get; set; }
+
+        public ICommand ToAddCommand { get; set; }
+        public ICommand ToEditCommand { get; set; }
+        public ICommand ToDeleteCommand { get; set; }
+
         #endregion
         public QuarantinePersonViewModel()
         {
+            QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
+            SeverityList = new ObservableCollection<Severity>(DataProvider.ins.db.Severities);
 
+            NationalityList = new ObservableCollection<string>() {
+                "VietNam", "Ameriden", "Phap", "Dut", "Em"
+            };
+
+            ProvinceList = new ObservableCollection<string>() {
+                "Ho Chi Minh", "Binh Duong", "Vinh Long"
+            };
+            DistrictList = new ObservableCollection<string>() {
+                "Quan 1", "Quan 2", "Quan 3", "Quan 4"
+            };
+            WardList = new ObservableCollection<string>()
+            {
+                "Phu Thanh", "Phu Tho Hoa", "Binh Hung Hoa"
+            };
+
+            SexList = new ObservableCollection<string>()
+            {
+                "Nam", "Nữ"
+            };
+
+            ToAddCommand = new RelayCommand<Window>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+
+            });
+
+            ToEditCommand = new RelayCommand<Window>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+
+            });
+
+
+            AddCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                AddQuarantinePerson();
+            });
+
+            EditCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+
+            }, (p) =>
+            {
+                EditQuarantinePerson();
+            });
+
+            DeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                DeleteQuarantinePerson();
+            });
+
+            CancelCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                p.Close();
+            });
         }
 
         #region method
@@ -355,6 +486,10 @@ namespace QuanLyKhuCachLy.ViewModel
             QPDateOfBirth = SelectedItem.dateOfBirth;
             QPSelectedNationality = SelectedItem.nationality;
         }
+
+        void AddQuarantinePerson() { }
+        void EditQuarantinePerson() { }
+        void DeleteQuarantinePerson() { }
         #endregion
     }
 }
