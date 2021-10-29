@@ -41,9 +41,9 @@ namespace QuanLyKhuCachLy.ViewModel
         private string _QADisplayName;
         public string QADisplayName
         {
-            get => _QADisplayName; set
+            get => QADisplayName; set
             {
-                _QADisplayName = value;
+                QADisplayName = value;
                 OnPropertyChanged();
             }
         }

@@ -133,6 +133,16 @@
     <Compile Include="MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\ListQuarantinedPeople.xaml.cs">
+      <DependentUpon>ListQuarantinedPeople.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\StaffDetailInfomation.xaml.cs">
+      <DependentUpon>StaffDetailInfomation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\StaffList.xaml.cs">
+      <DependentUpon>StaffList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ValidationRules\DateFormat.cs" />
     <Compile Include="ValidationRules\NoSpecialChar.cs" />
     <Compile Include="ValidationRules\NumberField.cs" />
     <Compile Include="ValidationRules\OnlyNumber.cs" />
