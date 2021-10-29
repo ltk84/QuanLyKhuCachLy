@@ -42,17 +42,20 @@
         <Setter Property="Foreground" Value="White" />
         <Setter Property="Height" Value="23.4"/>
         <Setter Property="Width" Value="121"/>
-        <Setter Property="Background" Value="#FF1D9583"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border CornerRadius="4" Background="#FF1D9583" BorderBrush="#FF1D9583" BorderThickness="0,0,0,0" >
+                    <Border CornerRadius="4" Background="{TemplateBinding Background}" BorderBrush="#FF1D9583" BorderThickness="0,0,0,0" >
                         <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+
+
+
+
 
 
 

@@ -133,6 +133,9 @@
     <Compile Include="MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\QuarantineRoomInfomation.xaml.cs">
+      <DependentUpon>QuarantineRoomInfomation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\StaffDetailInfomation.xaml.cs">
       <DependentUpon>StaffDetailInfomation.xaml</DependentUpon>
     </Compile>
@@ -229,6 +232,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControl\QuarantineRoomInfomation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControl\StaffDetailInfomation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -305,6 +312,9 @@
       <DependentUpon>DataModel.edmx</DependentUpon>
       <LastGenOutput>DataModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\icons\complete-icon.png" />
+    <Resource Include="Resources\icons\delete-white-icon.png" />
+    <Resource Include="Resources\icons\empty-icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

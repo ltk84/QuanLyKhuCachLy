@@ -29,6 +29,7 @@
             <Button 
             Grid.Column="1"
             Content="Thêm nhân viên"
+            Background="#FF1D9583"
             Style="{StaticResource AddObjectButton}"/>
             
         </Grid>
