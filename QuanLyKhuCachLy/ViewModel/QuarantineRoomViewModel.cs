@@ -12,6 +12,7 @@ namespace QuanLyKhuCachLy.ViewModel
 {
     public class QuarantineRoomViewModel : BaseViewModel
     {
+
         #region property
         private ObservableCollection<QuarantineRoom> _RoomList;
         public ObservableCollection<QuarantineRoom> RoomList

@@ -175,5 +175,16 @@ namespace QuanLyKhuCachLy.Model
         public virtual QuarantineRoom QuarantineRoom { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TestingResult> TestingResults { get; set; }
+
+        public bool CheckValidateProperty()
+        {
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(sex) || string.IsNullOrWhiteSpace(citizenID)
+                || string.IsNullOrWhiteSpace(nationality) || string.IsNullOrWhiteSpace(healthInsuranceID) || string.IsNullOrWhiteSpace(phoneNumber)
+                || string.IsNullOrWhiteSpace(level) || arrivedDate < leaveDate || dateOfBirth <= arrivedDate || quarantineDays < 0
+                || healthInformationID < 0 || addressID < 0 || roomID < 0)
+                return false;
+
+            return true;
+        }
     }
 }

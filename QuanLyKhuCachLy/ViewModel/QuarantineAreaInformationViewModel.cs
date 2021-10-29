@@ -179,7 +179,6 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #endregion
 
-        static int LIMIT = 20;
 
         #endregion
 
