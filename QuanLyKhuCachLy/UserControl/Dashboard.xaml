@@ -164,7 +164,9 @@
         </Grid>
         <StackPanel Grid.Row="1">
             <Border>
-                
+                <TextBlock Style="{StaticResource DashboardTitle}">
+                    SẮP XẾP PHÒNG CHO NGƯỜI CÁCH LY
+                </TextBlock>
             </Border>
         </StackPanel>
     </Grid>
