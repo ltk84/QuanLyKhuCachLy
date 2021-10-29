@@ -55,16 +55,8 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="46"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="46"></RowDefinition>
-                    <RowDefinition Height="46"></RowDefinition>
-                    <RowDefinition Height="46"></RowDefinition>
-                    <RowDefinition Height="46"></RowDefinition>
-                    <RowDefinition Height="46"></RowDefinition>
-                    <RowDefinition Height="46"></RowDefinition>
-                    <RowDefinition Height="46"></RowDefinition>
-                    <RowDefinition Height="46"></RowDefinition>
-                    <RowDefinition Height="46"></RowDefinition>
-                    <RowDefinition Height="46"></RowDefinition>
+                    <RowDefinition Height="460"></RowDefinition>
+                    
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -76,16 +68,57 @@
                     Margin="0, 0, 0, 0"  
                     Background="#1E434A54" />
 
-                <Grid>
+                <Grid
+                    Grid.Row="0"
+                    >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
+
+                    <TextBlock
+                        Grid.Column="0"
+                        Text="Số thứ tự"
+                        Margin="0,0,0,0"
+                        Style="{StaticResource table-heading}"
+                        />
+
+                    <TextBlock
+                        Grid.Column="1"
+                        Text="Họ và tên "
+                        Margin="0,0,0,0"
+                        Style="{StaticResource table-heading}"
+                        />
+
+                    <TextBlock
+                        Grid.Column="2"
+                        Text="Ngày sinh"
+                        Margin="0,0,0,0"
+                        Style="{StaticResource table-heading}"
+                        />
+
+                    <TextBlock
+                        Grid.Column="3"
+                        Text="Quốc tịch"
+                        Margin="0,0,0,0"
+                        Style="{StaticResource table-heading}"
+                        />
+
+
                 </Grid>
-                
-            
+
+
+                <ScrollViewer Width="672" Grid.Row="2" HorizontalScrollBarVisibility="Hidden">
+                    <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <Rectangle Fill="White" Opacity="0.2" Width="672" Height="500"></Rectangle>
+                    </StackPanel>
+                </ScrollViewer>
+
+
+
+
 
             </Grid>
         </Border>

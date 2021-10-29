@@ -19,6 +19,7 @@
                 <ResourceDictionary Source="/ResourceXAML/InputTemplate.xaml" />
                 <ResourceDictionary Source="/ResourceXAML/ListInfomationTemplate.xaml" />
                 <ResourceDictionary Source="/ResourceXAML/ModifiActionTemplate.xaml" />
+                <ResourceDictionary Source="/ResourceXAML/TableTemplate.xaml" />
                 
                 
             </ResourceDictionary.MergedDictionaries>
