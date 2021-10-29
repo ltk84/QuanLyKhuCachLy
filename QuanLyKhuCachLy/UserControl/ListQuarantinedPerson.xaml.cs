@@ -18,9 +18,9 @@ namespace QuanLyKhuCachLy.UserControl
     /// <summary>
     /// Interaction logic for ListQuarantinedPeople.xaml
     /// </summary>
-    public partial class ListQuarantinedPeople : UserControl
+    public partial class ListQuarantinedPerson : UserControl
     {
-        public ListQuarantinedPeople()
+        public ListQuarantinedPerson()
         {
             InitializeComponent();
         }
