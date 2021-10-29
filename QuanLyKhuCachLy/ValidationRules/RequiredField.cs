@@ -16,10 +16,16 @@ namespace QuanLyKhuCachLy.ValidationRules
         }
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if (String.IsNullOrWhiteSpace((string)value))
+            if (value == null)
             {
                 return new ValidationResult(false, $"Thông tin này là bắt buộc.");
             }
+
+            if (String.IsNullOrWhiteSpace(value.ToString()))
+            {
+                return new ValidationResult(false, $"Thông tin này là bắt buộc.");
+            }
+
             return ValidationResult.ValidResult;
         }
     }

@@ -162,10 +162,97 @@
                 Content="Xem"
                 Style="{StaticResource DashboardButton}" />
         </Grid>
-        <StackPanel Grid.Row="1">
-            <Border>
-                
+        <Grid Grid.Row="1" Margin="0,40,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <Border Style="{StaticResource RecommendationField}">
+                    <StackPanel Margin="40,25">
+                        <TextBlock FontSize="20" Style="{StaticResource DashboardTitle}">
+                            SẮP XẾP PHÒNG CHO NGƯỜI CÁCH LY
+                        </TextBlock>
+                        <TextBlock
+                            Margin="0,5,0,0"
+                            FontSize="14"
+                            Style="{StaticResource DashboardContent}">
+                            Có 55 người chưa được sắp xếp phòng.
+                        </TextBlock>
+                        <Button
+                            Width="218"
+                            Height="35"
+                            Margin="0,20,0,0"
+                            HorizontalAlignment="Right"
+                            Content="Xem đề xuất sắp xếp phòng"
+                            FontSize="12"
+                            Style="{StaticResource DashboardButton}" />
+                    </StackPanel>
+                </Border>
+                <Border Margin="0,40,0,0" Style="{StaticResource RecommendationField}">
+                    <StackPanel Margin="40,25">
+                        <TextBlock FontSize="20" Style="{StaticResource DashboardTitle}">
+                            GỬI THÔNG BÁO HOÀN THÀNH CÁCH LY
+                        </TextBlock>
+                        <TextBlock
+                            Margin="0,5,0,0"
+                            FontSize="14"
+                            Style="{StaticResource DashboardContent}">
+                            Có 39 người dự kiến hoàn thành cách ly hôm nay.
+                        </TextBlock>
+                        <Button
+                            Width="218"
+                            Height="35"
+                            Margin="0,20,0,0"
+                            HorizontalAlignment="Right"
+                            Content="Xem đề xuất gửi thông báo"
+                            FontSize="12"
+                            Style="{StaticResource DashboardButton}" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+            <Border
+                Grid.Column="1"
+                Margin="40,0,0,0"
+                HorizontalAlignment="Right"
+                Background="#FFFAAC2D"
+                Style="{StaticResource RecommendationField}">
+                <StackPanel>
+                    <TextBlock
+                        Margin="0,15,0,0"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource DashboardHeader}">
+                        THAO TÁC NHANH
+                    </TextBlock>
+                    <Button Style="{StaticResource FastButton}">
+                        <TextBlock
+                            Margin="16,0,16,0"
+                            FontSize="14"
+                            FontWeight="Bold"
+                            Style="{StaticResource DashboardContent}">
+                            Thêm người cách ly
+                        </TextBlock>
+                    </Button>
+                    <Button Style="{StaticResource FastButton}">
+                        <TextBlock
+                            Margin="16,0,16,0"
+                            FontSize="14"
+                            FontWeight="Bold"
+                            Style="{StaticResource DashboardContent}">
+                            Cập nhật xét nghiệm
+                        </TextBlock>
+                    </Button>
+                    <Button Style="{StaticResource FastButton}">
+                        <TextBlock
+                            Margin="16,0,16,0"
+                            FontSize="14"
+                            FontWeight="Bold"
+                            Style="{StaticResource DashboardContent}">
+                            Xử lý đổi phòng
+                        </TextBlock>
+                    </Button>
+                </StackPanel>
             </Border>
-        </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

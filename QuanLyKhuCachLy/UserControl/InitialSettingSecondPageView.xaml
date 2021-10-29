@@ -105,22 +105,19 @@
                         Foreground="#FF434A54">
                         Ngày sinh (*)
                     </TextBlock>
-                    <TextBox
-                        materialDesign:HintAssist.Hint="Nhập ngày sinh"
-                        MaxLength="10"
-                        Style="{StaticResource TextInputField}">
-                        <TextBox.Text>
+                    <DatePicker materialDesign:HintAssist.Hint="Nhập ngày sinh" Style="{StaticResource DatePickerField}">
+                        <DatePicker.SelectedDate>
                             <Binding
                                 Path="ManagerDateOfBirth"
+                                RelativeSource="{RelativeSource AncestorType={x:Type DatePicker}}"
                                 StringFormat="dd/MM/yyyy"
                                 UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <vr:RequiredField />
-                                    <vr:DateFormat />
                                 </Binding.ValidationRules>
                             </Binding>
-                        </TextBox.Text>
-                    </TextBox>
+                        </DatePicker.SelectedDate>
+                    </DatePicker>
                 </StackPanel>
                 <StackPanel
                     Grid.Row="0"
@@ -158,6 +155,7 @@
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập số căn cước công dân"
                         MaxLength="20"
+                        PreviewTextInput="TextBox_PreviewTextInput_1"
                         Style="{StaticResource TextInputField}">
                         <TextBox.Text>
                             <Binding Path="ManagerCitizenID" UpdateSourceTrigger="PropertyChanged">
@@ -228,6 +226,7 @@
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập số điện thoại"
                         MaxLength="20"
+                        PreviewTextInput="TextBox_PreviewTextInput"
                         Style="{StaticResource TextInputField}">
                         <TextBox.Text>
                             <Binding Path="ManagerPhoneNumber" UpdateSourceTrigger="PropertyChanged">
