@@ -133,6 +133,9 @@
     <Compile Include="MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\ListQuarantinedPeople.xaml.cs">
+      <DependentUpon>ListQuarantinedPeople.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\StaffDetailInfomation.xaml.cs">
       <DependentUpon>StaffDetailInfomation.xaml</DependentUpon>
     </Compile>
@@ -226,6 +229,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControl\InitialSettingThirdPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl\ListQuarantinedPeople.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
