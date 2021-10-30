@@ -136,6 +136,9 @@
     <Compile Include="Model\Staff.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\sysdiagram.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\TestingResult.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>

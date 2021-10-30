@@ -37,8 +37,17 @@ namespace QuanLyKhuCachLy.Model
             }
         }
 
+        private Nullable<int> _addressID;
+        public Nullable<int> addressID
+        {
+            get => _addressID; set
+            {
+                _addressID = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public virtual Address Address { get; set; }
         public virtual QuarantinePerson QuarantinePerson { get; set; }
-
-
     }
 }

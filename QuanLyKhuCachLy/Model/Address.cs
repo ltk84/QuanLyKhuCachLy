@@ -82,6 +82,8 @@ namespace QuanLyKhuCachLy.Model
         public virtual ICollection<QuarantinePerson> QuarantinePersons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Staff> Staffs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DestinationHistory> DestinationHistories { get; set; }
 
         public bool CheckValidateProperty()
         {
