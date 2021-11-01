@@ -35,6 +35,7 @@ namespace QuanLyKhuCachLy.Model
         public virtual DbSet<QuarantineRoom> QuarantineRooms { get; set; }
         public virtual DbSet<Severity> Severities { get; set; }
         public virtual DbSet<Staff> Staffs { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TestingResult> TestingResults { get; set; }
     }
 }

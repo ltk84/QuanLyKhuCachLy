@@ -266,6 +266,21 @@
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
+                        materialDesign:HintAssist.IsFloating="False"
+                        materialDesign:TextFieldAssist.HasOutlinedTextField="False"
+                        materialDesign:TextFieldAssist.LeadingIcon="Person"
+                        materialDesign:TextFieldAssist.TextFieldCornerRadius="10,10,10,10"
+                        materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
+                        Background="#FFEBEBEB"
+                        BorderBrush="#00000000"
+                        CaretBrush="#FF434A54"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="14"
+                        Foreground="Black"
+                        PreviewTextInput="TextBox_PreviewTextInput"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        Text="{Binding QATestCycle}"
+                        TextWrapping="Wrap" />
                 </StackPanel>
                 <StackPanel
                     Grid.Row="2"
@@ -291,6 +306,21 @@
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
+                        materialDesign:HintAssist.IsFloating="False"
+                        materialDesign:TextFieldAssist.HasOutlinedTextField="False"
+                        materialDesign:TextFieldAssist.LeadingIcon="Person"
+                        materialDesign:TextFieldAssist.TextFieldCornerRadius="10,10,10,10"
+                        materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
+                        Background="#FFEBEBEB"
+                        BorderBrush="#00000000"
+                        CaretBrush="#FF434A54"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="14"
+                        Foreground="Black"
+                        PreviewTextInput="TextBox_PreviewTextInput_1"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        Text="{Binding QARequiredDayToFinish}"
+                        TextWrapping="Wrap" />
                 </StackPanel>
             </Grid>
         </Grid>

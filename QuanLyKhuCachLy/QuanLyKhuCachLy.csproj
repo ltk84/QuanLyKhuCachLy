@@ -78,6 +78,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Demo.xaml.cs">
+      <DependentUpon>Demo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DemoAdd.xaml.cs">
+      <DependentUpon>DemoAdd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DemoEdit.xaml.cs">
+      <DependentUpon>DemoEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InitialSettingScreen.xaml.cs">
       <DependentUpon>InitialSettingScreen.xaml</DependentUpon>
     </Compile>
@@ -127,6 +136,9 @@
     <Compile Include="Model\Staff.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\sysdiagram.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\TestingResult.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
@@ -172,6 +184,18 @@
     <Compile Include="ViewModel\QuarantineRoomViewModel.cs" />
     <Compile Include="ViewModel\ReportViewModel.cs" />
     <Compile Include="ViewModel\StaffViewModel.cs" />
+    <Page Include="Demo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DemoAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DemoEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="InitialSettingScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

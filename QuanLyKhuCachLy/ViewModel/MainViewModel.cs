@@ -228,6 +228,7 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 // Chỗ này cần xử lý thêm: Hiện tại là nếu tắt screen inital set up giữa chừng thì sẽ close chương trình (không có thông báo)
                 // Mong muốn là khi đóng giữa chừng thì sẽ thông báo rồi mới close (hoặc xử lý kiểu khác)
+                // Test (suppose !CheckInit)
                 if (!CheckInitialSetUp)
                 {
                     InitialSettingScreen.ShowDialog();
