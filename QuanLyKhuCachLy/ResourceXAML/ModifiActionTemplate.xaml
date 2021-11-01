@@ -21,7 +21,7 @@
             <TextBlock
                 VerticalAlignment="Center"
                 Grid.Column="1" 
-                FontSize="16"
+                FontSize="11"
                 FontWeight="Regular"
                 Foreground="#FF000000"
                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
@@ -56,7 +56,7 @@
             <TextBlock
                 VerticalAlignment="Center"
                 Grid.Column="1" 
-                FontSize="16"
+                FontSize="11"
                 FontWeight="Regular"
                 Foreground="#FF000000"
                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
@@ -91,7 +91,7 @@
             <TextBlock
                 VerticalAlignment="Center"
                 Grid.Column="1" 
-                FontSize="16"
+                FontSize="11"
                 FontWeight="Regular"
                 Foreground="#FF000000"
                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
@@ -125,7 +125,7 @@
             <TextBlock
                 VerticalAlignment="Center"
                 Grid.Column="1" 
-                FontSize="16"
+                FontSize="11"
                 FontWeight="Regular"
                 Foreground="#FF000000"
                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"

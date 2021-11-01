@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QuanLyKhuCachLy.UserControl"
              mc:Ignorable="d" 
-             d:DesignHeight="1024" d:DesignWidth="1024">
+             d:DesignHeight="768" d:DesignWidth="768">
     <StackPanel
          Margin="40,30,40,30"
         >
@@ -19,8 +19,8 @@
             <Image
                         Margin="0, 0, 10, 0"
                         Grid.Column="0"
-                        Width="40"
-                        Height="40"
+                        Width="24"
+                        Height="24"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Bottom"
                         RenderTransformOrigin="0.5,0.5"
@@ -28,7 +28,7 @@
             <TextBlock
                 VerticalAlignment="Center"
                 Grid.Column="1" 
-                FontSize="18"
+                FontSize="14"
                 FontWeight="Regular"
                 Foreground="#FF434A54"
                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
@@ -66,7 +66,7 @@
 
 
             <Grid>
-                <Grid.RowDefinitions>
+                <Grid.RowDefinitions  >
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
@@ -74,7 +74,7 @@
                 <TextBlock
                 VerticalAlignment="Center"
                 Grid.Row="0" 
-                FontSize="32"
+                FontSize="24"
                 FontWeight="Bold"
                 Foreground="#FF363636"
                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans" Margin="0,-10,0,10"
@@ -85,7 +85,7 @@
                 <TextBlock
                 VerticalAlignment="Center"
                 Grid.Row="1" 
-                FontSize="28"
+                FontSize="20"
                 FontWeight="Light"
                 Foreground="#FF363636"
                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
@@ -213,7 +213,7 @@
         </Grid>
 
         <Separator
-            Margin="0, 0, 0, 10"  Background="#1E434A54"/>
+            Margin="0,20,0,20" Background="#1E434A54"/>
 
         <Grid>
             <Grid.ColumnDefinitions>
@@ -224,38 +224,62 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-
-            <TextBlock Text="Chức vụ"
-                       Style="{StaticResource list-key-text}"/>
-            <TextBlock
-                Grid.Column="1"
-                Style="{StaticResource list-value-text}"
-                Text="Tạp vụ"/>
-
             <TextBlock 
                 Grid.Row="0"
                 Grid.Column="0"
-                Text="Chức vụ"
+                Text="Triệu chứng"
                        Style="{StaticResource list-key-text}"/>
             <TextBlock
                 Grid.Row="0"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="Tạp vụ"/>
+                Text="Sốt, ho, khó thở"/>
 
             <TextBlock 
                 Grid.Row="1"
                 Grid.Column="0"
-                Text="Bộ phận"
+                Text="Nhớm đối tượng"
                        Style="{StaticResource list-key-text}"/>
             <TextBlock
                 Grid.Row="1"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="Giường chiếu"/>
-
+                Text="F0"/>
+            <TextBlock 
+                Grid.Row="2"
+                Grid.Column="0"
+                Text="Ngày cách ly"
+                       Style="{StaticResource list-key-text}"/>
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="1"
+                Style="{StaticResource list-value-text}"
+                Text="21/10/2021"/>
+            <TextBlock 
+                Grid.Row="3"
+                Grid.Column="0"
+                Text="Dự kiến hoàn thành cách ly"
+                       Style="{StaticResource list-key-text}"/>
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="1"
+                Style="{StaticResource list-value-text}"
+                Text="21/11/2021"/>
+            <TextBlock 
+                Grid.Row="4"
+                Grid.Column="0"
+                Text="Phòng"
+                       Style="{StaticResource list-key-text}"/>
+            <TextBlock
+                Grid.Row="4"
+                Grid.Column="1"
+                Style="{StaticResource list-value-text}"
+                Text="A1"/>
         </Grid>
     </StackPanel>
 </UserControl>

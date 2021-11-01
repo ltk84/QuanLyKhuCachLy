@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QuanLyKhuCachLy.UserControl"
              mc:Ignorable="d" 
-             d:DesignHeight="1024" d:DesignWidth="1024">
+             d:DesignHeight="768" d:DesignWidth="1024">
     <StackPanel  Margin="25,25,25,25">
         <Grid Margin="30,0,30,0">
             <Grid.ColumnDefinitions>
@@ -15,61 +15,105 @@
             <TextBlock
                 Grid.Column="0"
                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                FontSize="32"
+                FontSize="24"
                 FontWeight="Bold"
                 Foreground="#FF363636" Margin="0,0,32,0.333"
                 >
             DANH SÁCH NGƯỜI CÁCH LY
             </TextBlock>
-            <Button Width="176"
-                    Height="34"
+            <Button Width="100"
+                    Height="26"
                 Grid.Column="1"
                 Content="Thêm người cách ly"
-                Style="{StaticResource AddObjectButton}" Margin="32,5,0,4.333"/>
+                Style="{StaticResource AddObjectButton}" Margin="0,0,0,0"/>
         </Grid>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="582*"/>
-                <ColumnDefinition Width="233*"/>
-                <ColumnDefinition Width="159*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <DataGrid
                 x:Name="QuarantinedPersonTable"
                 IsReadOnly="True"
                 AutoGenerateColumns="False"
-                Margin="30,30,30,30"
+                Margin="20,20,20,20"
                 BorderBrush="Black"
                 BorderThickness="1"
-                Height="900" Grid.ColumnSpan="3"
+                Height="600"
+                Grid.ColumnSpan="5" SelectionChanged="QuarantinedPersonTable_SelectionChanged"
                 >
                 <DataGrid.Columns >
                     <DataGridTextColumn
                         Header="Số thứ tự"
-                        MinWidth="100"
+                        MinWidth="80"
                         Width="*"
                         >
                         <DataGridColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader" >
-                                <Setter Property="FontSize" Value="24"/>
+                                <Setter Property="FontSize" Value="18"/>
                                 <Setter Property="FontWeight" Value="Bold" />
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="Background" Value="Transparent"/>
                             </Style>
                         </DataGridColumn.HeaderStyle>
                     </DataGridTextColumn>
                     <DataGridTextColumn
                         Header="Họ và tên"
                         MinWidth="300"
-                        Width="*"
-                        />
+                        Width="*">
+                        <DataGridColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader" >
+                                <Setter Property="FontSize" Value="18"/>
+                                <Setter Property="FontWeight" Value="Bold" />
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Style>
+                        </DataGridColumn.HeaderStyle>
+                    </DataGridTextColumn>
+
                     <DataGridTextColumn
                         Header="Ngày sinh"
                         MinWidth="200"
-                        Width="*"
-                        />
+                        Width="*">
+                        <DataGridColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader" >
+                                <Setter Property="FontSize" Value="18"/>
+                                <Setter Property="FontWeight" Value="Bold" />
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Style>
+                        </DataGridColumn.HeaderStyle>
+                    </DataGridTextColumn>
+
                     <DataGridTextColumn
                         Header="Quốc tịch"
                         MinWidth="200"
-                        Width="*"
-                        />
+                        Width="*">
+                        <DataGridColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader" >
+                                <Setter Property="FontSize" Value="18"/>
+                                <Setter Property="FontWeight" Value="Bold" />
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Style>
+                        </DataGridColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn
+                        Header="  "
+                        MinWidth="80"
+                        Width="*">
+                        <DataGridColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader" >
+                                <Setter Property="FontSize" Value="18"/>
+                                <Setter Property="FontWeight" Value="Bold" />
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Style>
+                        </DataGridColumn.HeaderStyle>
+                    </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
