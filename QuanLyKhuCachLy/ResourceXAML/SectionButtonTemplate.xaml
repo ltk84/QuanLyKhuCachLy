@@ -38,7 +38,7 @@
     <Style x:Key="AddObjectButton" TargetType="Button">
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontFamily" Value="/QuanLyKhuCachLy;component/Resources/fonts/#Baloo" />
-        <Setter Property="FontSize" Value="10" />
+        <Setter Property="FontSize" Value="14" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="Height" Value="23.4"/>
         <Setter Property="Width" Value="121"/>

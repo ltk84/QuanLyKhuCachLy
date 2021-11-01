@@ -24,5 +24,10 @@ namespace QuanLyKhuCachLy.UserControl
         {
             InitializeComponent();
         }
+
+        private void QuarantinedPersonTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

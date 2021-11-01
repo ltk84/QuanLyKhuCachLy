@@ -5,43 +5,56 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QuanLyKhuCachLy.UserControl"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="1024" d:DesignWidth="1024">
     <StackPanel  Margin="25,25,25,25">
-        <Grid >
+        <Grid Margin="30,0,30,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="170"></ColumnDefinition>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="238"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock
                 Grid.Column="0"
                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                FontSize="22"
+                FontSize="32"
                 FontWeight="Bold"
-                Foreground="#FF363636"
+                Foreground="#FF363636" Margin="0,0,32,0.333"
                 >
             DANH SÁCH NGƯỜI CÁCH LY
             </TextBlock>
-            <Button 
+            <Button Width="176"
+                    Height="34"
                 Grid.Column="1"
                 Content="Thêm người cách ly"
-                Style="{StaticResource AddObjectButton}"/>
+                Style="{StaticResource AddObjectButton}" Margin="32,5,0,4.333"/>
         </Grid>
         <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="582*"/>
+                <ColumnDefinition Width="233*"/>
+                <ColumnDefinition Width="159*"/>
+            </Grid.ColumnDefinitions>
             <DataGrid
                 x:Name="QuarantinedPersonTable"
                 IsReadOnly="True"
                 AutoGenerateColumns="False"
-                Margin="10,10,10,10"
+                Margin="30,30,30,30"
                 BorderBrush="Black"
                 BorderThickness="1"
-                Height="400"
+                Height="900" Grid.ColumnSpan="3"
                 >
-                <DataGrid.Columns>
+                <DataGrid.Columns >
                     <DataGridTextColumn
                         Header="Số thứ tự"
                         MinWidth="100"
                         Width="*"
-                        />
+                        >
+                        <DataGridColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader" >
+                                <Setter Property="FontSize" Value="24"/>
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </DataGridColumn.HeaderStyle>
+                    </DataGridTextColumn>
                     <DataGridTextColumn
                         Header="Họ và tên"
                         MinWidth="300"
