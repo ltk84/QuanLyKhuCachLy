@@ -133,8 +133,8 @@
     <Compile Include="MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\ListQuarantinedPeople.xaml.cs">
-      <DependentUpon>ListQuarantinedPeople.xaml</DependentUpon>
+    <Compile Include="UserControl\ListQuarantinedPerson.xaml.cs">
+      <DependentUpon>ListQuarantinedPerson.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControl\StaffDetailInfomation.xaml.cs">
       <DependentUpon>StaffDetailInfomation.xaml</DependentUpon>
@@ -232,7 +232,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl\ListQuarantinedPeople.xaml">
+    <Page Include="UserControl\ListQuarantinedPerson.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

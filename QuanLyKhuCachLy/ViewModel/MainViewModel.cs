@@ -15,6 +15,7 @@ namespace QuanLyKhuCachLy.ViewModel
         #region property
         #region Handle Dashboard
         public DashboardViewModel DashboardModel { get; set; }
+        public QuarantinePersonViewModel quarantinePersonViewModel { get;set }
 
         private object _currentView;
         private bool _isOnDashboard;
