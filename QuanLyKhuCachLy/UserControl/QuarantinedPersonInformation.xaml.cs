@@ -16,13 +16,18 @@ using System.Windows.Shapes;
 namespace QuanLyKhuCachLy.UserControl
 {
     /// <summary>
-    /// Interaction logic for ListQuarantinedPerson.xaml
+    /// Interaction logic for QuarantinedPersonInformation.xaml
     /// </summary>
-    public partial class ListQuarantinedPerson 
+    public partial class QuarantinedPersonInformation 
     {
-        public ListQuarantinedPerson()
+        public QuarantinedPersonInformation()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
