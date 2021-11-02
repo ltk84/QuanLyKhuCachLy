@@ -13,16 +13,36 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace QuanLyKhuCachLy.View
+namespace QuanLyKhuCachLy.UserControl
 {
     /// <summary>
-    /// Interaction logic for InitialSettingThirdPageView.xaml
+    /// Interaction logic for InitialSettingSecondPageView.xaml
     /// </summary>
     public partial class InitialSettingThirdPageView
     {
         public InitialSettingThirdPageView()
         {
             InitializeComponent();
+        }
+
+        private void CheckIsNumeric(TextCompositionEventArgs e)
+        {
+            int result;
+
+            if (!(int.TryParse(e.Text, out result) || e.Text == "."))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            CheckIsNumeric(e);
+        }
+
+        private void TextBox_PreviewTextInput_1(object sender, TextCompositionEventArgs e)
+        {
+            CheckIsNumeric(e);
         }
     }
 }

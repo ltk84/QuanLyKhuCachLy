@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace QuanLyKhuCachLy.View
+namespace QuanLyKhuCachLy.UserControl
 {
     /// <summary>
     /// Interaction logic for InitialSettingFirstPageView.xaml

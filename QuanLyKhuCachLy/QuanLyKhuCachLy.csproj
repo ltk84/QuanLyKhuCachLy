@@ -133,6 +133,9 @@
     <Compile Include="MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\InitialSettingSecondPageView.xaml.cs">
+      <DependentUpon>InitialSettingSecondPageView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ValidationRules\NoSpecialChar.cs" />
     <Compile Include="ValidationRules\NumberField.cs" />
     <Compile Include="ValidationRules\OnlyNumber.cs" />
@@ -152,11 +155,11 @@
     <Compile Include="UserControl\InitialSettingFirstPageView.xaml.cs">
       <DependentUpon>InitialSettingFirstPageView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\InitialSettingSecondPageView.xaml.cs">
-      <DependentUpon>InitialSettingSecondPageView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserControl\InitialSettingThirdPageView.xaml.cs">
       <DependentUpon>InitialSettingThirdPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\InitialSettingFourthPageView.xaml.cs">
+      <DependentUpon>InitialSettingFourthPageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\QuarantinePersonViewModel.cs" />
     <Compile Include="ViewModel\QuarantineRoomViewModel.cs" />
@@ -207,6 +210,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControl\InitialSettingThirdPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl\InitialSettingFourthPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

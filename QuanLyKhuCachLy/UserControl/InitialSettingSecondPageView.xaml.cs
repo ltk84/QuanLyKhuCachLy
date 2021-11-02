@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace QuanLyKhuCachLy.View
+namespace QuanLyKhuCachLy.UserControl
 {
     /// <summary>
     /// Interaction logic for InitialSettingSecondPageView.xaml
@@ -24,7 +24,6 @@ namespace QuanLyKhuCachLy.View
         {
             InitializeComponent();
         }
-
         private void CheckIsNumeric(TextCompositionEventArgs e)
         {
             int result;
@@ -36,11 +35,6 @@ namespace QuanLyKhuCachLy.View
         }
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            CheckIsNumeric(e);
-        }
-
-        private void TextBox_PreviewTextInput_1(object sender, TextCompositionEventArgs e)
         {
             CheckIsNumeric(e);
         }

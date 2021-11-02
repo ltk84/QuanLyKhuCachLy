@@ -91,6 +91,7 @@ namespace QuanLyKhuCachLy.ViewModel
         private Visibility _Tab1;
         private Visibility _Tab2;
         private Visibility _Tab3;
+        private Visibility _Tab4;
         public Visibility Tab1
         {
             get => _Tab1; set
@@ -111,6 +112,13 @@ namespace QuanLyKhuCachLy.ViewModel
             get => _Tab3; set
             {
                 _Tab3 = value; OnPropertyChanged();
+            }
+        }
+        public Visibility Tab4
+        {
+            get => _Tab4; set
+            {
+                _Tab4 = value; OnPropertyChanged();
             }
         }
         public int TabIndex { get; set; }
@@ -187,12 +195,13 @@ namespace QuanLyKhuCachLy.ViewModel
             Tab1 = Visibility.Visible;
             Tab2 = Visibility.Hidden;
             Tab3 = Visibility.Hidden;
+            Tab4 = Visibility.Hidden;
             TabIndex = 1;
-            TabPosition = $"{TabIndex}/3";
+            TabPosition = $"{TabIndex}/4";
 
             NextTabCommand = new RelayCommand<Window>((p) =>
             {
-                if (TabIndex <= 3) return true;
+                if (TabIndex <= 4) return true;
                 return false;
             }, (p) =>
             {
@@ -242,8 +251,8 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 TabIndex--;
             }
-            if (TabIndex <= 3)
-                TabPosition = $"{TabIndex}/3";
+            if (TabIndex <= 4)
+                TabPosition = $"{TabIndex}/4";
 
             switch (TabIndex)
             {
@@ -251,19 +260,28 @@ namespace QuanLyKhuCachLy.ViewModel
                     Tab1 = Visibility.Visible;
                     Tab2 = Visibility.Hidden;
                     Tab3 = Visibility.Hidden;
+                    Tab4 = Visibility.Hidden;
                     break;
                 case 2:
                     Tab1 = Visibility.Hidden;
                     Tab2 = Visibility.Visible;
                     Tab3 = Visibility.Hidden;
+                    Tab4 = Visibility.Hidden;
                     break;
                 case 3:
                     Tab1 = Visibility.Hidden;
                     Tab2 = Visibility.Hidden;
                     Tab3 = Visibility.Visible;
+                    Tab4 = Visibility.Hidden;
+                    break;
+                case 4:
+                    Tab1 = Visibility.Hidden;
+                    Tab2 = Visibility.Hidden;
+                    Tab3 = Visibility.Hidden;
+                    Tab4 = Visibility.Visible;
                     break;
                 default:
-                    UpdateQuarantineAreaInformation();
+                    //UpdateQuarantineAreaInformation();
                     p.Close();
                     break;
             }
