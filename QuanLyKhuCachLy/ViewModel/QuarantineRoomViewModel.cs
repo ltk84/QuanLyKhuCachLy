@@ -5,22 +5,40 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace QuanLyKhuCachLy.ViewModel
 {
     public class QuarantineRoomViewModel : BaseViewModel
     {
+
         #region property
-        private ObservableCollection<QuarantineRoom> _QARoom;
-        public ObservableCollection<QuarantineRoom> QARoom
+        #region list
+        private ObservableCollection<QuarantineRoom> _RoomList;
+        public ObservableCollection<QuarantineRoom> RoomList
         {
-            get => _QARoom; set
+            get => _RoomList; set
             {
-                _QARoom = value;
+                _RoomList = value;
                 OnPropertyChanged();
             }
         }
+
+        private ObservableCollection<Severity> _RoomLevelList;
+        public ObservableCollection<Severity> RoomLevelList
+        {
+            get => _RoomLevelList; set
+            {
+                _RoomLevelList = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region child view model
+        private QuarantinePersonInRoomViewModel _PersonInRoomViewModel;
+        #endregion
 
         private QuarantineRoom _SelectedItem;
         public QuarantineRoom SelectedItem
@@ -31,77 +49,172 @@ namespace QuanLyKhuCachLy.ViewModel
                 OnPropertyChanged();
                 if (_SelectedItem != null)
                 {
-                    QADisplayName = SelectedItem.displayName;
-                    QACapacity = SelectedItem.capacity;
-                    QALevel = SelectedItem.level;
+                    SetSelectedItemToProperty();
                 }
             }
         }
 
-        private string _QADisplayName;
-        public string QADisplayName
+        #region Room
+        private int _RoomID;
+        public int RoomID
         {
-            get => _QADisplayName; set
+            get => _RoomID; set
             {
-                _QADisplayName = value;
+                _RoomID = value;
                 OnPropertyChanged();
             }
         }
 
-        private int _QACapacity;
-        public int QACapacity
+        private string _RoomDisplayName;
+        public string RoomDisplayName
         {
-            get => _QACapacity; set
+            get => _RoomDisplayName; set
             {
-                _QACapacity = value;
+                _RoomDisplayName = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _QALevel;
-        public string QALevel
+        private int _RoomCapacity;
+        public int RoomCapacity
         {
-            get => _QALevel; set
+            get => _RoomCapacity; set
             {
-                _QALevel = value;
+                _RoomCapacity = value;
                 OnPropertyChanged();
             }
         }
 
-        public ICommand AddCommand { get; set; }
-        public ICommand EditCommand { get; set; }
-        public ICommand DeleteCommand { get; set; }
+        private Severity _RoomSelectedSeverity;
+        public Severity RoomSelectedSeverity
+        {
+            get => _RoomSelectedSeverity; set
+            {
+                _RoomSelectedSeverity = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region command
+        public ICommand AddRoomManualCommand { get; set; }
+        public ICommand AddRoomExcelCommand { get; set; }
+        public ICommand EditRoomCommand { get; set; }
+        public ICommand DeleteRoomCommand { get; set; }
+        public ICommand CancelCommand { get; set; }
+        public ICommand CompleteQuarantineCommand { get; set; }
+
+        public ICommand ToAddManualCommand { get; set; }
+        public ICommand ToAddExcelCommand { get; set; }
+        public ICommand ToEditCommand { get; set; }
+        public ICommand ToDeleteCommand { get; set; }
+        public ICommand ToViewCommand { get; set; }
+        #endregion
 
         #endregion
 
         public QuarantineRoomViewModel()
         {
-            QARoom = new ObservableCollection<QuarantineRoom>(DataProvider.ins.db.QuarantineRooms);
-            AddCommand = new RelayCommand<object>((p) =>
+            RoomList = new ObservableCollection<QuarantineRoom>(DataProvider.ins.db.QuarantineRooms);
+            RoomLevelList = new ObservableCollection<Severity>(DataProvider.ins.db.Severities);
+
+            _PersonInRoomViewModel = new QuarantinePersonInRoomViewModel(CurrentRoomID: RoomID);
+
+            ToAddManualCommand = new RelayCommand<Window>((p) =>
             {
-                if (!string.IsNullOrEmpty(QADisplayName) && !string.IsNullOrEmpty(QALevel)) return true;
+                return true;
+            }, (p) =>
+            {
+                ClearData();
+                DemoAdd AddScreen = new DemoAdd();
+                AddScreen.ShowDialog();
+                ClearData();
+            });
+
+            ToEditCommand = new RelayCommand<Window>((p) =>
+            {
+                if (SelectedItem == null) return false;
+                return true;
+            }, (p) =>
+            {
+                DemoEdit EditScreen = new DemoEdit();
+                SetSelectedItemToProperty();
+                EditScreen.ShowDialog();
+            });
+
+
+            AddRoomManualCommand = new RelayCommand<object>((p) =>
+            {
+                if (RoomSelectedSeverity == null)
+                    return false;
+                QuarantineRoom QuarantineRoom = new QuarantineRoom { displayName = RoomDisplayName, capacity = RoomCapacity, level = RoomSelectedSeverity.level };
+                if (QuarantineRoom.CheckValidateProperty()) return true;
                 return false;
             }, (p) =>
             {
-
+                AddQuarantineRoom();
             });
 
-            EditCommand = new RelayCommand<object>((p) =>
+            EditRoomCommand = new RelayCommand<object>((p) =>
             {
-                if (!string.IsNullOrEmpty(QADisplayName) && !string.IsNullOrEmpty(QALevel)) return true;
+                if (RoomSelectedSeverity == null)
+                    return false;
+                QuarantineRoom QuarantineRoom = new QuarantineRoom { displayName = RoomDisplayName, capacity = RoomCapacity, level = RoomSelectedSeverity.level };
+                if (QuarantineRoom.CheckValidateProperty()) return true;
                 return false;
             }, (p) =>
             {
-
+                EditQuarantineRoom();
             });
 
-            DeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            DeleteRoomCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
+                //DeleteQuarantineRoom();
+            });
 
+            CancelCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                p.Close();
             });
         }
 
         #region method
+        // untest
+        void AddQuarantineRoom()
+        {
+            // List Severity được tạo từ trước nên không cần thêm
+            QuarantineRoom QuarantineRoom = new QuarantineRoom { displayName = RoomDisplayName, capacity = RoomCapacity, level = RoomSelectedSeverity.level };
+
+            DataProvider.ins.db.QuarantineRooms.Add(QuarantineRoom);
+            DataProvider.ins.db.SaveChanges();
+
+            RoomList.Add(QuarantineRoom);
+        }
+        //untest
+        void EditQuarantineRoom()
+        {
+            QuarantineRoom QuarantineRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+            QuarantineRoom.displayName = RoomDisplayName;
+            QuarantineRoom.capacity = RoomCapacity;
+            QuarantineRoom.level = RoomSelectedSeverity.level;
+
+            DataProvider.ins.db.SaveChanges();
+
+            SelectedItem = QuarantineRoom;
+        }
+        void DeleteQuarantineRoom() { }
+        void ClearData()
+        {
+            RoomDisplayName = "";
+            RoomCapacity = 0;
+            RoomSelectedSeverity = null;
+        }
+        void SetSelectedItemToProperty()
+        {
+            RoomDisplayName = SelectedItem.displayName;
+            RoomCapacity = SelectedItem.capacity;
+            RoomSelectedSeverity = SelectedItem.Severity;
+        }
         #endregion
     }
 }

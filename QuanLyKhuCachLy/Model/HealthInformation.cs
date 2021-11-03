@@ -9,27 +9,100 @@
 
 namespace QuanLyKhuCachLy.Model
 {
+    using QuanLyKhuCachLy.ViewModel;
     using System;
     using System.Collections.Generic;
-    
-    public partial class HealthInformation
+
+    public partial class HealthInformation : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public HealthInformation()
         {
             this.QuarantinePersons = new HashSet<QuarantinePerson>();
         }
-    
+
         public int id { get; set; }
-        public bool isFever { get; set; }
-        public bool isCough { get; set; }
-        public bool isSoreThroat { get; set; }
-        public bool isLossOfTatse { get; set; }
-        public bool isTired { get; set; }
-        public bool isShortnessOfBreath { get; set; }
-        public bool isOtherSymptoms { get; set; }
-        public bool isDisease { get; set; }
-    
+
+        private bool _isFever;
+        public bool isFever
+        {
+            get => _isFever; set
+            {
+                _isFever = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _isCough;
+        public bool isCough
+        {
+            get => _isCough; set
+            {
+                _isCough = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _isSoreThroat;
+        public bool isSoreThroat
+        {
+            get => _isSoreThroat; set
+            {
+                _isSoreThroat = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _isLossOfTatse;
+        public bool isLossOfTatse
+        {
+            get => _isLossOfTatse; set
+            {
+                _isLossOfTatse = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _isTired;
+        public bool isTired
+        {
+            get => _isTired; set
+            {
+                _isTired = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _isShortnessOfBreath;
+        public bool isShortnessOfBreath
+        {
+            get => _isShortnessOfBreath; set
+            {
+                _isShortnessOfBreath = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _isOtherSymptoms;
+        public bool isOtherSymptoms
+        {
+            get => _isOtherSymptoms; set
+            {
+                _isOtherSymptoms = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _isDisease;
+        public bool isDisease
+        {
+            get => _isDisease; set
+            {
+                _isDisease = value;
+                OnPropertyChanged();
+            }
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QuarantinePerson> QuarantinePersons { get; set; }
     }

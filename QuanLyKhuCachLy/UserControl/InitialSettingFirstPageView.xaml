@@ -283,7 +283,7 @@
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập số ngày"
                         MaxLength="9"
-                        PreviewTextInput="TextBox_PreviewTextInput"
+                        PreviewTextInput="TextBox_PreviewTextInput_1"
                         Style="{StaticResource TextInputField}">
                         <TextBox.Text>
                             <Binding Path="QARequiredDayToFinish" UpdateSourceTrigger="PropertyChanged">

@@ -25,6 +25,11 @@ namespace QuanLyKhuCachLy.UserControl
             InitializeComponent();
         }
 
+        private void TextBox_PreviewTextInput_1(object sender, TextCompositionEventArgs e)
+        {
+            CheckIsNumeric(e);
+        }
+
         private void CheckIsNumeric(TextCompositionEventArgs e)
         {
             int result;
@@ -33,16 +38,6 @@ namespace QuanLyKhuCachLy.UserControl
             {
                 e.Handled = true;
             }
-        }
-
-        private void TextBox_PreviewTextInput_1(object sender, TextCompositionEventArgs e)
-        {
-            CheckIsNumeric(e);
-        }
-
-        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            CheckIsNumeric(e);
         }
     }
 }

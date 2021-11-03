@@ -10,6 +10,7 @@ using System.Windows.Input;
 
 namespace QuanLyKhuCachLy.ViewModel
 {
+
     public class QuarantineAreaInformationViewModel : BaseViewModel
     {
         #region property
@@ -186,6 +187,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #endregion
 
+
         #endregion
 
         public QuarantineAreaInformationViewModel()
@@ -201,7 +203,54 @@ namespace QuanLyKhuCachLy.ViewModel
 
             NextTabCommand = new RelayCommand<Window>((p) =>
             {
+
                 if (TabIndex <= 4) return true;
+                else
+                {
+                    Address QAreaAddress = new Address()
+                    {
+                        province = QASelectedProvince,
+                        district = QASelectedDistrict,
+                        apartmentNumber = QAApartmentNumber,
+                        streetName = QAStreetName,
+                        ward = QASelectedWard
+                    };
+
+                    Address ManagerAddress = new Address()
+                    {
+                        province = ManagerSelectedProvince,
+                        district = ManagerSelectedDistrict,
+                        apartmentNumber = ManagerApartmentNumber,
+                        streetName = ManagerStreetName,
+                        ward = ManagerSelectedWard
+                    };
+
+                    Staff Manager = new Staff()
+                    {
+                        citizenID = ManagerCitizenID,
+                        dateOfBirth = ManagerDateOfBirth,
+                        department = ManagerDepartment,
+                        healthInsuranceID = ManagerHealthInsuranceID,
+                        jobTitle = ManagerJobTitle,
+                        name = ManagerName,
+                        nationality = ManagerNationality,
+                        phoneNumber = ManagerPhoneNumber,
+                        sex = ManagerSex,
+                    };
+
+                    QuarantineArea QuarantineArea = new QuarantineArea()
+                    {
+                        name = QAname,
+                        testCycle = QATestCycle,
+                        requiredDayToFinish = QARequiredDayToFinish,
+                    };
+
+                    if (QAreaAddress.CheckValidateProperty() && ManagerAddress.CheckValidateProperty() && Manager.CheckValidateProperty() && QuarantineArea.CheckValidateProperty())
+                    {
+                        return true;
+                    }
+
+                }
                 return false;
             }, (p) =>
             {
@@ -287,7 +336,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
-        // Chưa test
+
         void UpdateQuarantineAreaInformation()
         {
             Address QAreaAddress = new Address()
