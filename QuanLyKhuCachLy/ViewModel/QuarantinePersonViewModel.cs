@@ -13,6 +13,80 @@ namespace QuanLyKhuCachLy.ViewModel
     public class QuarantinePersonViewModel : BaseViewModel
     {
         #region property
+
+        #region UI
+        private Visibility _Tab1;
+        private Visibility _Tab2;
+        private Visibility _TabInformation1;
+        private Visibility _TabInformation2;
+        private Visibility _Tab3;
+        private Visibility _ButtonReturn;
+        public Visibility ButtonReturn
+        {
+            get => _ButtonReturn; set
+            {
+                _ButtonReturn = value; OnPropertyChanged();
+            }
+        }
+        public Visibility TabInformation1
+        {
+            get => _TabInformation1; set
+            {
+                _TabInformation1 = value; OnPropertyChanged();
+            }
+        }
+        public Visibility TabInformation2
+        {
+            get => _TabInformation2; set
+            {
+                _TabInformation2 = value; OnPropertyChanged();
+            }
+        }
+        public Visibility Tab1
+        {
+            get => _Tab1; set
+            {
+                _Tab1 = value; OnPropertyChanged();
+            }
+        }
+        public Visibility Tab2
+        {
+            get => _Tab2; set
+            {
+                _Tab2 = value; OnPropertyChanged();
+            }
+        }
+
+        public Visibility Tab3
+        {
+            get => _Tab3; set
+            {
+                _Tab3 = value; OnPropertyChanged();
+            }
+        }
+        public int TabIndex { get; set; }
+
+        private String _TabPostion;
+        public String TabPosition
+        {
+            get => _TabPostion; set
+            {
+                _TabPostion = value; OnPropertyChanged();
+            }
+        }
+
+        public int TabIndexInformation { get; set; }
+
+        private String _TabPostionInformation;
+        public String TabPositionInformation
+        {
+            get => _TabPostionInformation; set
+            {
+                _TabPostionInformation = value; OnPropertyChanged();
+            }
+        }
+        #endregion
+
         #region Quarantine Person
         private int _QPID;
         public int QPID
@@ -369,9 +443,63 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand ToEditCommand { get; set; }
         public ICommand ToDeleteCommand { get; set; }
 
+        public ICommand NextTabCommand { get; set; }
+        public ICommand PreviousTabCommand { get; set; }
+
+        public ICommand NextTabCommandInformation { get; set; }
+        public ICommand PreviousTabCommandInformation { get; set; }
+
         #endregion
         public QuarantinePersonViewModel()
         {
+            Tab1 = Visibility.Visible;
+            Tab2 = Visibility.Hidden;
+            Tab3 = Visibility.Hidden;
+            TabInformation1 = Visibility.Visible;
+            TabInformation2 = Visibility.Hidden;
+            TabIndexInformation = 1;
+            TabPositionInformation = $"{TabIndexInformation}/2";
+            ButtonReturn = Visibility.Hidden;
+            TabIndex = 1;
+            TabPosition = $"{TabIndex}/3";
+
+            NextTabCommandInformation = new RelayCommand<Window>((p) =>
+            {
+
+                if (TabIndexInformation < 2) return true;
+                return false;
+            }, (p) =>
+            {
+                HandleChangeTabInforamtion(TabIndexInformation, "next", p);
+            });
+
+            PreviousTabCommandInformation = new RelayCommand<Window>((p) =>
+            {
+                if (TabIndexInformation > 1) return true;
+                return false;
+            }, (p) =>
+            {
+                HandleChangeTabInforamtion(TabIndexInformation, "previous", p);
+            });
+
+            NextTabCommand = new RelayCommand<Window>((p) =>
+            {
+
+                if (TabIndex < 3) return true;              
+                return false;
+            }, (p) =>
+            {
+                HandleChangeTab(TabIndex, "next", p);
+            });
+
+            PreviousTabCommand = new RelayCommand<Window>((p) =>
+            {
+                if (TabIndex > 1) return true;
+                return false;
+            }, (p) =>
+            {
+                HandleChangeTab(TabIndex, "previous", p);
+            });
             QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
             SeverityList = new ObservableCollection<Severity>(DataProvider.ins.db.Severities);
 
@@ -623,6 +751,72 @@ namespace QuanLyKhuCachLy.ViewModel
 
         }
         void DeleteQuarantinePerson() { }
+
+        void HandleChangeTab(int index, string action, Window p)
+        {
+            if (action == "next")
+            {
+                TabIndex++;
+            }
+            else
+            {
+                TabIndex--;
+            }
+            if (TabIndex <= 3)
+                TabPosition = $"{TabIndex}/3";
+
+            switch (TabIndex)
+            {
+                case 1:
+                    Tab1 = Visibility.Visible;
+                    Tab2 = Visibility.Hidden;
+                    Tab3 = Visibility.Hidden;
+                    ButtonReturn = Visibility.Hidden;
+                    break;
+                case 2:
+                    Tab1 = Visibility.Hidden;
+                    Tab2 = Visibility.Visible;
+                    Tab3 = Visibility.Hidden;
+                    ButtonReturn = Visibility.Visible;
+                    break;
+                case 3:
+                    Tab1 = Visibility.Hidden;
+                    Tab2 = Visibility.Hidden;
+                    Tab3 = Visibility.Visible;
+                    ButtonReturn = Visibility.Visible;
+                    break;
+                default:
+                    
+                    p.Close();
+                    break;
+            }
+        }
+
+        void HandleChangeTabInforamtion(int index, string action, Window p)
+        {
+            if (action == "next")
+            {
+                TabIndexInformation++;
+            }
+            else
+            {
+                TabIndexInformation--;
+            }
+            if (TabIndexInformation <= 2)
+                TabPositionInformation = $"{TabIndexInformation}/2";
+
+            switch (TabIndexInformation)
+            {
+                case 1:
+                    TabInformation1 = Visibility.Visible;
+                    TabInformation2 = Visibility.Hidden;                  
+                    break;
+                default:
+                    TabInformation1 = Visibility.Hidden;
+                    TabInformation2 = Visibility.Visible;
+                    break;
+            }
+        }
         #endregion
     }
 }

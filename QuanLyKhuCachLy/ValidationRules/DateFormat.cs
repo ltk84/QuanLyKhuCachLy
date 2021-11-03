@@ -8,17 +8,23 @@ using System.Windows.Controls;
 
 namespace QuanLyKhuCachLy.ValidationRules
 {
-    public class RequiredField : ValidationRule
+    public class DateFormat : ValidationRule
     {
-
-        public RequiredField()
+        public DateFormat()
         {
+
         }
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if (String.IsNullOrWhiteSpace((string)value))
+            DateTime input;
+            try
             {
-                return new ValidationResult(false, $"Thông tin này là bắt buộc.");
+                if (((string)value).Length > 0)
+                    input = DateTime.Parse((String)value);
+            }
+            catch (Exception)
+            {
+                return new ValidationResult(false, $"Vui lòng nhập theo mẫu: 08/04/2001.");
             }
             return ValidationResult.ValidResult;
         }

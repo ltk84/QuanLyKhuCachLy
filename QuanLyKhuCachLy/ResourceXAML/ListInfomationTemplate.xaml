@@ -14,7 +14,7 @@
 
     <Style x:Key="list-value-text" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans" />
-        <Setter Property="FontSize" Value="17" />
+        <Setter Property="FontSize" Value="17"/>
         <Setter Property="FontWeight" Value="Regular" />
         <Setter Property="Foreground" Value="#FF434A54" />
         <Setter Property="VerticalAlignment" Value="Bottom" />
