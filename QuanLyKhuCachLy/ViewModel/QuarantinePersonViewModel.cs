@@ -16,6 +16,8 @@ namespace QuanLyKhuCachLy.ViewModel
         #region Quarantine Person
         private Visibility _Tab1;
         private Visibility _Tab2;
+        private Visibility _TabInformation1;
+        private Visibility _TabInformation2;
         private Visibility _Tab3;
         private Visibility _ButtonReturn;
         public Visibility ButtonReturn
@@ -23,6 +25,20 @@ namespace QuanLyKhuCachLy.ViewModel
             get => _ButtonReturn; set
             {
                 _ButtonReturn = value; OnPropertyChanged();
+            }
+        }
+        public Visibility TabInformation1
+        {
+            get => _TabInformation1; set
+            {
+                _TabInformation1 = value; OnPropertyChanged();
+            }
+        }
+        public Visibility TabInformation2
+        {
+            get => _TabInformation2; set
+            {
+                _TabInformation2 = value; OnPropertyChanged();
             }
         }
         public Visibility Tab1
@@ -57,7 +73,18 @@ namespace QuanLyKhuCachLy.ViewModel
                 _TabPostion = value; OnPropertyChanged();
             }
         }
-        
+
+        public int TabIndexInformation { get; set; }
+
+        private String _TabPostionInformation;
+        public String TabPositionInformation
+        {
+            get => _TabPostionInformation; set
+            {
+                _TabPostionInformation = value; OnPropertyChanged();
+            }
+        }
+
         private string _QPName;
         public string QPName
         {
@@ -455,15 +482,41 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand NextTabCommand { get; set; }
         public ICommand PreviousTabCommand { get; set; }
 
+        public ICommand NextTabCommandInformation { get; set; }
+        public ICommand PreviousTabCommandInformation { get; set; }
+
         #endregion
         public QuarantinePersonViewModel()
         {
             Tab1 = Visibility.Visible;
             Tab2 = Visibility.Hidden;
             Tab3 = Visibility.Hidden;
+            TabInformation1 = Visibility.Visible;
+            TabInformation2 = Visibility.Hidden;
+            TabIndexInformation = 1;
+            TabPositionInformation = $"{TabIndexInformation}/2";
             ButtonReturn = Visibility.Hidden;
             TabIndex = 1;
             TabPosition = $"{TabIndex}/3";
+
+            NextTabCommandInformation = new RelayCommand<Window>((p) =>
+            {
+
+                if (TabIndexInformation < 2) return true;
+                return false;
+            }, (p) =>
+            {
+                HandleChangeTabInforamtion(TabIndexInformation, "next", p);
+            });
+
+            PreviousTabCommandInformation = new RelayCommand<Window>((p) =>
+            {
+                if (TabIndexInformation > 1) return true;
+                return false;
+            }, (p) =>
+            {
+                HandleChangeTabInforamtion(TabIndexInformation, "previous", p);
+            });
 
             NextTabCommand = new RelayCommand<Window>((p) =>
             {
@@ -603,6 +656,31 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
+        void HandleChangeTabInforamtion(int index, string action, Window p)
+        {
+            if (action == "next")
+            {
+                TabIndexInformation++;
+            }
+            else
+            {
+                TabIndexInformation--;
+            }
+            if (TabIndexInformation <= 2)
+                TabPositionInformation = $"{TabIndexInformation}/2";
+
+            switch (TabIndexInformation)
+            {
+                case 1:
+                    TabInformation1 = Visibility.Visible;
+                    TabInformation2 = Visibility.Hidden;                  
+                    break;
+                default:
+                    TabInformation1 = Visibility.Hidden;
+                    TabInformation2 = Visibility.Visible;
+                    break;
+            }
+        }
         #endregion
     }
 }

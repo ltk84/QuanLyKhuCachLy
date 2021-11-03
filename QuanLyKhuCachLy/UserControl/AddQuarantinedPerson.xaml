@@ -10,7 +10,6 @@
     xmlns:control="clr-namespace:QuanLyKhuCachLy.UserControl"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     Name="AddQuarantinedPersonScreen" 
-    Background="#FF3D4466"
     DataContext="{StaticResource ResourceKey=PersonVM}">
     <Viewbox
         Margin="0,0,0,0"
@@ -74,6 +73,7 @@
                                 FontSize="16"
                                 FontWeight="Bold"
                                 Visibility="{Binding ButtonReturn}"
+                                Command="{Binding PreviousTabCommand}"
                                 Style="{StaticResource MaterialDesignRaisedButton}">
                                 <TextBlock Text="Trở lại" />
                             </Button>
@@ -89,6 +89,8 @@
                                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                                 FontSize="12"
                                 FontWeight="Bold"
+                                Visibility="Visible"
+                                Command="{Binding NextTabCommand}"
                                 Style="{StaticResource MaterialDesignRaisedButton}">
                                 <TextBlock FontSize="16">
                                     <TextBlock.Style>

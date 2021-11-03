@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QuanLyKhuCachLy.UserControl"
              mc:Ignorable="d" 
-             d:DesignHeight="768" d:DesignWidth="768">
+               d:DesignHeight="768" d:DesignWidth="768"
+             >
     <StackPanel  Margin="25,25,25,25">
         <Grid Margin="20,0,20,0">
             <Grid.ColumnDefinitions>

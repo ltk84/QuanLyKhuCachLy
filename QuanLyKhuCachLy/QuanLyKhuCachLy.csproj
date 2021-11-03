@@ -163,6 +163,12 @@
     <Compile Include="UserControl\QuarantinedPersonInformation.xaml.cs">
       <DependentUpon>QuarantinedPersonInformation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\QuarantinedPersonInformationFirstPage.xaml.cs">
+      <DependentUpon>QuarantinedPersonInformationFirstPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\QuarantinedPersonInformationSecondPage.xaml.cs">
+      <DependentUpon>QuarantinedPersonInformationSecondPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\StaffDetailInfomation.xaml.cs">
       <DependentUpon>StaffDetailInfomation.xaml</DependentUpon>
     </Compile>
@@ -292,6 +298,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControl\QuarantinedPersonInformation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl\QuarantinedPersonInformationFirstPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl\QuarantinedPersonInformationSecondPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

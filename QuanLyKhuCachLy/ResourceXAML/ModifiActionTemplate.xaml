@@ -9,15 +9,15 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
-            <Image
-                        Margin="0, 0, 15, 0"
-                        Grid.Column="0"
-                        Width="18"
-                        Height="16"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        RenderTransformOrigin="0.5,0.5"
-                        Source="/QuanLyKhuCachLy;component/Resources/icons/edit-icon.png" />
+            <Image 
+                Margin="0, 0, 15, 0"
+                Grid.Column="0"
+                Width="18"
+                Height="16"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                RenderTransformOrigin="0.5,0.5"
+                Source="/QuanLyKhuCachLy;component/Resources/icons/edit-icon.png" />
             <TextBlock
                 VerticalAlignment="Center"
                 Grid.Column="1" 
@@ -27,7 +27,6 @@
                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                 Text="{TemplateBinding Property=Content}"
                 >
-
             </TextBlock>
 
 
