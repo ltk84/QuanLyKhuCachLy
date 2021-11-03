@@ -19,7 +19,7 @@ namespace QuanLyKhuCachLy.Model
         public QuarantinePerson()
         {
             this.DestinationHistories = new HashSet<DestinationHistory>();
-            this.InjectionRecords = new HashSet<InjectionRecord>();
+            this.InjectionRecords = new HashSet<InjectionRecordViewModel>();
             this.TestingResults = new HashSet<TestingResult>();
         }
 
@@ -170,7 +170,7 @@ namespace QuanLyKhuCachLy.Model
         public virtual ICollection<DestinationHistory> DestinationHistories { get; set; }
         public virtual HealthInformation HealthInformation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<InjectionRecord> InjectionRecords { get; set; }
+        public virtual ICollection<InjectionRecordViewModel> InjectionRecords { get; set; }
         public virtual Severity Severity { get; set; }
         public virtual QuarantineRoom QuarantineRoom { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -180,8 +180,7 @@ namespace QuanLyKhuCachLy.Model
         {
             if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(sex) || string.IsNullOrWhiteSpace(citizenID)
                 || string.IsNullOrWhiteSpace(nationality) || string.IsNullOrWhiteSpace(healthInsuranceID) || string.IsNullOrWhiteSpace(phoneNumber)
-                || string.IsNullOrWhiteSpace(level) || arrivedDate < leaveDate || dateOfBirth <= arrivedDate || quarantineDays < 0
-                || healthInformationID < 0 || addressID < 0 || roomID < 0)
+                || string.IsNullOrWhiteSpace(level) || arrivedDate < leaveDate || dateOfBirth <= arrivedDate || quarantineDays < 0)
                 return false;
 
             return true;

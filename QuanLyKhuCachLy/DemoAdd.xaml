@@ -65,7 +65,7 @@
             materialDesign:ShadowAssist.ShadowDepth="Depth0"
             Background="#FF1D9583"
             BorderBrush="{x:Null}"
-            Command="{Binding AddCommand}"
+            Command="{Binding AddRoomManualCommand}"
             FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
             FontSize="12"
             FontWeight="Bold"

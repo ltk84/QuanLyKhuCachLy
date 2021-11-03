@@ -47,7 +47,23 @@ namespace QuanLyKhuCachLy.Model
             }
         }
 
+        private string _displayAddress;
+        public string displayAddress
+        {
+            get => _displayAddress; set
+            {
+                _displayAddress = value;
+                OnPropertyChanged();
+            }
+        }
+
         public virtual Address Address { get; set; }
         public virtual QuarantinePerson QuarantinePerson { get; set; }
+
+        public bool CheckValidProperty()
+        {
+            if (dateArrive == null || quarantinePersonID == null || addressID == null) return false;
+            return true;
+        }
     }
 }

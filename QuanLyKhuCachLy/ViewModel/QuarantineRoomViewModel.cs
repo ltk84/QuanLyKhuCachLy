@@ -14,6 +14,7 @@ namespace QuanLyKhuCachLy.ViewModel
     {
 
         #region property
+        #region list
         private ObservableCollection<QuarantineRoom> _RoomList;
         public ObservableCollection<QuarantineRoom> RoomList
         {
@@ -23,6 +24,21 @@ namespace QuanLyKhuCachLy.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        private ObservableCollection<Severity> _RoomLevelList;
+        public ObservableCollection<Severity> RoomLevelList
+        {
+            get => _RoomLevelList; set
+            {
+                _RoomLevelList = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region child view model
+        private QuarantinePersonInRoomViewModel _PersonInRoomViewModel;
+        #endregion
 
         private QuarantineRoom _SelectedItem;
         public QuarantineRoom SelectedItem
@@ -35,6 +51,17 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     SetSelectedItemToProperty();
                 }
+            }
+        }
+
+        #region Room
+        private int _RoomID;
+        public int RoomID
+        {
+            get => _RoomID; set
+            {
+                _RoomID = value;
+                OnPropertyChanged();
             }
         }
 
@@ -67,26 +94,22 @@ namespace QuanLyKhuCachLy.ViewModel
                 OnPropertyChanged();
             }
         }
+        #endregion
 
-        private ObservableCollection<Severity> _RoomLevelList;
-        public ObservableCollection<Severity> RoomLevelList
-        {
-            get => _RoomLevelList; set
-            {
-                _RoomLevelList = value;
-                OnPropertyChanged();
-            }
-        }
-
-
-        public ICommand AddCommand { get; set; }
-        public ICommand EditCommand { get; set; }
-        public ICommand DeleteCommand { get; set; }
+        #region command
+        public ICommand AddRoomManualCommand { get; set; }
+        public ICommand AddRoomExcelCommand { get; set; }
+        public ICommand EditRoomCommand { get; set; }
+        public ICommand DeleteRoomCommand { get; set; }
         public ICommand CancelCommand { get; set; }
+        public ICommand CompleteQuarantineCommand { get; set; }
 
-        public ICommand ToAddCommand { get; set; }
+        public ICommand ToAddManualCommand { get; set; }
+        public ICommand ToAddExcelCommand { get; set; }
         public ICommand ToEditCommand { get; set; }
         public ICommand ToDeleteCommand { get; set; }
+        public ICommand ToViewCommand { get; set; }
+        #endregion
 
         #endregion
 
@@ -95,7 +118,9 @@ namespace QuanLyKhuCachLy.ViewModel
             RoomList = new ObservableCollection<QuarantineRoom>(DataProvider.ins.db.QuarantineRooms);
             RoomLevelList = new ObservableCollection<Severity>(DataProvider.ins.db.Severities);
 
-            ToAddCommand = new RelayCommand<Window>((p) =>
+            _PersonInRoomViewModel = new QuarantinePersonInRoomViewModel(CurrentRoomID: RoomID);
+
+            ToAddManualCommand = new RelayCommand<Window>((p) =>
             {
                 return true;
             }, (p) =>
@@ -118,7 +143,7 @@ namespace QuanLyKhuCachLy.ViewModel
             });
 
 
-            AddCommand = new RelayCommand<object>((p) =>
+            AddRoomManualCommand = new RelayCommand<object>((p) =>
             {
                 if (RoomSelectedSeverity == null)
                     return false;
@@ -130,7 +155,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 AddQuarantineRoom();
             });
 
-            EditCommand = new RelayCommand<object>((p) =>
+            EditRoomCommand = new RelayCommand<object>((p) =>
             {
                 if (RoomSelectedSeverity == null)
                     return false;
@@ -142,7 +167,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 EditQuarantineRoom();
             });
 
-            DeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            DeleteRoomCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 //DeleteQuarantineRoom();
             });
@@ -155,7 +180,6 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #region method
         // untest
-        // handle cho screen inital nữa
         void AddQuarantineRoom()
         {
             // List Severity được tạo từ trước nên không cần thêm

@@ -91,8 +91,7 @@ namespace QuanLyKhuCachLy.Model
                 || string.IsNullOrWhiteSpace(streetName) || string.IsNullOrWhiteSpace(apartmentNumber))
                 return false;
 
-            //if (province.Length > LIMIT || district.Length > LIMIT || ward.Length > LIMIT || streetName.Length > LIMIT || apartmentNumber.Length > LIMIT)
-            //    return false;
+
             return true;
         }
     }

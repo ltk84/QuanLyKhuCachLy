@@ -9,10 +9,11 @@
 
 namespace QuanLyKhuCachLy.Model
 {
+    using QuanLyKhuCachLy.ViewModel;
     using System;
     using System.Collections.Generic;
-    
-    public partial class Severity
+
+    public partial class Severity : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Severity()
@@ -20,10 +21,27 @@ namespace QuanLyKhuCachLy.Model
             this.QuarantinePersons = new HashSet<QuarantinePerson>();
             this.QuarantineRooms = new HashSet<QuarantineRoom>();
         }
-    
-        public string level { get; set; }
-        public string description { get; set; }
-    
+
+        private string _level;
+        public string level
+        {
+            get => _level; set
+            {
+                _level = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _description;
+        public string description
+        {
+            get => _description; set
+            {
+                _description = value;
+                OnPropertyChanged();
+            }
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QuarantinePerson> QuarantinePersons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

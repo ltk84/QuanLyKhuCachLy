@@ -98,7 +98,7 @@ namespace QuanLyKhuCachLy.Model
         {
             get => _isDisease; set
             {
-                isDisease = value;
+                _isDisease = value;
                 OnPropertyChanged();
             }
         }

@@ -21,8 +21,6 @@ namespace QuanLyKhuCachLy.Model
         public Nullable<int> addressID { get; set; }
         public Nullable<int> managerID { get; set; }
 
-        private static int LIMIT = 20;
-
         public virtual Address Address { get; set; }
         public virtual Staff Staff { get; set; }
 

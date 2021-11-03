@@ -17,10 +17,10 @@
             <ListView ItemsSource="{Binding RoomList}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding id}" Header="Id" />
-                        <GridViewColumn DisplayMemberBinding="{Binding displayName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Header="Tên" />
-                        <GridViewColumn DisplayMemberBinding="{Binding capacity}" Header="Sức chứa" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Severity.level}" Header="Mức độ" />
+                        <!--<GridViewColumn DisplayMemberBinding="{Binding id}" Header="Id" />-->
+                        <GridViewColumn DisplayMemberBinding="{Binding capacity}" Header="Tên" />
+                        <GridViewColumn DisplayMemberBinding="{Binding displayName}" Header="Ngày sinh" />
+
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -34,7 +34,7 @@
             materialDesign:ShadowAssist.ShadowDepth="Depth0"
             Background="#FF1D9583"
             BorderBrush="{x:Null}"
-            Command="{Binding ToAddCommand}"
+            Command="{Binding ToAddManualCommand}"
             FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
             FontSize="12"
             FontWeight="Bold"
