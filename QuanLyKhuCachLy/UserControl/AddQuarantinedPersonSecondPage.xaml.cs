@@ -18,8 +18,7 @@ namespace QuanLyKhuCachLy.UserControl
     /// <summary>
     /// Interaction logic for AddQuarantinedPersonSecondPage.xaml
     /// </summary>
-    public partial class AddQuarantinedPersonSecondPage : UserControl
-    {
+    public partial class AddQuarantinedPersonSecondPage { 
         public AddQuarantinedPersonSecondPage()
         {
             InitializeComponent();
