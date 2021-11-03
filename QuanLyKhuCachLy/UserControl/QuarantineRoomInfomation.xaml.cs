@@ -18,7 +18,7 @@ namespace QuanLyKhuCachLy.UserControl
     /// <summary>
     /// Interaction logic for QuarantineRoomInfomation.xaml
     /// </summary>
-    public partial class QuarantineRoomInfomation : UserControl
+    public partial class QuarantineRoomInfomation 
     {
         public QuarantineRoomInfomation()
         {
