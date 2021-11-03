@@ -28,7 +28,11 @@
                 <userControl:Dashboard />
             </DataTemplate>
 
-            
+            <DataTemplate DataType="{x:Type viewModel:StaffViewModel}">
+                <userControl:StaffWrapperTab />
+            </DataTemplate>
+
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

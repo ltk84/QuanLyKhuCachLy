@@ -111,11 +111,7 @@
                 </Grid>
 
 
-                <ScrollViewer Width="672" Grid.Row="2" HorizontalScrollBarVisibility="Hidden">
-                    <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
-                        <Rectangle Fill="White" Opacity="0.2" Width="672" Height="500"></Rectangle>
-                    </StackPanel>
-                </ScrollViewer>
+                
 
 
 

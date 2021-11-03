@@ -15,6 +15,7 @@ namespace QuanLyKhuCachLy.ViewModel
         #region property
         #region Handle Dashboard
         public DashboardViewModel DashboardModel { get; set; }
+        public StaffViewModel StaffVM { get; set; }
 
         private object _currentView;
         private bool _isOnDashboard;
@@ -144,6 +145,7 @@ namespace QuanLyKhuCachLy.ViewModel
         private void Init()
         {
             DashboardModel = new DashboardViewModel();
+            StaffVM = new StaffViewModel();
             ToDashboard();
         }
 
@@ -180,6 +182,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         private void ToStaff()
         {
+            CurrentView = StaffVM;
             _isOnDashboard = false;
             _isOnRoom = false;
             _isOnPerson = false;
