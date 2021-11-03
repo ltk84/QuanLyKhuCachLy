@@ -145,6 +145,15 @@
     <Compile Include="MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\AddQuarantinedPersonFirstPage.xaml.cs">
+      <DependentUpon>AddQuarantinedPersonFirstPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddQuarantinedPersonSecondPage.xaml.cs">
+      <DependentUpon>AddQuarantinedPersonSecondPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddQuarantinedPersonThirdPage.xaml.cs">
+      <DependentUpon>AddQuarantinedPersonThirdPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\ListQuarantinedPerson.xaml.cs">
       <DependentUpon>ListQuarantinedPerson.xaml</DependentUpon>
     </Compile>
@@ -240,6 +249,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ResourceXAML\TableTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl\AddQuarantinedPersonFirstPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl\AddQuarantinedPersonSecondPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl\AddQuarantinedPersonThirdPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

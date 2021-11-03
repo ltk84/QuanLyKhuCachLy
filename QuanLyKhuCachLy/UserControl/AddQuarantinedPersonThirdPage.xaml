@@ -6,7 +6,229 @@
              xmlns:local="clr-namespace:QuanLyKhuCachLy.UserControl"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <StackPanel Margin="0,0,0,0">
+        <TextBlock
+            Margin="0,32,0,0"
+            HorizontalAlignment="Center"
+            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+            FontSize="24"
+            FontWeight="Bold">
+            Thêm người cách ly
+        </TextBlock>
+        <TextBlock
+            Margin="0,2,0,0"
+            HorizontalAlignment="Center"
+            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+            FontSize="16">
+            Vui lòng điền thông tin người cách ly
+        </TextBlock>
+        <Grid Margin="30,20,30,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition SharedSizeGroup="A" />
+                <ColumnDefinition SharedSizeGroup="A" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Grid.Column="0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition SharedSizeGroup="A" />
+                        <ColumnDefinition SharedSizeGroup="A" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0"
+                        Margin="0,0,0,0"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#FF434A54">
+                        Thông tin tiêm chủng
+                    </TextBlock>
+                    <Button Grid.Row="0" Grid.Column="1"
+                    VerticalAlignment="Bottom"
+                    Margin="150,-10,0,10"
+                    Template="{StaticResource plus-button}"
+                    />
+                </Grid>
+                <Separator Margin="0,0,15,2">
+                    <Separator.RenderTransform>
+                        <ScaleTransform ScaleY="1" />
+                    </Separator.RenderTransform>
+                </Separator>
+            </StackPanel>
+            <Grid Margin="0,0,0,0" Grid.Row="1" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="A" />
+                    <ColumnDefinition SharedSizeGroup="A" />
+                    <ColumnDefinition SharedSizeGroup="A" />
+                    <ColumnDefinition SharedSizeGroup="A" />
+                </Grid.ColumnDefinitions>
+                <DataGrid
+                    x:Name="vaccinationInformation"                                                 
+                    AutoGenerateColumns="False"
+                    BorderBrush="Black"
+                    Margin="0,15,15,0"
+                    BorderThickness="1"
+                    Height="280"
+                    Grid.ColumnSpan="4"
+                    >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                        Header="Lần"
+                        MinWidth="70"
+                        Width="*"
+                        >
+                            <DataGridColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader" >
+                                    <Setter Property="FontSize" Value="14"/>
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="Background" Value="Transparent"/>
+                                </Style>
+                            </DataGridColumn.HeaderStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
+                        Header="Tên"
+                        MinWidth="90"
+                        Width="*"
+                        >
+                            <DataGridColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader" >
+                                    <Setter Property="FontSize" Value="14"/>
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="Background" Value="Transparent"/>
+                                </Style>
+                            </DataGridColumn.HeaderStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
+                        Header="Ngày tiêm"
+                        MinWidth="70"
+                        Width="*"
+                        >
+                            <DataGridColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader" >
+                                    <Setter Property="FontSize" Value="14"/>
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="Background" Value="Transparent"/>
+                                </Style>
+                            </DataGridColumn.HeaderStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
+                        Header=" "
+                        MinWidth="60"
+                        Width="*"
+                        >
+                            <DataGridColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader" >
+                                    <Setter Property="FontSize" Value="14"/>
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="Background" Value="Transparent"/>
+                                </Style>
+                            </DataGridColumn.HeaderStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>              
+            </Grid>
+            <StackPanel Grid.Row="0" Grid.Column="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition SharedSizeGroup="A" />
+                        <ColumnDefinition SharedSizeGroup="A" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0"
+                        Margin="15,0,0,0"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#FF434A54">
+                        Lịch sử di chuyển
+                    </TextBlock>
+                    <Button Grid.Row="0" Grid.Column="1"
+                    VerticalAlignment="Bottom"
+                    Margin="165,-10,0,10"
+                    Template="{StaticResource plus-button}"
+                    />
+                </Grid>
+                <Separator Margin="15,0,0,2">
+                    <Separator.RenderTransform>
+                        <ScaleTransform ScaleY="1" />
+                    </Separator.RenderTransform>
+                </Separator>
+            </StackPanel>
+            <Grid Margin="0,0,0,0" Grid.Row="1" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="A" />
+                    <ColumnDefinition SharedSizeGroup="A" />
+                    <ColumnDefinition SharedSizeGroup="A" />
+                </Grid.ColumnDefinitions>
+                <DataGrid
+                    x:Name="travelHistory"                                                 
+                    AutoGenerateColumns="False"
+                    BorderBrush="Black"
+                    Margin="15,15,0,0"
+                    BorderThickness="1"
+                    Height="280"
+                    Grid.ColumnSpan="4"
+                    >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                        Header="Ngày"
+                        MinWidth="70"
+                        Width="*"
+                        >
+                            <DataGridColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader" >
+                                    <Setter Property="FontSize" Value="14"/>
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="Background" Value="Transparent"/>
+                                </Style>
+                            </DataGridColumn.HeaderStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
+                        Header="Địa điểm"
+                        MinWidth="90"
+                        Width="*"
+                        >
+                            <DataGridColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader" >
+                                    <Setter Property="FontSize" Value="14"/>
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="Background" Value="Transparent"/>
+                                </Style>
+                            </DataGridColumn.HeaderStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
+                        Header=""
+                        MinWidth="70"
+                        Width="*"
+                        >
+                            <DataGridColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader" >
+                                    <Setter Property="FontSize" Value="14"/>
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="Background" Value="Transparent"/>
+                                </Style>
+                            </DataGridColumn.HeaderStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Grid>
+    </StackPanel>
 </UserControl>
