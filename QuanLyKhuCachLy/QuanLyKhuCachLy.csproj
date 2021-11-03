@@ -136,6 +136,9 @@
     <Compile Include="UserControl\InitialSettingSecondPageView.xaml.cs">
       <DependentUpon>InitialSettingSecondPageView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\QuarantineRoom.xaml.cs">
+      <DependentUpon>QuarantineRoom.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ValidationRules\NoSpecialChar.cs" />
     <Compile Include="ValidationRules\NumberField.cs" />
     <Compile Include="ValidationRules\OnlyNumber.cs" />
@@ -219,6 +222,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControl\InitialSettingFourthPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl\QuarantineRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

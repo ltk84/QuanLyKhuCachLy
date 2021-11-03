@@ -281,7 +281,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     Tab4 = Visibility.Visible;
                     break;
                 default:
-                    //UpdateQuarantineAreaInformation();
+                    UpdateQuarantineAreaInformation();
                     p.Close();
                     break;
             }

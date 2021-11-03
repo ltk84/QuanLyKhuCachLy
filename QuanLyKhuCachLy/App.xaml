@@ -23,6 +23,9 @@
             <DataTemplate DataType="{x:Type viewModel:DashboardViewModel}">
                 <userControl:Dashboard />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:QuarantineRoomViewModel}">
+                <userControl:QuarantineRoom />
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
