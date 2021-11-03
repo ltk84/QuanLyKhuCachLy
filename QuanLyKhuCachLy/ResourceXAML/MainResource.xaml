@@ -13,4 +13,5 @@
     <viewmodel:StaffViewModel x:Key="StaffVM" />
     <viewmodel:InjectionRecordViewModel x:Key="InjectionVM" />
     <viewmodel:DestinationHistoryViewModel x:Key="DestinationVM" />
+    <viewmodel:SeverityViewModel x:Key="SeverityVM" />
 </ResourceDictionary>

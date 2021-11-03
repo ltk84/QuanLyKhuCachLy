@@ -14,9 +14,10 @@ namespace QuanLyKhuCachLy.ViewModel
     {
         #region property
         #region Handle Dashboard
-        public DashboardViewModel DashboardModel { get; set; }
-        public StaffViewModel StaffVM { get; set; }
+        public DashboardViewModel DashboardVM { get; set; }
+        public QuarantineRoomViewModel QuarantineRoomVM { get; set; }
         public QuarantinePersonViewModel quarantinePersonViewModel { get; set; }
+>>>>>>> lam/quarantine-room
 
         private object _currentView;
         private bool _isOnDashboard;
@@ -145,14 +146,16 @@ namespace QuanLyKhuCachLy.ViewModel
         #region method
         private void Init()
         {
-            DashboardModel = new DashboardViewModel();
+            DashboardVM = new DashboardViewModel();
+            QuarantineRoomVM = new QuarantineRoomViewModel();
             StaffVM = new StaffViewModel();
+
             ToDashboard();
         }
 
         private void ToDashboard()
         {
-            CurrentView = DashboardModel;
+            CurrentView = DashboardVM;
             _isOnDashboard = true;
             _isOnRoom = false;
             _isOnPerson = false;
@@ -163,6 +166,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         private void ToRoom()
         {
+            CurrentView = QuarantineRoomVM;
             _isOnDashboard = false;
             _isOnRoom = true;
             _isOnPerson = false;

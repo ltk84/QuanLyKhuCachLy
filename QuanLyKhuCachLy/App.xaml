@@ -22,6 +22,7 @@
                 <ResourceDictionary Source="/ResourceXAML/TableTemplate.xaml" />
                 
                 
+                <ResourceDictionary Source="/ResourceXAML/DataGridTemplate.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:DashboardViewModel}">
@@ -33,6 +34,9 @@
             </DataTemplate>
 
 
+            <DataTemplate DataType="{x:Type viewModel:QuarantineRoomViewModel}">
+                <userControl:QuarantineRoom />
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

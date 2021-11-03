@@ -180,6 +180,9 @@
     </Compile>
     <Compile Include="UserControl\StaffList.xaml.cs">
       <DependentUpon>StaffList.xaml</DependentUpon>
+      </Compile>
+    <Compile Include="UserControl\AddRoom.xaml.cs">
+      <DependentUpon>AddRoom.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControl\InitialSettingSecondPageView.xaml.cs">
       <DependentUpon>InitialSettingSecondPageView.xaml</DependentUpon>
@@ -188,6 +191,9 @@
       <DependentUpon>StaffWrapperTab.xaml</DependentUpon>
     </Compile>
     <Compile Include="ValidationRules\DateFormat.cs" />
+    <Compile Include="UserControl\QuarantineRoom.xaml.cs">
+      <DependentUpon>QuarantineRoom.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ValidationRules\NoSpecialChar.cs" />
     <Compile Include="ValidationRules\NumberField.cs" />
     <Compile Include="ValidationRules\OnlyNumber.cs" />
@@ -219,6 +225,7 @@
     <Compile Include="ViewModel\QuarantinePersonViewModel.cs" />
     <Compile Include="ViewModel\QuarantineRoomViewModel.cs" />
     <Compile Include="ViewModel\ReportViewModel.cs" />
+    <Compile Include="ViewModel\SeverityViewModel.cs" />
     <Compile Include="ViewModel\StaffViewModel.cs" />
     <Page Include="Demo.xaml">
       <SubType>Designer</SubType>
@@ -245,6 +252,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ResourceXAML\DashboardContentTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceXAML\DataGridTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -291,6 +302,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControl\AddQuarantinedPersonThirdPage.xaml">
+    </Page>
+    <Page Include="UserControl\AddRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -340,7 +353,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl\StaffWrapperTab.xaml">
+    <Page Include="UserControl\StaffWrapperTab.xaml" />
+    <Page Include="UserControl\QuarantineRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
