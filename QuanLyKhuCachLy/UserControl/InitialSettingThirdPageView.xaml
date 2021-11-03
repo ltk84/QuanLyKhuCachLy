@@ -109,8 +109,8 @@
                     <DatePicker materialDesign:HintAssist.Hint="Nhập ngày sinh" Style="{StaticResource DatePickerField}">
                         <DatePicker.SelectedDate>
                             <Binding
+                                Mode="OneWayToSource"
                                 Path="ManagerDateOfBirth"
-                                RelativeSource="{RelativeSource AncestorType={x:Type DatePicker}}"
                                 StringFormat="dd/MM/yyyy"
                                 UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>

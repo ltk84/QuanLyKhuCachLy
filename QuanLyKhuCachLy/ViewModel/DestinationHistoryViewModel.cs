@@ -110,8 +110,8 @@ namespace QuanLyKhuCachLy.ViewModel
         public DestinationHistoryViewModel(int currentPersonID)
         {
             _PersonID = currentPersonID;
-            //DestinationHistoryList = new ObservableCollection<DestinationHistory>(DataProvider.ins.db.DestinationHistories.Where(x => x.quarantinePersonID == _PersonID));
-            DestinationHistoryList = new ObservableCollection<DestinationHistory>();
+            DestinationHistoryList = new ObservableCollection<DestinationHistory>(DataProvider.ins.db.DestinationHistories.Where(x => x.quarantinePersonID == _PersonID));
+            //DestinationHistoryList = new ObservableCollection<DestinationHistory>();
 
             AddCommand = new RelayCommand<object>((p) =>
             {

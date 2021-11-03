@@ -61,7 +61,7 @@ namespace QuanLyKhuCachLy.ViewModel
         public string ManagerName { get => _ManagerName; set { _ManagerName = value; OnPropertyChanged(); } }
 
         private DateTime _ManagerDateOfBirth;
-        public DateTime ManagerDateOfBirth { get => _ManagerDateOfBirth; set { _ManagerDateOfBirth = value; OnPropertyChanged(); } }
+        public DateTime ManagerDateOfBirth { get => _ManagerDateOfBirth; set { _ManagerDateOfBirth = (DateTime)value; OnPropertyChanged(); } }
 
         private string _ManagerSex;
         public string ManagerSex { get => _ManagerSex; set { _ManagerSex = value; OnPropertyChanged(); } }
@@ -228,7 +228,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     Staff Manager = new Staff()
                     {
                         citizenID = ManagerCitizenID,
-                        dateOfBirth = ManagerDateOfBirth,
+                        dateOfBirth = (DateTime)ManagerDateOfBirth,
                         department = ManagerDepartment,
                         healthInsuranceID = ManagerHealthInsuranceID,
                         jobTitle = ManagerJobTitle,
@@ -367,7 +367,7 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 addressID = ManagerAddress.id,
                 citizenID = ManagerCitizenID,
-                dateOfBirth = ManagerDateOfBirth,
+                dateOfBirth = (DateTime)ManagerDateOfBirth,
                 department = ManagerDepartment,
                 healthInsuranceID = ManagerHealthInsuranceID,
                 jobTitle = ManagerJobTitle,
