@@ -5,12 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QuanLyKhuCachLy.UserControl"
              mc:Ignorable="d" 
-             d:DesignHeight="768" d:DesignWidth="1024">
+             d:DesignHeight="768" d:DesignWidth="768">
     <StackPanel  Margin="25,25,25,25">
-        <Grid Margin="30,0,30,0">
+        <Grid Margin="20,0,20,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="238"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock
                 Grid.Column="0"
@@ -42,7 +42,7 @@
                 Margin="20,20,20,20"
                 BorderBrush="Black"
                 BorderThickness="1"
-                Height="600"
+                Height="650"
                 Grid.ColumnSpan="5" SelectionChanged="QuarantinedPersonTable_SelectionChanged"
                 >
                 <DataGrid.Columns >
@@ -51,9 +51,10 @@
                         MinWidth="80"
                         Width="*"
                         >
+                        
                         <DataGridColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader" >
-                                <Setter Property="FontSize" Value="18"/>
+                                <Setter Property="FontSize" Value="16"/>
                                 <Setter Property="FontWeight" Value="Bold" />
                                 <Setter Property="HorizontalAlignment" Value="Center" />
                                 <Setter Property="Background" Value="Transparent"/>
@@ -62,11 +63,11 @@
                     </DataGridTextColumn>
                     <DataGridTextColumn
                         Header="Họ và tên"
-                        MinWidth="300"
+                        MinWidth="200"
                         Width="*">
                         <DataGridColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader" >
-                                <Setter Property="FontSize" Value="18"/>
+                                <Setter Property="FontSize" Value="16"/>
                                 <Setter Property="FontWeight" Value="Bold" />
                                 <Setter Property="HorizontalAlignment" Value="Center" />
                                 <Setter Property="Background" Value="Transparent"/>
@@ -76,11 +77,11 @@
 
                     <DataGridTextColumn
                         Header="Ngày sinh"
-                        MinWidth="200"
+                        MinWidth="180"
                         Width="*">
                         <DataGridColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader" >
-                                <Setter Property="FontSize" Value="18"/>
+                                <Setter Property="FontSize" Value="16"/>
                                 <Setter Property="FontWeight" Value="Bold" />
                                 <Setter Property="HorizontalAlignment" Value="Center" />
                                 <Setter Property="Background" Value="Transparent"/>
@@ -90,11 +91,11 @@
 
                     <DataGridTextColumn
                         Header="Quốc tịch"
-                        MinWidth="200"
+                        MinWidth="180"
                         Width="*">
                         <DataGridColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader" >
-                                <Setter Property="FontSize" Value="18"/>
+                                <Setter Property="FontSize" Value="16"/>
                                 <Setter Property="FontWeight" Value="Bold" />
                                 <Setter Property="HorizontalAlignment" Value="Center" />
                                 <Setter Property="Background" Value="Transparent"/>
