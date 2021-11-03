@@ -14,6 +14,50 @@ namespace QuanLyKhuCachLy.ViewModel
     {
         #region property
         #region Quarantine Person
+        private Visibility _Tab1;
+        private Visibility _Tab2;
+        private Visibility _Tab3;
+        private Visibility _ButtonReturn;
+        public Visibility ButtonReturn
+        {
+            get => _ButtonReturn; set
+            {
+                _ButtonReturn = value; OnPropertyChanged();
+            }
+        }
+        public Visibility Tab1
+        {
+            get => _Tab1; set
+            {
+                _Tab1 = value; OnPropertyChanged();
+            }
+        }
+        public Visibility Tab2
+        {
+            get => _Tab2; set
+            {
+                _Tab2 = value; OnPropertyChanged();
+            }
+        }
+
+        public Visibility Tab3
+        {
+            get => _Tab3; set
+            {
+                _Tab3 = value; OnPropertyChanged();
+            }
+        }
+        public int TabIndex { get; set; }
+
+        private String _TabPostion;
+        public String TabPosition
+        {
+            get => _TabPostion; set
+            {
+                _TabPostion = value; OnPropertyChanged();
+            }
+        }
+        
         private string _QPName;
         public string QPName
         {
@@ -408,9 +452,37 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand ToEditCommand { get; set; }
         public ICommand ToDeleteCommand { get; set; }
 
+        public ICommand NextTabCommand { get; set; }
+        public ICommand PreviousTabCommand { get; set; }
+
         #endregion
         public QuarantinePersonViewModel()
         {
+            Tab1 = Visibility.Visible;
+            Tab2 = Visibility.Hidden;
+            Tab3 = Visibility.Hidden;
+            ButtonReturn = Visibility.Hidden;
+            TabIndex = 1;
+            TabPosition = $"{TabIndex}/3";
+
+            NextTabCommand = new RelayCommand<Window>((p) =>
+            {
+
+                if (TabIndex < 3) return true;              
+                return false;
+            }, (p) =>
+            {
+                HandleChangeTab(TabIndex, "next", p);
+            });
+
+            PreviousTabCommand = new RelayCommand<Window>((p) =>
+            {
+                if (TabIndex > 1) return true;
+                return false;
+            }, (p) =>
+            {
+                HandleChangeTab(TabIndex, "previous", p);
+            });
             QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
             SeverityList = new ObservableCollection<Severity>(DataProvider.ins.db.Severities);
 
@@ -490,6 +562,47 @@ namespace QuanLyKhuCachLy.ViewModel
         void AddQuarantinePerson() { }
         void EditQuarantinePerson() { }
         void DeleteQuarantinePerson() { }
+
+        void HandleChangeTab(int index, string action, Window p)
+        {
+            if (action == "next")
+            {
+                TabIndex++;
+            }
+            else
+            {
+                TabIndex--;
+            }
+            if (TabIndex <= 3)
+                TabPosition = $"{TabIndex}/3";
+
+            switch (TabIndex)
+            {
+                case 1:
+                    Tab1 = Visibility.Visible;
+                    Tab2 = Visibility.Hidden;
+                    Tab3 = Visibility.Hidden;
+                    ButtonReturn = Visibility.Hidden;
+                    break;
+                case 2:
+                    Tab1 = Visibility.Hidden;
+                    Tab2 = Visibility.Visible;
+                    Tab3 = Visibility.Hidden;
+                    ButtonReturn = Visibility.Visible;
+                    break;
+                case 3:
+                    Tab1 = Visibility.Hidden;
+                    Tab2 = Visibility.Hidden;
+                    Tab3 = Visibility.Visible;
+                    ButtonReturn = Visibility.Visible;
+                    break;
+                default:
+                    
+                    p.Close();
+                    break;
+            }
+        }
+
         #endregion
     }
 }

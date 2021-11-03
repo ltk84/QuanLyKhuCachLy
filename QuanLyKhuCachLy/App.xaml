@@ -5,7 +5,7 @@
     xmlns:userControl="clr-namespace:QuanLyKhuCachLy.UserControl"
     xmlns:viewModel="clr-namespace:QuanLyKhuCachLy.ViewModel"
     ShutdownMode="OnMainWindowClose"
-    StartupUri="MainScreen.xaml">
+    StartupUri="UserControl/AddQuarantinedPerson.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
