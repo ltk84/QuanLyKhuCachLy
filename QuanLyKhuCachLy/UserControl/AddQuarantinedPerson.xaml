@@ -31,7 +31,7 @@
                         </Grid.RowDefinitions>
                         <control:AddQuarantinedPersonFirstPage Panel.ZIndex="-1" Visibility="{Binding Tab1}" />
                         <control:AddQuarantinedPersonSecondPage Visibility="{Binding Tab2}" />
-                        <control:AddQuarantinedPersonThirdPage Panel.ZIndex="1" Visibility="{Binding Tab3}" />
+                        <control:AddQuarantinedPersonThirdPage Panel.ZIndex="1" Visibility="{Binding Tab3}" Loaded="AddQuarantinedPersonThirdPage_Loaded" />
                     </Grid>
                     <Grid
                         Grid.Row="3"

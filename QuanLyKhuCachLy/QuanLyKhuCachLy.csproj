@@ -412,6 +412,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\icons\notify.png" />
+    <Resource Include="Resources\icons\delete-icon.png" />
+    <Resource Include="Resources\icons\edit-icon.png" />
+    <Resource Include="Resources\icons\plus-icon.png" />
+    <Resource Include="Resources\icons\tick-icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\icons\notify_selected.png" />

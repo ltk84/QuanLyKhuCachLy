@@ -33,7 +33,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Grid.Column="0">
-                <Grid>
+                <Grid Margin="0,0,15,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition SharedSizeGroup="A" />
                         <ColumnDefinition SharedSizeGroup="A" />
@@ -47,16 +47,17 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         FontWeight="Bold"
-                        Foreground="#FF434A54">
-                        Thông tin tiêm chủng
-                    </TextBlock>
-                    <Button Grid.Row="0" Grid.Column="1"
-                    VerticalAlignment="Bottom"
-                    Margin="150,-10,0,10"
-                    Template="{StaticResource plus-button}"
+                        Foreground="#FF434A54"><Run Text="Lịch sử di chuyển"/></TextBlock>
+                    <Button 
+                        Foreground="Transparent"
+                        Background="Transparent"
+                        Grid.Row="0" Grid.Column="1"
+                        VerticalAlignment="Bottom"
+                        Margin="155,-10,0,10"
+                        Template="{StaticResource plus-button}"
                     />
                 </Grid>
-                <Separator Margin="0,0,15,2">
+                <Separator Margin="0,0,15,0">
                     <Separator.RenderTransform>
                         <ScaleTransform ScaleY="1" />
                     </Separator.RenderTransform>
@@ -136,10 +137,10 @@
                             </DataGridColumn.HeaderStyle>
                         </DataGridTextColumn>
                     </DataGrid.Columns>
-                </DataGrid>              
+                </DataGrid>
             </Grid>
             <StackPanel Grid.Row="0" Grid.Column="1">
-                <Grid>
+                <Grid Margin="0,0,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition SharedSizeGroup="A" />
                         <ColumnDefinition SharedSizeGroup="A" />
@@ -153,16 +154,14 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         FontWeight="Bold"
-                        Foreground="#FF434A54">
-                        Lịch sử di chuyển
-                    </TextBlock>
+                        Foreground="#FF434A54"><Run Text="Lịch sử di chuyển"/></TextBlock>
                     <Button Grid.Row="0" Grid.Column="1"
                     VerticalAlignment="Bottom"
                     Margin="165,-10,0,10"
                     Template="{StaticResource plus-button}"
                     />
                 </Grid>
-                <Separator Margin="15,0,0,2">
+                <Separator Margin="15,0,0,0">
                     <Separator.RenderTransform>
                         <ScaleTransform ScaleY="1" />
                     </Separator.RenderTransform>

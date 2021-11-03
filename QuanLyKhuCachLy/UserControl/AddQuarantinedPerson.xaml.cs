@@ -24,5 +24,10 @@ namespace QuanLyKhuCachLy.UserControl
         {
             InitializeComponent();
         }
+
+        private void AddQuarantinedPersonThirdPage_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
