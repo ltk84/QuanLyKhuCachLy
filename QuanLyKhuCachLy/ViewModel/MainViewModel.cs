@@ -17,7 +17,9 @@ namespace QuanLyKhuCachLy.ViewModel
         public DashboardViewModel DashboardVM { get; set; }
         public QuarantineRoomViewModel QuarantineRoomVM { get; set; }
         public QuarantinePersonViewModel quarantinePersonViewModel { get; set; }
->>>>>>> lam/quarantine-room
+
+        public StaffViewModel StaffVM { get; set; }
+
 
         private object _currentView;
         private bool _isOnDashboard;

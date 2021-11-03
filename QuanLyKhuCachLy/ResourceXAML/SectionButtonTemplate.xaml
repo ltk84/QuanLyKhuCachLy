@@ -40,23 +40,26 @@
         <Setter Property="FontFamily" Value="/QuanLyKhuCachLy;component/Resources/fonts/#Baloo" />
         <Setter Property="FontSize" Value="10" />
         <Setter Property="Foreground" Value="White" />
-        <Setter Property="Height" Value="23.4"/>
-        <Setter Property="Width" Value="121"/>
+        <Setter Property="Height" Value="23.4" />
+        <Setter Property="Width" Value="121" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border CornerRadius="4" Background="{TemplateBinding Background}" BorderBrush="#FF1D9583" BorderThickness="0,0,0,0" >
-                        <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="#FF1D9583"
+                        BorderThickness="0,0,0,0"
+                        CornerRadius="4">
+                        <ContentPresenter
+                            x:Name="contentPresenter"
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-
-
-
-
-
-
-
 </ResourceDictionary>
