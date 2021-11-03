@@ -11,4 +11,5 @@
     <viewmodel:QuarantineRoomViewModel x:Key="RoomVM" />
     <viewmodel:ReportViewModel x:Key="ReportVM" />
     <viewmodel:StaffViewModel x:Key="StaffVM" />
+    <viewmodel:SeverityViewModel x:Key="SeverityVM" />
 </ResourceDictionary>

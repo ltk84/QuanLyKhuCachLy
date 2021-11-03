@@ -33,16 +33,11 @@
                 <ColumnDefinition Width="Auto" MinWidth="924.8" />
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0" Margin="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition SharedSizeGroup="A" />
-                    <ColumnDefinition SharedSizeGroup="A" />
-                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Grid.Column="0">
+                <StackPanel Grid.Row="0">
                     <TextBlock
                         Margin="0,0,0,0"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
@@ -56,64 +51,77 @@
                         </Separator.RenderTransform>
                     </Separator>
                 </StackPanel>
-                <StackPanel
+                <DataGrid
                     Grid.Row="1"
-                    Grid.Column="0"
-                    Margin="0,25,24,0">
-                    <TextBlock
-                        Margin="5,0,0,5"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="16"
-                        Foreground="#FF434A54">
-                        Mức độ (*)
-                    </TextBlock>
-                    <TextBox
-                        materialDesign:HintAssist.Hint="Nhập số ngày"
-                        MaxLength="9"
-                        PreviewTextInput="TextBox_PreviewTextInput"
-                        Style="{StaticResource TextInputField}">
-                        <!--<TextBox.Text>
-                            <Binding Path="" UpdateSourceTrigger="PropertyChanged">
-                                <Binding.ValidationRules>
-                                    <vr:RequiredField />
-                                    <vr:NumberField Min="1" />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>-->
-                    </TextBox>
-                </StackPanel>
-                <StackPanel
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Margin="0,25,24,0">
-                    <TextBlock
-                        Margin="5,0,0,5"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="16"
-                        Foreground="#FF434A54">
-                        Mô tả (*)
-                    </TextBlock>
-                    <TextBox
-                        materialDesign:HintAssist.Hint="Nhập mô tả"
-                        MaxLength="30"
-                        Style="{StaticResource TextInputField}">
-                        <!--<TextBox.Text>
-                            <Binding Path="" UpdateSourceTrigger="PropertyChanged">
-                                <Binding.ValidationRules>
-                                    <vr:RequiredField />
-                                    <vr:NoSpecialChar />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>-->
-                    </TextBox>
-                </StackPanel>
+                    Height="460"
+                    Margin="0,20,23,0"
+                    materialDesign:DataGridAssist.CornerRadius="10"
+                    AutoGenerateColumns="False"
+                    CanUserAddRows="False"
+                    CanUserReorderColumns="False"
+                    CanUserResizeColumns="False"
+                    CanUserResizeRows="False"
+                    DataContext="{StaticResource SeverityVM}"
+                    ItemsSource="{Binding ListSeverity}"
+                    SelectedItem="{Binding SelectedItem}">
+                    <DataGrid.Columns>
+                        <materialDesign:DataGridTextColumn
+                            Width="150"
+                            Binding="{Binding level}"
+                            EditingElementStyle="{StaticResource EditingDataGridElement}"
+                            ElementStyle="{StaticResource DataGridElement}"
+                            Header="Mức độ"
+                            HeaderStyle="{StaticResource DataGridHeader}"
+                            MaxLength="10" />
+                        <materialDesign:DataGridTextColumn
+                            Width="250"
+                            Binding="{Binding description}"
+                            EditingElementStyle="{StaticResource EditingDataGridElement}"
+                            ElementStyle="{StaticResource DataGridElement}"
+                            Header="Mô tả"
+                            HeaderStyle="{StaticResource DataGridHeader}"
+                            MaxLength="30" />
+                        <DataGridTemplateColumn
+                            Width="150"
+                            HeaderStyle="{StaticResource DataGridButtonHeader}"
+                            IsReadOnly="True">
+                            <DataGridTemplateColumn.Header>
+                                <Button
+                                    HorizontalAlignment="Right"
+                                    Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.AddSeverityCommand}"
+                                    CommandParameter="{Binding}"
+                                    Style="{StaticResource DataGridButton}">
+                                    <materialDesign:PackIcon
+                                        Width="16"
+                                        Height="16"
+                                        Kind="Add" />
+                                </Button>
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button
+                                        HorizontalAlignment="Right"
+                                        Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.RemoveSeverityCommand}"
+                                        CommandParameter="{Binding}"
+                                        Style="{StaticResource DataGridButton}">
+                                        <materialDesign:PackIcon
+                                            Width="16"
+                                            Height="16"
+                                            Kind="Delete" />
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
             <Grid
                 Grid.Column="1"
                 Width="511"
                 Height="141.6"
                 Margin="0"
-                HorizontalAlignment="Left">
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -129,6 +137,7 @@
                         Lưu ý
                     </TextBlock>
                     <TextBlock
+                        Margin="0,0,24,0"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54"

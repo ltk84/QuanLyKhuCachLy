@@ -17,6 +17,7 @@
                 <ResourceDictionary Source="/ResourceXAML/SectionButtonTemplate.xaml" />
                 <ResourceDictionary Source="/ResourceXAML/DashboardContentTemplate.xaml" />
                 <ResourceDictionary Source="/ResourceXAML/InputTemplate.xaml" />
+                <ResourceDictionary Source="/ResourceXAML/DataGridTemplate.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:DashboardViewModel}">

@@ -164,6 +164,7 @@
     <Compile Include="ViewModel\QuarantinePersonViewModel.cs" />
     <Compile Include="ViewModel\QuarantineRoomViewModel.cs" />
     <Compile Include="ViewModel\ReportViewModel.cs" />
+    <Compile Include="ViewModel\SeverityViewModel.cs" />
     <Compile Include="ViewModel\StaffViewModel.cs" />
     <Page Include="InitialSettingScreen.xaml">
       <SubType>Designer</SubType>
@@ -178,6 +179,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ResourceXAML\DashboardContentTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceXAML\DataGridTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
