@@ -133,6 +133,9 @@
     <Compile Include="MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\AddRoom.xaml.cs">
+      <DependentUpon>AddRoom.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\InitialSettingSecondPageView.xaml.cs">
       <DependentUpon>InitialSettingSecondPageView.xaml</DependentUpon>
     </Compile>
@@ -202,6 +205,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ResourceXAML\SectionButtonTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl\AddRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
