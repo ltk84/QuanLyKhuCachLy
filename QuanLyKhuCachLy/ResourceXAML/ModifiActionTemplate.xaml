@@ -1,33 +1,28 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ControlTemplate x:Key="action-button" TargetType="Button">
-        <Grid
-                VerticalAlignment="Bottom"
-                >
+        <Grid VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
-            <Image 
-                Margin="0, 0, 15, 0"
+            <Image
                 Grid.Column="0"
                 Width="18"
                 Height="16"
+                Margin="0,0,15,0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 RenderTransformOrigin="0.5,0.5"
                 Source="/QuanLyKhuCachLy;component/Resources/icons/edit-icon.png" />
             <TextBlock
+                Grid.Column="1"
                 VerticalAlignment="Center"
-                Grid.Column="1" 
+                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                 FontSize="11"
                 FontWeight="Regular"
                 Foreground="#FF000000"
-                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                Text="{TemplateBinding Property=Content}"
-                >
-            </TextBlock>
+                Text="{TemplateBinding Property=Content}" />
 
 
         </Grid>
@@ -35,34 +30,29 @@
 
 
     <ControlTemplate x:Key="edit-button" TargetType="Button">
-        <Grid
-                VerticalAlignment="Bottom"
-                >
+        <Grid VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
             <Image
-                        Margin="0, 0, 15, 0"
-                        Grid.Column="0"
-                        Width="18"
-                        Height="16"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        RenderTransformOrigin="0.5,0.5"
-                        Source="/QuanLyKhuCachLy;component/Resources/icons/edit-icon.png" />
-            <TextBlock
+                Grid.Column="0"
+                Width="18"
+                Height="16"
+                Margin="0,0,15,0"
+                HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Grid.Column="1" 
+                RenderTransformOrigin="0.5,0.5"
+                Source="/QuanLyKhuCachLy;component/Resources/icons/edit-icon.png" />
+            <TextBlock
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                 FontSize="11"
                 FontWeight="Regular"
                 Foreground="#FF000000"
-                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                Text="{TemplateBinding Property=Content}"
-                >
-
-            </TextBlock>
+                Text="{TemplateBinding Property=Content}" />
 
 
         </Grid>
@@ -70,34 +60,29 @@
 
 
     <ControlTemplate x:Key="delete-button" TargetType="Button">
-        <Grid
-                VerticalAlignment="Bottom"
-                >
+        <Grid VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
             <Image
-                        Margin="0, 0, 15, 0"
-                        Grid.Column="0"
-                        Width="18"
-                        Height="16"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        RenderTransformOrigin="0.5,0.5"
-                        Source="/QuanLyKhuCachLy;component/Resources/icons/delete-icon.png" />
-            <TextBlock
+                Grid.Column="0"
+                Width="18"
+                Height="16"
+                Margin="0,0,15,0"
+                HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Grid.Column="1" 
+                RenderTransformOrigin="0.5,0.5"
+                Source="/QuanLyKhuCachLy;component/Resources/icons/delete-icon.png" />
+            <TextBlock
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                 FontSize="11"
                 FontWeight="Regular"
                 Foreground="#FF000000"
-                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                Text="{TemplateBinding Property=Content}"
-                >
-
-            </TextBlock>
+                Text="{TemplateBinding Property=Content}" />
 
 
         </Grid>
@@ -105,102 +90,87 @@
 
 
     <ControlTemplate x:Key="edit-button-with-background" TargetType="Button">
-        <Grid
-                VerticalAlignment="Bottom"
-                >
+        <Grid VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
             <Image
-                        Margin="0, 0, 15, 0"
-                        Grid.Column="0"
-                        Width="18"
-                        Height="16"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        RenderTransformOrigin="0.5,0.5"
-                        Source="/QuanLyKhuCachLy;component/Resources/icons/edit-icon.png" />
-            <TextBlock
+                Grid.Column="0"
+                Width="18"
+                Height="16"
+                Margin="0,0,15,0"
+                HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Grid.Column="1" 
+                RenderTransformOrigin="0.5,0.5"
+                Source="/QuanLyKhuCachLy;component/Resources/icons/edit-icon.png" />
+            <TextBlock
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                 FontSize="11"
                 FontWeight="Regular"
                 Foreground="#FF000000"
-                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                Text="{TemplateBinding Property=Content}"
-                >
-
-            </TextBlock>
+                Text="{TemplateBinding Property=Content}" />
 
 
         </Grid>
     </ControlTemplate>
 
 
-    <ControlTemplate x:Key="delete-button" TargetType="Button">
+
     <ControlTemplate x:Key="completed-button" TargetType="Button">
-        <Grid
-                VerticalAlignment="Bottom"
-                >
+        <Grid VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
             <Image
-                        Margin="0, 0, 15, 0"
-                        Grid.Column="0"
-                        Width="18"
-                        Height="16"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        RenderTransformOrigin="0.5,0.5"
-                        Source="/QuanLyKhuCachLy;component/Resources/icons/tick-icon.png" />
-            <TextBlock
+                Grid.Column="0"
+                Width="18"
+                Height="16"
+                Margin="0,0,15,0"
+                HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Grid.Column="1" 
+                RenderTransformOrigin="0.5,0.5"
+                Source="/QuanLyKhuCachLy;component/Resources/icons/tick-icon.png" />
+            <TextBlock
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                 FontSize="11"
                 FontWeight="Regular"
                 Foreground="#FF000000"
-                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                Text="{TemplateBinding Property=Content}"
-                >
-
-            </TextBlock>
+                Text="{TemplateBinding Property=Content}" />
 
 
         </Grid>
     </ControlTemplate>
     <ControlTemplate x:Key="plus-button" TargetType="Button">
-        <Grid
-                VerticalAlignment="Bottom"
-                >
+        <Grid VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
             <Image
-                        Margin="0, 0, 15, 0"
-                        Grid.Column="0"
-                        Width="18"
-                        Height="16"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        RenderTransformOrigin="0.5,0.5"
-                        Source="/QuanLyKhuCachLy;component/Resources/icons/plus-icon.png" />
-            <TextBlock
+                Grid.Column="0"
+                Width="18"
+                Height="16"
+                Margin="0,0,15,0"
+                HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Grid.Column="1" 
+                RenderTransformOrigin="0.5,0.5"
+                Source="/QuanLyKhuCachLy;component/Resources/icons/plus-icon.png" />
+            <TextBlock
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                 FontSize="11"
                 FontWeight="Regular"
                 Foreground="#FF000000"
-                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                Text="{TemplateBinding Property=Content}"
-                >
-
-            </TextBlock>
+                Text="{TemplateBinding Property=Content}" />
 
 
         </Grid>
@@ -212,8 +182,8 @@
         <Setter Property="FontFamily" Value="/QuanLyKhuCachLy;component/Resources/fonts/#Baloo" />
         <Setter Property="FontSize" Value="10" />
         <Setter Property="Foreground" Value="White" />
-        <Setter Property="Height" Value="20"/>
-        <Setter Property="Width" Value="175.5"/>
+        <Setter Property="Height" Value="20" />
+        <Setter Property="Width" Value="175.5" />
         <Setter Property="Template">
             <Setter.Value>
                 <!--<ControlTemplate TargetType="Button">
@@ -222,35 +192,35 @@
                     </Border>
                 </ControlTemplate>-->
                 <ControlTemplate TargetType="Button">
-                    <Border CornerRadius="4" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding Background}" BorderThickness="0,0,0,0" >
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding Background}"
+                        BorderThickness="0,0,0,0"
+                        CornerRadius="4">
 
-                        <Grid
-                VerticalAlignment="Center"
-                
-                >
+                        <Grid VerticalAlignment="Center">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="1*" />
                             </Grid.ColumnDefinitions>
 
                             <Image
-                        Margin="20, 0, 15, 0"
-                        Grid.Column="0"
-                        Width="11.5"
-                        Height="13"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        RenderTransformOrigin="0.5,0.5"
-                        Source="/QuanLyKhuCachLy;component/Resources/icons/delete-white-icon.png" />
+                                Grid.Column="0"
+                                Width="11.5"
+                                Height="13"
+                                Margin="20,0,15,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                RenderTransformOrigin="0.5,0.5"
+                                Source="/QuanLyKhuCachLy;component/Resources/icons/delete-white-icon.png" />
                             <TextBlock
-                VerticalAlignment="Center"
-                Grid.Column="1" 
-                FontSize="11"
-                FontWeight="Bold"
-                Foreground="#FFFFFFFF"
-                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                Text="{TemplateBinding Property=Content}"
-                />
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                                FontSize="11"
+                                FontWeight="Bold"
+                                Foreground="#FFFFFFFF"
+                                Text="{TemplateBinding Property=Content}" />
                         </Grid>
                     </Border>
                 </ControlTemplate>
@@ -264,8 +234,8 @@
         <Setter Property="FontFamily" Value="/QuanLyKhuCachLy;component/Resources/fonts/#Baloo" />
         <Setter Property="FontSize" Value="10" />
         <Setter Property="Foreground" Value="White" />
-        <Setter Property="Height" Value="20"/>
-        <Setter Property="Width" Value="175.5"/>
+        <Setter Property="Height" Value="20" />
+        <Setter Property="Width" Value="175.5" />
         <Setter Property="Template">
             <Setter.Value>
                 <!--<ControlTemplate TargetType="Button">
@@ -274,35 +244,35 @@
                     </Border>
                 </ControlTemplate>-->
                 <ControlTemplate TargetType="Button">
-                    <Border CornerRadius="4" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding Background}" BorderThickness="0,0,0,0" >
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding Background}"
+                        BorderThickness="0,0,0,0"
+                        CornerRadius="4">
 
-                        <Grid
-                VerticalAlignment="Center"
-                
-                >
+                        <Grid VerticalAlignment="Center">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="1*" />
                             </Grid.ColumnDefinitions>
 
                             <Image
-                        Margin="20, 0, 15, 0"
-                        Grid.Column="0"
-                        Width="11.5"
-                        Height="13"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        RenderTransformOrigin="0.5,0.5"
-                        Source="/QuanLyKhuCachLy;component/Resources/icons/complete-icon.png" />
+                                Grid.Column="0"
+                                Width="11.5"
+                                Height="13"
+                                Margin="20,0,15,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                RenderTransformOrigin="0.5,0.5"
+                                Source="/QuanLyKhuCachLy;component/Resources/icons/complete-icon.png" />
                             <TextBlock
-                VerticalAlignment="Center"
-                Grid.Column="1" 
-                FontSize="11"
-                FontWeight="Bold"
-                Foreground="#FFFFFFFF"
-                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                Text="{TemplateBinding Property=Content}"
-                />
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                                FontSize="11"
+                                FontWeight="Bold"
+                                Foreground="#FFFFFFFF"
+                                Text="{TemplateBinding Property=Content}" />
                         </Grid>
                     </Border>
                 </ControlTemplate>
@@ -316,8 +286,8 @@
         <Setter Property="FontFamily" Value="/QuanLyKhuCachLy;component/Resources/fonts/#Baloo" />
         <Setter Property="FontSize" Value="10" />
         <Setter Property="Foreground" Value="White" />
-        <Setter Property="Height" Value="20"/>
-        <Setter Property="Width" Value="175.5"/>
+        <Setter Property="Height" Value="20" />
+        <Setter Property="Width" Value="175.5" />
         <Setter Property="Template">
             <Setter.Value>
                 <!--<ControlTemplate TargetType="Button">
@@ -326,35 +296,35 @@
                     </Border>
                 </ControlTemplate>-->
                 <ControlTemplate TargetType="Button">
-                    <Border CornerRadius="4" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding Background}" BorderThickness="0,0,0,0" >
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding Background}"
+                        BorderThickness="0,0,0,0"
+                        CornerRadius="4">
 
-                        <Grid
-                VerticalAlignment="Center"
-                
-                >
+                        <Grid VerticalAlignment="Center">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="1*" />
                             </Grid.ColumnDefinitions>
 
                             <Image
-                        Margin="20, 0, 15, 0"
-                        Grid.Column="0"
-                        Width="11.5"
-                        Height="13"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        RenderTransformOrigin="0.5,0.5"
-                        Source="/QuanLyKhuCachLy;component/Resources/icons/empty-icon.png" />
+                                Grid.Column="0"
+                                Width="11.5"
+                                Height="13"
+                                Margin="20,0,15,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                RenderTransformOrigin="0.5,0.5"
+                                Source="/QuanLyKhuCachLy;component/Resources/icons/empty-icon.png" />
                             <TextBlock
-                VerticalAlignment="Center"
-                Grid.Column="1" 
-                FontSize="11"
-                FontWeight="Bold"
-                Foreground="#FFFFFFFF"
-                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                Text="{TemplateBinding Property=Content}"
-                />
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                                FontSize="11"
+                                FontWeight="Bold"
+                                Foreground="#FFFFFFFF"
+                                Text="{TemplateBinding Property=Content}" />
                         </Grid>
                     </Border>
                 </ControlTemplate>
