@@ -184,6 +184,12 @@
     <Compile Include="UserControl\AddRoom.xaml.cs">
       <DependentUpon>AddRoom.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\DeleteConfirmation.xaml.cs">
+      <DependentUpon>DeleteConfirmation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\EditRoom.xaml.cs">
+      <DependentUpon>EditRoom.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\InitialSettingSecondPageView.xaml.cs">
       <DependentUpon>InitialSettingSecondPageView.xaml</DependentUpon>
     </Compile>
@@ -191,6 +197,9 @@
       <DependentUpon>StaffWrapperTab.xaml</DependentUpon>
     </Compile>
     <Compile Include="ValidationRules\DateFormat.cs" />
+    <Compile Include="UserControl\QuarantinePersonFunctionMenu.xaml.cs">
+      <DependentUpon>QuarantinePersonFunctionMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\QuarantineRoom.xaml.cs">
       <DependentUpon>QuarantineRoom.xaml</DependentUpon>
     </Compile>
@@ -251,11 +260,19 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ResourceXAML\ConfirmationTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ResourceXAML\DashboardContentTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ResourceXAML\DataGridTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceXAML\FunctionMenuTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -311,6 +328,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControl\DeleteConfirmation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl\EditRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControl\InitialSettingFirstPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -354,6 +379,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControl\StaffWrapperTab.xaml" />
+    <Page Include="UserControl\QuarantinePersonFunctionMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControl\QuarantineRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -23,6 +23,8 @@
 
 
                 <ResourceDictionary Source="/ResourceXAML/DataGridTemplate.xaml" />
+                <ResourceDictionary Source="/ResourceXAML/FunctionMenuTemplate.xaml" />
+                <ResourceDictionary Source="/ResourceXAML/ConfirmationTemplate.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:DashboardViewModel}">
