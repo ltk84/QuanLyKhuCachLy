@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace QuanLyKhuCachLy.UserControl
 {
     /// <summary>
-    /// Interaction logic for EditRoom.xaml
+    /// Interaction logic for QuarantinePersonFunctionMenu.xaml
     /// </summary>
-    public partial class EditRoom
+    public partial class QuarantinePersonFunctionMenu
     {
-        public EditRoom()
+        public QuarantinePersonFunctionMenu()
         {
             InitializeComponent();
         }

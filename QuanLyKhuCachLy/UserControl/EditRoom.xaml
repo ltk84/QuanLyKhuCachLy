@@ -67,7 +67,6 @@
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập sức chứa"
                         MaxLength="9"
-                        PreviewTextInput="TextBox_PreviewTextInput_1"
                         Style="{StaticResource TextInputField}">
                         <TextBox.Text>
                             <Binding Path="QATestCycle" UpdateSourceTrigger="PropertyChanged">
