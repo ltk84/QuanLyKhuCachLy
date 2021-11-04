@@ -120,7 +120,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             _PersonInRoomViewModel = new QuarantinePersonInRoomViewModel(CurrentRoomID: RoomID);
 
-            ToAddManualCommand = new RelayCommand<Window>((p) =>
+            ToAddManualCommand = new RelayCommand<object>((p) =>
             {
                 return true;
             }, (p) =>

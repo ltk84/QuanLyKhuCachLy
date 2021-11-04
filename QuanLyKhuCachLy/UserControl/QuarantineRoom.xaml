@@ -8,9 +8,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    DataContext="{StaticResource RoomVM}"
     mc:Ignorable="d">
-    <StackPanel Width="Auto" Margin="25,45,0,0">
+    <StackPanel
+        Width="Auto"
+        Margin="25,45,0,0"
+        DataContext="{StaticResource RoomVM}">
         <TextBlock
             Grid.Row="0"
             Grid.Column="0"
@@ -22,8 +24,7 @@
             Height="32"
             Margin="0,20,0,0"
             HorizontalAlignment="Right"
-            Command="{Binding AddRoomManualCommand}"
-            CommandParameter="{Binding}"
+            Command="{Binding ToAddManualCommand}"
             Content="Thêm phòng"
             FontSize="12"
             Style="{StaticResource DashboardButton}" />
