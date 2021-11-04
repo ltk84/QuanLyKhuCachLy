@@ -88,8 +88,8 @@
                             <DataGridTemplateColumn.Header>
                                 <Button
                                     HorizontalAlignment="Right"
-                                    Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.AddSeverityCommand}"
-                                    CommandParameter="{Binding}"
+                                    Command="{Binding AddSeverityCommand}"
+                                    DataContext="{StaticResource SeverityVM}"
                                     Style="{StaticResource DataGridButton}">
                                     <materialDesign:PackIcon
                                         Width="16"
@@ -101,8 +101,9 @@
                                 <DataTemplate>
                                     <Button
                                         HorizontalAlignment="Right"
-                                        Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.RemoveSeverityCommand}"
+                                        Command="{Binding RemoveSeverityCommand}"
                                         CommandParameter="{Binding}"
+                                        DataContext="{StaticResource SeverityVM}"
                                         Style="{StaticResource DataGridButton}">
                                         <materialDesign:PackIcon
                                             Width="16"

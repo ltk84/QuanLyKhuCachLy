@@ -22,7 +22,7 @@
             Height="32"
             Margin="0,20,0,0"
             HorizontalAlignment="Right"
-            Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.AddCommand}"
+            Command="{Binding AddRoomManualCommand}"
             CommandParameter="{Binding}"
             Content="Thêm phòng"
             FontSize="12"
@@ -36,7 +36,7 @@
             CanUserReorderColumns="False"
             CanUserResizeColumns="False"
             CanUserResizeRows="False"
-            ItemsSource="{Binding QARoom}"
+            ItemsSource="{Binding RoomList}"
             SelectedItem="{Binding SelectedItem}">
             <DataGrid.Columns>
                 <materialDesign:DataGridTextColumn
@@ -73,11 +73,7 @@
                     IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button
-                                HorizontalAlignment="Right"
-                                Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.RemoveSeverityCommand}"
-                                CommandParameter="{Binding}"
-                                Style="{StaticResource DataGridButton}">
+                            <Button HorizontalAlignment="Right" Style="{StaticResource DataGridButton}">
                                 <materialDesign:PackIcon
                                     Width="16"
                                     Height="16"
