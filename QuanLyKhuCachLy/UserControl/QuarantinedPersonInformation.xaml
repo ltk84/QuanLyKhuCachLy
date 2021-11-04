@@ -1,113 +1,110 @@
-﻿<Window 
+﻿<Window
     x:Class="QuanLyKhuCachLy.UserControl.QuarantinedPersonInformation"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-    xmlns:local="clr-namespace:QuanLyKhuCachLy.UserControl"
-    mc:Ignorable="d" 
-    d:DesignHeight="768" d:DesignWidth="768"
     xmlns:control="clr-namespace:QuanLyKhuCachLy.UserControl"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy.UserControl"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    Name="QuarantinedPersonInformationScreen" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Name="QuarantinedPersonInformationScreen"
+    d:DesignHeight="768"
+    d:DesignWidth="768"
     DataContext="{StaticResource ResourceKey=PersonVM}"
-        >
-    <StackPanel
-         Margin="40,30,40,30"
-        >
-        <Grid
-            >
+    mc:Ignorable="d">
+    <StackPanel Margin="40,30,40,30">
+        <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
             <Image
-                        Margin="0, 0, 10, 0"
-                        Grid.Column="0"
-                        Width="24"
-                        Height="24"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Bottom"
-                        RenderTransformOrigin="0.5,0.5"
-                        Source="/Resources/icons/back-icon.png" />
+                Grid.Column="0"
+                Width="24"
+                Height="24"
+                Margin="0,0,10,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                RenderTransformOrigin="0.5,0.5"
+                Source="/Resources/icons/back-icon.png" />
             <TextBlock
+                Grid.Column="1"
                 VerticalAlignment="Center"
-                Grid.Column="1" 
+                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                 FontSize="14"
                 FontWeight="Regular"
-                Foreground="#FF434A54"
-                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                >
+                Foreground="#FF434A54">
                 DANH SÁCH NGƯỜI CÁCH LY
             </TextBlock>
         </Grid>
 
-        <Grid
-            Margin="0, 30, 0, 0"
-            >
+        <Grid Margin="0,30,0,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="1"
-                    VerticalAlignment="Bottom"
-                    Margin="0,0,60,0"
-                    Template="{StaticResource completed-button}"
-                    Content="Hoàn thành cách ly" Click="Button_Click"/>
+            <Button
+                Grid.Column="1"
+                Margin="0,0,60,0"
+                VerticalAlignment="Bottom"
+                Click="Button_Click"
+                Content="Hoàn thành cách ly"
+                Template="{StaticResource completed-button}" />
 
-            <Button Grid.Column="2"
-                    VerticalAlignment="Bottom"
-                    Margin="0,0,60,0"
-                    Template="{StaticResource delete-button}"
-                    Content="Xóa người cách ly" Click="Button_Click"/>
+            <Button
+                Grid.Column="2"
+                Margin="0,0,60,0"
+                VerticalAlignment="Bottom"
+                Click="Button_Click"
+                Content="Xóa người cách ly"
+                Template="{StaticResource delete-button}" />
 
-            <Button Grid.Column="3"
-                    VerticalAlignment="Bottom"
-                    Template="{StaticResource edit-button}"
-                    Content="Chỉnh sửa"/>
+            <Button
+                Grid.Column="3"
+                VerticalAlignment="Bottom"
+                Content="Chỉnh sửa"
+                Template="{StaticResource edit-button}" />
 
 
             <Grid>
-                <Grid.RowDefinitions  >
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
 
                 <TextBlock
-                VerticalAlignment="Center"
-                Grid.Row="0" 
-                FontSize="24"
-                FontWeight="Bold"
-                Foreground="#FF363636"
-                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans" Margin="0,-10,0,10"
-                >
-                THÔNG TIN
+                    Grid.Row="0"
+                    Margin="0,-10,0,10"
+                    VerticalAlignment="Center"
+                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Foreground="#FF363636">
+                    THÔNG TIN
                 </TextBlock>
 
                 <TextBlock
-                VerticalAlignment="Center"
-                Grid.Row="1" 
-                FontSize="20"
-                FontWeight="Light"
-                Foreground="#FF363636"
-                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                >
-                Người cách ly
+                    Grid.Row="1"
+                    VerticalAlignment="Center"
+                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                    FontSize="20"
+                    FontWeight="Light"
+                    Foreground="#FF363636">
+                    Người cách ly
                 </TextBlock>
             </Grid>
         </Grid>
         <Border
-             Width="681"
-             Height="534"
-             Margin="0,30,1,0"
-             HorizontalAlignment="Center"
-             VerticalAlignment="Center"
-             Background="White"
-            >
+            Width="681"
+            Height="534"
+            Margin="0,30,1,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Background="White">
             <StackPanel>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -117,17 +114,20 @@
                     <control:QuarantinedPersonInformationSecondPage Visibility="{Binding TabInformation2}" />
                 </Grid>
                 <Grid
-                        Grid.Row="3"
-                        Margin="100,0,0,0"
-                        VerticalAlignment="Bottom" Height="81">
+                    Grid.Row="3"
+                    Height="81"
+                    Margin="100,0,0,0"
+                    VerticalAlignment="Bottom">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition SharedSizeGroup="A" Width="152*" />
-                        <ColumnDefinition SharedSizeGroup="A" Width="300*" />
+                        <ColumnDefinition Width="152*" SharedSizeGroup="A" />
+                        <ColumnDefinition Width="300*" SharedSizeGroup="A" />
                     </Grid.ColumnDefinitions>
                     <StackPanel
-                            Margin="176.8,10,-0.2,0"
-                            HorizontalAlignment="Left"
-                            Orientation="Horizontal" Width="209" Grid.Column="1">
+                        Grid.Column="1"
+                        Width="209"
+                        Margin="176.8,10,-0.2,0"
+                        HorizontalAlignment="Left"
+                        Orientation="Horizontal">
                         <Grid>
                             <Button
                                 Width="136"
@@ -137,12 +137,12 @@
                                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
                                 Background="#FF434A54"
                                 BorderBrush="{x:Null}"
+                                Command="{Binding NextTabCommandInformation}"
                                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                                 FontSize="16"
                                 FontWeight="Bold"
-                                Visibility="{Binding TabInformation1}"
-                                Command="{Binding NextTabCommandInformation}"
-                                Style="{StaticResource MaterialDesignRaisedButton}">
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Visibility="{Binding TabInformation1}">
                                 <TextBlock Text="Trang sau" />
                             </Button>
                             <Button
@@ -153,25 +153,27 @@
                                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
                                 Background="#FF434A54"
                                 BorderBrush="{x:Null}"
+                                Command="{Binding PreviousTabCommandInformation}"
                                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                                 FontSize="16"
                                 FontWeight="Bold"
-                                Visibility="{Binding TabInformation2}"
-                            Command="{Binding PreviousTabCommandInformation}"
-                                Style="{StaticResource MaterialDesignRaisedButton}">
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Visibility="{Binding TabInformation2}">
                                 <TextBlock Text="Trang trước" />
                             </Button>
                         </Grid>
                         <TextBlock
-                                x:Name="TabIndicatorInformation"
-                                Margin="25,0,0,0"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Bottom"
-                                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                                FontSize="16"
-                                FontWeight="Bold"
-                                Foreground="#FF434A54"
-                                Text="{Binding TabPositionInformation}" Width="35" Height="35" />
+                            x:Name="TabIndicatorInformation"
+                            Width="35"
+                            Height="35"
+                            Margin="25,0,0,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Foreground="#FF434A54"
+                            Text="{Binding TabPositionInformation}" />
                     </StackPanel>
                 </Grid>
             </StackPanel>

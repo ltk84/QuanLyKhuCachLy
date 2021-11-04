@@ -20,8 +20,8 @@
                 <ResourceDictionary Source="/ResourceXAML/ListInfomationTemplate.xaml" />
                 <ResourceDictionary Source="/ResourceXAML/ModifiActionTemplate.xaml" />
                 <ResourceDictionary Source="/ResourceXAML/TableTemplate.xaml" />
-                
-                
+
+
                 <ResourceDictionary Source="/ResourceXAML/DataGridTemplate.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
@@ -33,9 +33,12 @@
                 <userControl:StaffWrapperTab />
             </DataTemplate>
 
-
             <DataTemplate DataType="{x:Type viewModel:QuarantineRoomViewModel}">
                 <userControl:QuarantineRoom />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:QuarantinePersonViewModel}">
+                <userControl:ListQuarantinedPerson />
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

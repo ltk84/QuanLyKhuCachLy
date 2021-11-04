@@ -17,7 +17,6 @@ namespace QuanLyKhuCachLy.ViewModel
         public DashboardViewModel DashboardVM { get; set; }
         public QuarantineRoomViewModel QuarantineRoomVM { get; set; }
         public QuarantinePersonViewModel quarantinePersonViewModel { get; set; }
-
         public StaffViewModel StaffVM { get; set; }
 
 
@@ -151,7 +150,7 @@ namespace QuanLyKhuCachLy.ViewModel
             DashboardVM = new DashboardViewModel();
             QuarantineRoomVM = new QuarantineRoomViewModel();
             StaffVM = new StaffViewModel();
-
+            quarantinePersonViewModel = new QuarantinePersonViewModel();
             ToDashboard();
         }
 
@@ -179,6 +178,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         private void ToPerson()
         {
+            CurrentView = quarantinePersonViewModel;
             _isOnDashboard = false;
             _isOnRoom = false;
             _isOnPerson = true;
