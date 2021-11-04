@@ -5,7 +5,7 @@
     xmlns:userControl="clr-namespace:QuanLyKhuCachLy.UserControl"
     xmlns:viewModel="clr-namespace:QuanLyKhuCachLy.ViewModel"
     ShutdownMode="OnMainWindowClose"
-    StartupUri="/UserControl/QuarantinePersonFunctionMenu.xaml">
+    StartupUri="/UserControl/DeleteConfirmation.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -19,6 +19,7 @@
                 <ResourceDictionary Source="/ResourceXAML/InputTemplate.xaml" />
                 <ResourceDictionary Source="/ResourceXAML/DataGridTemplate.xaml" />
                 <ResourceDictionary Source="/ResourceXAML/FunctionMenuTemplate.xaml" />
+                <ResourceDictionary Source="/ResourceXAML/ConfirmationTemplate.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:DashboardViewModel}">
