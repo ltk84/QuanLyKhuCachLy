@@ -1,0 +1,291 @@
+﻿<UserControl
+    x:Class="QuanLyKhuCachLy.CustomUserControl.QuarantineRoomInfomation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="705"
+    d:DesignWidth="757"
+    mc:Ignorable="d">
+    <StackPanel Margin="40,30,40,30" DataContext="{Binding RelativeSource={RelativeSource self}}">
+        <Grid Margin="0,0,0,17">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+
+            <Image
+                Grid.Column="0"
+                Width="24"
+                Height="24"
+                Margin="0,0,10,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                RenderTransformOrigin="0.5,0.5"
+                Source="/Resources/icons/back-icon.png" />
+            <TextBlock
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                FontSize="14"
+                FontWeight="Regular"
+                Foreground="#FF434A54">
+                DANH SÁCH PHÒNG
+            </TextBlock>
+
+
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+
+
+            <Grid Grid.Column="1" Margin="50,0,0,0">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+
+                </Grid.RowDefinitions>
+
+                <Button
+                    Grid.Row="2"
+                    Height="30"
+                    VerticalAlignment="Top"
+                    Background="#FFF27251"
+                    Style="{StaticResource delete-button-with-background}">
+                    Xóa phòng
+                </Button>
+
+                <Button
+                    Grid.Row="1"
+                    Height="30"
+                    Margin="0,0,0,26"
+                    Background="#FF1D9583"
+                    Style="{StaticResource complete-button-with-background}">
+                    Hoàn thành cách ly
+                </Button>
+
+                <Button
+                    Grid.Row="0"
+                    Height="30"
+                    Margin="0,0,0,26"
+                    Background="#FF2AC7D7"
+                    Style="{StaticResource clear-button-with-background}">
+                    Làm trống
+                </Button>
+            </Grid>
+
+            <Grid Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <Grid
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+
+                    </Grid.ColumnDefinitions>
+
+
+                    <TextBlock
+                        Grid.Column="0"
+                        VerticalAlignment="Bottom"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="22"
+                        FontWeight="Bold"
+                        Foreground="#FF363636">
+                        THÔNG TIN
+                    </TextBlock>
+
+                    <TextBlock
+                        Grid.Column="1"
+                        Margin="8,0,8,0"
+                        VerticalAlignment="Bottom"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="19"
+                        FontWeight="Regular"
+                        Foreground="#FF363636">
+                        Phòng A2
+                    </TextBlock>
+                </Grid>
+
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="0,0,0,10"
+                    Template="{StaticResource edit-button}">
+                    Chỉnh sửa
+                </Button>
+
+
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Style="{StaticResource list-key-text}"
+                    Text="Tên:" />
+
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    Style="{StaticResource list-value-text}"
+                    Text="A2" />
+
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Style="{StaticResource list-key-text}"
+                    Text="Sức chứa:" />
+
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    Style="{StaticResource list-value-text}"
+                    Text="12" />
+
+                <TextBlock
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Style="{StaticResource list-key-text}"
+                    Text="Loại phòng" />
+
+                <TextBlock
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    Style="{StaticResource list-value-text}"
+                    Text="F1" />
+
+
+
+
+            </Grid>
+
+
+
+
+        </Grid>
+        <Grid Margin="0,15,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+
+
+            <TextBlock
+                Grid.Column="0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                FontSize="20"
+                FontWeight="Bold"
+                Foreground="#FF363636">
+                Danh sách người cách ly tại phòng
+            </TextBlock>
+
+            <Button
+                Grid.Column="1"
+                Background="#FF434A54"
+                Style="{StaticResource AddObjectButton}">
+                Cập nhật danh sách
+            </Button>
+
+        </Grid>
+
+        <Border
+            Width="672"
+            Height="366"
+            Margin="0,13,0,0"
+            Background="Transparent"
+            BorderBrush="#1E434A54"
+            BorderThickness="1"
+            CornerRadius="8,8,3,3">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="46" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="460" />
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+
+
+                <Separator
+                    Grid.Row="1"
+                    Margin="0,0,0,0"
+                    Background="#1E434A54" />
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="0,0,0,0"
+                        Style="{StaticResource table-heading}"
+                        Text="Số thứ tự" />
+
+                    <TextBlock
+                        Grid.Column="1"
+                        Margin="0,0,0,0"
+                        Style="{StaticResource table-heading}"
+                        Text="Họ và tên " />
+
+                    <TextBlock
+                        Grid.Column="2"
+                        Margin="0,0,0,0"
+                        Style="{StaticResource table-heading}"
+                        Text="Ngày sinh" />
+
+                    <TextBlock
+                        Grid.Column="3"
+                        Margin="0,0,0,0"
+                        Style="{StaticResource table-heading}"
+                        Text="Quốc tịch" />
+
+
+                </Grid>
+
+
+                <!--<ScrollViewer Width="672" Grid.Row="2" HorizontalScrollBarVisibility="Hidden">
+                    <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <Rectangle Fill="White" Opacity="0.2" Width="672" Height="366"></Rectangle>
+                    </StackPanel>
+                </ScrollViewer>-->
+
+
+
+
+
+            </Grid>
+        </Border>
+
+
+    </StackPanel>
+</UserControl>

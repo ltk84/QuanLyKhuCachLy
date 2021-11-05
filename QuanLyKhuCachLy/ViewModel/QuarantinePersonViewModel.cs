@@ -1,10 +1,7 @@
 ﻿using QuanLyKhuCachLy.Model;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -485,7 +482,7 @@ namespace QuanLyKhuCachLy.ViewModel
             NextTabCommand = new RelayCommand<Window>((p) =>
             {
 
-                if (TabIndex < 3) return true;              
+                if (TabIndex < 3) return true;
                 return false;
             }, (p) =>
             {
@@ -786,7 +783,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     ButtonReturn = Visibility.Visible;
                     break;
                 default:
-                    
+
                     p.Close();
                     break;
             }
@@ -809,7 +806,7 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 case 1:
                     TabInformation1 = Visibility.Visible;
-                    TabInformation2 = Visibility.Hidden;                  
+                    TabInformation2 = Visibility.Hidden;
                     break;
                 default:
                     TabInformation1 = Visibility.Hidden;

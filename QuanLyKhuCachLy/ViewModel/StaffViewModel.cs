@@ -1,11 +1,8 @@
 ﻿using QuanLyKhuCachLy.Model;
-using QuanLyKhuCachLy.UserControl;
+using QuanLyKhuCachLy.CustomUserControl;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -13,6 +10,9 @@ namespace QuanLyKhuCachLy.ViewModel
 {
     public class StaffViewModel : BaseViewModel
     {
+        #region property
+
+        #region ui
         private Visibility _Tab1;
         public Visibility Tab1
         {
@@ -30,9 +30,9 @@ namespace QuanLyKhuCachLy.ViewModel
                 _Tab2 = value; OnPropertyChanged();
             }
         }
-     
-        #region property
+        #endregion
 
+        #region staff
         private string _Name;
         public string Name
         {
@@ -122,12 +122,14 @@ namespace QuanLyKhuCachLy.ViewModel
                 OnPropertyChanged();
             }
         }
+        #endregion
 
+        #region address
         private string _StreetName;
         public string StreetName { get => _StreetName; set { _StreetName = value; OnPropertyChanged(); } }
 
         private string _ApartmentNumber;
-        public string ApartmentNumber { get => _ApartmentNumber; set { ApartmentNumber = value; OnPropertyChanged(); } }
+        public string ApartmentNumber { get => _ApartmentNumber; set { _ApartmentNumber = value; OnPropertyChanged(); } }
 
         private string _SelectedProvince;
         public string SelectedProvince { get => _SelectedProvince; set { _SelectedProvince = value; OnPropertyChanged(); } }
@@ -137,6 +139,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         private string _SelectedDistrict;
         public string SelectedDistrict { get => _SelectedDistrict; set { _SelectedDistrict = value; OnPropertyChanged(); } }
+        #endregion
 
         #region List
 
@@ -218,7 +221,6 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #endregion
         public StaffViewModel()
-
         {
             Tab1 = Visibility.Visible;
             Tab2 = Visibility.Hidden;

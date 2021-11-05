@@ -1,0 +1,17 @@
+﻿<UserControl
+    x:Class="QuanLyKhuCachLy.CustomUserControl.StaffWrapperTab"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodel="clr-namespace:QuanLyKhuCachLy.ViewModel"
+    d:DesignHeight="705"
+    d:DesignWidth="757"
+    mc:Ignorable="d">
+
+    <Grid DataContext="{StaticResource StaffVM}">
+        <local:StaffList Visibility="{Binding Tab1}" />
+        <local:StaffDetailInfomation Visibility="{Binding Tab2}" />
+    </Grid>
+</UserControl>

@@ -1,10 +1,5 @@
 ﻿using QuanLyKhuCachLy.Model;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace QuanLyKhuCachLy.ViewModel
@@ -38,15 +33,15 @@ namespace QuanLyKhuCachLy.ViewModel
         public Severity SelectedItem
         {
             get { return _selectedItem; }
-            set 
-            { 
-                _selectedItem = value; 
-                OnPropertyChanged(); 
-                if (_selectedItem != null) 
+            set
+            {
+                _selectedItem = value;
+                OnPropertyChanged();
+                if (_selectedItem != null)
                 {
                     level = SelectedItem.level;
                     description = SelectedItem.description;
-                } 
+                }
             }
         }
 
@@ -66,7 +61,8 @@ namespace QuanLyKhuCachLy.ViewModel
         private void Init()
         {
             ListSeverity = new ObservableCollection<Severity>();
-            Severity firstSeverity = new Severity () {
+            Severity firstSeverity = new Severity()
+            {
                 level = "1",
                 description = "F1, F2"
             };

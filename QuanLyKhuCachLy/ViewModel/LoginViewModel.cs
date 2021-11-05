@@ -1,10 +1,6 @@
 ﻿using QuanLyKhuCachLy.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -14,7 +10,7 @@ namespace QuanLyKhuCachLy.ViewModel
     public class LoginViewModel : BaseViewModel
     {
         #region property
-        public bool  isLogin { get; set; }
+        public bool isLogin { get; set; }
 
         private string _username;
         public string username { get => _username; set { _username = value; OnPropertyChanged(); } }
@@ -51,7 +47,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #region methods
 
-        
+
 
         /// <summary>
         /// Xử lý đăng nhập
@@ -77,7 +73,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             // mã hóa mật khẩu
             string encodePassword = MD5Hash(Base64Encode(password));
-            
+
             var accountList = DataProvider.ins.db.Accounts;
 
             bool isCorrectPass = false;

@@ -1,10 +1,6 @@
 ﻿using QuanLyKhuCachLy.Model;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -96,6 +92,28 @@ namespace QuanLyKhuCachLy.ViewModel
         }
         #endregion
 
+        #region ui
+        private Visibility _Tab1;
+        public Visibility Tab1
+        {
+            get => _Tab1; set
+            {
+                _Tab1 = value; OnPropertyChanged();
+            }
+        }
+
+        private Visibility _Tab2;
+        public Visibility Tab2
+        {
+            get => _Tab2; set
+            {
+                _Tab2 = value; OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #endregion
+
         #region command
         public ICommand AddRoomManualCommand { get; set; }
         public ICommand AddRoomExcelCommand { get; set; }
@@ -111,10 +129,12 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand ToViewCommand { get; set; }
         #endregion
 
-        #endregion
 
         public QuarantineRoomViewModel()
         {
+            Tab1 = Visibility.Visible;
+            Tab2 = Visibility.Hidden;
+
             RoomList = new ObservableCollection<QuarantineRoom>(DataProvider.ins.db.QuarantineRooms);
             RoomLevelList = new ObservableCollection<Severity>(DataProvider.ins.db.Severities);
 
@@ -142,6 +162,14 @@ namespace QuanLyKhuCachLy.ViewModel
                 EditScreen.ShowDialog();
             });
 
+            ToViewCommand = new RelayCommand<Window>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                Tab1 = Visibility.Hidden;
+                Tab2 = Visibility.Visible;
+            });
 
             AddRoomManualCommand = new RelayCommand<object>((p) =>
             {

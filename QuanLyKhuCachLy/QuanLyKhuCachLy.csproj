@@ -78,6 +78,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CustomUserControl\QuarantineRoomWrapperTab.xaml.cs">
+      <DependentUpon>QuarantineRoomWrapperTab.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Demo.xaml.cs">
       <DependentUpon>Demo.xaml</DependentUpon>
     </Compile>
@@ -145,62 +148,62 @@
     <Compile Include="MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\AddStaffScreen.xaml.cs">
+    <Compile Include="CustomUserControl\AddStaffScreen.xaml.cs">
       <DependentUpon>AddStaffScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\QuarantineRoomInfomation.xaml.cs">
+    <Compile Include="CustomUserControl\QuarantineRoomInfomation.xaml.cs">
       <DependentUpon>QuarantineRoomInfomation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\AddQuarantinedPerson.xaml.cs">
+    <Compile Include="CustomUserControl\AddQuarantinedPerson.xaml.cs">
       <DependentUpon>AddQuarantinedPerson.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\AddQuarantinedPersonFirstPage.xaml.cs">
+    <Compile Include="CustomUserControl\AddQuarantinedPersonFirstPage.xaml.cs">
       <DependentUpon>AddQuarantinedPersonFirstPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\AddQuarantinedPersonSecondPage.xaml.cs">
+    <Compile Include="CustomUserControl\AddQuarantinedPersonSecondPage.xaml.cs">
       <DependentUpon>AddQuarantinedPersonSecondPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\AddQuarantinedPersonThirdPage.xaml.cs">
+    <Compile Include="CustomUserControl\AddQuarantinedPersonThirdPage.xaml.cs">
       <DependentUpon>AddQuarantinedPersonThirdPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\ListQuarantinedPerson.xaml.cs">
+    <Compile Include="CustomUserControl\ListQuarantinedPerson.xaml.cs">
       <DependentUpon>ListQuarantinedPerson.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\QuarantinedPersonInformation.xaml.cs">
+    <Compile Include="CustomUserControl\QuarantinedPersonInformation.xaml.cs">
       <DependentUpon>QuarantinedPersonInformation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\QuarantinedPersonInformationFirstPage.xaml.cs">
+    <Compile Include="CustomUserControl\QuarantinedPersonInformationFirstPage.xaml.cs">
       <DependentUpon>QuarantinedPersonInformationFirstPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\QuarantinedPersonInformationSecondPage.xaml.cs">
+    <Compile Include="CustomUserControl\QuarantinedPersonInformationSecondPage.xaml.cs">
       <DependentUpon>QuarantinedPersonInformationSecondPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\StaffDetailInfomation.xaml.cs">
+    <Compile Include="CustomUserControl\StaffDetailInfomation.xaml.cs">
       <DependentUpon>StaffDetailInfomation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\StaffList.xaml.cs">
+    <Compile Include="CustomUserControl\StaffList.xaml.cs">
       <DependentUpon>StaffList.xaml</DependentUpon>
-      </Compile>
-    <Compile Include="UserControl\AddRoom.xaml.cs">
+    </Compile>
+    <Compile Include="CustomUserControl\AddRoom.xaml.cs">
       <DependentUpon>AddRoom.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\DeleteConfirmation.xaml.cs">
+    <Compile Include="CustomUserControl\DeleteConfirmation.xaml.cs">
       <DependentUpon>DeleteConfirmation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\EditRoom.xaml.cs">
+    <Compile Include="CustomUserControl\EditRoom.xaml.cs">
       <DependentUpon>EditRoom.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\InitialSettingSecondPageView.xaml.cs">
+    <Compile Include="CustomUserControl\InitialSettingSecondPageView.xaml.cs">
       <DependentUpon>InitialSettingSecondPageView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\StaffWrapperTab.xaml.cs">
+    <Compile Include="CustomUserControl\StaffWrapperTab.xaml.cs">
       <DependentUpon>StaffWrapperTab.xaml</DependentUpon>
     </Compile>
     <Compile Include="ValidationRules\DateFormat.cs" />
-    <Compile Include="UserControl\QuarantinePersonFunctionMenu.xaml.cs">
+    <Compile Include="CustomUserControl\QuarantinePersonFunctionMenu.xaml.cs">
       <DependentUpon>QuarantinePersonFunctionMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\QuarantineRoom.xaml.cs">
+    <Compile Include="CustomUserControl\QuarantineRoom.xaml.cs">
       <DependentUpon>QuarantineRoom.xaml</DependentUpon>
     </Compile>
     <Compile Include="ValidationRules\NoSpecialChar.cs" />
@@ -208,7 +211,7 @@
     <Compile Include="ValidationRules\OnlyNumber.cs" />
     <Compile Include="ValidationRules\RequiredField.cs" />
     <Compile Include="ViewModel\DashboardViewModel.cs" />
-    <Compile Include="UserControl\Dashboard.xaml.cs">
+    <Compile Include="CustomUserControl\Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\BaseViewModel.cs" />
@@ -221,13 +224,13 @@
     <Compile Include="AuthenticationScreen.xaml.cs">
       <DependentUpon>AuthenticationScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\InitialSettingFirstPageView.xaml.cs">
+    <Compile Include="CustomUserControl\InitialSettingFirstPageView.xaml.cs">
       <DependentUpon>InitialSettingFirstPageView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\InitialSettingThirdPageView.xaml.cs">
+    <Compile Include="CustomUserControl\InitialSettingThirdPageView.xaml.cs">
       <DependentUpon>InitialSettingThirdPageView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\InitialSettingFourthPageView.xaml.cs">
+    <Compile Include="CustomUserControl\InitialSettingFourthPageView.xaml.cs">
       <DependentUpon>InitialSettingFourthPageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\QuarantinePersonInRoomViewModel.cs" />
@@ -236,6 +239,10 @@
     <Compile Include="ViewModel\ReportViewModel.cs" />
     <Compile Include="ViewModel\SeverityViewModel.cs" />
     <Compile Include="ViewModel\StaffViewModel.cs" />
+    <Page Include="CustomUserControl\QuarantineRoomWrapperTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Demo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -304,86 +311,86 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl\AddStaffScreen.xaml">
+    <Page Include="CustomUserControl\AddStaffScreen.xaml">
     </Page>
-    <Page Include="UserControl\AddQuarantinedPerson.xaml">
+    <Page Include="CustomUserControl\AddQuarantinedPerson.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl\AddQuarantinedPersonFirstPage.xaml">
+    <Page Include="CustomUserControl\AddQuarantinedPersonFirstPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl\AddQuarantinedPersonSecondPage.xaml">
+    <Page Include="CustomUserControl\AddQuarantinedPersonSecondPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl\AddQuarantinedPersonThirdPage.xaml">
+    <Page Include="CustomUserControl\AddQuarantinedPersonThirdPage.xaml">
     </Page>
-    <Page Include="UserControl\AddRoom.xaml">
+    <Page Include="CustomUserControl\AddRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl\Dashboard.xaml">
+    <Page Include="CustomUserControl\Dashboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl\DeleteConfirmation.xaml">
+    <Page Include="CustomUserControl\DeleteConfirmation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl\EditRoom.xaml">
+    <Page Include="CustomUserControl\EditRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl\InitialSettingFirstPageView.xaml">
+    <Page Include="CustomUserControl\InitialSettingFirstPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl\InitialSettingSecondPageView.xaml">
+    <Page Include="CustomUserControl\InitialSettingSecondPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl\InitialSettingThirdPageView.xaml">
+    <Page Include="CustomUserControl\InitialSettingThirdPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl\QuarantineRoomInfomation.xaml">
+    <Page Include="CustomUserControl\QuarantineRoomInfomation.xaml">
     </Page>
-    <Page Include="UserControl\ListQuarantinedPerson.xaml">
+    <Page Include="CustomUserControl\ListQuarantinedPerson.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl\QuarantinedPersonInformation.xaml">
+    <Page Include="CustomUserControl\QuarantinedPersonInformation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl\QuarantinedPersonInformationFirstPage.xaml">
+    <Page Include="CustomUserControl\QuarantinedPersonInformationFirstPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl\QuarantinedPersonInformationSecondPage.xaml">
+    <Page Include="CustomUserControl\QuarantinedPersonInformationSecondPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl\StaffDetailInfomation.xaml">
+    <Page Include="CustomUserControl\StaffDetailInfomation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl\StaffList.xaml">
+    <Page Include="CustomUserControl\StaffList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl\InitialSettingFourthPageView.xaml">
+    <Page Include="CustomUserControl\InitialSettingFourthPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl\StaffWrapperTab.xaml" />
-    <Page Include="UserControl\QuarantinePersonFunctionMenu.xaml">
+    <Page Include="CustomUserControl\StaffWrapperTab.xaml" />
+    <Page Include="CustomUserControl\QuarantinePersonFunctionMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl\QuarantineRoom.xaml">
+    <Page Include="CustomUserControl\QuarantineRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
