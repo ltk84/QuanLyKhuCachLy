@@ -13,6 +13,44 @@ namespace QuanLyKhuCachLy.ViewModel
 {
     public class StaffViewModel : BaseViewModel
     {
+
+        AddStaffScreen addStaffScreen;
+        private Visibility _AddStaffTab1;
+        private Visibility _AddStaffTab2;
+
+        public Visibility AddStaffTab1
+        {
+            get => _AddStaffTab1;
+            set
+            {
+                _AddStaffTab1 = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Visibility AddStaffTab2
+        {
+            get => _AddStaffTab2;
+            set
+            {
+                _AddStaffTab2 = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private String _TabPostion;
+        public String TabPosition
+        {
+            get => _TabPostion; set
+            {
+                _TabPostion = value; OnPropertyChanged();
+            }
+        }
+
+
+        public int AddStaffTabIndex { get; set; }
+
+
         private Visibility _Tab1;
         public Visibility Tab1
         {
@@ -127,7 +165,7 @@ namespace QuanLyKhuCachLy.ViewModel
         public string StreetName { get => _StreetName; set { _StreetName = value; OnPropertyChanged(); } }
 
         private string _ApartmentNumber;
-        public string ApartmentNumber { get => _ApartmentNumber; set { ApartmentNumber = value; OnPropertyChanged(); } }
+        public string ApartmentNumber { get => _ApartmentNumber; set { _ApartmentNumber = value; OnPropertyChanged(); } }
 
         private string _SelectedProvince;
         public string SelectedProvince { get => _SelectedProvince; set { _SelectedProvince = value; OnPropertyChanged(); } }
@@ -216,12 +254,20 @@ namespace QuanLyKhuCachLy.ViewModel
 
         public ICommand ToAddCommand { get; set; }
 
+        public ICommand AddStaffChangeTab { get; set; }
+
+        public ICommand NextStaffTabCommand { get; set; }
+        public ICommand PreviousStaffTabCommand { get; set; }
+
+
         #endregion
         public StaffViewModel()
 
         {
             Tab1 = Visibility.Visible;
             Tab2 = Visibility.Hidden;
+            SetDefaultAddStaff();
+
             StaffList = new ObservableCollection<Staff>(DataProvider.ins.db.Staffs);
 
             NationalityList = new ObservableCollection<string>() {
@@ -273,14 +319,116 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-                AddStaffScreen addStaffScreen = new AddStaffScreen();
+                addStaffScreen = new AddStaffScreen();
                 addStaffScreen.ShowDialog();
             });
 
+            PreviousStaffTabCommand = new RelayCommand<Window>((p) =>
+            {
+                if (AddStaffTabIndex > 1) return true;
+                return false;
+            }, (p) =>
+            {
+                HandleChangeTab(AddStaffTabIndex, "previous", addStaffScreen);
+            });
+
+
+            AddStaffChangeTab = new RelayCommand<object>((p) => { return true; }, (p) => { System.Console.WriteLine("This is my message");  System.Console.WriteLine(p); });
+            NextStaffTabCommand = new RelayCommand<Window>((p) =>
+            {
+
+                if (AddStaffTabIndex < 2) return true;
+                else
+                {
+                    Address QAreaAddress = new Address()
+                    {
+                        province = SelectedProvince,
+                        district = SelectedDistrict,
+                        apartmentNumber = ApartmentNumber,
+                        streetName = StreetName,
+                        ward = SelectedWard
+                    };
+
+                    Address ManagerAddress = new Address()
+                    {
+                        province = SelectedProvince,
+                        district = SelectedDistrict,
+                        apartmentNumber = ApartmentNumber,
+                        streetName = StreetName,
+                        ward = SelectedWard
+                    };
+
+                    Staff Manager = new Staff()
+                    {
+                        citizenID = CitizenID,
+                       dateOfBirth = (DateTime)DateOfBirth,
+                        department = Department,
+                        healthInsuranceID = HealthInsuranceID,
+                        jobTitle = JobTitle,
+                        name = Name,
+                       nationality = SelectedNationality,
+                        phoneNumber = PhoneNumber,
+                        sex = SelectedSex,
+                    };
+
+                    
+
+                    if (QAreaAddress.CheckValidateProperty() && ManagerAddress.CheckValidateProperty() && Manager.CheckValidateProperty() )
+                    {
+                        return true;
+                    }
+
+                }
+                return false;
+            }, (p) =>
+            {
+                HandleChangeTab(AddStaffTabIndex, "next",addStaffScreen);
+            });
 
         }
 
         #region method
+
+        void HandleChangeTab(int index, string action, Window p)
+        {
+            if (action == "next")
+            {
+                AddStaffTabIndex++;
+            }
+            else
+            {
+                AddStaffTabIndex--;
+            }
+            if (AddStaffTabIndex <= 2)
+                TabPosition = $"{AddStaffTabIndex}/2";
+
+            switch (AddStaffTabIndex)
+            {
+                case 1:
+                    AddStaffTab1 = Visibility.Visible;
+                    AddStaffTab2 = Visibility.Hidden;
+                    break;
+                case 2:
+                    AddStaffTab1 = Visibility.Hidden;
+                    AddStaffTab2 = Visibility.Visible;
+                    break;
+                default:
+                    AddStaff();
+                    p.Close();
+                    SetDefaultAddStaff();
+
+                    break;
+            }
+
+        }
+
+        void SetDefaultAddStaff()
+        {
+            AddStaffTabIndex = 1;
+            AddStaffTab1 = Visibility.Visible;
+            AddStaffTab2 = Visibility.Hidden;
+            TabPosition = "1/2";
+        }
 
         void AddStaff()
         {

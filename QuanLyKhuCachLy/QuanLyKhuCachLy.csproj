@@ -55,8 +55,10 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -145,8 +147,14 @@
     <Compile Include="MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\AddStaffFirstScreen.xaml.cs">
+      <DependentUpon>AddStaffFirstScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\AddStaffScreen.xaml.cs">
       <DependentUpon>AddStaffScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddStaffSecondScreen.xaml.cs">
+      <DependentUpon>AddStaffSecondScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControl\QuarantineRoomInfomation.xaml.cs">
       <DependentUpon>QuarantineRoomInfomation.xaml</DependentUpon>
@@ -180,7 +188,7 @@
     </Compile>
     <Compile Include="UserControl\StaffList.xaml.cs">
       <DependentUpon>StaffList.xaml</DependentUpon>
-      </Compile>
+    </Compile>
     <Compile Include="UserControl\AddRoom.xaml.cs">
       <DependentUpon>AddRoom.xaml</DependentUpon>
     </Compile>
@@ -287,6 +295,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControl\AddStaffFirstScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControl\AddStaffScreen.xaml">
     </Page>
     <Page Include="UserControl\AddQuarantinedPerson.xaml">
@@ -304,6 +316,10 @@
     <Page Include="UserControl\AddQuarantinedPersonThirdPage.xaml">
     </Page>
     <Page Include="UserControl\AddRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl\AddStaffSecondScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
