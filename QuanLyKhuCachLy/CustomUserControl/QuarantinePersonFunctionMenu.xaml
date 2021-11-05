@@ -6,12 +6,16 @@
     xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Name="PersonCM"
     Width="276"
     Height="332"
     mc:Ignorable="d">
     <Border Padding="0,16,0,16" Style="{StaticResource RecommendationField}">
         <StackPanel DataContext="{StaticResource RoomVM}">
-            <Button Command="{Binding ToViewCommand}" Style="{StaticResource MenuButton}">
+            <Button
+                Command="{Binding ToViewCommand}"
+                CommandParameter="{Binding ElementName=PersonCM}"
+                Style="{StaticResource MenuButton}">
                 <StackPanel Style="{StaticResource MenuStackPanel}">
                     <materialDesign:PackIcon Kind="AccountDetailsOutline" Style="{StaticResource MenuIcon}" />
                     <TextBlock Style="{StaticResource MenuText}">

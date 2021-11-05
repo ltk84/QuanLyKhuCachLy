@@ -1,4 +1,5 @@
-﻿using QuanLyKhuCachLy.Model;
+﻿using QuanLyKhuCachLy.CustomUserControl;
+using QuanLyKhuCachLy.Model;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -127,6 +128,7 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand ToEditCommand { get; set; }
         public ICommand ToDeleteCommand { get; set; }
         public ICommand ToViewCommand { get; set; }
+        public ICommand ToMainCommand { get; set; }
         #endregion
 
 
@@ -162,13 +164,24 @@ namespace QuanLyKhuCachLy.ViewModel
                 EditScreen.ShowDialog();
             });
 
-            ToViewCommand = new RelayCommand<Window>((p) =>
+            ToViewCommand = new RelayCommand<object>((p) =>
             {
                 return true;
             }, (p) =>
             {
                 Tab1 = Visibility.Hidden;
                 Tab2 = Visibility.Visible;
+                QuarantinePersonFunctionMenu ContextMenu = (QuarantinePersonFunctionMenu)p;
+
+            });
+
+            ToMainCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                Tab2 = Visibility.Hidden;
+                Tab1 = Visibility.Visible;
             });
 
             AddRoomManualCommand = new RelayCommand<object>((p) =>
