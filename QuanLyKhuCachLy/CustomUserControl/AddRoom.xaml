@@ -95,7 +95,6 @@
                         Foreground="#FF434A54">
                         Loại phòng
                     </TextBlock>
-                    <!--  CHỗ này đáng lẻ là combbox nên binding lại sau  -->
                     <ComboBox
                         DisplayMemberPath="level"
                         ItemsSource="{Binding RoomLevelList}"

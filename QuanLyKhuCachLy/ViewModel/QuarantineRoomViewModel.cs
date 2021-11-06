@@ -1,4 +1,5 @@
-﻿using QuanLyKhuCachLy.CustomUserControl;
+﻿using MaterialDesignThemes.Wpf;
+using QuanLyKhuCachLy.CustomUserControl;
 using QuanLyKhuCachLy.Model;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -160,7 +161,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-                DemoEdit EditScreen = new DemoEdit();
+                EditRoom EditScreen = new EditRoom();
                 SetSelectedItemToProperty();
                 EditScreen.ShowDialog();
             });
@@ -198,7 +199,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 p.Close();
             });
 
-            EditRoomCommand = new RelayCommand<object>((p) =>
+            EditRoomCommand = new RelayCommand<Window>((p) =>
             {
                 if (RoomSelectedSeverity == null)
                     return false;
@@ -208,6 +209,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }, (p) =>
             {
                 EditQuarantineRoom();
+                p.Close();
             });
 
             DeleteRoomCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
