@@ -12,8 +12,8 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #region property
         #region list
-        private ObservableCollection<QuarantineRoom> _RoomList;
-        public ObservableCollection<QuarantineRoom> RoomList
+        private ObservableCollection<Model.QuarantineRoom> _RoomList;
+        public ObservableCollection<Model.QuarantineRoom> RoomList
         {
             get => _RoomList; set
             {
@@ -37,8 +37,8 @@ namespace QuanLyKhuCachLy.ViewModel
         private QuarantinePersonInRoomViewModel _PersonInRoomViewModel;
         #endregion
 
-        private QuarantineRoom _SelectedItem;
-        public QuarantineRoom SelectedItem
+        private Model.QuarantineRoom _SelectedItem;
+        public Model.QuarantineRoom SelectedItem
         {
             get => _SelectedItem; set
             {
@@ -137,7 +137,7 @@ namespace QuanLyKhuCachLy.ViewModel
             Tab1 = Visibility.Visible;
             Tab2 = Visibility.Hidden;
 
-            RoomList = new ObservableCollection<QuarantineRoom>(DataProvider.ins.db.QuarantineRooms);
+            RoomList = new ObservableCollection<Model.QuarantineRoom>(DataProvider.ins.db.QuarantineRooms);
             RoomLevelList = new ObservableCollection<Severity>(DataProvider.ins.db.Severities);
 
             _PersonInRoomViewModel = new QuarantinePersonInRoomViewModel(CurrentRoomID: RoomID);
@@ -171,7 +171,6 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 Tab1 = Visibility.Hidden;
                 Tab2 = Visibility.Visible;
-                QuarantinePersonFunctionMenu ContextMenu = (QuarantinePersonFunctionMenu)p;
 
             });
 
@@ -188,7 +187,7 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 if (RoomSelectedSeverity == null)
                     return false;
-                QuarantineRoom QuarantineRoom = new QuarantineRoom { displayName = RoomDisplayName, capacity = RoomCapacity, level = RoomSelectedSeverity.level };
+                Model.QuarantineRoom QuarantineRoom = new Model.QuarantineRoom { displayName = RoomDisplayName, capacity = RoomCapacity, level = RoomSelectedSeverity.level };
                 if (QuarantineRoom.CheckValidateProperty()) return true;
                 return false;
             }, (p) =>
@@ -200,7 +199,7 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 if (RoomSelectedSeverity == null)
                     return false;
-                QuarantineRoom QuarantineRoom = new QuarantineRoom { displayName = RoomDisplayName, capacity = RoomCapacity, level = RoomSelectedSeverity.level };
+                Model.QuarantineRoom QuarantineRoom = new Model.QuarantineRoom { displayName = RoomDisplayName, capacity = RoomCapacity, level = RoomSelectedSeverity.level };
                 if (QuarantineRoom.CheckValidateProperty()) return true;
                 return false;
             }, (p) =>
@@ -224,7 +223,7 @@ namespace QuanLyKhuCachLy.ViewModel
         void AddQuarantineRoom()
         {
             // List Severity được tạo từ trước nên không cần thêm
-            QuarantineRoom QuarantineRoom = new QuarantineRoom { displayName = RoomDisplayName, capacity = RoomCapacity, level = RoomSelectedSeverity.level };
+            Model.QuarantineRoom QuarantineRoom = new Model.QuarantineRoom { displayName = RoomDisplayName, capacity = RoomCapacity, level = RoomSelectedSeverity.level };
 
             DataProvider.ins.db.QuarantineRooms.Add(QuarantineRoom);
             DataProvider.ins.db.SaveChanges();
@@ -234,7 +233,7 @@ namespace QuanLyKhuCachLy.ViewModel
         //untest
         void EditQuarantineRoom()
         {
-            QuarantineRoom QuarantineRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+            Model.QuarantineRoom QuarantineRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == SelectedItem.id).FirstOrDefault();
             QuarantineRoom.displayName = RoomDisplayName;
             QuarantineRoom.capacity = RoomCapacity;
             QuarantineRoom.level = RoomSelectedSeverity.level;

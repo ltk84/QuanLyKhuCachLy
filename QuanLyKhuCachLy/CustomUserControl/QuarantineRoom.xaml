@@ -37,8 +37,11 @@
             CanUserReorderColumns="False"
             CanUserResizeColumns="False"
             CanUserResizeRows="False"
+            IsReadOnly="True"
             ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.RoomList}"
-            SelectedItem="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.SelectedItem}">
+            SelectedItem="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.SelectedItem}"
+            SelectionMode="Single"
+            SelectionUnit="FullRow">
             <DataGrid.Columns>
                 <materialDesign:DataGridTextColumn
                     Binding="{Binding id}"
@@ -83,7 +86,7 @@
                                     <ContextMenu>
                                         <ContextMenu.Template>
                                             <ControlTemplate>
-                                                <local:QuarantinePersonFunctionMenu />
+                                                <local:QuarantineRoomFunctionMenu />
                                             </ControlTemplate>
                                         </ContextMenu.Template>
                                     </ContextMenu>

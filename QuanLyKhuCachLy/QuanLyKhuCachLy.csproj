@@ -78,6 +78,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CustomUserControl\QuarantineRoomFunctionMenu.xaml.cs">
+      <DependentUpon>QuarantineRoomFunctionMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomUserControl\QuarantineRoomWrapperTab.xaml.cs">
       <DependentUpon>QuarantineRoomWrapperTab.xaml</DependentUpon>
     </Compile>
@@ -239,6 +242,10 @@
     <Compile Include="ViewModel\ReportViewModel.cs" />
     <Compile Include="ViewModel\SeverityViewModel.cs" />
     <Compile Include="ViewModel\StaffViewModel.cs" />
+    <Page Include="CustomUserControl\QuarantineRoomFunctionMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomUserControl\QuarantineRoomWrapperTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
