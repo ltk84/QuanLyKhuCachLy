@@ -148,8 +148,8 @@ namespace QuanLyKhuCachLy.ViewModel
             }, (p) =>
             {
                 ClearData();
-                DemoAdd AddScreen = new DemoAdd();
-                AddScreen.ShowDialog();
+                AddRoom AddRoomScreen = new AddRoom();
+                AddRoomScreen.ShowDialog();
                 ClearData();
             });
 

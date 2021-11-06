@@ -24,10 +24,32 @@
             Height="32"
             Margin="0,20,0,0"
             HorizontalAlignment="Right"
-            Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ToAddManualCommand}"
             Content="Thêm phòng"
             FontSize="12"
-            Style="{StaticResource DashboardButton}" />
+            Style="{StaticResource DashboardButton}">
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="Button.Click">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="ContextMenu.IsOpen">
+                                    <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="True" />
+                                </BooleanAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Button.Triggers>
+            <Button.ContextMenu>
+                <ContextMenu>
+                    <ContextMenu.Template>
+                        <ControlTemplate>
+                            <local:AddRoomFunctionMenu />
+                        </ControlTemplate>
+                    </ContextMenu.Template>
+                </ContextMenu>
+            </Button.ContextMenu>
+        </Button>
         <DataGrid
             Height="460"
             Margin="0,20,0,20"
