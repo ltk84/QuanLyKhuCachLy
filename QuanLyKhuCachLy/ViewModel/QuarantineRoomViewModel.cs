@@ -3,6 +3,7 @@ using QuanLyKhuCachLy.Model;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace QuanLyKhuCachLy.ViewModel
@@ -183,16 +184,18 @@ namespace QuanLyKhuCachLy.ViewModel
                 Tab1 = Visibility.Visible;
             });
 
-            AddRoomManualCommand = new RelayCommand<object>((p) =>
+            AddRoomManualCommand = new RelayCommand<Window>((p) =>
             {
                 if (RoomSelectedSeverity == null)
                     return false;
                 Model.QuarantineRoom QuarantineRoom = new Model.QuarantineRoom { displayName = RoomDisplayName, capacity = RoomCapacity, level = RoomSelectedSeverity.level };
                 if (QuarantineRoom.CheckValidateProperty()) return true;
                 return false;
+
             }, (p) =>
             {
                 AddQuarantineRoom();
+                p.Close();
             });
 
             EditRoomCommand = new RelayCommand<object>((p) =>

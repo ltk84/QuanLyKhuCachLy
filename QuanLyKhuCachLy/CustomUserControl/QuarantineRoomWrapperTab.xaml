@@ -7,8 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="600"
     d:DesignWidth="900"
+    DataContext="{StaticResource RoomVM}"
     mc:Ignorable="d">
-    <Grid DataContext="{StaticResource RoomVM}">
+    <Grid>
         <local:QuarantineRoom Visibility="{Binding Tab1}" />
         <local:QuarantineRoomInfomation Visibility="{Binding Tab2}" />
     </Grid>

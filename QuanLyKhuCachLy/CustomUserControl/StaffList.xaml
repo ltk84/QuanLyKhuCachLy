@@ -6,11 +6,13 @@
     xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodel="clr-namespace:QuanLyKhuCachLy.ViewModel"
     xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
     d:DesignHeight="705"
     d:DesignWidth="757"
     mc:Ignorable="d">
-    <StackPanel Margin="40,30,40,30" DataContext="{Binding RelativeSource={RelativeSource self}}">
+    <StackPanel Margin="40,30,40,30">
+
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
@@ -27,7 +29,7 @@
             <Button
                 Grid.Column="1"
                 Background="#FF1D9583"
-                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ToAddCommand}"
+                Command="{Binding ToAddCommand}"
                 Content="Thêm nhân viên"
                 Style="{StaticResource AddObjectButton}" />
 

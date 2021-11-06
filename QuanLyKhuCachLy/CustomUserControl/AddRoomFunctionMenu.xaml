@@ -13,8 +13,8 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
     <Border Padding="0,16,0,16" Style="{StaticResource RecommendationField}">
-        <StackPanel DataContext="{Binding RelativeSource={RelativeSource self}}">
-            <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ToAddManualCommand}" Style="{StaticResource MenuButton}">
+        <StackPanel>
+            <Button Command="{Binding ToAddManualCommand}" Style="{StaticResource MenuButton}">
                 <StackPanel Style="{StaticResource MenuStackPanel}">
                     <materialDesign:PackIcon Kind="PencilOutline" Style="{StaticResource MenuIcon}" />
                     <TextBlock Style="{StaticResource MenuText}">
@@ -22,7 +22,7 @@
                     </TextBlock>
                 </StackPanel>
             </Button>
-            <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ToAddExcelCommand}" Style="{StaticResource MenuButton}">
+            <Button Command="{Binding ToAddExcelCommand}" Style="{StaticResource MenuButton}">
                 <StackPanel Style="{StaticResource MenuStackPanel}">
                     <materialDesign:PackIcon Kind="FileExcelOutline" Style="{StaticResource MenuIcon}" />
                     <TextBlock Style="{StaticResource MenuText}">

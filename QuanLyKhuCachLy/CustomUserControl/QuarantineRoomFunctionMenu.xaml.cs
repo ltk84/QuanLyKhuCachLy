@@ -24,5 +24,7 @@ namespace QuanLyKhuCachLy.CustomUserControl
         {
             InitializeComponent();
         }
+
+        
     }
 }

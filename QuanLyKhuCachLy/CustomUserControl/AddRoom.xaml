@@ -7,12 +7,13 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
+    Name="AddRoomManualScreen"
     Title="AddRoom"
     Width="552.747"
     Height="552.857"
     Background="{x:Null}"
+    DataContext="{StaticResource RoomVM}"
     WindowStartupLocation="CenterScreen"
-    WindowState="Minimized"
     WindowStyle="None"
     mc:Ignorable="d">
     <Border Style="{StaticResource RecommendationField}">
@@ -52,7 +53,10 @@
                         MaxLength="30"
                         Style="{StaticResource TextInputField}">
                         <TextBox.Text>
-                            <Binding Path="QAname" UpdateSourceTrigger="PropertyChanged">
+                            <Binding
+                                Path="RoomDisplayName"
+                                UpdateSourceTrigger="PropertyChanged"
+                                ValidatesOnExceptions="True">
                                 <Binding.ValidationRules>
                                     <vr:RequiredField />
                                     <vr:NoSpecialChar />
@@ -72,12 +76,12 @@
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập sức chứa"
                         MaxLength="9"
+                        PreviewTextInput="TextBox_PreviewTextInput"
                         Style="{StaticResource TextInputField}">
                         <TextBox.Text>
-                            <Binding Path="QATestCycle" UpdateSourceTrigger="PropertyChanged">
+                            <Binding Path="RoomCapacity" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <vr:RequiredField />
-                                    <vr:NumberField Min="1" />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -91,18 +95,19 @@
                         Foreground="#FF434A54">
                         Loại phòng
                     </TextBlock>
-                    <TextBox
-                        materialDesign:HintAssist.Hint="Nhập loại phòng"
-                        MaxLength="20"
-                        Style="{StaticResource TextInputField}">
-                        <TextBox.Text>
-                            <Binding Path="QAApartmentNumber" UpdateSourceTrigger="PropertyChanged">
+                    <!--  CHỗ này đáng lẻ là combbox nên binding lại sau  -->
+                    <ComboBox
+                        DisplayMemberPath="level"
+                        ItemsSource="{Binding RoomLevelList}"
+                        Style="{StaticResource ComboBoxField}">
+                        <ComboBox.SelectedItem>
+                            <Binding Path="RoomSelectedSeverity" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <vr:RequiredField />
                                 </Binding.ValidationRules>
                             </Binding>
-                        </TextBox.Text>
-                    </TextBox>
+                        </ComboBox.SelectedItem>
+                    </ComboBox>
                 </StackPanel>
                 <StackPanel
                     Grid.Row="3"
@@ -117,6 +122,8 @@
                         materialDesign:ShadowAssist.ShadowDepth="Depth0"
                         Background="#FF434A54"
                         BorderBrush="{x:Null}"
+                        Command="{Binding CancelCommand}"
+                        CommandParameter="{Binding ElementName=AddRoomManualScreen}"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         FontWeight="Bold"
@@ -132,6 +139,8 @@
                         materialDesign:ShadowAssist.ShadowDepth="Depth0"
                         Background="#FF1D9583"
                         BorderBrush="{x:Null}"
+                        Command="{Binding AddRoomManualCommand}"
+                        CommandParameter="{Binding ElementName=AddRoomManualScreen}"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="12"
                         FontWeight="Bold"
@@ -139,6 +148,7 @@
                         <TextBlock FontSize="16">
                             Thêm
                         </TextBlock>
+
                     </Button>
                 </StackPanel>
             </Grid>

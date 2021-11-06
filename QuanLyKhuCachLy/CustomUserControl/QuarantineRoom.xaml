@@ -9,10 +9,7 @@
     Width="750"
     d:DesignHeight="450"
     mc:Ignorable="d">
-    <StackPanel
-        Width="Auto"
-        Margin="25,45,0,0"
-        DataContext="{Binding RelativeSource={RelativeSource self}}">
+    <StackPanel Width="Auto" Margin="25,45,0,0">
         <TextBlock
             Grid.Row="0"
             Grid.Column="0"
@@ -26,20 +23,9 @@
             HorizontalAlignment="Right"
             Content="Thêm phòng"
             FontSize="12"
+            PreviewMouseDown="Button_PreviewMouseDown"
             Style="{StaticResource DashboardButton}">
-            <Button.Triggers>
-                <EventTrigger RoutedEvent="Button.Click">
-                    <EventTrigger.Actions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="ContextMenu.IsOpen">
-                                    <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="True" />
-                                </BooleanAnimationUsingKeyFrames>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger.Actions>
-                </EventTrigger>
-            </Button.Triggers>
+
             <Button.ContextMenu>
                 <ContextMenu>
                     <ContextMenu.Template>
@@ -60,8 +46,8 @@
             CanUserResizeColumns="False"
             CanUserResizeRows="False"
             IsReadOnly="True"
-            ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.RoomList}"
-            SelectedItem="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.SelectedItem}"
+            ItemsSource="{Binding RoomList}"
+            SelectedItem="{Binding SelectedItem}"
             SelectionMode="Single"
             SelectionUnit="FullRow">
             <DataGrid.Columns>
@@ -99,7 +85,10 @@
                     IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button HorizontalAlignment="Right" Style="{StaticResource DataGridButton}">
+                            <Button
+                                HorizontalAlignment="Right"
+                                PreviewMouseUp="Button_PreviewMouseUp"
+                                Style="{StaticResource DataGridButton}">
                                 <materialDesign:PackIcon
                                     Width="16"
                                     Height="16"
@@ -113,6 +102,7 @@
                                         </ContextMenu.Template>
                                     </ContextMenu>
                                 </Button.ContextMenu>
+
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
