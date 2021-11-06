@@ -1,4 +1,5 @@
-﻿using QuanLyKhuCachLy.Model;
+﻿using QuanLyKhuCachLy.CustomUserControl;
+using QuanLyKhuCachLy.Model;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -18,6 +19,22 @@ namespace QuanLyKhuCachLy.ViewModel
         private Visibility _TabInformation2;
         private Visibility _Tab3;
         private Visibility _ButtonReturn;
+        private Visibility _TabList;
+        private Visibility _TabInformation;
+        public Visibility TabList
+        {
+            get => _TabList; set
+            {
+                _TabList = value; OnPropertyChanged();
+            }
+        }
+        public Visibility TabInformation
+        {
+            get => _TabInformation; set
+            {
+                _TabInformation = value; OnPropertyChanged();
+            }
+        }
         public Visibility ButtonReturn
         {
             get => _ButtonReturn; set
@@ -449,6 +466,8 @@ namespace QuanLyKhuCachLy.ViewModel
         #endregion
         public QuarantinePersonViewModel()
         {
+            TabList = Visibility.Visible;
+            TabInformation = Visibility.Hidden;
             Tab1 = Visibility.Visible;
             Tab2 = Visibility.Hidden;
             Tab3 = Visibility.Hidden;
@@ -525,10 +544,12 @@ namespace QuanLyKhuCachLy.ViewModel
 
             ToAddCommand = new RelayCommand<Window>((p) =>
             {
+
                 return true;
             }, (p) =>
             {
-
+                AddQuarantinedPerson addQuarantinePerson = new AddQuarantinedPerson();
+                addQuarantinePerson.ShowDialog();
             });
 
             ToEditCommand = new RelayCommand<Window>((p) =>
