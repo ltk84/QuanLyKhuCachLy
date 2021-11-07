@@ -14,6 +14,7 @@ namespace QuanLyKhuCachLy.ViewModel
     public class StaffViewModel : BaseViewModel
     {
 
+       
         AddStaffScreen addStaffScreen;
         private Visibility _AddStaffTab1;
         private Visibility _AddStaffTab2;
