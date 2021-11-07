@@ -10,7 +10,7 @@
              d:DesignHeight="705" d:DesignWidth="757">
     
     <Grid>
-        <control:StaffList Panel.ZIndex="-1" Visibility="{Binding Tab1}"/>
-        <control:StaffDetailInfomation Visibility="{Binding Tab2}"/>
+        <control:StaffList  Visibility="Visible"/>
+        <control:StaffDetailInfomation Visibility="Hidden"/>
     </Grid>
 </UserControl>

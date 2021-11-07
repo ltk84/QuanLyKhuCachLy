@@ -10,7 +10,7 @@
     <viewmodel:QuarantinePersonViewModel x:Key="PersonVM" />
     <viewmodel:QuarantineRoomViewModel x:Key="RoomVM" />
     <viewmodel:ReportViewModel x:Key="ReportVM" />
-    <viewmodel:StaffViewModel x:Key="StaffVM" />
+    <viewmodel:StaffViewModel x:Key="StaffVM"/>
     <viewmodel:InjectionRecordViewModel x:Key="InjectionVM" />
     <viewmodel:DestinationHistoryViewModel x:Key="DestinationVM" />
     <viewmodel:SeverityViewModel x:Key="SeverityVM" />

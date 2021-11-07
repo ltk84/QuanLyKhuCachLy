@@ -30,6 +30,9 @@
                 Background="#FF1D9583"
                 Command="{Binding ToAddCommand}"
                 Content="Thêm nhân viên"
+                Height="35"
+                Width="140"
+                FontSize="16"
                 Style="{StaticResource AddObjectButton}" />
 
         </Grid>
@@ -43,7 +46,7 @@
         </TextBlock>
         <TextBox
             Width="350"
-            Height="35"
+            Height="34"
             Margin="0,4,0,0"
             HorizontalAlignment="Left"
             materialDesign:HintAssist.Hint="Nhập bất kì để tìm kiếm"
@@ -51,13 +54,11 @@
             Style="{StaticResource TextInputField}" />
 
         <Border
-            Width="672"
             Height="520"
             Margin="0,13,0,0"
-            Background="Transparent"
-            BorderBrush="#1E434A54"
+            BorderBrush="#FF434A54"
             BorderThickness="1"
-            CornerRadius="8,8,3,3">
+            CornerRadius="8,8,8,8">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="46" />
@@ -73,7 +74,7 @@
                 <Separator
                     Grid.Row="1"
                     Margin="0,0,0,0"
-                    Background="#1E434A54" />
+                    Background="#FF434A54" />
 
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>

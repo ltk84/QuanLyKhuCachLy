@@ -17,6 +17,7 @@ namespace QuanLyKhuCachLy.ViewModel
         AddStaffScreen addStaffScreen;
         private Visibility _AddStaffTab1;
         private Visibility _AddStaffTab2;
+        private Visibility _AddStaffPreviousBtn;
 
         public Visibility AddStaffTab1
         {
@@ -24,6 +25,16 @@ namespace QuanLyKhuCachLy.ViewModel
             set
             {
                 _AddStaffTab1 = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Visibility AddStaffPreviousBtn
+        {
+            get => _AddStaffPreviousBtn;
+            set
+            {
+                _AddStaffPreviousBtn = value;
                 OnPropertyChanged();
             }
         }
@@ -258,6 +269,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         public ICommand NextStaffTabCommand { get; set; }
         public ICommand PreviousStaffTabCommand { get; set; }
+        public ICommand CancelAddStaffTabCommand { get; set; }
 
 
         #endregion
@@ -321,6 +333,15 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 addStaffScreen = new AddStaffScreen();
                 addStaffScreen.ShowDialog();
+            });
+
+
+            CancelAddStaffTabCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                CloseAddStaffWindown();
             });
 
             PreviousStaffTabCommand = new RelayCommand<Window>((p) =>
@@ -407,19 +428,26 @@ namespace QuanLyKhuCachLy.ViewModel
                 case 1:
                     AddStaffTab1 = Visibility.Visible;
                     AddStaffTab2 = Visibility.Hidden;
+                    AddStaffPreviousBtn = Visibility.Collapsed;
                     break;
                 case 2:
                     AddStaffTab1 = Visibility.Hidden;
+                    AddStaffPreviousBtn = Visibility.Visible;
                     AddStaffTab2 = Visibility.Visible;
                     break;
                 default:
                     AddStaff();
-                    p.Close();
+                    CloseAddStaffWindown();
                     SetDefaultAddStaff();
 
                     break;
             }
 
+        }
+
+        void CloseAddStaffWindown()
+        {
+            addStaffScreen.Close();
         }
 
         void SetDefaultAddStaff()
@@ -428,6 +456,7 @@ namespace QuanLyKhuCachLy.ViewModel
             AddStaffTab1 = Visibility.Visible;
             AddStaffTab2 = Visibility.Hidden;
             TabPosition = "1/2";
+            AddStaffPreviousBtn = Visibility.Collapsed;
         }
 
         void AddStaff()

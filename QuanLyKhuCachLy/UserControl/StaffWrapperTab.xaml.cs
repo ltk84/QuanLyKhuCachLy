@@ -24,5 +24,10 @@ namespace QuanLyKhuCachLy.UserControl
         {
             InitializeComponent();
         }
+
+        private void StaffList_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
