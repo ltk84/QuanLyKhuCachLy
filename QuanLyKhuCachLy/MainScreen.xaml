@@ -11,14 +11,14 @@
     Title="MainScreen"
     Width="{Binding SystemParameters.PrimaryScreenWidth}"
     Height="{Binding SystemParameters.PrimaryScreenHeight}"
-    MinWidth="1118"
-    MinHeight="800"
+    MinWidth="1000"
+    MinHeight="680"
     DataContext="{StaticResource MainVM}"
     mc:Ignorable="d">
-    <Viewbox Stretch="UniformToFill">
+    <Viewbox StretchDirection="Both" Stretch="UniformToFill">
         <Grid
-            Width="1369"
-            Height="1024"
+            Width="1273"
+            Height="1111"
             HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
