@@ -17,7 +17,7 @@ namespace QuanLyKhuCachLy.CustomUserControl
         {
             int result;
 
-            if (!(int.TryParse(e.Text, out result) || e.Text == "."))
+            if (int.TryParse(e.Text, out result) == false || e.Text == ".")
             {
                 e.Handled = true;
             }

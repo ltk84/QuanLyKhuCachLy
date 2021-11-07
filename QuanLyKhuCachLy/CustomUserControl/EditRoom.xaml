@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utility="clr-namespace:QuanLyKhuCachLy.Utility"
     xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
     Name="EditRoomScreen"
     Width="552.747"
@@ -46,6 +47,7 @@
                     </TextBlock>
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập tên phòng"
+                        utility:ProtocolSettingsLayout.MVVMHasError="{Binding Path=DisplayNameFieldHasError}"
                         MaxLength="30"
                         Style="{StaticResource TextInputField}">
                         <TextBox.Text>
@@ -68,6 +70,7 @@
                     </TextBlock>
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập sức chứa"
+                        utility:ProtocolSettingsLayout.MVVMHasError="{Binding CapacityFieldHasError}"
                         MaxLength="9"
                         Style="{StaticResource TextInputField}">
                         <TextBox.Text>
@@ -93,7 +96,9 @@
                         ItemsSource="{Binding RoomLevelList}"
                         Style="{StaticResource ComboBoxField}">
                         <ComboBox.SelectedItem>
+
                             <Binding Path="RoomSelectedSeverity" UpdateSourceTrigger="PropertyChanged">
+
                                 <Binding.ValidationRules>
                                     <vr:RequiredField />
                                 </Binding.ValidationRules>

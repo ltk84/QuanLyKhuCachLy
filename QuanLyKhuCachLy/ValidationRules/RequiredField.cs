@@ -2,6 +2,7 @@
 using System;
 using System.Globalization;
 using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace QuanLyKhuCachLy.ValidationRules
 {
@@ -13,13 +14,7 @@ namespace QuanLyKhuCachLy.ValidationRules
         }
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if (value is Severity)
-            {
-                Severity severity = value as Severity;
-                return String.IsNullOrWhiteSpace(severity.level)
-                    ? new ValidationResult(false, $"Thông tin này là bắt buộc.")
-                    : ValidationResult.ValidResult;
-            }
+            if (value is Severity) { }
 
             if (value is DateTime)
             {
@@ -28,11 +23,15 @@ namespace QuanLyKhuCachLy.ValidationRules
                     : ValidationResult.ValidResult;
             }
 
-            if (value is string && String.IsNullOrWhiteSpace((string)value))
+            if (value is string)
             {
-                return new ValidationResult(false, $"Thông tin này là bắt buộc.");
+                if (String.IsNullOrWhiteSpace(value.ToString()))
+                    return new ValidationResult(false, $"Thông tin này là bắt buộc.");
+                return ValidationResult.ValidResult;
             }
+
             return ValidationResult.ValidResult;
+
         }
     }
 }

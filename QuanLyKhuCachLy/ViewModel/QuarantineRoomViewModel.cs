@@ -113,6 +113,37 @@ namespace QuanLyKhuCachLy.ViewModel
                 _Tab2 = value; OnPropertyChanged();
             }
         }
+
+
+        #endregion
+
+        #region validation
+        private bool _DisplayNameFieldHasError;
+        public bool DisplayNameFieldHasError
+        {
+            get => _DisplayNameFieldHasError; set
+            {
+                _DisplayNameFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _CapacityFieldHasError;
+        public bool CapacityFieldHasError
+        {
+            get => _CapacityFieldHasError; set
+            {
+                _CapacityFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _SeverityFieldHasError;
+        public bool SeverityFieldHasError
+        {
+            get => _SeverityFieldHasError; set
+            {
+                _SeverityFieldHasError = value; OnPropertyChanged();
+            }
+        }
         #endregion
 
         #endregion
@@ -124,6 +155,7 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand DeleteRoomCommand { get; set; }
         public ICommand CancelCommand { get; set; }
         public ICommand CompleteQuarantineCommand { get; set; }
+        public ICommand ClearCommand { get; set; }
 
         public ICommand ToAddManualCommand { get; set; }
         public ICommand ToAddExcelCommand { get; set; }
@@ -136,6 +168,9 @@ namespace QuanLyKhuCachLy.ViewModel
 
         public QuarantineRoomViewModel()
         {
+            DisplayNameFieldHasError = true;
+            CapacityFieldHasError = true;
+
             Tab1 = Visibility.Visible;
             Tab2 = Visibility.Hidden;
 
@@ -187,10 +222,14 @@ namespace QuanLyKhuCachLy.ViewModel
 
             AddRoomManualCommand = new RelayCommand<Window>((p) =>
             {
-                if (RoomSelectedSeverity == null)
-                    return false;
-                Model.QuarantineRoom QuarantineRoom = new Model.QuarantineRoom { displayName = RoomDisplayName, capacity = RoomCapacity, level = RoomSelectedSeverity.level };
-                if (QuarantineRoom.CheckValidateProperty()) return true;
+                //if (RoomSelectedSeverity == null)
+                //    return false;
+                //Model.QuarantineRoom QuarantineRoom = new Model.QuarantineRoom { displayName = RoomDisplayName, capacity = RoomCapacity, level = RoomSelectedSeverity.level };
+                //if (QuarantineRoom.CheckValidateProperty()) return true;
+                //return false;
+
+
+                if (!DisplayNameFieldHasError && !CapacityFieldHasError && !SeverityFieldHasError) return true;
                 return false;
 
             }, (p) =>
@@ -220,6 +259,11 @@ namespace QuanLyKhuCachLy.ViewModel
             CancelCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
                 p.Close();
+            });
+
+            ClearCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+
             });
         }
 

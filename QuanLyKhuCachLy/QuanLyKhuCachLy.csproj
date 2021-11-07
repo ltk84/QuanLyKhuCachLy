@@ -205,6 +205,7 @@
     <Compile Include="CustomUserControl\StaffWrapperTab.xaml.cs">
       <DependentUpon>StaffWrapperTab.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utility\ProtocolSettingsLayout.cs" />
     <Compile Include="ValidationRules\DateFormat.cs" />
     <Compile Include="CustomUserControl\QuarantinePersonFunctionMenu.xaml.cs">
       <DependentUpon>QuarantinePersonFunctionMenu.xaml</DependentUpon>
