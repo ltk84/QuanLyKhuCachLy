@@ -51,7 +51,7 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         FontWeight="Bold"
-                        Foreground="#FF434A54"><Run Text="Lịch sử di chuyển" /></TextBlock>
+                        Foreground="#FF434A54"><Run Text="Thông tin tiêm chủng" /></TextBlock>
                     <Button
                         Grid.Row="0"
                         Grid.Column="1"

@@ -8,7 +8,6 @@
     xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    DataContext="{StaticResource PersonVM}"
     mc:Ignorable="d">
     <StackPanel Margin="0,0,0,0">
         <TextBlock
