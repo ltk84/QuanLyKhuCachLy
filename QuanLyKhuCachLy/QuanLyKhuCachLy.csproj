@@ -78,6 +78,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converter\IntToStringConverter.cs" />
     <Compile Include="CustomUserControl\AddPersonFunctionMenu.xaml.cs">
       <DependentUpon>AddPersonFunctionMenu.xaml</DependentUpon>
     </Compile>

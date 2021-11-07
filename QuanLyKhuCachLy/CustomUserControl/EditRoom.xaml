@@ -92,6 +92,7 @@
                         Loại phòng
                     </TextBlock>
                     <ComboBox
+                        utility:ProtocolSettingsLayout.MVVMHasError="{Binding SeverityFieldHasError}"
                         DisplayMemberPath="level"
                         ItemsSource="{Binding RoomLevelList}"
                         Style="{StaticResource ComboBoxField}">
