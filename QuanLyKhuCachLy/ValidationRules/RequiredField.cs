@@ -14,7 +14,13 @@ namespace QuanLyKhuCachLy.ValidationRules
         }
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if (value is Severity) { }
+            if (value is Severity)
+            {
+                Severity severity = value as Severity;
+                return String.IsNullOrWhiteSpace(severity.level)
+                    ? new ValidationResult(false, $"Thông tin này là bắt buộc.")
+                    : ValidationResult.ValidResult;
+            }
 
             if (value is DateTime)
             {

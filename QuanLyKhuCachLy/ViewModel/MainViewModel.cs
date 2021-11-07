@@ -148,7 +148,7 @@ namespace QuanLyKhuCachLy.ViewModel
             quarantinePersonViewModel = new QuarantinePersonViewModel();
             // test room
             //ToDashboard();
-            ToRoom();
+            ToPerson();
         }
 
         private void ToDashboard()

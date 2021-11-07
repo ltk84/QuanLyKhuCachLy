@@ -8,6 +8,7 @@
     xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
     d:DesignHeight="450"
     d:DesignWidth="800"
+    DataContext="{StaticResource PersonVM}"
     mc:Ignorable="d">
     <StackPanel Margin="0,0,0,0">
         <TextBlock
@@ -52,21 +53,30 @@
                     </Separator.RenderTransform>
                 </Separator>
             </StackPanel>
-            <StackPanel Grid.Row="1" Margin="0,10,24,0">
+            <StackPanel
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Margin="0,10,24,0">
                 <TextBlock
                     Margin="5,0,0,5"
                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                     FontSize="16"
                     Foreground="#FF434A54">
-                    Họ và tên
+                    Họ và tên (*)
                 </TextBlock>
                 <TextBox
-                    Height="40"
-                    Margin="0,0,-245,0"
-                    Padding="10,8,8,10"
                     materialDesign:HintAssist.Hint="Nhập họ và tên"
                     MaxLength="30"
-                    Style="{StaticResource TextInputField}" />
+                    Style="{StaticResource TextInputField}">
+                    <TextBox.Text>
+                        <Binding Path="QPName" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <vr:RequiredField />
+                                <vr:NoSpecialChar />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
             </StackPanel>
             <StackPanel
                 Grid.Row="1"
@@ -85,13 +95,15 @@
                     Foreground="#FF434A54">
                     Giới tính
                 </TextBlock>
-                <TextBox
-                    Height="40"
-                    Margin="0,0,0,0"
-                    Padding="10,8,8,10"
-                    materialDesign:HintAssist.Hint="Nhập giới tính"
-                    MaxLength="30"
-                    Style="{StaticResource TextInputField}" />
+                <ComboBox ItemsSource="{Binding SexList}" Style="{StaticResource ComboBoxField}">
+                    <ComboBox.SelectedItem>
+                        <Binding Path="QPSelectedSex" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <vr:RequiredField />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.SelectedItem>
+                </ComboBox>
             </StackPanel>
             <StackPanel
                 Grid.Row="2"
@@ -104,12 +116,19 @@
                     Foreground="#FF434A54">
                     Ngày sinh
                 </TextBlock>
-                <TextBox
-                    Height="40"
-                    Padding="10,8,8,10"
-                    materialDesign:HintAssist.Hint="Nhập ngày sinh"
-                    MaxLength="20"
-                    Style="{StaticResource TextInputField}" />
+                <DatePicker materialDesign:HintAssist.Hint="Nhập ngày sinh" Style="{StaticResource DatePickerField}">
+                    <DatePicker.SelectedDate>
+                        <Binding
+                            Mode="OneWayToSource"
+                            Path="QPDateOfBirth"
+                            StringFormat="dd/MM/yyyy"
+                            UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <vr:RequiredField />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DatePicker.SelectedDate>
+                </DatePicker>
             </StackPanel>
             <StackPanel
                 Grid.Row="2"
@@ -123,11 +142,18 @@
                     Căn cước công dân
                 </TextBlock>
                 <TextBox
-                    Height="40"
-                    Padding="10,8,8,10"
-                    materialDesign:HintAssist.Hint="Nhập số địa chỉ"
+                    materialDesign:HintAssist.Hint="Nhập số căn cước công dân"
                     MaxLength="20"
-                    Style="{StaticResource TextInputField}" />
+                    PreviewTextInput="TextBox_PreviewTextInput"
+                    Style="{StaticResource TextInputField}">
+                    <TextBox.Text>
+                        <Binding Path="QPCitizenID" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <vr:OnlyNumber />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
             </StackPanel>
             <StackPanel
                 Grid.Row="2"
@@ -140,12 +166,15 @@
                     Foreground="#FF434A54">
                     Quốc tịch
                 </TextBlock>
-                <ComboBox
-                    Height="40"
-                    Margin="0,0,0,0"
-                    Padding="10,8,8,10"
-                    ItemsSource="{Binding NationalityList}"
-                    Style="{StaticResource ComboBoxField}" />
+                <ComboBox ItemsSource="{Binding NationalityList}" Style="{StaticResource ComboBoxField}">
+                    <ComboBox.SelectedItem>
+                        <Binding Path="QPSelectedNationality" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <vr:RequiredField />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.SelectedItem>
+                </ComboBox>
             </StackPanel>
             <StackPanel
                 Grid.Row="3"
@@ -159,11 +188,18 @@
                     Số điện thoại
                 </TextBlock>
                 <TextBox
-                    Height="40"
-                    Padding="10,8,8,10"
                     materialDesign:HintAssist.Hint="Nhập số điện thoại"
                     MaxLength="20"
-                    Style="{StaticResource TextInputField}" />
+                    PreviewTextInput="TextBox_PreviewTextInput"
+                    Style="{StaticResource TextInputField}">
+                    <TextBox.Text>
+                        <Binding Path="QPPhoneNumber" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <vr:OnlyNumber />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
             </StackPanel>
             <StackPanel
                 Grid.Row="3"
@@ -177,11 +213,17 @@
                     Mã bảo hiểm y tế
                 </TextBlock>
                 <TextBox
-                    Height="40"
-                    Padding="10,8,8,10"
                     materialDesign:HintAssist.Hint="Nhập mã bảo hiểm y tế"
                     MaxLength="20"
-                    Style="{StaticResource TextInputField}" />
+                    Style="{StaticResource TextInputField}">
+                    <TextBox.Text>
+                        <Binding Path="QPHealthInsuranceID" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <vr:NoSpecialChar />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
             </StackPanel>
         </Grid>
     </StackPanel>

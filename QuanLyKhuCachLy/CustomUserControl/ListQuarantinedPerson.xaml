@@ -7,7 +7,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="768"
     d:DesignWidth="768"
-    DataContext="{StaticResource PersonVM}"
     mc:Ignorable="d">
     <StackPanel Margin="25,25,25,25">
         <Grid Margin="20,0,20,0">
@@ -25,12 +24,24 @@
                 DANH SÁCH NGƯỜI CÁCH LY
             </TextBlock>
             <Button
-                Grid.Column="1"
-                Width="100"
-                Height="26"
+                Grid.ColumnSpan="2"
+                Width="Auto"
+                Height="32"
                 Margin="0,0,0,0"
+                HorizontalAlignment="Right"
                 Content="Thêm người cách ly"
-                Style="{StaticResource AddObjectButton}" />
+                PreviewMouseDown="Button_PreviewMouseDown"
+                Style="{StaticResource DashboardButton}">
+                <Button.ContextMenu>
+                    <ContextMenu>
+                        <ContextMenu.Template>
+                            <ControlTemplate>
+                                <local:AddPersonFunctionMenu />
+                            </ControlTemplate>
+                        </ContextMenu.Template>
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
         </Grid>
         <Grid>
             <Grid.ColumnDefinitions>
