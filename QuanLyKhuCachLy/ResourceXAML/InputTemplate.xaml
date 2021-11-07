@@ -29,6 +29,7 @@
             <Trigger Property="Validation.HasError" Value="False">
                 <Setter Property="materialDesign:ValidationAssist.Suppress" Value="True" />
             </Trigger>
+
         </Style.Triggers>
     </Style>
     <Style

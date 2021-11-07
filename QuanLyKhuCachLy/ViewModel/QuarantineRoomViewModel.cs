@@ -1,8 +1,10 @@
-﻿using QuanLyKhuCachLy.CustomUserControl;
+﻿using MaterialDesignThemes.Wpf;
+using QuanLyKhuCachLy.CustomUserControl;
 using QuanLyKhuCachLy.Model;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace QuanLyKhuCachLy.ViewModel
@@ -111,6 +113,37 @@ namespace QuanLyKhuCachLy.ViewModel
                 _Tab2 = value; OnPropertyChanged();
             }
         }
+
+
+        #endregion
+
+        #region validation
+        private bool _DisplayNameFieldHasError;
+        public bool DisplayNameFieldHasError
+        {
+            get => _DisplayNameFieldHasError; set
+            {
+                _DisplayNameFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _CapacityFieldHasError;
+        public bool CapacityFieldHasError
+        {
+            get => _CapacityFieldHasError; set
+            {
+                _CapacityFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _SeverityFieldHasError;
+        public bool SeverityFieldHasError
+        {
+            get => _SeverityFieldHasError; set
+            {
+                _SeverityFieldHasError = value; OnPropertyChanged();
+            }
+        }
         #endregion
 
         #endregion
@@ -122,6 +155,7 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand DeleteRoomCommand { get; set; }
         public ICommand CancelCommand { get; set; }
         public ICommand CompleteQuarantineCommand { get; set; }
+        public ICommand ClearCommand { get; set; }
 
         public ICommand ToAddManualCommand { get; set; }
         public ICommand ToAddExcelCommand { get; set; }
@@ -134,6 +168,9 @@ namespace QuanLyKhuCachLy.ViewModel
 
         public QuarantineRoomViewModel()
         {
+            DisplayNameFieldHasError = true;
+            CapacityFieldHasError = true;
+
             Tab1 = Visibility.Visible;
             Tab2 = Visibility.Hidden;
 
@@ -148,8 +185,8 @@ namespace QuanLyKhuCachLy.ViewModel
             }, (p) =>
             {
                 ClearData();
-                DemoAdd AddScreen = new DemoAdd();
-                AddScreen.ShowDialog();
+                AddRoom AddRoomScreen = new AddRoom();
+                AddRoomScreen.ShowDialog();
                 ClearData();
             });
 
@@ -159,7 +196,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-                DemoEdit EditScreen = new DemoEdit();
+                EditRoom EditScreen = new EditRoom();
                 SetSelectedItemToProperty();
                 EditScreen.ShowDialog();
             });
@@ -183,19 +220,25 @@ namespace QuanLyKhuCachLy.ViewModel
                 Tab1 = Visibility.Visible;
             });
 
-            AddRoomManualCommand = new RelayCommand<object>((p) =>
+            AddRoomManualCommand = new RelayCommand<Window>((p) =>
             {
-                if (RoomSelectedSeverity == null)
-                    return false;
-                Model.QuarantineRoom QuarantineRoom = new Model.QuarantineRoom { displayName = RoomDisplayName, capacity = RoomCapacity, level = RoomSelectedSeverity.level };
-                if (QuarantineRoom.CheckValidateProperty()) return true;
+                //if (RoomSelectedSeverity == null)
+                //    return false;
+                //Model.QuarantineRoom QuarantineRoom = new Model.QuarantineRoom { displayName = RoomDisplayName, capacity = RoomCapacity, level = RoomSelectedSeverity.level };
+                //if (QuarantineRoom.CheckValidateProperty()) return true;
+                //return false;
+
+
+                if (!DisplayNameFieldHasError && !CapacityFieldHasError && !SeverityFieldHasError) return true;
                 return false;
+
             }, (p) =>
             {
                 AddQuarantineRoom();
+                p.Close();
             });
 
-            EditRoomCommand = new RelayCommand<object>((p) =>
+            EditRoomCommand = new RelayCommand<Window>((p) =>
             {
                 if (RoomSelectedSeverity == null)
                     return false;
@@ -205,6 +248,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }, (p) =>
             {
                 EditQuarantineRoom();
+                p.Close();
             });
 
             DeleteRoomCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -215,6 +259,11 @@ namespace QuanLyKhuCachLy.ViewModel
             CancelCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
                 p.Close();
+            });
+
+            ClearCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+
             });
         }
 

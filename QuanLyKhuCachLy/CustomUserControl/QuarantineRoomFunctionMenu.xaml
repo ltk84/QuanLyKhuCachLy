@@ -25,7 +25,7 @@
                     </TextBlock>
                 </StackPanel>
             </Button>
-            <Button Style="{StaticResource MenuButton}">
+            <Button Command="{Binding ToEditCommand}" Style="{StaticResource MenuButton}">
                 <StackPanel Style="{StaticResource MenuStackPanel}">
                     <materialDesign:PackIcon Kind="PencilOutline" Style="{StaticResource MenuIcon}" />
                     <TextBlock Style="{StaticResource MenuText}">
@@ -33,7 +33,7 @@
                     </TextBlock>
                 </StackPanel>
             </Button>
-            <Button Style="{StaticResource MenuButton}">
+            <Button Command="{Binding ToEditCommand}" Style="{StaticResource MenuButton}">
                 <StackPanel Style="{StaticResource MenuStackPanel}">
                     <materialDesign:PackIcon Kind="DeleteOutline" Style="{StaticResource MenuIcon}" />
                     <TextBlock Style="{StaticResource MenuText}">
@@ -41,7 +41,7 @@
                     </TextBlock>
                 </StackPanel>
             </Button>
-            <Button Style="{StaticResource MenuButton}">
+            <Button Command="{Binding CompleteQuarantineCommand}" Style="{StaticResource MenuButton}">
                 <StackPanel Style="{StaticResource MenuStackPanel}">
                     <materialDesign:PackIcon Kind="CheckboxOutline" Style="{StaticResource MenuIcon}" />
                     <TextBlock Style="{StaticResource MenuText}">

@@ -8,9 +8,10 @@
     xmlns:viewmodel="clr-namespace:QuanLyKhuCachLy.ViewModel"
     d:DesignHeight="705"
     d:DesignWidth="757"
+    DataContext="{StaticResource StaffVM}"
     mc:Ignorable="d">
 
-    <Grid DataContext="{StaticResource StaffVM}">
+    <Grid>
         <local:StaffList Visibility="{Binding Tab1}" />
         <local:StaffDetailInfomation Visibility="{Binding Tab2}" />
     </Grid>

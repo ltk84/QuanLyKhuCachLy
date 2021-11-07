@@ -2,6 +2,7 @@
 using System;
 using System.Globalization;
 using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace QuanLyKhuCachLy.ValidationRules
 {
@@ -30,9 +31,13 @@ namespace QuanLyKhuCachLy.ValidationRules
 
             if (value is string && String.IsNullOrWhiteSpace((string)value))
             {
-                return new ValidationResult(false, $"Thông tin này là bắt buộc.");
+                if (String.IsNullOrWhiteSpace(value.ToString()))
+                    return new ValidationResult(false, $"Thông tin này là bắt buộc.");
+                return ValidationResult.ValidResult;
             }
+
             return ValidationResult.ValidResult;
+
         }
     }
 }

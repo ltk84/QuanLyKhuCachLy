@@ -6,10 +6,10 @@
     xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="780"
-    Height="700"
+    d:DesignHeight="700"
+    d:DesignWidth="780"
     mc:Ignorable="d">
-    <StackPanel Margin="40,30,40,30" DataContext="{Binding RelativeSource={RelativeSource self}}">
+    <StackPanel Margin="25,45,45,0">
         <Grid Margin="0,0,0,17">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -22,7 +22,7 @@
                 Margin="0,0,10,0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ToMainCommand}"
+                Command="{Binding ToMainCommand}"
                 IsEnabled="True"
                 RenderTransformOrigin="0.5,0.5"
                 Style="{StaticResource MaterialDesignIconButton}"
@@ -131,7 +131,7 @@
                         FontSize="19"
                         FontWeight="Regular"
                         Foreground="#FF363636"
-                        Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.RoomDisplayName, StringFormat=Phòng {0}}" />
+                        Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.SelectedItem.displayName, StringFormat=Phòng {0}}" />
                 </Grid>
 
                 <Button
@@ -155,7 +155,7 @@
                     Grid.Column="1"
                     HorizontalAlignment="Right"
                     Style="{StaticResource list-value-text}"
-                    Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.RoomDisplayName}" />
+                    Text="{Binding SelectedItem.displayName}" />
 
                 <TextBlock
                     Grid.Row="2"
@@ -168,7 +168,7 @@
                     Grid.Column="1"
                     HorizontalAlignment="Right"
                     Style="{StaticResource list-value-text}"
-                    Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.RoomCapacity}" />
+                    Text="{Binding SelectedItem.capacity}" />
 
                 <TextBlock
                     Grid.Row="3"
@@ -181,7 +181,7 @@
                     Grid.Column="1"
                     HorizontalAlignment="Right"
                     Style="{StaticResource list-value-text}"
-                    Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.RoomSelectedSeverity.level}" />
+                    Text="{Binding SelectedItem.Severity.level}" />
             </Grid>
         </Grid>
         <Grid Margin="0,15,0,0">
