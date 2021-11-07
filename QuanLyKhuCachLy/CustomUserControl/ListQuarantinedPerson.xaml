@@ -24,13 +24,24 @@
                 DANH SÁCH NGƯỜI CÁCH LY
             </TextBlock>
             <Button
+                Grid.ColumnSpan="2"
                 Width="Auto"
                 Height="32"
                 Margin="0,0,0,0"
                 HorizontalAlignment="Right"
                 Content="Thêm người cách ly"
-                Command="{Binding ToAddCommand}"
-                Style="{StaticResource DashboardButton}" Grid.ColumnSpan="2" />
+                PreviewMouseDown="Button_PreviewMouseDown"
+                Style="{StaticResource DashboardButton}">
+                <Button.ContextMenu>
+                    <ContextMenu>
+                        <ContextMenu.Template>
+                            <ControlTemplate>
+                                <local:AddPersonFunctionMenu />
+                            </ControlTemplate>
+                        </ContextMenu.Template>
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
         </Grid>
         <Grid>
             <Grid.ColumnDefinitions>

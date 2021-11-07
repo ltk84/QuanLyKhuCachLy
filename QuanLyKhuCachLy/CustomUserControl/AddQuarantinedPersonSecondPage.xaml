@@ -8,6 +8,7 @@
     xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
     d:DesignHeight="450"
     d:DesignWidth="800"
+    DataContext="{StaticResource PersonVM}"
     mc:Ignorable="d">
     <StackPanel Margin="0,0,0,0">
         <TextBlock
@@ -64,11 +65,15 @@
                     Foreground="#FF434A54">
                     Tỉnh/Thành phố (*)
                 </TextBlock>
-                <ComboBox
-                    Height="40"
-                    Padding="10,8,8,10"
-                    ItemsSource="{Binding ProvinceList}"
-                    Style="{StaticResource ComboBoxField}" />
+                <ComboBox ItemsSource="{Binding ProvinceList}" Style="{StaticResource ComboBoxField}">
+                    <ComboBox.SelectedItem>
+                        <Binding Path="QPSelectedProvince" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <vr:RequiredField />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.SelectedItem>
+                </ComboBox>
             </StackPanel>
             <StackPanel
                 Grid.Row="1"
@@ -82,11 +87,15 @@
                     Foreground="#FF434A54">
                     Quận/Huyện (*)
                 </TextBlock>
-                <ComboBox
-                    Height="40"
-                    Padding="10,8,8,10"
-                    ItemsSource="{Binding DistrictList}"
-                    Style="{StaticResource ComboBoxField}" />
+                <ComboBox ItemsSource="{Binding DistrictList}" Style="{StaticResource ComboBoxField}">
+                    <ComboBox.SelectedItem>
+                        <Binding Path="QPSelectedDistrict" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <vr:RequiredField />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.SelectedItem>
+                </ComboBox>
             </StackPanel>
             <StackPanel
                 Grid.Row="1"
@@ -100,11 +109,15 @@
                     Foreground="#FF434A54">
                     Phường/Xã (*)
                 </TextBlock>
-                <ComboBox
-                    Height="40"
-                    Padding="10,8,8,10"
-                    ItemsSource="{Binding WardList}"
-                    Style="{StaticResource ComboBoxField}" />
+                <ComboBox ItemsSource="{Binding WardList}" Style="{StaticResource ComboBoxField}">
+                    <ComboBox.SelectedItem>
+                        <Binding Path="QPSelectedWard" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <vr:RequiredField />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.SelectedItem>
+                </ComboBox>
             </StackPanel>
             <StackPanel
                 Grid.Row="2"
@@ -118,10 +131,10 @@
                     Đường
                 </TextBlock>
                 <TextBox
-                    Padding="10,8,8,10"
                     materialDesign:HintAssist.Hint="Nhập tên đường"
                     MaxLength="20"
-                    Style="{StaticResource TextInputField}" />
+                    Style="{StaticResource TextInputField}"
+                    Text="{Binding QPStreetName}" />
             </StackPanel>
             <StackPanel
                 Grid.Row="2"
@@ -135,11 +148,10 @@
                     Số (*)
                 </TextBlock>
                 <TextBox
-                    Height="40"
-                    Padding="10,8,8,10"
                     materialDesign:HintAssist.Hint="Nhập số địa chỉ"
                     MaxLength="20"
-                    Style="{StaticResource TextInputField}" />
+                    Style="{StaticResource TextInputField}"
+                    Text="{Binding QPApartmentNumber, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
         </Grid>
         <Grid Margin="30,20,30,0">

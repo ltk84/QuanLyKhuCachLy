@@ -29,7 +29,7 @@ namespace QuanLyKhuCachLy.ValidationRules
                     : ValidationResult.ValidResult;
             }
 
-            if (value is string && String.IsNullOrWhiteSpace((string)value))
+            if (value is string)
             {
                 if (String.IsNullOrWhiteSpace(value.ToString()))
                     return new ValidationResult(false, $"Thông tin này là bắt buộc.");

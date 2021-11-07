@@ -453,7 +453,8 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand DeleteCommand { get; set; }
         public ICommand CancelCommand { get; set; }
 
-        public ICommand ToAddCommand { get; set; }
+        public ICommand ToAddManualCommand { get; set; }
+        public ICommand ToAddExcelCommand { get; set; }
         public ICommand ToEditCommand { get; set; }
         public ICommand ToDeleteCommand { get; set; }
 
@@ -542,7 +543,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 "Nam", "Nữ"
             };
 
-            ToAddCommand = new RelayCommand<Window>((p) =>
+            ToAddManualCommand = new RelayCommand<Window>((p) =>
             {
 
                 return true;
@@ -550,6 +551,15 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 AddQuarantinedPerson addQuarantinePerson = new AddQuarantinedPerson();
                 addQuarantinePerson.ShowDialog();
+            });
+
+            ToAddExcelCommand = new RelayCommand<Window>((p) =>
+            {
+
+                return true;
+            }, (p) =>
+            {
+
             });
 
             ToEditCommand = new RelayCommand<Window>((p) =>

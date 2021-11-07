@@ -25,7 +25,6 @@
             FontSize="12"
             PreviewMouseDown="Button_PreviewMouseDown"
             Style="{StaticResource DashboardButton}">
-
             <Button.ContextMenu>
                 <ContextMenu>
                     <ContextMenu.Template>

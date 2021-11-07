@@ -78,11 +78,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CustomUserControl\QuarantinePersonWrapperTab.xaml.cs">
-      <DependentUpon>QuarantinePersonWrapperTab.xaml</DependentUpon>
+    <Compile Include="CustomUserControl\AddPersonFunctionMenu.xaml.cs">
+      <DependentUpon>AddPersonFunctionMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomUserControl\AddRoomFunctionMenu.xaml.cs">
       <DependentUpon>AddRoomFunctionMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\QuarantinePersonWrapperTab.xaml.cs">
+      <DependentUpon>QuarantinePersonWrapperTab.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomUserControl\QuarantineRoomFunctionMenu.xaml.cs">
       <DependentUpon>QuarantineRoomFunctionMenu.xaml</DependentUpon>
@@ -249,11 +252,12 @@
     <Compile Include="ViewModel\ReportViewModel.cs" />
     <Compile Include="ViewModel\SeverityViewModel.cs" />
     <Compile Include="ViewModel\StaffViewModel.cs" />
-    <Page Include="CustomUserControl\QuarantinePersonWrapperTab.xaml">
-     <SubType>Designer</SubType>
+    <Page Include="CustomUserControl\AddPersonFunctionMenu.xaml">
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CustomUserControl\AddRoomFunctionMenu.xaml">
+    <Page Include="CustomUserControl\AddRoomFunctionMenu.xaml" />
+    <Page Include="CustomUserControl\QuarantinePersonWrapperTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
