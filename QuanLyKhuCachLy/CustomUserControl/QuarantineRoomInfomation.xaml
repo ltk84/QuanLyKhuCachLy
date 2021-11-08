@@ -6,10 +6,10 @@
     xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="780"
-    Height="700"
+    d:DesignHeight="700"
+    d:DesignWidth="780"
     mc:Ignorable="d">
-    <StackPanel Margin="40,30,40,30">
+    <StackPanel Margin="25,45,45,0">
         <Grid Margin="0,0,0,17">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
