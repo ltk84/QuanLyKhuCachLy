@@ -9,10 +9,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Name="QuarantinedPersonInformationScreen"
     Width="1000"
-    d:DesignHeight="768"
+    Height="796.5"
     d:DesignWidth="1000"
     mc:Ignorable="d">
-    <StackPanel Margin="40,30,40,30">
+    <StackPanel Margin="40,30,40,0">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -102,9 +102,9 @@
             </Grid>
         </Grid>
         <Border
-            Width="681"
-            Height="534"
-            Margin="0,30,1,0"
+            Width="764"
+            Height="570"
+            Margin="36,30,120,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Background="White">

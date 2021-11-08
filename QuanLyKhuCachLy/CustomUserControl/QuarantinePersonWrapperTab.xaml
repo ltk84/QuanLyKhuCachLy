@@ -6,13 +6,13 @@
     xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Width="1200"
-    d:DesignHeight="450"
+    d:DesignHeight="804"
     d:DesignWidth="900"
     DataContext="{StaticResource PersonVM}"
     mc:Ignorable="d">
     <Grid>
         <local:ListQuarantinedPerson Visibility="{Binding TabList}" />
-        <local:QuarantinedPersonInformation Visibility="{Binding TabInformation}" />
+        <local:QuarantinedPersonInformation Visibility="{Binding TabInformation}" Margin="102,4,100,4" />
 
     </Grid>
 </UserControl>
