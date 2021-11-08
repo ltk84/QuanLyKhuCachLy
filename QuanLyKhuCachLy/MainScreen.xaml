@@ -12,6 +12,7 @@
     Width="{Binding SystemParameters.PrimaryScreenWidth}"
     Height="{Binding SystemParameters.PrimaryScreenHeight}"
     DataContext="{StaticResource MainVM}"
+    WindowState="Maximized"
     mc:Ignorable="d">
 
     <Grid

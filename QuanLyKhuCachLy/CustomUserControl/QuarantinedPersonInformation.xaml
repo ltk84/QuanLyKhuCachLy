@@ -8,8 +8,9 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Name="QuarantinedPersonInformationScreen"
+    Width="1000"
     d:DesignHeight="768"
-    d:DesignWidth="768"
+    d:DesignWidth="1000"
     mc:Ignorable="d">
     <StackPanel Margin="40,30,40,30">
         <Grid>
@@ -18,15 +19,18 @@
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
-            <Image
+            <Button
                 Grid.Column="0"
-                Width="24"
-                Height="24"
                 Margin="0,0,10,0"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Bottom"
+                VerticalAlignment="Center"
+                Command="{Binding ToMainCommand}"
+                IsEnabled="True"
                 RenderTransformOrigin="0.5,0.5"
-                Source="/Resources/icons/back-icon.png" />
+                Style="{StaticResource MaterialDesignIconButton}"
+                ToolTip="MaterialDesignIconButton">
+                <materialDesign:PackIcon Kind="ArrowLeftCircle" />
+            </Button>
             <TextBlock
                 Grid.Column="1"
                 VerticalAlignment="Center"

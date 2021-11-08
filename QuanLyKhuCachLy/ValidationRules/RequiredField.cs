@@ -44,7 +44,16 @@ namespace QuanLyKhuCachLy.ValidationRules
                     {
                         return sourceValue == null ? new ValidationResult(false, $"Thông tin này là bắt buộc.") : ValidationResult.ValidResult;
                     }
-
+                    else if (propertyType.Name == "DateTime")
+                    {
+                        DateTime date;
+                        bool result = DateTime.TryParse(sourceValue.ToString(), out date);
+                        if (!result || date.ToString() == DateTime.MinValue.ToString())
+                        {
+                            return new ValidationResult(false, $"Thông tin này là bắt buộc.");
+                        }
+                        return ValidationResult.ValidResult;
+                    }
                 }
             }
 

@@ -11,18 +11,28 @@ namespace QuanLyKhuCachLy.Converter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            DateTime dateTime = (DateTime)value;
-            return dateTime;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
+            //DateTime dateTime = (DateTime)value;
+            //return dateTime;
             string dateTimeStr = value as string;
             DateTime dateTime;
             if (DateTime.TryParse(dateTimeStr, out dateTime))
             {
                 return DateTime.Now;
             }
+            return dateTime;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            //string dateTimeStr = value as string;
+            //DateTime dateTime;
+            //if (DateTime.TryParse(dateTimeStr, out dateTime))
+            //{
+            //    return DateTime.Now;
+            //}
+            //return dateTime;
+            if (value == null) return DateTime.MinValue;
+            DateTime dateTime = (DateTime)value;
             return dateTime;
         }
     }

@@ -207,6 +207,7 @@
                     <TextBox.Text>
                         <Binding Path="QPPhoneNumber" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
+                                <vr:RequiredField />
                                 <vr:OnlyNumber />
                             </Binding.ValidationRules>
                         </Binding>
