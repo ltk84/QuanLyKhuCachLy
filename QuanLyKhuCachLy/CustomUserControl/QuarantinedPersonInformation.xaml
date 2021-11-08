@@ -8,14 +8,13 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Name="QuarantinedPersonInformationScreen"
-    Width="1000"
-    Height="796.5"
-    d:DesignWidth="1000"
+    d:DesignHeight="700"
+    d:DesignWidth="780"
     mc:Ignorable="d">
-    <StackPanel Margin="40,30,40,0">
-        <Grid>
+    <StackPanel Margin="25,45,45,0">
+        <Grid Margin="0,0,0,17">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
@@ -102,12 +101,12 @@
             </Grid>
         </Grid>
         <Border
-            Width="764"
-            Height="570"
-            Margin="36,30,120,0"
+            Width="672"
+            Height="462"
+            Margin="19,13,18.6,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Background="White">
+            Background="Transparent">
             <StackPanel>
                 <Grid>
                     <Grid.RowDefinitions>
