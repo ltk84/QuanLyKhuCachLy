@@ -5,7 +5,7 @@
     xmlns:userControl="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:viewModel="clr-namespace:QuanLyKhuCachLy.ViewModel"
     ShutdownMode="OnMainWindowClose"
-    StartupUri="MainScreen.xaml">
+    StartupUri="/CustomUserControl/StatisticWrapper.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -13,6 +13,8 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/Generic.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/MaterialDesignLightTheme.xaml" />
                 <ResourceDictionary Source="/ResourceXAML/MainResource.xaml" />
                 <ResourceDictionary Source="/ResourceXAML/SectionButtonTemplate.xaml" />
                 <ResourceDictionary Source="/ResourceXAML/DashboardContentTemplate.xaml" />
@@ -20,6 +22,7 @@
                 <ResourceDictionary Source="/ResourceXAML/ListInfomationTemplate.xaml" />
                 <ResourceDictionary Source="/ResourceXAML/ModifiActionTemplate.xaml" />
                 <ResourceDictionary Source="/ResourceXAML/TableTemplate.xaml" />
+                <ResourceDictionary Source="/ResourceXAML/TabControlTemplate.xaml" />
 
 
                 <ResourceDictionary Source="/ResourceXAML/DataGridTemplate.xaml" />

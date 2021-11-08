@@ -50,7 +50,7 @@
                         Tên
                     </TextBlock>
                     <TextBox
-                        Name="a"
+                        x:Name="RoomNameInput"
                         materialDesign:HintAssist.Hint="Nhập tên phòng"
                         utility:ProtocolSettingsLayout.MVVMHasError="{Binding Path=DisplayNameFieldHasError}"
                         MaxLength="30"
@@ -78,6 +78,7 @@
                         Sức chứa
                     </TextBlock>
                     <TextBox
+                        Name="RoomCapacityInput"
                         materialDesign:HintAssist.Hint="Nhập sức chứa"
                         utility:ProtocolSettingsLayout.MVVMHasError="{Binding CapacityFieldHasError}"
                         MaxLength="9"
@@ -102,6 +103,7 @@
                         Loại phòng
                     </TextBlock>
                     <ComboBox
+                        Name="RoomTypeInput"
                         DisplayMemberPath="level"
                         ItemsSource="{Binding RoomLevelList}"
                         Style="{StaticResource ComboBoxField}">
@@ -145,8 +147,46 @@
                         CommandParameter="{Binding ElementName=AddRoomManualScreen}"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="12"
-                        FontWeight="Bold"
-                        Style="{StaticResource MaterialDesignRaisedButton}">
+                        FontWeight="Bold">
+                        <Button.Style>
+                            <Style BasedOn="{StaticResource MaterialDesignRaisedButton}" TargetType="Button">
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=RoomNameInput}" Value="False" />
+                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=RoomCapacityInput}" Value="False" />
+                                        </MultiDataTrigger.Conditions>
+                                        <MultiDataTrigger.Setters>
+                                            <Setter Property="IsEnabled" Value="True" />
+                                        </MultiDataTrigger.Setters>
+                                    </MultiDataTrigger>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=RoomNameInput}" Value="True" />
+                                        </MultiDataTrigger.Conditions>
+                                        <MultiDataTrigger.Setters>
+                                            <Setter Property="IsEnabled" Value="False" />
+                                        </MultiDataTrigger.Setters>
+                                    </MultiDataTrigger>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding Path=(Text), ElementName=RoomNameInput}" Value="" />
+                                        </MultiDataTrigger.Conditions>
+                                        <MultiDataTrigger.Setters>
+                                            <Setter Property="IsEnabled" Value="False" />
+                                        </MultiDataTrigger.Setters>
+                                    </MultiDataTrigger>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=RoomCapacityInput}" Value="True" />
+                                        </MultiDataTrigger.Conditions>
+                                        <MultiDataTrigger.Setters>
+                                            <Setter Property="IsEnabled" Value="False" />
+                                        </MultiDataTrigger.Setters>
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <TextBlock FontSize="16">
                             Thêm
                         </TextBlock>

@@ -229,8 +229,9 @@ namespace QuanLyKhuCachLy.ViewModel
                 //return false;
 
 
-                if (!DisplayNameFieldHasError && !CapacityFieldHasError && !SeverityFieldHasError) return true;
-                return false;
+                //if (!DisplayNameFieldHasError && !CapacityFieldHasError && !SeverityFieldHasError) return true;
+                //return false;
+                return true;
 
             }, (p) =>
             {
