@@ -5,10 +5,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utility="clr-namespace:QuanLyKhuCachLy.Utility"
     xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    DataContext="{StaticResource PersonVM}"
     mc:Ignorable="d">
     <StackPanel Margin="0,0,0,0">
         <TextBlock
@@ -65,7 +65,10 @@
                     Foreground="#FF434A54">
                     Tỉnh/Thành phố (*)
                 </TextBlock>
-                <ComboBox ItemsSource="{Binding ProvinceList}" Style="{StaticResource ComboBoxField}">
+                <ComboBox
+                    utility:ProtocolSettingsLayout.MVVMHasError="{Binding ProvinceFieldHasError}"
+                    ItemsSource="{Binding ProvinceList}"
+                    Style="{StaticResource ComboBoxField}">
                     <ComboBox.SelectedItem>
                         <Binding Path="QPSelectedProvince" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
@@ -87,7 +90,10 @@
                     Foreground="#FF434A54">
                     Quận/Huyện (*)
                 </TextBlock>
-                <ComboBox ItemsSource="{Binding DistrictList}" Style="{StaticResource ComboBoxField}">
+                <ComboBox
+                    utility:ProtocolSettingsLayout.MVVMHasError="{Binding DistrictFieldHasError}"
+                    ItemsSource="{Binding DistrictList}"
+                    Style="{StaticResource ComboBoxField}">
                     <ComboBox.SelectedItem>
                         <Binding Path="QPSelectedDistrict" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
@@ -109,7 +115,10 @@
                     Foreground="#FF434A54">
                     Phường/Xã (*)
                 </TextBlock>
-                <ComboBox ItemsSource="{Binding WardList}" Style="{StaticResource ComboBoxField}">
+                <ComboBox
+                    utility:ProtocolSettingsLayout.MVVMHasError="{Binding WardFieldHasError}"
+                    ItemsSource="{Binding WardList}"
+                    Style="{StaticResource ComboBoxField}">
                     <ComboBox.SelectedItem>
                         <Binding Path="QPSelectedWard" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>

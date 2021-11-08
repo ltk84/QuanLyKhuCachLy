@@ -7,26 +7,23 @@ using System.Windows.Data;
 
 namespace QuanLyKhuCachLy.Converter
 {
-    public class IntToStringConverter : IValueConverter
+    class DateTimeToStringConverter : IValueConverter
     {
-
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            int number = (int)value;
-            return number.ToString();
+            DateTime dateTime = (DateTime)value;
+            return dateTime;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            string text = (string)value;
-            int number;
-            if (!int.TryParse(text, out number))
+            string dateTimeStr = value as string;
+            DateTime dateTime;
+            if (DateTime.TryParse(dateTimeStr, out dateTime))
             {
-
-                return 0; //Some default value
+                return DateTime.Now;
             }
-
-            return number;
+            return dateTime;
         }
     }
 }

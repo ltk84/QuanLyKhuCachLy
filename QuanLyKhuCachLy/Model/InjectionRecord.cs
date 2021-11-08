@@ -37,8 +37,8 @@ namespace QuanLyKhuCachLy.Model
             }
         }
 
-        private Nullable<int> _quarantinePersonID;
-        public Nullable<int> quarantinePersonID
+        private int _quarantinePersonID;
+        public int quarantinePersonID
         {
             get => _quarantinePersonID; set
             {

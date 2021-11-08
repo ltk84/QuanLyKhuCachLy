@@ -18,6 +18,7 @@ namespace QuanLyKhuCachLy.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Address()
         {
+            this.DestinationHistories = new HashSet<DestinationHistory>();
             this.QuarantineAreas = new HashSet<QuarantineArea>();
             this.QuarantinePersons = new HashSet<QuarantinePerson>();
             this.Staffs = new HashSet<Staff>();
@@ -75,15 +76,14 @@ namespace QuanLyKhuCachLy.Model
             }
         }
 
-
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DestinationHistory> DestinationHistories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QuarantineArea> QuarantineAreas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QuarantinePerson> QuarantinePersons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Staff> Staffs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DestinationHistory> DestinationHistories { get; set; }
 
         public bool CheckValidateProperty()
         {

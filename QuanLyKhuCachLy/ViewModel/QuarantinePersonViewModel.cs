@@ -182,8 +182,8 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
-        private string _QPSelectedLevel;
-        public string QPSelectedLevel
+        private Severity _QPSelectedLevel;
+        public Severity QPSelectedLevel
         {
             get => _QPSelectedLevel; set
             {
@@ -373,6 +373,83 @@ namespace QuanLyKhuCachLy.ViewModel
         private DestinationHistoryViewModel _DestinationHistoryViewModel;
         #endregion
 
+        #region validation
+        private bool _NameFieldHasError;
+        public bool NameFieldHasError
+        {
+            get => _NameFieldHasError; set
+            {
+                _NameFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _SexFieldHasError;
+        public bool SexFieldHasError
+        {
+            get => _SexFieldHasError; set
+            {
+                _SexFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _NationalityFieldHasError;
+        public bool NationalityFieldHasError
+        {
+            get => _NationalityFieldHasError; set
+            {
+                _NationalityFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _ProvinceFieldHasError;
+        public bool ProvinceFieldHasError
+        {
+            get => _ProvinceFieldHasError; set
+            {
+                _ProvinceFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _DistrictFieldHasError;
+        public bool DistrictFieldHasError
+        {
+            get => _DistrictFieldHasError; set
+            {
+                _DistrictFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _WardFieldHasError;
+        public bool WardFieldHasError
+        {
+            get => _WardFieldHasError; set
+            {
+                _WardFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _SeverityFieldHasError;
+        public bool SeverityFieldHasError
+        {
+            get => _SeverityFieldHasError; set
+            {
+                _SeverityFieldHasError = value; OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region quarantine area information
+        private QuarantineArea _QAInformation;
+        public QuarantineArea QAInformation
+        {
+            get => _QAInformation; set
+            {
+                _QAInformation = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
 
 
         #endregion
@@ -445,6 +522,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 _WardList = value; OnPropertyChanged();
             }
         }
+
+
         #endregion
 
         #region command
@@ -520,6 +599,8 @@ namespace QuanLyKhuCachLy.ViewModel
             QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
             SeverityList = new ObservableCollection<Severity>(DataProvider.ins.db.Severities);
 
+            QAInformation = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
+
             _InjectionRecordViewModel = new InjectionRecordViewModel(currentPersonID: QPID);
             _DestinationHistoryViewModel = new DestinationHistoryViewModel(currentPersonID: QPID);
 
@@ -545,7 +626,6 @@ namespace QuanLyKhuCachLy.ViewModel
 
             ToAddManualCommand = new RelayCommand<Window>((p) =>
             {
-
                 return true;
             }, (p) =>
             {
@@ -555,7 +635,6 @@ namespace QuanLyKhuCachLy.ViewModel
 
             ToAddExcelCommand = new RelayCommand<Window>((p) =>
             {
-
                 return true;
             }, (p) =>
             {
@@ -573,29 +652,10 @@ namespace QuanLyKhuCachLy.ViewModel
 
             AddCommand = new RelayCommand<object>((p) =>
             {
-                Address PersonAddress = new Address()
+                if (!NameFieldHasError && !NationalityFieldHasError && !SexFieldHasError && !ProvinceFieldHasError && !DistrictFieldHasError && !WardFieldHasError && !SeverityFieldHasError)
                 {
-                    apartmentNumber = QPApartmentNumber,
-                    streetName = QPStreetName,
-                    ward = QPSelectedWard,
-                    district = QPSelectedDistrict,
-                    province = QPSelectedProvince,
-                };
-
-                // Tạo người cách ly
-                QuarantinePerson Person = new QuarantinePerson()
-                {
-                    name = QPName,
-                    dateOfBirth = QPDateOfBirth,
-                    sex = QPSelectedSex,
-                    citizenID = QPCitizenID,
-                    nationality = QPSelectedNationality,
-                    phoneNumber = QPPhoneNumber,
-                    healthInsuranceID = QPHealthInsuranceID
-                };
-
-                if (Person.CheckValidateProperty() && PersonAddress.CheckValidateProperty())
                     return true;
+                }
                 return false;
             }, (p) =>
             {
@@ -695,7 +755,12 @@ namespace QuanLyKhuCachLy.ViewModel
                 citizenID = QPCitizenID,
                 nationality = QPSelectedNationality,
                 phoneNumber = QPPhoneNumber,
-                healthInsuranceID = QPHealthInsuranceID
+                healthInsuranceID = QPHealthInsuranceID,
+                level = QPSelectedLevel.level,
+                roomID = -1,
+                quarantineDays = 0,
+                arrivedDate = DateTime.Today,
+                leaveDate = DateTime.Today.AddDays(QAInformation.requiredDayToFinish),
             };
 
             DataProvider.ins.db.QuarantinePersons.Add(Person);

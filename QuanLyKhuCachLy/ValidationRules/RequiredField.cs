@@ -42,28 +42,10 @@ namespace QuanLyKhuCachLy.ValidationRules
                     }
                     else if (propertyType.Name == "Severity")
                     {
-
                         return sourceValue == null ? new ValidationResult(false, $"Thông tin này là bắt buộc.") : ValidationResult.ValidResult;
                     }
 
                 }
-            }
-
-
-
-
-            if (value is DateTime)
-            {
-                return String.IsNullOrWhiteSpace(value.ToString())
-                    ? new ValidationResult(false, $"Thông tin này là bắt buộc.")
-                    : ValidationResult.ValidResult;
-            }
-
-            if (value is string)
-            {
-                if (String.IsNullOrWhiteSpace(value.ToString()))
-                    return new ValidationResult(false, $"Thông tin này là bắt buộc.");
-                return ValidationResult.ValidResult;
             }
 
             return ValidationResult.ValidResult;
