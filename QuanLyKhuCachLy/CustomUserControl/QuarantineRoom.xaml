@@ -85,10 +85,7 @@
                     IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button
-                                HorizontalAlignment="Right"
-                                PreviewMouseUp="Button_PreviewMouseUp"
-                                Style="{StaticResource DataGridButton}">
+                            <Button HorizontalAlignment="Right" Style="{StaticResource DataGridButton}">
                                 <materialDesign:PackIcon
                                     Width="16"
                                     Height="16"

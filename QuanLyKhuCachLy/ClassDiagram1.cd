@@ -1,0 +1,558 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="QuanLyKhuCachLy.App" Collapsed="true">
+    <Position X="47.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.AuthenticationScreen" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="49.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AuthenticationScreen.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.Demo" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="45.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Demo.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.DemoAdd" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="47.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DemoAdd.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.DemoEdit" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="49.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DemoEdit.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.InitialSettingScreen" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="56.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InitialSettingScreen.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.MainScreen" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="51" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MainScreen.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.Converter.DateTimeToStringConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="56.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Converter\DateTimeToStringConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.Converter.IntToStringConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="47.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Converter\IntToStringConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.AddPersonFunctionMenu" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="47.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomUserControl\AddPersonFunctionMenu.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.AddQuarantinedPerson" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="49.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>CustomUserControl\AddQuarantinedPerson.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.AddQuarantinedPersonFirstPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="51" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomUserControl\AddQuarantinedPersonFirstPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.AddQuarantinedPersonSecondPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="52.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomUserControl\AddQuarantinedPersonSecondPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.AddQuarantinedPersonThirdPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="54.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomUserControl\AddQuarantinedPersonThirdPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.AddRoom" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="56.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomUserControl\AddRoom.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.AddRoomFunctionMenu" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="58" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomUserControl\AddRoomFunctionMenu.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.AddStaffScreen" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="45.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomUserControl\AddStaffScreen.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.Dashboard" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="51" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomUserControl\Dashboard.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.DeleteConfirmation" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="58" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomUserControl\DeleteConfirmation.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.EditRoom" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="51" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomUserControl\EditRoom.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.InitialSettingFirstPageView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="52.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQQAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomUserControl\InitialSettingFirstPageView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.InitialSettingFourthPageView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="54.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomUserControl\InitialSettingFourthPageView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.InitialSettingSecondPageView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="58" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomUserControl\InitialSettingSecondPageView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.InitialSettingThirdPageView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="45.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAQQAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomUserControl\InitialSettingThirdPageView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.ListQuarantinedPerson" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="49.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAQAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomUserControl\ListQuarantinedPerson.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.QuarantinedPersonInformation" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="49.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomUserControl\QuarantinedPersonInformation.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.QuarantinedPersonInformationFirstPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="51" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomUserControl\QuarantinedPersonInformationFirstPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.QuarantinedPersonInformationSecondPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="52.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomUserControl\QuarantinedPersonInformationSecondPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.QuarantinePersonFunctionMenu" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="54.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomUserControl\QuarantinePersonFunctionMenu.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.QuarantinePersonWrapperTab" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="56.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomUserControl\QuarantinePersonWrapperTab.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.QuarantineRoom" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="58" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>CustomUserControl\QuarantineRoom.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.QuarantineRoomFunctionMenu" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="45.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomUserControl\QuarantineRoomFunctionMenu.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.QuarantineRoomInfomation" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="47.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomUserControl\QuarantineRoomInfomation.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.QuarantineRoomWrapperTab" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="49.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomUserControl\QuarantineRoomWrapperTab.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.StaffDetailInfomation" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="58" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomUserControl\StaffDetailInfomation.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.StaffList" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="45.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomUserControl\StaffList.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.CustomUserControl.StaffWrapperTab" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="47.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomUserControl\StaffWrapperTab.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.Model.QLKCLEntities" Collapsed="true">
+    <Position X="45.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAIAAAAAAQAACAgUCAAAADgAAAAECAAAAA=</HashCode>
+      <FileName>Model\DataModel.Context.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.Model.Account" Collapsed="true">
+    <Position X="45.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAgAAAgA=</HashCode>
+      <FileName>Model\Account.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.Model.Address" Collapsed="true">
+    <Position X="18.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAEIAAAAIAQAAAAgACAAIAAAAARABABAAoI=</HashCode>
+      <FileName>Model\Address.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.Model.DestinationHistory" Collapsed="true">
+    <Position X="23" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EEAAAAAAAkAAAgAAAAAAAAAAAAAAABACAAAACEAgAoA=</HashCode>
+      <FileName>Model\DestinationHistory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.Model.HealthInformation" Collapsed="true">
+    <Position X="27.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAQAAEAAAAAAAJIkAABAAoIACAACQAAAABAAEAAgA=</HashCode>
+      <FileName>Model\HealthInformation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.Model.InjectionRecord" Collapsed="true">
+    <Position X="29.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAABAAAAAAAAAAAQAAIAAAAAAIBEAAAAACAAAAgA=</HashCode>
+      <FileName>Model\InjectionRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.Model.QuarantineArea" Collapsed="true">
+    <Position X="47.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAACCAEIAICAAAAAEAAAgA=</HashCode>
+      <FileName>Model\QuarantineArea.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.Model.QuarantinePerson" Collapsed="true">
+    <Position X="38.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EQARIIAAAEBYIgEAAAQAAaAgQUEMIABiCAAIAGQQAgI=</HashCode>
+      <FileName>Model\QuarantinePerson.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.Model.QuarantineRoom" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAIAAQQgAAEAIAAAAAAAAAQAAgA=</HashCode>
+      <FileName>Model\QuarantineRoom.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.Model.Severity" Collapsed="true">
+    <Position X="7.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEIAAAAQAgAAEAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Model\Severity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.Model.Staff" Collapsed="true">
+    <Position X="14" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAARIAAAAEBQCAEAAAQAACAQAEAEIAACAAAIgEAQCgA=</HashCode>
+      <FileName>Model\Staff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.Model.sysdiagram" Collapsed="true">
+    <Position X="49.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAIAAAAAAAAAAAAAAAQAAAFAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\sysdiagram.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.Model.TestingResult" Collapsed="true">
+    <Position X="51" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAACAABAgA=</HashCode>
+      <FileName>Model\TestingResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.Model.DataProvider" Collapsed="true">
+    <Position X="52.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAQAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Model\DataProvider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.Properties.Resources" Collapsed="true">
+    <Position X="54.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.Properties.Settings" Collapsed="true">
+    <Position X="56.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.Utility.ProtocolSettingsLayout" Collapsed="true">
+    <Position X="58" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAgAAIAAAAgAAABAIAAAAgAAIAA=</HashCode>
+      <FileName>Utility\ProtocolSettingsLayout.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.ValidationRules.DateFormat" Collapsed="true">
+    <Position X="54.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ValidationRules\DateFormat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.ValidationRules.NoSpecialChar" Collapsed="true">
+    <Position X="52.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ValidationRules\NoSpecialChar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.ValidationRules.NumberField" Collapsed="true">
+    <Position X="54.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABCAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ValidationRules\NumberField.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.ValidationRules.OnlyNumber" Collapsed="true">
+    <Position X="56.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ValidationRules\OnlyNumber.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.ValidationRules.RequiredField" Collapsed="true">
+    <Position X="52.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ValidationRules\RequiredField.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.ViewModel.BaseViewModel" Collapsed="true">
+    <Position X="22" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\BaseViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.ViewModel.RelayCommand&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="51" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEACAAQAAECAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\BaseViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QuanLyKhuCachLy.ViewModel.DashboardViewModel" Collapsed="true">
+    <Position X="34.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\DashboardViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.ViewModel.DestinationHistoryViewModel" Collapsed="true">
+    <Position X="41" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>wAQiAAGAQQCRQANCARACBAAAAkAACAAAABAIIgAAFAE=</HashCode>
+      <FileName>ViewModel\DestinationHistoryViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.ViewModel.InjectionRecordViewModel" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAIAAEAAUARQAEKIBACAAAAAAAAIIwAIBQAgAAABAA=</HashCode>
+      <FileName>ViewModel\InjectionRecordViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.ViewModel.LoginViewModel" Collapsed="true">
+    <Position X="9.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BQQAAAAAAAAAAAABAAAAQAEAAABAAAAAAIIAAgAAEAA=</HashCode>
+      <FileName>ViewModel\LoginViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.ViewModel.MainViewModel" Collapsed="true">
+    <Position X="16.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>wCBAAQACAAAAAgQNUAEBAAAAQFgoAhAEIAAjCYAAAIA=</HashCode>
+      <FileName>ViewModel\MainViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.ViewModel.NotificationViewModel" Collapsed="true">
+    <Position X="20.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\NotificationViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.ViewModel.QuarantineAreaInformationViewModel" Collapsed="true">
+    <Position X="25.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YBSCBIgIAFoCqpsQEEDWSgCAgshECCEAgLAQBQiAQgk=</HashCode>
+      <FileName>ViewModel\QuarantineAreaInformationViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.ViewModel.QuarantinePersonInRoomViewModel" Collapsed="true">
+    <Position X="32" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\QuarantinePersonInRoomViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.ViewModel.QuarantinePersonViewModel" Collapsed="true">
+    <Position X="32" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>8BQGDoEKYdvzWtMSW1HRGxECCSV9CeEAgvSU5rE0hWk=</HashCode>
+      <FileName>ViewModel\QuarantinePersonViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.ViewModel.QuarantineRoomViewModel" Collapsed="true">
+    <Position X="36.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAIAKECAQogAQgFQDCYJAiCBAAgAgIFApECABAABAM=</HashCode>
+      <FileName>ViewModel\QuarantineRoomViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.ViewModel.ReportViewModel" Collapsed="true">
+    <Position X="43.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\ReportViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.ViewModel.SeverityViewModel" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IIAAAAAAAAAAAQIEIAAAEQAAAQEAQAAAABACAAAAAAA=</HashCode>
+      <FileName>ViewModel\SeverityViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuanLyKhuCachLy.ViewModel.StaffViewModel" Collapsed="true">
+    <Position X="11.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YIACAYAAAQQSYgOWAQCSYAQAHAgRABEAgDCAAFCMAgE=</HashCode>
+      <FileName>ViewModel\StaffViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

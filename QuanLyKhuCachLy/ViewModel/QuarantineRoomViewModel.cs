@@ -168,8 +168,6 @@ namespace QuanLyKhuCachLy.ViewModel
 
         public QuarantineRoomViewModel()
         {
-            DisplayNameFieldHasError = true;
-            CapacityFieldHasError = true;
 
             Tab1 = Visibility.Visible;
             Tab2 = Visibility.Hidden;
@@ -240,10 +238,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             EditRoomCommand = new RelayCommand<Window>((p) =>
             {
-                if (RoomSelectedSeverity == null)
-                    return false;
-                Model.QuarantineRoom QuarantineRoom = new Model.QuarantineRoom { displayName = RoomDisplayName, capacity = RoomCapacity, level = RoomSelectedSeverity.level };
-                if (QuarantineRoom.CheckValidateProperty()) return true;
+                if (!DisplayNameFieldHasError && !CapacityFieldHasError && !SeverityFieldHasError) return true;
                 return false;
             }, (p) =>
             {

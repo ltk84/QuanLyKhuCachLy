@@ -8,25 +8,28 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Name="QuarantinedPersonInformationScreen"
-    d:DesignHeight="768"
-    d:DesignWidth="768"
+    d:DesignHeight="1600"
+    d:DesignWidth="780"
     mc:Ignorable="d">
-    <StackPanel Margin="40,30,40,30">
-        <Grid>
+    <StackPanel Margin="25,45,45,0">
+        <Grid Margin="0,0,0,17">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
-            <Image
+            <Button
                 Grid.Column="0"
-                Width="24"
-                Height="24"
                 Margin="0,0,10,0"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Bottom"
+                VerticalAlignment="Center"
+                Command="{Binding ToMainCommand}"
+                IsEnabled="True"
                 RenderTransformOrigin="0.5,0.5"
-                Source="/Resources/icons/back-icon.png" />
+                Style="{StaticResource MaterialDesignIconButton}"
+                ToolTip="MaterialDesignIconButton">
+                <materialDesign:PackIcon Kind="ArrowLeftCircle" />
+            </Button>
             <TextBlock
                 Grid.Column="1"
                 VerticalAlignment="Center"
@@ -98,84 +101,88 @@
             </Grid>
         </Grid>
         <Border
-            Width="681"
-            Height="534"
-            Margin="0,30,1,0"
+            Width="672"
+            Height="462"
+            Margin="19,13,18.6,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Background="White">
-            <StackPanel>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="450" />
-                    </Grid.RowDefinitions>
-                    <local:QuarantinedPersonInformationFirstPage Panel.ZIndex="-1" Visibility="{Binding TabInformation1}" />
-                    <local:QuarantinedPersonInformationSecondPage Visibility="{Binding TabInformation2}" />
-                </Grid>
-                <Grid
-                    Grid.Row="3"
-                    Height="81"
-                    Margin="100,0,0,0"
-                    VerticalAlignment="Bottom">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="152*" SharedSizeGroup="A" />
-                        <ColumnDefinition Width="300*" SharedSizeGroup="A" />
-                    </Grid.ColumnDefinitions>
-                    <StackPanel
-                        Grid.Column="1"
-                        Width="209"
-                        Margin="176.8,10,-0.2,0"
-                        HorizontalAlignment="Left"
-                        Orientation="Horizontal">
-                        <Grid>
-                            <Button
-                                Width="136"
-                                Height="37"
-                                Margin="24,17,0,17.2"
-                                materialDesign:ButtonAssist.CornerRadius="8"
-                                materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                                Background="#FF434A54"
-                                BorderBrush="{x:Null}"
-                                Command="{Binding NextTabCommandInformation}"
+            Background="Transparent">
+            <ScrollViewer>
+                <StackPanel>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <local:QuarantinedPersonInformationFirstPage Panel.ZIndex="-1" Visibility="{Binding TabInformation1}" />
+                        <local:QuarantinedPersonInformationSecondPage Visibility="{Binding TabInformation2}" />
+                    </Grid>
+                    <Grid
+                        Grid.Row="3"
+                        Height="81"
+                        Margin="100,0,0,0"
+                        VerticalAlignment="Bottom">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="152*" SharedSizeGroup="A" />
+                            <ColumnDefinition Width="300*" SharedSizeGroup="A" />
+                        </Grid.ColumnDefinitions>
+
+
+                        <StackPanel
+                            Grid.Column="1"
+                            Width="209"
+                            Margin="176.8,10,-0.2,0"
+                            HorizontalAlignment="Left"
+                            Orientation="Horizontal">
+                            <Grid>
+                                <Button
+                                    Width="136"
+                                    Height="37"
+                                    Margin="24,17,0,17.2"
+                                    materialDesign:ButtonAssist.CornerRadius="8"
+                                    materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                                    Background="#FF434A54"
+                                    BorderBrush="{x:Null}"
+                                    Command="{Binding NextTabCommandInformation}"
+                                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                                    FontSize="16"
+                                    FontWeight="Bold"
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                    Visibility="{Binding TabInformation1}">
+                                    <TextBlock Text="Trang sau" />
+                                </Button>
+                                <Button
+                                    Width="136"
+                                    Height="37"
+                                    Margin="24,17,0,17"
+                                    materialDesign:ButtonAssist.CornerRadius="8"
+                                    materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                                    Background="#FF434A54"
+                                    BorderBrush="{x:Null}"
+                                    Command="{Binding PreviousTabCommandInformation}"
+                                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                                    FontSize="16"
+                                    FontWeight="Bold"
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                    Visibility="{Binding TabInformation2}">
+                                    <TextBlock Text="Trang trước" />
+                                </Button>
+                            </Grid>
+                            <TextBlock
+                                x:Name="TabIndicatorInformation"
+                                Width="35"
+                                Height="35"
+                                Margin="25,0,0,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
                                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                                 FontSize="16"
                                 FontWeight="Bold"
-                                Style="{StaticResource MaterialDesignRaisedButton}"
-                                Visibility="{Binding TabInformation1}">
-                                <TextBlock Text="Trang sau" />
-                            </Button>
-                            <Button
-                                Width="136"
-                                Height="37"
-                                Margin="24,17,0,17"
-                                materialDesign:ButtonAssist.CornerRadius="8"
-                                materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                                Background="#FF434A54"
-                                BorderBrush="{x:Null}"
-                                Command="{Binding PreviousTabCommandInformation}"
-                                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                                FontSize="16"
-                                FontWeight="Bold"
-                                Style="{StaticResource MaterialDesignRaisedButton}"
-                                Visibility="{Binding TabInformation2}">
-                                <TextBlock Text="Trang trước" />
-                            </Button>
-                        </Grid>
-                        <TextBlock
-                            x:Name="TabIndicatorInformation"
-                            Width="35"
-                            Height="35"
-                            Margin="25,0,0,0"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Bottom"
-                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                            FontSize="16"
-                            FontWeight="Bold"
-                            Foreground="#FF434A54"
-                            Text="{Binding TabPositionInformation}" />
-                    </StackPanel>
-                </Grid>
-            </StackPanel>
+                                Foreground="#FF434A54"
+                                Text="{Binding TabPositionInformation}" />
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
         </Border>
     </StackPanel>
 </UserControl>

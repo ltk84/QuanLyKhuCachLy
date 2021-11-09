@@ -4,138 +4,108 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="768"
-    d:DesignWidth="768"
+    d:DesignHeight="450"
+    d:DesignWidth="750"
     mc:Ignorable="d">
-    <StackPanel Margin="25,25,25,25">
-        <Grid Margin="20,0,20,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="100" />
-            </Grid.ColumnDefinitions>
-            <TextBlock
-                Grid.Column="0"
-                Margin="0,0,32,0.333"
-                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                FontSize="24"
-                FontWeight="Bold"
-                Foreground="#FF363636">
-                DANH SÁCH NGƯỜI CÁCH LY
-            </TextBlock>
-            <Button
-                Grid.ColumnSpan="2"
-                Width="Auto"
-                Height="32"
-                Margin="0,0,0,0"
-                HorizontalAlignment="Right"
+    <StackPanel Width="Auto" Margin="25,45,45,0">
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="0"
+            Style="{StaticResource DashboardTitle}">
+            DANH SÁCH NGƯỜI CÁCH LY
+        </TextBlock>
+        <Button
+            Width="170"
+            Height="32"
+            Margin="0,20,0,0"
+            HorizontalAlignment="Right"
                 Content="Thêm người cách ly"
-                PreviewMouseDown="Button_PreviewMouseDown"
-                Style="{StaticResource DashboardButton}">
-                <Button.ContextMenu>
-                    <ContextMenu>
-                        <ContextMenu.Template>
-                            <ControlTemplate>
-                                <local:AddPersonFunctionMenu />
-                            </ControlTemplate>
-                        </ContextMenu.Template>
-                    </ContextMenu>
-                </Button.ContextMenu>
-            </Button>
-        </Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <DataGrid
+            FontSize="12"
+            PreviewMouseDown="Button_PreviewMouseDown"
+            Style="{StaticResource DashboardButton}">
+            <Button.ContextMenu>
+                <ContextMenu>
+                    <ContextMenu.Template>
+                        <ControlTemplate>
+                            <local:AddPersonFunctionMenu />
+                        </ControlTemplate>
+                    </ContextMenu.Template>
+                </ContextMenu>
+            </Button.ContextMenu>
+        </Button>
+        <DataGrid
                 x:Name="QuarantinedPersonTable"
-                Grid.ColumnSpan="5"
-                Height="650"
-                Margin="20,20,20,20"
-                AutoGenerateColumns="False"
-                BorderBrush="Black"
-                BorderThickness="1"
-                IsReadOnly="True"
+            Height="460"
+            Margin="0,20,0,20"
+            materialDesign:DataGridAssist.CornerRadius="10"
+            AutoGenerateColumns="False"
+            CanUserAddRows="False"
+            CanUserReorderColumns="False"
+            CanUserResizeColumns="False"
+            CanUserResizeRows="False"
+            IsReadOnly="True"
+            SelectionMode="Single"
+            SelectionUnit="FullRow"
                 ItemsSource="{Binding QuarantinePersonList}"
+                SelectedItem="{Binding SelectedItem}"
                 SelectionChanged="QuarantinedPersonTable_SelectionChanged">
-                <DataGrid.Columns>
-                    <DataGridTextColumn
-                        Width="*"
-                        MinWidth="80"
+            <DataGrid.Columns>
+                <materialDesign:DataGridTextColumn
                         Binding="{Binding id}"
-                        Header="Số thứ tự">
-                        <DataGridColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="FontSize" Value="16" />
-                                <Setter Property="FontWeight" Value="Bold" />
-                                <Setter Property="HorizontalAlignment" Value="Center" />
-                                <Setter Property="Background" Value="Transparent" />
-                            </Style>
-                        </DataGridColumn.HeaderStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn
-                        Width="*"
-                        MinWidth="200"
+                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                    ElementStyle="{StaticResource DataGridElement}"
+                    Header="Số thứ tự"
+                    HeaderStyle="{StaticResource DataGridHeader}"
+                    MaxLength="10" />
+                <materialDesign:DataGridTextColumn
                         Binding="{Binding name}"
-                        Header="Họ và tên">
-                        <DataGridColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="FontSize" Value="16" />
-                                <Setter Property="FontWeight" Value="Bold" />
-                                <Setter Property="HorizontalAlignment" Value="Center" />
-                                <Setter Property="Background" Value="Transparent" />
-                            </Style>
-                        </DataGridColumn.HeaderStyle>
-                    </DataGridTextColumn>
-
-                    <DataGridTextColumn
-                        Width="*"
-                        MinWidth="180"
+                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                    ElementStyle="{StaticResource DataGridElement}"
+                    Header="Họ và tên"
+                    HeaderStyle="{StaticResource DataGridHeader}"
+                    MaxLength="30" />
+                <materialDesign:DataGridTextColumn
                         Binding="{Binding dateOfBirth}"
-                        Header="Ngày sinh">
-                        <DataGridColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="FontSize" Value="16" />
-                                <Setter Property="FontWeight" Value="Bold" />
-                                <Setter Property="HorizontalAlignment" Value="Center" />
-                                <Setter Property="Background" Value="Transparent" />
-                            </Style>
-                        </DataGridColumn.HeaderStyle>
-                    </DataGridTextColumn>
-
-                    <DataGridTextColumn
-                        Width="*"
-                        MinWidth="180"
+                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                    ElementStyle="{StaticResource DataGridElement}"
+                    Header="Ngày sinh"
+                    HeaderStyle="{StaticResource DataGridHeader}"
+                    MaxLength="30" />
+                <materialDesign:DataGridTextColumn
                         Binding="{Binding nationality}"
-                        Header="Quốc tịch">
-                        <DataGridColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="FontSize" Value="16" />
-                                <Setter Property="FontWeight" Value="Bold" />
-                                <Setter Property="HorizontalAlignment" Value="Center" />
-                                <Setter Property="Background" Value="Transparent" />
-                            </Style>
-                        </DataGridColumn.HeaderStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn
-                        Width="*"
-                        MinWidth="80"
-                        Header="  ">
-                        <DataGridColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="FontSize" Value="18" />
-                                <Setter Property="FontWeight" Value="Bold" />
-                                <Setter Property="HorizontalAlignment" Value="Center" />
-                                <Setter Property="Background" Value="Transparent" />
-                            </Style>
-                        </DataGridColumn.HeaderStyle>
-                    </DataGridTextColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
+                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                    ElementStyle="{StaticResource DataGridElement}"
+                    Header="Quốc tịch"
+                    HeaderStyle="{StaticResource DataGridHeader}"
+                    MaxLength="30" />
+                <DataGridTemplateColumn
+                    Width="*"
+                    HeaderStyle="{StaticResource DataGridButtonHeader}"
+                    IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button HorizontalAlignment="Right" Style="{StaticResource DataGridButton}">
+                                <materialDesign:PackIcon
+                                    Width="16"
+                                    Height="16"
+                                    Kind="DotsHorizontal" />
+                                <Button.ContextMenu>
+                                    <ContextMenu>
+                                        <ContextMenu.Template>
+                                            <ControlTemplate>
+                                                <local:QuarantinePersonFunctionMenu />
+                                            </ControlTemplate>
+                                        </ContextMenu.Template>
+                                    </ContextMenu>
+                                </Button.ContextMenu>
+
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </StackPanel>
 </UserControl>

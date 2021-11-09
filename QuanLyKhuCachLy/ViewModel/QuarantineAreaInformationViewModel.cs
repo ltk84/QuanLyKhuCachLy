@@ -134,7 +134,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #endregion
 
-        #region DummyData
+        #region list
         // đang dummy data (đáng lẻ nên lấy data từ đâu đó)
         private ObservableCollection<string> _ProvinceList;
         public ObservableCollection<string> ProvinceList
@@ -183,6 +183,54 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #endregion
 
+        #region validation rule
+        private bool _QANameFieldHasError;
+        public bool QANameFieldHasError { get => _QANameFieldHasError; set { _QANameFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _QAProvinceFieldHasError;
+        public bool QAProvinceFieldHasError { get => _QAProvinceFieldHasError; set { _QAProvinceFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _QADistrictFieldHasError;
+        public bool QADistrictFieldHasError { get => _QADistrictFieldHasError; set { _QADistrictFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _QAWardFieldHasError;
+        public bool QAWardFieldHasError { get => _QAWardFieldHasError; set { _QAWardFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _QATestCycleFieldHasError;
+        public bool QATestCycleFieldHasError { get => _QATestCycleFieldHasError; set { _QATestCycleFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _QARequiredDayFieldHasError;
+        public bool QARequiredDayFieldHasError { get => _QARequiredDayFieldHasError; set { _QARequiredDayFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _MNameFieldHasError;
+        public bool MNameFieldHasError { get => _MNameFieldHasError; set { _MNameFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _MNationalityFieldHasError;
+        public bool MNationalityFieldHasError { get => _MNationalityFieldHasError; set { _MNationalityFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _MSexFieldHasError;
+        public bool MSexFieldHasError { get => _MSexFieldHasError; set { _MSexFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _MDateOfBirthFieldHasError;
+        public bool MDateOfBirthFieldHasError { get => _MDateOfBirthFieldHasError; set { _MDateOfBirthFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _MJobTitleFieldHasError;
+        public bool MJobTitleFieldHasError { get => _MJobTitleFieldHasError; set { _MJobTitleFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _MDepartmentFieldHasError;
+        public bool MDepartmentFieldHasError { get => _MDepartmentFieldHasError; set { _MDepartmentFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _MProvinceFieldHasError;
+        public bool MProvinceFieldHasError { get => _MProvinceFieldHasError; set { _MProvinceFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _MDistrictFieldHasError;
+        public bool MDistrictFieldHasError { get => _MDistrictFieldHasError; set { _MDistrictFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _MWardFieldHasError;
+        public bool MWardFieldHasError { get => _MWardFieldHasError; set { _MWardFieldHasError = value; OnPropertyChanged(); } }
+
+        #endregion
+
 
         #endregion
 
@@ -203,48 +251,53 @@ namespace QuanLyKhuCachLy.ViewModel
                 if (TabIndex <= 4) return true;
                 else
                 {
-                    Address QAreaAddress = new Address()
-                    {
-                        province = QASelectedProvince,
-                        district = QASelectedDistrict,
-                        apartmentNumber = QAApartmentNumber,
-                        streetName = QAStreetName,
-                        ward = QASelectedWard
-                    };
+                    //Address QAreaAddress = new Address()
+                    //{
+                    //    province = QASelectedProvince,
+                    //    district = QASelectedDistrict,
+                    //    apartmentNumber = QAApartmentNumber,
+                    //    streetName = QAStreetName,
+                    //    ward = QASelectedWard
+                    //};
 
-                    Address ManagerAddress = new Address()
-                    {
-                        province = ManagerSelectedProvince,
-                        district = ManagerSelectedDistrict,
-                        apartmentNumber = ManagerApartmentNumber,
-                        streetName = ManagerStreetName,
-                        ward = ManagerSelectedWard
-                    };
+                    //Address ManagerAddress = new Address()
+                    //{
+                    //    province = ManagerSelectedProvince,
+                    //    district = ManagerSelectedDistrict,
+                    //    apartmentNumber = ManagerApartmentNumber,
+                    //    streetName = ManagerStreetName,
+                    //    ward = ManagerSelectedWard
+                    //};
 
-                    Staff Manager = new Staff()
-                    {
-                        citizenID = ManagerCitizenID,
-                        dateOfBirth = (DateTime)ManagerDateOfBirth,
-                        department = ManagerDepartment,
-                        healthInsuranceID = ManagerHealthInsuranceID,
-                        jobTitle = ManagerJobTitle,
-                        name = ManagerName,
-                        nationality = ManagerNationality,
-                        phoneNumber = ManagerPhoneNumber,
-                        sex = ManagerSex,
-                    };
+                    //Staff Manager = new Staff()
+                    //{
+                    //    citizenID = ManagerCitizenID,
+                    //    dateOfBirth = (DateTime)ManagerDateOfBirth,
+                    //    department = ManagerDepartment,
+                    //    healthInsuranceID = ManagerHealthInsuranceID,
+                    //    jobTitle = ManagerJobTitle,
+                    //    name = ManagerName,
+                    //    nationality = ManagerNationality,
+                    //    phoneNumber = ManagerPhoneNumber,
+                    //    sex = ManagerSex,
+                    //};
 
-                    QuarantineArea QuarantineArea = new QuarantineArea()
-                    {
-                        name = QAname,
-                        testCycle = QATestCycle,
-                        requiredDayToFinish = QARequiredDayToFinish,
-                    };
+                    //QuarantineArea QuarantineArea = new QuarantineArea()
+                    //{
+                    //    name = QAname,
+                    //    testCycle = QATestCycle,
+                    //    requiredDayToFinish = QARequiredDayToFinish,
+                    //};
 
-                    if (QAreaAddress.CheckValidateProperty() && ManagerAddress.CheckValidateProperty() && Manager.CheckValidateProperty() && QuarantineArea.CheckValidateProperty())
-                    {
+                    //if (QAreaAddress.CheckValidateProperty() && ManagerAddress.CheckValidateProperty() && Manager.CheckValidateProperty() && QuarantineArea.CheckValidateProperty())
+                    //{
+                    //    return true;
+                    //}
+
+                    if (!QANameFieldHasError && !QAProvinceFieldHasError && !QADistrictFieldHasError && !QAWardFieldHasError && !QATestCycleFieldHasError && !QARequiredDayFieldHasError
+                        && !MNameFieldHasError && !MDateOfBirthFieldHasError && !MSexFieldHasError && !MNationalityFieldHasError && !MJobTitleFieldHasError && !MDepartmentFieldHasError
+                        && !MProvinceFieldHasError && !MDistrictFieldHasError && !MWardFieldHasError)
                         return true;
-                    }
 
                 }
                 return false;
@@ -276,7 +329,6 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 "Phu Thanh", "Phu Tho Hoa", "Binh Hung Hoa"
             };
-
             SexList = new ObservableCollection<string>()
             {
                 "Nam", "Nữ"

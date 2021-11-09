@@ -18,8 +18,8 @@ namespace QuanLyKhuCachLy.Model
         public string name { get; set; }
         public int testCycle { get; set; }
         public int requiredDayToFinish { get; set; }
-        public Nullable<int> addressID { get; set; }
-        public Nullable<int> managerID { get; set; }
+        public int addressID { get; set; }
+        public int managerID { get; set; }
 
         public virtual Address Address { get; set; }
         public virtual Staff Staff { get; set; }

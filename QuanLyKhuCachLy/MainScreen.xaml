@@ -14,8 +14,9 @@
     MinWidth="1000"
     MinHeight="680"
     DataContext="{StaticResource MainVM}"
+    WindowState="Maximized"
     mc:Ignorable="d">
-    <Viewbox StretchDirection="Both" Stretch="UniformToFill">
+    <Viewbox Stretch="UniformToFill" StretchDirection="Both">
         <Grid
             Width="1273"
             Height="1111"

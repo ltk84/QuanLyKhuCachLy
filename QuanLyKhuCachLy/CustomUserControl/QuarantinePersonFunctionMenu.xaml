@@ -11,7 +11,7 @@
     Height="332"
     mc:Ignorable="d">
     <Border Padding="0,16,0,16" Style="{StaticResource RecommendationField}">
-        <StackPanel DataContext="{StaticResource RoomVM}">
+        <StackPanel DataContext="{StaticResource PersonVM}">
             <Button
                 Command="{Binding ToViewCommand}"
                 CommandParameter="{Binding ElementName=PersonCM}"
