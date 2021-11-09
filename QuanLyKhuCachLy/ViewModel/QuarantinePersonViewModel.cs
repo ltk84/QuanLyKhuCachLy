@@ -868,6 +868,7 @@ namespace QuanLyKhuCachLy.ViewModel
             IsShortnessOfBreath = false;
             IsSoreThroat = false;
             IsTired = false;
+            QPSelectedLevel = null;
         }
 
         void AddQuarantinePerson()
