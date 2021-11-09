@@ -1,5 +1,6 @@
 ﻿using QuanLyKhuCachLy.Model;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace QuanLyKhuCachLy.ViewModel
@@ -15,6 +16,7 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 _level = value;
                 OnPropertyChanged();
+                MessageBox.Show(level);
             }
         }
 
@@ -60,19 +62,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         private void Init()
         {
-            ListSeverity = new ObservableCollection<Severity>();
-            Severity firstSeverity = new Severity()
-            {
-                level = "1",
-                description = "F1, F2"
-            };
-            Severity secondSeverity = new Severity()
-            {
-                level = "2",
-                description = "F0"
-            };
-            ListSeverity.Add(firstSeverity);
-            ListSeverity.Add(secondSeverity);
+            ListSeverity = new ObservableCollection<Severity>(DataProvider.ins.db.Severities);
 
             RemoveSeverityCommand = new RelayCommand<object>((p) => { return true; }, (o) =>
             {
@@ -94,10 +84,12 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             Severity newSeverity = new Severity()
             {
-                level = "(Mức độ)",
-                description = "(Mô tả)"
+                level = "A",
+                description = "B"
             };
             ListSeverity.Add(newSeverity);
+
+
         }
 
     }

@@ -267,7 +267,7 @@ namespace QuanLyKhuCachLy.ViewModel
         void AddQuarantineRoom()
         {
             // List Severity được tạo từ trước nên không cần thêm
-            Model.QuarantineRoom QuarantineRoom = new Model.QuarantineRoom { displayName = RoomDisplayName, capacity = RoomCapacity, level = RoomSelectedSeverity.level };
+            Model.QuarantineRoom QuarantineRoom = new Model.QuarantineRoom { displayName = RoomDisplayName, capacity = RoomCapacity, levelID = RoomSelectedSeverity.id };
 
             DataProvider.ins.db.QuarantineRooms.Add(QuarantineRoom);
             DataProvider.ins.db.SaveChanges();
@@ -280,7 +280,7 @@ namespace QuanLyKhuCachLy.ViewModel
             Model.QuarantineRoom QuarantineRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == SelectedItem.id).FirstOrDefault();
             QuarantineRoom.displayName = RoomDisplayName;
             QuarantineRoom.capacity = RoomCapacity;
-            QuarantineRoom.level = RoomSelectedSeverity.level;
+            QuarantineRoom.levelID = RoomSelectedSeverity.id;
 
             DataProvider.ins.db.SaveChanges();
 

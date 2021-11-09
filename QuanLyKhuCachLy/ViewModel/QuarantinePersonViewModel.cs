@@ -801,7 +801,7 @@ namespace QuanLyKhuCachLy.ViewModel
             var Person = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == SelectedItem.id).FirstOrDefault();
             var PersonAddress = DataProvider.ins.db.Addresses.Where(x => x.id == Person.addressID).FirstOrDefault();
             var HealthInfor = DataProvider.ins.db.HealthInformations.Where(x => x.id == Person.healthInformationID).FirstOrDefault();
-            var PersonSeverity = DataProvider.ins.db.Severities.Where(x => x.level == Person.level).FirstOrDefault();
+            var PersonSeverity = DataProvider.ins.db.Severities.Where(x => x.id == Person.levelID).FirstOrDefault();
             var PersonRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == Person.roomID).FirstOrDefault();
 
             if (PersonAddress != null)
@@ -838,7 +838,7 @@ namespace QuanLyKhuCachLy.ViewModel
             SelectedItem.nationality = Person.nationality;
             SelectedItem.phoneNumber = Person.phoneNumber;
             SelectedItem.healthInsuranceID = Person.healthInsuranceID;
-            SelectedItem.level = PersonSeverity.level;
+            SelectedItem.levelID = PersonSeverity.id;
             SelectedItem.arrivedDate = Person.arrivedDate;
             SelectedItem.leaveDate = Person.leaveDate;
             Room = PersonRoom;
@@ -920,7 +920,7 @@ namespace QuanLyKhuCachLy.ViewModel
                         nationality = QPSelectedNationality,
                         phoneNumber = QPPhoneNumber,
                         healthInsuranceID = QPHealthInsuranceID,
-                        level = QPSelectedLevel.level,
+                        levelID = QPSelectedLevel.id,
                         quarantineDays = 0,
                         arrivedDate = DateTime.Today,
                         leaveDate = DateTime.Today.AddDays(QAInformation.requiredDayToFinish),

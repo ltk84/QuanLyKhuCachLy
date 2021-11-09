@@ -60,7 +60,7 @@ namespace QuanLyKhuCachLy.Model
         public virtual QuarantinePerson QuarantinePerson { get; set; }
         public bool CheckValidProperty()
         {
-            if (dateArrive == null || quarantinePersonID == null || addressID == null) return false;
+            if (dateArrive == null) return false;
             return true;
         }
     }

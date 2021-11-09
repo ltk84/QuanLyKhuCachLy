@@ -89,12 +89,18 @@
                                 <Button
                                     HorizontalAlignment="Right"
                                     Command="{Binding AddSeverityCommand}"
-                                    DataContext="{StaticResource SeverityVM}"
-                                    Style="{StaticResource DataGridButton}">
+                                    DataContext="{StaticResource SeverityVM}">
                                     <materialDesign:PackIcon
                                         Width="16"
                                         Height="16"
                                         Kind="Add" />
+                                    <Button.Style>
+                                        <Style BasedOn="{StaticResource MaterialDesignIconButton}" TargetType="{x:Type Button}">
+                                            <Setter Property="Width" Value="18" />
+                                            <Setter Property="Height" Value="18" />
+                                            <Setter Property="Foreground" Value="#FF363636" />
+                                        </Style>
+                                    </Button.Style>
                                 </Button>
                             </DataGridTemplateColumn.Header>
                             <DataGridTemplateColumn.CellTemplate>

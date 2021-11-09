@@ -23,6 +23,7 @@ namespace QuanLyKhuCachLy.Model
 
         public int id { get; set; }
 
+
         private string _displayName;
         public string displayName
         {
@@ -43,12 +44,12 @@ namespace QuanLyKhuCachLy.Model
             }
         }
 
-        private string _level;
-        public string level
+        private int _levelID;
+        public int levelID
         {
-            get => _level; set
+            get => _levelID; set
             {
-                _level = value;
+                _levelID = value;
                 OnPropertyChanged();
             }
         }
@@ -59,7 +60,7 @@ namespace QuanLyKhuCachLy.Model
 
         public bool CheckValidateProperty()
         {
-            if (string.IsNullOrWhiteSpace(displayName) || capacity <= 0 || string.IsNullOrWhiteSpace(level))
+            if (string.IsNullOrWhiteSpace(displayName) || capacity <= 0)
                 return false;
 
             return true;

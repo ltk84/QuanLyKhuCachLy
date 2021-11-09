@@ -22,6 +22,17 @@ namespace QuanLyKhuCachLy.Model
             this.QuarantineRooms = new HashSet<QuarantineRoom>();
         }
 
+        private int _id;
+        public int id
+        {
+            get => _id; set
+            {
+                _id = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         private string _level;
         public string level
         {
