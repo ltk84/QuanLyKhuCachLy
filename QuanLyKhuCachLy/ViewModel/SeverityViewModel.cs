@@ -1,5 +1,9 @@
 ﻿using QuanLyKhuCachLy.Model;
+using System;
 using System.Collections.ObjectModel;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -16,7 +20,6 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 _level = value;
                 OnPropertyChanged();
-                MessageBox.Show(level);
             }
         }
 
@@ -54,6 +57,7 @@ namespace QuanLyKhuCachLy.ViewModel
         }
         public ICommand RemoveSeverityCommand { get; set; }
         public ICommand AddSeverityCommand { get; set; }
+        public ICommand EditSeverityCommand { get; set; }
 
         public SeverityViewModel()
         {
@@ -73,23 +77,129 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 AddSeverity();
             });
+
+            EditSeverityCommand = new RelayCommand<object>((p) => { return true; }, (o) =>
+            {
+                EditSeverity();
+            });
         }
 
+        // Chua lam
         private void RemoveSeverity(Severity severity)
         {
             ListSeverity.Remove(severity);
         }
 
+        private void EditSeverity()
+        {
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    var severity = DataProvider.ins.db.Severities.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+
+                    ListSeverity[ListSeverity.IndexOf(severity)].level = SelectedItem.level;
+                    ListSeverity[ListSeverity.IndexOf(severity)].description = SelectedItem.description;
+
+                    severity.level = SelectedItem.level;
+                    severity.description = SelectedItem.description;
+
+                    DataProvider.ins.db.SaveChanges();
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
+        }
+
         private void AddSeverity()
         {
-            Severity newSeverity = new Severity()
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
             {
-                level = "A",
-                description = "B"
-            };
-            ListSeverity.Add(newSeverity);
+                try
+                {
+                    Severity newSeverity = new Severity()
+                    {
+                        level = "(Level)",
+                        description = "(Description)"
+                    };
+                    DataProvider.ins.db.Severities.Add(newSeverity);
+                    DataProvider.ins.db.SaveChanges();
 
+                    ListSeverity.Add(newSeverity);
 
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
         }
 
     }

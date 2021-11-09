@@ -420,6 +420,8 @@ namespace QuanLyKhuCachLy.ViewModel
                     DataProvider.ins.db.SaveChanges();
 
                     isDoneSetUp = true;
+
+                    transaction.Commit();
                 }
                 catch (DbUpdateException e)
                 {
