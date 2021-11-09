@@ -25,6 +25,7 @@
             Width="950"
             Height="800"
             HorizontalAlignment="Center"
+            BorderBrush="Transparent"
             FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
             FontSize="16">
             <TabControl.Resources>
@@ -32,87 +33,11 @@
                     <Setter Property="HorizontalAlignment" Value="Center" />
                 </Style>
             </TabControl.Resources>
-            <TabItem Header="Tab 1" Style="{StaticResource TabControlStyle}">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="0" Grid.Column="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.Column="0" VerticalAlignment="Bottom">
-                            Đối tượng
-                        </TextBlock>
-                        <ComboBox
-                            Grid.Column="1"
-                            VerticalAlignment="Bottom"
-                            materialDesign:HintAssist.Hint="OS">
-                            <ComboBoxItem Content="Android" />
-                            <ComboBoxItem Content="iOS" />
-                            <ComboBoxItem Content="Linux" />
-                            <ComboBoxItem Content="Windows" />
-                        </ComboBox>
-
-                    </Grid>
-                    <Grid Grid.Row="0" Grid.Column="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.Column="0" VerticalAlignment="Bottom">
-                            Thời gian
-                        </TextBlock>
-                        <DatePicker
-                            Grid.Column="1"
-                            Width="100"
-                            materialDesign:HintAssist.Hint="Pick Date"
-                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
-                        <DatePicker
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            Width="100"
-                            materialDesign:HintAssist.Hint="Pick Date"
-                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
-                    </Grid>
-                    <StackPanel
-                        Grid.Row="1"
-                        Grid.ColumnSpan="3"
-                        Orientation="Horizontal">
-                        <TextBlock>
-                            Báo cáo
-                        </TextBlock>
-                        <StackPanel Style="{StaticResource MenuStackPanel}">
-                            <materialDesign:PackIcon Kind="PrinterOutline" Style="{StaticResource MenuIcon}" />
-                            <TextBlock Style="{StaticResource MenuText}">
-                                In
-                            </TextBlock>
-                        </StackPanel>
-                        <StackPanel Style="{StaticResource MenuStackPanel}">
-                            <materialDesign:PackIcon Kind="Export" Style="{StaticResource MenuIcon}" />
-                            <TextBlock Style="{StaticResource MenuText}">
-                                Xuất
-                            </TextBlock>
-                        </StackPanel>
-                    </StackPanel>
-                </Grid>
+            <TabItem Header="Người cách ly" Style="{StaticResource TabControlStyle}">
+                <local:StatisticFirstTab />
             </TabItem>
-            <TabItem Header="Tab 2" Style="{StaticResource TabControlStyle}" />
+            <TabItem Header="Khu cách ly" Style="{StaticResource TabControlStyle}" />
+            <TabItem Header="Thông tin xét nghiệm" Style="{StaticResource TabControlStyle}" />
         </TabControl>
     </Grid>
 </UserControl>

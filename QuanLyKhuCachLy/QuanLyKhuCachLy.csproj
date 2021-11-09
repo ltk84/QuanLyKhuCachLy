@@ -93,6 +93,9 @@
     <Compile Include="CustomUserControl\QuarantineRoomWrapperTab.xaml.cs">
       <DependentUpon>QuarantineRoomWrapperTab.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomUserControl\StatisticFirstTab.xaml.cs">
+      <DependentUpon>StatisticFirstTab.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomUserControl\StatisticWrapper.xaml.cs">
       <DependentUpon>StatisticWrapper.xaml</DependentUpon>
     </Compile>
@@ -264,6 +267,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomUserControl\QuarantineRoomWrapperTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\StatisticFirstTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
