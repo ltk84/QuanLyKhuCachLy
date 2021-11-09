@@ -113,7 +113,7 @@
                 Grid.Row="6"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="440 Lê Văn Quới, Bình Hưng Hòa A, Bình Tân, Hồ Chí Minh" />
+                Text="{Binding DisplayAddress}" />
         </Grid>
         <Separator Margin="0,20,0,20" Background="#1E434A54" />
 
@@ -140,7 +140,7 @@
                 Grid.Row="0"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="Sốt, ho, khó thở" />
+                Text="{Binding DisplayHealthInfor}" />
 
             <TextBlock
                 Grid.Row="1"

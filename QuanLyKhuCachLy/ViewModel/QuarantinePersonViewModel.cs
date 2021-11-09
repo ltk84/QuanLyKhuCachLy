@@ -1,6 +1,7 @@
 ﻿using QuanLyKhuCachLy.CustomUserControl;
 using QuanLyKhuCachLy.Model;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
@@ -285,6 +286,9 @@ namespace QuanLyKhuCachLy.ViewModel
 
         private string _QPSelectedDistrict;
         public string QPSelectedDistrict { get => _QPSelectedDistrict; set { _QPSelectedDistrict = value; OnPropertyChanged(); } }
+
+        private string _DisplayAddress;
+        public string DisplayAddress { get => _DisplayAddress; set { _DisplayAddress = value; OnPropertyChanged(); } }
         #endregion
 
         #region health information
@@ -365,6 +369,16 @@ namespace QuanLyKhuCachLy.ViewModel
             get => _IsDisease; set
             {
                 _IsDisease = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _DisplayHealthInfor;
+        public string DisplayHealthInfor
+        {
+            get => _DisplayHealthInfor; set
+            {
+                _DisplayHealthInfor = value;
                 OnPropertyChanged();
             }
         }
@@ -676,7 +690,7 @@ namespace QuanLyKhuCachLy.ViewModel
             });
 
 
-            AddCommand = new RelayCommand<object>((p) =>
+            AddCommand = new RelayCommand<Window>((p) =>
             {
                 if (!NameFieldHasError && !NationalityFieldHasError && !SexFieldHasError && !ProvinceFieldHasError && !DistrictFieldHasError && !WardFieldHasError && !SeverityFieldHasError)
                 {
@@ -686,6 +700,8 @@ namespace QuanLyKhuCachLy.ViewModel
             }, (p) =>
             {
                 AddQuarantinePerson();
+                p.Close();
+                TabIndex = 1;
             });
 
             EditCommand = new RelayCommand<object>((p) =>
@@ -732,6 +748,54 @@ namespace QuanLyKhuCachLy.ViewModel
         }
 
         #region method
+        void InitDisplayAddress(Address PersonAddress)
+        {
+            if (PersonAddress == null) return;
+            List<string> list = new List<string>()
+            {
+                PersonAddress.apartmentNumber,
+                PersonAddress.streetName,
+                PersonAddress.ward,
+                PersonAddress.district,
+                PersonAddress.province
+            };
+
+            DisplayAddress = string.Empty;
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (!string.IsNullOrWhiteSpace(list[i]))
+                {
+                    DisplayAddress += list[i];
+                }
+                if (i != list.Count - 1)
+                {
+                    if (i != 0)
+                        DisplayAddress += ", ";
+                    else DisplayAddress += " ";
+                }
+            }
+        }
+
+        void InitDisplayHealthInformation(HealthInformation HF)
+        {
+            DisplayHealthInfor = string.Empty;
+            if (HF.isCough) DisplayHealthInfor += "Ho, ";
+            if (HF.isDisease) DisplayHealthInfor += "Có bệnh nền, ";
+            if (HF.isFever) DisplayHealthInfor += "Sốt, ";
+            if (HF.isLossOfTatse) DisplayHealthInfor += "Mất mùi vị, ";
+            if (HF.isShortnessOfBreath) DisplayHealthInfor += "Khó thở, ";
+            if (HF.isSoreThroat) DisplayHealthInfor += "Đau họng, ";
+            if (HF.isTired) DisplayHealthInfor += "Mệt mỏi, ";
+            if (HF.isOtherSymptoms) DisplayHealthInfor += "Triệu chứng khác";
+            else
+            {
+                if (DisplayHealthInfor != "")
+                {
+                    DisplayHealthInfor = DisplayHealthInfor.Remove(DisplayHealthInfor.LastIndexOf(","));
+                }
+            }
+        }
+
         void SetSelectedItemToProperty()
         {
             var Person = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == SelectedItem.id).FirstOrDefault();
@@ -778,6 +842,8 @@ namespace QuanLyKhuCachLy.ViewModel
             SelectedItem.arrivedDate = Person.arrivedDate;
             SelectedItem.leaveDate = Person.leaveDate;
             Room = PersonRoom;
+            InitDisplayAddress(PersonAddress);
+            InitDisplayHealthInformation(HealthInfor);
         }
 
         void ClearData()

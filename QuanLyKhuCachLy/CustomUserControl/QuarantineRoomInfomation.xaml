@@ -9,7 +9,10 @@
     d:DesignHeight="700"
     d:DesignWidth="780"
     mc:Ignorable="d">
+
+
     <StackPanel Margin="25,45,45,0">
+
         <Grid Margin="0,0,0,17">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -287,4 +290,5 @@
 
 
     </StackPanel>
+
 </UserControl>

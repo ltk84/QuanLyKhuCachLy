@@ -91,6 +91,7 @@
                                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
                                 Background="#FF1D9583"
                                 BorderBrush="{x:Null}"
+                                CommandParameter="{Binding ElementName=AddQuarantinedPersonScreen}"
                                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                                 FontSize="12"
                                 FontWeight="Bold"
@@ -104,7 +105,6 @@
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
-
                                 </Button.Style>
                                 <TextBlock FontSize="16">
                                     <TextBlock.Style>

@@ -11,7 +11,7 @@
     mc:Ignorable="d">
     <Grid>
         <local:ListQuarantinedPerson Visibility="{Binding TabList}" />
-        <local:QuarantinedPersonInformation Visibility="{Binding TabInformation}" Margin="102,4,100,4" />
+        <local:QuarantinedPersonInformation Visibility="{Binding TabInformation}" />
 
     </Grid>
 </UserControl>
