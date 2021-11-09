@@ -9,52 +9,16 @@
 
 namespace QuanLyKhuCachLy.Model
 {
-    using QuanLyKhuCachLy.ViewModel;
     using System;
     using System.Collections.Generic;
-
-    public partial class InjectionRecord : BaseViewModel
+    
+    public partial class InjectionRecord
     {
         public int id { get; set; }
-
-        private System.DateTime _dateInjection;
-        public System.DateTime dateInjection
-        {
-            get => _dateInjection; set
-            {
-                _dateInjection = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _vaccineName;
-        public string vaccineName
-        {
-            get => _vaccineName; set
-            {
-                _vaccineName = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private int _quarantinePersonID;
-        public int quarantinePersonID
-        {
-            get => _quarantinePersonID; set
-            {
-                _quarantinePersonID = value;
-                OnPropertyChanged();
-            }
-        }
-
+        public System.DateTime dateInjection { get; set; }
+        public string vaccineName { get; set; }
+        public int quarantinePersonID { get; set; }
+    
         public virtual QuarantinePerson QuarantinePerson { get; set; }
-
-        public bool CheckValidateProperty()
-        {
-            if (string.IsNullOrWhiteSpace(vaccineName))
-                return false;
-
-            return true;
-        }
     }
 }

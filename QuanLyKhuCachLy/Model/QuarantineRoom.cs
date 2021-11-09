@@ -9,61 +9,24 @@
 
 namespace QuanLyKhuCachLy.Model
 {
-    using QuanLyKhuCachLy.ViewModel;
     using System;
     using System.Collections.Generic;
-
-    public partial class QuarantineRoom : BaseViewModel
+    
+    public partial class QuarantineRoom
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public QuarantineRoom()
         {
             this.QuarantinePersons = new HashSet<QuarantinePerson>();
         }
-
+    
         public int id { get; set; }
-
-
-        private string _displayName;
-        public string displayName
-        {
-            get => _displayName; set
-            {
-                _displayName = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private int _capacity;
-        public int capacity
-        {
-            get => _capacity; set
-            {
-                _capacity = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private int _levelID;
-        public int levelID
-        {
-            get => _levelID; set
-            {
-                _levelID = value;
-                OnPropertyChanged();
-            }
-        }
-
+        public string displayName { get; set; }
+        public int capacity { get; set; }
+        public int levelID { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QuarantinePerson> QuarantinePersons { get; set; }
         public virtual Severity Severity { get; set; }
-
-        public bool CheckValidateProperty()
-        {
-            if (string.IsNullOrWhiteSpace(displayName) || capacity <= 0)
-                return false;
-
-            return true;
-        }
     }
 }

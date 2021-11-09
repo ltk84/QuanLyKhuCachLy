@@ -9,11 +9,10 @@
 
 namespace QuanLyKhuCachLy.Model
 {
-    using QuanLyKhuCachLy.ViewModel;
     using System;
     using System.Collections.Generic;
-
-    public partial class Address : BaseViewModel
+    
+    public partial class Address
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Address()
@@ -23,59 +22,14 @@ namespace QuanLyKhuCachLy.Model
             this.QuarantinePersons = new HashSet<QuarantinePerson>();
             this.Staffs = new HashSet<Staff>();
         }
-
+    
         public int id { get; set; }
-
-        private string _province;
-        public string province
-        {
-            get => _province; set
-            {
-                _province = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _district;
-        public string district
-        {
-            get => _district; set
-            {
-                _district = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _ward;
-        public string ward
-        {
-            get => _ward; set
-            {
-                _ward = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _streetName;
-        public string streetName
-        {
-            get => _streetName; set
-            {
-                _streetName = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _apartmentNumber;
-        public string apartmentNumber
-        {
-            get => _apartmentNumber; set
-            {
-                _apartmentNumber = value;
-                OnPropertyChanged();
-            }
-        }
-
+        public string province { get; set; }
+        public string district { get; set; }
+        public string ward { get; set; }
+        public string streetName { get; set; }
+        public string apartmentNumber { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DestinationHistory> DestinationHistories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -84,15 +38,5 @@ namespace QuanLyKhuCachLy.Model
         public virtual ICollection<QuarantinePerson> QuarantinePersons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Staff> Staffs { get; set; }
-
-        public bool CheckValidateProperty()
-        {
-            if (string.IsNullOrWhiteSpace(province) || string.IsNullOrWhiteSpace(district) || string.IsNullOrWhiteSpace(ward)
-                || string.IsNullOrWhiteSpace(streetName) || string.IsNullOrWhiteSpace(apartmentNumber))
-                return false;
-
-
-            return true;
-        }
     }
 }
