@@ -9,7 +9,7 @@
     d:DesignHeight="450"
     d:DesignWidth="750"
     mc:Ignorable="d">
-    <StackPanel Width="Auto" Margin="25,45,45,0">
+    <StackPanel Width="Auto" Margin="25,25,45,0">
         <TextBlock
             Grid.Row="0"
             Grid.Column="0"

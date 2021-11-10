@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
@@ -18,6 +19,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid
             Grid.Row="0"
@@ -114,5 +116,20 @@
                 </TextBlock>
             </StackPanel>
         </StackPanel>
+        <Grid
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            Height="450"
+            VerticalAlignment="Top">
+            <lvc:CartesianChart LegendLocation="Bottom" Series="{Binding SeriesCollection}">
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Salesman" Labels="{Binding Labels}" />
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Sold Apps" LabelFormatter="{Binding Formatter}" />
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+        </Grid>
+
     </Grid>
 </UserControl>

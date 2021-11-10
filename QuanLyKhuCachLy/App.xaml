@@ -5,7 +5,7 @@
     xmlns:userControl="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:viewModel="clr-namespace:QuanLyKhuCachLy.ViewModel"
     ShutdownMode="OnMainWindowClose"
-    StartupUri="/CustomUserControl/StatisticWrapper.xaml">
+    StartupUri="MainScreen.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -44,6 +44,10 @@
 
             <DataTemplate DataType="{x:Type viewModel:QuarantinePersonViewModel}">
                 <userControl:ListQuarantinedPerson />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:ReportViewModel}">
+                <userControl:StatisticWrapper />
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

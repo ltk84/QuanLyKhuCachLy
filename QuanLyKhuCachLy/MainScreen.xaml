@@ -9,13 +9,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Name="MainWindow"
     Title="MainScreen"
-    Width="{Binding SystemParameters.PrimaryScreenWidth}"
-    Height="{Binding SystemParameters.PrimaryScreenHeight}"
     MinWidth="1000"
     MinHeight="680"
     DataContext="{StaticResource MainVM}"
     mc:Ignorable="d">
-    <Viewbox StretchDirection="Both" Stretch="UniformToFill">
+    <Viewbox Stretch="UniformToFill" StretchDirection="Both">
         <Grid
             Width="1273"
             Height="1111"
@@ -26,7 +24,7 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" HorizontalAlignment="Left">
                 <Canvas>
-                    <StackPanel Height="1024">
+                    <StackPanel Height="Auto">
                         <Border
                             Width="276"
                             HorizontalAlignment="Left"

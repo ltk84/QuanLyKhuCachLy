@@ -10,7 +10,7 @@
                     <StackPanel>
                         <Label
                             x:Name="Label"
-                            Width="200"
+                            Width="308"
                             HorizontalAlignment="Stretch"
                             HorizontalContentAlignment="Center">
                             <ContentPresenter

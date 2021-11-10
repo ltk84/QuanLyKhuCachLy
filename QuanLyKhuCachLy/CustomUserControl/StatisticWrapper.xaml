@@ -8,8 +8,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Width="Auto"
     Height="Auto"
+    DataContext="{StaticResource ReportVM}"
     mc:Ignorable="d">
-    <Grid>
+    <Grid Width="Auto" Margin="25,45,45,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
