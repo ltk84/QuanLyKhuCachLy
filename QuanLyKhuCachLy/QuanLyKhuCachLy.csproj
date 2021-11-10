@@ -99,6 +99,18 @@
     </Compile>
     <Compile Include="CustomUserControl\AddStaffSecondScreen.xaml.cs">
       <DependentUpon>AddStaffSecondScreen.xaml</DependentUpon>
+      </Compile>
+    <Compile Include="CustomUserControl\EditQuarantinedPersonInformation.xaml.cs">
+      <DependentUpon>EditQuarantinedPersonInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditQuarantinedPersonInformationFisrtPage.xaml.cs">
+      <DependentUpon>EditQuarantinedPersonInformationFisrtPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditQuarantinedPersonInformationSecondPage.xaml.cs">
+      <DependentUpon>EditQuarantinedPersonInformationSecondPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditQuarantinedPersonInformationThirdPage.xaml.cs">
+      <DependentUpon>EditQuarantinedPersonInformationThirdPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomUserControl\QuarantinePersonWrapperTab.xaml.cs">
       <DependentUpon>QuarantinePersonWrapperTab.xaml</DependentUpon>
@@ -285,7 +297,20 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CustomUserControl\AddStaffSecondScreen.xaml">
+    <Page Include="CustomUserControl\AddStaffSecondScreen.xaml" />
+    <Page Include="CustomUserControl\EditQuarantinedPersonInformation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\EditQuarantinedPersonInformationFisrtPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\EditQuarantinedPersonInformationSecondPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\EditQuarantinedPersonInformationThirdPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
