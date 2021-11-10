@@ -25,6 +25,7 @@ namespace QuanLyKhuCachLy.ViewModel
         private Visibility _TabEdit2;
         private Visibility _TabEdit3;
         private Visibility _ButtonReturn;
+        private Visibility _ButtonEditReturn;
         private Visibility _TabList;
         private Visibility _TabInformation;
         public Visibility TabList
@@ -46,6 +47,14 @@ namespace QuanLyKhuCachLy.ViewModel
             get => _ButtonReturn; set
             {
                 _ButtonReturn = value; OnPropertyChanged();
+            }
+        }
+
+        public Visibility ButtonEditReturn
+        {
+            get => _ButtonEditReturn; set
+            {
+                _ButtonEditReturn = value; OnPropertyChanged();
             }
         }
         public Visibility TabInformation1
@@ -624,6 +633,7 @@ namespace QuanLyKhuCachLy.ViewModel
             TabIndexInformation = 1;
             TabPositionInformation = $"{TabIndexInformation}/2";
             ButtonReturn = Visibility.Hidden;
+            ButtonEditReturn = Visibility.Hidden;
             TabIndex = 1;
             TabPosition = $"{TabIndex}/3";
             TabEditIndex = 1;
