@@ -18,7 +18,7 @@ namespace QuanLyKhuCachLy.CustomUserControl
     /// <summary>
     /// Interaction logic for AddPersonFunctionMenu.xaml
     /// </summary>
-    public partial class AddPersonFunctionMenu : UserControl
+    public partial class AddPersonFunctionMenu 
     {
         public AddPersonFunctionMenu()
         {

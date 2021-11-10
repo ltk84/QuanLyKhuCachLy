@@ -9,7 +9,7 @@
     d:DesignHeight="757"
     d:DesignWidth="705"
     mc:Ignorable="d">
-    <StackPanel Margin="40,30,40,30" DataContext="{Binding RelativeSource={RelativeSource self}}">
+    <StackPanel Margin="40,30,40,30">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -24,7 +24,7 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 RenderTransformOrigin="0.5,0.5"
-                Source="/Resources/icons/back-icon.png" />
+                Source="/QuanLyKhuCachLy;component/Resources/icons/back-icon.png" />
             <TextBlock
                 Grid.Column="1"
                 VerticalAlignment="Center"

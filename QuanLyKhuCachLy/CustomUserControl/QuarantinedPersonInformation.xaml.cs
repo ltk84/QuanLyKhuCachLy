@@ -6,7 +6,7 @@ namespace QuanLyKhuCachLy.CustomUserControl
     /// <summary>
     /// Interaction logic for QuarantinedPersonInformation.xaml
     /// </summary>
-    public partial class QuarantinedPersonInformation : UserControl
+    public partial class QuarantinedPersonInformation 
     {
         public QuarantinedPersonInformation()
         {
