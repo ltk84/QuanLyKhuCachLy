@@ -28,8 +28,6 @@ namespace QuanLyKhuCachLy.Model
         {
             if (string.IsNullOrWhiteSpace(name) || testCycle < 0 || requiredDayToFinish < 0)
                 return false;
-            //if (name.Length > LIMIT)
-            //    return false;
             return true;
         }
     }

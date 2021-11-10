@@ -91,7 +91,6 @@ namespace QuanLyKhuCachLy.Model
                 || string.IsNullOrWhiteSpace(streetName) || string.IsNullOrWhiteSpace(apartmentNumber))
                 return false;
 
-
             return true;
         }
     }

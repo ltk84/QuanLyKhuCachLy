@@ -110,7 +110,6 @@
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Setter Property="Text" Value="Tiếp theo" />
-
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding ElementName=TabIndicator, Path=Text}" Value="3/3">
                                                     <Setter Property="Text" Value="Thêm" />

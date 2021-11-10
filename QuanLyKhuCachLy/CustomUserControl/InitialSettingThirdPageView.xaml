@@ -167,12 +167,14 @@
                     </TextBlock>
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập số căn cước công dân"
+                        utility:ProtocolSettingsLayout.MVVMHasError="{Binding MCitizenIDFieldHasError}"
                         MaxLength="20"
                         PreviewTextInput="TextBox_PreviewTextInput_1"
                         Style="{StaticResource TextInputField}">
                         <TextBox.Text>
                             <Binding Path="ManagerCitizenID" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
+                                    <vr:RequiredField />
                                     <vr:OnlyNumber />
                                 </Binding.ValidationRules>
                             </Binding>
@@ -241,12 +243,14 @@
                     </TextBlock>
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập số điện thoại"
+                        utility:ProtocolSettingsLayout.MVVMHasError="{Binding MPhoneNumberFieldHasError}"
                         MaxLength="20"
                         PreviewTextInput="TextBox_PreviewTextInput"
                         Style="{StaticResource TextInputField}">
                         <TextBox.Text>
                             <Binding Path="ManagerPhoneNumber" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
+                                    <vr:RequiredField />
                                     <vr:OnlyNumber />
                                 </Binding.ValidationRules>
                             </Binding>

@@ -81,12 +81,20 @@
                                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
                                 Background="#FF1D9583"
                                 BorderBrush="{x:Null}"
-                                Command="{Binding NextTabCommand}"
                                 CommandParameter="{Binding ElementName=InitScreen}"
                                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                                 FontSize="12"
-                                FontWeight="Bold"
-                                Style="{StaticResource MaterialDesignRaisedButton}">
+                                FontWeight="Bold">
+                                <Button.Style>
+                                    <Style BasedOn="{StaticResource MaterialDesignRaisedButton}" TargetType="{x:Type Button}">
+                                        <Setter Property="Command" Value="{Binding NextTabCommand}" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=TabIndicator, Path=Text}" Value="4/4">
+                                                <Setter Property="Command" Value="{Binding SetUpCommand}" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
                                 <TextBlock FontSize="16">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">

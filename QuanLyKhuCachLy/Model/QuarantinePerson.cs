@@ -95,12 +95,12 @@ namespace QuanLyKhuCachLy.Model
             }
         }
 
-        private string _level;
-        public string level
+        private int _levelID;
+        public int levelID
         {
-            get => _level; set
+            get => _levelID; set
             {
-                _level = value;
+                _levelID = value;
                 OnPropertyChanged();
             }
         }
@@ -178,7 +178,7 @@ namespace QuanLyKhuCachLy.Model
         {
             if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(sex) || string.IsNullOrWhiteSpace(citizenID)
                 || string.IsNullOrWhiteSpace(nationality) || string.IsNullOrWhiteSpace(healthInsuranceID) || string.IsNullOrWhiteSpace(phoneNumber)
-                || string.IsNullOrWhiteSpace(level) || arrivedDate < leaveDate || dateOfBirth <= arrivedDate || quarantineDays < 0)
+                || arrivedDate < leaveDate || dateOfBirth <= arrivedDate || quarantineDays < 0)
                 return false;
 
             return true;
