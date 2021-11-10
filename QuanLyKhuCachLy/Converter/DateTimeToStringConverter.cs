@@ -13,9 +13,9 @@ namespace QuanLyKhuCachLy.Converter
         {
             //DateTime dateTime = (DateTime)value;
             //return dateTime;
-            string dateTimeStr = value as string;
+            string dateTimeStr = value.ToString();
             DateTime dateTime;
-            if (DateTime.TryParse(dateTimeStr, out dateTime))
+            if (!DateTime.TryParse(dateTimeStr, out dateTime))
             {
                 return DateTime.Now;
             }

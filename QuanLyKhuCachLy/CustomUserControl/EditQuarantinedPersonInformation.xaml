@@ -31,10 +31,7 @@
                         </Grid.RowDefinitions>
                         <control:EditQuarantinedPersonInformationFisrtPage Panel.ZIndex="-1" Visibility="{Binding TabEdit1}" />
                         <control:EditQuarantinedPersonInformationSecondPage Visibility="{Binding TabEdit2}" />
-                        <control:EditQuarantinedPersonInformationThirdPage
-                            Panel.ZIndex="1"
-                           
-                            Visibility="{Binding TabEdit3}" />
+                        <control:EditQuarantinedPersonInformationThirdPage Panel.ZIndex="1" Visibility="{Binding TabEdit3}" />
                     </Grid>
                     <Grid
                         Grid.Row="3"
@@ -79,7 +76,7 @@
                                 FontSize="16"
                                 FontWeight="Bold"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
-                                Visibility="{Binding ButtonReturn}">
+                                Visibility="{Binding ButtonEditReturn}">
                                 <TextBlock Text="Trở lại" />
                             </Button>
                             <Button

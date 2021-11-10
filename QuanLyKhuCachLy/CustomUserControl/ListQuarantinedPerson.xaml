@@ -21,7 +21,7 @@
             Height="32"
             Margin="0,20,0,0"
             HorizontalAlignment="Right"
-                Content="Thêm người cách ly"
+            Content="Thêm người cách ly"
             FontSize="12"
             PreviewMouseDown="Button_PreviewMouseDown"
             Style="{StaticResource DashboardButton}">
@@ -36,7 +36,7 @@
             </Button.ContextMenu>
         </Button>
         <DataGrid
-                x:Name="QuarantinedPersonTable"
+            x:Name="QuarantinedPersonTable"
             Height="460"
             Margin="0,20,0,20"
             materialDesign:DataGridAssist.CornerRadius="10"
@@ -46,35 +46,35 @@
             CanUserResizeColumns="False"
             CanUserResizeRows="False"
             IsReadOnly="True"
+            ItemsSource="{Binding QuarantinePersonList}"
+            SelectedItem="{Binding SelectedItem}"
+            SelectionChanged="QuarantinedPersonTable_SelectionChanged"
             SelectionMode="Single"
-            SelectionUnit="FullRow"
-                ItemsSource="{Binding QuarantinePersonList}"
-                SelectedItem="{Binding SelectedItem}"
-                SelectionChanged="QuarantinedPersonTable_SelectionChanged">
+            SelectionUnit="FullRow">
             <DataGrid.Columns>
                 <materialDesign:DataGridTextColumn
-                        Binding="{Binding id}"
+                    Binding="{Binding id}"
                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                     ElementStyle="{StaticResource DataGridElement}"
                     Header="Số thứ tự"
                     HeaderStyle="{StaticResource DataGridHeader}"
                     MaxLength="10" />
                 <materialDesign:DataGridTextColumn
-                        Binding="{Binding name}"
+                    Binding="{Binding name}"
                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                     ElementStyle="{StaticResource DataGridElement}"
                     Header="Họ và tên"
                     HeaderStyle="{StaticResource DataGridHeader}"
                     MaxLength="30" />
                 <materialDesign:DataGridTextColumn
-                        Binding="{Binding dateOfBirth}"
+                    Binding="{Binding dateOfBirth}"
                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                     ElementStyle="{StaticResource DataGridElement}"
                     Header="Ngày sinh"
                     HeaderStyle="{StaticResource DataGridHeader}"
                     MaxLength="30" />
                 <materialDesign:DataGridTextColumn
-                        Binding="{Binding nationality}"
+                    Binding="{Binding nationality}"
                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                     ElementStyle="{StaticResource DataGridElement}"
                     Header="Quốc tịch"

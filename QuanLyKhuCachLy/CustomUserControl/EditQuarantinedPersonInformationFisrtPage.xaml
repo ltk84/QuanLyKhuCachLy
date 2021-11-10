@@ -1,5 +1,6 @@
-﻿<UserControl x:Class="QuanLyKhuCachLy.CustomUserControl.EditQuarantinedPersonInformationFisrtPage"
-            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<UserControl
+    x:Class="QuanLyKhuCachLy.CustomUserControl.EditQuarantinedPersonInformationFisrtPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:convert="clr-namespace:QuanLyKhuCachLy.Converter"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -19,7 +20,7 @@
             FontWeight="Bold">
             Thông tin người cách ly
         </TextBlock>
-        
+
         <Grid Grid.Row="0" Margin="30,0,30,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition SharedSizeGroup="A" />
@@ -62,8 +63,7 @@
                     materialDesign:HintAssist.Hint="Nhập họ và tên"
                     utility:ProtocolSettingsLayout.MVVMHasError="{Binding NameFieldHasError}"
                     MaxLength="30"
-                    Style="{StaticResource TextInputField}"
-                    >
+                    Style="{StaticResource TextInputField}">
                     <TextBox.Text>
                         <Binding Path="QPName" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
@@ -118,7 +118,6 @@
                 <DatePicker materialDesign:HintAssist.Hint="Nhập ngày sinh" Style="{StaticResource DatePickerField}">
                     <DatePicker.SelectedDate>
                         <Binding
-                            Mode="OneWayToSource"
                             Path="QPDateOfBirth"
                             StringFormat="dd/MM/yyyy"
                             UpdateSourceTrigger="PropertyChanged">
