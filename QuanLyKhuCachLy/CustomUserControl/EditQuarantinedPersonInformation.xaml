@@ -79,7 +79,7 @@
                                 FontSize="16"
                                 FontWeight="Bold"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
-                                Visibility="{Binding ButtonReturn}">
+                                Visibility="{Binding ButtonEditReturn}">
                                 <TextBlock Text="Trở lại" />
                             </Button>
                             <Button
