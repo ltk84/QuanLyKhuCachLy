@@ -708,9 +708,13 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 ClearData();
                 AddQuarantinedPerson addQuarantinePerson = new AddQuarantinedPerson();
-                addQuarantinePerson.ShowDialog();
-                TabIndex = 1;
+                addQuarantinePerson.ShowDialog();              
                 ClearData();
+                TabIndex = 1;
+                Tab1 = Visibility.Visible;
+                Tab2 = Visibility.Hidden;
+                Tab3 = Visibility.Hidden;
+                TabPosition = $"{TabIndex}/3";
             });
 
             ToAddExcelCommand = new RelayCommand<Window>((p) =>
@@ -1192,8 +1196,8 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 TabEditIndex--;
             }
-            if (TabEditIndex <= 2)
-                TabEditPosition = $"{TabEditIndex}/2";
+            if (TabEditIndex <= 3)
+                TabEditPosition = $"{TabEditIndex}/3";
 
             switch (TabEditIndex)
             {
