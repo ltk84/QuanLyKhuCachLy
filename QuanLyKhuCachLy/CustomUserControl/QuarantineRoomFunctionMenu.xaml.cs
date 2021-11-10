@@ -18,7 +18,7 @@ namespace QuanLyKhuCachLy.CustomUserControl
     /// <summary>
     /// Interaction logic for QuarantineRoomFunctionMenu.xaml
     /// </summary>
-    public partial class QuarantineRoomFunctionMenu : UserControl
+    public partial class QuarantineRoomFunctionMenu 
     {
         public QuarantineRoomFunctionMenu()
         {

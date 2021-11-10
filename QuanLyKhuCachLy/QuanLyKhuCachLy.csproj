@@ -85,6 +85,15 @@
     <Compile Include="CustomUserControl\AddRoomFunctionMenu.xaml.cs">
       <DependentUpon>AddRoomFunctionMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomUserControl\AddStaffFirstScreen.xaml.cs">
+      <DependentUpon>AddStaffFirstScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\AddStaffScreen.xaml.cs">
+      <DependentUpon>AddStaffScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\AddStaffSecondScreen.xaml.cs">
+      <DependentUpon>AddStaffSecondScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomUserControl\QuarantinePersonWrapperTab.xaml.cs">
       <DependentUpon>QuarantinePersonWrapperTab.xaml</DependentUpon>
     </Compile>
@@ -160,9 +169,6 @@
     </Compile>
     <Compile Include="MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CustomUserControl\AddStaffScreen.xaml.cs">
-      <DependentUpon>AddStaffScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomUserControl\QuarantineRoomInfomation.xaml.cs">
       <DependentUpon>QuarantineRoomInfomation.xaml</DependentUpon>
@@ -258,6 +264,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomUserControl\AddRoomFunctionMenu.xaml" />
+    <Page Include="CustomUserControl\AddStaffFirstScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\AddStaffScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\AddStaffSecondScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomUserControl\QuarantinePersonWrapperTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -337,8 +355,6 @@
     <Page Include="ResourceXAML\TableTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CustomUserControl\AddStaffScreen.xaml">
     </Page>
     <Page Include="CustomUserControl\AddQuarantinedPerson.xaml">
       <SubType>Designer</SubType>
