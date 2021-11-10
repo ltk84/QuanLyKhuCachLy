@@ -15,7 +15,7 @@ namespace QuanLyKhuCachLy.ViewModel
     public class StaffViewModel : BaseViewModel
     {
 
-
+        EditStaffScreen editStaffScreen;
         AddStaffScreen addStaffScreen;
         private Visibility _AddStaffTab1;
         private Visibility _AddStaffTab2;
@@ -199,9 +199,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 _SelectedItem = value; OnPropertyChanged();
                 if (SelectedItem != null)
                 {
-                    Name = SelectedItem.name;
-                    DateOfBirth = SelectedItem.dateOfBirth;
-                    SelectedNationality = SelectedItem.nationality;
+                    SetSelectedItemToProperty();
                 }
             }
         }
@@ -272,7 +270,8 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand NextStaffTabCommand { get; set; }
         public ICommand PreviousStaffTabCommand { get; set; }
         public ICommand CancelAddStaffTabCommand { get; set; }
-
+         
+        public ICommand ToEditCommand { get; set; }
 
         #endregion
         public StaffViewModel()
@@ -326,6 +325,17 @@ namespace QuanLyKhuCachLy.ViewModel
             }, (p) =>
             {
                 DeleteStaff();
+            });
+
+
+            ToEditCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                SetSelectedItemToProperty();
+                editStaffScreen = new EditStaffScreen();
+                editStaffScreen.ShowDialog();
             });
 
             ToAddCommand = new RelayCommand<object>((p) =>
@@ -518,6 +528,29 @@ namespace QuanLyKhuCachLy.ViewModel
             DataProvider.ins.db.SaveChanges();
         }
         void DeleteStaff() { }
+
+
+        void SetSelectedItemToProperty()
+        {
+            Name = SelectedItem.name;
+            DateOfBirth = SelectedItem.dateOfBirth;
+            SelectedSex = SelectedItem.sex;
+            CitizenID = SelectedItem.citizenID;
+            SelectedNationality = SelectedItem.nationality;
+            HealthInsuranceID = SelectedItem.healthInsuranceID;
+            PhoneNumber = SelectedItem.phoneNumber;
+            JobTitle = SelectedItem.jobTitle;
+            Department = SelectedItem.department;
+
+            Address StaffAdress = DataProvider.ins.db.Addresses.Where(x => x.id == SelectedItem.addressID).FirstOrDefault();
+
+
+            StreetName = StaffAdress.streetName;
+            ApartmentNumber = StaffAdress.apartmentNumber;
+            SelectedProvince = StaffAdress.province;
+            SelectedWard = StaffAdress.ward;
+            SelectedDistrict = StaffAdress.district;
+        }
 
         #endregion
     }
