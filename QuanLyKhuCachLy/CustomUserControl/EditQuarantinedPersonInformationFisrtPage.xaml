@@ -17,15 +17,9 @@
             FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
             FontSize="24"
             FontWeight="Bold">
-            Thêm người cách ly
+            Thông tin người cách ly
         </TextBlock>
-        <TextBlock
-            Margin="0,2,0,0"
-            HorizontalAlignment="Center"
-            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-            FontSize="16">
-            Vui lòng điền thông tin người cách ly
-        </TextBlock>
+        
         <Grid Grid.Row="0" Margin="30,0,30,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition SharedSizeGroup="A" />
@@ -68,7 +62,8 @@
                     materialDesign:HintAssist.Hint="Nhập họ và tên"
                     utility:ProtocolSettingsLayout.MVVMHasError="{Binding NameFieldHasError}"
                     MaxLength="30"
-                    Style="{StaticResource TextInputField}">
+                    Style="{StaticResource TextInputField}"
+                    >
                     <TextBox.Text>
                         <Binding Path="QPName" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>

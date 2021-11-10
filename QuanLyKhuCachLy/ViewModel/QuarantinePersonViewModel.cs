@@ -21,6 +21,9 @@ namespace QuanLyKhuCachLy.ViewModel
         private Visibility _TabInformation1;
         private Visibility _TabInformation2;
         private Visibility _Tab3;
+        private Visibility _TabEdit1;
+        private Visibility _TabEdit2;
+        private Visibility _TabEdit3;
         private Visibility _ButtonReturn;
         private Visibility _TabList;
         private Visibility _TabInformation;
@@ -81,6 +84,28 @@ namespace QuanLyKhuCachLy.ViewModel
                 _Tab3 = value; OnPropertyChanged();
             }
         }
+        public Visibility TabEdit1
+        {
+            get => _TabEdit1; set
+            {
+                _TabEdit1 = value; OnPropertyChanged();
+            }
+        }
+        public Visibility TabEdit2
+        {
+            get => _TabEdit2; set
+            {
+                _TabEdit2 = value; OnPropertyChanged();
+            }
+        }
+
+        public Visibility TabEdit3
+        {
+            get => _TabEdit3; set
+            {
+                _TabEdit3 = value; OnPropertyChanged();
+            }
+        }
         public int TabIndex { get; set; }
 
         private String _TabPostion;
@@ -91,6 +116,17 @@ namespace QuanLyKhuCachLy.ViewModel
                 _TabPostion = value; OnPropertyChanged();
             }
         }
+
+        public int TabEditIndex { get; set; }
+        private String _TabEditPostion;
+        public String TabEditPosition
+        {
+            get => _TabEditPostion; set
+            {
+                _TabEditPostion = value; OnPropertyChanged();
+            }
+        }
+
 
         public int TabIndexInformation { get; set; }
 
@@ -561,6 +597,8 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand NextTabCommandInformation { get; set; }
         public ICommand PreviousTabCommandInformation { get; set; }
 
+        public ICommand NextTabEditCommand { get; set; }
+        public ICommand PreviousTabEditCommand { get; set; }
         #endregion
         public QuarantinePersonViewModel()
         {
@@ -569,6 +607,9 @@ namespace QuanLyKhuCachLy.ViewModel
             Tab1 = Visibility.Visible;
             Tab2 = Visibility.Hidden;
             Tab3 = Visibility.Hidden;
+            TabEdit1 = Visibility.Visible;
+            TabEdit2 = Visibility.Hidden;
+            TabEdit3 = Visibility.Hidden;
             TabInformation1 = Visibility.Visible;
             TabInformation2 = Visibility.Hidden;
             TabIndexInformation = 1;
@@ -576,7 +617,8 @@ namespace QuanLyKhuCachLy.ViewModel
             ButtonReturn = Visibility.Hidden;
             TabIndex = 1;
             TabPosition = $"{TabIndex}/3";
-
+            TabEditIndex = 1;
+            TabEditPosition = $"{TabEditIndex}/3";
             NextTabCommandInformation = new RelayCommand<Window>((p) =>
             {
 
@@ -595,7 +637,24 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 HandleChangeTabInforamtion(TabIndexInformation, "previous", p);
             });
+            NextTabEditCommand = new RelayCommand<Window>((p) =>
+            {
 
+                if (TabEditIndex < 3) return true;
+                return false;
+            }, (p) =>
+            {
+                HandleChangeTabEdit(TabIndex, "next", p);
+            });
+
+            PreviousTabEditCommand = new RelayCommand<Window>((p) =>
+            {
+                if (TabEditIndex > 1) return true;
+                return false;
+            }, (p) =>
+            {
+                HandleChangeTabEdit(TabIndex, "previous", p);
+            });
             NextTabCommand = new RelayCommand<Window>((p) =>
             {
 
@@ -650,6 +709,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 ClearData();
                 AddQuarantinedPerson addQuarantinePerson = new AddQuarantinedPerson();
                 addQuarantinePerson.ShowDialog();
+                TabIndex = 1;
                 ClearData();
             });
 
@@ -666,9 +726,13 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-                EditRoom editRoom = new EditRoom();
-                SetSelectedItemToProperty();
-                editRoom.ShowDialog();
+                EditQuarantinedPersonInformation editPerson = new EditQuarantinedPersonInformation();
+                editPerson.ShowDialog();
+                TabEditIndex = 1;
+                TabEdit1 = Visibility.Visible;
+                TabEdit2 = Visibility.Hidden;
+                TabEdit3 = Visibility.Hidden;
+                TabEditPosition = $"{TabEditIndex}/3";
             });
 
             ToViewCommand = new RelayCommand<object>((p) =>
@@ -1118,7 +1182,38 @@ namespace QuanLyKhuCachLy.ViewModel
                     break;
             }
         }
+        void HandleChangeTabEdit(int index, string action, Window p)
+        {
+            if (action == "next")
+            {
+                TabEditIndex++;
+            }
+            else
+            {
+                TabEditIndex--;
+            }
+            if (TabEditIndex <= 2)
+                TabEditPosition = $"{TabEditIndex}/2";
 
+            switch (TabEditIndex)
+            {
+                case 1:
+                    TabEdit1 = Visibility.Visible;
+                    TabEdit2 = Visibility.Hidden;
+                    TabEdit3 = Visibility.Hidden;
+                    break;
+                case 2:
+                    TabEdit1 = Visibility.Hidden;
+                    TabEdit2 = Visibility.Visible;
+                    TabEdit3 = Visibility.Hidden;
+                    break;
+                default:
+                    TabEdit1 = Visibility.Hidden;
+                    TabEdit2 = Visibility.Hidden;
+                    TabEdit3 = Visibility.Visible;
+                    break;
+            }
+        }
         #endregion
     }
 }
