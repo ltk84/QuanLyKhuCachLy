@@ -1,7 +1,10 @@
 ﻿using MaterialDesignThemes.Wpf;
 using QuanLyKhuCachLy.CustomUserControl;
 using QuanLyKhuCachLy.Model;
+using System;
 using System.Collections.ObjectModel;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -220,13 +223,6 @@ namespace QuanLyKhuCachLy.ViewModel
 
             AddRoomManualCommand = new RelayCommand<Window>((p) =>
             {
-                //if (RoomSelectedSeverity == null)
-                //    return false;
-                //Model.QuarantineRoom QuarantineRoom = new Model.QuarantineRoom { displayName = RoomDisplayName, capacity = RoomCapacity, level = RoomSelectedSeverity.level };
-                //if (QuarantineRoom.CheckValidateProperty()) return true;
-                //return false;
-
-
                 if (!DisplayNameFieldHasError && !CapacityFieldHasError && !SeverityFieldHasError) return true;
                 return false;
 
@@ -263,28 +259,117 @@ namespace QuanLyKhuCachLy.ViewModel
         }
 
         #region method
-        // untest
         void AddQuarantineRoom()
         {
-            // List Severity được tạo từ trước nên không cần thêm
-            Model.QuarantineRoom QuarantineRoom = new Model.QuarantineRoom { displayName = RoomDisplayName, capacity = RoomCapacity, level = RoomSelectedSeverity.level };
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    // List Severity được tạo từ trước nên không cần thêm
+                    Model.QuarantineRoom QuarantineRoom = new Model.QuarantineRoom { displayName = RoomDisplayName, capacity = RoomCapacity, levelID = RoomSelectedSeverity.id };
 
-            DataProvider.ins.db.QuarantineRooms.Add(QuarantineRoom);
-            DataProvider.ins.db.SaveChanges();
+                    DataProvider.ins.db.QuarantineRooms.Add(QuarantineRoom);
+                    DataProvider.ins.db.SaveChanges();
 
-            RoomList.Add(QuarantineRoom);
+                    RoomList.Add(QuarantineRoom);
+
+                    transaction.Commit();
+
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+
+            }
         }
         //untest
         void EditQuarantineRoom()
         {
-            Model.QuarantineRoom QuarantineRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == SelectedItem.id).FirstOrDefault();
-            QuarantineRoom.displayName = RoomDisplayName;
-            QuarantineRoom.capacity = RoomCapacity;
-            QuarantineRoom.level = RoomSelectedSeverity.level;
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    Model.QuarantineRoom QuarantineRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+                    QuarantineRoom.displayName = RoomDisplayName;
+                    QuarantineRoom.capacity = RoomCapacity;
+                    QuarantineRoom.levelID = RoomSelectedSeverity.id;
 
-            DataProvider.ins.db.SaveChanges();
+                    DataProvider.ins.db.SaveChanges();
 
-            SelectedItem = QuarantineRoom;
+                    SelectedItem = QuarantineRoom;
+
+                    transaction.Commit();
+
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+
+            }
         }
         void DeleteQuarantineRoom() { }
         void ClearData()

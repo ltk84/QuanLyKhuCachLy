@@ -6,10 +6,10 @@
     xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="750"
     d:DesignHeight="450"
+    d:DesignWidth="750"
     mc:Ignorable="d">
-    <StackPanel Width="Auto" Margin="25,45,0,0">
+    <StackPanel Width="Auto" Margin="25,45,45,0">
         <TextBlock
             Grid.Row="0"
             Grid.Column="0"
@@ -72,7 +72,7 @@
                     HeaderStyle="{StaticResource DataGridHeader}"
                     MaxLength="30" />
                 <materialDesign:DataGridTextColumn
-                    Binding="{Binding level}"
+                    Binding="{Binding Severity.level}"
                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                     ElementStyle="{StaticResource DataGridElement}"
                     Header="Mức độ"
@@ -84,10 +84,7 @@
                     IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button
-                                HorizontalAlignment="Right"
-                                PreviewMouseUp="Button_PreviewMouseUp"
-                                Style="{StaticResource DataGridButton}">
+                            <Button HorizontalAlignment="Right" Style="{StaticResource DataGridButton}">
                                 <materialDesign:PackIcon
                                     Width="16"
                                     Height="16"

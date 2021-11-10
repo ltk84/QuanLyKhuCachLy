@@ -133,9 +133,7 @@ namespace QuanLyKhuCachLy.Model
             if (string.IsNullOrWhiteSpace(sex) || string.IsNullOrWhiteSpace(citizenID) || string.IsNullOrWhiteSpace(nationality) || string.IsNullOrWhiteSpace(healthInsuranceID)
                 || string.IsNullOrWhiteSpace(phoneNumber) || addressID < 0 || string.IsNullOrWhiteSpace(jobTitle) || string.IsNullOrWhiteSpace(department))
                 return false;
-            //if (sex.Length > LIMIT || citizenID.Length > LIMIT || nationality.Length > LIMIT || healthInsuranceID.Length > LIMIT || phoneNumber.Length > LIMIT
-            //     || jobTitle.Length > LIMIT || department.Length > LIMIT)
-            //    return false;
+
             return true;
         }
     }

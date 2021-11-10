@@ -43,23 +43,25 @@ namespace QuanLyKhuCachLy.Model
             }
         }
 
-        private string _level;
-        public string level
+        private int _levelID;
+        public int levelID
         {
-            get => _level; set
+            get => _levelID; set
             {
-                _level = value;
+                _levelID = value;
                 OnPropertyChanged();
             }
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QuarantinePerson> QuarantinePersons { get; set; }
-        public virtual Severity Severity { get; set; }
+
+        private Severity _Severity;
+        public virtual Severity Severity { get => _Severity; set { _Severity = value; OnPropertyChanged(); } }
 
         public bool CheckValidateProperty()
         {
-            if (string.IsNullOrWhiteSpace(displayName) || capacity <= 0 || string.IsNullOrWhiteSpace(level))
+            if (string.IsNullOrWhiteSpace(displayName) || capacity <= 0)
                 return false;
 
             return true;

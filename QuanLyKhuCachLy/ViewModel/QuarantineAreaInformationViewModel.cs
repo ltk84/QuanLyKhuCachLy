@@ -1,6 +1,8 @@
 ﻿using QuanLyKhuCachLy.Model;
 using System;
 using System.Collections.ObjectModel;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Windows;
 using System.Windows.Input;
 
@@ -129,12 +131,11 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
-        public ICommand NextTabCommand { get; set; }
-        public ICommand PreviousTabCommand { get; set; }
+
 
         #endregion
 
-        #region DummyData
+        #region list
         // đang dummy data (đáng lẻ nên lấy data từ đâu đó)
         private ObservableCollection<string> _ProvinceList;
         public ObservableCollection<string> ProvinceList
@@ -183,6 +184,67 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #endregion
 
+        #region validation rule
+        private bool _QANameFieldHasError;
+        public bool QANameFieldHasError { get => _QANameFieldHasError; set { _QANameFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _QAProvinceFieldHasError;
+        public bool QAProvinceFieldHasError { get => _QAProvinceFieldHasError; set { _QAProvinceFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _QADistrictFieldHasError;
+        public bool QADistrictFieldHasError { get => _QADistrictFieldHasError; set { _QADistrictFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _QAWardFieldHasError;
+        public bool QAWardFieldHasError { get => _QAWardFieldHasError; set { _QAWardFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _QATestCycleFieldHasError;
+        public bool QATestCycleFieldHasError { get => _QATestCycleFieldHasError; set { _QATestCycleFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _QARequiredDayFieldHasError;
+        public bool QARequiredDayFieldHasError { get => _QARequiredDayFieldHasError; set { _QARequiredDayFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _MNameFieldHasError;
+        public bool MNameFieldHasError { get => _MNameFieldHasError; set { _MNameFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _MNationalityFieldHasError;
+        public bool MNationalityFieldHasError { get => _MNationalityFieldHasError; set { _MNationalityFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _MSexFieldHasError;
+        public bool MSexFieldHasError { get => _MSexFieldHasError; set { _MSexFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _MDateOfBirthFieldHasError;
+        public bool MDateOfBirthFieldHasError { get => _MDateOfBirthFieldHasError; set { _MDateOfBirthFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _MJobTitleFieldHasError;
+        public bool MJobTitleFieldHasError { get => _MJobTitleFieldHasError; set { _MJobTitleFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _MDepartmentFieldHasError;
+        public bool MDepartmentFieldHasError { get => _MDepartmentFieldHasError; set { _MDepartmentFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _MProvinceFieldHasError;
+        public bool MProvinceFieldHasError { get => _MProvinceFieldHasError; set { _MProvinceFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _MDistrictFieldHasError;
+        public bool MDistrictFieldHasError { get => _MDistrictFieldHasError; set { _MDistrictFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _MWardFieldHasError;
+        public bool MWardFieldHasError { get => _MWardFieldHasError; set { _MWardFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _MCitizenIDFieldHasError;
+        public bool MCitizenIDFieldHasError { get => _MCitizenIDFieldHasError; set { _MCitizenIDFieldHasError = value; OnPropertyChanged(); } }
+
+        private bool _MPhoneNumberFieldHasError;
+        public bool MPhoneNumberFieldHasError { get => _MPhoneNumberFieldHasError; set { _MPhoneNumberFieldHasError = value; OnPropertyChanged(); } }
+
+        #endregion
+
+        #region command
+        public ICommand NextTabCommand { get; set; }
+        public ICommand PreviousTabCommand { get; set; }
+        public ICommand SetUpCommand { get; set; }
+
+        #endregion
+
 
         #endregion
 
@@ -197,56 +259,24 @@ namespace QuanLyKhuCachLy.ViewModel
             TabIndex = 1;
             TabPosition = $"{TabIndex}/4";
 
+            SetUpCommand = new RelayCommand<Window>((p) =>
+            {
+                if (!QANameFieldHasError && !QAProvinceFieldHasError && !QADistrictFieldHasError && !QAWardFieldHasError && !QATestCycleFieldHasError && !QARequiredDayFieldHasError
+                 && !MNameFieldHasError && !MDateOfBirthFieldHasError && !MSexFieldHasError && !MNationalityFieldHasError && !MJobTitleFieldHasError && !MDepartmentFieldHasError
+                 && !MProvinceFieldHasError && !MDistrictFieldHasError && !MWardFieldHasError && !MCitizenIDFieldHasError && !MPhoneNumberFieldHasError)
+                    return true;
+                return false;
+            }, (p) =>
+            {
+                UpdateQuarantineAreaInformation();
+                p.Close();
+            });
+
             NextTabCommand = new RelayCommand<Window>((p) =>
             {
 
                 if (TabIndex <= 4) return true;
-                else
-                {
-                    Address QAreaAddress = new Address()
-                    {
-                        province = QASelectedProvince,
-                        district = QASelectedDistrict,
-                        apartmentNumber = QAApartmentNumber,
-                        streetName = QAStreetName,
-                        ward = QASelectedWard
-                    };
 
-                    Address ManagerAddress = new Address()
-                    {
-                        province = ManagerSelectedProvince,
-                        district = ManagerSelectedDistrict,
-                        apartmentNumber = ManagerApartmentNumber,
-                        streetName = ManagerStreetName,
-                        ward = ManagerSelectedWard
-                    };
-
-                    Staff Manager = new Staff()
-                    {
-                        citizenID = ManagerCitizenID,
-                        dateOfBirth = (DateTime)ManagerDateOfBirth,
-                        department = ManagerDepartment,
-                        healthInsuranceID = ManagerHealthInsuranceID,
-                        jobTitle = ManagerJobTitle,
-                        name = ManagerName,
-                        nationality = ManagerNationality,
-                        phoneNumber = ManagerPhoneNumber,
-                        sex = ManagerSex,
-                    };
-
-                    QuarantineArea QuarantineArea = new QuarantineArea()
-                    {
-                        name = QAname,
-                        testCycle = QATestCycle,
-                        requiredDayToFinish = QARequiredDayToFinish,
-                    };
-
-                    if (QAreaAddress.CheckValidateProperty() && ManagerAddress.CheckValidateProperty() && Manager.CheckValidateProperty() && QuarantineArea.CheckValidateProperty())
-                    {
-                        return true;
-                    }
-
-                }
                 return false;
             }, (p) =>
             {
@@ -276,7 +306,6 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 "Phu Thanh", "Phu Tho Hoa", "Binh Hung Hoa"
             };
-
             SexList = new ObservableCollection<string>()
             {
                 "Nam", "Nữ"
@@ -326,8 +355,6 @@ namespace QuanLyKhuCachLy.ViewModel
                     Tab4 = Visibility.Visible;
                     break;
                 default:
-                    UpdateQuarantineAreaInformation();
-                    p.Close();
                     break;
             }
         }
@@ -335,60 +362,103 @@ namespace QuanLyKhuCachLy.ViewModel
 
         void UpdateQuarantineAreaInformation()
         {
-            Address QAreaAddress = new Address()
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
             {
-                province = QASelectedProvince,
-                district = QASelectedDistrict,
-                apartmentNumber = QAApartmentNumber,
-                streetName = QAStreetName,
-                ward = QASelectedWard
-            };
+                try
+                {
+                    Address QAreaAddress = new Address()
+                    {
+                        province = QASelectedProvince,
+                        district = QASelectedDistrict,
+                        apartmentNumber = QAApartmentNumber,
+                        streetName = QAStreetName,
+                        ward = QASelectedWard
+                    };
 
-            DataProvider.ins.db.Addresses.Add(QAreaAddress);
-            DataProvider.ins.db.SaveChanges();
+                    DataProvider.ins.db.Addresses.Add(QAreaAddress);
+                    DataProvider.ins.db.SaveChanges();
 
-            Address ManagerAddress = new Address()
-            {
-                province = ManagerSelectedProvince,
-                district = ManagerSelectedDistrict,
-                apartmentNumber = ManagerApartmentNumber,
-                streetName = ManagerStreetName,
-                ward = ManagerSelectedWard
-            };
+                    Address ManagerAddress = new Address()
+                    {
+                        province = ManagerSelectedProvince,
+                        district = ManagerSelectedDistrict,
+                        apartmentNumber = ManagerApartmentNumber,
+                        streetName = ManagerStreetName,
+                        ward = ManagerSelectedWard
+                    };
 
-            DataProvider.ins.db.Addresses.Add(ManagerAddress);
-            DataProvider.ins.db.SaveChanges();
+                    DataProvider.ins.db.Addresses.Add(ManagerAddress);
+                    DataProvider.ins.db.SaveChanges();
 
-            Staff Manager = new Staff()
-            {
-                addressID = ManagerAddress.id,
-                citizenID = ManagerCitizenID,
-                dateOfBirth = (DateTime)ManagerDateOfBirth,
-                department = ManagerDepartment,
-                healthInsuranceID = ManagerHealthInsuranceID,
-                jobTitle = ManagerJobTitle,
-                name = ManagerName,
-                nationality = ManagerNationality,
-                phoneNumber = ManagerPhoneNumber,
-                sex = ManagerSex,
-            };
+                    Staff Manager = new Staff()
+                    {
+                        addressID = ManagerAddress.id,
+                        citizenID = ManagerCitizenID,
+                        dateOfBirth = (DateTime)ManagerDateOfBirth,
+                        department = ManagerDepartment,
+                        healthInsuranceID = ManagerHealthInsuranceID,
+                        jobTitle = ManagerJobTitle,
+                        name = ManagerName,
+                        nationality = ManagerNationality,
+                        phoneNumber = ManagerPhoneNumber,
+                        sex = ManagerSex,
+                    };
 
-            DataProvider.ins.db.Staffs.Add(Manager);
-            DataProvider.ins.db.SaveChanges();
+                    DataProvider.ins.db.Staffs.Add(Manager);
+                    DataProvider.ins.db.SaveChanges();
 
-            QuarantineArea QuarantineArea = new QuarantineArea()
-            {
-                addressID = QAreaAddress.id,
-                name = QAname,
-                testCycle = QATestCycle,
-                requiredDayToFinish = QARequiredDayToFinish,
-                managerID = Manager.id,
-            };
+                    QuarantineArea QuarantineArea = new QuarantineArea()
+                    {
+                        addressID = QAreaAddress.id,
+                        name = QAname,
+                        testCycle = QATestCycle,
+                        requiredDayToFinish = QARequiredDayToFinish,
+                        managerID = Manager.id,
+                    };
 
-            DataProvider.ins.db.QuarantineAreas.Add(QuarantineArea);
-            DataProvider.ins.db.SaveChanges();
+                    DataProvider.ins.db.QuarantineAreas.Add(QuarantineArea);
+                    DataProvider.ins.db.SaveChanges();
 
-            isDoneSetUp = true;
+                    isDoneSetUp = true;
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
         }
 
         #endregion
