@@ -772,7 +772,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 TabIndex = 1;
             });
 
-            EditCommand = new RelayCommand<object>((p) =>
+            EditCommand = new RelayCommand<Window>((p) =>
             {
                 Address PersonAddress = new Address()
                 {
@@ -802,6 +802,8 @@ namespace QuanLyKhuCachLy.ViewModel
             }, (p) =>
             {
                 EditQuarantinePerson();
+                p.Close();
+                TabEditIndex = 1;
             });
 
             DeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
