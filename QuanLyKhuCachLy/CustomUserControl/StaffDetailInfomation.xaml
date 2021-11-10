@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="757"
     d:DesignWidth="705"
+    DataContext="{StaticResource StaffVM}"
     mc:Ignorable="d">
     <StackPanel Margin="40,30,40,30">
         <Grid>
@@ -16,15 +17,18 @@
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
-            <Image
+            <Button
                 Grid.Column="0"
-                Width="24"
-                Height="24"
                 Margin="0,0,10,0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
+                Command="{Binding ToMainCommand}"
+                IsEnabled="True"
                 RenderTransformOrigin="0.5,0.5"
-                Source="/QuanLyKhuCachLy;component/Resources/icons/back-icon.png" />
+                Style="{StaticResource MaterialDesignIconButton}"
+                ToolTip="MaterialDesignIconButton">
+                <materialDesign:PackIcon Kind="ArrowLeftCircle" />
+            </Button>
             <TextBlock
                 Grid.Column="1"
                 VerticalAlignment="Center"
@@ -54,6 +58,7 @@
             <Button
                 Grid.Column="2"
                 VerticalAlignment="Bottom"
+                Command="{Binding ToEditCommand}"
                 Content="Chỉnh sửa"
                 Template="{StaticResource edit-button}" />
 
@@ -118,7 +123,7 @@
                 Grid.Row="0"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="Trần Lê Thanh Kiều" />
+                Text="{Binding Name}" />
 
 
             <TextBlock
@@ -131,7 +136,7 @@
                 Grid.Row="1"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="Lưỡng tính" />
+                Text="{Binding SelectedSex}" />
 
 
             <TextBlock
@@ -144,7 +149,7 @@
                 Grid.Row="2"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="Việt Nam" />
+                Text="{Binding SelectedNationality}" />
 
             <TextBlock
                 Grid.Row="3"
@@ -156,7 +161,7 @@
                 Grid.Row="3"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="156989664" />
+                Text="ALo" />
 
             <TextBlock
                 Grid.Row="4"

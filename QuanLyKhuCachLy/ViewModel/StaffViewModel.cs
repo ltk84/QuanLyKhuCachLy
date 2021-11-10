@@ -9,17 +9,41 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 
 namespace QuanLyKhuCachLy.ViewModel
 {
     public class StaffViewModel : BaseViewModel
     {
 
-
+        #region UI
         AddStaffScreen addStaffScreen;
         private Visibility _AddStaffTab1;
         private Visibility _AddStaffTab2;
         private Visibility _AddStaffPreviousBtn;
+        private Visibility _TabList;
+        private Visibility _TabInformation;
+
+        public Visibility TabList
+        {
+            get => _TabList;
+            set
+            {
+                _TabList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Visibility TabInformation
+        {
+            get => _TabInformation;
+            set
+            {
+                _TabInformation = value;
+                OnPropertyChanged();
+            }
+        }
 
         public Visibility AddStaffTab1
         {
@@ -81,6 +105,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 _Tab2 = value; OnPropertyChanged();
             }
         }
+        #endregion
 
         #region property
 
@@ -174,6 +199,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
+        #region address
         private string _StreetName;
         public string StreetName { get => _StreetName; set { _StreetName = value; OnPropertyChanged(); } }
 
@@ -188,6 +214,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         private string _SelectedDistrict;
         public string SelectedDistrict { get => _SelectedDistrict; set { _SelectedDistrict = value; OnPropertyChanged(); } }
+        #endregion
 
         #region List
 
@@ -261,18 +288,124 @@ namespace QuanLyKhuCachLy.ViewModel
         }
         #endregion
 
+        #region command
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
 
-        public ICommand ToAddCommand { get; set; }
-
-        public ICommand AddStaffChangeTab { get; set; }
+        public ICommand ToAddManualCommand { get; set; }
+        public ICommand ToAddExcelCommand { get; set; }
+        public ICommand ToEditCommand { get; set; }
+        public ICommand ToViewCommand { get; set; }
+        public ICommand ToMainCommand { get; set; }
 
         public ICommand NextStaffTabCommand { get; set; }
         public ICommand PreviousStaffTabCommand { get; set; }
         public ICommand CancelAddStaffTabCommand { get; set; }
+        #endregion
 
+        #region validation
+        private bool _NameFieldHasError;
+        public bool NameFieldHasError
+        {
+            get => _NameFieldHasError; set
+            {
+                _NameFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _SexFieldHasError;
+        public bool SexFieldHasError
+        {
+            get => _SexFieldHasError; set
+            {
+                _SexFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _NationalityFieldHasError;
+        public bool NationalityFieldHasError
+        {
+            get => _NationalityFieldHasError; set
+            {
+                _NationalityFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _ProvinceFieldHasError;
+        public bool ProvinceFieldHasError
+        {
+            get => _ProvinceFieldHasError; set
+            {
+                _ProvinceFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _DistrictFieldHasError;
+        public bool DistrictFieldHasError
+        {
+            get => _DistrictFieldHasError; set
+            {
+                _DistrictFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _WardFieldHasError;
+        public bool WardFieldHasError
+        {
+            get => _WardFieldHasError; set
+            {
+                _WardFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _CitizenIDFieldHasError;
+        public bool CitizenIDFieldHasError
+        {
+            get => _CitizenIDFieldHasError; set
+            {
+                _CitizenIDFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _PhoneNumberFieldHasError;
+        public bool PhoneNumberFieldHasError
+        {
+            get => _PhoneNumberFieldHasError; set
+            {
+                _PhoneNumberFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _DateOfBirthFieldHasError;
+        public bool DateOfBirthFieldHasError
+        {
+            get => _DateOfBirthFieldHasError; set
+            {
+                _DateOfBirthFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _JobTitleFieldHasError;
+        public bool JobTitleFieldHasError
+        {
+            get => _JobTitleFieldHasError; set
+            {
+                _JobTitleFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _DepartmentFieldHasError;
+        public bool DepartmentFieldHasError
+        {
+            get => _DepartmentFieldHasError; set
+            {
+                _DepartmentFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+
+        #endregion
 
         #endregion
         public StaffViewModel()
@@ -280,6 +413,9 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             Tab1 = Visibility.Visible;
             Tab2 = Visibility.Hidden;
+            TabList = Visibility.Visible;
+            TabInformation = Visibility.Hidden;
+
             SetDefaultAddStaff();
 
             StaffList = new ObservableCollection<Staff>(DataProvider.ins.db.Staffs);
@@ -306,15 +442,23 @@ namespace QuanLyKhuCachLy.ViewModel
 
             AddCommand = new RelayCommand<object>((p) =>
             {
-                return true;
+                if (!NameFieldHasError && !SexFieldHasError && !DateOfBirthFieldHasError && !CitizenIDFieldHasError && !NationalityFieldHasError && !PhoneNumberFieldHasError
+                && !JobTitleFieldHasError && !DepartmentFieldHasError && !ProvinceFieldHasError && !DistrictFieldHasError && !WardFieldHasError)
+                    return true;
+                return false;
             }, (p) =>
             {
                 AddStaff();
+                CloseAddStaffWindown();
+                SetDefaultAddStaff();
             });
 
             EditCommand = new RelayCommand<object>((p) =>
             {
-                return true;
+                if (!NameFieldHasError && !SexFieldHasError && !DateOfBirthFieldHasError && !CitizenIDFieldHasError && !NationalityFieldHasError && !PhoneNumberFieldHasError
+                && !JobTitleFieldHasError && !DepartmentFieldHasError && !ProvinceFieldHasError && !DistrictFieldHasError && !WardFieldHasError)
+                    return true;
+                return false;
             }, (p) =>
             {
                 EditStaff();
@@ -328,15 +472,52 @@ namespace QuanLyKhuCachLy.ViewModel
                 DeleteStaff();
             });
 
-            ToAddCommand = new RelayCommand<object>((p) =>
+            ToAddManualCommand = new RelayCommand<object>((p) =>
             {
                 return true;
             }, (p) =>
             {
+                ClearData();
+                SetDefaultAddStaff();
                 addStaffScreen = new AddStaffScreen();
                 addStaffScreen.ShowDialog();
+                ClearData();
+
             });
 
+            ToAddExcelCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+
+            });
+
+            ToEditCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+
+            });
+
+            ToViewCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                TabInformation = Visibility.Visible;
+                TabList = Visibility.Hidden;
+            });
+
+            ToMainCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                TabInformation = Visibility.Hidden;
+                TabList = Visibility.Visible;
+            });
 
             CancelAddStaffTabCommand = new RelayCommand<object>((p) =>
             {
@@ -356,52 +537,12 @@ namespace QuanLyKhuCachLy.ViewModel
             });
 
 
-            AddStaffChangeTab = new RelayCommand<object>((p) => { return true; }, (p) => { System.Console.WriteLine("This is my message"); System.Console.WriteLine(p); });
+
             NextStaffTabCommand = new RelayCommand<Window>((p) =>
             {
 
                 if (AddStaffTabIndex < 2) return true;
-                else
-                {
-                    Address QAreaAddress = new Address()
-                    {
-                        province = SelectedProvince,
-                        district = SelectedDistrict,
-                        apartmentNumber = ApartmentNumber,
-                        streetName = StreetName,
-                        ward = SelectedWard
-                    };
 
-                    Address ManagerAddress = new Address()
-                    {
-                        province = SelectedProvince,
-                        district = SelectedDistrict,
-                        apartmentNumber = ApartmentNumber,
-                        streetName = StreetName,
-                        ward = SelectedWard
-                    };
-
-                    Staff Manager = new Staff()
-                    {
-                        citizenID = CitizenID,
-                        dateOfBirth = (DateTime)DateOfBirth,
-                        department = Department,
-                        healthInsuranceID = HealthInsuranceID,
-                        jobTitle = JobTitle,
-                        name = Name,
-                        nationality = SelectedNationality,
-                        phoneNumber = PhoneNumber,
-                        sex = SelectedSex,
-                    };
-
-
-
-                    if (QAreaAddress.CheckValidateProperty() && ManagerAddress.CheckValidateProperty() && Manager.CheckValidateProperty())
-                    {
-                        return true;
-                    }
-
-                }
                 return false;
             }, (p) =>
             {
@@ -438,9 +579,6 @@ namespace QuanLyKhuCachLy.ViewModel
                     AddStaffTab2 = Visibility.Visible;
                     break;
                 default:
-                    AddStaff();
-                    CloseAddStaffWindown();
-                    SetDefaultAddStaff();
 
                     break;
             }
@@ -450,6 +588,24 @@ namespace QuanLyKhuCachLy.ViewModel
         void CloseAddStaffWindown()
         {
             addStaffScreen.Close();
+        }
+
+        void ClearData()
+        {
+            Name = string.Empty;
+            SelectedSex = string.Empty;
+            DateOfBirth = DateTime.MinValue;
+            CitizenID = string.Empty;
+            SelectedNationality = string.Empty;
+            PhoneNumber = string.Empty;
+            HealthInsuranceID = string.Empty;
+            Department = string.Empty;
+            JobTitle = string.Empty;
+            SelectedProvince = string.Empty;
+            SelectedDistrict = string.Empty;
+            SelectedWard = string.Empty;
+            StreetName = string.Empty;
+            ApartmentNumber = string.Empty;
         }
 
         void SetDefaultAddStaff()
@@ -463,36 +619,79 @@ namespace QuanLyKhuCachLy.ViewModel
 
         void AddStaff()
         {
-            Address StaffAddress = new Address()
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
             {
-                province = SelectedProvince,
-                district = SelectedDistrict,
-                apartmentNumber = ApartmentNumber,
-                streetName = StreetName,
-                ward = SelectedWard
-            };
+                try
+                {
+                    Address StaffAddress = new Address()
+                    {
+                        province = SelectedProvince,
+                        district = SelectedDistrict,
+                        apartmentNumber = ApartmentNumber,
+                        streetName = StreetName,
+                        ward = SelectedWard
+                    };
 
-            DataProvider.ins.db.Addresses.Add(StaffAddress);
-            DataProvider.ins.db.SaveChanges();
+                    DataProvider.ins.db.Addresses.Add(StaffAddress);
+                    DataProvider.ins.db.SaveChanges();
 
-            Staff NewStaff = new Staff()
-            {
-                addressID = StaffAddress.id,
-                citizenID = CitizenID,
-                dateOfBirth = DateOfBirth,
-                department = Department,
-                healthInsuranceID = HealthInsuranceID,
-                jobTitle = JobTitle,
-                name = Name,
-                nationality = SelectedNationality,
-                phoneNumber = PhoneNumber,
-                sex = SelectedSex,
-            };
+                    Staff NewStaff = new Staff()
+                    {
+                        addressID = StaffAddress.id,
+                        citizenID = CitizenID,
+                        dateOfBirth = DateOfBirth,
+                        department = Department,
+                        healthInsuranceID = HealthInsuranceID,
+                        jobTitle = JobTitle,
+                        name = Name,
+                        nationality = SelectedNationality,
+                        phoneNumber = PhoneNumber,
+                        sex = SelectedSex,
+                    };
 
-            DataProvider.ins.db.Staffs.Add(NewStaff);
-            DataProvider.ins.db.SaveChanges();
+                    DataProvider.ins.db.Staffs.Add(NewStaff);
+                    DataProvider.ins.db.SaveChanges();
 
-            StaffList.Add(NewStaff);
+                    StaffList.Add(NewStaff);
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
         }
         void EditStaff()
         {
@@ -518,6 +717,8 @@ namespace QuanLyKhuCachLy.ViewModel
             DataProvider.ins.db.SaveChanges();
         }
         void DeleteStaff() { }
+
+
 
         #endregion
     }

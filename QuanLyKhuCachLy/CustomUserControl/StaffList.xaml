@@ -9,9 +9,8 @@
     xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
     d:DesignHeight="705"
     d:DesignWidth="757"
-    DataContext="{StaticResource StaffVM}"
     mc:Ignorable="d">
-    <StackPanel Margin="40,30,40,30" DataContext="{StaticResource StaffVM}">
+    <StackPanel Margin="40,30,40,30">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
@@ -27,13 +26,23 @@
             </TextBlock>
             <Button
                 Grid.Column="1"
-                Background="#FF1D9583"
-                Command="{Binding ToAddCommand}"
-                Content="Thêm nhân viên"
-                Height="35"
                 Width="140"
+                Height="35"
+                Background="#FF1D9583"
+                Content="Thêm nhân viên"
                 FontSize="16"
-                Style="{StaticResource AddObjectButton}" />
+                PreviewMouseDown="Button_PreviewMouseDown"
+                Style="{StaticResource AddObjectButton}">
+                <Button.ContextMenu>
+                    <ContextMenu>
+                        <ContextMenu.Template>
+                            <ControlTemplate>
+                                <local:AddStaffFunctionMenu />
+                            </ControlTemplate>
+                        </ContextMenu.Template>
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
 
         </Grid>
 
@@ -52,74 +61,6 @@
             materialDesign:HintAssist.Hint="Nhập bất kì để tìm kiếm"
             MaxLength="30"
             Style="{StaticResource TextInputField}" />
-
-        <!--<Border
-            Height="520"
-            Margin="0,13,0,0"
-            BorderBrush="#FF434A54"
-            BorderThickness="1"
-            CornerRadius="8,8,8,8">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="46" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="460" />
-
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-
-
-                <Separator
-                    Grid.Row="1"
-                    Margin="0,0,0,0"
-                    Background="#FF434A54" />
-
-                <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock
-                        Grid.Column="0"
-                        Margin="0,0,0,0"
-                        Style="{StaticResource table-heading}"
-                        Text="Số thứ tự" />
-
-                    <TextBlock
-                        Grid.Column="1"
-                        Margin="0,0,0,0"
-                        Style="{StaticResource table-heading}"
-                        Text="Họ và tên " />
-
-                    <TextBlock
-                        Grid.Column="2"
-                        Margin="0,0,0,0"
-                        Style="{StaticResource table-heading}"
-                        Text="Ngày sinh" />
-
-                    <TextBlock
-                        Grid.Column="3"
-                        Margin="0,0,0,0"
-                        Style="{StaticResource table-heading}"
-                        Text="Quốc tịch" />
-
-
-                </Grid>
-
-
-
-
-
-
-
-
-            </Grid>
-        </Border>-->
 
         <DataGrid
             Height="460"
@@ -172,6 +113,15 @@
                                     Width="16"
                                     Height="16"
                                     Kind="DotsHorizontal" />
+                                <Button.ContextMenu>
+                                    <ContextMenu>
+                                        <ContextMenu.Template>
+                                            <ControlTemplate>
+                                                <local:StaffFunctionMenu />
+                                            </ControlTemplate>
+                                        </ContextMenu.Template>
+                                    </ContextMenu>
+                                </Button.ContextMenu>
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
