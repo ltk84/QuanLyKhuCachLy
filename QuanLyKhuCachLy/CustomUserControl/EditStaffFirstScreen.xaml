@@ -1,11 +1,11 @@
 ﻿<UserControl
-    x:Class="QuanLyKhuCachLy.CustomUserControl.AddStaffFirstScreen"
+    x:Class="QuanLyKhuCachLy.CustomUserControl.EditStaffFirstScreen"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:convert="clr-namespace:QuanLyKhuCachLy.Converter"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:convert="clr-namespace:QuanLyKhuCachLy.Converter"
     xmlns:utility="clr-namespace:QuanLyKhuCachLy.Utility"
     xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
     d:DesignHeight="350"
@@ -18,7 +18,7 @@
             FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
             FontSize="24"
             FontWeight="Bold">
-            Thêm nhân viên
+            Sửa thông tin nhân viên
         </TextBlock>
         <TextBlock
             Margin="0,2,0,0"
@@ -129,7 +129,6 @@
                     Style="{StaticResource DatePickerField}">
                     <DatePicker.SelectedDate>
                         <Binding
-                            Mode="OneWayToSource"
                             Path="DateOfBirth"
                             StringFormat="dd/MM/yyyy"
                             UpdateSourceTrigger="PropertyChanged">
@@ -245,6 +244,7 @@
                     <TextBox.Text>
                         <Binding Path="HealthInsuranceID" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
+                                <vr:RequiredField />
                                 <vr:NoSpecialChar />
                             </Binding.ValidationRules>
                         </Binding>

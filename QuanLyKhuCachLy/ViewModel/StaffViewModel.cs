@@ -18,6 +18,9 @@ namespace QuanLyKhuCachLy.ViewModel
     {
 
         #region UI
+        bool isAdding = true;
+        EditStaffScreen editStaffScreen;
+
         AddStaffScreen addStaffScreen;
         private Visibility _AddStaffTab1;
         private Visibility _AddStaffTab2;
@@ -214,6 +217,9 @@ namespace QuanLyKhuCachLy.ViewModel
 
         private string _SelectedDistrict;
         public string SelectedDistrict { get => _SelectedDistrict; set { _SelectedDistrict = value; OnPropertyChanged(); } }
+
+        private string _DisplayAdress;
+        public string DisplayAddress { get => _DisplayAdress; set { _DisplayAdress = value; OnPropertyChanged(); } }
         #endregion
 
         #region List
@@ -226,9 +232,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 _SelectedItem = value; OnPropertyChanged();
                 if (SelectedItem != null)
                 {
-                    Name = SelectedItem.name;
-                    DateOfBirth = SelectedItem.dateOfBirth;
-                    SelectedNationality = SelectedItem.nationality;
+                    SetSelectedItemToProperty();
                 }
             }
         }
@@ -462,6 +466,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }, (p) =>
             {
                 EditStaff();
+                editStaffScreen.Close();
             });
 
             DeleteCommand = new RelayCommand<object>((p) =>
@@ -477,8 +482,10 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
+
                 ClearData();
                 SetDefaultAddStaff();
+                isAdding = true;
                 addStaffScreen = new AddStaffScreen();
                 addStaffScreen.ShowDialog();
                 ClearData();
@@ -498,7 +505,11 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-
+                isAdding = false;
+                SetDefaultAddStaff();
+                SetSelectedItemToProperty();
+                editStaffScreen = new EditStaffScreen();
+                editStaffScreen.ShowDialog();
             });
 
             ToViewCommand = new RelayCommand<object>((p) =>
@@ -587,7 +598,44 @@ namespace QuanLyKhuCachLy.ViewModel
 
         void CloseAddStaffWindown()
         {
-            addStaffScreen.Close();
+            if (isAdding)
+            {
+                addStaffScreen.Close();
+
+            }
+            else
+            {
+                editStaffScreen.Close();
+            }
+        }
+
+        void InitDisplayAddress(Address StaffAddress)
+        {
+            if (StaffAddress == null) return;
+            List<string> list = new List<string>()
+            {
+                StaffAddress.apartmentNumber,
+                StaffAddress.streetName,
+                StaffAddress.ward,
+                StaffAddress.district,
+                StaffAddress.province
+
+            };
+
+            DisplayAddress = string.Empty;
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (!string.IsNullOrWhiteSpace(list[i]))
+                {
+                    DisplayAddress += list[i];
+                }
+                if (i != list.Count - 1)
+                {
+                    if (i != 0)
+                        DisplayAddress += ", ";
+                    else DisplayAddress += " ";
+                }
+            }
         }
 
         void ClearData()
@@ -695,30 +743,96 @@ namespace QuanLyKhuCachLy.ViewModel
         }
         void EditStaff()
         {
-            Staff SelectStaff = DataProvider.ins.db.Staffs.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    Staff SelectStaff = DataProvider.ins.db.Staffs.Where(x => x.id == SelectedItem.id).FirstOrDefault();
 
-            Address StaffAdress = DataProvider.ins.db.Addresses.Where(x => x.id == SelectStaff.addressID).FirstOrDefault();
-            StaffAdress.province = SelectedProvince;
-            StaffAdress.district = SelectedDistrict;
-            StaffAdress.ward = SelectedWard;
-            StaffAdress.streetName = StreetName;
-            StaffAdress.apartmentNumber = ApartmentNumber;
+                    Address StaffAdress = DataProvider.ins.db.Addresses.Where(x => x.id == SelectStaff.addressID).FirstOrDefault();
+                    StaffAdress.province = SelectedProvince;
+                    StaffAdress.district = SelectedDistrict;
+                    StaffAdress.ward = SelectedWard;
+                    StaffAdress.streetName = StreetName;
+                    StaffAdress.apartmentNumber = ApartmentNumber;
 
-            SelectStaff.name = Name;
-            SelectStaff.nationality = SelectedNationality;
-            SelectStaff.phoneNumber = PhoneNumber;
-            SelectStaff.sex = SelectedSex;
-            SelectStaff.healthInsuranceID = HealthInsuranceID;
-            SelectStaff.department = Department;
-            SelectStaff.dateOfBirth = DateOfBirth;
-            SelectStaff.citizenID = CitizenID;
-            SelectStaff.addressID = StaffAdress.id;
+                    SelectStaff.name = Name;
+                    SelectStaff.nationality = SelectedNationality;
+                    SelectStaff.phoneNumber = PhoneNumber;
+                    SelectStaff.sex = SelectedSex;
+                    SelectStaff.healthInsuranceID = HealthInsuranceID;
+                    SelectStaff.department = Department;
+                    SelectStaff.dateOfBirth = DateOfBirth;
+                    SelectStaff.citizenID = CitizenID;
+                    SelectStaff.addressID = StaffAdress.id;
 
-            DataProvider.ins.db.SaveChanges();
+                    InitDisplayAddress(StaffAdress);
+
+                    DataProvider.ins.db.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
         }
         void DeleteStaff() { }
 
 
+        void SetSelectedItemToProperty()
+        {
+            Name = SelectedItem.name;
+            DateOfBirth = SelectedItem.dateOfBirth;
+            SelectedSex = SelectedItem.sex;
+            CitizenID = SelectedItem.citizenID;
+            SelectedNationality = SelectedItem.nationality;
+            HealthInsuranceID = SelectedItem.healthInsuranceID;
+            PhoneNumber = SelectedItem.phoneNumber;
+            JobTitle = SelectedItem.jobTitle;
+            Department = SelectedItem.department;
+
+            Address StaffAdress = DataProvider.ins.db.Addresses.Where(x => x.id == SelectedItem.addressID).FirstOrDefault();
+
+
+            StreetName = StaffAdress.streetName;
+            ApartmentNumber = StaffAdress.apartmentNumber;
+            SelectedProvince = StaffAdress.province;
+            SelectedWard = StaffAdress.ward;
+            SelectedDistrict = StaffAdress.district;
+
+            InitDisplayAddress(StaffAdress);
+        }
 
         #endregion
     }

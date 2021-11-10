@@ -147,15 +147,6 @@ namespace QuanLyKhuCachLy.ViewModel
                 _TabPostionInformation = value; OnPropertyChanged();
             }
         }
-
-        private Visibility _ButtonEditReturn;
-        public Visibility ButtonEditReturn
-        {
-            get => _ButtonEditReturn; set
-            {
-                _ButtonEditReturn = value; OnPropertyChanged();
-            }
-        }
         #endregion
 
         #region Quarantine Person
@@ -638,7 +629,6 @@ namespace QuanLyKhuCachLy.ViewModel
             TabPosition = $"{TabIndex}/3";
             TabEditIndex = 1;
             TabEditPosition = $"{TabEditIndex}/3";
-            ButtonEditReturn = Visibility.Hidden;
 
             NextTabCommandInformation = new RelayCommand<Window>((p) =>
             {
@@ -1099,6 +1089,8 @@ namespace QuanLyKhuCachLy.ViewModel
                     Person.healthInsuranceID = QPHealthInsuranceID;
 
                     DataProvider.ins.db.SaveChanges();
+
+                    InitDisplayAddress(PersonAddress);
 
                     transaction.Commit();
 

@@ -97,9 +97,7 @@
                         ItemsSource="{Binding RoomLevelList}"
                         Style="{StaticResource ComboBoxField}">
                         <ComboBox.SelectedItem>
-
                             <Binding Path="RoomSelectedSeverity" UpdateSourceTrigger="PropertyChanged">
-
                                 <Binding.ValidationRules>
                                     <vr:RequiredField />
                                 </Binding.ValidationRules>

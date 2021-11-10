@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace QuanLyKhuCachLy.CustomUserControl
 {
     /// <summary>
-    /// Interaction logic for AddPersonFunctionMenu.xaml
+    /// Interaction logic for EditStaffFirstScreen.xaml
     /// </summary>
-    public partial class AddPersonFunctionMenu : UserControl
+    public partial class EditStaffFirstScreen : UserControl
     {
-        public AddPersonFunctionMenu()
+        public EditStaffFirstScreen()
         {
             InitializeComponent();
         }

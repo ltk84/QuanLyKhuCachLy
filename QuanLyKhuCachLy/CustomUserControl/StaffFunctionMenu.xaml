@@ -6,9 +6,9 @@
     xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Name="StaffCM"
     Width="276"
-    Height="332"
-    d:DesignHeight="450"
+    Height="216.11"
     d:DesignWidth="800"
     mc:Ignorable="d">
     <Border Padding="0,16,0,16" Style="{StaticResource RecommendationField}">
@@ -37,22 +37,9 @@
                     </TextBlock>
                 </StackPanel>
             </Button>
-            <Button Style="{StaticResource MenuButton}">
-                <StackPanel Style="{StaticResource MenuStackPanel}">
-                    <materialDesign:PackIcon Kind="CheckboxOutline" Style="{StaticResource MenuIcon}" />
-                    <TextBlock Style="{StaticResource MenuText}">
-                        Hoàn thành cách ly
-                    </TextBlock>
-                </StackPanel>
-            </Button>
-            <Button Style="{StaticResource MenuButton}">
-                <StackPanel Style="{StaticResource MenuStackPanel}">
-                    <materialDesign:PackIcon Kind="Broom" Style="{StaticResource MenuIcon}" />
-                    <TextBlock Style="{StaticResource MenuText}">
-                        Làm trống
-                    </TextBlock>
-                </StackPanel>
-            </Button>
+            
+           
         </StackPanel>
     </Border>
 </UserControl>
+
