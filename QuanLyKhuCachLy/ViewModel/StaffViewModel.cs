@@ -502,6 +502,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }, (p) =>
             {
                 isAdding = false;
+                SetDefaultAddStaff();
                 SetSelectedItemToProperty();
                 editStaffScreen = new EditStaffScreen();
                 editStaffScreen.ShowDialog();
