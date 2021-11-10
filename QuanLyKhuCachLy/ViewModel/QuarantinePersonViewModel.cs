@@ -8,7 +8,9 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-
+using System.IO;
+using Microsoft.Win32;
+using Excel = Microsoft.Office.Interop.Excel;
 namespace QuanLyKhuCachLy.ViewModel
 {
     public class QuarantinePersonViewModel : BaseViewModel
@@ -148,14 +150,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
-        private Visibility _ButtonEditReturn;
-        public Visibility ButtonEditReturn
-        {
-            get => _ButtonEditReturn; set
-            {
-                _ButtonEditReturn = value; OnPropertyChanged();
-            }
-        }
+        
         #endregion
 
         #region Quarantine Person
@@ -617,6 +612,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         public ICommand NextTabEditCommand { get; set; }
         public ICommand PreviousTabEditCommand { get; set; }
+
         #endregion
         public QuarantinePersonViewModel()
         {
@@ -743,7 +739,66 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
+                string path = "";
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Multiselect = false;
+                openFileDialog.Filter = "Excel files (*.xlsx;*.xlsm;*xls)|*.xlsx;*.xlsm;*xls|All files (*.*)|*.*";
+                openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                if (openFileDialog.ShowDialog() == true)
+                    path = openFileDialog.FileName;
+                Excel.Application xlApp = new Excel.Application();
+                Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(path);
+                Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
+                Excel.Range xlRange = xlWorksheet.UsedRange;
+                int rowCount = xlRange.Rows.Count;
+                int colCount = xlRange.Columns.Count;
+                if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2 != "STT")
+                    return;
+                if (xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2 != "Họ và tên")
+                    return;
+                if (xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2 != "Ngày sinh")
+                    return;
+                if (xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2 != "Giới tính")
+                    return;
+                if (xlRange.Cells[1, 6] == null || xlRange.Cells[1, 6].Value2 != "CMND/CCCD")
+                    return;
+                if (xlRange.Cells[1, 7] == null || xlRange.Cells[1, 7].Value2 != "Quốc tịch")
+                    return;
+                if (xlRange.Cells[1, 8] == null || xlRange.Cells[1, 8].Value2 != "SĐT")
+                    return;
+                if (xlRange.Cells[1, 9] == null || xlRange.Cells[1, 9].Value2 != "Nhóm đối tượng")
+                    return;
+                if (xlRange.Cells[1, 10] == null || xlRange.Cells[1, 10].Value2 != "Ngày đến")
+                    return;
+                for (int i = 2; i <= rowCount; i++)
+                {
+                    if (xlRange.Cells[i, 2] != null && xlRange.Cells[i, 2].Value2 != null)
+                    { 
+                    }
+                    if (xlRange.Cells[i, 3] != null && xlRange.Cells[i, 3].Value2 != null)
+                    {
+                    }
+                    if (xlRange.Cells[i, 4] != null && xlRange.Cells[i, 4].Value2 != null)
+                    {
+                    }
+                    if (xlRange.Cells[i, 6] != null && xlRange.Cells[i, 6].Value2 != null)
+                    {
+                    }
+                    if (xlRange.Cells[i, 7] != null && xlRange.Cells[i, 7].Value2 != null)
+                    {
+                    }
+                    if (xlRange.Cells[i, 8] != null && xlRange.Cells[i, 8].Value2 != null)
+                    {
+                    }
+                    if (xlRange.Cells[i, 9] != null && xlRange.Cells[i, 9].Value2 != null)
+                    {
+                    }
+                    if (xlRange.Cells[i, 10] != null && xlRange.Cells[i, 10].Value2 != null)
+                    {
+                    }
+                }
 
+                //MessageBox.Show(rowCount.ToString());
             });
 
             ToEditCommand = new RelayCommand<Window>((p) =>
