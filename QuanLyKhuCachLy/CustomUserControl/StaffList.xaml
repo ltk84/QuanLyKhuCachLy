@@ -124,10 +124,6 @@
                                         </ContextMenu.Template>
                                     </ContextMenu>
                                 </Button.ContextMenu>
-<<<<<<< HEAD
-
-=======
->>>>>>> tung/feature-staff
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

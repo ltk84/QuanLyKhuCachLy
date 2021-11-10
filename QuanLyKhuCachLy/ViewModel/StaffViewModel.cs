@@ -17,11 +17,10 @@ namespace QuanLyKhuCachLy.ViewModel
     public class StaffViewModel : BaseViewModel
     {
 
-<<<<<<< HEAD
-        EditStaffScreen editStaffScreen;
-=======
         #region UI
->>>>>>> tung/feature-staff
+        bool isAdding = true;
+        EditStaffScreen editStaffScreen;
+ 
         AddStaffScreen addStaffScreen;
         private Visibility _AddStaffTab1;
         private Visibility _AddStaffTab2;
@@ -479,8 +478,10 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
+
                 ClearData();
                 SetDefaultAddStaff();
+                isAdding = true;
                 addStaffScreen = new AddStaffScreen();
                 addStaffScreen.ShowDialog();
                 ClearData();
@@ -500,6 +501,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
+                isAdding = false;
                 SetSelectedItemToProperty();
                 editStaffScreen = new EditStaffScreen();
                 editStaffScreen.ShowDialog();
@@ -591,7 +593,15 @@ namespace QuanLyKhuCachLy.ViewModel
 
         void CloseAddStaffWindown()
         {
-            addStaffScreen.Close();
+            if (isAdding)
+            {
+                addStaffScreen.Close();
+
+            }
+            else
+            {
+                editStaffScreen.Close();
+            }
         }
 
         void ClearData()
