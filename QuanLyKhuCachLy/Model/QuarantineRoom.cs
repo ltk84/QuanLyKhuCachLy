@@ -55,7 +55,9 @@ namespace QuanLyKhuCachLy.Model
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QuarantinePerson> QuarantinePersons { get; set; }
-        public virtual Severity Severity { get; set; }
+
+        private Severity _Severity;
+        public virtual Severity Severity { get => _Severity; set { _Severity = value; OnPropertyChanged(); } }
 
         public bool CheckValidateProperty()
         {

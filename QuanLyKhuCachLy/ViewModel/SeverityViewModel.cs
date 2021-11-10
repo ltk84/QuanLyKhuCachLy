@@ -106,6 +106,8 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     DataProvider.ins.db.SaveChanges();
 
+                    SelectedItem = severity;
+
                     transaction.Commit();
                 }
                 catch (DbUpdateException e)
