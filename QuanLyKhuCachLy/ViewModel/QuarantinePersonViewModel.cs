@@ -489,14 +489,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
-        private bool _SeverityFieldHasError;
-        public bool SeverityFieldHasError
-        {
-            get => _SeverityFieldHasError; set
-            {
-                _SeverityFieldHasError = value; OnPropertyChanged();
-            }
-        }
+
         #endregion
 
         #region quarantine area information
@@ -771,7 +764,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             AddCommand = new RelayCommand<Window>((p) =>
             {
-                if (!NameFieldHasError && !NationalityFieldHasError && !SexFieldHasError && !ProvinceFieldHasError && !DistrictFieldHasError && !WardFieldHasError && !SeverityFieldHasError)
+                if (!NameFieldHasError && !NationalityFieldHasError && !SexFieldHasError && !ProvinceFieldHasError && !DistrictFieldHasError && !WardFieldHasError)
                 {
                     return true;
                 }
@@ -785,7 +778,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             EditCommand = new RelayCommand<Window>((p) =>
             {
-                if (!NameFieldHasError && !NationalityFieldHasError && !SexFieldHasError && !ProvinceFieldHasError && !DistrictFieldHasError && !WardFieldHasError && !SeverityFieldHasError)
+                if (!NameFieldHasError && !NationalityFieldHasError && !SexFieldHasError && !ProvinceFieldHasError && !DistrictFieldHasError && !WardFieldHasError)
                 {
                     return true;
                 }
@@ -842,6 +835,8 @@ namespace QuanLyKhuCachLy.ViewModel
         void InitDisplayHealthInformation(HealthInformation HF)
         {
             DisplayHealthInfor = string.Empty;
+
+            if (HF == null) return;
             if (HF.isCough) DisplayHealthInfor += "Ho, ";
             if (HF.isDisease) DisplayHealthInfor += "Có bệnh nền, ";
             if (HF.isFever) DisplayHealthInfor += "Sốt, ";
@@ -876,14 +871,17 @@ namespace QuanLyKhuCachLy.ViewModel
                 QPSelectedProvince = PersonAddress.province;
             }
 
-            IsCough = HealthInfor.isCough;
-            IsDisease = HealthInfor.isDisease;
-            IsFever = HealthInfor.isFever;
-            IsLossOfTatse = HealthInfor.isLossOfTatse;
-            IsOtherSymptoms = HealthInfor.isOtherSymptoms;
-            IsShortnessOfBreath = HealthInfor.isShortnessOfBreath;
-            IsSoreThroat = HealthInfor.isSoreThroat;
-            IsTired = HealthInfor.isTired;
+            if (HealthInfor != null)
+            {
+                IsCough = HealthInfor.isCough;
+                IsDisease = HealthInfor.isDisease;
+                IsFever = HealthInfor.isFever;
+                IsLossOfTatse = HealthInfor.isLossOfTatse;
+                IsOtherSymptoms = HealthInfor.isOtherSymptoms;
+                IsShortnessOfBreath = HealthInfor.isShortnessOfBreath;
+                IsSoreThroat = HealthInfor.isSoreThroat;
+                IsTired = HealthInfor.isTired;
+            }
 
             QPName = Person.name;
             QPSelectedSex = Person.sex;
@@ -901,7 +899,7 @@ namespace QuanLyKhuCachLy.ViewModel
             SelectedItem.nationality = Person.nationality;
             SelectedItem.phoneNumber = Person.phoneNumber;
             SelectedItem.healthInsuranceID = Person.healthInsuranceID;
-            SelectedItem.levelID = PersonSeverity.id;
+            if (PersonSeverity != null) SelectedItem.levelID = PersonSeverity.id;
             SelectedItem.arrivedDate = Person.arrivedDate;
             SelectedItem.leaveDate = Person.leaveDate;
             Room = PersonRoom;

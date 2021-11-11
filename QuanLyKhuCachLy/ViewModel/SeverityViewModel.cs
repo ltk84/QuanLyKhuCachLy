@@ -68,10 +68,10 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             ListSeverity = new ObservableCollection<Severity>(DataProvider.ins.db.Severities);
 
-            RemoveSeverityCommand = new RelayCommand<object>((p) => { return true; }, (o) =>
-            {
-                RemoveSeverity(SelectedItem);
-            });
+            RemoveSeverityCommand = new RelayCommand<object>((p) => { if (ListSeverity.Count > 1) return true; return false; }, (o) =>
+             {
+                 RemoveSeverity();
+             });
 
             AddSeverityCommand = new RelayCommand<object>((p) => { return true; }, (o) =>
             {
@@ -84,10 +84,60 @@ namespace QuanLyKhuCachLy.ViewModel
             });
         }
 
-        // Chua lam
-        private void RemoveSeverity(Severity severity)
+
+        private void RemoveSeverity()
         {
-            ListSeverity.Remove(severity);
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    var severity = DataProvider.ins.db.Severities.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+                    if (severity == null) return;
+
+                    DataProvider.ins.db.Severities.Remove(severity);
+                    DataProvider.ins.db.SaveChanges();
+
+                    ListSeverity.Remove(severity);
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+
+            }
         }
 
         private void EditSeverity()

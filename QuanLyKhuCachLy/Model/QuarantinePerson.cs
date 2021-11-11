@@ -96,8 +96,8 @@ namespace QuanLyKhuCachLy.Model
             }
         }
 
-        private int _levelID;
-        public int levelID
+        private Nullable<int> _levelID;
+        public Nullable<int> levelID
         {
             get => _levelID; set
             {

@@ -139,14 +139,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
-        private bool _SeverityFieldHasError;
-        public bool SeverityFieldHasError
-        {
-            get => _SeverityFieldHasError; set
-            {
-                _SeverityFieldHasError = value; OnPropertyChanged();
-            }
-        }
+
         #endregion
 
         #endregion
@@ -222,7 +215,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             AddRoomManualCommand = new RelayCommand<Window>((p) =>
             {
-                if (!DisplayNameFieldHasError && !CapacityFieldHasError && !SeverityFieldHasError) return true;
+                if (!DisplayNameFieldHasError && !CapacityFieldHasError) return true;
                 return false;
 
             }, (p) =>
@@ -233,7 +226,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             EditRoomCommand = new RelayCommand<Window>((p) =>
             {
-                if (!DisplayNameFieldHasError && !CapacityFieldHasError && !SeverityFieldHasError) return true;
+                if (!DisplayNameFieldHasError && !CapacityFieldHasError) return true;
                 return false;
             }, (p) =>
             {
