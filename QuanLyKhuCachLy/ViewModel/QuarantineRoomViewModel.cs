@@ -163,7 +163,6 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand ToAddManualCommand { get; set; }
         public ICommand ToAddExcelCommand { get; set; }
         public ICommand ToEditCommand { get; set; }
-        public ICommand ToDeleteCommand { get; set; }
         public ICommand ToViewCommand { get; set; }
         public ICommand ToMainCommand { get; set; }
         #endregion
@@ -242,9 +241,9 @@ namespace QuanLyKhuCachLy.ViewModel
                 p.Close();
             });
 
-            DeleteRoomCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            DeleteRoomCommand = new RelayCommand<object>((p) => { if (SelectedItem != null) return true; return false; }, (p) =>
             {
-                //DeleteQuarantineRoom();
+                DeleteQuarantineRoom();
             });
 
             CancelCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
@@ -371,7 +370,60 @@ namespace QuanLyKhuCachLy.ViewModel
 
             }
         }
-        void DeleteQuarantineRoom() { }
+        void DeleteQuarantineRoom()
+        {
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    var Room = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+                    if (Room == null) return;
+
+                    DataProvider.ins.db.QuarantineRooms.Remove(Room);
+                    DataProvider.ins.db.SaveChanges();
+
+                    RoomList.Remove(Room);
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+
+            }
+        }
         void ClearData()
         {
             RoomDisplayName = "";

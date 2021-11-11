@@ -471,7 +471,9 @@ namespace QuanLyKhuCachLy.ViewModel
 
             DeleteCommand = new RelayCommand<object>((p) =>
             {
-                return true;
+                if (SelectedItem != null)
+                    return true;
+                return false;
             }, (p) =>
             {
                 DeleteStaff();
@@ -807,7 +809,59 @@ namespace QuanLyKhuCachLy.ViewModel
                 }
             }
         }
-        void DeleteStaff() { }
+        void DeleteStaff()
+        {
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    Staff staff = DataProvider.ins.db.Staffs.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+                    if (staff == null) return;
+
+                    DataProvider.ins.db.Staffs.Remove(staff);
+                    DataProvider.ins.db.SaveChanges();
+
+                    StaffList.Remove(staff);
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
+        }
 
 
         void SetSelectedItemToProperty()

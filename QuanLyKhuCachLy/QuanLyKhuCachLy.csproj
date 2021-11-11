@@ -99,7 +99,7 @@
     </Compile>
     <Compile Include="CustomUserControl\AddStaffSecondScreen.xaml.cs">
       <DependentUpon>AddStaffSecondScreen.xaml</DependentUpon>
-      </Compile>
+    </Compile>
     <Compile Include="CustomUserControl\EditQuarantinedPersonInformation.xaml.cs">
       <DependentUpon>EditQuarantinedPersonInformation.xaml</DependentUpon>
     </Compile>

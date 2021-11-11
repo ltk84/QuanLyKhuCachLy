@@ -596,7 +596,6 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand ToAddManualCommand { get; set; }
         public ICommand ToAddExcelCommand { get; set; }
         public ICommand ToEditCommand { get; set; }
-        public ICommand ToDeleteCommand { get; set; }
         public ICommand ToViewCommand { get; set; }
         public ICommand ToMainCommand { get; set; }
 
@@ -799,7 +798,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 TabEditIndex = 1;
             });
 
-            DeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            DeleteCommand = new RelayCommand<object>((p) => { if (SelectedItem != null) return true; return false; }, (p) =>
             {
                 DeleteQuarantinePerson();
             });
@@ -864,7 +863,7 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             var Person = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == SelectedItem.id).FirstOrDefault();
             var PersonAddress = DataProvider.ins.db.Addresses.Where(x => x.id == Person.addressID).FirstOrDefault();
-            var HealthInfor = DataProvider.ins.db.HealthInformations.Where(x => x.id == Person.healthInformationID).FirstOrDefault();
+            var HealthInfor = DataProvider.ins.db.HealthInformations.Where(x => x.quarantinePersonID == Person.id).FirstOrDefault();
             var PersonSeverity = DataProvider.ins.db.Severities.Where(x => x.id == Person.levelID).FirstOrDefault();
             var PersonRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == Person.roomID).FirstOrDefault();
 
@@ -958,25 +957,11 @@ namespace QuanLyKhuCachLy.ViewModel
                     }
 
                     // Tạo thông tin sức khỏe
-                    HealthInformation PersonHealthInformation = new HealthInformation()
-                    {
-                        isCough = IsCough,
-                        isDisease = IsDisease,
-                        isFever = IsFever,
-                        isLossOfTatse = IsLossOfTatse,
-                        isTired = IsTired,
-                        isOtherSymptoms = IsOtherSymptoms,
-                        isShortnessOfBreath = IsShortnessOfBreath,
-                        isSoreThroat = IsSoreThroat
-                    };
 
-                    DataProvider.ins.db.HealthInformations.Add(PersonHealthInformation);
-                    DataProvider.ins.db.SaveChanges();
 
                     // Tạo người cách ly
                     QuarantinePerson Person = new QuarantinePerson()
                     {
-                        healthInformationID = PersonHealthInformation.id,
                         name = QPName,
                         dateOfBirth = QPDateOfBirth,
                         sex = QPSelectedSex,
@@ -996,6 +981,22 @@ namespace QuanLyKhuCachLy.ViewModel
                     DataProvider.ins.db.SaveChanges();
 
                     QuarantinePersonList.Add(Person);
+
+                    HealthInformation PersonHealthInformation = new HealthInformation()
+                    {
+                        isCough = IsCough,
+                        isDisease = IsDisease,
+                        isFever = IsFever,
+                        isLossOfTatse = IsLossOfTatse,
+                        isTired = IsTired,
+                        isOtherSymptoms = IsOtherSymptoms,
+                        isShortnessOfBreath = IsShortnessOfBreath,
+                        isSoreThroat = IsSoreThroat,
+                        quarantinePersonID = Person.id,
+                    };
+
+                    DataProvider.ins.db.HealthInformations.Add(PersonHealthInformation);
+                    DataProvider.ins.db.SaveChanges();
 
                     transaction.Commit();
 
@@ -1063,7 +1064,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     }
 
                     // Tạo thông tin sức khỏe
-                    HealthInformation PersonHealthInformation = DataProvider.ins.db.HealthInformations.Where(x => x.id == Person.healthInformationID).FirstOrDefault();
+                    HealthInformation PersonHealthInformation = DataProvider.ins.db.HealthInformations.Where(x => x.quarantinePersonID == Person.id).FirstOrDefault();
 
                     if (PersonHealthInformation != null)
                     {
@@ -1092,6 +1093,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     DataProvider.ins.db.SaveChanges();
 
                     InitDisplayAddress(PersonAddress);
+                    InitDisplayHealthInformation(PersonHealthInformation);
 
                     transaction.Commit();
 
@@ -1135,7 +1137,59 @@ namespace QuanLyKhuCachLy.ViewModel
 
 
         }
-        void DeleteQuarantinePerson() { }
+        void DeleteQuarantinePerson()
+        {
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    var Person = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+                    if (Person == null) return;
+
+                    DataProvider.ins.db.QuarantinePersons.Remove(Person);
+                    DataProvider.ins.db.SaveChanges();
+
+                    QuarantinePersonList.Remove(Person);
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
+        }
 
         void HandleChangeTab(int index, string action, Window p)
         {

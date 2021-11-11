@@ -19,7 +19,7 @@ namespace QuanLyKhuCachLy.Model
         public int testCycle { get; set; }
         public int requiredDayToFinish { get; set; }
         public int addressID { get; set; }
-        public int managerID { get; set; }
+        public Nullable<int> managerID { get; set; }
 
         public virtual Address Address { get; set; }
         public virtual Staff Staff { get; set; }
