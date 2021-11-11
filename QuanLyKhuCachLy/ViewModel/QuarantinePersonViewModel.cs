@@ -1088,6 +1088,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     Person.phoneNumber = QPPhoneNumber;
                     Person.healthInsuranceID = QPHealthInsuranceID;
 
+
                     DataProvider.ins.db.SaveChanges();
 
                     InitDisplayAddress(PersonAddress);
