@@ -752,24 +752,21 @@ namespace QuanLyKhuCachLy.ViewModel
                 Excel.Range xlRange = xlWorksheet.UsedRange;
                 int rowCount = xlRange.Rows.Count;
                 int colCount = xlRange.Columns.Count;
-                if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2 != "STT")
+                if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2 != "STT" ||
+                xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2 != "Họ và tên"||
+                xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2 != "Ngày sinh"||
+                xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2 != "Giới tính" ||
+                xlRange.Cells[1, 5] == null || xlRange.Cells[1, 5].Value2 != "Địa chỉ thường trú"||
+                xlRange.Cells[1, 7] == null || xlRange.Cells[1, 7].Value2 != "CMND/CCCD"||
+                xlRange.Cells[1, 8] == null || xlRange.Cells[1, 8].Value2 != "Quốc tịch"||
+                xlRange.Cells[1, 9] == null || xlRange.Cells[1, 9].Value2 != "SĐT"||
+                xlRange.Cells[1, 10] == null || xlRange.Cells[1, 10].Value2 != "Triệu chứng"||
+                xlRange.Cells[1, 11] == null || xlRange.Cells[1, 11].Value2 != "Nhóm đối tượng"||
+                xlRange.Cells[1, 12] == null || xlRange.Cells[1, 12].Value2 != "Ngày đến")
+                {
+                    MessageBox.Show("Không đúng định dạng file");
                     return;
-                if (xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2 != "Họ và tên")
-                    return;
-                if (xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2 != "Ngày sinh")
-                    return;
-                if (xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2 != "Giới tính")
-                    return;
-                if (xlRange.Cells[1, 6] == null || xlRange.Cells[1, 6].Value2 != "CMND/CCCD")
-                    return;
-                if (xlRange.Cells[1, 7] == null || xlRange.Cells[1, 7].Value2 != "Quốc tịch")
-                    return;
-                if (xlRange.Cells[1, 8] == null || xlRange.Cells[1, 8].Value2 != "SĐT")
-                    return;
-                if (xlRange.Cells[1, 9] == null || xlRange.Cells[1, 9].Value2 != "Nhóm đối tượng")
-                    return;
-                if (xlRange.Cells[1, 10] == null || xlRange.Cells[1, 10].Value2 != "Ngày đến")
-                    return;
+                }
                 for (int i = 2; i <= rowCount; i++)
                 {
                     if (xlRange.Cells[i, 2] != null && xlRange.Cells[i, 2].Value2 != null)
