@@ -111,6 +111,7 @@ namespace QuanLyKhuCachLy.ViewModel
         #endregion
 
         #region property
+        
 
         private string _Name;
         public string Name
@@ -119,6 +120,17 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 _Name = value;
                 OnPropertyChanged();
+            }
+        }
+
+        private string _SearchKey;
+        public string SearchKey
+        {
+            get => _SearchKey; set
+            {
+                _SearchKey = value;
+                OnPropertyChanged();
+                FilterListView();
             }
         }
 
@@ -246,6 +258,15 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
+        private Staff[] _StaffListView;
+        public Staff[] StaffListView
+        {
+            get => _StaffListView; set
+            {
+                _StaffListView = value; OnPropertyChanged();
+            }
+        }
+
         private ObservableCollection<string> _ProvinceList;
         public ObservableCollection<string> ProvinceList
         {
@@ -294,6 +315,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #region command
         public ICommand AddCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
 
@@ -421,8 +443,9 @@ namespace QuanLyKhuCachLy.ViewModel
             TabInformation = Visibility.Hidden;
 
             SetDefaultAddStaff();
-
+            
             StaffList = new ObservableCollection<Staff>(DataProvider.ins.db.Staffs);
+            StaffListView = StaffList.ToArray();
 
             NationalityList = new ObservableCollection<string>() {
                 "VietNam", "Ameriden", "Phap", "Dut", "Em"
@@ -510,6 +533,15 @@ namespace QuanLyKhuCachLy.ViewModel
                 SetSelectedItemToProperty();
                 editStaffScreen = new EditStaffScreen();
                 editStaffScreen.ShowDialog();
+            });
+
+
+            SearchCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                Console.WriteLine(SearchKey);
             });
 
             ToViewCommand = new RelayCommand<object>((p) =>
@@ -701,6 +733,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     DataProvider.ins.db.SaveChanges();
 
                     StaffList.Add(NewStaff);
+                    StaffListView = StaffList.ToArray();
 
                     transaction.Commit();
                 }
@@ -832,6 +865,29 @@ namespace QuanLyKhuCachLy.ViewModel
             SelectedDistrict = StaffAdress.district;
 
             InitDisplayAddress(StaffAdress);
+        }
+
+
+        void FilterListView()
+        {
+            if (SearchKey =="")
+            {
+                StaffListView = StaffList.ToArray();
+
+            }
+
+            else
+            {
+                StaffListView = StaffList.ToArray();
+                String[] Value = new string[StaffListView.Length];
+                
+                for (int i=0; i<StaffListView.Length; i++)
+                {
+                    Value[i] = StaffListView[i].name.ToString() + "@@" + StaffListView[i].citizenID.ToString()  ;
+                }
+
+                StaffListView = StaffListView.Where((val, index) => Value[index].Contains(SearchKey)).ToArray();
+            }
         }
 
         #endregion

@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utility="clr-namespace:QuanLyKhuCachLy.Utility"
     xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
     d:DesignHeight="705"
     d:DesignWidth="757"
@@ -53,14 +54,22 @@
             Foreground="#FF434A54">
             Nhập bất kì để tìm kiếm
         </TextBlock>
-        <TextBox
-            Width="350"
-            Height="34"
-            Margin="0,4,0,0"
-            HorizontalAlignment="Left"
-            materialDesign:HintAssist.Hint="Nhập bất kì để tìm kiếm"
-            MaxLength="30"
-            Style="{StaticResource TextInputField}" />
+        <TextBox    Width="300"
+                    HorizontalAlignment="Left"
+                    Height="40"
+                    Margin="0, 8, 0,0"
+                    Padding="10,8,8,10"
+                    materialDesign:HintAssist.Hint="Tên, CMND,...."
+                    MaxLength="20"
+                    Style="{StaticResource TextInputField}">
+            <TextBox.Text>
+                <Binding  Mode="TwoWay" Path="SearchKey" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+
+        </TextBox>
 
         <DataGrid
             Height="460"
@@ -71,7 +80,7 @@
             CanUserReorderColumns="False"
             CanUserResizeColumns="False"
             CanUserResizeRows="False"
-            ItemsSource="{Binding StaffList}"
+            ItemsSource="{Binding StaffListView}"
             SelectedItem="{Binding SelectedItem}">
             <DataGrid.Columns>
                 <materialDesign:DataGridTextColumn
