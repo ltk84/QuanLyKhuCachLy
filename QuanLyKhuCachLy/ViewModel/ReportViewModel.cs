@@ -34,16 +34,7 @@ namespace QuanLyKhuCachLy.ViewModel
             set { _EndDate = value; OnPropertyChanged(); }
         }
 
-        private Func<double, string> _Formatter;
-        public Func<double, string> Formatter
-        {
-            get => _Formatter; set
-            {
-                _Formatter = value; OnPropertyChanged();
-            }
-        }
-
-        #region Tab 1
+        #region First Tab
 
         private ObservableCollection<string> _QuarantinePersonReportObjects;
         public ObservableCollection<string> QuarantinePersonReportObjects
@@ -81,9 +72,18 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
+        private Func<double, string> _QuarantinePersonFormatter;
+        public Func<double, string> QuarantinePersonFormatter
+        {
+            get => _QuarantinePersonFormatter; set
+            {
+                _QuarantinePersonFormatter = value; OnPropertyChanged();
+            }
+        }
+
         #endregion
 
-        #region Tab 2
+        #region Second Tab
 
         private ObservableCollection<string> _QuarantineAreaReportObjects;
         public ObservableCollection<string> QuarantineAreaReportObjects
@@ -114,7 +114,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #endregion
 
-        #region Tab 3
+        #region Third Tab
 
         private ObservableCollection<string> _TestingReportObjects;
         public ObservableCollection<string> TestingReportObjects
@@ -152,6 +152,15 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
+        private Func<double, string> _TestingFormatter;
+        public Func<double, string> TestingFormatter
+        {
+            get => _TestingFormatter; set
+            {
+                _TestingFormatter = value; OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         #endregion
@@ -177,8 +186,10 @@ namespace QuanLyKhuCachLy.ViewModel
 
             QuarantinePersonReportObjects = new ObservableCollection<string>() { "Người cách ly", "Nhóm đối tượng" };
             QuarantineAreaReportObjects = new ObservableCollection<string>() { "Sức chứa", "Phòng", "Mức độ phòng", "Nhân viên" };
+            TestingReportObjects = new ObservableCollection<string>() { "Xét nghiệm" };
 
-            Formatter = value => value.ToString() + "người";
+            QuarantinePersonFormatter = value => value.ToString() + " người";
+            TestingFormatter = value => value.ToString() + " mẫu";
 
             SelectionChangedCommand = new RelayCommand<object>((p) =>
             {
@@ -192,6 +203,9 @@ namespace QuanLyKhuCachLy.ViewModel
                         break;
                     case 1:
                         ToSecondTab();
+                        break;
+                    case 2:
+                        ToThirdTab();
                         break;
                 }
             });
@@ -231,6 +245,13 @@ namespace QuanLyKhuCachLy.ViewModel
                     LoadStafChart(EndDate);
                 }
             }
+            else if (SelectedTab == 2)
+            {
+                if (SelectedReportObject.CompareTo(TestingReportObjects[0]) == 0)
+                {
+                    LoadTestingChart(BeginDate, EndDate);
+                }
+            }
         }
 
         #endregion
@@ -249,6 +270,13 @@ namespace QuanLyKhuCachLy.ViewModel
             SelectedTab = 1;
             SelectedQuarantineAreaReportObjects = QuarantineAreaReportObjects[0];
             LoadChart(SelectedTab, BeginDate, EndDate, SelectedQuarantineAreaReportObjects);
+        }
+
+        private void ToThirdTab()
+        {
+            SelectedTab = 2;
+            SelectedTestingReportObjects = TestingReportObjects[0];
+            LoadChart(SelectedTab, BeginDate, EndDate, SelectedTestingReportObjects);
         }
 
         #endregion
@@ -387,6 +415,44 @@ namespace QuanLyKhuCachLy.ViewModel
         private void LoadStafChart(DateTime EndDate)
         {
 
+        }
+
+        #endregion
+
+        #region Third Tab
+
+        private void LoadTestingChart(DateTime BeginDate, DateTime EndDate)
+        {
+            ThirdLabels = new ObservableCollection<string>();
+            ThirdSeriesCollection = new SeriesCollection
+            {
+                new ColumnSeries
+                {
+                    Title = "Số kết quả dương tính",
+                    Values = new ChartValues<int>(),
+                },
+                new ColumnSeries
+                {
+                    Title = "Số kết quả âm tính",
+                    Values = new ChartValues<int>(),
+                },
+            };
+
+            for (DateTime date = BeginDate; date <= EndDate; date = date.AddDays(1))
+            {
+                ThirdLabels.Add(date.ToString("dd/MM/yyyy"));
+                ThirdSeriesCollection[0].Values.Add(CountPositiveTestingResult(date));
+                ThirdSeriesCollection[1].Values.Add(CountNegativeTestingResult(date));
+            }
+        }
+
+        private int CountPositiveTestingResult(DateTime date)
+        {
+            return 5;
+        }
+        private int CountNegativeTestingResult(DateTime date)
+        {
+            return 5;
         }
 
         #endregion

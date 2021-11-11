@@ -48,7 +48,9 @@
             <TabItem Header="Khu cách ly" Style="{StaticResource TabControlStyle}">
                 <local:StatisticSecondTab />
             </TabItem>
-            <TabItem Header="Thông tin xét nghiệm" Style="{StaticResource TabControlStyle}" />
+            <TabItem Header="Thông tin xét nghiệm" Style="{StaticResource TabControlStyle}">
+                <local:StatisticThirdTab />
+            </TabItem>
         </TabControl>
     </Grid>
 </UserControl>

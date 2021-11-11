@@ -150,7 +150,7 @@
                     <lvc:Axis Title="Thời gian" Labels="{Binding FirstLabels}" />
                 </lvc:CartesianChart.AxisX>
                 <lvc:CartesianChart.AxisY>
-                    <lvc:Axis Title="Người" LabelFormatter="{Binding Formatter}" />
+                    <lvc:Axis Title="Người" LabelFormatter="{Binding QuarantinePersonFormatter}" />
                 </lvc:CartesianChart.AxisY>
             </lvc:CartesianChart>
         </Grid>
