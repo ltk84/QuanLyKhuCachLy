@@ -10,13 +10,14 @@
     Height="Auto"
     DataContext="{StaticResource ReportVM}"
     mc:Ignorable="d">
-    <Grid Width="Auto" Margin="25,45,45,0">
+    <Grid Width="Auto" Margin="25,25,45,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock
             Grid.Row="0"
+            Margin="0,0,0,24"
             HorizontalAlignment="Center"
             Style="{StaticResource DashboardTitle}">
             THỐNG KÊ
@@ -28,7 +29,8 @@
             HorizontalAlignment="Center"
             BorderBrush="Transparent"
             FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-            FontSize="16">
+            FontSize="16"
+            SelectedIndex="{Binding SelectedTab}">
             <TabControl.Resources>
                 <Style TargetType="{x:Type TabPanel}">
                     <Setter Property="HorizontalAlignment" Value="Center" />
@@ -37,8 +39,10 @@
             <TabItem Header="Người cách ly" Style="{StaticResource TabControlStyle}">
                 <local:StatisticFirstTab />
             </TabItem>
-            <TabItem Header="Khu cách ly" Style="{StaticResource TabControlStyle}" />
-            <TabItem Header="Thông tin xét nghiệm" Style="{StaticResource TabControlStyle}" />
+            <TabItem Header="Khu cách ly" Style="{StaticResource TabControlStyle}">
+            </TabItem>
+            <TabItem Header="Thông tin xét nghiệm" Style="{StaticResource TabControlStyle}">
+            </TabItem>
         </TabControl>
     </Grid>
 </UserControl>

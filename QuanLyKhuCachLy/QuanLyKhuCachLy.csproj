@@ -67,6 +67,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -101,6 +102,9 @@
     </Compile>
     <Compile Include="CustomUserControl\StatisticFirstTab.xaml.cs">
       <DependentUpon>StatisticFirstTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\StatisticSecondTab.xaml.cs">
+      <DependentUpon>StatisticSecondTab.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomUserControl\StatisticWrapper.xaml.cs">
       <DependentUpon>StatisticWrapper.xaml</DependentUpon>
@@ -277,6 +281,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomUserControl\StatisticFirstTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\StatisticSecondTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
