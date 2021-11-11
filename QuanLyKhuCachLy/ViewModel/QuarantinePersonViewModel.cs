@@ -761,11 +761,12 @@ namespace QuanLyKhuCachLy.ViewModel
                 xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2 != "Giới tính" ||
                 xlRange.Cells[1, 5] == null || xlRange.Cells[1, 5].Value2 != "Địa chỉ thường trú"||
                 xlRange.Cells[1, 7] == null || xlRange.Cells[1, 7].Value2 != "CMND/CCCD"||
-                xlRange.Cells[1, 8] == null || xlRange.Cells[1, 8].Value2 != "Quốc tịch"||
-                xlRange.Cells[1, 9] == null || xlRange.Cells[1, 9].Value2 != "SĐT"||
-                xlRange.Cells[1, 10] == null || xlRange.Cells[1, 10].Value2 != "Triệu chứng"||
-                xlRange.Cells[1, 11] == null || xlRange.Cells[1, 11].Value2 != "Nhóm đối tượng"||
-                xlRange.Cells[1, 12] == null || xlRange.Cells[1, 12].Value2 != "Ngày đến")
+                xlRange.Cells[1, 8] == null || xlRange.Cells[1, 8].Value2 != "Mã bảo hiểm" ||
+                xlRange.Cells[1, 9] == null || xlRange.Cells[1, 9].Value2 != "Quốc tịch"||
+                xlRange.Cells[1, 10] == null || xlRange.Cells[1, 10].Value2 != "SĐT"||
+                xlRange.Cells[1, 11] == null || xlRange.Cells[1, 11].Value2 != "Triệu chứng"||
+                xlRange.Cells[1, 12] == null || xlRange.Cells[1, 12].Value2 != "Nhóm đối tượng"||
+                xlRange.Cells[1, 13] == null || xlRange.Cells[1, 13].Value2 != "Ngày đến")
                 {
                     MessageBox.Show("Không đúng định dạng file");
                     return;
@@ -802,15 +803,19 @@ namespace QuanLyKhuCachLy.ViewModel
                     }
                     if (xlRange.Cells[i, 8] != null && xlRange.Cells[i, 8].Value2 != null)
                     {
-                        quarantinePerson.nationality = xlRange.Cells[i, 8].Value2.ToString();
+                        quarantinePerson.healthInsuranceID = xlRange.Cells[i, 8].Value2.ToString();
                     }
-                    if (xlRange.Cells[i, 9] != null && xlRange.Cells[i, 9].Value2 != null)
+                    if (xlRange.Cells[i, 9] != null && xlRange.Cells[i,9].Value2 != null)
                     {
-                        quarantinePerson.phoneNumber = xlRange.Cells[i, 7].Value2.ToString();
+                        quarantinePerson.nationality = xlRange.Cells[i, 9].Value2.ToString();
                     }
                     if (xlRange.Cells[i, 10] != null && xlRange.Cells[i, 10].Value2 != null)
                     {
-                        string health = xlRange.Cells[i, 10].Value2.ToString();
+                        quarantinePerson.phoneNumber = xlRange.Cells[i, 10].Value2.ToString();
+                    }
+                    if (xlRange.Cells[i, 11] != null && xlRange.Cells[i, 11].Value2 != null)
+                    {
+                        string health = xlRange.Cells[i, 11].Value2.ToString();                     
                         if(health.Contains("sốt")|| health.Contains("Sốt"))
                         {
                             healthInformation.isFever = true;
@@ -852,14 +857,14 @@ namespace QuanLyKhuCachLy.ViewModel
                         }
                         else healthInformation.isFever = false;
                     }
-                    if (xlRange.Cells[i, 11] != null && xlRange.Cells[i, 11].Value2 != null)
-                    {
-                        quarantinePerson.levelID = Int32.Parse(xlRange.Cells[i, 11].Value2.ToString());
-                    }
                     if (xlRange.Cells[i, 12] != null && xlRange.Cells[i, 12].Value2 != null)
                     {
+                        quarantinePerson.levelID = Int32.Parse(xlRange.Cells[i, 12].Value2.ToString());
+                    }
+                    if (xlRange.Cells[i, 13] != null && xlRange.Cells[i, 13].Value2 != null)
+                    {
 
-                        DateTime arrivedTime = DateTime.FromOADate(double.Parse(xlRange.Cells[i, 3].Value2.ToString()));
+                        DateTime arrivedTime = DateTime.FromOADate(double.Parse(xlRange.Cells[i, 13].Value2.ToString()));
                         quarantinePerson.arrivedDate = arrivedTime;
                     }
                     listAdress.Add(personAddress);
@@ -877,11 +882,12 @@ namespace QuanLyKhuCachLy.ViewModel
                             DataProvider.ins.db.SaveChanges();
                             listQuarantinePerson[i].healthInformationID = listHealthInformation[i].id;
                             listQuarantinePerson[i].leaveDate = listQuarantinePerson[i].arrivedDate.AddDays(QAInformation.requiredDayToFinish);
+                            listQuarantinePerson[i].addressID = listAdress[i].id;
                             DataProvider.ins.db.QuarantinePersons.Add(listQuarantinePerson[i]);
                             DataProvider.ins.db.SaveChanges();
                             QuarantinePersonList.Add(listQuarantinePerson[i]);
-                            transaction.Commit();
                         }
+                        transaction.Commit();
                         MessageBox.Show("Đã thêm từ file excel");
                         return;
                     }
