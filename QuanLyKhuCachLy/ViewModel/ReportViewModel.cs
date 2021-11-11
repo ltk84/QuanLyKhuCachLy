@@ -1,8 +1,10 @@
 ﻿using LiveCharts;
+using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using QuanLyKhuCachLy.Model;
 using System;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace QuanLyKhuCachLy.ViewModel
@@ -34,33 +36,60 @@ namespace QuanLyKhuCachLy.ViewModel
             set { _EndDate = value; OnPropertyChanged(); }
         }
 
-        private ObservableCollection<string> _ReportObjects;
-        public ObservableCollection<string> ReportObjects
+        private ObservableCollection<string> _QuarantinePersonReportObjects;
+        public ObservableCollection<string> QuarantinePersonReportObjects
         {
-            get => _ReportObjects; set
+            get => _QuarantinePersonReportObjects; set
             {
-                _ReportObjects = value; OnPropertyChanged();
+                _QuarantinePersonReportObjects = value; OnPropertyChanged();
             }
         }
 
-        private string _SelectedReportObject;
-        public string SelectedReportObject
+        private ObservableCollection<string> _QuarantineAreaReportObjects;
+        public ObservableCollection<string> QuarantineAreaReportObjects
         {
-            get => _SelectedReportObject; set
+            get => _QuarantineAreaReportObjects; set
             {
-                _SelectedReportObject = value; OnPropertyChanged();
+                _QuarantineAreaReportObjects = value; OnPropertyChanged();
+            }
+        }
+
+        private string _SelectedQuarantinePersonReportObjects;
+        public string SelectedQuarantinePersonReportObjects
+        {
+            get => _SelectedQuarantinePersonReportObjects; set
+            {
+                _SelectedQuarantinePersonReportObjects = value; OnPropertyChanged();
+            }
+        }
+
+        private string _SelectedQuarantineAreaReportObjects;
+        public string SelectedQuarantineAreaReportObjects
+        {
+            get => _SelectedQuarantineAreaReportObjects; set
+            {
+                _SelectedQuarantineAreaReportObjects = value; OnPropertyChanged();
             }
         }
 
         #endregion
 
         #region UI
-        private SeriesCollection _SeriesCollection;
-        public SeriesCollection SeriesCollection
+        private SeriesCollection _FirstSeriesCollection;
+        public SeriesCollection FirstSeriesCollection
         {
-            get => _SeriesCollection; set
+            get => _FirstSeriesCollection; set
             {
-                _SeriesCollection = value; OnPropertyChanged();
+                _FirstSeriesCollection = value; OnPropertyChanged();
+            }
+        }
+
+        private SeriesCollection _SecondSeriesCollection;
+        public SeriesCollection SecondSeriesCollection
+        {
+            get => _SecondSeriesCollection; set
+            {
+                _SecondSeriesCollection = value; OnPropertyChanged();
             }
         }
 
@@ -87,81 +116,107 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #region Command
 
-        public ICommand AddRoomManualCommand { get; set; }
+        public ICommand SelectionChangedCommand { get; set; }
 
         #endregion
 
         public ReportViewModel() {
             Init();
-            LoadChart(BeginDate, EndDate, SelectedReportObject);
         }
+
+        #region Method
+
+        #region Fundamental Function
 
         private void Init()
         {
-            SelectedTab = 0;
-            EndDate = DateTime.Now.Date;
+            EndDate = DateTime.Now.AddMonths(-3).Date;
             BeginDate = DateTime.Now.Date;
 
-            ReportObjects = new ObservableCollection<string>() { "Người cách ly", "Nhóm đối tượng" };
-            SelectedReportObject = ReportObjects[0];
-            Formatter = value => value + "ng";
+            QuarantinePersonReportObjects = new ObservableCollection<string>() { "Người cách ly", "Nhóm đối tượng" };
+            QuarantineAreaReportObjects = new ObservableCollection<string>() { "Sức chứa", "Phòng", "Mức độ phòng", "Nhân viên" };
+
+            Formatter = value => value.ToString() + "người";
+
+            SelectionChangedCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                switch (SelectedTab)
+                {
+                    case 0:
+                        ToFirstTab();
+                        break;
+                    case 1:
+                        ToSecondTab();
+                        break;
+                }
+            });
+
+            ToFirstTab();
         }
 
-        private void LoadChart(DateTime BeginDate, DateTime EndDate, string SelectedReportObject)
+        private void LoadChart(int SelectedTab, DateTime BeginDate, DateTime EndDate, string SelectedReportObject)
         {
-            if (SelectedReportObject.CompareTo(ReportObjects[0]) == 0)
+            if (SelectedTab == 0)
             {
-                LoadQuarantinePersonChart(BeginDate, EndDate);
-            } 
-            else if (SelectedReportObject.CompareTo(ReportObjects[1]) == 0)
+                if (SelectedReportObject.CompareTo(QuarantinePersonReportObjects[0]) == 0)
+                {
+                    LoadQuarantinePersonChart(BeginDate, EndDate);
+                }
+                else if (SelectedReportObject.CompareTo(QuarantinePersonReportObjects[1]) == 0)
+                {
+                    LoadTargetGroupChart(BeginDate, EndDate);
+                }
+            }
+            else if (SelectedTab == 1)
             {
-                LoadTargetGroupChart(BeginDate, EndDate);
+                if (SelectedReportObject.CompareTo(QuarantineAreaReportObjects[0]) == 0)
+                {
+                    LoadCapacityChart(EndDate);
+                }
+                else if (SelectedReportObject.CompareTo(QuarantineAreaReportObjects[1]) == 0)
+                {
+                    LoadRoomChart(EndDate);
+                }
+                else if (SelectedReportObject.CompareTo(QuarantineAreaReportObjects[2]) == 0)
+                {
+                    LoadRoomSeverityChart(EndDate);
+                }
+                else if (SelectedReportObject.CompareTo(QuarantineAreaReportObjects[3]) == 0)
+                {
+                    LoadStafChart(EndDate);
+                }
             }
         }
+
+        #endregion
+
+        #region Navigation
+
+        private void ToFirstTab()
+        {
+            SelectedTab = 0;
+            SelectedQuarantinePersonReportObjects = QuarantinePersonReportObjects[0];
+            LoadChart(SelectedTab, BeginDate, EndDate, SelectedQuarantinePersonReportObjects);
+        }
+
+        private void ToSecondTab()
+        {
+            SelectedTab = 1;
+            SelectedQuarantineAreaReportObjects = QuarantineAreaReportObjects[0];
+            LoadChart(SelectedTab, BeginDate, EndDate, SelectedQuarantineAreaReportObjects);
+        }
+
+        #endregion
 
         #region FirstTab
 
         private void LoadQuarantinePersonChart(DateTime BeginDate, DateTime EndDate)
         {
             Labels = new ObservableCollection<string>();
-            SeriesCollection = new SeriesCollection
-            {
-                new StackedColumnSeries
-                {
-                    Title = "Số người đang cách ly",
-                    Values = new ChartValues<int>(),
-                    StackMode = StackMode.Values,
-                    DataLabels = true
-                },
-                new StackedColumnSeries
-                {
-                    Title = "Số người cách ly mới",
-                    Values = new ChartValues<int>(),
-                    StackMode = StackMode.Values,
-                    DataLabels = true
-                },
-                new StackedColumnSeries
-                {
-                    Title = "Số người hoàn thành",
-                    Values = new ChartValues<int>(),
-                    StackMode = StackMode.Values,
-                    DataLabels = true
-                }
-            }; 
-
-            for (DateTime date = BeginDate; date <= EndDate; date = date.AddDays(1))
-            {
-                Labels.Add(date.ToString("dd/MM/yyyy"));
-                SeriesCollection[0].Values.Add(CountQuarantinePerson(date));
-                SeriesCollection[1].Values.Add(CountQuarantinePerson(date));
-                SeriesCollection[2].Values.Add(CountQuarantinePerson(date));
-            }
-        }
-
-        private void LoadTargetGroupChart(DateTime BeginDate, DateTime EndDate)
-        {
-            Labels = new ObservableCollection<string>();
-            SeriesCollection = new SeriesCollection
+            FirstSeriesCollection = new SeriesCollection
             {
                 new StackedColumnSeries
                 {
@@ -189,9 +244,46 @@ namespace QuanLyKhuCachLy.ViewModel
             for (DateTime date = BeginDate; date <= EndDate; date = date.AddDays(1))
             {
                 Labels.Add(date.ToString("dd/MM/yyyy"));
-                //SeriesCollection[0].Values.Add(CountTargetGroup(date));
-                //SeriesCollection[1].Values.Add(CountTargetGroup(date));
-                //SeriesCollection[2].Values.Add(CountTargetGroup(date));
+                FirstSeriesCollection[0].Values.Add(CountQuarantinePerson(date));
+                FirstSeriesCollection[1].Values.Add(CountQuarantinePerson(date));
+                FirstSeriesCollection[2].Values.Add(CountQuarantinePerson(date));
+            }
+        }
+
+        private void LoadTargetGroupChart(DateTime BeginDate, DateTime EndDate)
+        {
+            Labels = new ObservableCollection<string>();
+            FirstSeriesCollection = new SeriesCollection
+            {
+                new StackedColumnSeries
+                {
+                    Title = "Số người đang cách ly",
+                    Values = new ChartValues<int>(),
+                    StackMode = StackMode.Values,
+                    DataLabels = true
+                },
+                new StackedColumnSeries
+                {
+                    Title = "Số người cách ly mới",
+                    Values = new ChartValues<int>(),
+                    StackMode = StackMode.Values,
+                    DataLabels = true
+                },
+                new StackedColumnSeries
+                {
+                    Title = "Số người hoàn thành",
+                    Values = new ChartValues<int>(),
+                    StackMode = StackMode.Values,
+                    DataLabels = true
+                }
+            };
+
+            for (DateTime date = BeginDate; date <= EndDate; date = date.AddDays(1))
+            {
+                Labels.Add(date.ToString("dd/MM/yyyy"));
+                //FirstSeriesCollection[0].Values.Add(CountTargetGroup(date));
+                //FirstSeriesCollection[1].Values.Add(CountTargetGroup(date));
+                //FirstSeriesCollection[2].Values.Add(CountTargetGroup(date));
             }
         }
 
@@ -206,5 +298,58 @@ namespace QuanLyKhuCachLy.ViewModel
         }
 
         #endregion
+
+        #region SecondTab
+
+        private void LoadCapacityChart(DateTime EndDate)
+        {
+            SecondSeriesCollection = new SeriesCollection
+            {
+                new PieSeries
+                {
+                    Title = "Chrome",
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(8) },
+                    DataLabels = true
+                },
+                new PieSeries
+                {
+                    Title = "Mozilla",
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(6) },
+                    DataLabels = true
+                },
+                new PieSeries
+                {
+                    Title = "Opera",
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(10) },
+                    DataLabels = true
+                },
+                new PieSeries
+                {
+                    Title = "Explorer",
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(4) },
+                    DataLabels = true
+                }
+            };
+        }
+
+        private void LoadRoomChart(DateTime EndDate)
+        {
+
+        }
+
+        private void LoadRoomSeverityChart(DateTime EndDate)
+        {
+
+        }
+
+        private void LoadStafChart(DateTime EndDate)
+        {
+
+        }
+
+        #endregion
+
+        #endregion
+
     }
 }

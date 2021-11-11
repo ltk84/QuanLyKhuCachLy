@@ -45,8 +45,8 @@
                 Grid.Column="1"
                 Margin="12,0,0,0"
                 VerticalAlignment="Top"
-                ItemsSource="{Binding ReportObjects}"
-                SelectedItem="{Binding SelectedReportObject}"
+                ItemsSource="{Binding QuarantineAreaReportObjects}"
+                SelectedItem="{Binding SelectedQuarantineAreaReportObjects}"
                 Style="{StaticResource UnderlineComboBox}" />
 
         </Grid>
@@ -69,26 +69,12 @@
                 Thời gian:
             </TextBlock>
             <StackPanel
+                Grid.Row="0"
                 Grid.Column="1"
                 HorizontalAlignment="Right"
                 Orientation="Horizontal">
-                <TextBlock Margin="0,0,16,0" VerticalAlignment="Top">
-                    từ
-                </TextBlock>
-                <DatePicker
-                    materialDesign:HintAssist.Hint="Chọn ngày đầu "
-                    DisplayDateEnd="{Binding EndDate}"
-                    SelectedDate="{Binding BeginDate}"
-                    Style="{StaticResource UnderlineDatePicker}" />
-            </StackPanel>
-            <StackPanel
-                Grid.Row="1"
-                Grid.Column="1"
-                Margin="0,12,0,0"
-                HorizontalAlignment="Right"
-                Orientation="Horizontal">
-                <TextBlock Margin="0,0,16,0" VerticalAlignment="Top">
-                    đến
+                <TextBlock Margin="0,0,10,0" VerticalAlignment="Top">
+                    đến ngày
                 </TextBlock>
                 <DatePicker
                     materialDesign:HintAssist.Hint="Chọn ngày cuối "
@@ -145,14 +131,13 @@
             Height="400"
             Margin="32,24,0,0"
             VerticalAlignment="Top">
-            <lvc:CartesianChart LegendLocation="Bottom" Series="{Binding SeriesCollection}">
-                <lvc:CartesianChart.AxisX>
-                    <lvc:Axis Title="Thời gian" Labels="{Binding Labels}" />
-                </lvc:CartesianChart.AxisX>
-                <lvc:CartesianChart.AxisY>
-                    <lvc:Axis Title="Người" LabelFormatter="{Binding Formatter}" />
-                </lvc:CartesianChart.AxisY>
-            </lvc:CartesianChart>
+            <lvc:PieChart
+                Name="Chart"
+                Grid.Row="1"
+                Margin="0,15"
+                InnerRadius="100"
+                LegendLocation="Right"
+                Series="{Binding SecondSeriesCollection}" />
         </Grid>
 
     </Grid>
