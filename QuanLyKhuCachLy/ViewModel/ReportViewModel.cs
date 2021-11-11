@@ -130,7 +130,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         private void Init()
         {
-            EndDate = DateTime.Now.AddMonths(-3).Date;
+            EndDate = DateTime.Now.Date;
             BeginDate = DateTime.Now.Date;
 
             QuarantinePersonReportObjects = new ObservableCollection<string>() { "Người cách ly", "Nhóm đối tượng" };
