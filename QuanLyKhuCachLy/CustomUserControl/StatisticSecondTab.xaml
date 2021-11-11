@@ -132,8 +132,6 @@
             Margin="32,24,0,0"
             VerticalAlignment="Top">
             <lvc:PieChart
-                Name="Chart"
-                Grid.Row="1"
                 Margin="0,15"
                 InnerRadius="100"
                 LegendLocation="Right"

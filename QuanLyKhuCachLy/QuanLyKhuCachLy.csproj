@@ -106,6 +106,9 @@
     <Compile Include="CustomUserControl\StatisticSecondTab.xaml.cs">
       <DependentUpon>StatisticSecondTab.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomUserControl\StatisticThirdTab.xaml.cs">
+      <DependentUpon>StatisticThirdTab.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomUserControl\StatisticWrapper.xaml.cs">
       <DependentUpon>StatisticWrapper.xaml</DependentUpon>
     </Compile>
@@ -285,6 +288,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomUserControl\StatisticSecondTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\StatisticThirdTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

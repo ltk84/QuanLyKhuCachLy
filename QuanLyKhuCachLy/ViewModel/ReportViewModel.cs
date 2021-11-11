@@ -13,8 +13,6 @@ namespace QuanLyKhuCachLy.ViewModel
     {
         #region Property
 
-        #region Report Data
-
         private int _SelectedTab;
         public int SelectedTab
         {
@@ -36,21 +34,23 @@ namespace QuanLyKhuCachLy.ViewModel
             set { _EndDate = value; OnPropertyChanged(); }
         }
 
+        private Func<double, string> _Formatter;
+        public Func<double, string> Formatter
+        {
+            get => _Formatter; set
+            {
+                _Formatter = value; OnPropertyChanged();
+            }
+        }
+
+        #region Tab 1
+
         private ObservableCollection<string> _QuarantinePersonReportObjects;
         public ObservableCollection<string> QuarantinePersonReportObjects
         {
             get => _QuarantinePersonReportObjects; set
             {
                 _QuarantinePersonReportObjects = value; OnPropertyChanged();
-            }
-        }
-
-        private ObservableCollection<string> _QuarantineAreaReportObjects;
-        public ObservableCollection<string> QuarantineAreaReportObjects
-        {
-            get => _QuarantineAreaReportObjects; set
-            {
-                _QuarantineAreaReportObjects = value; OnPropertyChanged();
             }
         }
 
@@ -63,24 +63,43 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
-        private string _SelectedQuarantineAreaReportObjects;
-        public string SelectedQuarantineAreaReportObjects
-        {
-            get => _SelectedQuarantineAreaReportObjects; set
-            {
-                _SelectedQuarantineAreaReportObjects = value; OnPropertyChanged();
-            }
-        }
-
-        #endregion
-
-        #region UI
         private SeriesCollection _FirstSeriesCollection;
         public SeriesCollection FirstSeriesCollection
         {
             get => _FirstSeriesCollection; set
             {
                 _FirstSeriesCollection = value; OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<string> _FirstLabels;
+        public ObservableCollection<string> FirstLabels
+        {
+            get => _FirstLabels; set
+            {
+                _FirstLabels = value; OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region Tab 2
+
+        private ObservableCollection<string> _QuarantineAreaReportObjects;
+        public ObservableCollection<string> QuarantineAreaReportObjects
+        {
+            get => _QuarantineAreaReportObjects; set
+            {
+                _QuarantineAreaReportObjects = value; OnPropertyChanged();
+            }
+        }
+
+        private string _SelectedQuarantineAreaReportObjects;
+        public string SelectedQuarantineAreaReportObjects
+        {
+            get => _SelectedQuarantineAreaReportObjects; set
+            {
+                _SelectedQuarantineAreaReportObjects = value; OnPropertyChanged();
             }
         }
 
@@ -93,23 +112,46 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
-        private ObservableCollection<string> _Labels;
-        public ObservableCollection<string> Labels
+        #endregion
+
+        #region Tab 3
+
+        private ObservableCollection<string> _TestingReportObjects;
+        public ObservableCollection<string> TestingReportObjects
         {
-            get => _Labels; set
+            get => _TestingReportObjects; set
             {
-                _Labels = value; OnPropertyChanged();
+                _TestingReportObjects = value; OnPropertyChanged();
             }
         }
 
-        private Func<double, string> _Formatter;
-        public Func<double, string> Formatter
+        private string _SelectedTestingReportObjects;
+        public string SelectedTestingReportObjects
         {
-            get => _Formatter; set
+            get => _SelectedTestingReportObjects; set
             {
-                _Formatter = value; OnPropertyChanged();
+                _SelectedTestingReportObjects = value; OnPropertyChanged();
             }
         }
+
+        private SeriesCollection _ThirdSeriesCollection;
+        public SeriesCollection ThirdSeriesCollection
+        {
+            get => _ThirdSeriesCollection; set
+            {
+                _ThirdSeriesCollection = value; OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<string> _ThirdLabels;
+        public ObservableCollection<string> ThirdLabels
+        {
+            get => _ThirdLabels; set
+            {
+                _ThirdLabels = value; OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         #endregion
@@ -215,7 +257,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         private void LoadQuarantinePersonChart(DateTime BeginDate, DateTime EndDate)
         {
-            Labels = new ObservableCollection<string>();
+            FirstLabels = new ObservableCollection<string>();
             FirstSeriesCollection = new SeriesCollection
             {
                 new StackedColumnSeries
@@ -243,7 +285,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             for (DateTime date = BeginDate; date <= EndDate; date = date.AddDays(1))
             {
-                Labels.Add(date.ToString("dd/MM/yyyy"));
+                FirstLabels.Add(date.ToString("dd/MM/yyyy"));
                 FirstSeriesCollection[0].Values.Add(CountQuarantinePerson(date));
                 FirstSeriesCollection[1].Values.Add(CountQuarantinePerson(date));
                 FirstSeriesCollection[2].Values.Add(CountQuarantinePerson(date));
@@ -252,7 +294,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         private void LoadTargetGroupChart(DateTime BeginDate, DateTime EndDate)
         {
-            Labels = new ObservableCollection<string>();
+            FirstLabels = new ObservableCollection<string>();
             FirstSeriesCollection = new SeriesCollection
             {
                 new StackedColumnSeries
@@ -280,7 +322,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             for (DateTime date = BeginDate; date <= EndDate; date = date.AddDays(1))
             {
-                Labels.Add(date.ToString("dd/MM/yyyy"));
+                FirstLabels.Add(date.ToString("dd/MM/yyyy"));
                 //FirstSeriesCollection[0].Values.Add(CountTargetGroup(date));
                 //FirstSeriesCollection[1].Values.Add(CountTargetGroup(date));
                 //FirstSeriesCollection[2].Values.Add(CountTargetGroup(date));
