@@ -85,8 +85,14 @@
                 <DatePicker
                     materialDesign:HintAssist.Hint="Chọn ngày đầu "
                     DisplayDateEnd="{Binding EndDate}"
-                    SelectedDate="{Binding BeginDate}"
-                    Style="{StaticResource UnderlineDatePicker}" />
+                    SelectedDate="{Binding BeginDate, UpdateSourceTrigger=PropertyChanged}"
+                    Style="{StaticResource UnderlineDatePicker}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectedDateChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </DatePicker>
             </StackPanel>
             <StackPanel
                 Grid.Row="1"
@@ -101,8 +107,14 @@
                     materialDesign:HintAssist.Hint="Chọn ngày cuối "
                     DisplayDateEnd="{Binding Mode=OneWay, Source={x:Static System:DateTime.Today}}"
                     DisplayDateStart="{Binding BeginDate}"
-                    SelectedDate="{Binding EndDate}"
-                    Style="{StaticResource UnderlineDatePicker}" />
+                    SelectedDate="{Binding EndDate, UpdateSourceTrigger=PropertyChanged}"
+                    Style="{StaticResource UnderlineDatePicker}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectedDateChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </DatePicker>
             </StackPanel>
 
         </Grid>

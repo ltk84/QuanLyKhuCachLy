@@ -199,8 +199,8 @@ namespace QuanLyKhuCachLy.ViewModel
             TestingReportObjects = new ObservableCollection<string>() { "Xét nghiệm" };
             SelectedTestingReportObjects = TestingReportObjects[0];
 
-            QuarantinePersonFormatter = value => value.ToString() + " người";
-            TestingFormatter = value => value.ToString() + " mẫu";
+            QuarantinePersonFormatter = value => value.ToString("N0") + " người";
+            TestingFormatter = value => value.ToString("N0") + " mẫu";
 
             SelectionChangedCommand = new RelayCommand<object>((p) =>
             {
@@ -344,22 +344,19 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     Title = "Số người đang cách ly",
                     Values = new ChartValues<int>(),
-                    StackMode = StackMode.Values,
-                    DataLabels = true
+                    //DataLabels = true
                 },
                 new StackedColumnSeries
                 {
                     Title = "Số người cách ly mới",
                     Values = new ChartValues<int>(),
-                    StackMode = StackMode.Values,
-                    DataLabels = true
+                    //DataLabels = true
                 },
                 new StackedColumnSeries
                 {
                     Title = "Số người hoàn thành",
                     Values = new ChartValues<int>(),
-                    StackMode = StackMode.Values,
-                    DataLabels = true
+                    //DataLabels = true
                 }
             };
 
@@ -440,9 +437,17 @@ namespace QuanLyKhuCachLy.ViewModel
                     Title = SeverityList[i].description,
                     Values = new ChartValues<int>(),
                     StackMode = StackMode.Values,
-                    DataLabels = true
+                    //DataLabels = true
                 });
             }
+
+            FirstSeriesCollection.Add(new StackedColumnSeries
+            {
+                Title = "Khác",
+                Values = new ChartValues<int>(),
+                StackMode = StackMode.Values,
+                //DataLabels = true
+            });
 
             for (DateTime date = BeginDate; date <= EndDate; date = date.AddDays(1))
             {
@@ -451,6 +456,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     FirstSeriesCollection[i].Values.Add(CountTargetGroup(date, SeverityList[i]));
                 }
+
+                FirstSeriesCollection[SeverityList.Count].Values.Add(CountTargetGroup(date, null));
             }
         }
 
@@ -459,8 +466,15 @@ namespace QuanLyKhuCachLy.ViewModel
             int count = 0;
             try
             {
-                // DataProvider.ins.db.Database.SqlQuery<int>("select count(id) from QuarantinePerson where arrivedDate = @p0", date.ToString("MM/dd/yyyy"));
-                count = DataProvider.ins.db.QuarantinePersons.Where(person => person.leaveDate > date && person.arrivedDate <= date && person.levelID == severity.id).Count();
+                if (severity != null)
+                {
+                    count = DataProvider.ins.db.QuarantinePersons.Where(person => (person.leaveDate > date) && (person.arrivedDate <= date) && (person.levelID == severity.id)).Count();
+                } 
+                else
+                {
+                    ObservableCollection<Model.QuarantinePerson> QuarantinePersonList = new ObservableCollection<Model.QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
+                    count = QuarantinePersonList.Where(person => (person.leaveDate > date) && (person.arrivedDate <= date) && (person.levelID == null)).Count();
+                }
             }
             catch
             {
@@ -479,21 +493,39 @@ namespace QuanLyKhuCachLy.ViewModel
         #region Load Report Object 1
         private void LoadCapacityChart()
         {
-            SecondSeriesCollection = new SeriesCollection
+            int AvailableCapacity = CountAvailableCapacity();
+            int OccupiedCapacity = CountOccupiedCapacity();
+            if (AvailableCapacity != 0 || OccupiedCapacity != 0)
             {
-                new PieSeries
+                SecondSeriesCollection = new SeriesCollection
                 {
-                    Title = "Giường trống",
-                    Values = new ChartValues<ObservableValue> { new ObservableValue(CountAvailableCapacity()) },
-                    DataLabels = true
-                },
-                new PieSeries
+                    new PieSeries
+                    {
+                        Title = "Giường trống",
+                        Values = new ChartValues<ObservableValue> { new ObservableValue(AvailableCapacity) },
+                        DataLabels = AvailableCapacity != 0,
+                    },
+                    new PieSeries
+                    {
+                        Title = "Giường đã có người",
+                        Values = new ChartValues<ObservableValue> { new ObservableValue(OccupiedCapacity) },
+                        DataLabels = OccupiedCapacity != 0
+                    },
+                };
+            } 
+            else
+            {
+                SecondSeriesCollection = new SeriesCollection
                 {
-                    Title = "Giường đã có người",
-                    Values = new ChartValues<ObservableValue> { new ObservableValue(CountOccupiedCapacity()) },
-                    DataLabels = true
-                },
-            };
+                    new PieSeries
+                    {
+                        Fill = Brushes.Gray,
+                        Title = "Trống",
+                        Values = new ChartValues<ObservableValue> { new ObservableValue(1) },
+                        DataLabels = false
+                    },
+                };
+            }
         }
 
         private int CountOccupiedCapacity()
@@ -524,31 +556,65 @@ namespace QuanLyKhuCachLy.ViewModel
 
         private void LoadRoomChart()
         {
-            SecondSeriesCollection = new SeriesCollection
+            int AvailableRoom = CountAvailableRoom();
+            int OccupiedRoom = CountOccupiedRoom();
+            if (AvailableRoom != 0 || OccupiedRoom != 0)
             {
-                new PieSeries
+                SecondSeriesCollection = new SeriesCollection
                 {
-                    Title = "Số phòng còn trống",
-                    Values = new ChartValues<ObservableValue> { new ObservableValue(CountAvailableRoom()) },
-                    DataLabels = true
-                },
-                new PieSeries
+                    new PieSeries
+                    {
+                        Title = "Số phòng còn trống",
+                        Values = new ChartValues<ObservableValue> { new ObservableValue(AvailableRoom) },
+                        DataLabels = AvailableRoom != 0
+                    },
+                    new PieSeries
+                    {
+                        Title = "Số phòng đầy",
+                        Values = new ChartValues<ObservableValue> { new ObservableValue(OccupiedRoom) },
+                        DataLabels = OccupiedRoom != 0
+                    },
+                };
+            }
+            else
+            {
+                SecondSeriesCollection = new SeriesCollection
                 {
-                    Title = "Số phòng đầy",
-                    Values = new ChartValues<ObservableValue> { new ObservableValue(CountOccupiedRoom()) },
-                    DataLabels = true
-                },
-            };
+                    new PieSeries
+                    {
+                        Fill = Brushes.Gray,
+                        Title = "Trống",
+                        Values = new ChartValues<ObservableValue> { new ObservableValue(1) },
+                        DataLabels = false
+                    },
+                };
+            }
         }
         private int CountOccupiedRoom()
         {
-            int count = DataProvider.ins.db.QuarantineRooms.Where(room => room.QuarantinePersons.Count == room.capacity).Count();
+            int count = 0;
+            try
+            {
+                count = DataProvider.ins.db.QuarantineRooms.Where(room => room.QuarantinePersons.Count == room.capacity).Count();
+            }
+            catch
+            {
+                MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng phòng đã đầy!");
+            }
             return count;
         }
 
         private int CountAvailableRoom()
         {
-            int count = DataProvider.ins.db.QuarantineRooms.Where(room => room.QuarantinePersons.Count < room.capacity).Count();
+            int count = 0;
+            try
+            {
+                count = DataProvider.ins.db.QuarantineRooms.Where(room => room.QuarantinePersons.Count < room.capacity).Count();
+            }
+            catch
+            {
+                MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng phòng trống!");
+            }
             return count;
         }
 
@@ -565,19 +631,58 @@ namespace QuanLyKhuCachLy.ViewModel
 
             for (int i = 0; i < SeverityList.Count; i++)
             {
+                int RoomCount = CountRoomWithSeverity(SeverityList[i]);
                 SecondSeriesCollection.Add(
                 new PieSeries
                 {
                     Title = SeverityList[i].description,
-                    Values = new ChartValues<ObservableValue> { new ObservableValue(CountRoomWithSeverity(SeverityList[i])) },
-                    DataLabels = true
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(RoomCount) },
+                    DataLabels = RoomCount != 0
+                });
+            }
+
+            int RoomNoSeverityCount = CountRoomWithSeverity(null);
+
+            SecondSeriesCollection.Add(new PieSeries
+            {
+                Title = "Khác",
+                Values = new ChartValues<ObservableValue> { new ObservableValue(RoomNoSeverityCount) },
+                DataLabels = RoomNoSeverityCount != 0
+            });
+
+            if (DataProvider.ins.db.QuarantineRooms.Count() == 0)
+            {
+                SecondSeriesCollection.Add(
+                new PieSeries
+                {
+                    Fill = Brushes.Gray,
+                    Title = "Trống",
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(1) },
+                    DataLabels = false
                 });
             }
         }
 
         private int CountRoomWithSeverity(Severity severity)
         {
-            int count = DataProvider.ins.db.QuarantineRooms.Where(room => room.Severity.level == severity.level).Count();
+            int count = 0;
+            try
+            {
+                if (severity != null)
+                {
+                    count = DataProvider.ins.db.QuarantineRooms.Where(room => room.Severity.level == severity.level).Count();
+                }
+                else
+                {
+                    ObservableCollection<Model.QuarantineRoom> QuarantineRoomList = new ObservableCollection<Model.QuarantineRoom>(DataProvider.ins.db.QuarantineRooms);
+                    count = QuarantineRoomList.Where(room => room.levelID == null).Count();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng phòng theo mức độ!");
+            }
+
             return count;
         }
 
@@ -592,19 +697,39 @@ namespace QuanLyKhuCachLy.ViewModel
 
             for (int i = 0; i < DepartmentList.Count(); i++)
             {
+                int StaffCount = CountStaffWithDepartment(DepartmentList.ElementAt(i).ToString());
                 SecondSeriesCollection.Add(
                 new PieSeries
                 {
                     Title = DepartmentList.ElementAt(i).ToString(),
-                    Values = new ChartValues<ObservableValue> { new ObservableValue(CountStaffWithDepartment(DepartmentList.ElementAt(i).ToString())) },
-                    DataLabels = true
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(StaffCount) },
+                    DataLabels = StaffCount != 0
+                });
+            }
+            if (DepartmentList.Count() == 0 || DataProvider.ins.db.Staffs.Count() == 0)
+            {
+                SecondSeriesCollection.Add(
+                new PieSeries
+                {
+                    Fill = Brushes.Gray,
+                    Title = "Trống",
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(1) },
+                    DataLabels = false
                 });
             }
         }
 
         private int CountStaffWithDepartment(string department)
         {
-            int count = DataProvider.ins.db.Staffs.Where(staff => staff.department == department).Count();
+            int count = 0;
+            try
+            {
+                count = DataProvider.ins.db.Staffs.Where(staff => staff.department == department).Count();
+            }
+            catch
+            {
+                MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng  nhân viên theo phòng ban!");
+            }
             return count;
         }
 
@@ -641,13 +766,29 @@ namespace QuanLyKhuCachLy.ViewModel
 
         private int CountPositiveTestingResult(DateTime date)
         {
-            int count = DataProvider.ins.db.TestingResults.Where(result => result.dateTesting <= date && result.isPositive).Count();
+            int count = 0;
+            try
+            {
+                count = DataProvider.ins.db.TestingResults.Where(result => result.dateTesting <= date && result.isPositive).Count();
+            }
+            catch
+            {
+                MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng xét nghiệm dương tính!");
+            }
             return count;
         }
 
         private int CountNegativeTestingResult(DateTime date)
         {
-            int count = DataProvider.ins.db.TestingResults.Where(result => result.dateTesting <= date && !result.isPositive).Count();
+            int count = 0;
+            try
+            {
+                count = DataProvider.ins.db.TestingResults.Where(result => result.dateTesting <= date && !result.isPositive).Count();
+            }
+            catch
+            {
+                MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng xét nghiệm âm tính!");
+            }
             return count;
         }
 

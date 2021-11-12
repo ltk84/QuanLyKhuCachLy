@@ -70,26 +70,11 @@
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <TextBlock
-                Grid.Column="0"
-                VerticalAlignment="Top"
-                FontWeight="Bold">
-                Thời gian:
-            </TextBlock>
             <StackPanel
                 Grid.Row="0"
                 Grid.Column="1"
                 HorizontalAlignment="Left"
-                Orientation="Horizontal">
-                <TextBlock Margin="0,0,14,0" VerticalAlignment="Top">
-                    đến ngày
-                </TextBlock>
-                <DatePicker
-                    materialDesign:HintAssist.Hint="Chọn ngày cuối "
-                    DisplayDateEnd="{Binding Mode=OneWay, Source={x:Static System:DateTime.Today}}"
-                    SelectedDate="{Binding EndDate}"
-                    Style="{StaticResource UnderlineDatePicker}" />
-            </StackPanel>
+                Orientation="Horizontal" />
 
         </Grid>
         <StackPanel
