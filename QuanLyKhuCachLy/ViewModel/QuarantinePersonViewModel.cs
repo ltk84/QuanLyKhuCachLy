@@ -890,15 +890,15 @@ namespace QuanLyKhuCachLy.ViewModel
                         for (int i = 0; i < listQuarantinePerson.Count; i++)
                         {
                             DataProvider.ins.db.Addresses.Add(listAdress[i]);
-                            DataProvider.ins.db.SaveChanges();
-                            DataProvider.ins.db.HealthInformations.Add(listHealthInformation[i]);
-                            DataProvider.ins.db.SaveChanges();
-                            listQuarantinePerson[i].healthInformationID = listHealthInformation[i].id;
+                            DataProvider.ins.db.SaveChanges();                      
                             listQuarantinePerson[i].leaveDate = listQuarantinePerson[i].arrivedDate.AddDays(QAInformation.requiredDayToFinish);
                             listQuarantinePerson[i].addressID = listAdress[i].id;
                             DataProvider.ins.db.QuarantinePersons.Add(listQuarantinePerson[i]);
                             DataProvider.ins.db.SaveChanges();
                             QuarantinePersonList.Add(listQuarantinePerson[i]);
+                            listHealthInformation[i].quarantinePersonID = listQuarantinePerson[i].id;
+                            DataProvider.ins.db.HealthInformations.Add(listHealthInformation[i]);
+                            DataProvider.ins.db.SaveChanges();
                         }
                         transaction.Commit();
                         MessageBox.Show("Đã thêm từ file excel");
