@@ -762,6 +762,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 if (openFileDialog.ShowDialog() == true)
                     path = openFileDialog.FileName;
+                else
+                    return;
                 Excel.Application xlApp = new Excel.Application();
                 Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(path);
                 Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
@@ -805,10 +807,10 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (xlRange.Cells[i, 5] != null && xlRange.Cells[i, 5].Value2 != null)
                     {
                         string[] arrListStr = xlRange.Cells[i, 5].Value2.ToString().Split(',');
-                        personAddress.district = arrListStr[1];
-                        personAddress.province = arrListStr[0];
-                        personAddress.ward = arrListStr[2];
-                        personAddress.streetName = arrListStr[3];
+                        personAddress.district = arrListStr[2];
+                        personAddress.province = arrListStr[3];
+                        personAddress.ward = arrListStr[1];
+                        personAddress.streetName = arrListStr[0];
                     }
                     if (xlRange.Cells[i, 7] != null && xlRange.Cells[i, 7].Value2 != null)
                     {
