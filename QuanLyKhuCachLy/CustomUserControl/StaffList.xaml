@@ -6,13 +6,11 @@
     xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewmodel="clr-namespace:QuanLyKhuCachLy.ViewModel"
     xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
     d:DesignHeight="705"
     d:DesignWidth="757"
     mc:Ignorable="d">
     <StackPanel Margin="40,30,40,30">
-
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
@@ -28,10 +26,23 @@
             </TextBlock>
             <Button
                 Grid.Column="1"
+                Width="140"
+                Height="35"
                 Background="#FF1D9583"
-                Command="{Binding ToAddCommand}"
                 Content="Thêm nhân viên"
-                Style="{StaticResource AddObjectButton}" />
+                FontSize="16"
+                PreviewMouseDown="Button_PreviewMouseDown"
+                Style="{StaticResource AddObjectButton}">
+                <Button.ContextMenu>
+                    <ContextMenu>
+                        <ContextMenu.Template>
+                            <ControlTemplate>
+                                <local:AddStaffFunctionMenu />
+                            </ControlTemplate>
+                        </ContextMenu.Template>
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
 
         </Grid>
 
@@ -44,82 +55,82 @@
         </TextBlock>
         <TextBox
             Width="350"
-            Height="35"
+            Height="34"
             Margin="0,4,0,0"
             HorizontalAlignment="Left"
             materialDesign:HintAssist.Hint="Nhập bất kì để tìm kiếm"
             MaxLength="30"
             Style="{StaticResource TextInputField}" />
 
-        <Border
-            Width="672"
-            Height="520"
-            Margin="0,13,0,0"
-            Background="Transparent"
-            BorderBrush="#1E434A54"
-            BorderThickness="1"
-            CornerRadius="8,8,3,3">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="46" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="460" />
+        <DataGrid
+            Height="460"
+            Margin="0,20,0,20"
+            materialDesign:DataGridAssist.CornerRadius="10"
+            AutoGenerateColumns="False"
+            CanUserAddRows="False"
+            CanUserReorderColumns="False"
+            CanUserResizeColumns="False"
+            CanUserResizeRows="False"
+            ItemsSource="{Binding StaffList}"
+            SelectedItem="{Binding SelectedItem}">
+            <DataGrid.Columns>
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding id}"
+                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                    ElementStyle="{StaticResource DataGridElement}"
+                    Header="Số thứ tự"
+                    HeaderStyle="{StaticResource DataGridHeader}"
+                    MaxLength="10" />
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding name}"
+                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                    ElementStyle="{StaticResource DataGridElement}"
+                    Header="Tên"
+                    HeaderStyle="{StaticResource DataGridHeader}"
+                    MaxLength="30" />
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding dateOfBirth}"
+                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                    ElementStyle="{StaticResource DataGridElement}"
+                    Header="Ngày sinh"
+                    HeaderStyle="{StaticResource DataGridHeader}"
+                    MaxLength="30" />
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding nationality}"
+                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                    ElementStyle="{StaticResource DataGridElement}"
+                    Header="Quốc tịch"
+                    HeaderStyle="{StaticResource DataGridHeader}"
+                    MaxLength="30" />
+                <DataGridTemplateColumn
+                    Width="*"
+                    HeaderStyle="{StaticResource DataGridButtonHeader}"
+                    IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                HorizontalAlignment="Right"
+                                Style="{StaticResource DataGridButton}">
+                                <materialDesign:PackIcon
+                                    Width="16"
+                                    Height="16"
+                                    Kind="DotsHorizontal" />
+                                <Button.ContextMenu>
 
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
-
-
-                <Separator
-                    Grid.Row="1"
-                    Margin="0,0,0,0"
-                    Background="#1E434A54" />
-
-                <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock
-                        Grid.Column="0"
-                        Margin="0,0,0,0"
-                        Style="{StaticResource table-heading}"
-                        Text="Số thứ tự" />
-
-                    <TextBlock
-                        Grid.Column="1"
-                        Margin="0,0,0,0"
-                        Style="{StaticResource table-heading}"
-                        Text="Họ và tên " />
-
-                    <TextBlock
-                        Grid.Column="2"
-                        Margin="0,0,0,0"
-                        Style="{StaticResource table-heading}"
-                        Text="Ngày sinh" />
-
-                    <TextBlock
-                        Grid.Column="3"
-                        Margin="0,0,0,0"
-                        Style="{StaticResource table-heading}"
-                        Text="Quốc tịch" />
-
-
-                </Grid>
-
-
-
-
-
-
-
-
-            </Grid>
-        </Border>
+                                    <ContextMenu PreviewMouseUp="ContextMenu_PreviewMouseUp">
+                                        <ContextMenu.Template>
+                                            <ControlTemplate>
+                                                <local:StaffFunctionMenu />
+                                            </ControlTemplate>
+                                        </ContextMenu.Template>
+                                    </ContextMenu>
+                                </Button.ContextMenu>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
 
     </StackPanel>
 </UserControl>

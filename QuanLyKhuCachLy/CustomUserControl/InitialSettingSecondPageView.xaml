@@ -120,7 +120,7 @@
                                         Command="{Binding RemoveSeverityCommand}"
                                         CommandParameter="{Binding}"
                                         DataContext="{StaticResource SeverityVM}"
-                                        Style="{StaticResource DataGridButton}">
+                                        Style="{StaticResource DataGridButtonDelete}">
                                         <materialDesign:PackIcon
                                             Width="16"
                                             Height="16"

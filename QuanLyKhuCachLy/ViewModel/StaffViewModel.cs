@@ -1,18 +1,96 @@
-﻿using QuanLyKhuCachLy.Model;
+﻿
+using QuanLyKhuCachLy.Model;
 using QuanLyKhuCachLy.CustomUserControl;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 
 namespace QuanLyKhuCachLy.ViewModel
 {
     public class StaffViewModel : BaseViewModel
     {
-        #region property
 
-        #region ui
+        #region UI
+        bool isAdding = true;
+        EditStaffScreen editStaffScreen;
+
+        AddStaffScreen addStaffScreen;
+        private Visibility _AddStaffTab1;
+        private Visibility _AddStaffTab2;
+        private Visibility _AddStaffPreviousBtn;
+        private Visibility _TabList;
+        private Visibility _TabInformation;
+
+        public Visibility TabList
+        {
+            get => _TabList;
+            set
+            {
+                _TabList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Visibility TabInformation
+        {
+            get => _TabInformation;
+            set
+            {
+                _TabInformation = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Visibility AddStaffTab1
+        {
+            get => _AddStaffTab1;
+            set
+            {
+                _AddStaffTab1 = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Visibility AddStaffPreviousBtn
+        {
+            get => _AddStaffPreviousBtn;
+            set
+            {
+                _AddStaffPreviousBtn = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Visibility AddStaffTab2
+        {
+            get => _AddStaffTab2;
+            set
+            {
+                _AddStaffTab2 = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private String _TabPostion;
+        public String TabPosition
+        {
+            get => _TabPostion; set
+            {
+                _TabPostion = value; OnPropertyChanged();
+            }
+        }
+
+
+        public int AddStaffTabIndex { get; set; }
+
+
         private Visibility _Tab1;
         public Visibility Tab1
         {
@@ -32,7 +110,8 @@ namespace QuanLyKhuCachLy.ViewModel
         }
         #endregion
 
-        #region staff
+        #region property
+
         private string _Name;
         public string Name
         {
@@ -122,7 +201,6 @@ namespace QuanLyKhuCachLy.ViewModel
                 OnPropertyChanged();
             }
         }
-        #endregion
 
         #region address
         private string _StreetName;
@@ -139,6 +217,9 @@ namespace QuanLyKhuCachLy.ViewModel
 
         private string _SelectedDistrict;
         public string SelectedDistrict { get => _SelectedDistrict; set { _SelectedDistrict = value; OnPropertyChanged(); } }
+
+        private string _DisplayAdress;
+        public string DisplayAddress { get => _DisplayAdress; set { _DisplayAdress = value; OnPropertyChanged(); } }
         #endregion
 
         #region List
@@ -151,9 +232,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 _SelectedItem = value; OnPropertyChanged();
                 if (SelectedItem != null)
                 {
-                    Name = SelectedItem.name;
-                    DateOfBirth = SelectedItem.dateOfBirth;
-                    SelectedNationality = SelectedItem.nationality;
+                    SetSelectedItemToProperty();
                 }
             }
         }
@@ -213,17 +292,136 @@ namespace QuanLyKhuCachLy.ViewModel
         }
         #endregion
 
+        #region command
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
 
-        public ICommand ToAddCommand { get; set; }
+        public ICommand ToAddManualCommand { get; set; }
+        public ICommand ToAddExcelCommand { get; set; }
+        public ICommand ToEditCommand { get; set; }
+        public ICommand ToViewCommand { get; set; }
+        public ICommand ToMainCommand { get; set; }
+
+        public ICommand NextStaffTabCommand { get; set; }
+        public ICommand PreviousStaffTabCommand { get; set; }
+        public ICommand CancelAddStaffTabCommand { get; set; }
+        #endregion
+
+        #region validation
+        private bool _NameFieldHasError;
+        public bool NameFieldHasError
+        {
+            get => _NameFieldHasError; set
+            {
+                _NameFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _SexFieldHasError;
+        public bool SexFieldHasError
+        {
+            get => _SexFieldHasError; set
+            {
+                _SexFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _NationalityFieldHasError;
+        public bool NationalityFieldHasError
+        {
+            get => _NationalityFieldHasError; set
+            {
+                _NationalityFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _ProvinceFieldHasError;
+        public bool ProvinceFieldHasError
+        {
+            get => _ProvinceFieldHasError; set
+            {
+                _ProvinceFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _DistrictFieldHasError;
+        public bool DistrictFieldHasError
+        {
+            get => _DistrictFieldHasError; set
+            {
+                _DistrictFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _WardFieldHasError;
+        public bool WardFieldHasError
+        {
+            get => _WardFieldHasError; set
+            {
+                _WardFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _CitizenIDFieldHasError;
+        public bool CitizenIDFieldHasError
+        {
+            get => _CitizenIDFieldHasError; set
+            {
+                _CitizenIDFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _PhoneNumberFieldHasError;
+        public bool PhoneNumberFieldHasError
+        {
+            get => _PhoneNumberFieldHasError; set
+            {
+                _PhoneNumberFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _DateOfBirthFieldHasError;
+        public bool DateOfBirthFieldHasError
+        {
+            get => _DateOfBirthFieldHasError; set
+            {
+                _DateOfBirthFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _JobTitleFieldHasError;
+        public bool JobTitleFieldHasError
+        {
+            get => _JobTitleFieldHasError; set
+            {
+                _JobTitleFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _DepartmentFieldHasError;
+        public bool DepartmentFieldHasError
+        {
+            get => _DepartmentFieldHasError; set
+            {
+                _DepartmentFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+
+        #endregion
 
         #endregion
         public StaffViewModel()
+
         {
             Tab1 = Visibility.Visible;
             Tab2 = Visibility.Hidden;
+            TabList = Visibility.Visible;
+            TabInformation = Visibility.Hidden;
+
+            SetDefaultAddStaff();
+
             StaffList = new ObservableCollection<Staff>(DataProvider.ins.db.Staffs);
 
             NationalityList = new ObservableCollection<string>() {
@@ -248,99 +446,447 @@ namespace QuanLyKhuCachLy.ViewModel
 
             AddCommand = new RelayCommand<object>((p) =>
             {
-                return true;
+                if (!NameFieldHasError && !SexFieldHasError && !DateOfBirthFieldHasError && !CitizenIDFieldHasError && !NationalityFieldHasError && !PhoneNumberFieldHasError
+                && !JobTitleFieldHasError && !DepartmentFieldHasError && !ProvinceFieldHasError && !DistrictFieldHasError && !WardFieldHasError)
+                    return true;
+                return false;
             }, (p) =>
             {
                 AddStaff();
+                CloseAddStaffWindown();
+                SetDefaultAddStaff();
             });
 
             EditCommand = new RelayCommand<object>((p) =>
             {
-                return true;
+                if (!NameFieldHasError && !SexFieldHasError && !DateOfBirthFieldHasError && !CitizenIDFieldHasError && !NationalityFieldHasError && !PhoneNumberFieldHasError
+                && !JobTitleFieldHasError && !DepartmentFieldHasError && !ProvinceFieldHasError && !DistrictFieldHasError && !WardFieldHasError)
+                    return true;
+                return false;
             }, (p) =>
             {
                 EditStaff();
+                editStaffScreen.Close();
             });
 
             DeleteCommand = new RelayCommand<object>((p) =>
             {
-                return true;
+                if (SelectedItem != null)
+                    return true;
+                return false;
             }, (p) =>
             {
                 DeleteStaff();
             });
 
-            ToAddCommand = new RelayCommand<object>((p) =>
+            ToAddManualCommand = new RelayCommand<object>((p) =>
             {
                 return true;
             }, (p) =>
             {
-                AddStaffScreen addStaffScreen = new AddStaffScreen();
+
+                ClearData();
+                SetDefaultAddStaff();
+                isAdding = true;
+                addStaffScreen = new AddStaffScreen();
                 addStaffScreen.ShowDialog();
+                ClearData();
+
             });
 
+            ToAddExcelCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+
+            });
+
+            ToEditCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                isAdding = false;
+                SetDefaultAddStaff();
+                SetSelectedItemToProperty();
+                editStaffScreen = new EditStaffScreen();
+                editStaffScreen.ShowDialog();
+            });
+
+            ToViewCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                TabInformation = Visibility.Visible;
+                TabList = Visibility.Hidden;
+            });
+
+            ToMainCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                TabInformation = Visibility.Hidden;
+                TabList = Visibility.Visible;
+            });
+
+            CancelAddStaffTabCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                CloseAddStaffWindown();
+            });
+
+            PreviousStaffTabCommand = new RelayCommand<Window>((p) =>
+            {
+                if (AddStaffTabIndex > 1) return true;
+                return false;
+            }, (p) =>
+            {
+                HandleChangeTab(AddStaffTabIndex, "previous", addStaffScreen);
+            });
+
+
+
+            NextStaffTabCommand = new RelayCommand<Window>((p) =>
+            {
+
+                if (AddStaffTabIndex < 2) return true;
+
+                return false;
+            }, (p) =>
+            {
+                HandleChangeTab(AddStaffTabIndex, "next", addStaffScreen);
+            });
 
         }
 
         #region method
 
+        void HandleChangeTab(int index, string action, Window p)
+        {
+            if (action == "next")
+            {
+                AddStaffTabIndex++;
+            }
+            else
+            {
+                AddStaffTabIndex--;
+            }
+            if (AddStaffTabIndex <= 2)
+                TabPosition = $"{AddStaffTabIndex}/2";
+
+            switch (AddStaffTabIndex)
+            {
+                case 1:
+                    AddStaffTab1 = Visibility.Visible;
+                    AddStaffTab2 = Visibility.Hidden;
+                    AddStaffPreviousBtn = Visibility.Collapsed;
+                    break;
+                case 2:
+                    AddStaffTab1 = Visibility.Hidden;
+                    AddStaffPreviousBtn = Visibility.Visible;
+                    AddStaffTab2 = Visibility.Visible;
+                    break;
+                default:
+
+                    break;
+            }
+
+        }
+
+        void CloseAddStaffWindown()
+        {
+            if (isAdding)
+            {
+                addStaffScreen.Close();
+
+            }
+            else
+            {
+                editStaffScreen.Close();
+            }
+        }
+
+        void InitDisplayAddress(Address StaffAddress)
+        {
+            if (StaffAddress == null) return;
+            List<string> list = new List<string>()
+            {
+                StaffAddress.apartmentNumber,
+                StaffAddress.streetName,
+                StaffAddress.ward,
+                StaffAddress.district,
+                StaffAddress.province
+
+            };
+
+            DisplayAddress = string.Empty;
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (!string.IsNullOrWhiteSpace(list[i]))
+                {
+                    DisplayAddress += list[i];
+                }
+                if (i != list.Count - 1)
+                {
+                    if (i != 0)
+                        DisplayAddress += ", ";
+                    else DisplayAddress += " ";
+                }
+            }
+        }
+
+        void ClearData()
+        {
+            Name = string.Empty;
+            SelectedSex = string.Empty;
+            DateOfBirth = DateTime.MinValue;
+            CitizenID = string.Empty;
+            SelectedNationality = string.Empty;
+            PhoneNumber = string.Empty;
+            HealthInsuranceID = string.Empty;
+            Department = string.Empty;
+            JobTitle = string.Empty;
+            SelectedProvince = string.Empty;
+            SelectedDistrict = string.Empty;
+            SelectedWard = string.Empty;
+            StreetName = string.Empty;
+            ApartmentNumber = string.Empty;
+        }
+
+        void SetDefaultAddStaff()
+        {
+            AddStaffTabIndex = 1;
+            AddStaffTab1 = Visibility.Visible;
+            AddStaffTab2 = Visibility.Hidden;
+            TabPosition = "1/2";
+            AddStaffPreviousBtn = Visibility.Collapsed;
+        }
+
         void AddStaff()
         {
-            Address StaffAddress = new Address()
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
             {
-                province = SelectedProvince,
-                district = SelectedDistrict,
-                apartmentNumber = ApartmentNumber,
-                streetName = StreetName,
-                ward = SelectedWard
-            };
+                try
+                {
+                    Address StaffAddress = new Address()
+                    {
+                        province = SelectedProvince,
+                        district = SelectedDistrict,
+                        apartmentNumber = ApartmentNumber,
+                        streetName = StreetName,
+                        ward = SelectedWard
+                    };
 
-            DataProvider.ins.db.Addresses.Add(StaffAddress);
-            DataProvider.ins.db.SaveChanges();
+                    DataProvider.ins.db.Addresses.Add(StaffAddress);
+                    DataProvider.ins.db.SaveChanges();
 
-            Staff NewStaff = new Staff()
-            {
-                addressID = StaffAddress.id,
-                citizenID = CitizenID,
-                dateOfBirth = DateOfBirth,
-                department = Department,
-                healthInsuranceID = HealthInsuranceID,
-                jobTitle = JobTitle,
-                name = Name,
-                nationality = SelectedNationality,
-                phoneNumber = PhoneNumber,
-                sex = SelectedSex,
-            };
+                    Staff NewStaff = new Staff()
+                    {
+                        addressID = StaffAddress.id,
+                        citizenID = CitizenID,
+                        dateOfBirth = DateOfBirth,
+                        department = Department,
+                        healthInsuranceID = HealthInsuranceID,
+                        jobTitle = JobTitle,
+                        name = Name,
+                        nationality = SelectedNationality,
+                        phoneNumber = PhoneNumber,
+                        sex = SelectedSex,
+                    };
 
-            DataProvider.ins.db.Staffs.Add(NewStaff);
-            DataProvider.ins.db.SaveChanges();
+                    DataProvider.ins.db.Staffs.Add(NewStaff);
+                    DataProvider.ins.db.SaveChanges();
 
-            StaffList.Add(NewStaff);
+                    StaffList.Add(NewStaff);
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
         }
         void EditStaff()
         {
-            Staff SelectStaff = DataProvider.ins.db.Staffs.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    Staff SelectStaff = DataProvider.ins.db.Staffs.Where(x => x.id == SelectedItem.id).FirstOrDefault();
 
-            Address StaffAdress = DataProvider.ins.db.Addresses.Where(x => x.id == SelectStaff.addressID).FirstOrDefault();
-            StaffAdress.province = SelectedProvince;
-            StaffAdress.district = SelectedDistrict;
-            StaffAdress.ward = SelectedWard;
-            StaffAdress.streetName = StreetName;
-            StaffAdress.apartmentNumber = ApartmentNumber;
+                    Address StaffAdress = DataProvider.ins.db.Addresses.Where(x => x.id == SelectStaff.addressID).FirstOrDefault();
+                    StaffAdress.province = SelectedProvince;
+                    StaffAdress.district = SelectedDistrict;
+                    StaffAdress.ward = SelectedWard;
+                    StaffAdress.streetName = StreetName;
+                    StaffAdress.apartmentNumber = ApartmentNumber;
 
-            SelectStaff.name = Name;
-            SelectStaff.nationality = SelectedNationality;
-            SelectStaff.phoneNumber = PhoneNumber;
-            SelectStaff.sex = SelectedSex;
-            SelectStaff.healthInsuranceID = HealthInsuranceID;
-            SelectStaff.department = Department;
-            SelectStaff.dateOfBirth = DateOfBirth;
-            SelectStaff.citizenID = CitizenID;
-            SelectStaff.addressID = StaffAdress.id;
+                    SelectStaff.name = Name;
+                    SelectStaff.nationality = SelectedNationality;
+                    SelectStaff.phoneNumber = PhoneNumber;
+                    SelectStaff.sex = SelectedSex;
+                    SelectStaff.healthInsuranceID = HealthInsuranceID;
+                    SelectStaff.department = Department;
+                    SelectStaff.dateOfBirth = DateOfBirth;
+                    SelectStaff.citizenID = CitizenID;
+                    SelectStaff.addressID = StaffAdress.id;
 
-            DataProvider.ins.db.SaveChanges();
+                    InitDisplayAddress(StaffAdress);
+
+                    DataProvider.ins.db.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
         }
-        void DeleteStaff() { }
+        void DeleteStaff()
+        {
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    Staff staff = DataProvider.ins.db.Staffs.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+                    if (staff == null) return;
+
+                    DataProvider.ins.db.Staffs.Remove(staff);
+                    DataProvider.ins.db.SaveChanges();
+
+                    StaffList.Remove(staff);
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
+        }
+
+
+        void SetSelectedItemToProperty()
+        {
+            Name = SelectedItem.name;
+            DateOfBirth = SelectedItem.dateOfBirth;
+            SelectedSex = SelectedItem.sex;
+            CitizenID = SelectedItem.citizenID;
+            SelectedNationality = SelectedItem.nationality;
+            HealthInsuranceID = SelectedItem.healthInsuranceID;
+            PhoneNumber = SelectedItem.phoneNumber;
+            JobTitle = SelectedItem.jobTitle;
+            Department = SelectedItem.department;
+
+            Address StaffAdress = DataProvider.ins.db.Addresses.Where(x => x.id == SelectedItem.addressID).FirstOrDefault();
+
+
+            StreetName = StaffAdress.streetName;
+            ApartmentNumber = StaffAdress.apartmentNumber;
+            SelectedProvince = StaffAdress.province;
+            SelectedWard = StaffAdress.ward;
+            SelectedDistrict = StaffAdress.district;
+
+            InitDisplayAddress(StaffAdress);
+        }
 
         #endregion
     }

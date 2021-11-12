@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace QuanLyKhuCachLy.CustomUserControl
 {
     /// <summary>
-    /// Interaction logic for AddStaffScreen.xaml
+    /// Interaction logic for StaffFunctionMenu.xaml
     /// </summary>
-    public partial class AddStaffScreen : Window
+    public partial class StaffFunctionMenu : UserControl
     {
-        public AddStaffScreen()
+        public StaffFunctionMenu()
         {
             InitializeComponent();
         }

@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace QuanLyKhuCachLy.CustomUserControl
 {
     /// <summary>
-    /// Interaction logic for AddStaffScreen.xaml
+    /// Interaction logic for EditStaffScreen.xaml
     /// </summary>
-    public partial class AddStaffScreen : Window
+    public partial class EditStaffScreen : Window
     {
-        public AddStaffScreen()
+        public EditStaffScreen()
         {
             InitializeComponent();
         }

@@ -18,7 +18,7 @@ namespace QuanLyKhuCachLy.CustomUserControl
     /// <summary>
     /// Interaction logic for QuarantinePersonWrapperTab.xaml
     /// </summary>
-    public partial class QuarantinePersonWrapperTab : UserControl
+    public partial class QuarantinePersonWrapperTab 
     {
         public QuarantinePersonWrapperTab()
         {

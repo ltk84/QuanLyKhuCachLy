@@ -66,7 +66,7 @@
                     Height="30"
                     VerticalAlignment="Top"
                     Background="#FFF27251"
-                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.DeleteRoomCommand}"
+                    Command="{Binding DeleteRoomCommand}"
                     Style="{StaticResource delete-button-with-background}">
                     Xóa phòng
                 </Button>

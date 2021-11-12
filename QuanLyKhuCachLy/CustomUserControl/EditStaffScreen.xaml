@@ -1,5 +1,5 @@
 ﻿<Window
-    x:Class="QuanLyKhuCachLy.CustomUserControl.AddStaffScreen"
+    x:Class="QuanLyKhuCachLy.CustomUserControl.EditStaffScreen"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:control="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
@@ -19,8 +19,8 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <control:AddStaffFirstScreen Visibility="{Binding AddStaffTab1}" />
-            <control:AddStaffSecondScreen Visibility="{Binding AddStaffTab2}" />
+            <control:EditStaffFirstScreen Visibility="{Binding AddStaffTab1}" />
+            <control:EditStaffSecondScreen Visibility="{Binding AddStaffTab2}" />
         </Grid>
         <StackPanel
             Grid.Row="1"
@@ -76,7 +76,7 @@
                         <Setter Property="Command" Value="{Binding NextStaffTabCommand}" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding ElementName=TabIndicator, Path=Text}" Value="2/2">
-                                <Setter Property="Command" Value="{Binding AddCommand}" />
+                                <Setter Property="Command" Value="{Binding EditCommand}" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>

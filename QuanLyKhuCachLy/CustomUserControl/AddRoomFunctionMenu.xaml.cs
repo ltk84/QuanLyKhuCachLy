@@ -18,7 +18,7 @@ namespace QuanLyKhuCachLy.CustomUserControl
     /// <summary>
     /// Interaction logic for AddRoomFunctionMenu.xaml
     /// </summary>
-    public partial class AddRoomFunctionMenu : UserControl
+    public partial class AddRoomFunctionMenu 
     {
         public AddRoomFunctionMenu()
         {

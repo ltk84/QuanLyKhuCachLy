@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="QuanLyKhuCachLy.CustomUserControl.AddQuarantinedPersonFirstPage"
+    x:Class="QuanLyKhuCachLy.CustomUserControl.EditStaffFirstScreen"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:convert="clr-namespace:QuanLyKhuCachLy.Converter"
@@ -8,26 +8,26 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:utility="clr-namespace:QuanLyKhuCachLy.Utility"
     xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
-    d:DesignHeight="450"
+    d:DesignHeight="350"
     d:DesignWidth="800"
     mc:Ignorable="d">
     <StackPanel Margin="0,0,0,0">
         <TextBlock
-            Margin="0,32,0,0"
+            Margin="0,0,0,0"
             HorizontalAlignment="Center"
             FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
             FontSize="24"
             FontWeight="Bold">
-            Thêm người cách ly
+            Sửa thông tin nhân viên
         </TextBlock>
         <TextBlock
             Margin="0,2,0,0"
             HorizontalAlignment="Center"
             FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
             FontSize="16">
-            Vui lòng điền thông tin người cách ly
+            Vui lòng điền thông tin nhân viên
         </TextBlock>
-        <Grid Grid.Row="0" Margin="30,0,30,0">
+        <Grid Grid.Row="0" Margin="30,22,30,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition SharedSizeGroup="A" />
                 <ColumnDefinition SharedSizeGroup="A" />
@@ -54,24 +54,24 @@
                     </Separator.RenderTransform>
                 </Separator>
             </StackPanel>
-            <StackPanel
-                Grid.Row="1"
-                Grid.ColumnSpan="2"
-                Margin="0,10,24,0">
+            <StackPanel Grid.Row="1" Margin="0,10,24,0">
                 <TextBlock
                     Margin="5,0,0,5"
                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                     FontSize="16"
                     Foreground="#FF434A54">
-                    Họ và tên (*)
+                    Họ và tên
                 </TextBlock>
                 <TextBox
+                    Height="40"
+                    Margin="0,0,-245,0"
+                    Padding="10,8,8,10"
                     materialDesign:HintAssist.Hint="Nhập họ và tên"
                     utility:ProtocolSettingsLayout.MVVMHasError="{Binding NameFieldHasError}"
                     MaxLength="30"
                     Style="{StaticResource TextInputField}">
                     <TextBox.Text>
-                        <Binding Path="QPName" UpdateSourceTrigger="PropertyChanged">
+                        <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <vr:RequiredField />
                                 <vr:NoSpecialChar />
@@ -98,11 +98,12 @@
                     Giới tính
                 </TextBlock>
                 <ComboBox
+                    Padding="10,8,8,10"
                     utility:ProtocolSettingsLayout.MVVMHasError="{Binding SexFieldHasError}"
                     ItemsSource="{Binding SexList}"
                     Style="{StaticResource ComboBoxField}">
                     <ComboBox.SelectedItem>
-                        <Binding Path="QPSelectedSex" UpdateSourceTrigger="PropertyChanged">
+                        <Binding Path="SelectedSex" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <vr:RequiredField />
                             </Binding.ValidationRules>
@@ -121,11 +122,14 @@
                     Foreground="#FF434A54">
                     Ngày sinh
                 </TextBlock>
-                <DatePicker materialDesign:HintAssist.Hint="Nhập ngày sinh" Style="{StaticResource DatePickerField}">
+                <DatePicker
+                    Padding="10,8,8,10"
+                    materialDesign:HintAssist.Hint="Nhập ngày sinh"
+                    utility:ProtocolSettingsLayout.MVVMHasError="{Binding DateOfBirthFieldHasError}"
+                    Style="{StaticResource DatePickerField}">
                     <DatePicker.SelectedDate>
                         <Binding
-                            Mode="OneWayToSource"
-                            Path="QPDateOfBirth"
+                            Path="DateOfBirth"
                             StringFormat="dd/MM/yyyy"
                             UpdateSourceTrigger="PropertyChanged">
                             <Binding.Converter>
@@ -150,17 +154,21 @@
                     Căn cước công dân
                 </TextBlock>
                 <TextBox
-                    materialDesign:HintAssist.Hint="Nhập số căn cước công dân"
+                    Height="40"
+                    Padding="10,8,8,10"
+                    materialDesign:HintAssist.Hint="Nhập số CCCD"
+                    utility:ProtocolSettingsLayout.MVVMHasError="{Binding CitizenIDFieldHasError}"
                     MaxLength="20"
-                    PreviewTextInput="TextBox_PreviewTextInput"
                     Style="{StaticResource TextInputField}">
                     <TextBox.Text>
-                        <Binding Path="QPCitizenID" UpdateSourceTrigger="PropertyChanged">
+                        <Binding Path="CitizenID" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
-                                <vr:OnlyNumber />
+                                <vr:RequiredField />
+                                <vr:NoSpecialChar />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
+
                 </TextBox>
             </StackPanel>
             <StackPanel
@@ -175,11 +183,12 @@
                     Quốc tịch
                 </TextBlock>
                 <ComboBox
+                    Padding="10,8,8,10"
                     utility:ProtocolSettingsLayout.MVVMHasError="{Binding NationalityFieldHasError}"
                     ItemsSource="{Binding NationalityList}"
                     Style="{StaticResource ComboBoxField}">
                     <ComboBox.SelectedItem>
-                        <Binding Path="QPSelectedNationality" UpdateSourceTrigger="PropertyChanged">
+                        <Binding Path="SelectedNationality" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <vr:RequiredField />
                             </Binding.ValidationRules>
@@ -199,15 +208,17 @@
                     Số điện thoại
                 </TextBlock>
                 <TextBox
+                    Height="40"
+                    Padding="10,8,8,10"
                     materialDesign:HintAssist.Hint="Nhập số điện thoại"
+                    utility:ProtocolSettingsLayout.MVVMHasError="{Binding PhoneNumberFieldHasError}"
                     MaxLength="20"
-                    PreviewTextInput="TextBox_PreviewTextInput"
                     Style="{StaticResource TextInputField}">
                     <TextBox.Text>
-                        <Binding Path="QPPhoneNumber" UpdateSourceTrigger="PropertyChanged">
+                        <Binding Path="PhoneNumber" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <vr:RequiredField />
-                                <vr:OnlyNumber />
+                                <vr:NoSpecialChar />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -225,37 +236,20 @@
                     Mã bảo hiểm y tế
                 </TextBlock>
                 <TextBox
+                    Height="40"
+                    Padding="10,8,8,10"
                     materialDesign:HintAssist.Hint="Nhập mã bảo hiểm y tế"
                     MaxLength="20"
                     Style="{StaticResource TextInputField}">
                     <TextBox.Text>
-                        <Binding Path="QPHealthInsuranceID" UpdateSourceTrigger="PropertyChanged">
+                        <Binding Path="HealthInsuranceID" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
+                                <vr:RequiredField />
                                 <vr:NoSpecialChar />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
-            </StackPanel>
-            <StackPanel
-                Grid.Row="3"
-                Grid.Column="2"
-                Margin="0,15,0,0">
-                <TextBlock
-                    Margin="5,0,0,5"
-                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                    FontSize="16"
-                    Foreground="#FF434A54">
-                    Mức độ
-                </TextBlock>
-                <ComboBox
-                    DisplayMemberPath="level"
-                    ItemsSource="{Binding SeverityList}"
-                    Style="{StaticResource ComboBoxField}">
-                    <ComboBox.SelectedItem>
-                        <Binding Path="QPSelectedLevel" UpdateSourceTrigger="PropertyChanged" />
-                    </ComboBox.SelectedItem>
-                </ComboBox>
             </StackPanel>
         </Grid>
     </StackPanel>
