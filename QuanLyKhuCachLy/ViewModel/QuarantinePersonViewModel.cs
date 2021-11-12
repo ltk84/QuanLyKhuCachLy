@@ -312,6 +312,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 if (_SelectedItem != null)
                 {
                     SetSelectedItemToProperty();
+                    InjectionRecordViewModel.ins.IRQuarantinePersonID = SelectedItem.id;
+                    DestinationHistoryViewModel = new DestinationHistoryViewModel(currentPersonID: SelectedItem.id);
                 }
             }
         }
@@ -430,8 +432,26 @@ namespace QuanLyKhuCachLy.ViewModel
         #endregion
 
         #region child view model
+
         private InjectionRecordViewModel _InjectionRecordViewModel;
+        public InjectionRecordViewModel InjectionRecordViewModel
+        {
+            get => _InjectionRecordViewModel; set
+            {
+                _InjectionRecordViewModel = value;
+                OnPropertyChanged();
+            }
+        }
+
         private DestinationHistoryViewModel _DestinationHistoryViewModel;
+        public DestinationHistoryViewModel DestinationHistoryViewModel
+        {
+            get => _DestinationHistoryViewModel; set
+            {
+                _DestinationHistoryViewModel = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         #region validation
@@ -681,8 +701,9 @@ namespace QuanLyKhuCachLy.ViewModel
 
             QAInformation = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
 
-            _InjectionRecordViewModel = new InjectionRecordViewModel(currentPersonID: QPID);
-            _DestinationHistoryViewModel = new DestinationHistoryViewModel(currentPersonID: QPID);
+            //InjectionRecordViewModel = new InjectionRecordViewModel();
+            InjectionRecordViewModel = InjectionRecordViewModel.ins;
+            DestinationHistoryViewModel = new DestinationHistoryViewModel();
 
             NationalityList = new ObservableCollection<string>() {
                 "VietNam", "Ameriden", "Phap", "Dut", "Em"
@@ -713,6 +734,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 AddQuarantinedPerson addQuarantinePerson = new AddQuarantinedPerson();
                 addQuarantinePerson.ShowDialog();
                 ClearData();
+
                 TabIndex = 1;
                 Tab1 = Visibility.Visible;
                 Tab2 = Visibility.Hidden;
@@ -930,6 +952,8 @@ namespace QuanLyKhuCachLy.ViewModel
             IsSoreThroat = false;
             IsTired = false;
             QPSelectedLevel = null;
+
+            InjectionRecordViewModel.ins.InjectionRecordList.Clear();
         }
 
         void AddQuarantinePerson()
@@ -967,12 +991,13 @@ namespace QuanLyKhuCachLy.ViewModel
                         nationality = QPSelectedNationality,
                         phoneNumber = QPPhoneNumber,
                         healthInsuranceID = QPHealthInsuranceID,
-                        levelID = QPSelectedLevel.id,
+
                         quarantineDays = 0,
                         arrivedDate = DateTime.Today,
                         leaveDate = DateTime.Today.AddDays(QAInformation.requiredDayToFinish),
                     };
 
+                    if (QPSelectedLevel != null) Person.levelID = QPSelectedLevel.id;
                     if (PersonAddress.CheckValidateProperty()) Person.addressID = PersonAddress.id;
 
                     DataProvider.ins.db.QuarantinePersons.Add(Person);
@@ -995,6 +1020,8 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     DataProvider.ins.db.HealthInformations.Add(PersonHealthInformation);
                     DataProvider.ins.db.SaveChanges();
+
+                    InjectionRecordViewModel.ins.ApplyInjectionRecordToDB(Person.id, "add");
 
                     transaction.Commit();
 
@@ -1092,6 +1119,8 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     InitDisplayAddress(PersonAddress);
                     InitDisplayHealthInformation(PersonHealthInformation);
+
+                    InjectionRecordViewModel.ApplyInjectionRecordToDB(Person.id, "edit");
 
                     transaction.Commit();
 
