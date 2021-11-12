@@ -69,7 +69,6 @@ namespace QuanLyKhuCachLy.ViewModel
                 if (_SelectedItem != null)
                 {
                     SetSelectedItemToProperty();
-                    MessageBox.Show(SelectedItem.vaccineName);
                 }
             }
         }
@@ -137,20 +136,20 @@ namespace QuanLyKhuCachLy.ViewModel
                 DeleteInjectionRecordUI();
             });
 
-            DeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
-            {
-                DeleteInjectionRecord();
-            });
+            //DeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            //{
+            //    DeleteInjectionRecord();
+            //});
 
-            AddCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
-             {
-                 AddInjectionRecord();
-             });
+            //AddCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            // {
+            //     AddInjectionRecord();
+            // });
 
-            EditCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
-            {
-                EditInjectionRecord();
-            });
+            //EditCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            //{
+            //    EditInjectionRecord();
+            //});
 
         }
 
@@ -166,6 +165,7 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             InjectionRecord injectionRecord = new InjectionRecord()
             {
+                id = -1,
                 dateInjection = DateTime.Today,
                 vaccineName = "(ALO)",
             };
@@ -175,7 +175,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         void EditInjectionRecordUI()
         {
-            var injectionRecord = InjectionRecordList.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+            var injectionRecord = InjectionRecordList[InjectionRecordList.IndexOf(SelectedItem)];
 
             InjectionRecordList[InjectionRecordList.IndexOf(injectionRecord)].dateInjection = SelectedItem.dateInjection;
             InjectionRecordList[InjectionRecordList.IndexOf(injectionRecord)].vaccineName = SelectedItem.vaccineName;
@@ -189,7 +189,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         public void ApplyInjectionRecordToDB(int PersonID, string action)
         {
-            if (action == "add")
+            if (action == "Add")
             {
                 foreach (var ir in InjectionRecordList)
                 {
@@ -198,9 +198,9 @@ namespace QuanLyKhuCachLy.ViewModel
                 }
 
                 DataProvider.ins.db.SaveChanges();
-                InjectionRecordList.Clear();
+                ClearInjectionRecordList();
             }
-            else if (action == "edit")
+            else if (action == "EditOrDelete")
             {
                 List<InjectionRecord> IRList = DataProvider.ins.db.InjectionRecords.Where(x => x.quarantinePersonID == PersonID).ToList();
 
@@ -216,6 +216,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     {
                         irUI.quarantinePersonID = PersonID;
                         DataProvider.ins.db.InjectionRecords.Add(irUI);
+                        DataProvider.ins.db.SaveChanges();
                     }
                 }
 
@@ -232,188 +233,186 @@ namespace QuanLyKhuCachLy.ViewModel
                 }
 
                 DataProvider.ins.db.SaveChanges();
-                InjectionRecordList = new ObservableCollection<InjectionRecord>(DataProvider.ins.db.InjectionRecords.Where(x => x.quarantinePersonID == PersonID));
-
-            }
-            else
-            {
-
+                SyncInjectionRecordList(PersonID);
             }
 
         }
 
+        public void SyncInjectionRecordList(int PersonID) => InjectionRecordList = new ObservableCollection<InjectionRecord>(DataProvider.ins.db.InjectionRecords.Where(x => x.quarantinePersonID == PersonID));
 
-        void AddInjectionRecord()
-        {
-            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
-            {
-                try
-                {
-                    InjectionRecord injectionRecord = new InjectionRecord()
-                    {
-                        dateInjection = DateTime.Today,
-                        vaccineName = "(ALO)",
-                        quarantinePersonID = IRQuarantinePersonID,
-                    };
+        public void ClearInjectionRecordList() => InjectionRecordList.Clear();
 
-                    DataProvider.ins.db.InjectionRecords.Add(injectionRecord);
-                    DataProvider.ins.db.SaveChanges();
+        //void AddInjectionRecord()
+        //{
+        //    using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+        //    {
+        //        try
+        //        {
+        //            InjectionRecord injectionRecord = new InjectionRecord()
+        //            {
+        //                dateInjection = DateTime.Today,
+        //                vaccineName = "(ALO)",
+        //                quarantinePersonID = IRQuarantinePersonID,
+        //            };
 
-                    InjectionRecordList.Add(injectionRecord);
+        //            DataProvider.ins.db.InjectionRecords.Add(injectionRecord);
+        //            DataProvider.ins.db.SaveChanges();
 
-                    transaction.Commit();
-                }
-                catch (DbUpdateException e)
-                {
-                    transaction.Rollback();
-                    string error = "Lỗi db update";
+        //            InjectionRecordList.Add(injectionRecord);
 
-                    MessageBox.Show(error);
-                }
-                catch (DbEntityValidationException e)
-                {
-                    transaction.Rollback();
-                    string error = "Lỗi validation";
+        //            transaction.Commit();
+        //        }
+        //        catch (DbUpdateException e)
+        //        {
+        //            transaction.Rollback();
+        //            string error = "Lỗi db update";
 
-                    MessageBox.Show(error);
-                }
-                catch (NotSupportedException e)
-                {
-                    transaction.Rollback();
-                    string error = "Lỗi db đéo support";
+        //            MessageBox.Show(error);
+        //        }
+        //        catch (DbEntityValidationException e)
+        //        {
+        //            transaction.Rollback();
+        //            string error = "Lỗi validation";
 
-                    MessageBox.Show(error);
-                }
-                catch (ObjectDisposedException e)
-                {
-                    transaction.Rollback();
-                    string error = "Lỗi db object disposed";
+        //            MessageBox.Show(error);
+        //        }
+        //        catch (NotSupportedException e)
+        //        {
+        //            transaction.Rollback();
+        //            string error = "Lỗi db đéo support";
 
-                    MessageBox.Show(error);
-                }
-                catch (InvalidOperationException e)
-                {
-                    transaction.Rollback();
-                    string error = "Lỗi invalid operation";
+        //            MessageBox.Show(error);
+        //        }
+        //        catch (ObjectDisposedException e)
+        //        {
+        //            transaction.Rollback();
+        //            string error = "Lỗi db object disposed";
 
-                    MessageBox.Show(error);
-                }
-            }
-        }
+        //            MessageBox.Show(error);
+        //        }
+        //        catch (InvalidOperationException e)
+        //        {
+        //            transaction.Rollback();
+        //            string error = "Lỗi invalid operation";
 
-        void EditInjectionRecord()
-        {
-            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
-            {
-                try
-                {
-                    InjectionRecord PersonInjectionRecord = DataProvider.ins.db.InjectionRecords.Where(x => x.id == SelectedItem.id).FirstOrDefault();
-                    if (PersonInjectionRecord == null) return;
+        //            MessageBox.Show(error);
+        //        }
+        //    }
+        //}
+
+        //void EditInjectionRecord()
+        //{
+        //    using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+        //    {
+        //        try
+        //        {
+        //            InjectionRecord PersonInjectionRecord = DataProvider.ins.db.InjectionRecords.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+        //            if (PersonInjectionRecord == null) return;
 
 
-                    InjectionRecordList[InjectionRecordList.IndexOf(PersonInjectionRecord)].dateInjection = SelectedItem.dateInjection;
-                    InjectionRecordList[InjectionRecordList.IndexOf(PersonInjectionRecord)].vaccineName = SelectedItem.vaccineName;
+        //            InjectionRecordList[InjectionRecordList.IndexOf(PersonInjectionRecord)].dateInjection = SelectedItem.dateInjection;
+        //            InjectionRecordList[InjectionRecordList.IndexOf(PersonInjectionRecord)].vaccineName = SelectedItem.vaccineName;
 
-                    PersonInjectionRecord.dateInjection = SelectedItem.dateInjection;
-                    PersonInjectionRecord.vaccineName = SelectedItem.vaccineName;
+        //            PersonInjectionRecord.dateInjection = SelectedItem.dateInjection;
+        //            PersonInjectionRecord.vaccineName = SelectedItem.vaccineName;
 
-                    DataProvider.ins.db.SaveChanges();
+        //            DataProvider.ins.db.SaveChanges();
 
-                    SelectedItem = PersonInjectionRecord;
+        //            SelectedItem = PersonInjectionRecord;
 
-                    transaction.Commit();
-                }
-                catch (DbUpdateException e)
-                {
-                    transaction.Rollback();
-                    string error = "Lỗi db update";
+        //            transaction.Commit();
+        //        }
+        //        catch (DbUpdateException e)
+        //        {
+        //            transaction.Rollback();
+        //            string error = "Lỗi db update";
 
-                    MessageBox.Show(error);
-                }
-                catch (DbEntityValidationException e)
-                {
-                    transaction.Rollback();
-                    string error = "Lỗi validation";
+        //            MessageBox.Show(error);
+        //        }
+        //        catch (DbEntityValidationException e)
+        //        {
+        //            transaction.Rollback();
+        //            string error = "Lỗi validation";
 
-                    MessageBox.Show(error);
-                }
-                catch (NotSupportedException e)
-                {
-                    transaction.Rollback();
-                    string error = "Lỗi db đéo support";
+        //            MessageBox.Show(error);
+        //        }
+        //        catch (NotSupportedException e)
+        //        {
+        //            transaction.Rollback();
+        //            string error = "Lỗi db đéo support";
 
-                    MessageBox.Show(error);
-                }
-                catch (ObjectDisposedException e)
-                {
-                    transaction.Rollback();
-                    string error = "Lỗi db object disposed";
+        //            MessageBox.Show(error);
+        //        }
+        //        catch (ObjectDisposedException e)
+        //        {
+        //            transaction.Rollback();
+        //            string error = "Lỗi db object disposed";
 
-                    MessageBox.Show(error);
-                }
-                catch (InvalidOperationException e)
-                {
-                    transaction.Rollback();
-                    string error = "Lỗi invalid operation";
+        //            MessageBox.Show(error);
+        //        }
+        //        catch (InvalidOperationException e)
+        //        {
+        //            transaction.Rollback();
+        //            string error = "Lỗi invalid operation";
 
-                    MessageBox.Show(error);
-                }
-            }
-        }
+        //            MessageBox.Show(error);
+        //        }
+        //    }
+        //}
 
-        void DeleteInjectionRecord()
-        {
-            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
-            {
-                try
-                {
-                    InjectionRecord PersonInjectionRecord = DataProvider.ins.db.InjectionRecords.Where(x => x == SelectedItem).FirstOrDefault();
-                    if (PersonInjectionRecord == null) return;
+        //void DeleteInjectionRecord()
+        //{
+        //    using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+        //    {
+        //        try
+        //        {
+        //            InjectionRecord PersonInjectionRecord = DataProvider.ins.db.InjectionRecords.Where(x => x == SelectedItem).FirstOrDefault();
+        //            if (PersonInjectionRecord == null) return;
 
-                    DataProvider.ins.db.InjectionRecords.Remove(PersonInjectionRecord);
-                    DataProvider.ins.db.SaveChanges();
+        //            DataProvider.ins.db.InjectionRecords.Remove(PersonInjectionRecord);
+        //            DataProvider.ins.db.SaveChanges();
 
-                    InjectionRecordList.Remove(PersonInjectionRecord);
+        //            InjectionRecordList.Remove(PersonInjectionRecord);
 
-                    transaction.Commit();
-                }
-                catch (DbUpdateException e)
-                {
-                    transaction.Rollback();
-                    string error = "Lỗi db update";
+        //            transaction.Commit();
+        //        }
+        //        catch (DbUpdateException e)
+        //        {
+        //            transaction.Rollback();
+        //            string error = "Lỗi db update";
 
-                    MessageBox.Show(error);
-                }
-                catch (DbEntityValidationException e)
-                {
-                    transaction.Rollback();
-                    string error = "Lỗi validation";
+        //            MessageBox.Show(error);
+        //        }
+        //        catch (DbEntityValidationException e)
+        //        {
+        //            transaction.Rollback();
+        //            string error = "Lỗi validation";
 
-                    MessageBox.Show(error);
-                }
-                catch (NotSupportedException e)
-                {
-                    transaction.Rollback();
-                    string error = "Lỗi db đéo support";
+        //            MessageBox.Show(error);
+        //        }
+        //        catch (NotSupportedException e)
+        //        {
+        //            transaction.Rollback();
+        //            string error = "Lỗi db đéo support";
 
-                    MessageBox.Show(error);
-                }
-                catch (ObjectDisposedException e)
-                {
-                    transaction.Rollback();
-                    string error = "Lỗi db object disposed";
+        //            MessageBox.Show(error);
+        //        }
+        //        catch (ObjectDisposedException e)
+        //        {
+        //            transaction.Rollback();
+        //            string error = "Lỗi db object disposed";
 
-                    MessageBox.Show(error);
-                }
-                catch (InvalidOperationException e)
-                {
-                    transaction.Rollback();
-                    string error = "Lỗi invalid operation";
+        //            MessageBox.Show(error);
+        //        }
+        //        catch (InvalidOperationException e)
+        //        {
+        //            transaction.Rollback();
+        //            string error = "Lỗi invalid operation";
 
-                    MessageBox.Show(error);
-                }
-            }
-        }
+        //            MessageBox.Show(error);
+        //        }
+        //    }
+        //}
         #endregion
     }
 }

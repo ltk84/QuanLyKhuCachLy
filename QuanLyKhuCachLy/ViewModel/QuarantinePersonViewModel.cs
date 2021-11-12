@@ -820,6 +820,8 @@ namespace QuanLyKhuCachLy.ViewModel
 
             CancelCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
+                if (SelectedItem != null)
+                    InjectionRecordViewModel.SyncInjectionRecordList(SelectedItem.id);
                 p.Close();
             });
         }
@@ -953,7 +955,7 @@ namespace QuanLyKhuCachLy.ViewModel
             IsTired = false;
             QPSelectedLevel = null;
 
-            InjectionRecordViewModel.ins.InjectionRecordList.Clear();
+            InjectionRecordViewModel.ins.ClearInjectionRecordList();
         }
 
         void AddQuarantinePerson()
@@ -1021,7 +1023,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     DataProvider.ins.db.HealthInformations.Add(PersonHealthInformation);
                     DataProvider.ins.db.SaveChanges();
 
-                    InjectionRecordViewModel.ins.ApplyInjectionRecordToDB(Person.id, "add");
+                    InjectionRecordViewModel.ins.ApplyInjectionRecordToDB(Person.id, "Add");
 
                     transaction.Commit();
 
@@ -1120,7 +1122,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     InitDisplayAddress(PersonAddress);
                     InitDisplayHealthInformation(PersonHealthInformation);
 
-                    InjectionRecordViewModel.ApplyInjectionRecordToDB(Person.id, "edit");
+                    InjectionRecordViewModel.ApplyInjectionRecordToDB(Person.id, "EditOrDelete");
 
                     transaction.Commit();
 
