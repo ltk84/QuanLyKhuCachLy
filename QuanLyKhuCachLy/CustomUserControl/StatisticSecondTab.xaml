@@ -107,25 +107,8 @@
                 Width="120"
                 Height="Auto"
                 VerticalAlignment="Center"
-                Style="{StaticResource MenuButton}">
-                <StackPanel Style="{StaticResource MenuStackPanel}">
-                    <materialDesign:PackIcon
-                        Width="18"
-                        Height="18"
-                        Kind="PrinterOutline"
-                        Style="{StaticResource MenuIcon}" />
-                    <TextBlock
-                        VerticalAlignment="Center"
-                        FontSize="14"
-                        Style="{StaticResource MenuText}">
-                        In
-                    </TextBlock>
-                </StackPanel>
-            </Button>
-            <Button
-                Width="120"
-                Height="Auto"
-                VerticalAlignment="Center"
+                Command="{Binding PrintCommand, Mode=OneWay}"
+                CommandParameter="{Binding ElementName=SecondReportChart, Mode=OneWay}"
                 Style="{StaticResource MenuButton}">
                 <StackPanel Style="{StaticResource MenuStackPanel}">
                     <materialDesign:PackIcon
@@ -149,6 +132,7 @@
             Margin="32,24,0,0"
             VerticalAlignment="Top">
             <lvc:PieChart
+                x:Name="SecondReportChart"
                 Margin="0,15"
                 InnerRadius="100"
                 LegendLocation="Right"

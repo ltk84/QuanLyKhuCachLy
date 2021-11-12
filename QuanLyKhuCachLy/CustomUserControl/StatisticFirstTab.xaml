@@ -121,25 +121,8 @@
                 Width="120"
                 Height="Auto"
                 VerticalAlignment="Center"
-                Style="{StaticResource MenuButton}">
-                <StackPanel Style="{StaticResource MenuStackPanel}">
-                    <materialDesign:PackIcon
-                        Width="18"
-                        Height="18"
-                        Kind="PrinterOutline"
-                        Style="{StaticResource MenuIcon}" />
-                    <TextBlock
-                        VerticalAlignment="Center"
-                        FontSize="14"
-                        Style="{StaticResource MenuText}">
-                        In
-                    </TextBlock>
-                </StackPanel>
-            </Button>
-            <Button
-                Width="120"
-                Height="Auto"
-                VerticalAlignment="Center"
+                Command="{Binding PrintCommand, Mode=OneWay}"
+                CommandParameter="{Binding ElementName=FirstReportChart, Mode=OneWay}"
                 Style="{StaticResource MenuButton}">
                 <StackPanel Style="{StaticResource MenuStackPanel}">
                     <materialDesign:PackIcon
@@ -162,7 +145,10 @@
             Height="400"
             Margin="32,24,0,0"
             VerticalAlignment="Top">
-            <lvc:CartesianChart LegendLocation="Bottom" Series="{Binding FirstSeriesCollection}">
+            <lvc:CartesianChart
+                x:Name="FirstReportChart"
+                LegendLocation="Bottom"
+                Series="{Binding FirstSeriesCollection}">
                 <lvc:CartesianChart.AxisX>
                     <lvc:Axis Title="Thời gian" Labels="{Binding FirstLabels}" />
                 </lvc:CartesianChart.AxisX>

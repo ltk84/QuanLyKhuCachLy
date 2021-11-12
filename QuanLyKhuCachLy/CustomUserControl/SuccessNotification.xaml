@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="QuanLyKhuCachLy.CustomUserControl.DeleteConfirmation"
+    x:Class="QuanLyKhuCachLy.CustomUserControl.SuccessNotification"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,27 +9,24 @@
     Width="525"
     Height="300"
     mc:Ignorable="d">
-    <Border Style="{StaticResource ConfirmationBackground}">
+    <Border Background="#FF1D9583" Style="{StaticResource ConfirmationBackground}">
         <StackPanel Margin="20,0" VerticalAlignment="Center">
-            <materialDesign:PackIcon Kind="CloseCircle" Style="{StaticResource ConfirmationIcon}" />
+            <materialDesign:PackIcon Kind="CheckCircle" Style="{StaticResource ConfirmationIcon}" />
             <TextBlock Style="{StaticResource ConfirmationTitle}">
-                Bạn có chắc muốn xóa?
+                Thành công
             </TextBlock>
             <TextBlock Style="{StaticResource ConfirmationSubtitle}">
-                Sau khi xác sẽ không thể hoàn tác
+                Thao tác được thực thi thành công
             </TextBlock>
             <StackPanel
                 Margin="0,32,0,0"
                 HorizontalAlignment="Center"
                 Orientation="Horizontal">
-                <Button Margin="0" Style="{StaticResource ConfirmationButton}">
-                    <TextBlock Text="Hủy bỏ" />
-                </Button>
                 <Button
-                    Margin="36,0,0,0"
-                    Foreground="#FFF27251"
+                    Margin="0"
+                    Click="Button_Click"
                     Style="{StaticResource ConfirmationButton}">
-                    <TextBlock Text="Xóa" />
+                    <TextBlock Text="Đóng" />
                 </Button>
             </StackPanel>
         </StackPanel>

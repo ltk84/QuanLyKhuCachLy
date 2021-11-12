@@ -1,13 +1,16 @@
 ﻿using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
+using QuanLyKhuCachLy.CustomUserControl;
 using QuanLyKhuCachLy.Model;
 using System;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace QuanLyKhuCachLy.ViewModel
 {
@@ -170,6 +173,9 @@ namespace QuanLyKhuCachLy.ViewModel
         #region Command
 
         public ICommand SelectionChangedCommand { get; set; }
+        public ICommand PrintCommand { get; set; }
+        public ICommand ExportCommand { get; set; }
+        
 
         #endregion
 
@@ -213,6 +219,46 @@ namespace QuanLyKhuCachLy.ViewModel
                         ToThirdTab();
                         break;
                 }
+            });
+
+            PrintCommand = new RelayCommand<Visual>((p) =>
+            {
+                return true;
+            }, (v) =>
+            {
+                try
+                {
+                    PrintDialog printDlg = new PrintDialog();
+                    printDlg.PrintVisual(v, "Chart Printing");
+                }
+                catch
+                {
+                    Window FailDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    FailDialog.ShowDialog();
+                }
+
+                Window SuccessDialog = new Window
+                {
+                    AllowsTransparency = true,
+                    Background = Brushes.Transparent,
+                    Width = 600,
+                    Height = 400,
+                    ResizeMode = ResizeMode.NoResize,
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                    WindowStyle = WindowStyle.None,
+                    Content = new SuccessNotification()
+                };
+                SuccessDialog.ShowDialog();
             });
 
             ToFirstTab();

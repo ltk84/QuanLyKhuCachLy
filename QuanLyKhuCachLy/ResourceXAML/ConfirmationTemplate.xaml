@@ -8,6 +8,16 @@
         TargetType="Border">
         <Setter Property="Padding" Value="0,16,0,16" />
         <Setter Property="Background" Value="#FFF27251" />
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect
+                    BlurRadius="10"
+                    Direction="-2"
+                    Opacity="0.36"
+                    ShadowDepth="1"
+                    Color="#FF434A54" />
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="ConfirmationIcon" TargetType="materialDesign:PackIcon">
