@@ -4,6 +4,8 @@ using LiveCharts.Wpf;
 using QuanLyKhuCachLy.Model;
 using System;
 using System.Collections.ObjectModel;
+using System.Data.SqlClient;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -219,10 +221,12 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 if (SelectedReportObject.CompareTo(QuarantinePersonReportObjects[0]) == 0)
                 {
+                    // Report Object 1
                     LoadQuarantinePersonChart(BeginDate, EndDate);
                 }
                 else if (SelectedReportObject.CompareTo(QuarantinePersonReportObjects[1]) == 0)
                 {
+                    // Report Object 2
                     LoadTargetGroupChart(BeginDate, EndDate);
                 }
             }
@@ -230,19 +234,19 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 if (SelectedReportObject.CompareTo(QuarantineAreaReportObjects[0]) == 0)
                 {
-                    LoadCapacityChart(EndDate);
+                    LoadCapacityChart();
                 }
                 else if (SelectedReportObject.CompareTo(QuarantineAreaReportObjects[1]) == 0)
                 {
-                    LoadRoomChart(EndDate);
+                    LoadRoomChart();
                 }
                 else if (SelectedReportObject.CompareTo(QuarantineAreaReportObjects[2]) == 0)
                 {
-                    LoadRoomSeverityChart(EndDate);
+                    LoadRoomSeverityChart();
                 }
                 else if (SelectedReportObject.CompareTo(QuarantineAreaReportObjects[3]) == 0)
                 {
-                    LoadStafChart(EndDate);
+                    LoadStafChart();
                 }
             }
             else if (SelectedTab == 2)
@@ -283,6 +287,8 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #region FirstTab
 
+        #region Load Report Object 1
+
         private void LoadQuarantinePersonChart(DateTime BeginDate, DateTime EndDate)
         {
             FirstLabels = new ObservableCollection<string>();
@@ -315,107 +321,248 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 FirstLabels.Add(date.ToString("dd/MM/yyyy"));
                 FirstSeriesCollection[0].Values.Add(CountQuarantinePerson(date));
-                FirstSeriesCollection[1].Values.Add(CountQuarantinePerson(date));
-                FirstSeriesCollection[2].Values.Add(CountQuarantinePerson(date));
-            }
-        }
-
-        private void LoadTargetGroupChart(DateTime BeginDate, DateTime EndDate)
-        {
-            FirstLabels = new ObservableCollection<string>();
-            FirstSeriesCollection = new SeriesCollection
-            {
-                new StackedColumnSeries
-                {
-                    Title = "Số người đang cách ly",
-                    Values = new ChartValues<int>(),
-                    StackMode = StackMode.Values,
-                    DataLabels = true
-                },
-                new StackedColumnSeries
-                {
-                    Title = "Số người cách ly mới",
-                    Values = new ChartValues<int>(),
-                    StackMode = StackMode.Values,
-                    DataLabels = true
-                },
-                new StackedColumnSeries
-                {
-                    Title = "Số người hoàn thành",
-                    Values = new ChartValues<int>(),
-                    StackMode = StackMode.Values,
-                    DataLabels = true
-                }
-            };
-
-            for (DateTime date = BeginDate; date <= EndDate; date = date.AddDays(1))
-            {
-                FirstLabels.Add(date.ToString("dd/MM/yyyy"));
-                //FirstSeriesCollection[0].Values.Add(CountTargetGroup(date));
-                //FirstSeriesCollection[1].Values.Add(CountTargetGroup(date));
-                //FirstSeriesCollection[2].Values.Add(CountTargetGroup(date));
+                FirstSeriesCollection[1].Values.Add(CountNewQuarantinePerson(date));
+                FirstSeriesCollection[2].Values.Add(CountCompeleteQuarantinePerson(date));
             }
         }
 
         private int CountQuarantinePerson(DateTime date)
         {
-            return 10;
+            int count = 0;
+            try
+            {
+                // DataProvider.ins.db.Database.SqlQuery<string>("select count(id) from QuarantinePerson where leaveDate < @p0", date.ToString("MM/dd/yyyy"));
+                count = DataProvider.ins.db.QuarantinePersons.Where(person => person.leaveDate > date && person.arrivedDate < date).Count();
+            }
+            catch
+            {
+                MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng người cách ly!");
+            }
+
+            return count;
+        }
+
+        private int CountNewQuarantinePerson(DateTime date)
+        {
+            int count = 0;
+            try
+            {
+                // DataProvider.ins.db.Database.SqlQuery<int>("select count(id) from QuarantinePerson where arrivedDate = @p0", date.ToString("MM/dd/yyyy"));
+                count = DataProvider.ins.db.QuarantinePersons.Where(person => person.arrivedDate == date).Count();
+            }
+            catch
+            {
+                MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng người cách ly mới!");
+            }
+
+            return count;
+        }
+
+        private int CountCompeleteQuarantinePerson(DateTime date)
+        {
+
+            int count = 0;
+            try
+            {
+                // Do chưa có thuộc tính hoàn thành cách ly nên phải xét điều kiện leaveDate >= currentDate và sẽ được xem là hoàn thành cách ly nếu điều kiện này thỏa.
+                // DataProvider.ins.db.Database.SqlQuery<int>("select count(id) from QuarantinePerson where leaveDate >= @p0", date.ToString("MM/dd/yyyy"));
+                count = DataProvider.ins.db.QuarantinePersons.Where(person => person.leaveDate <= date).Count();
+            }
+            catch
+            {
+                MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng người hoàn thành cách ly!");
+            }
+
+            return count;
+        }
+
+        #endregion
+
+        #region Load Report Object 2
+
+        private void LoadTargetGroupChart(DateTime BeginDate, DateTime EndDate)
+        {
+            ObservableCollection<Model.Severity> SeverityList = new ObservableCollection<Model.Severity>(DataProvider.ins.db.Severities);
+
+            FirstLabels = new ObservableCollection<string>();
+            FirstSeriesCollection = new SeriesCollection();
+
+            for (int i = 0; i < SeverityList.Count; i++)
+            {
+                FirstSeriesCollection.Add(new StackedColumnSeries
+                {
+                    Title = SeverityList[i].description,
+                    Values = new ChartValues<int>(),
+                    StackMode = StackMode.Values,
+                    DataLabels = true
+                });
+            }
+
+            for (DateTime date = BeginDate; date <= EndDate; date = date.AddDays(1))
+            {
+                FirstLabels.Add(date.ToString("dd/MM/yyyy"));
+                for (int i = 0; i < SeverityList.Count; i++)
+                {
+                    FirstSeriesCollection[i].Values.Add(CountTargetGroup(date, SeverityList[i]));
+                }
+            }
         }
 
         private int CountTargetGroup(DateTime date, Severity severity)
         {
-            return 10;
+            int count = 0;
+            try
+            {
+                // DataProvider.ins.db.Database.SqlQuery<int>("select count(id) from QuarantinePerson where arrivedDate = @p0", date.ToString("MM/dd/yyyy"));
+                count = DataProvider.ins.db.QuarantinePersons.Where(person => person.leaveDate > date && person.arrivedDate <= date && person.level == severity.level).Count();
+            }
+            catch
+            {
+                MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng người cách ly mới!");
+            }
+
+            return count;
         }
+
+        #endregion
 
         #endregion
 
         #region SecondTab
 
-        private void LoadCapacityChart(DateTime EndDate)
+        #region Load Report Object 1
+        private void LoadCapacityChart()
         {
             SecondSeriesCollection = new SeriesCollection
             {
                 new PieSeries
                 {
-                    Title = "Chrome",
-                    Values = new ChartValues<ObservableValue> { new ObservableValue(8) },
+                    Title = "Giường trống",
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(CountAvailableCapacity()) },
                     DataLabels = true
                 },
                 new PieSeries
                 {
-                    Title = "Mozilla",
-                    Values = new ChartValues<ObservableValue> { new ObservableValue(6) },
+                    Title = "Giường đã có người",
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(CountOccupiedCapacity()) },
                     DataLabels = true
                 },
-                new PieSeries
-                {
-                    Title = "Opera",
-                    Values = new ChartValues<ObservableValue> { new ObservableValue(10) },
-                    DataLabels = true
-                },
-                new PieSeries
-                {
-                    Title = "Explorer",
-                    Values = new ChartValues<ObservableValue> { new ObservableValue(4) },
-                    DataLabels = true
-                }
             };
         }
 
-        private void LoadRoomChart(DateTime EndDate)
+        private int CountOccupiedCapacity()
         {
-
+            ObservableCollection<Model.QuarantineRoom> QuarantineRoomList = new ObservableCollection<Model.QuarantineRoom>(DataProvider.ins.db.QuarantineRooms);
+            int count = 0;
+            for (int i = 0; i < QuarantineRoomList.Count(); i++)
+            {
+                count += QuarantineRoomList[i].QuarantinePersons.Count();
+            }
+            return count;
         }
 
-        private void LoadRoomSeverityChart(DateTime EndDate)
+        private int CountAvailableCapacity()
         {
-
+            ObservableCollection<Model.QuarantineRoom> QuarantineRoomList = new ObservableCollection<Model.QuarantineRoom>(DataProvider.ins.db.QuarantineRooms);
+            int count = 0;
+            for (int i = 0; i < QuarantineRoomList.Count(); i++)
+            {
+                count += QuarantineRoomList[i].capacity - QuarantineRoomList[i].QuarantinePersons.Count();
+            }
+            return count;
         }
 
-        private void LoadStafChart(DateTime EndDate)
+        #endregion
+
+        #region Load Report Object 2
+
+        private void LoadRoomChart()
+        {
+            SecondSeriesCollection = new SeriesCollection
+            {
+                new PieSeries
+                {
+                    Title = "Số phòng còn trống",
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(CountAvailableRoom()) },
+                    DataLabels = true
+                },
+                new PieSeries
+                {
+                    Title = "Số phòng đầy",
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(CountOccupiedRoom()) },
+                    DataLabels = true
+                },
+            };
+        }
+        private int CountOccupiedRoom()
+        {
+            int count = DataProvider.ins.db.QuarantineRooms.Where(room => room.QuarantinePersons.Count == room.capacity).Count();
+            return count;
+        }
+
+        private int CountAvailableRoom()
+        {
+            int count = DataProvider.ins.db.QuarantineRooms.Where(room => room.QuarantinePersons.Count < room.capacity).Count();
+            return count;
+        }
+
+        #endregion
+
+        #region Load Report Object 3
+
+        private void LoadRoomSeverityChart()
         {
 
+            ObservableCollection<Model.Severity> SeverityList = new ObservableCollection<Model.Severity>(DataProvider.ins.db.Severities);
+
+            SecondSeriesCollection = new SeriesCollection();
+
+            for (int i = 0; i < SeverityList.Count; i++)
+            {
+                SecondSeriesCollection.Add(
+                new PieSeries
+                {
+                    Title = SeverityList[i].description,
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(CountRoomWithSeverity(SeverityList[i])) },
+                    DataLabels = true
+                });
+            }
         }
+
+        private int CountRoomWithSeverity(Severity severity)
+        {
+            int count = DataProvider.ins.db.QuarantineRooms.Where(room => room.Severity.level == severity.level).Count();
+            return count;
+        }
+
+        #endregion
+
+        #region Load Report Object 4
+
+        private void LoadStafChart()
+        {
+            var DepartmentList = DataProvider.ins.db.Staffs.Select(staff => staff.department).Distinct();
+            SecondSeriesCollection = new SeriesCollection();
+
+            for (int i = 0; i < DepartmentList.Count(); i++)
+            {
+                SecondSeriesCollection.Add(
+                new PieSeries
+                {
+                    Title = DepartmentList.ElementAt(i).ToString(),
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(CountStaffWithDepartment(DepartmentList.ElementAt(i).ToString())) },
+                    DataLabels = true
+                });
+            }
+        }
+
+        private int CountStaffWithDepartment(string department)
+        {
+            int count = DataProvider.ins.db.Staffs.Where(staff => staff.department == department).Count();
+            return count;
+        }
+
+        #endregion
 
         #endregion
 
@@ -448,11 +595,13 @@ namespace QuanLyKhuCachLy.ViewModel
 
         private int CountPositiveTestingResult(DateTime date)
         {
-            return 5;
+            int count = DataProvider.ins.db.TestingResults.Where(result => result.dateTesting <= date && result.isPositive).Count();
+            return count;
         }
         private int CountNegativeTestingResult(DateTime date)
         {
-            return 5;
+            int count = DataProvider.ins.db.TestingResults.Where(result => result.dateTesting <= date && !result.isPositive).Count();
+            return count;
         }
 
         #endregion
