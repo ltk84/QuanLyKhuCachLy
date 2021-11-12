@@ -187,8 +187,11 @@ namespace QuanLyKhuCachLy.ViewModel
             BeginDate = DateTime.Now.Date;
 
             QuarantinePersonReportObjects = new ObservableCollection<string>() { "Người cách ly", "Nhóm đối tượng" };
+            SelectedQuarantinePersonReportObjects = QuarantinePersonReportObjects[0];
             QuarantineAreaReportObjects = new ObservableCollection<string>() { "Sức chứa", "Phòng", "Mức độ phòng", "Nhân viên" };
+            SelectedQuarantineAreaReportObjects = QuarantineAreaReportObjects[0];
             TestingReportObjects = new ObservableCollection<string>() { "Xét nghiệm" };
+            SelectedTestingReportObjects = TestingReportObjects[0];
 
             QuarantinePersonFormatter = value => value.ToString() + " người";
             TestingFormatter = value => value.ToString() + " mẫu";
@@ -265,21 +268,18 @@ namespace QuanLyKhuCachLy.ViewModel
         private void ToFirstTab()
         {
             SelectedTab = 0;
-            SelectedQuarantinePersonReportObjects = QuarantinePersonReportObjects[0];
             LoadChart(SelectedTab, BeginDate, EndDate, SelectedQuarantinePersonReportObjects);
         }
 
         private void ToSecondTab()
         {
             SelectedTab = 1;
-            SelectedQuarantineAreaReportObjects = QuarantineAreaReportObjects[0];
             LoadChart(SelectedTab, BeginDate, EndDate, SelectedQuarantineAreaReportObjects);
         }
 
         private void ToThirdTab()
         {
             SelectedTab = 2;
-            SelectedTestingReportObjects = TestingReportObjects[0];
             LoadChart(SelectedTab, BeginDate, EndDate, SelectedTestingReportObjects);
         }
 
@@ -598,6 +598,7 @@ namespace QuanLyKhuCachLy.ViewModel
             int count = DataProvider.ins.db.TestingResults.Where(result => result.dateTesting <= date && result.isPositive).Count();
             return count;
         }
+
         private int CountNegativeTestingResult(DateTime date)
         {
             int count = DataProvider.ins.db.TestingResults.Where(result => result.dateTesting <= date && !result.isPositive).Count();

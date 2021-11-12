@@ -8,6 +8,7 @@
     xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     d:DesignHeight="900"
     d:DesignWidth="850"
     DataContext="{StaticResource ReportVM}"
@@ -47,7 +48,13 @@
                 VerticalAlignment="Top"
                 ItemsSource="{Binding QuarantinePersonReportObjects}"
                 SelectedItem="{Binding SelectedQuarantinePersonReportObjects}"
-                Style="{StaticResource UnderlineComboBox}" />
+                Style="{StaticResource UnderlineComboBox}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
 
         </Grid>
         <Grid
