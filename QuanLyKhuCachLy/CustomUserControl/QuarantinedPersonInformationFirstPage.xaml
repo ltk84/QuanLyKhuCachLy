@@ -38,7 +38,7 @@
                 Grid.Row="0"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="Trần Lê Thanh Tùng" />
+                Text="{Binding SelectedItem.name}" />
 
 
             <TextBlock
@@ -51,7 +51,7 @@
                 Grid.Row="1"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="Nam" />
+                Text="{Binding SelectedItem.sex}" />
 
 
             <TextBlock
@@ -64,7 +64,7 @@
                 Grid.Row="2"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="Việt Nam" />
+                Text="{Binding SelectedItem.nationality}" />
 
             <TextBlock
                 Grid.Row="3"
@@ -76,7 +76,7 @@
                 Grid.Row="3"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="123456789" />
+                Text="{Binding SelectedItem.citizenID}" />
 
             <TextBlock
                 Grid.Row="4"
@@ -88,7 +88,7 @@
                 Grid.Row="4"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="113" />
+                Text="{Binding SelectedItem.phoneNumber}" />
 
             <TextBlock
                 Grid.Row="5"
@@ -100,7 +100,7 @@
                 Grid.Row="5"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="SV19522496" />
+                Text="{Binding SelectedItem.healthInsuranceID}" />
 
             <TextBlock
                 Grid.Row="6"
@@ -113,7 +113,7 @@
                 Grid.Row="6"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="440 Lê Văn Quới, Bình Hưng Hòa A, Bình Tân, Hồ Chí Minh" />
+                Text="{Binding DisplayAddress}" />
         </Grid>
         <Separator Margin="0,20,0,20" Background="#1E434A54" />
 
@@ -140,7 +140,7 @@
                 Grid.Row="0"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="Sốt, ho, khó thở" />
+                Text="{Binding DisplayHealthInfor}" />
 
             <TextBlock
                 Grid.Row="1"
@@ -151,7 +151,7 @@
                 Grid.Row="1"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="F0" />
+                Text="{Binding SelectedItem.Severity.level}" />
             <TextBlock
                 Grid.Row="2"
                 Grid.Column="0"
@@ -161,7 +161,7 @@
                 Grid.Row="2"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="21/10/2021" />
+                Text="{Binding SelectedItem.arrivedDate}" />
             <TextBlock
                 Grid.Row="3"
                 Grid.Column="0"
@@ -171,7 +171,7 @@
                 Grid.Row="3"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="21/11/2021" />
+                Text="{Binding SelectedItem.leaveDate}" />
             <TextBlock
                 Grid.Row="4"
                 Grid.Column="0"
@@ -181,7 +181,7 @@
                 Grid.Row="4"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="A1" />
+                Text="{Binding Room.displayName}" />
         </Grid>
     </StackPanel>
 </UserControl>

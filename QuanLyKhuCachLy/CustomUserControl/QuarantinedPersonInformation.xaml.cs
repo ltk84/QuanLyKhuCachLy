@@ -1,11 +1,12 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace QuanLyKhuCachLy.CustomUserControl
 {
     /// <summary>
     /// Interaction logic for QuarantinedPersonInformation.xaml
     /// </summary>
-    public partial class QuarantinedPersonInformation
+    public partial class QuarantinedPersonInformation 
     {
         public QuarantinedPersonInformation()
         {

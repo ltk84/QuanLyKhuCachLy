@@ -8,7 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="750"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+     DataContext="{StaticResource ResourceKey=RoomVM}">
     <StackPanel Width="Auto" Margin="25,25,45,0">
         <TextBlock
             Grid.Row="0"
@@ -25,7 +26,6 @@
             FontSize="12"
             PreviewMouseDown="Button_PreviewMouseDown"
             Style="{StaticResource DashboardButton}">
-
             <Button.ContextMenu>
                 <ContextMenu>
                     <ContextMenu.Template>
@@ -73,7 +73,7 @@
                     HeaderStyle="{StaticResource DataGridHeader}"
                     MaxLength="30" />
                 <materialDesign:DataGridTextColumn
-                    Binding="{Binding level}"
+                    Binding="{Binding Severity.level}"
                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                     ElementStyle="{StaticResource DataGridElement}"
                     Header="Mức độ"
@@ -85,10 +85,7 @@
                     IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button
-                                HorizontalAlignment="Right"
-                                PreviewMouseUp="Button_PreviewMouseUp"
-                                Style="{StaticResource DataGridButton}">
+                            <Button HorizontalAlignment="Right" Style="{StaticResource DataGridButton}">
                                 <materialDesign:PackIcon
                                     Width="16"
                                     Height="16"
@@ -97,7 +94,7 @@
                                     <ContextMenu>
                                         <ContextMenu.Template>
                                             <ControlTemplate>
-                                                <local:QuarantineRoomFunctionMenu />
+                                                <local:QuarantineRoomFunctionMenu Visibility="{Binding VisibilityMenu}"/>
                                             </ControlTemplate>
                                         </ContextMenu.Template>
                                     </ContextMenu>

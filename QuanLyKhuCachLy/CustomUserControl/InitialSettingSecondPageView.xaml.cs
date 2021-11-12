@@ -25,5 +25,10 @@ namespace QuanLyKhuCachLy.CustomUserControl
         {
             CheckIsNumeric(e);
         }
+
+        private void DataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

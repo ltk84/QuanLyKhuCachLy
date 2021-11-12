@@ -63,4 +63,15 @@
             </EventTrigger>
         </Style.Triggers>
     </Style>
+
+    <Style
+        x:Key="DataGridButtonDelete"
+        BasedOn="{StaticResource MaterialDesignIconButton}"
+        TargetType="Button">
+        <Setter Property="Width" Value="18" />
+        <Setter Property="Height" Value="18" />
+        <Setter Property="Foreground" Value="#FF363636" />
+
+    </Style>
+
 </ResourceDictionary>

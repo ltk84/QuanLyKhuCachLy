@@ -33,7 +33,7 @@
                     </TextBlock>
                 </StackPanel>
             </Button>
-            <Button Command="{Binding ToEditCommand}" Style="{StaticResource MenuButton}">
+            <Button Command="{Binding DeleteRoomCommand}" Style="{StaticResource MenuButton}">
                 <StackPanel Style="{StaticResource MenuStackPanel}">
                     <materialDesign:PackIcon Kind="DeleteOutline" Style="{StaticResource MenuIcon}" />
                     <TextBlock Style="{StaticResource MenuText}">

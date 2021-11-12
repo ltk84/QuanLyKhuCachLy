@@ -1,5 +1,10 @@
 ﻿using QuanLyKhuCachLy.Model;
+using System;
 using System.Collections.ObjectModel;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
+using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace QuanLyKhuCachLy.ViewModel
@@ -8,25 +13,25 @@ namespace QuanLyKhuCachLy.ViewModel
     {
 
 
-        private string _level;
-        public string level
-        {
-            get => _level; set
-            {
-                _level = value;
-                OnPropertyChanged();
-            }
-        }
+        //private string _level;
+        //public string level
+        //{
+        //    get => _level; set
+        //    {
+        //        _level = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
 
-        private string _description;
-        public string description
-        {
-            get => _description; set
-            {
-                _description = value;
-                OnPropertyChanged();
-            }
-        }
+        //private string _description;
+        //public string description
+        //{
+        //    get => _description; set
+        //    {
+        //        _description = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
         private ObservableCollection<Severity> _listSeverity;
         private Severity _selectedItem;
 
@@ -39,8 +44,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 OnPropertyChanged();
                 if (_selectedItem != null)
                 {
-                    level = SelectedItem.level;
-                    description = SelectedItem.description;
+                    //level = SelectedItem.level;
+                    //description = SelectedItem.description;
                 }
             }
         }
@@ -52,6 +57,7 @@ namespace QuanLyKhuCachLy.ViewModel
         }
         public ICommand RemoveSeverityCommand { get; set; }
         public ICommand AddSeverityCommand { get; set; }
+        public ICommand EditSeverityCommand { get; set; }
 
         public SeverityViewModel()
         {
@@ -60,44 +66,192 @@ namespace QuanLyKhuCachLy.ViewModel
 
         private void Init()
         {
-            ListSeverity = new ObservableCollection<Severity>();
-            Severity firstSeverity = new Severity()
-            {
-                level = "1",
-                description = "F1, F2"
-            };
-            Severity secondSeverity = new Severity()
-            {
-                level = "2",
-                description = "F0"
-            };
-            ListSeverity.Add(firstSeverity);
-            ListSeverity.Add(secondSeverity);
+            ListSeverity = new ObservableCollection<Severity>(DataProvider.ins.db.Severities);
 
-            RemoveSeverityCommand = new RelayCommand<object>((p) => { return true; }, (o) =>
-            {
-                RemoveSeverity(SelectedItem);
-            });
+            RemoveSeverityCommand = new RelayCommand<object>((p) => { if (ListSeverity.Count > 1) return true; return false; }, (o) =>
+             {
+                 RemoveSeverity();
+             });
 
             AddSeverityCommand = new RelayCommand<object>((p) => { return true; }, (o) =>
             {
                 AddSeverity();
             });
+
+            EditSeverityCommand = new RelayCommand<object>((p) => { return true; }, (o) =>
+            {
+                EditSeverity();
+            });
         }
 
-        private void RemoveSeverity(Severity severity)
+
+        private void RemoveSeverity()
         {
-            ListSeverity.Remove(severity);
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    var severity = DataProvider.ins.db.Severities.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+                    if (severity == null) return;
+
+                    DataProvider.ins.db.Severities.Remove(severity);
+                    DataProvider.ins.db.SaveChanges();
+
+                    ListSeverity.Remove(severity);
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+
+            }
+        }
+
+        private void EditSeverity()
+        {
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    var severity = DataProvider.ins.db.Severities.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+
+                    ListSeverity[ListSeverity.IndexOf(severity)].level = SelectedItem.level;
+                    ListSeverity[ListSeverity.IndexOf(severity)].description = SelectedItem.description;
+
+                    severity.level = SelectedItem.level;
+                    severity.description = SelectedItem.description;
+
+                    DataProvider.ins.db.SaveChanges();
+
+                    SelectedItem = severity;
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
         }
 
         private void AddSeverity()
         {
-            Severity newSeverity = new Severity()
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
             {
-                level = "(Mức độ)",
-                description = "(Mô tả)"
-            };
-            ListSeverity.Add(newSeverity);
+                try
+                {
+                    Severity newSeverity = new Severity()
+                    {
+                        level = "(Level)",
+                        description = "(Description)"
+                    };
+                    DataProvider.ins.db.Severities.Add(newSeverity);
+                    DataProvider.ins.db.SaveChanges();
+
+                    ListSeverity.Add(newSeverity);
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
         }
 
     }

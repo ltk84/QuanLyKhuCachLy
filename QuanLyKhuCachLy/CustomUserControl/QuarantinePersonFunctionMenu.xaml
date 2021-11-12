@@ -11,7 +11,7 @@
     Height="332"
     mc:Ignorable="d">
     <Border Padding="0,16,0,16" Style="{StaticResource RecommendationField}">
-        <StackPanel DataContext="{StaticResource RoomVM}">
+        <StackPanel DataContext="{StaticResource PersonVM}">
             <Button
                 Command="{Binding ToViewCommand}"
                 CommandParameter="{Binding ElementName=PersonCM}"
@@ -23,7 +23,7 @@
                     </TextBlock>
                 </StackPanel>
             </Button>
-            <Button Style="{StaticResource MenuButton}">
+            <Button Command="{Binding ToEditCommand}" Style="{StaticResource MenuButton}">
                 <StackPanel Style="{StaticResource MenuStackPanel}">
                     <materialDesign:PackIcon Kind="PencilOutline" Style="{StaticResource MenuIcon}" />
                     <TextBlock Style="{StaticResource MenuText}">
@@ -31,7 +31,7 @@
                     </TextBlock>
                 </StackPanel>
             </Button>
-            <Button Style="{StaticResource MenuButton}">
+            <Button Command="{Binding DeleteCommand}" Style="{StaticResource MenuButton}">
                 <StackPanel Style="{StaticResource MenuStackPanel}">
                     <materialDesign:PackIcon Kind="DeleteOutline" Style="{StaticResource MenuIcon}" />
                     <TextBlock Style="{StaticResource MenuText}">

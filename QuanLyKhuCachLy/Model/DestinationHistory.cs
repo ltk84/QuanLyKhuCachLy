@@ -16,7 +16,6 @@ namespace QuanLyKhuCachLy.Model
     public partial class DestinationHistory : BaseViewModel
     {
         public int id { get; set; }
-
         private System.DateTime _dateArrive;
         public System.DateTime dateArrive
         {
@@ -27,8 +26,8 @@ namespace QuanLyKhuCachLy.Model
             }
         }
 
-        private Nullable<int> _quarantinePersonID;
-        public Nullable<int> quarantinePersonID
+        private int _quarantinePersonID;
+        public int quarantinePersonID
         {
             get => _quarantinePersonID; set
             {
@@ -37,8 +36,8 @@ namespace QuanLyKhuCachLy.Model
             }
         }
 
-        private Nullable<int> _addressID;
-        public Nullable<int> addressID
+        private int _addressID;
+        public int addressID
         {
             get => _addressID; set
             {
@@ -59,10 +58,9 @@ namespace QuanLyKhuCachLy.Model
 
         public virtual Address Address { get; set; }
         public virtual QuarantinePerson QuarantinePerson { get; set; }
-
         public bool CheckValidProperty()
         {
-            if (dateArrive == null || quarantinePersonID == null || addressID == null) return false;
+            if (dateArrive == null) return false;
             return true;
         }
     }

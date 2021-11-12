@@ -43,7 +43,7 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:QuarantinePersonViewModel}">
-                <userControl:ListQuarantinedPerson />
+                <userControl:QuarantinePersonWrapperTab />
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:ReportViewModel}">

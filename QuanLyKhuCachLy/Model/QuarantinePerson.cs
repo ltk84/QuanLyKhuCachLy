@@ -19,7 +19,8 @@ namespace QuanLyKhuCachLy.Model
         public QuarantinePerson()
         {
             this.DestinationHistories = new HashSet<DestinationHistory>();
-            this.InjectionRecords = new HashSet<InjectionRecordViewModel>();
+            this.HealthInformations = new HashSet<HealthInformation>();
+            this.InjectionRecords = new HashSet<InjectionRecord>();
             this.TestingResults = new HashSet<TestingResult>();
         }
 
@@ -95,12 +96,12 @@ namespace QuanLyKhuCachLy.Model
             }
         }
 
-        private string _level;
-        public string level
+        private Nullable<int> _levelID;
+        public Nullable<int> levelID
         {
-            get => _level; set
+            get => _levelID; set
             {
-                _level = value;
+                _levelID = value;
                 OnPropertyChanged();
             }
         }
@@ -114,7 +115,6 @@ namespace QuanLyKhuCachLy.Model
                 OnPropertyChanged();
             }
         }
-
         private System.DateTime _leaveDate;
         public System.DateTime leaveDate
         {
@@ -135,8 +135,8 @@ namespace QuanLyKhuCachLy.Model
             }
         }
 
-        private int _addressID;
-        public int addressID
+        private Nullable<int> _addressID;
+        public Nullable<int> addressID
         {
             get => _addressID; set
             {
@@ -145,18 +145,8 @@ namespace QuanLyKhuCachLy.Model
             }
         }
 
-        private int _healthInformationID;
-        public int healthInformationID
-        {
-            get => _healthInformationID; set
-            {
-                _healthInformationID = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private int _roomID;
-        public int roomID
+        private Nullable<int> _roomID;
+        public Nullable<int> roomID
         {
             get => _roomID; set
             {
@@ -164,26 +154,26 @@ namespace QuanLyKhuCachLy.Model
                 OnPropertyChanged();
             }
         }
+        public Nullable<bool> _completeQuarantine { get; set; }
+        public Nullable<bool> completeQuarantine
+        {
+            get => _completeQuarantine; set
+            {
+                _completeQuarantine = value;
+                OnPropertyChanged();
+            }
+        }
 
         public virtual Address Address { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DestinationHistory> DestinationHistories { get; set; }
-        public virtual HealthInformation HealthInformation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<InjectionRecordViewModel> InjectionRecords { get; set; }
+        public virtual ICollection<HealthInformation> HealthInformations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InjectionRecord> InjectionRecords { get; set; }
         public virtual Severity Severity { get; set; }
         public virtual QuarantineRoom QuarantineRoom { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TestingResult> TestingResults { get; set; }
-
-        public bool CheckValidateProperty()
-        {
-            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(sex) || string.IsNullOrWhiteSpace(citizenID)
-                || string.IsNullOrWhiteSpace(nationality) || string.IsNullOrWhiteSpace(healthInsuranceID) || string.IsNullOrWhiteSpace(phoneNumber)
-                || string.IsNullOrWhiteSpace(level) || arrivedDate < leaveDate || dateOfBirth <= arrivedDate || quarantineDays < 0)
-                return false;
-
-            return true;
-        }
     }
 }

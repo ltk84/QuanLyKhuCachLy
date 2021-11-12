@@ -18,7 +18,7 @@ namespace QuanLyKhuCachLy.Model
         public string name { get; set; }
         public int testCycle { get; set; }
         public int requiredDayToFinish { get; set; }
-        public Nullable<int> addressID { get; set; }
+        public int addressID { get; set; }
         public Nullable<int> managerID { get; set; }
 
         public virtual Address Address { get; set; }
@@ -28,8 +28,6 @@ namespace QuanLyKhuCachLy.Model
         {
             if (string.IsNullOrWhiteSpace(name) || testCycle < 0 || requiredDayToFinish < 0)
                 return false;
-            //if (name.Length > LIMIT)
-            //    return false;
             return true;
         }
     }

@@ -2,6 +2,7 @@
     x:Class="QuanLyKhuCachLy.CustomUserControl.AddRoom"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:convert="clr-namespace:QuanLyKhuCachLy.Converter"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -68,6 +69,7 @@
                         </TextBox.Text>
                     </TextBox>
 
+
                 </StackPanel>
                 <StackPanel Grid.Row="1" Margin="0,15,0,0">
                     <TextBlock
@@ -86,6 +88,9 @@
                         Style="{StaticResource TextInputField}">
                         <TextBox.Text>
                             <Binding Path="RoomCapacity" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.Converter>
+                                    <convert:IntToStringConverter />
+                                </Binding.Converter>
                                 <Binding.ValidationRules>
                                     <vr:RequiredField />
                                     <vr:NumberField Min="1" />
@@ -107,7 +112,6 @@
                         DisplayMemberPath="level"
                         ItemsSource="{Binding RoomLevelList}"
                         Style="{StaticResource ComboBoxField}">
-
                         <ComboBox.SelectedItem>
                             <Binding Path="RoomSelectedSeverity" UpdateSourceTrigger="PropertyChanged" />
                         </ComboBox.SelectedItem>

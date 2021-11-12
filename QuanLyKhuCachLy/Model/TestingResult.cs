@@ -17,7 +17,7 @@ namespace QuanLyKhuCachLy.Model
         public int id { get; set; }
         public System.DateTime dateTesting { get; set; }
         public bool isPositive { get; set; }
-        public Nullable<int> quarantinePersonID { get; set; }
+        public int quarantinePersonID { get; set; }
     
         public virtual QuarantinePerson QuarantinePerson { get; set; }
     }

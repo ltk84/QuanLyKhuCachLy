@@ -414,7 +414,7 @@ namespace QuanLyKhuCachLy.ViewModel
             try
             {
                 // DataProvider.ins.db.Database.SqlQuery<int>("select count(id) from QuarantinePerson where arrivedDate = @p0", date.ToString("MM/dd/yyyy"));
-                count = DataProvider.ins.db.QuarantinePersons.Where(person => person.leaveDate > date && person.arrivedDate <= date && person.level == severity.level).Count();
+                count = DataProvider.ins.db.QuarantinePersons.Where(person => person.leaveDate > date && person.arrivedDate <= date && person.levelID == severity.id).Count();
             }
             catch
             {

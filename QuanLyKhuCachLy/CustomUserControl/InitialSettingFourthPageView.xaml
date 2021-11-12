@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utility="clr-namespace:QuanLyKhuCachLy.Utility"
     xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
     d:DesignHeight="740"
     d:DesignWidth="1225"
@@ -81,6 +82,7 @@
                     </TextBlock>
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập tên chức vụ"
+                        utility:ProtocolSettingsLayout.MVVMHasError="{Binding MJobTitleFieldHasError}"
                         MaxLength="30"
                         Style="{StaticResource TextInputField}">
                         <TextBox.Text>
@@ -106,6 +108,7 @@
                     </TextBlock>
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập tên phòng ban"
+                        utility:ProtocolSettingsLayout.MVVMHasError="{Binding MDepartmentFieldHasError}"
                         MaxLength="30"
                         Style="{StaticResource TextInputField}">
                         <TextBox.Text>
@@ -157,7 +160,10 @@
                         Foreground="#FF434A54">
                         Tỉnh/Thành phố (*)
                     </TextBlock>
-                    <ComboBox ItemsSource="{Binding ProvinceList}" Style="{StaticResource ComboBoxField}">
+                    <ComboBox
+                        utility:ProtocolSettingsLayout.MVVMHasError="{Binding MProvinceFieldHasError}"
+                        ItemsSource="{Binding ProvinceList}"
+                        Style="{StaticResource ComboBoxField}">
                         <ComboBox.SelectedItem>
                             <Binding Path="ManagerSelectedProvince" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
@@ -179,7 +185,10 @@
                         Foreground="#FF434A54">
                         Quận/Huyện (*)
                     </TextBlock>
-                    <ComboBox ItemsSource="{Binding DistrictList}" Style="{StaticResource ComboBoxField}">
+                    <ComboBox
+                        utility:ProtocolSettingsLayout.MVVMHasError="{Binding MDistrictFieldHasError}"
+                        ItemsSource="{Binding DistrictList}"
+                        Style="{StaticResource ComboBoxField}">
                         <ComboBox.SelectedItem>
                             <Binding Path="ManagerSelectedDistrict" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
@@ -201,7 +210,10 @@
                         Foreground="#FF434A54">
                         Phường/Xã (*)
                     </TextBlock>
-                    <ComboBox ItemsSource="{Binding WardList}" Style="{StaticResource ComboBoxField}">
+                    <ComboBox
+                        utility:ProtocolSettingsLayout.MVVMHasError="{Binding MWardFieldHasError}"
+                        ItemsSource="{Binding WardList}"
+                        Style="{StaticResource ComboBoxField}">
                         <ComboBox.SelectedItem>
                             <Binding Path="ManagerSelectedWard" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
@@ -242,15 +254,8 @@
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập số địa chỉ"
                         MaxLength="20"
-                        Style="{StaticResource TextInputField}">
-                        <TextBox.Text>
-                            <Binding Path="ManagerApartmentNumber" UpdateSourceTrigger="PropertyChanged">
-                                <Binding.ValidationRules>
-                                    <vr:RequiredField />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
+                        Style="{StaticResource TextInputField}"
+                        Text="{Binding ManagerApartmentNumber, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
             </Grid>
         </Grid>

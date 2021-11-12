@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utility="clr-namespace:QuanLyKhuCachLy.Utility"
     xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -65,10 +66,13 @@
                     Tỉnh/Thành phố (*)
                 </TextBlock>
                 <ComboBox
-                    Height="40"
-                    Padding="10,8,8,10"
+                    utility:ProtocolSettingsLayout.MVVMHasError="{Binding ProvinceFieldHasError}"
                     ItemsSource="{Binding ProvinceList}"
-                    Style="{StaticResource ComboBoxField}" />
+                    Style="{StaticResource ComboBoxField}">
+                    <ComboBox.SelectedItem>
+                        <Binding Path="QPSelectedProvince" UpdateSourceTrigger="PropertyChanged" />
+                    </ComboBox.SelectedItem>
+                </ComboBox>
             </StackPanel>
             <StackPanel
                 Grid.Row="1"
@@ -83,10 +87,13 @@
                     Quận/Huyện (*)
                 </TextBlock>
                 <ComboBox
-                    Height="40"
-                    Padding="10,8,8,10"
+                    utility:ProtocolSettingsLayout.MVVMHasError="{Binding DistrictFieldHasError}"
                     ItemsSource="{Binding DistrictList}"
-                    Style="{StaticResource ComboBoxField}" />
+                    Style="{StaticResource ComboBoxField}">
+                    <ComboBox.SelectedItem>
+                        <Binding Path="QPSelectedDistrict" UpdateSourceTrigger="PropertyChanged" />
+                    </ComboBox.SelectedItem>
+                </ComboBox>
             </StackPanel>
             <StackPanel
                 Grid.Row="1"
@@ -101,10 +108,13 @@
                     Phường/Xã (*)
                 </TextBlock>
                 <ComboBox
-                    Height="40"
-                    Padding="10,8,8,10"
+                    utility:ProtocolSettingsLayout.MVVMHasError="{Binding WardFieldHasError}"
                     ItemsSource="{Binding WardList}"
-                    Style="{StaticResource ComboBoxField}" />
+                    Style="{StaticResource ComboBoxField}">
+                    <ComboBox.SelectedItem>
+                        <Binding Path="QPSelectedWard" UpdateSourceTrigger="PropertyChanged" />
+                    </ComboBox.SelectedItem>
+                </ComboBox>
             </StackPanel>
             <StackPanel
                 Grid.Row="2"
@@ -118,10 +128,10 @@
                     Đường
                 </TextBlock>
                 <TextBox
-                    Padding="10,8,8,10"
                     materialDesign:HintAssist.Hint="Nhập tên đường"
                     MaxLength="20"
-                    Style="{StaticResource TextInputField}" />
+                    Style="{StaticResource TextInputField}"
+                    Text="{Binding QPStreetName}" />
             </StackPanel>
             <StackPanel
                 Grid.Row="2"
@@ -135,11 +145,10 @@
                     Số (*)
                 </TextBlock>
                 <TextBox
-                    Height="40"
-                    Padding="10,8,8,10"
                     materialDesign:HintAssist.Hint="Nhập số địa chỉ"
                     MaxLength="20"
-                    Style="{StaticResource TextInputField}" />
+                    Style="{StaticResource TextInputField}"
+                    Text="{Binding QPApartmentNumber, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
         </Grid>
         <Grid Margin="30,20,30,0">
@@ -173,7 +182,7 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Margin="15">
-                <CheckBox>
+                <CheckBox IsChecked="{Binding IsFever}">
                     <TextBlock
                         Margin="0,0,0,0"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
@@ -187,7 +196,7 @@
                 Grid.Row="2"
                 Grid.Column="0"
                 Margin="15,5,15,0">
-                <CheckBox>
+                <CheckBox IsChecked="{Binding IsTired}">
                     <TextBlock
                         Margin="0,0,0,0"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
@@ -201,7 +210,7 @@
                 Grid.Row="1"
                 Grid.Column="1"
                 Margin="15">
-                <CheckBox>
+                <CheckBox IsChecked="{Binding IsCough}">
                     <TextBlock
                         Margin="0,0,0,0"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
@@ -215,7 +224,7 @@
                 Grid.Row="2"
                 Grid.Column="1"
                 Margin="15,5,15,0">
-                <CheckBox>
+                <CheckBox IsChecked="{Binding IsShortnessOfBreath}">
                     <TextBlock
                         Margin="0,0,0,0"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
@@ -229,7 +238,7 @@
                 Grid.Row="1"
                 Grid.Column="2"
                 Margin="15">
-                <CheckBox>
+                <CheckBox IsChecked="{Binding IsSoreThroat}">
                     <TextBlock
                         Margin="0,0,0,0"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
@@ -243,7 +252,7 @@
                 Grid.Row="2"
                 Grid.Column="2"
                 Margin="15,5,15,0">
-                <CheckBox>
+                <CheckBox IsChecked="{Binding IsOtherSymptoms}">
                     <TextBlock
                         Margin="0,0,0,0"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
@@ -257,7 +266,7 @@
                 Grid.Row="1"
                 Grid.Column="3"
                 Margin="15">
-                <CheckBox>
+                <CheckBox IsChecked="{Binding IsLossOfTatse}">
                     <TextBlock
                         Margin="0,0,0,0"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
@@ -271,7 +280,7 @@
                 Grid.Row="2"
                 Grid.Column="3"
                 Margin="15,5,15,0">
-                <CheckBox>
+                <CheckBox IsChecked="{Binding IsDisease}">
                     <TextBlock
                         Margin="0,0,0,0"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"

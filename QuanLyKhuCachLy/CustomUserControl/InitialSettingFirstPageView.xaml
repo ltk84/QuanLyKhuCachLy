@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utility="clr-namespace:QuanLyKhuCachLy.Utility"
     xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
     d:DesignHeight="740"
     d:DesignWidth="1225"
@@ -54,6 +55,7 @@
                     </TextBlock>
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập tên khu cách ly"
+                        utility:ProtocolSettingsLayout.MVVMHasError="{Binding QANameFieldHasError}"
                         MaxLength="30"
                         Style="{StaticResource TextInputField}">
                         <TextBox.Text>
@@ -121,7 +123,10 @@
                         Foreground="#FF434A54">
                         Tỉnh/Thành phố (*)
                     </TextBlock>
-                    <ComboBox ItemsSource="{Binding ProvinceList}" Style="{StaticResource ComboBoxField}">
+                    <ComboBox
+                        utility:ProtocolSettingsLayout.MVVMHasError="{Binding QAProvinceFieldHasError}"
+                        ItemsSource="{Binding ProvinceList}"
+                        Style="{StaticResource ComboBoxField}">
                         <ComboBox.SelectedItem>
                             <Binding Path="QASelectedProvince" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
@@ -143,7 +148,10 @@
                         Foreground="#FF434A54">
                         Quận/Huyện (*)
                     </TextBlock>
-                    <ComboBox ItemsSource="{Binding DistrictList}" Style="{StaticResource ComboBoxField}">
+                    <ComboBox
+                        utility:ProtocolSettingsLayout.MVVMHasError="{Binding QADistrictFieldHasError}"
+                        ItemsSource="{Binding DistrictList}"
+                        Style="{StaticResource ComboBoxField}">
                         <ComboBox.SelectedItem>
                             <Binding Path="QASelectedDistrict" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
@@ -165,7 +173,10 @@
                         Foreground="#FF434A54">
                         Phường/Xã (*)
                     </TextBlock>
-                    <ComboBox ItemsSource="{Binding WardList}" Style="{StaticResource ComboBoxField}">
+                    <ComboBox
+                        utility:ProtocolSettingsLayout.MVVMHasError="{Binding QAWardFieldHasError}"
+                        ItemsSource="{Binding WardList}"
+                        Style="{StaticResource ComboBoxField}">
                         <ComboBox.SelectedItem>
                             <Binding Path="QASelectedWard" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
@@ -209,9 +220,9 @@
                         Style="{StaticResource TextInputField}">
                         <TextBox.Text>
                             <Binding Path="QAApartmentNumber" UpdateSourceTrigger="PropertyChanged">
-                                <Binding.ValidationRules>
+                                <!--<Binding.ValidationRules>
                                     <vr:RequiredField />
-                                </Binding.ValidationRules>
+                                </Binding.ValidationRules>-->
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
@@ -256,6 +267,7 @@
                     </TextBlock>
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập số ngày"
+                        utility:ProtocolSettingsLayout.MVVMHasError="{Binding QATestCycleFieldHasError}"
                         MaxLength="9"
                         PreviewTextInput="TextBox_PreviewTextInput_1"
                         Style="{StaticResource TextInputField}">
@@ -282,6 +294,7 @@
                     </TextBlock>
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập số ngày"
+                        utility:ProtocolSettingsLayout.MVVMHasError="{Binding QATestCycleFieldHasError}"
                         MaxLength="9"
                         PreviewTextInput="TextBox_PreviewTextInput_1"
                         Style="{StaticResource TextInputField}">

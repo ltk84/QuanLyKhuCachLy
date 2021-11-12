@@ -1,6 +1,10 @@
-﻿using QuanLyKhuCachLy.Model;
+﻿using QuanLyKhuCachLy.CustomUserControl;
+using QuanLyKhuCachLy.Model;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -17,12 +21,40 @@ namespace QuanLyKhuCachLy.ViewModel
         private Visibility _TabInformation1;
         private Visibility _TabInformation2;
         private Visibility _Tab3;
+        private Visibility _TabEdit1;
+        private Visibility _TabEdit2;
+        private Visibility _TabEdit3;
         private Visibility _ButtonReturn;
+        private Visibility _ButtonEditReturn;
+        private Visibility _TabList;
+        private Visibility _TabInformation;
+        public Visibility TabList
+        {
+            get => _TabList; set
+            {
+                _TabList = value; OnPropertyChanged();
+            }
+        }
+        public Visibility TabInformation
+        {
+            get => _TabInformation; set
+            {
+                _TabInformation = value; OnPropertyChanged();
+            }
+        }
         public Visibility ButtonReturn
         {
             get => _ButtonReturn; set
             {
                 _ButtonReturn = value; OnPropertyChanged();
+            }
+        }
+
+        public Visibility ButtonEditReturn
+        {
+            get => _ButtonEditReturn; set
+            {
+                _ButtonEditReturn = value; OnPropertyChanged();
             }
         }
         public Visibility TabInformation1
@@ -61,6 +93,28 @@ namespace QuanLyKhuCachLy.ViewModel
                 _Tab3 = value; OnPropertyChanged();
             }
         }
+        public Visibility TabEdit1
+        {
+            get => _TabEdit1; set
+            {
+                _TabEdit1 = value; OnPropertyChanged();
+            }
+        }
+        public Visibility TabEdit2
+        {
+            get => _TabEdit2; set
+            {
+                _TabEdit2 = value; OnPropertyChanged();
+            }
+        }
+
+        public Visibility TabEdit3
+        {
+            get => _TabEdit3; set
+            {
+                _TabEdit3 = value; OnPropertyChanged();
+            }
+        }
         public int TabIndex { get; set; }
 
         private String _TabPostion;
@@ -71,6 +125,17 @@ namespace QuanLyKhuCachLy.ViewModel
                 _TabPostion = value; OnPropertyChanged();
             }
         }
+
+        public int TabEditIndex { get; set; }
+        private String _TabEditPostion;
+        public String TabEditPosition
+        {
+            get => _TabEditPostion; set
+            {
+                _TabEditPostion = value; OnPropertyChanged();
+            }
+        }
+
 
         public int TabIndexInformation { get; set; }
 
@@ -165,8 +230,8 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
-        private string _QPSelectedLevel;
-        public string QPSelectedLevel
+        private Severity _QPSelectedLevel;
+        public Severity QPSelectedLevel
         {
             get => _QPSelectedLevel; set
             {
@@ -225,12 +290,12 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
-        private int _QPRoomID;
-        public int roomID
+        private Model.QuarantineRoom _Room;
+        public Model.QuarantineRoom Room
         {
-            get => _QPRoomID; set
+            get => _Room; set
             {
-                _QPRoomID = value;
+                _Room = value;
                 OnPropertyChanged();
             }
         }
@@ -247,6 +312,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 if (_SelectedItem != null)
                 {
                     SetSelectedItemToProperty();
+                    InjectionRecordViewModel.ins.IRQuarantinePersonID = SelectedItem.id;
+                    DestinationHistoryViewModel = new DestinationHistoryViewModel(currentPersonID: SelectedItem.id);
                 }
             }
         }
@@ -266,6 +333,9 @@ namespace QuanLyKhuCachLy.ViewModel
 
         private string _QPSelectedDistrict;
         public string QPSelectedDistrict { get => _QPSelectedDistrict; set { _QPSelectedDistrict = value; OnPropertyChanged(); } }
+
+        private string _DisplayAddress;
+        public string DisplayAddress { get => _DisplayAddress; set { _DisplayAddress = value; OnPropertyChanged(); } }
         #endregion
 
         #region health information
@@ -349,11 +419,109 @@ namespace QuanLyKhuCachLy.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        private string _DisplayHealthInfor;
+        public string DisplayHealthInfor
+        {
+            get => _DisplayHealthInfor; set
+            {
+                _DisplayHealthInfor = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         #region child view model
+
         private InjectionRecordViewModel _InjectionRecordViewModel;
+        public InjectionRecordViewModel InjectionRecordViewModel
+        {
+            get => _InjectionRecordViewModel; set
+            {
+                _InjectionRecordViewModel = value;
+                OnPropertyChanged();
+            }
+        }
+
         private DestinationHistoryViewModel _DestinationHistoryViewModel;
+        public DestinationHistoryViewModel DestinationHistoryViewModel
+        {
+            get => _DestinationHistoryViewModel; set
+            {
+                _DestinationHistoryViewModel = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region validation
+        private bool _NameFieldHasError;
+        public bool NameFieldHasError
+        {
+            get => _NameFieldHasError; set
+            {
+                _NameFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _SexFieldHasError;
+        public bool SexFieldHasError
+        {
+            get => _SexFieldHasError; set
+            {
+                _SexFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _NationalityFieldHasError;
+        public bool NationalityFieldHasError
+        {
+            get => _NationalityFieldHasError; set
+            {
+                _NationalityFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _ProvinceFieldHasError;
+        public bool ProvinceFieldHasError
+        {
+            get => _ProvinceFieldHasError; set
+            {
+                _ProvinceFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _DistrictFieldHasError;
+        public bool DistrictFieldHasError
+        {
+            get => _DistrictFieldHasError; set
+            {
+                _DistrictFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _WardFieldHasError;
+        public bool WardFieldHasError
+        {
+            get => _WardFieldHasError; set
+            {
+                _WardFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+
+        #endregion
+
+        #region quarantine area information
+        private QuarantineArea _QAInformation;
+        public QuarantineArea QAInformation
+        {
+            get => _QAInformation; set
+            {
+                _QAInformation = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
 
@@ -428,6 +596,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 _WardList = value; OnPropertyChanged();
             }
         }
+
+
         #endregion
 
         #region command
@@ -436,9 +606,11 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand DeleteCommand { get; set; }
         public ICommand CancelCommand { get; set; }
 
-        public ICommand ToAddCommand { get; set; }
+        public ICommand ToAddManualCommand { get; set; }
+        public ICommand ToAddExcelCommand { get; set; }
         public ICommand ToEditCommand { get; set; }
-        public ICommand ToDeleteCommand { get; set; }
+        public ICommand ToViewCommand { get; set; }
+        public ICommand ToMainCommand { get; set; }
 
         public ICommand NextTabCommand { get; set; }
         public ICommand PreviousTabCommand { get; set; }
@@ -446,19 +618,29 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand NextTabCommandInformation { get; set; }
         public ICommand PreviousTabCommandInformation { get; set; }
 
+        public ICommand NextTabEditCommand { get; set; }
+        public ICommand PreviousTabEditCommand { get; set; }
         #endregion
         public QuarantinePersonViewModel()
         {
+            TabList = Visibility.Visible;
+            TabInformation = Visibility.Hidden;
             Tab1 = Visibility.Visible;
             Tab2 = Visibility.Hidden;
             Tab3 = Visibility.Hidden;
+            TabEdit1 = Visibility.Visible;
+            TabEdit2 = Visibility.Hidden;
+            TabEdit3 = Visibility.Hidden;
             TabInformation1 = Visibility.Visible;
             TabInformation2 = Visibility.Hidden;
             TabIndexInformation = 1;
             TabPositionInformation = $"{TabIndexInformation}/2";
             ButtonReturn = Visibility.Hidden;
+            ButtonEditReturn = Visibility.Hidden;
             TabIndex = 1;
             TabPosition = $"{TabIndex}/3";
+            TabEditIndex = 1;
+            TabEditPosition = $"{TabEditIndex}/3";
 
             NextTabCommandInformation = new RelayCommand<Window>((p) =>
             {
@@ -478,7 +660,24 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 HandleChangeTabInforamtion(TabIndexInformation, "previous", p);
             });
+            NextTabEditCommand = new RelayCommand<Window>((p) =>
+            {
 
+                if (TabEditIndex < 3) return true;
+                return false;
+            }, (p) =>
+            {
+                HandleChangeTabEdit(TabIndex, "next", p);
+            });
+
+            PreviousTabEditCommand = new RelayCommand<Window>((p) =>
+            {
+                if (TabEditIndex > 1) return true;
+                return false;
+            }, (p) =>
+            {
+                HandleChangeTabEdit(TabIndex, "previous", p);
+            });
             NextTabCommand = new RelayCommand<Window>((p) =>
             {
 
@@ -500,8 +699,11 @@ namespace QuanLyKhuCachLy.ViewModel
             QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
             SeverityList = new ObservableCollection<Severity>(DataProvider.ins.db.Severities);
 
-            _InjectionRecordViewModel = new InjectionRecordViewModel(currentPersonID: QPID);
-            _DestinationHistoryViewModel = new DestinationHistoryViewModel(currentPersonID: QPID);
+            QAInformation = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
+
+            //InjectionRecordViewModel = new InjectionRecordViewModel();
+            InjectionRecordViewModel = InjectionRecordViewModel.ins;
+            DestinationHistoryViewModel = new DestinationHistoryViewModel();
 
             NationalityList = new ObservableCollection<string>() {
                 "VietNam", "Ameriden", "Phap", "Dut", "Em"
@@ -523,7 +725,24 @@ namespace QuanLyKhuCachLy.ViewModel
                 "Nam", "Nữ"
             };
 
-            ToAddCommand = new RelayCommand<Window>((p) =>
+            ToAddManualCommand = new RelayCommand<Window>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                ClearData();
+                AddQuarantinedPerson addQuarantinePerson = new AddQuarantinedPerson();
+                addQuarantinePerson.ShowDialog();
+                ClearData();
+
+                TabIndex = 1;
+                Tab1 = Visibility.Visible;
+                Tab2 = Visibility.Hidden;
+                Tab3 = Visibility.Hidden;
+                TabPosition = $"{TabIndex}/3";
+            });
+
+            ToAddExcelCommand = new RelayCommand<Window>((p) =>
             {
                 return true;
             }, (p) =>
@@ -536,74 +755,65 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
+                SetSelectedItemToProperty();
+                EditQuarantinedPersonInformation editPerson = new EditQuarantinedPersonInformation();
+                editPerson.ShowDialog();
+                TabEditIndex = 1;
+                TabEdit1 = Visibility.Visible;
+                TabEdit2 = Visibility.Hidden;
+                TabEdit3 = Visibility.Hidden;
+                TabEditPosition = $"{TabEditIndex}/3";
+            });
 
+            ToViewCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                TabInformation = Visibility.Visible;
+                TabList = Visibility.Hidden;
+            });
+
+            ToMainCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                TabInformation = Visibility.Hidden;
+                TabList = Visibility.Visible;
             });
 
 
-            AddCommand = new RelayCommand<object>((p) =>
+            AddCommand = new RelayCommand<Window>((p) =>
             {
-                Address PersonAddress = new Address()
+                if (!NameFieldHasError && !NationalityFieldHasError && !SexFieldHasError && !ProvinceFieldHasError && !DistrictFieldHasError && !WardFieldHasError)
                 {
-                    apartmentNumber = QPApartmentNumber,
-                    streetName = QPStreetName,
-                    ward = QPSelectedWard,
-                    district = QPSelectedDistrict,
-                    province = QPSelectedProvince,
-                };
-
-                // Tạo người cách ly
-                QuarantinePerson Person = new QuarantinePerson()
-                {
-                    name = QPName,
-                    dateOfBirth = QPDateOfBirth,
-                    sex = QPSelectedSex,
-                    citizenID = QPCitizenID,
-                    nationality = QPSelectedNationality,
-                    phoneNumber = QPPhoneNumber,
-                    healthInsuranceID = QPHealthInsuranceID
-                };
-
-                if (Person.CheckValidateProperty() && PersonAddress.CheckValidateProperty())
                     return true;
+                }
                 return false;
             }, (p) =>
             {
                 AddQuarantinePerson();
+                p.Close();
+                TabIndex = 1;
             });
 
-            EditCommand = new RelayCommand<object>((p) =>
+            EditCommand = new RelayCommand<Window>((p) =>
             {
-                Address PersonAddress = new Address()
+                if (!NameFieldHasError && !NationalityFieldHasError && !SexFieldHasError && !ProvinceFieldHasError && !DistrictFieldHasError && !WardFieldHasError)
                 {
-                    apartmentNumber = QPApartmentNumber,
-                    streetName = QPStreetName,
-                    ward = QPSelectedWard,
-                    district = QPSelectedDistrict,
-                    province = QPSelectedProvince,
-                };
-
-                // Tạo người cách ly
-                QuarantinePerson Person = new QuarantinePerson()
-                {
-                    name = QPName,
-                    dateOfBirth = QPDateOfBirth,
-                    sex = QPSelectedSex,
-                    citizenID = QPCitizenID,
-                    nationality = QPSelectedNationality,
-                    phoneNumber = QPPhoneNumber,
-                    healthInsuranceID = QPHealthInsuranceID
-                };
-
-                if (Person.CheckValidateProperty() && PersonAddress.CheckValidateProperty())
                     return true;
+                }
                 return false;
 
             }, (p) =>
             {
                 EditQuarantinePerson();
+                p.Close();
+                TabEditIndex = 1;
             });
 
-            DeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            DeleteCommand = new RelayCommand<object>((p) => { if (SelectedItem != null) return true; return false; }, (p) =>
             {
                 DeleteQuarantinePerson();
             });
@@ -615,139 +825,398 @@ namespace QuanLyKhuCachLy.ViewModel
         }
 
         #region method
+        void InitDisplayAddress(Address PersonAddress)
+        {
+            if (PersonAddress == null) return;
+            List<string> list = new List<string>()
+            {
+                PersonAddress.apartmentNumber,
+                PersonAddress.streetName,
+                PersonAddress.ward,
+                PersonAddress.district,
+                PersonAddress.province
+
+            };
+
+            DisplayAddress = string.Empty;
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (!string.IsNullOrWhiteSpace(list[i]))
+                {
+                    DisplayAddress += list[i];
+                }
+                if (i != list.Count - 1)
+                {
+                    if (i != 0)
+                        DisplayAddress += ", ";
+                    else DisplayAddress += " ";
+                }
+            }
+        }
+
+        void InitDisplayHealthInformation(HealthInformation HF)
+        {
+            DisplayHealthInfor = string.Empty;
+
+            if (HF == null) return;
+            if (HF.isCough) DisplayHealthInfor += "Ho, ";
+            if (HF.isDisease) DisplayHealthInfor += "Có bệnh nền, ";
+            if (HF.isFever) DisplayHealthInfor += "Sốt, ";
+            if (HF.isLossOfTatse) DisplayHealthInfor += "Mất mùi vị, ";
+            if (HF.isShortnessOfBreath) DisplayHealthInfor += "Khó thở, ";
+            if (HF.isSoreThroat) DisplayHealthInfor += "Đau họng, ";
+            if (HF.isTired) DisplayHealthInfor += "Mệt mỏi, ";
+            if (HF.isOtherSymptoms) DisplayHealthInfor += "Triệu chứng khác";
+            else
+            {
+                if (DisplayHealthInfor != "")
+                {
+                    DisplayHealthInfor = DisplayHealthInfor.Remove(DisplayHealthInfor.LastIndexOf(","));
+                }
+            }
+        }
+
         void SetSelectedItemToProperty()
         {
-            QPName = SelectedItem.name;
-            QPDateOfBirth = SelectedItem.dateOfBirth;
-            QPSelectedNationality = SelectedItem.nationality;
+            var Person = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+            var PersonAddress = DataProvider.ins.db.Addresses.Where(x => x.id == Person.addressID).FirstOrDefault();
+            var HealthInfor = DataProvider.ins.db.HealthInformations.Where(x => x.quarantinePersonID == Person.id).FirstOrDefault();
+            var PersonSeverity = DataProvider.ins.db.Severities.Where(x => x.id == Person.levelID).FirstOrDefault();
+            var PersonRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == Person.roomID).FirstOrDefault();
+
+            if (PersonAddress != null)
+            {
+                QPApartmentNumber = PersonAddress.apartmentNumber;
+                QPStreetName = PersonAddress.streetName;
+                QPSelectedWard = PersonAddress.ward;
+                QPSelectedDistrict = PersonAddress.district;
+                QPSelectedProvince = PersonAddress.province;
+            }
+
+            if (HealthInfor != null)
+            {
+                IsCough = HealthInfor.isCough;
+                IsDisease = HealthInfor.isDisease;
+                IsFever = HealthInfor.isFever;
+                IsLossOfTatse = HealthInfor.isLossOfTatse;
+                IsOtherSymptoms = HealthInfor.isOtherSymptoms;
+                IsShortnessOfBreath = HealthInfor.isShortnessOfBreath;
+                IsSoreThroat = HealthInfor.isSoreThroat;
+                IsTired = HealthInfor.isTired;
+            }
+
+            QPName = Person.name;
+            QPSelectedSex = Person.sex;
+            QPDateOfBirth = Person.dateOfBirth;
+            QPCitizenID = Person.citizenID;
+            QPSelectedNationality = Person.nationality;
+            QPPhoneNumber = Person.phoneNumber;
+            QPHealthInsuranceID = Person.healthInsuranceID;
+            QPSelectedLevel = PersonSeverity;
+
+            SelectedItem.name = Person.name;
+            SelectedItem.sex = Person.sex;
+            SelectedItem.dateOfBirth = Person.dateOfBirth;
+            SelectedItem.citizenID = Person.citizenID;
+            SelectedItem.nationality = Person.nationality;
+            SelectedItem.phoneNumber = Person.phoneNumber;
+            SelectedItem.healthInsuranceID = Person.healthInsuranceID;
+            if (PersonSeverity != null) SelectedItem.levelID = PersonSeverity.id;
+            SelectedItem.arrivedDate = Person.arrivedDate;
+            SelectedItem.leaveDate = Person.leaveDate;
+            Room = PersonRoom;
+            InitDisplayAddress(PersonAddress);
+            InitDisplayHealthInformation(HealthInfor);
+        }
+
+        void ClearData()
+        {
+            QPName = string.Empty;
+            QPSelectedSex = string.Empty;
+            QPDateOfBirth = DateTime.MinValue;
+            QPCitizenID = string.Empty;
+            QPSelectedNationality = string.Empty;
+            QPPhoneNumber = string.Empty;
+            QPHealthInsuranceID = string.Empty;
+            QPSelectedProvince = string.Empty;
+            QPSelectedDistrict = string.Empty;
+            QPSelectedWard = string.Empty;
+            QPStreetName = string.Empty;
+            QPApartmentNumber = string.Empty;
+            IsCough = false;
+            IsDisease = false;
+            IsFever = false;
+            IsLossOfTatse = false;
+            IsOtherSymptoms = false;
+            IsShortnessOfBreath = false;
+            IsSoreThroat = false;
+            IsTired = false;
+            QPSelectedLevel = null;
+
+            InjectionRecordViewModel.ins.InjectionRecordList.Clear();
         }
 
         void AddQuarantinePerson()
         {
-            // Tạo địa chỉ hiện ở của người cách ly
-            Address PersonAddress = new Address()
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
             {
-                apartmentNumber = QPApartmentNumber,
-                streetName = QPStreetName,
-                ward = QPSelectedWard,
-                district = QPSelectedDistrict,
-                province = QPSelectedProvince,
-            };
+                try
+                {
+                    // Tạo địa chỉ hiện ở của người cách ly
+                    Address PersonAddress = new Address()
+                    {
+                        apartmentNumber = QPApartmentNumber,
+                        streetName = QPStreetName,
+                        ward = QPSelectedWard,
+                        district = QPSelectedDistrict,
+                        province = QPSelectedProvince,
+                    };
 
-            DataProvider.ins.db.Addresses.Add(PersonAddress);
-            DataProvider.ins.db.SaveChanges();
+                    if (PersonAddress.CheckValidateProperty())
+                    {
+                        DataProvider.ins.db.Addresses.Add(PersonAddress);
+                        DataProvider.ins.db.SaveChanges();
+                    }
 
-            // Tạo thông tin sức khỏe
-            HealthInformation PersonHealthInformation = new HealthInformation()
-            {
-                isCough = IsCough,
-                isDisease = IsDisease,
-                isFever = IsFever,
-                isLossOfTatse = IsLossOfTatse,
-                isTired = IsTired,
-                isOtherSymptoms = IsOtherSymptoms,
-                isShortnessOfBreath = IsShortnessOfBreath,
-                isSoreThroat = IsSoreThroat
-            };
+                    // Tạo thông tin sức khỏe
 
-            DataProvider.ins.db.HealthInformations.Add(PersonHealthInformation);
-            DataProvider.ins.db.SaveChanges();
 
-            // Tạo người cách ly
-            QuarantinePerson Person = new QuarantinePerson()
-            {
-                addressID = PersonAddress.id,
-                healthInformationID = PersonHealthInformation.id,
-                name = QPName,
-                dateOfBirth = QPDateOfBirth,
-                sex = QPSelectedSex,
-                citizenID = QPCitizenID,
-                nationality = QPSelectedNationality,
-                phoneNumber = QPPhoneNumber,
-                healthInsuranceID = QPHealthInsuranceID
-            };
+                    // Tạo người cách ly
+                    QuarantinePerson Person = new QuarantinePerson()
+                    {
+                        name = QPName,
+                        dateOfBirth = QPDateOfBirth,
+                        sex = QPSelectedSex,
+                        citizenID = QPCitizenID,
+                        nationality = QPSelectedNationality,
+                        phoneNumber = QPPhoneNumber,
+                        healthInsuranceID = QPHealthInsuranceID,
 
-            DataProvider.ins.db.QuarantinePersons.Add(Person);
-            DataProvider.ins.db.SaveChanges();
+                        quarantineDays = 0,
+                        arrivedDate = DateTime.Today,
+                        leaveDate = DateTime.Today.AddDays(QAInformation.requiredDayToFinish),
+                    };
+
+                    if (QPSelectedLevel != null) Person.levelID = QPSelectedLevel.id;
+                    if (PersonAddress.CheckValidateProperty()) Person.addressID = PersonAddress.id;
+
+                    DataProvider.ins.db.QuarantinePersons.Add(Person);
+                    DataProvider.ins.db.SaveChanges();
+
+                    QuarantinePersonList.Add(Person);
+
+                    HealthInformation PersonHealthInformation = new HealthInformation()
+                    {
+                        isCough = IsCough,
+                        isDisease = IsDisease,
+                        isFever = IsFever,
+                        isLossOfTatse = IsLossOfTatse,
+                        isTired = IsTired,
+                        isOtherSymptoms = IsOtherSymptoms,
+                        isShortnessOfBreath = IsShortnessOfBreath,
+                        isSoreThroat = IsSoreThroat,
+                        quarantinePersonID = Person.id,
+                    };
+
+                    DataProvider.ins.db.HealthInformations.Add(PersonHealthInformation);
+                    DataProvider.ins.db.SaveChanges();
+
+                    InjectionRecordViewModel.ins.ApplyInjectionRecordToDB(Person.id, "add");
+
+                    transaction.Commit();
+
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+
+            }
 
         }
         void EditQuarantinePerson()
         {
-            QuarantinePerson Person = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    QuarantinePerson Person = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+                    if (Person == null) return;
 
-            // Tạo địa chỉ hiện ở của người cách ly
-            Address PersonAddress = DataProvider.ins.db.Addresses.Where(x => x.id == Person.addressID).FirstOrDefault();
+                    // Tạo địa chỉ hiện ở của người cách ly
+                    Address PersonAddress = DataProvider.ins.db.Addresses.Where(x => x.id == Person.addressID).FirstOrDefault();
 
-            PersonAddress.apartmentNumber = QPApartmentNumber;
-            PersonAddress.streetName = QPStreetName;
-            PersonAddress.ward = QPSelectedWard;
-            PersonAddress.district = QPSelectedDistrict;
-            PersonAddress.province = QPSelectedProvince;
+                    if (PersonAddress != null)
+                    {
+                        PersonAddress.apartmentNumber = QPApartmentNumber;
+                        PersonAddress.streetName = QPStreetName;
+                        PersonAddress.ward = QPSelectedWard;
+                        PersonAddress.district = QPSelectedDistrict;
+                        PersonAddress.province = QPSelectedProvince;
 
-            DataProvider.ins.db.SaveChanges();
+                        DataProvider.ins.db.SaveChanges();
+                    }
 
-            // Tạo thông tin sức khỏe
-            HealthInformation PersonHealthInformation = DataProvider.ins.db.HealthInformations.Where(x => x.id == Person.healthInformationID).FirstOrDefault();
+                    // Tạo thông tin sức khỏe
+                    HealthInformation PersonHealthInformation = DataProvider.ins.db.HealthInformations.Where(x => x.quarantinePersonID == Person.id).FirstOrDefault();
 
-            PersonHealthInformation.isCough = IsCough;
-            PersonHealthInformation.isDisease = IsDisease;
-            PersonHealthInformation.isFever = IsFever;
-            PersonHealthInformation.isLossOfTatse = IsLossOfTatse;
-            PersonHealthInformation.isTired = IsTired;
-            PersonHealthInformation.isOtherSymptoms = IsOtherSymptoms;
-            PersonHealthInformation.isShortnessOfBreath = IsShortnessOfBreath;
-            PersonHealthInformation.isSoreThroat = IsSoreThroat;
+                    if (PersonHealthInformation != null)
+                    {
+                        PersonHealthInformation.isCough = IsCough;
+                        PersonHealthInformation.isDisease = IsDisease;
+                        PersonHealthInformation.isFever = IsFever;
+                        PersonHealthInformation.isLossOfTatse = IsLossOfTatse;
+                        PersonHealthInformation.isTired = IsTired;
+                        PersonHealthInformation.isOtherSymptoms = IsOtherSymptoms;
+                        PersonHealthInformation.isShortnessOfBreath = IsShortnessOfBreath;
+                        PersonHealthInformation.isSoreThroat = IsSoreThroat;
 
-            DataProvider.ins.db.SaveChanges();
+                        DataProvider.ins.db.SaveChanges();
+                    }
 
-            // Tạo người cách ly
-            Person.name = QPName;
-            Person.dateOfBirth = QPDateOfBirth;
-            Person.sex = QPSelectedSex;
-            Person.citizenID = QPCitizenID;
-            Person.nationality = QPSelectedNationality;
-            Person.phoneNumber = QPPhoneNumber;
-            Person.healthInsuranceID = QPHealthInsuranceID;
+                    // Tạo người cách ly
+                    Person.name = QPName;
+                    Person.dateOfBirth = QPDateOfBirth;
+                    Person.sex = QPSelectedSex;
+                    Person.citizenID = QPCitizenID;
+                    Person.nationality = QPSelectedNationality;
+                    Person.phoneNumber = QPPhoneNumber;
+                    Person.healthInsuranceID = QPHealthInsuranceID;
 
-            DataProvider.ins.db.SaveChanges();
 
-            // Tạo thông tin nơi người cách ly đã tới (optional) 
-            DestinationHistory PersonDestinationHistory = DataProvider.ins.db.DestinationHistories.Where(x => x.quarantinePersonID == Person.id).FirstOrDefault();
+                    DataProvider.ins.db.SaveChanges();
 
-            //PersonDestinationHistory.dateArrive = HDDateArrive;
+                    InitDisplayAddress(PersonAddress);
+                    InitDisplayHealthInformation(PersonHealthInformation);
 
-            //if (PersonDestinationHistory.CheckValidProperty())
-            //{
-            //    DataProvider.ins.db.SaveChanges();
-            //}
+                    InjectionRecordViewModel.ApplyInjectionRecordToDB(Person.id, "edit");
 
-            //// Tạo địa chỉ thông tin nơi đã tới (optional) vì là thành phần của thằng nơi đã tới
-            //Address DestinationHistoryAddress = DataProvider.ins.db.Addresses.Where(x => x.id == PersonDestinationHistory.addressID).FirstOrDefault();
+                    transaction.Commit();
 
-            //DestinationHistoryAddress.apartmentNumber = HDApartmentNumber;
-            //DestinationHistoryAddress.streetName = HDStreetName;
-            //DestinationHistoryAddress.ward = HDSelectedWard;
-            //DestinationHistoryAddress.district = HDSelectedDistrict;
-            //DestinationHistoryAddress.province = HDSelectedProvince;
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
 
-            //if (DestinationHistoryAddress.CheckValidateProperty())
-            //{
-            //    DataProvider.ins.db.SaveChanges();
-            //}
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
 
-            //// Tạo thông tin tiêm chủng (optional)
-            //InjectionRecord PersonInjectionRecord = DataProvider.ins.db.InjectionRecords.Where(x => x.quarantinePersonID == Person.id).FirstOrDefault();
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
 
-            //PersonInjectionRecord.dateInjection = IRDateInjection;
-            //PersonInjectionRecord.vaccineName = IRVaccineName;
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
 
-            //if (PersonInjectionRecord.CheckValidateProperty())
-            //{
-            //    DataProvider.ins.db.SaveChanges();
-            //}
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
+
 
         }
-        void DeleteQuarantinePerson() { }
+        void DeleteQuarantinePerson()
+        {
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    var Person = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+                    if (Person == null) return;
+
+                    DataProvider.ins.db.QuarantinePersons.Remove(Person);
+                    DataProvider.ins.db.SaveChanges();
+
+                    QuarantinePersonList.Remove(Person);
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
+        }
 
         void HandleChangeTab(int index, string action, Window p)
         {
@@ -769,6 +1238,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     Tab2 = Visibility.Hidden;
                     Tab3 = Visibility.Hidden;
                     ButtonReturn = Visibility.Hidden;
+
                     break;
                 case 2:
                     Tab1 = Visibility.Hidden;
@@ -811,6 +1281,41 @@ namespace QuanLyKhuCachLy.ViewModel
                 default:
                     TabInformation1 = Visibility.Hidden;
                     TabInformation2 = Visibility.Visible;
+                    break;
+            }
+        }
+        void HandleChangeTabEdit(int index, string action, Window p)
+        {
+            if (action == "next")
+            {
+                TabEditIndex++;
+            }
+            else
+            {
+                TabEditIndex--;
+            }
+            if (TabEditIndex <= 3)
+                TabEditPosition = $"{TabEditIndex}/3";
+
+            switch (TabEditIndex)
+            {
+                case 1:
+                    TabEdit1 = Visibility.Visible;
+                    TabEdit2 = Visibility.Hidden;
+                    TabEdit3 = Visibility.Hidden;
+                    ButtonEditReturn = Visibility.Hidden;
+                    break;
+                case 2:
+                    TabEdit1 = Visibility.Hidden;
+                    TabEdit2 = Visibility.Visible;
+                    TabEdit3 = Visibility.Hidden;
+                    ButtonEditReturn = Visibility.Visible;
+                    break;
+                default:
+                    TabEdit1 = Visibility.Hidden;
+                    TabEdit2 = Visibility.Hidden;
+                    TabEdit3 = Visibility.Visible;
+                    ButtonEditReturn = Visibility.Visible;
                     break;
             }
         }

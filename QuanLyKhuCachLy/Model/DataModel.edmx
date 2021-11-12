@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="QLKCLModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="QLKCLModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="id" />
@@ -30,8 +30,8 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="dateArrive" Type="date" Nullable="false" />
-          <Property Name="quarantinePersonID" Type="int" />
-          <Property Name="addressID" Type="int" />
+          <Property Name="quarantinePersonID" Type="int" Nullable="false" />
+          <Property Name="addressID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="HealthInformation">
           <Key>
@@ -46,6 +46,7 @@
           <Property Name="isShortnessOfBreath" Type="bit" Nullable="false" />
           <Property Name="isOtherSymptoms" Type="bit" Nullable="false" />
           <Property Name="isDisease" Type="bit" Nullable="false" />
+          <Property Name="quarantinePersonID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="InjectionRecord">
           <Key>
@@ -54,7 +55,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="dateInjection" Type="date" Nullable="false" />
           <Property Name="vaccineName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="quarantinePersonID" Type="int" />
+          <Property Name="quarantinePersonID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="QuarantineArea">
           <Key>
@@ -64,7 +65,7 @@
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="testCycle" Type="int" Nullable="false" />
           <Property Name="requiredDayToFinish" Type="int" Nullable="false" />
-          <Property Name="addressID" Type="int" />
+          <Property Name="addressID" Type="int" Nullable="false" />
           <Property Name="managerID" Type="int" />
         </EntityType>
         <EntityType Name="QuarantinePerson">
@@ -77,15 +78,14 @@
           <Property Name="sex" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="citizenID" Type="varchar" MaxLength="20" />
           <Property Name="nationality" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="healthInsuranceID" Type="varchar" MaxLength="20" />
-          <Property Name="phoneNumber" Type="varchar" MaxLength="20" />
-          <Property Name="level" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="phoneNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="levelID" Type="int" Nullable="false" />
           <Property Name="arrivedDate" Type="date" Nullable="false" />
           <Property Name="leaveDate" Type="date" Nullable="false" />
           <Property Name="quarantineDays" Type="int" Nullable="false" />
-          <Property Name="addressID" Type="int" Nullable="false" />
-          <Property Name="healthInformationID" Type="int" Nullable="false" />
-          <Property Name="roomID" Type="int" Nullable="false" />
+          <Property Name="addressID" Type="int" />
+          <Property Name="roomID" Type="int" />
+          <Property Name="completeQuarantine" Type="bit" />
         </EntityType>
         <EntityType Name="QuarantineRoom">
           <Key>
@@ -94,14 +94,15 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="displayName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="capacity" Type="int" Nullable="false" />
-          <Property Name="level" Type="varchar" MaxLength="10" />
+          <Property Name="levelID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Severity">
           <Key>
-            <PropertyRef Name="level" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="level" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="description" Type="nvarchar" MaxLength="50" />
+          <Property Name="level" Type="nchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="Staff">
           <Key>
@@ -111,10 +112,10 @@
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="dateOfBirth" Type="date" Nullable="false" />
           <Property Name="sex" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="citizenID" Type="varchar" MaxLength="20" />
+          <Property Name="citizenID" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="nationality" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="healthInsuranceID" Type="varchar" MaxLength="20" />
-          <Property Name="phoneNumber" Type="varchar" MaxLength="20" />
+          <Property Name="phoneNumber" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="addressID" Type="int" Nullable="false" />
           <Property Name="jobTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="department" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -136,10 +137,10 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="dateTesting" Type="date" Nullable="false" />
           <Property Name="isPositive" Type="bit" Nullable="false" />
-          <Property Name="quarantinePersonID" Type="int" />
+          <Property Name="quarantinePersonID" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Destinati__addre__3C69FB99">
-          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+        <Association Name="FK__Destinati__addre__37A5467C">
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
           <End Role="DestinationHistory" Type="Self.DestinationHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Address">
@@ -150,8 +151,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Destinati__quara__3B75D760">
-          <End Role="QuarantinePerson" Type="Self.QuarantinePerson" Multiplicity="0..1" />
+        <Association Name="FK__Destinati__quara__38996AB5">
+          <End Role="QuarantinePerson" Type="Self.QuarantinePerson" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="DestinationHistory" Type="Self.DestinationHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="QuarantinePerson">
@@ -162,8 +165,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Injection__quara__3D5E1FD2">
-          <End Role="QuarantinePerson" Type="Self.QuarantinePerson" Multiplicity="0..1" />
+        <Association Name="FK__Injection__quara__398D8EEE">
+          <End Role="QuarantinePerson" Type="Self.QuarantinePerson" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="InjectionRecord" Type="Self.InjectionRecord" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="QuarantinePerson">
@@ -174,8 +179,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Quarantin__addre__3E52440B">
-          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+        <Association Name="FK__Quarantin__addre__3A81B327">
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
           <End Role="QuarantineArea" Type="Self.QuarantineArea" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Address">
@@ -186,8 +191,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Quarantin__addre__403A8C7D">
-          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+        <Association Name="FK__Quarantin__addre__3C69FB99">
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
           <End Role="QuarantinePerson" Type="Self.QuarantinePerson" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Address">
@@ -198,56 +203,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Quarantin__healt__412EB0B6">
-          <End Role="HealthInformation" Type="Self.HealthInformation" Multiplicity="1" />
-          <End Role="QuarantinePerson" Type="Self.QuarantinePerson" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HealthInformation">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="QuarantinePerson">
-              <PropertyRef Name="healthInformationID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Quarantin__level__4222D4EF">
+        <Association Name="FK__Quarantin__level__3E52440B">
           <End Role="Severity" Type="Self.Severity" Multiplicity="1" />
           <End Role="QuarantinePerson" Type="Self.QuarantinePerson" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Severity">
-              <PropertyRef Name="level" />
+              <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="QuarantinePerson">
-              <PropertyRef Name="level" />
+              <PropertyRef Name="levelID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Quarantin__level__440B1D61">
-          <End Role="Severity" Type="Self.Severity" Multiplicity="0..1" />
+        <Association Name="FK__Quarantin__level__403A8C7D">
+          <End Role="Severity" Type="Self.Severity" Multiplicity="1" />
           <End Role="QuarantineRoom" Type="Self.QuarantineRoom" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Severity">
-              <PropertyRef Name="level" />
-            </Principal>
-            <Dependent Role="QuarantineRoom">
-              <PropertyRef Name="level" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Quarantin__manag__3F466844">
-          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
-          <End Role="QuarantineArea" Type="Self.QuarantineArea" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Staff">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="QuarantineArea">
-              <PropertyRef Name="managerID" />
+            <Dependent Role="QuarantineRoom">
+              <PropertyRef Name="levelID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Quarantin__roomI__4316F928">
-          <End Role="QuarantineRoom" Type="Self.QuarantineRoom" Multiplicity="1" />
+        <Association Name="FK__Quarantin__roomI__3F466844">
+          <End Role="QuarantineRoom" Type="Self.QuarantineRoom" Multiplicity="0..1" />
           <End Role="QuarantinePerson" Type="Self.QuarantinePerson" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="QuarantineRoom">
@@ -258,8 +239,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Staff__addressID__44FF419A">
-          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+        <Association Name="FK__Staff__addressID__412EB0B6">
+          <End Role="Address" Type="Self.Address" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Address">
@@ -270,8 +253,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TestingRe__quara__45F365D3">
-          <End Role="QuarantinePerson" Type="Self.QuarantinePerson" Multiplicity="0..1" />
+        <Association Name="FK__TestingRe__quara__4222D4EF">
+          <End Role="QuarantinePerson" Type="Self.QuarantinePerson" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="TestingResult" Type="Self.TestingResult" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="QuarantinePerson">
@@ -279,6 +264,32 @@
             </Principal>
             <Dependent Role="TestingResult">
               <PropertyRef Name="quarantinePersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HealthInfor_Person">
+          <End Role="QuarantinePerson" Type="Self.QuarantinePerson" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HealthInformation" Type="Self.HealthInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuarantinePerson">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="HealthInformation">
+              <PropertyRef Name="quarantinePersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuarantineArea_managerID">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+          <End Role="QuarantineArea" Type="Self.QuarantineArea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="QuarantineArea">
+              <PropertyRef Name="managerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -295,121 +306,60 @@
           <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TestingResult" EntityType="Self.TestingResult" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Destinati__addre__3C69FB99" Association="Self.FK__Destinati__addre__3C69FB99">
+          <AssociationSet Name="FK__Destinati__addre__37A5467C" Association="Self.FK__Destinati__addre__37A5467C">
             <End Role="Address" EntitySet="Address" />
             <End Role="DestinationHistory" EntitySet="DestinationHistory" />
           </AssociationSet>
-          <AssociationSet Name="FK__Destinati__quara__3B75D760" Association="Self.FK__Destinati__quara__3B75D760">
+          <AssociationSet Name="FK__Destinati__quara__38996AB5" Association="Self.FK__Destinati__quara__38996AB5">
             <End Role="QuarantinePerson" EntitySet="QuarantinePerson" />
             <End Role="DestinationHistory" EntitySet="DestinationHistory" />
           </AssociationSet>
-          <AssociationSet Name="FK__Injection__quara__3D5E1FD2" Association="Self.FK__Injection__quara__3D5E1FD2">
+          <AssociationSet Name="FK__Injection__quara__398D8EEE" Association="Self.FK__Injection__quara__398D8EEE">
             <End Role="QuarantinePerson" EntitySet="QuarantinePerson" />
             <End Role="InjectionRecord" EntitySet="InjectionRecord" />
           </AssociationSet>
-          <AssociationSet Name="FK__Quarantin__addre__3E52440B" Association="Self.FK__Quarantin__addre__3E52440B">
+          <AssociationSet Name="FK__Quarantin__addre__3A81B327" Association="Self.FK__Quarantin__addre__3A81B327">
             <End Role="Address" EntitySet="Address" />
             <End Role="QuarantineArea" EntitySet="QuarantineArea" />
           </AssociationSet>
-          <AssociationSet Name="FK__Quarantin__addre__403A8C7D" Association="Self.FK__Quarantin__addre__403A8C7D">
+          <AssociationSet Name="FK__Quarantin__addre__3C69FB99" Association="Self.FK__Quarantin__addre__3C69FB99">
             <End Role="Address" EntitySet="Address" />
             <End Role="QuarantinePerson" EntitySet="QuarantinePerson" />
           </AssociationSet>
-          <AssociationSet Name="FK__Quarantin__healt__412EB0B6" Association="Self.FK__Quarantin__healt__412EB0B6">
-            <End Role="HealthInformation" EntitySet="HealthInformation" />
-            <End Role="QuarantinePerson" EntitySet="QuarantinePerson" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Quarantin__level__4222D4EF" Association="Self.FK__Quarantin__level__4222D4EF">
+          <AssociationSet Name="FK__Quarantin__level__3E52440B" Association="Self.FK__Quarantin__level__3E52440B">
             <End Role="Severity" EntitySet="Severity" />
             <End Role="QuarantinePerson" EntitySet="QuarantinePerson" />
           </AssociationSet>
-          <AssociationSet Name="FK__Quarantin__level__440B1D61" Association="Self.FK__Quarantin__level__440B1D61">
+          <AssociationSet Name="FK__Quarantin__level__403A8C7D" Association="Self.FK__Quarantin__level__403A8C7D">
             <End Role="Severity" EntitySet="Severity" />
             <End Role="QuarantineRoom" EntitySet="QuarantineRoom" />
           </AssociationSet>
-          <AssociationSet Name="FK__Quarantin__manag__3F466844" Association="Self.FK__Quarantin__manag__3F466844">
-            <End Role="Staff" EntitySet="Staff" />
-            <End Role="QuarantineArea" EntitySet="QuarantineArea" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Quarantin__roomI__4316F928" Association="Self.FK__Quarantin__roomI__4316F928">
+          <AssociationSet Name="FK__Quarantin__roomI__3F466844" Association="Self.FK__Quarantin__roomI__3F466844">
             <End Role="QuarantineRoom" EntitySet="QuarantineRoom" />
             <End Role="QuarantinePerson" EntitySet="QuarantinePerson" />
           </AssociationSet>
-          <AssociationSet Name="FK__Staff__addressID__44FF419A" Association="Self.FK__Staff__addressID__44FF419A">
+          <AssociationSet Name="FK__Staff__addressID__412EB0B6" Association="Self.FK__Staff__addressID__412EB0B6">
             <End Role="Address" EntitySet="Address" />
             <End Role="Staff" EntitySet="Staff" />
           </AssociationSet>
-          <AssociationSet Name="FK__TestingRe__quara__45F365D3" Association="Self.FK__TestingRe__quara__45F365D3">
+          <AssociationSet Name="FK__TestingRe__quara__4222D4EF" Association="Self.FK__TestingRe__quara__4222D4EF">
             <End Role="QuarantinePerson" EntitySet="QuarantinePerson" />
             <End Role="TestingResult" EntitySet="TestingResult" />
           </AssociationSet>
+          <AssociationSet Name="FK_HealthInfor_Person" Association="Self.FK_HealthInfor_Person">
+            <End Role="QuarantinePerson" EntitySet="QuarantinePerson" />
+            <End Role="HealthInformation" EntitySet="HealthInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuarantineArea_managerID" Association="Self.FK_QuarantineArea_managerID">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="QuarantineArea" EntitySet="QuarantineArea" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QLKCLModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="QLKCLEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Accounts" EntityType="QLKCLModel.Account" />
-          <EntitySet Name="Addresses" EntityType="QLKCLModel.Address" />
-          <EntitySet Name="DestinationHistories" EntityType="QLKCLModel.DestinationHistory" />
-          <EntitySet Name="HealthInformations" EntityType="QLKCLModel.HealthInformation" />
-          <EntitySet Name="InjectionRecords" EntityType="QLKCLModel.InjectionRecord" />
-          <EntitySet Name="QuarantineAreas" EntityType="QLKCLModel.QuarantineArea" />
-          <EntitySet Name="QuarantinePersons" EntityType="QLKCLModel.QuarantinePerson" />
-          <EntitySet Name="QuarantineRooms" EntityType="QLKCLModel.QuarantineRoom" />
-          <EntitySet Name="Severities" EntityType="QLKCLModel.Severity" />
-          <EntitySet Name="Staffs" EntityType="QLKCLModel.Staff" />
-          <EntitySet Name="sysdiagrams" EntityType="QLKCLModel.sysdiagram" />
-          <EntitySet Name="TestingResults" EntityType="QLKCLModel.TestingResult" />
-          <AssociationSet Name="FK__Destinati__addre__3C69FB99" Association="QLKCLModel.FK__Destinati__addre__3C69FB99">
-            <End Role="Address" EntitySet="Addresses" />
-            <End Role="DestinationHistory" EntitySet="DestinationHistories" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Quarantin__addre__3E52440B" Association="QLKCLModel.FK__Quarantin__addre__3E52440B">
-            <End Role="Address" EntitySet="Addresses" />
-            <End Role="QuarantineArea" EntitySet="QuarantineAreas" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Quarantin__addre__403A8C7D" Association="QLKCLModel.FK__Quarantin__addre__403A8C7D">
-            <End Role="Address" EntitySet="Addresses" />
-            <End Role="QuarantinePerson" EntitySet="QuarantinePersons" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Staff__addressID__44FF419A" Association="QLKCLModel.FK__Staff__addressID__44FF419A">
-            <End Role="Address" EntitySet="Addresses" />
-            <End Role="Staff" EntitySet="Staffs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Destinati__quara__3B75D760" Association="QLKCLModel.FK__Destinati__quara__3B75D760">
-            <End Role="QuarantinePerson" EntitySet="QuarantinePersons" />
-            <End Role="DestinationHistory" EntitySet="DestinationHistories" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Quarantin__healt__412EB0B6" Association="QLKCLModel.FK__Quarantin__healt__412EB0B6">
-            <End Role="HealthInformation" EntitySet="HealthInformations" />
-            <End Role="QuarantinePerson" EntitySet="QuarantinePersons" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Injection__quara__3D5E1FD2" Association="QLKCLModel.FK__Injection__quara__3D5E1FD2">
-            <End Role="QuarantinePerson" EntitySet="QuarantinePersons" />
-            <End Role="InjectionRecord" EntitySet="InjectionRecords" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Quarantin__manag__3F466844" Association="QLKCLModel.FK__Quarantin__manag__3F466844">
-            <End Role="Staff" EntitySet="Staffs" />
-            <End Role="QuarantineArea" EntitySet="QuarantineAreas" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Quarantin__level__4222D4EF" Association="QLKCLModel.FK__Quarantin__level__4222D4EF">
-            <End Role="Severity" EntitySet="Severities" />
-            <End Role="QuarantinePerson" EntitySet="QuarantinePersons" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Quarantin__roomI__4316F928" Association="QLKCLModel.FK__Quarantin__roomI__4316F928">
-            <End Role="QuarantineRoom" EntitySet="QuarantineRooms" />
-            <End Role="QuarantinePerson" EntitySet="QuarantinePersons" />
-          </AssociationSet>
-          <AssociationSet Name="FK__TestingRe__quara__45F365D3" Association="QLKCLModel.FK__TestingRe__quara__45F365D3">
-            <End Role="QuarantinePerson" EntitySet="QuarantinePersons" />
-            <End Role="TestingResult" EntitySet="TestingResults" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Quarantin__level__440B1D61" Association="QLKCLModel.FK__Quarantin__level__440B1D61">
-            <End Role="Severity" EntitySet="Severities" />
-            <End Role="QuarantineRoom" EntitySet="QuarantineRooms" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="id" />
@@ -423,15 +373,15 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="province" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="district" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ward" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="province" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="district" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ward" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="streetName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="apartmentNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="DestinationHistories" Relationship="QLKCLModel.FK__Destinati__addre__3C69FB99" FromRole="Address" ToRole="DestinationHistory" />
-          <NavigationProperty Name="QuarantineAreas" Relationship="QLKCLModel.FK__Quarantin__addre__3E52440B" FromRole="Address" ToRole="QuarantineArea" />
-          <NavigationProperty Name="QuarantinePersons" Relationship="QLKCLModel.FK__Quarantin__addre__403A8C7D" FromRole="Address" ToRole="QuarantinePerson" />
-          <NavigationProperty Name="Staffs" Relationship="QLKCLModel.FK__Staff__addressID__44FF419A" FromRole="Address" ToRole="Staff" />
+          <NavigationProperty Name="DestinationHistories" Relationship="Self.FK__Destinati__addre__37A5467C" FromRole="Address" ToRole="DestinationHistory" />
+          <NavigationProperty Name="QuarantineAreas" Relationship="Self.FK__Quarantin__addre__3A81B327" FromRole="Address" ToRole="QuarantineArea" />
+          <NavigationProperty Name="QuarantinePersons" Relationship="Self.FK__Quarantin__addre__3C69FB99" FromRole="Address" ToRole="QuarantinePerson" />
+          <NavigationProperty Name="Staffs" Relationship="Self.FK__Staff__addressID__412EB0B6" FromRole="Address" ToRole="Staff" />
         </EntityType>
         <EntityType Name="DestinationHistory">
           <Key>
@@ -439,10 +389,10 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="dateArrive" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="quarantinePersonID" Type="Int32" />
-          <Property Name="addressID" Type="Int32" />
-          <NavigationProperty Name="Address" Relationship="QLKCLModel.FK__Destinati__addre__3C69FB99" FromRole="DestinationHistory" ToRole="Address" />
-          <NavigationProperty Name="QuarantinePerson" Relationship="QLKCLModel.FK__Destinati__quara__3B75D760" FromRole="DestinationHistory" ToRole="QuarantinePerson" />
+          <Property Name="quarantinePersonID" Type="Int32" Nullable="false" />
+          <Property Name="addressID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Address" Relationship="Self.FK__Destinati__addre__37A5467C" FromRole="DestinationHistory" ToRole="Address" />
+          <NavigationProperty Name="QuarantinePerson" Relationship="Self.FK__Destinati__quara__38996AB5" FromRole="DestinationHistory" ToRole="QuarantinePerson" />
         </EntityType>
         <EntityType Name="HealthInformation">
           <Key>
@@ -457,7 +407,8 @@
           <Property Name="isShortnessOfBreath" Type="Boolean" Nullable="false" />
           <Property Name="isOtherSymptoms" Type="Boolean" Nullable="false" />
           <Property Name="isDisease" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="QuarantinePersons" Relationship="QLKCLModel.FK__Quarantin__healt__412EB0B6" FromRole="HealthInformation" ToRole="QuarantinePerson" />
+          <Property Name="quarantinePersonID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="QuarantinePerson" Relationship="Self.FK_HealthInfor_Person" FromRole="HealthInformation" ToRole="QuarantinePerson" />
         </EntityType>
         <EntityType Name="InjectionRecord">
           <Key>
@@ -465,93 +416,93 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="dateInjection" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="vaccineName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="quarantinePersonID" Type="Int32" />
-          <NavigationProperty Name="QuarantinePerson" Relationship="QLKCLModel.FK__Injection__quara__3D5E1FD2" FromRole="InjectionRecord" ToRole="QuarantinePerson" />
+          <Property Name="vaccineName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="quarantinePersonID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="QuarantinePerson" Relationship="Self.FK__Injection__quara__398D8EEE" FromRole="InjectionRecord" ToRole="QuarantinePerson" />
         </EntityType>
         <EntityType Name="QuarantineArea">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="testCycle" Type="Int32" Nullable="false" />
           <Property Name="requiredDayToFinish" Type="Int32" Nullable="false" />
-          <Property Name="addressID" Type="Int32" />
+          <Property Name="addressID" Type="Int32" Nullable="false" />
           <Property Name="managerID" Type="Int32" />
-          <NavigationProperty Name="Address" Relationship="QLKCLModel.FK__Quarantin__addre__3E52440B" FromRole="QuarantineArea" ToRole="Address" />
-          <NavigationProperty Name="Staff" Relationship="QLKCLModel.FK__Quarantin__manag__3F466844" FromRole="QuarantineArea" ToRole="Staff" />
+          <NavigationProperty Name="Address" Relationship="Self.FK__Quarantin__addre__3A81B327" FromRole="QuarantineArea" ToRole="Address" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_QuarantineArea_managerID" FromRole="QuarantineArea" ToRole="Staff" />
         </EntityType>
         <EntityType Name="QuarantinePerson">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="dateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="sex" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="sex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="citizenID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="nationality" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="healthInsuranceID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="phoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="level" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="nationality" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="levelID" Type="Int32" Nullable="false" />
           <Property Name="arrivedDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="leaveDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="quarantineDays" Type="Int32" Nullable="false" />
-          <Property Name="addressID" Type="Int32" Nullable="false" />
-          <Property Name="healthInformationID" Type="Int32" Nullable="false" />
-          <Property Name="roomID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Address" Relationship="QLKCLModel.FK__Quarantin__addre__403A8C7D" FromRole="QuarantinePerson" ToRole="Address" />
-          <NavigationProperty Name="DestinationHistories" Relationship="QLKCLModel.FK__Destinati__quara__3B75D760" FromRole="QuarantinePerson" ToRole="DestinationHistory" />
-          <NavigationProperty Name="HealthInformation" Relationship="QLKCLModel.FK__Quarantin__healt__412EB0B6" FromRole="QuarantinePerson" ToRole="HealthInformation" />
-          <NavigationProperty Name="InjectionRecords" Relationship="QLKCLModel.FK__Injection__quara__3D5E1FD2" FromRole="QuarantinePerson" ToRole="InjectionRecord" />
-          <NavigationProperty Name="Severity" Relationship="QLKCLModel.FK__Quarantin__level__4222D4EF" FromRole="QuarantinePerson" ToRole="Severity" />
-          <NavigationProperty Name="QuarantineRoom" Relationship="QLKCLModel.FK__Quarantin__roomI__4316F928" FromRole="QuarantinePerson" ToRole="QuarantineRoom" />
-          <NavigationProperty Name="TestingResults" Relationship="QLKCLModel.FK__TestingRe__quara__45F365D3" FromRole="QuarantinePerson" ToRole="TestingResult" />
+          <Property Name="addressID" Type="Int32" />
+          <Property Name="roomID" Type="Int32" />
+          <Property Name="completeQuarantine" Type="Boolean" />
+          <NavigationProperty Name="Address" Relationship="Self.FK__Quarantin__addre__3C69FB99" FromRole="QuarantinePerson" ToRole="Address" />
+          <NavigationProperty Name="DestinationHistories" Relationship="Self.FK__Destinati__quara__38996AB5" FromRole="QuarantinePerson" ToRole="DestinationHistory" />
+          <NavigationProperty Name="HealthInformations" Relationship="Self.FK_HealthInfor_Person" FromRole="QuarantinePerson" ToRole="HealthInformation" />
+          <NavigationProperty Name="InjectionRecords" Relationship="Self.FK__Injection__quara__398D8EEE" FromRole="QuarantinePerson" ToRole="InjectionRecord" />
+          <NavigationProperty Name="Severity" Relationship="Self.FK__Quarantin__level__3E52440B" FromRole="QuarantinePerson" ToRole="Severity" />
+          <NavigationProperty Name="QuarantineRoom" Relationship="Self.FK__Quarantin__roomI__3F466844" FromRole="QuarantinePerson" ToRole="QuarantineRoom" />
+          <NavigationProperty Name="TestingResults" Relationship="Self.FK__TestingRe__quara__4222D4EF" FromRole="QuarantinePerson" ToRole="TestingResult" />
         </EntityType>
         <EntityType Name="QuarantineRoom">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="displayName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="displayName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="capacity" Type="Int32" Nullable="false" />
-          <Property Name="level" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="QuarantinePersons" Relationship="QLKCLModel.FK__Quarantin__roomI__4316F928" FromRole="QuarantineRoom" ToRole="QuarantinePerson" />
-          <NavigationProperty Name="Severity" Relationship="QLKCLModel.FK__Quarantin__level__440B1D61" FromRole="QuarantineRoom" ToRole="Severity" />
+          <Property Name="levelID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="QuarantinePersons" Relationship="Self.FK__Quarantin__roomI__3F466844" FromRole="QuarantineRoom" ToRole="QuarantinePerson" />
+          <NavigationProperty Name="Severity" Relationship="Self.FK__Quarantin__level__403A8C7D" FromRole="QuarantineRoom" ToRole="Severity" />
         </EntityType>
         <EntityType Name="Severity">
           <Key>
-            <PropertyRef Name="level" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="level" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="QuarantinePersons" Relationship="QLKCLModel.FK__Quarantin__level__4222D4EF" FromRole="Severity" ToRole="QuarantinePerson" />
-          <NavigationProperty Name="QuarantineRooms" Relationship="QLKCLModel.FK__Quarantin__level__440B1D61" FromRole="Severity" ToRole="QuarantineRoom" />
+          <Property Name="level" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="QuarantinePersons" Relationship="Self.FK__Quarantin__level__3E52440B" FromRole="Severity" ToRole="QuarantinePerson" />
+          <NavigationProperty Name="QuarantineRooms" Relationship="Self.FK__Quarantin__level__403A8C7D" FromRole="Severity" ToRole="QuarantineRoom" />
         </EntityType>
         <EntityType Name="Staff">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="dateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="sex" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="citizenID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="nationality" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="sex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="citizenID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nationality" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="healthInsuranceID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="phoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="phoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="addressID" Type="Int32" Nullable="false" />
-          <Property Name="jobTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="department" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Address" Relationship="QLKCLModel.FK__Staff__addressID__44FF419A" FromRole="Staff" ToRole="Address" />
-          <NavigationProperty Name="QuarantineAreas" Relationship="QLKCLModel.FK__Quarantin__manag__3F466844" FromRole="Staff" ToRole="QuarantineArea" />
+          <Property Name="jobTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Address" Relationship="Self.FK__Staff__addressID__412EB0B6" FromRole="Staff" ToRole="Address" />
+          <NavigationProperty Name="QuarantineAreas" Relationship="Self.FK_QuarantineArea_managerID" FromRole="Staff" ToRole="QuarantineArea" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="principal_id" Type="Int32" Nullable="false" />
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
@@ -564,12 +515,12 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="dateTesting" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="isPositive" Type="Boolean" Nullable="false" />
-          <Property Name="quarantinePersonID" Type="Int32" />
-          <NavigationProperty Name="QuarantinePerson" Relationship="QLKCLModel.FK__TestingRe__quara__45F365D3" FromRole="TestingResult" ToRole="QuarantinePerson" />
+          <Property Name="quarantinePersonID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="QuarantinePerson" Relationship="Self.FK__TestingRe__quara__4222D4EF" FromRole="TestingResult" ToRole="QuarantinePerson" />
         </EntityType>
-        <Association Name="FK__Destinati__addre__3C69FB99">
-          <End Type="QLKCLModel.Address" Role="Address" Multiplicity="0..1" />
-          <End Type="QLKCLModel.DestinationHistory" Role="DestinationHistory" Multiplicity="*" />
+        <Association Name="FK__Destinati__addre__37A5467C">
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="DestinationHistory" Type="Self.DestinationHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Address">
               <PropertyRef Name="id" />
@@ -579,9 +530,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Quarantin__addre__3E52440B">
-          <End Type="QLKCLModel.Address" Role="Address" Multiplicity="0..1" />
-          <End Type="QLKCLModel.QuarantineArea" Role="QuarantineArea" Multiplicity="*" />
+        <Association Name="FK__Quarantin__addre__3A81B327">
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="QuarantineArea" Type="Self.QuarantineArea" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Address">
               <PropertyRef Name="id" />
@@ -591,9 +542,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Quarantin__addre__403A8C7D">
-          <End Type="QLKCLModel.Address" Role="Address" Multiplicity="1" />
-          <End Type="QLKCLModel.QuarantinePerson" Role="QuarantinePerson" Multiplicity="*" />
+        <Association Name="FK__Quarantin__addre__3C69FB99">
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+          <End Role="QuarantinePerson" Type="Self.QuarantinePerson" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Address">
               <PropertyRef Name="id" />
@@ -603,9 +554,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Staff__addressID__44FF419A">
-          <End Type="QLKCLModel.Address" Role="Address" Multiplicity="1" />
-          <End Type="QLKCLModel.Staff" Role="Staff" Multiplicity="*" />
+        <Association Name="FK__Staff__addressID__412EB0B6">
+          <End Role="Address" Type="Self.Address" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Address">
               <PropertyRef Name="id" />
@@ -615,9 +568,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Destinati__quara__3B75D760">
-          <End Type="QLKCLModel.QuarantinePerson" Role="QuarantinePerson" Multiplicity="0..1" />
-          <End Type="QLKCLModel.DestinationHistory" Role="DestinationHistory" Multiplicity="*" />
+        <Association Name="FK__Destinati__quara__38996AB5">
+          <End Role="QuarantinePerson" Type="Self.QuarantinePerson" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DestinationHistory" Type="Self.DestinationHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="QuarantinePerson">
               <PropertyRef Name="id" />
@@ -627,21 +582,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Quarantin__healt__412EB0B6">
-          <End Type="QLKCLModel.HealthInformation" Role="HealthInformation" Multiplicity="1" />
-          <End Type="QLKCLModel.QuarantinePerson" Role="QuarantinePerson" Multiplicity="*" />
+        <Association Name="FK_HealthInfor_Person">
+          <End Role="QuarantinePerson" Type="Self.QuarantinePerson" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HealthInformation" Type="Self.HealthInformation" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="HealthInformation">
+            <Principal Role="QuarantinePerson">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="QuarantinePerson">
-              <PropertyRef Name="healthInformationID" />
+            <Dependent Role="HealthInformation">
+              <PropertyRef Name="quarantinePersonID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Injection__quara__3D5E1FD2">
-          <End Type="QLKCLModel.QuarantinePerson" Role="QuarantinePerson" Multiplicity="0..1" />
-          <End Type="QLKCLModel.InjectionRecord" Role="InjectionRecord" Multiplicity="*" />
+        <Association Name="FK__Injection__quara__398D8EEE">
+          <End Role="QuarantinePerson" Type="Self.QuarantinePerson" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="InjectionRecord" Type="Self.InjectionRecord" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="QuarantinePerson">
               <PropertyRef Name="id" />
@@ -651,9 +610,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Quarantin__manag__3F466844">
-          <End Type="QLKCLModel.Staff" Role="Staff" Multiplicity="0..1" />
-          <End Type="QLKCLModel.QuarantineArea" Role="QuarantineArea" Multiplicity="*" />
+        <Association Name="FK_QuarantineArea_managerID">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+          <End Role="QuarantineArea" Type="Self.QuarantineArea" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Staff">
               <PropertyRef Name="id" />
@@ -663,21 +622,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Quarantin__level__4222D4EF">
-          <End Type="QLKCLModel.Severity" Role="Severity" Multiplicity="1" />
-          <End Type="QLKCLModel.QuarantinePerson" Role="QuarantinePerson" Multiplicity="*" />
+        <Association Name="FK__Quarantin__level__3E52440B">
+          <End Role="Severity" Type="Self.Severity" Multiplicity="1" />
+          <End Role="QuarantinePerson" Type="Self.QuarantinePerson" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Severity">
-              <PropertyRef Name="level" />
+              <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="QuarantinePerson">
-              <PropertyRef Name="level" />
+              <PropertyRef Name="levelID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Quarantin__roomI__4316F928">
-          <End Type="QLKCLModel.QuarantineRoom" Role="QuarantineRoom" Multiplicity="1" />
-          <End Type="QLKCLModel.QuarantinePerson" Role="QuarantinePerson" Multiplicity="*" />
+        <Association Name="FK__Quarantin__roomI__3F466844">
+          <End Role="QuarantineRoom" Type="Self.QuarantineRoom" Multiplicity="0..1" />
+          <End Role="QuarantinePerson" Type="Self.QuarantinePerson" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="QuarantineRoom">
               <PropertyRef Name="id" />
@@ -687,9 +646,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TestingRe__quara__45F365D3">
-          <End Type="QLKCLModel.QuarantinePerson" Role="QuarantinePerson" Multiplicity="0..1" />
-          <End Type="QLKCLModel.TestingResult" Role="TestingResult" Multiplicity="*" />
+        <Association Name="FK__TestingRe__quara__4222D4EF">
+          <End Role="QuarantinePerson" Type="Self.QuarantinePerson" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TestingResult" Type="Self.TestingResult" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="QuarantinePerson">
               <PropertyRef Name="id" />
@@ -699,126 +660,189 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Quarantin__level__440B1D61">
-          <End Type="QLKCLModel.Severity" Role="Severity" Multiplicity="0..1" />
-          <End Type="QLKCLModel.QuarantineRoom" Role="QuarantineRoom" Multiplicity="*" />
+        <Association Name="FK__Quarantin__level__403A8C7D">
+          <End Role="Severity" Type="Self.Severity" Multiplicity="1" />
+          <End Role="QuarantineRoom" Type="Self.QuarantineRoom" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Severity">
-              <PropertyRef Name="level" />
+              <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="QuarantineRoom">
-              <PropertyRef Name="level" />
+              <PropertyRef Name="levelID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="Addresses" EntityType="Self.Address" />
+          <EntitySet Name="DestinationHistories" EntityType="Self.DestinationHistory" />
+          <EntitySet Name="HealthInformations" EntityType="Self.HealthInformation" />
+          <EntitySet Name="InjectionRecords" EntityType="Self.InjectionRecord" />
+          <EntitySet Name="QuarantineAreas" EntityType="Self.QuarantineArea" />
+          <EntitySet Name="QuarantinePersons" EntityType="Self.QuarantinePerson" />
+          <EntitySet Name="QuarantineRooms" EntityType="Self.QuarantineRoom" />
+          <EntitySet Name="Severities" EntityType="Self.Severity" />
+          <EntitySet Name="Staffs" EntityType="Self.Staff" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TestingResults" EntityType="Self.TestingResult" />
+          <AssociationSet Name="FK__Destinati__addre__37A5467C" Association="Self.FK__Destinati__addre__37A5467C">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="DestinationHistory" EntitySet="DestinationHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Quarantin__addre__3A81B327" Association="Self.FK__Quarantin__addre__3A81B327">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="QuarantineArea" EntitySet="QuarantineAreas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Quarantin__addre__3C69FB99" Association="Self.FK__Quarantin__addre__3C69FB99">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="QuarantinePerson" EntitySet="QuarantinePersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Staff__addressID__412EB0B6" Association="Self.FK__Staff__addressID__412EB0B6">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Staff" EntitySet="Staffs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Destinati__quara__38996AB5" Association="Self.FK__Destinati__quara__38996AB5">
+            <End Role="QuarantinePerson" EntitySet="QuarantinePersons" />
+            <End Role="DestinationHistory" EntitySet="DestinationHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HealthInfor_Person" Association="Self.FK_HealthInfor_Person">
+            <End Role="QuarantinePerson" EntitySet="QuarantinePersons" />
+            <End Role="HealthInformation" EntitySet="HealthInformations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Injection__quara__398D8EEE" Association="Self.FK__Injection__quara__398D8EEE">
+            <End Role="QuarantinePerson" EntitySet="QuarantinePersons" />
+            <End Role="InjectionRecord" EntitySet="InjectionRecords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuarantineArea_managerID" Association="Self.FK_QuarantineArea_managerID">
+            <End Role="Staff" EntitySet="Staffs" />
+            <End Role="QuarantineArea" EntitySet="QuarantineAreas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Quarantin__level__3E52440B" Association="Self.FK__Quarantin__level__3E52440B">
+            <End Role="Severity" EntitySet="Severities" />
+            <End Role="QuarantinePerson" EntitySet="QuarantinePersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Quarantin__roomI__3F466844" Association="Self.FK__Quarantin__roomI__3F466844">
+            <End Role="QuarantineRoom" EntitySet="QuarantineRooms" />
+            <End Role="QuarantinePerson" EntitySet="QuarantinePersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TestingRe__quara__4222D4EF" Association="Self.FK__TestingRe__quara__4222D4EF">
+            <End Role="QuarantinePerson" EntitySet="QuarantinePersons" />
+            <End Role="TestingResult" EntitySet="TestingResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Quarantin__level__403A8C7D" Association="Self.FK__Quarantin__level__403A8C7D">
+            <End Role="Severity" EntitySet="Severities" />
+            <End Role="QuarantineRoom" EntitySet="QuarantineRooms" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="QLKCLModelStoreContainer" CdmEntityContainer="QLKCLEntities">
+        <EntityContainerMapping StorageEntityContainer="QLKCLModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="QLKCLModel.Account">
               <MappingFragment StoreEntitySet="Account">
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Addresses">
             <EntityTypeMapping TypeName="QLKCLModel.Address">
               <MappingFragment StoreEntitySet="Address">
-                <ScalarProperty Name="apartmentNumber" ColumnName="apartmentNumber" />
-                <ScalarProperty Name="streetName" ColumnName="streetName" />
-                <ScalarProperty Name="ward" ColumnName="ward" />
-                <ScalarProperty Name="district" ColumnName="district" />
-                <ScalarProperty Name="province" ColumnName="province" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="province" ColumnName="province" />
+                <ScalarProperty Name="district" ColumnName="district" />
+                <ScalarProperty Name="ward" ColumnName="ward" />
+                <ScalarProperty Name="streetName" ColumnName="streetName" />
+                <ScalarProperty Name="apartmentNumber" ColumnName="apartmentNumber" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DestinationHistories">
             <EntityTypeMapping TypeName="QLKCLModel.DestinationHistory">
               <MappingFragment StoreEntitySet="DestinationHistory">
-                <ScalarProperty Name="addressID" ColumnName="addressID" />
-                <ScalarProperty Name="quarantinePersonID" ColumnName="quarantinePersonID" />
-                <ScalarProperty Name="dateArrive" ColumnName="dateArrive" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="dateArrive" ColumnName="dateArrive" />
+                <ScalarProperty Name="quarantinePersonID" ColumnName="quarantinePersonID" />
+                <ScalarProperty Name="addressID" ColumnName="addressID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="HealthInformations">
             <EntityTypeMapping TypeName="QLKCLModel.HealthInformation">
               <MappingFragment StoreEntitySet="HealthInformation">
-                <ScalarProperty Name="isDisease" ColumnName="isDisease" />
-                <ScalarProperty Name="isOtherSymptoms" ColumnName="isOtherSymptoms" />
-                <ScalarProperty Name="isShortnessOfBreath" ColumnName="isShortnessOfBreath" />
-                <ScalarProperty Name="isTired" ColumnName="isTired" />
-                <ScalarProperty Name="isLossOfTatse" ColumnName="isLossOfTatse" />
-                <ScalarProperty Name="isSoreThroat" ColumnName="isSoreThroat" />
-                <ScalarProperty Name="isCough" ColumnName="isCough" />
-                <ScalarProperty Name="isFever" ColumnName="isFever" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="isFever" ColumnName="isFever" />
+                <ScalarProperty Name="isCough" ColumnName="isCough" />
+                <ScalarProperty Name="isSoreThroat" ColumnName="isSoreThroat" />
+                <ScalarProperty Name="isLossOfTatse" ColumnName="isLossOfTatse" />
+                <ScalarProperty Name="isTired" ColumnName="isTired" />
+                <ScalarProperty Name="isShortnessOfBreath" ColumnName="isShortnessOfBreath" />
+                <ScalarProperty Name="isOtherSymptoms" ColumnName="isOtherSymptoms" />
+                <ScalarProperty Name="isDisease" ColumnName="isDisease" />
+                <ScalarProperty Name="quarantinePersonID" ColumnName="quarantinePersonID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InjectionRecords">
             <EntityTypeMapping TypeName="QLKCLModel.InjectionRecord">
               <MappingFragment StoreEntitySet="InjectionRecord">
-                <ScalarProperty Name="quarantinePersonID" ColumnName="quarantinePersonID" />
-                <ScalarProperty Name="vaccineName" ColumnName="vaccineName" />
-                <ScalarProperty Name="dateInjection" ColumnName="dateInjection" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="dateInjection" ColumnName="dateInjection" />
+                <ScalarProperty Name="vaccineName" ColumnName="vaccineName" />
+                <ScalarProperty Name="quarantinePersonID" ColumnName="quarantinePersonID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="QuarantineAreas">
             <EntityTypeMapping TypeName="QLKCLModel.QuarantineArea">
               <MappingFragment StoreEntitySet="QuarantineArea">
-                <ScalarProperty Name="managerID" ColumnName="managerID" />
-                <ScalarProperty Name="addressID" ColumnName="addressID" />
-                <ScalarProperty Name="requiredDayToFinish" ColumnName="requiredDayToFinish" />
-                <ScalarProperty Name="testCycle" ColumnName="testCycle" />
-                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="testCycle" ColumnName="testCycle" />
+                <ScalarProperty Name="requiredDayToFinish" ColumnName="requiredDayToFinish" />
+                <ScalarProperty Name="addressID" ColumnName="addressID" />
+                <ScalarProperty Name="managerID" ColumnName="managerID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="QuarantinePersons">
             <EntityTypeMapping TypeName="QLKCLModel.QuarantinePerson">
               <MappingFragment StoreEntitySet="QuarantinePerson">
-                <ScalarProperty Name="roomID" ColumnName="roomID" />
-                <ScalarProperty Name="healthInformationID" ColumnName="healthInformationID" />
-                <ScalarProperty Name="addressID" ColumnName="addressID" />
-                <ScalarProperty Name="quarantineDays" ColumnName="quarantineDays" />
-                <ScalarProperty Name="leaveDate" ColumnName="leaveDate" />
-                <ScalarProperty Name="arrivedDate" ColumnName="arrivedDate" />
-                <ScalarProperty Name="level" ColumnName="level" />
-                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
-                <ScalarProperty Name="healthInsuranceID" ColumnName="healthInsuranceID" />
-                <ScalarProperty Name="nationality" ColumnName="nationality" />
-                <ScalarProperty Name="citizenID" ColumnName="citizenID" />
-                <ScalarProperty Name="sex" ColumnName="sex" />
-                <ScalarProperty Name="dateOfBirth" ColumnName="dateOfBirth" />
-                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="dateOfBirth" ColumnName="dateOfBirth" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="citizenID" ColumnName="citizenID" />
+                <ScalarProperty Name="nationality" ColumnName="nationality" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="levelID" ColumnName="levelID" />
+                <ScalarProperty Name="arrivedDate" ColumnName="arrivedDate" />
+                <ScalarProperty Name="leaveDate" ColumnName="leaveDate" />
+                <ScalarProperty Name="quarantineDays" ColumnName="quarantineDays" />
+                <ScalarProperty Name="addressID" ColumnName="addressID" />
+                <ScalarProperty Name="roomID" ColumnName="roomID" />
+                <ScalarProperty Name="completeQuarantine" ColumnName="completeQuarantine" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="QuarantineRooms">
             <EntityTypeMapping TypeName="QLKCLModel.QuarantineRoom">
               <MappingFragment StoreEntitySet="QuarantineRoom">
-                <ScalarProperty Name="level" ColumnName="level" />
-                <ScalarProperty Name="capacity" ColumnName="capacity" />
-                <ScalarProperty Name="displayName" ColumnName="displayName" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="displayName" ColumnName="displayName" />
+                <ScalarProperty Name="capacity" ColumnName="capacity" />
+                <ScalarProperty Name="levelID" ColumnName="levelID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Severities">
             <EntityTypeMapping TypeName="QLKCLModel.Severity">
               <MappingFragment StoreEntitySet="Severity">
+                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="level" ColumnName="level" />
               </MappingFragment>
@@ -827,38 +851,38 @@
           <EntitySetMapping Name="Staffs">
             <EntityTypeMapping TypeName="QLKCLModel.Staff">
               <MappingFragment StoreEntitySet="Staff">
-                <ScalarProperty Name="department" ColumnName="department" />
-                <ScalarProperty Name="jobTitle" ColumnName="jobTitle" />
-                <ScalarProperty Name="addressID" ColumnName="addressID" />
-                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
-                <ScalarProperty Name="healthInsuranceID" ColumnName="healthInsuranceID" />
-                <ScalarProperty Name="nationality" ColumnName="nationality" />
-                <ScalarProperty Name="citizenID" ColumnName="citizenID" />
-                <ScalarProperty Name="sex" ColumnName="sex" />
-                <ScalarProperty Name="dateOfBirth" ColumnName="dateOfBirth" />
-                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="dateOfBirth" ColumnName="dateOfBirth" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="citizenID" ColumnName="citizenID" />
+                <ScalarProperty Name="nationality" ColumnName="nationality" />
+                <ScalarProperty Name="healthInsuranceID" ColumnName="healthInsuranceID" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="addressID" ColumnName="addressID" />
+                <ScalarProperty Name="jobTitle" ColumnName="jobTitle" />
+                <ScalarProperty Name="department" ColumnName="department" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="QLKCLModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TestingResults">
             <EntityTypeMapping TypeName="QLKCLModel.TestingResult">
               <MappingFragment StoreEntitySet="TestingResult">
-                <ScalarProperty Name="quarantinePersonID" ColumnName="quarantinePersonID" />
-                <ScalarProperty Name="isPositive" ColumnName="isPositive" />
-                <ScalarProperty Name="dateTesting" ColumnName="dateTesting" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="dateTesting" ColumnName="dateTesting" />
+                <ScalarProperty Name="isPositive" ColumnName="isPositive" />
+                <ScalarProperty Name="quarantinePersonID" ColumnName="quarantinePersonID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

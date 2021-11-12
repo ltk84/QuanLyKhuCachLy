@@ -1,0 +1,17 @@
+﻿<UserControl
+    x:Class="QuanLyKhuCachLy.CustomUserControl.QuarantinePersonWrapperTab"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="600"
+    d:DesignWidth="900"
+    DataContext="{StaticResource PersonVM}"
+    mc:Ignorable="d">
+    <Grid>
+        <local:ListQuarantinedPerson Visibility="{Binding TabList}" />
+        <local:QuarantinedPersonInformation Visibility="{Binding TabInformation}" />
+
+    </Grid>
+</UserControl>
