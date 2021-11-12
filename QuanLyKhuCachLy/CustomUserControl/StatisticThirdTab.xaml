@@ -109,7 +109,7 @@
         </Grid>
         <StackPanel
             Grid.Row="1"
-            Grid.ColumnSpan="1"
+            Grid.ColumnSpan="2"
             Margin="32,24,0,0"
             Orientation="Horizontal">
             <TextBlock
@@ -118,34 +118,44 @@
                 FontWeight="Bold">
                 Báo cáo
             </TextBlock>
-            <StackPanel Width="90" Style="{StaticResource MenuStackPanel}">
-                <materialDesign:PackIcon
-                    Width="18"
-                    Height="18"
-                    VerticalAlignment="Center"
-                    Kind="PrinterOutline"
-                    Style="{StaticResource MenuIcon}" />
-                <TextBlock
-                    VerticalAlignment="Center"
-                    FontSize="14"
-                    Style="{StaticResource MenuText}">
-                    In
-                </TextBlock>
-            </StackPanel>
-            <StackPanel Width="90" Style="{StaticResource MenuStackPanel}">
-                <materialDesign:PackIcon
-                    Width="18"
-                    Height="18"
-                    VerticalAlignment="Center"
-                    Kind="Export"
-                    Style="{StaticResource MenuIcon}" />
-                <TextBlock
-                    VerticalAlignment="Center"
-                    FontSize="14"
-                    Style="{StaticResource MenuText}">
-                    Xuất
-                </TextBlock>
-            </StackPanel>
+            <Button
+                Width="120"
+                Height="Auto"
+                VerticalAlignment="Center"
+                Style="{StaticResource MenuButton}">
+                <StackPanel Style="{StaticResource MenuStackPanel}">
+                    <materialDesign:PackIcon
+                        Width="18"
+                        Height="18"
+                        Kind="PrinterOutline"
+                        Style="{StaticResource MenuIcon}" />
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        FontSize="14"
+                        Style="{StaticResource MenuText}">
+                        In
+                    </TextBlock>
+                </StackPanel>
+            </Button>
+            <Button
+                Width="120"
+                Height="Auto"
+                VerticalAlignment="Center"
+                Style="{StaticResource MenuButton}">
+                <StackPanel Style="{StaticResource MenuStackPanel}">
+                    <materialDesign:PackIcon
+                        Width="18"
+                        Height="18"
+                        Kind="Export"
+                        Style="{StaticResource MenuIcon}" />
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        FontSize="14"
+                        Style="{StaticResource MenuText}">
+                        Xuất
+                    </TextBlock>
+                </StackPanel>
+            </Button>
         </StackPanel>
         <Grid
             Grid.Row="2"
