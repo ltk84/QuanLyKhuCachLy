@@ -108,7 +108,6 @@
                                 Background="#FF1D9583"
                                 Content="Chọn"
                                 FontSize="16"
-                                PreviewMouseDown="Button_PreviewMouseDown"
                                 Style="{StaticResource AddObjectButton}">
                                 <Button.ContextMenu>
                                     <ContextMenu>
