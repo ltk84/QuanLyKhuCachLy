@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace QuanLyKhuCachLy.CustomUserControl
 {
     /// <summary>
-    /// Interaction logic for NotificationScreenTemplateManage.xaml
+    /// Interaction logic for NotificationScreenWrapper.xaml
     /// </summary>
-    public partial class NotificationScreenTemplateManage : UserControl
+    public partial class NotificationScreenWrapper : UserControl
     {
-        public NotificationScreenTemplateManage()
+        public NotificationScreenWrapper()
         {
             InitializeComponent();
         }
-
     }
 }

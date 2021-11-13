@@ -6,38 +6,34 @@
              xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="1024" d:DesignWidth="1098">
+             d:DesignHeight="705" d:DesignWidth="757">
     <StackPanel Margin="40,30,40,30">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="1*" />
-            </Grid.ColumnDefinitions>
+    <Grid Height="645">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="auto"/>
 
-            <Button
-                Grid.Column="0"
-                Margin="0,0,10,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Command="{Binding ToMainCommand}"
-                IsEnabled="True"
-                RenderTransformOrigin="0.5,0.5"
-                Style="{StaticResource MaterialDesignIconButton}"
-                ToolTip="MaterialDesignIconButton">
-                <materialDesign:PackIcon Kind="ArrowLeftCircle" />
-            </Button>
-            <TextBlock
+
+        </Grid.RowDefinitions>
+        <TextBlock
+            Grid.Row="0"
+            
                 Grid.Column="1"
                 VerticalAlignment="Center"
                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                FontSize="14"
-                FontWeight="Regular"  
+                FontSize="22"
+                FontWeight="Bold"  
                 Foreground="#FF434A54">
-                DANH SÁCH NHÂN VIÊN
-            </TextBlock>
-        </Grid>
+                THÔNG BÁO
+        </TextBlock>
 
-        <Grid>
+        <Grid
+            Grid.Row="1"
+            >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="auto"/>
@@ -45,18 +41,18 @@
 
             <StackPanel
                 Grid.Column="0"
-                Margin="0,0,18,0"
+                Margin="0,16,18,8"
                 >
                 <TextBlock
                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                    FontSize="24"
+                    FontSize="16.52"
                     FontWeight="Bold"
                     Foreground="#ff363636">
                     Mẫu
                 </TextBlock>
                 <TextBlock
                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                    FontSize="18"
+                    FontSize="12.39"
                     FontWeight="Regular"
                     TextWrapping="Wrap"
                     Foreground="#ff434A54">
@@ -71,24 +67,24 @@
             <Button
                 Grid.Column="1"
                 VerticalAlignment="Center"
-                FontSize="16"
-                Content="Thêm"
+                FontSize="11"
+                Content="Quãn lý mẫu"
                 Template="{StaticResource add-button-no-background}" />
         </Grid>
 
-        <ScrollViewer
-            Height="288"
+            <Border Grid.Row="2" Background="Transparent" BorderBrush="#FF000000" BorderThickness="1" CornerRadius="8,8,8,8" Margin="0, 0,0,0" Padding="0,5,0,5">
+                <ScrollViewer
             HorizontalScrollBarVisibility="Hidden">
-            <ListView Margin="10" Name="lvDataBinding">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock
+                    <ListView Margin="10" Name="lvDataBinding">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
                                 Grid.Column="0"
                                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                                 FontSize="18"
@@ -98,9 +94,9 @@
                                 Text="Đây là tiêu đề mẫu"
                                 >
 
-                            </TextBlock>
+                                    </TextBlock>
 
-                            <Button
+                                    <Button
                                 Grid.Column="1"
                                 Margin="0,0,24,0"
                                 Width="93"
@@ -109,23 +105,23 @@
                                 Content="Chọn"
                                 FontSize="16"
                                 Style="{StaticResource AddObjectButton}">
-                                <Button.ContextMenu>
-                                    <ContextMenu>
-                                        <ContextMenu.Template>
-                                            <ControlTemplate>
-                                                <local:AddStaffFunctionMenu />
-                                            </ControlTemplate>
-                                        </ContextMenu.Template>
-                                    </ContextMenu>
-                                </Button.ContextMenu>
-                            </Button>
+                                        <Button.ContextMenu>
+                                            <ContextMenu>
+                                                <ContextMenu.Template>
+                                                    <ControlTemplate>
+                                                        <local:AddStaffFunctionMenu />
+                                                    </ControlTemplate>
+                                                </ContextMenu.Template>
+                                            </ContextMenu>
+                                        </Button.ContextMenu>
+                                    </Button>
 
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto" />
-                                    <RowDefinition Height="auto" />
-                                </Grid.RowDefinitions>
-                                <Image
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="auto" />
+                                        </Grid.RowDefinitions>
+                                        <Image
                                     Grid.Row="0"
                                     Width="14"
                                     Height="14"
@@ -134,7 +130,7 @@
                                     VerticalAlignment="Center"
                                     RenderTransformOrigin="0.5,0.5"
                                     Source="/QuanLyKhuCachLy;component/Resources/icons/person_selected.png" />
-                                <TextBlock
+                                        <TextBlock
                                     Grid.Row="1"
                                     VerticalAlignment="Center"
                                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
@@ -144,16 +140,19 @@
                                     Text="12" />
 
 
-                            </Grid>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
 
-        </ScrollViewer>
+                </ScrollViewer>
+            </Border>
 
-        <Grid
-            Margin="0,40,0,0"
+            <Grid
+            Grid.Row="3"
+            
+            Margin="0,0,0,8"
             >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
@@ -169,8 +168,9 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock
+                    VerticalAlignment="Bottom"
                      FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                    FontSize="24"
+                    FontSize="16.52"
                     FontWeight="Bold"
                     Foreground="#FF363636">
                     Nội dung
@@ -194,8 +194,9 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock
+                    VerticalAlignment="Bottom"
                      FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                    FontSize="24"
+                    FontSize="16.52"
                     FontWeight="Bold"
                     Foreground="#FF363636">
                     Đối tượng
@@ -215,7 +216,9 @@
 
         </Grid>
 
-        <Grid>
+        <Grid
+            Grid.Row="4"
+            >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="27"/>
@@ -224,20 +227,37 @@
 
             </Grid.ColumnDefinitions>
 
-            <TextBox
-                Grid.Column="0"
-                Background="#fff"
-                Height="381" Margin="0,0,26.5,0" Grid.ColumnSpan="2">
-                This is the content
-            </TextBox>
+                <Border Grid.Column="0" Background="Transparent" BorderBrush="#FF000000" BorderThickness="1" CornerRadius="8,8,8,8" Margin="0, 0,0,0" Padding="0,5,0,5">
+                    <TextBox
+                        Grid.Column="0"
+                        Background="#fff"
+                        Margin="0,0,0,0" Grid.ColumnSpan="2">
+                        This is the content
+                    </TextBox>
+                </Border>
 
 
-            <TextBox
-                Grid.Column="2"
-                Background="#fff"
-                Height="381">
-                This is the content
-            </TextBox>
-        </Grid>
+                <Border Grid.Column="2" Background="Transparent" BorderBrush="#FF000000" BorderThickness="1" CornerRadius="8,8,8,8" Margin="0, 0,0,0" Padding="0,5,0,5">
+                    <TextBox
+                        Grid.Column="0"
+                        Background="#fff"
+                        Margin="0,0,0,0" Grid.ColumnSpan="2">
+                        This is the content
+                    </TextBox>
+                </Border>
+            </Grid>
+        <Button
+            HorizontalAlignment="Right"
+            Grid.Row="5"
+            Margin="0,10,0,0"
+            Width="137"
+            Height="32"
+            Background="#FF1D9583"
+            Content="Gửi thông báo"
+            FontSize="14"
+            Style="{StaticResource AddObjectButton}">
+        </Button>
+    </Grid>
     </StackPanel>
+
 </UserControl>

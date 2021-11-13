@@ -42,6 +42,11 @@
             <DataTemplate DataType="{x:Type viewModel:QuarantinePersonViewModel}">
                 <userControl:QuarantinePersonWrapperTab />
             </DataTemplate>
+
+
+            <DataTemplate DataType="{x:Type viewModel:NotificationViewModel}">
+                <userControl:NotificationScreenWrapper />
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

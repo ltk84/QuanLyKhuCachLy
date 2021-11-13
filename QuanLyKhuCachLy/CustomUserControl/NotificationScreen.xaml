@@ -6,9 +6,19 @@
              xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="1024" d:DesignWidth="1098">
-    <StackPanel Margin="40,30,40,30">
-        <Grid>
+             d:DesignHeight="705" d:DesignWidth="757">
+    <StackPanel  Margin="40,30,40,30">
+    <Grid Height="645">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid
+            Grid.Row="0"
+            >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="1*" />
@@ -30,14 +40,17 @@
                 Grid.Column="1"
                 VerticalAlignment="Center"
                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                FontSize="14"
+                FontSize="12.39"
                 FontWeight="Regular"  
                 Foreground="#FF434A54">
-                DANH SÁCH NHÂN VIÊN
+                THÔNG BÁO
             </TextBlock>
         </Grid>
 
-        <Grid>
+        <Grid
+            Margin="0,20.65,0,8.26"
+            Grid.Row="1"
+            >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="auto"/>
@@ -49,14 +62,14 @@
                 >
                 <TextBlock
                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                    FontSize="24"
+                    FontSize="16.52"
                     FontWeight="Bold"
                     Foreground="#ff363636">
                     Mẫu
                 </TextBlock>
                 <TextBlock
                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                    FontSize="18"
+                    FontSize="12.39"
                     FontWeight="Regular"
                     TextWrapping="Wrap"
                     Foreground="#ff434A54">
@@ -71,24 +84,25 @@
             <Button
                 Grid.Column="1"
                 VerticalAlignment="Center"
-                FontSize="16"
+                FontSize="11"
                 Content="Thêm"
                 Template="{StaticResource add-button-no-background}" />
         </Grid>
 
-        <ScrollViewer
-            Height="333"
+
+            <Border Grid.Row="2" Background="Transparent" BorderBrush="#FF000000" BorderThickness="1" CornerRadius="8,8,8,8" Margin="0, 0,0,0" Padding="0,5,0,5">
+                <ScrollViewer
             HorizontalScrollBarVisibility="Hidden">
-            <ListView Margin="10" Name="lvDataBinding">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock
+                    <ListView Margin="10" Name="lvDataBinding">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
                                 Grid.Column="0"
                                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                                 FontSize="18"
@@ -98,9 +112,9 @@
                                 Text="Đây là tiêu đề mẫu"
                                 >
 
-                            </TextBlock>
+                                    </TextBlock>
 
-                            <Button
+                                    <Button
                                 Grid.Column="1"
                                 Margin="0,0,24,0"
                                 Width="93"
@@ -110,23 +124,23 @@
                                 FontSize="16"
                                 
                                 Style="{StaticResource AddObjectButton}">
-                                <Button.ContextMenu>
-                                    <ContextMenu>
-                                        <ContextMenu.Template>
-                                            <ControlTemplate>
-                                                <local:AddStaffFunctionMenu />
-                                            </ControlTemplate>
-                                        </ContextMenu.Template>
-                                    </ContextMenu>
-                                </Button.ContextMenu>
-                            </Button>
+                                        <Button.ContextMenu>
+                                            <ContextMenu>
+                                                <ContextMenu.Template>
+                                                    <ControlTemplate>
+                                                        <local:AddStaffFunctionMenu />
+                                                    </ControlTemplate>
+                                                </ContextMenu.Template>
+                                            </ContextMenu>
+                                        </Button.ContextMenu>
+                                    </Button>
 
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto" />
-                                    <RowDefinition Height="auto" />
-                                </Grid.RowDefinitions>
-                                <Image
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="auto" />
+                                        </Grid.RowDefinitions>
+                                        <Image
                                     Grid.Row="0"
                                     Width="14"
                                     Height="14"
@@ -135,7 +149,7 @@
                                     VerticalAlignment="Center"
                                     RenderTransformOrigin="0.5,0.5"
                                     Source="/QuanLyKhuCachLy;component/Resources/icons/person_selected.png" />
-                                <TextBlock
+                                        <TextBlock
                                     Grid.Row="1"
                                     VerticalAlignment="Center"
                                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
@@ -145,17 +159,20 @@
                                     Text="12" />
 
 
-                            </Grid>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
 
-        </ScrollViewer>
+                </ScrollViewer>
+            </Border>
 
 
-        <Grid
-                Margin="0,40,0,20">
+            <Grid
+            Grid.Row="3"
+            
+                Margin="0,12,0,8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="auto"/>
@@ -163,7 +180,7 @@
 
             <TextBlock
                      FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                    FontSize="24"
+                    FontSize="16.52"
                     FontWeight="Bold"
                     Foreground="#FF363636">
                     Nội dung
@@ -178,11 +195,14 @@
 
         </Grid>
 
-        <TextBox
-            Height="426"
+        <Border Grid.Row="4" Background="Transparent" BorderBrush="#FF000000" BorderThickness="1" CornerRadius="8,8,8,8" Margin="0, 13,0,0" Padding="10">
+            <TextBox
             Background="#FFF"
             />
+        </Border>
+        
 
 
+    </Grid>
     </StackPanel>
 </UserControl>
