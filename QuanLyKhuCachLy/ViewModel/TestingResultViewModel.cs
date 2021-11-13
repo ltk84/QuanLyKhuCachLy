@@ -2,9 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace QuanLyKhuCachLy.ViewModel
@@ -45,10 +47,24 @@ namespace QuanLyKhuCachLy.ViewModel
             set
             {
                 _SelectedItem = value;
-
                 OnPropertyChanged();
             }
         }
+
+        private bool _SelectedResult;
+        public bool SelectedResult
+        {
+            get => _SelectedResult;
+            set
+            {
+                _SelectedResult = value;
+                if (SelectedItem != null)
+                    SelectedItem.isPositive = SelectedResult;
+                OnPropertyChanged();
+            }
+        }
+
+
 
         #region list
         private ObservableCollection<TestingResult> _TestingResultList;
@@ -61,18 +77,8 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
-        //private ObservableCollection<ResultOfTesting> _ResultList;
-        //public ObservableCollection<ResultOfTesting> ResultList
-        //{
-        //    get => _ResultList; set
-        //    {
-        //        _ResultList = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
-
-        private ObservableCollection<string> _ResultList;
-        public ObservableCollection<string> ResultList
+        private Dictionary<string, bool> _ResultList;
+        public Dictionary<string, bool> ResultList
         {
             get => _ResultList; set
             {
@@ -80,6 +86,16 @@ namespace QuanLyKhuCachLy.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        //private ObservableCollection<string> _ResultList;
+        //public ObservableCollection<string> ResultList
+        //{
+        //    get => _ResultList; set
+        //    {
+        //        _ResultList = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
         #endregion
 
         #region command
@@ -92,15 +108,16 @@ namespace QuanLyKhuCachLy.ViewModel
         public TestingResultViewModel()
         {
             TestingResultList = new ObservableCollection<TestingResult>();
-            //ResultList = new ObservableCollection<ResultOfTesting>()
+
+            //ResultList = new ObservableCollection<string>()
             //{
-            //    new ResultOfTesting() {resultString = "Dương tính", resultBool = true},
-            //    new ResultOfTesting() {resultString = "Âm tính", resultBool = false},
+            //   "Dương tính", "Âm tính"
             //};
 
-            ResultList = new ObservableCollection<string>()
+            ResultList = new Dictionary<string, bool>()
             {
-               "Dương tính", "Âm tính"
+                {"Âm tính", false },
+                {"Dương tính", true },
             };
 
             AddOnUICommand = new RelayCommand<object>((p) =>
@@ -111,16 +128,6 @@ namespace QuanLyKhuCachLy.ViewModel
            {
                AddTestingResultUI();
            });
-
-            //EditOnUICommand = new RelayCommand<object>((p) =>
-            //{
-            //    if (SelectedItem != null)
-            //        return true;
-            //    return false;
-            //}, (p) =>
-            //{
-            //    EditTestingResultUI();
-            //});
 
             DeleteOnUICommand = new RelayCommand<object>((p) => { if (SelectedItem != null) return true; return false; }, (p) =>
             {
@@ -165,13 +172,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                 foreach (var trUI in TestingResultList)
                 {
-                    if (TRList.Contains(trUI))
-                    {
-                        var trDB = DataProvider.ins.db.TestingResults.Where(x => x.id == trUI.id).FirstOrDefault();
-                        if (trDB.dateTesting.CompareTo(trUI.dateTesting) != 0) trDB.dateTesting = trUI.dateTesting;
-                        if (trDB.isPositive != trUI.isPositive) trDB.isPositive = trUI.isPositive;
-                    }
-                    else
+                    if (!TRList.Contains(trUI))
                     {
                         trUI.quarantinePersonID = PersonID;
                         DataProvider.ins.db.TestingResults.Add(trUI);
@@ -188,24 +189,29 @@ namespace QuanLyKhuCachLy.ViewModel
                 }
 
                 DataProvider.ins.db.SaveChanges();
-                SyncTestingResultList(PersonID);
+                TestingResultList = new ObservableCollection<TestingResult>(DataProvider.ins.db.TestingResults.Where(x => x.quarantinePersonID == PersonID));
             }
         }
 
-        public void SyncTestingResultList(int PersonID) => TestingResultList = new ObservableCollection<TestingResult>(DataProvider.ins.db.TestingResults.Where(x => x.quarantinePersonID == PersonID));
+        public void RollbackTransaction(int PersonID)
+        {
+            DataProvider.ins.db.ChangeTracker.Entries().Where(e => e.Entity != null).ToList().ForEach(e => e.State = EntityState.Detached);
+            TestingResultList = new ObservableCollection<TestingResult>(DataProvider.ins.db.TestingResults.Where(x => x.quarantinePersonID == PersonID));
+        }
 
         public void ClearTestingResultList() => TestingResultList.Clear();
         #endregion
     }
 
-    public class ResultOfTesting
+    public class ComboBoxTestingResult
     {
-        public string resultString { get; set; }
-        public bool resultBool { get; set; }
+        public string label;
+        public bool value;
 
-        public ResultOfTesting()
+        public ComboBoxTestingResult(string k, bool v)
         {
-
+            label = k;
+            value = v;
         }
     }
 }

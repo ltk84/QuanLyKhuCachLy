@@ -11,6 +11,7 @@
     d:DesignHeight="500"
     d:DesignWidth="830"
     DataContext="{StaticResource ResourceKey=PersonVM}"
+    WindowStyle="None"
     mc:Ignorable="d">
     <Viewbox
         Margin="0,0,0,0"

@@ -38,5 +38,7 @@ namespace QuanLyKhuCachLy.CustomUserControl
         {
             CheckIsNumeric(e);
         }
+
+
     }
 }

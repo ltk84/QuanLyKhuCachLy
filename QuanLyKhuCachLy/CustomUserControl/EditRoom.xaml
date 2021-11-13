@@ -12,6 +12,7 @@
     Width="552.747"
     Height="552.857"
     DataContext="{StaticResource RoomVM}"
+    WindowStyle="None"
     mc:Ignorable="d">
     <Border Style="{StaticResource RecommendationField}">
         <StackPanel>

@@ -10,7 +10,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    DataContext="{StaticResource PersonVM}"
     mc:Ignorable="d">
     <StackPanel Margin="0,0,0,0">
         <TextBlock
@@ -271,10 +270,10 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <ComboBox
-                                        DataContext="{StaticResource PersonVM}"
-                                        ItemsSource="{Binding TestingResultViewModel.ResultList}"
-                                        SelectedIndex="1"
-                                        SelectedValue="{Binding TestingResultViewModel.SelectedItem.isPositive, Converter={StaticResource convert}}"
+                                        DisplayMemberPath="Key"
+                                        ItemsSource="{Binding TestingResultViewModel.ResultList, Source={StaticResource PersonVM}}"
+                                        SelectedValue="{Binding isPositive, UpdateSourceTrigger=PropertyChanged}"
+                                        SelectedValuePath="Value"
                                         Style="{StaticResource ComboBoxField}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

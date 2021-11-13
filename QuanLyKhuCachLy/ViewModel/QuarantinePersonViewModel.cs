@@ -836,8 +836,8 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 if (SelectedItem != null)
                 {
-                    InjectionRecordViewModel.SyncInjectionRecordList(SelectedItem.id);
-                    TestingResultViewModel.SyncTestingResultList(SelectedItem.id);
+                    InjectionRecordViewModel.RollbackTransaction(SelectedItem.id);
+                    TestingResultViewModel.RollbackTransaction(SelectedItem.id);
                 }
                 p.Close();
             });
