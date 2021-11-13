@@ -242,16 +242,11 @@
                     Mức độ
                 </TextBlock>
                 <ComboBox
-                    utility:ProtocolSettingsLayout.MVVMHasError="{Binding SeverityFieldHasError}"
                     DisplayMemberPath="level"
                     ItemsSource="{Binding SeverityList}"
                     Style="{StaticResource ComboBoxField}">
                     <ComboBox.SelectedItem>
-                        <Binding Path="QPSelectedLevel" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <vr:RequiredField />
-                            </Binding.ValidationRules>
-                        </Binding>
+                        <Binding Path="QPSelectedLevel" UpdateSourceTrigger="PropertyChanged" />
                     </ComboBox.SelectedItem>
                 </ComboBox>
             </StackPanel>

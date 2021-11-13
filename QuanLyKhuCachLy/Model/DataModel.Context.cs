@@ -12,19 +12,19 @@ namespace QuanLyKhuCachLy.Model
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
     public partial class QLKCLEntities : DbContext
     {
         public QLKCLEntities()
             : base("name=QLKCLEntities")
         {
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Address> Addresses { get; set; }
         public virtual DbSet<DestinationHistory> DestinationHistories { get; set; }

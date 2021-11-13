@@ -15,12 +15,6 @@ namespace QuanLyKhuCachLy.Model
 
     public partial class HealthInformation : BaseViewModel
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public HealthInformation()
-        {
-            this.QuarantinePersons = new HashSet<QuarantinePerson>();
-        }
-
         public int id { get; set; }
 
         private bool _isFever;
@@ -102,8 +96,19 @@ namespace QuanLyKhuCachLy.Model
                 OnPropertyChanged();
             }
         }
+        public int _quarantinePersonID { get; set; }
+        public int quarantinePersonID
+        {
+            get => _quarantinePersonID; set
+            {
+                _quarantinePersonID = value;
+                OnPropertyChanged();
+            }
+        }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<QuarantinePerson> QuarantinePersons { get; set; }
+        public virtual QuarantinePerson QuarantinePerson { get; set; }
+
     }
 }
+
+

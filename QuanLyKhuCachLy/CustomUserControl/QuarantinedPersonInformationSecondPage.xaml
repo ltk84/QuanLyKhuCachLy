@@ -4,9 +4,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="500"
     d:DesignWidth="700"
+    DataContext="{StaticResource PersonVM}"
     mc:Ignorable="d">
     <Grid>
         <Grid>
@@ -35,12 +37,22 @@
                 Margin="15,30,10,10"
                 AutoGenerateColumns="False"
                 BorderBrush="Black"
-                BorderThickness="1">
+                BorderThickness="1"
+                CanUserAddRows="False"
+                CanUserReorderColumns="False"
+                CanUserResizeColumns="False"
+                CanUserResizeRows="False"
+                ItemsSource="{Binding InjectionRecordViewModel.InjectionRecordList}"
+                SelectedItem="{Binding InjectionRecordViewModel.SelectedItem}">
                 <DataGrid.Columns>
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="70"
-                        Header="Lần">
+                        Binding="{Binding id}"
+                        EditingElementStyle="{StaticResource EditingDataGridElement}"
+                        ElementStyle="{StaticResource DataGridElement}"
+                        Header="Lần"
+                        IsReadOnly="True">
                         <DataGridColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="FontSize" Value="14" />
@@ -53,7 +65,10 @@
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="90"
-                        Header="Tên">
+                        Binding="{Binding vaccineName}"
+                        ElementStyle="{StaticResource DataGridElement}"
+                        Header="Tên"
+                        IsReadOnly="True">
                         <DataGridColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="FontSize" Value="14" />
@@ -63,10 +78,16 @@
                             </Style>
                         </DataGridColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn
+                    <DataGridTemplateColumn
                         Width="*"
                         MinWidth="70"
-                        Header="Ngày tiêm">
+                        Header="Ngày tiêm"
+                        IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DatePicker materialDesign:HintAssist.Hint="Chọn ngày cuối" SelectedDate="{Binding dateInjection}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
                         <DataGridColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="FontSize" Value="14" />
@@ -75,7 +96,7 @@
                                 <Setter Property="Background" Value="Transparent" />
                             </Style>
                         </DataGridColumn.HeaderStyle>
-                    </DataGridTextColumn>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
             <TextBlock

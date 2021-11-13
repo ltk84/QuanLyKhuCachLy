@@ -52,6 +52,7 @@
                 Grid.Column="1"
                 Margin="0,0,60,0"
                 VerticalAlignment="Bottom"
+                Command="{Binding DeleteCommand}"
                 Content="Xóa nhân viên"
                 Template="{StaticResource delete-button}" />
 

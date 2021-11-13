@@ -19,6 +19,7 @@ namespace QuanLyKhuCachLy.Model
         public QuarantinePerson()
         {
             this.DestinationHistories = new HashSet<DestinationHistory>();
+            this.HealthInformations = new HashSet<HealthInformation>();
             this.InjectionRecords = new HashSet<InjectionRecord>();
             this.TestingResults = new HashSet<TestingResult>();
         }
@@ -95,8 +96,8 @@ namespace QuanLyKhuCachLy.Model
             }
         }
 
-        private int _levelID;
-        public int levelID
+        private Nullable<int> _levelID;
+        public Nullable<int> levelID
         {
             get => _levelID; set
             {
@@ -144,16 +145,6 @@ namespace QuanLyKhuCachLy.Model
             }
         }
 
-        private Nullable<int> _healthInformationID;
-        public Nullable<int> healthInformationID
-        {
-            get => _healthInformationID; set
-            {
-                _healthInformationID = value;
-                OnPropertyChanged();
-            }
-        }
-
         private Nullable<int> _roomID;
         public Nullable<int> roomID
         {
@@ -163,25 +154,26 @@ namespace QuanLyKhuCachLy.Model
                 OnPropertyChanged();
             }
         }
+        public Nullable<bool> _completeQuarantine { get; set; }
+        public Nullable<bool> completeQuarantine
+        {
+            get => _completeQuarantine; set
+            {
+                _completeQuarantine = value;
+                OnPropertyChanged();
+            }
+        }
 
         public virtual Address Address { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DestinationHistory> DestinationHistories { get; set; }
-        public virtual HealthInformation HealthInformation { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HealthInformation> HealthInformations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InjectionRecord> InjectionRecords { get; set; }
         public virtual Severity Severity { get; set; }
         public virtual QuarantineRoom QuarantineRoom { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TestingResult> TestingResults { get; set; }
-        public bool CheckValidateProperty()
-        {
-            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(sex) || string.IsNullOrWhiteSpace(citizenID)
-                || string.IsNullOrWhiteSpace(nationality) || string.IsNullOrWhiteSpace(healthInsuranceID) || string.IsNullOrWhiteSpace(phoneNumber)
-                || arrivedDate < leaveDate || dateOfBirth <= arrivedDate || quarantineDays < 0)
-                return false;
-
-            return true;
-        }
     }
 }
