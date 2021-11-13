@@ -8,7 +8,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="500"
     d:DesignWidth="700"
-    DataContext="{StaticResource PersonVM}"
     mc:Ignorable="d">
     <Grid>
         <Grid>
@@ -78,16 +77,13 @@
                             </Style>
                         </DataGridColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTemplateColumn
+                    <DataGridTextColumn
                         Width="*"
                         MinWidth="70"
+                        Binding="{Binding dateInjection}"
                         Header="Ngày tiêm"
                         IsReadOnly="True">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <DatePicker materialDesign:HintAssist.Hint="Chọn ngày cuối" SelectedDate="{Binding dateInjection}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
+
                         <DataGridColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="FontSize" Value="14" />
@@ -96,7 +92,7 @@
                                 <Setter Property="Background" Value="Transparent" />
                             </Style>
                         </DataGridColumn.HeaderStyle>
-                    </DataGridTemplateColumn>
+                    </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
             <TextBlock
@@ -109,18 +105,26 @@
                 Foreground="#FF434A54">
                 Thông tin xét nghiệm
             </TextBlock>
+
             <DataGrid
-                x:Name="TestInformation"
+                x:Name="testingResult"
                 Grid.Row="1"
                 Grid.Column="0"
                 Margin="15,30,10,10"
                 AutoGenerateColumns="False"
                 BorderBrush="Black"
-                BorderThickness="1">
+                BorderThickness="1"
+                CanUserAddRows="False"
+                CanUserReorderColumns="False"
+                CanUserResizeColumns="False"
+                CanUserResizeRows="False"
+                ItemsSource="{Binding TestingResultViewModel.TestingResultList}"
+                SelectedItem="{Binding TestingResultViewModel.SelectedItem}">
                 <DataGrid.Columns>
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="70"
+                        Binding="{Binding id}"
                         Header="Lần">
                         <DataGridColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
@@ -133,8 +137,9 @@
                     </DataGridTextColumn>
                     <DataGridTextColumn
                         Width="*"
-                        MinWidth="90"
-                        Header="Ngày">
+                        MinWidth="150"
+                        Binding="{Binding dateTesting}"
+                        Header="Ngày xét nghiệm">
                         <DataGridColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="FontSize" Value="14" />
@@ -144,10 +149,23 @@
                             </Style>
                         </DataGridColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn
+                    <DataGridTemplateColumn
                         Width="*"
-                        MinWidth="70"
+                        MinWidth="90"
                         Header="Kết quả">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox x:Name="txt" IsReadOnly="True" />
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding isPositive}" Value="true">
+                                        <Setter TargetName="txt" Property="Text" Value="Dương tính" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding isPositive}" Value="false">
+                                        <Setter TargetName="txt" Property="Text" Value="Âm tính" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
                         <DataGridColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="FontSize" Value="14" />
@@ -156,7 +174,8 @@
                                 <Setter Property="Background" Value="Transparent" />
                             </Style>
                         </DataGridColumn.HeaderStyle>
-                    </DataGridTextColumn>
+                    </DataGridTemplateColumn>
+
                 </DataGrid.Columns>
             </DataGrid>
             <TextBlock
@@ -183,6 +202,7 @@
                         Width="*"
                         MinWidth="70"
                         Header="Ngày">
+
                         <DataGridColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="FontSize" Value="14" />

@@ -82,6 +82,7 @@
     </ApplicationDefinition>
     <Compile Include="Converter\DateTimeToStringConverter.cs" />
     <Compile Include="Converter\IntToStringConverter.cs" />
+    <Compile Include="Converter\TestResultToBoolConverter.cs" />
     <Compile Include="CustomUserControl\AddPersonFunctionMenu.xaml.cs">
       <DependentUpon>AddPersonFunctionMenu.xaml</DependentUpon>
     </Compile>
@@ -289,6 +290,7 @@
     <Compile Include="ViewModel\ReportViewModel.cs" />
     <Compile Include="ViewModel\SeverityViewModel.cs" />
     <Compile Include="ViewModel\StaffViewModel.cs" />
+    <Compile Include="ViewModel\TestingResultViewModel.cs" />
     <Page Include="CustomUserControl\AddPersonFunctionMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

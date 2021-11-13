@@ -9,16 +9,44 @@
 
 namespace QuanLyKhuCachLy.Model
 {
+    using QuanLyKhuCachLy.ViewModel;
     using System;
     using System.Collections.Generic;
-    
-    public partial class TestingResult
+
+    public partial class TestingResult : BaseViewModel
     {
         public int id { get; set; }
-        public System.DateTime dateTesting { get; set; }
-        public bool isPositive { get; set; }
-        public int quarantinePersonID { get; set; }
-    
+
+        private System.DateTime _dateTesting;
+        public System.DateTime dateTesting
+        {
+            get => _dateTesting; set
+            {
+                _dateTesting = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _isPositive;
+        public bool isPositive
+        {
+            get => _isPositive; set
+            {
+                _isPositive = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private int _quarantinePersonID;
+        public int quarantinePersonID
+        {
+            get => _quarantinePersonID; set
+            {
+                _quarantinePersonID = value;
+                OnPropertyChanged();
+            }
+        }
+
         public virtual QuarantinePerson QuarantinePerson { get; set; }
     }
 }

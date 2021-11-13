@@ -90,9 +90,6 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand EditOnUICommand { get; set; }
         public ICommand DeleteOnUICommand { get; set; }
 
-        public ICommand AddCommand { get; set; }
-        public ICommand EditCommand { get; set; }
-        public ICommand DeleteCommand { get; set; }
         #endregion
 
         private static InjectionRecordViewModel _ins;
@@ -121,15 +118,15 @@ namespace QuanLyKhuCachLy.ViewModel
                 AddInjectionRecordUI();
             });
 
-            EditOnUICommand = new RelayCommand<object>((p) =>
-            {
-                if (SelectedItem != null)
-                    return true;
-                return false;
-            }, (p) =>
-            {
-                EditInjectionRecordUI();
-            });
+            //EditOnUICommand = new RelayCommand<object>((p) =>
+            //{
+            //    if (SelectedItem != null)
+            //        return true;
+            //    return false;
+            //}, (p) =>
+            //{
+            //    EditInjectionRecordUI();
+            //});
 
             DeleteOnUICommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
@@ -173,13 +170,13 @@ namespace QuanLyKhuCachLy.ViewModel
             InjectionRecordList.Add(injectionRecord);
         }
 
-        void EditInjectionRecordUI()
-        {
-            var injectionRecord = InjectionRecordList[InjectionRecordList.IndexOf(SelectedItem)];
+        //void EditInjectionRecordUI()
+        //{
+        //    var injectionRecord = InjectionRecordList[InjectionRecordList.IndexOf(SelectedItem)];
 
-            InjectionRecordList[InjectionRecordList.IndexOf(injectionRecord)].dateInjection = SelectedItem.dateInjection;
-            InjectionRecordList[InjectionRecordList.IndexOf(injectionRecord)].vaccineName = SelectedItem.vaccineName;
-        }
+        //    InjectionRecordList[InjectionRecordList.IndexOf(injectionRecord)].dateInjection = SelectedItem.dateInjection;
+        //    InjectionRecordList[InjectionRecordList.IndexOf(injectionRecord)].vaccineName = SelectedItem.vaccineName;
+        //}
 
         void DeleteInjectionRecordUI()
         {
@@ -200,7 +197,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 DataProvider.ins.db.SaveChanges();
                 ClearInjectionRecordList();
             }
-            else if (action == "EditOrDelete")
+            else
             {
                 List<InjectionRecord> IRList = DataProvider.ins.db.InjectionRecords.Where(x => x.quarantinePersonID == PersonID).ToList();
 
@@ -224,10 +221,6 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     if (!InjectionRecordList.Contains(irInDB))
                     {
-                        //var irUI = InjectionRecordList.Where(x => x.id == irInDB.id).FirstOrDefault();
-                        //if (irInDB.dateInjection.CompareTo(irUI.dateInjection) != 0) irInDB.dateInjection = irUI.dateInjection;
-                        //if (irInDB.vaccineName != irUI.vaccineName) irInDB.vaccineName = irUI.vaccineName;
-
                         DataProvider.ins.db.InjectionRecords.Remove(irInDB);
                     }
                 }

@@ -314,6 +314,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     SetSelectedItemToProperty();
                     InjectionRecordViewModel.ins.IRQuarantinePersonID = SelectedItem.id;
                     DestinationHistoryViewModel = new DestinationHistoryViewModel(currentPersonID: SelectedItem.id);
+                    TestingResultViewModel.ins.PersonID = SelectedItem.id;
                 }
             }
         }
@@ -449,6 +450,16 @@ namespace QuanLyKhuCachLy.ViewModel
             get => _DestinationHistoryViewModel; set
             {
                 _DestinationHistoryViewModel = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private TestingResultViewModel _TestingResultViewModel;
+        public TestingResultViewModel TestingResultViewModel
+        {
+            get => _TestingResultViewModel; set
+            {
+                _TestingResultViewModel = value;
                 OnPropertyChanged();
             }
         }
@@ -701,9 +712,9 @@ namespace QuanLyKhuCachLy.ViewModel
 
             QAInformation = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
 
-            //InjectionRecordViewModel = new InjectionRecordViewModel();
             InjectionRecordViewModel = InjectionRecordViewModel.ins;
             DestinationHistoryViewModel = new DestinationHistoryViewModel();
+            TestingResultViewModel = TestingResultViewModel.ins;
 
             NationalityList = new ObservableCollection<string>() {
                 "VietNam", "Ameriden", "Phap", "Dut", "Em"
@@ -781,6 +792,9 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 TabInformation = Visibility.Hidden;
                 TabList = Visibility.Visible;
+                TabIndexInformation = 1;
+                TabInformation1 = Visibility.Visible;
+                TabInformation2 = Visibility.Hidden;
             });
 
 
@@ -821,7 +835,10 @@ namespace QuanLyKhuCachLy.ViewModel
             CancelCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
                 if (SelectedItem != null)
+                {
                     InjectionRecordViewModel.SyncInjectionRecordList(SelectedItem.id);
+                    TestingResultViewModel.SyncTestingResultList(SelectedItem.id);
+                }
                 p.Close();
             });
         }
@@ -956,6 +973,7 @@ namespace QuanLyKhuCachLy.ViewModel
             QPSelectedLevel = null;
 
             InjectionRecordViewModel.ins.ClearInjectionRecordList();
+            TestingResultViewModel.ins.ClearTestingResultList();
         }
 
         void AddQuarantinePerson()
@@ -1024,6 +1042,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     DataProvider.ins.db.SaveChanges();
 
                     InjectionRecordViewModel.ins.ApplyInjectionRecordToDB(Person.id, "Add");
+                    TestingResultViewModel.ins.ApplyTestingResultToDb(Person.id, "Add");
 
                     transaction.Commit();
 
@@ -1123,6 +1142,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     InitDisplayHealthInformation(PersonHealthInformation);
 
                     InjectionRecordViewModel.ApplyInjectionRecordToDB(Person.id, "EditOrDelete");
+                    TestingResultViewModel.ApplyTestingResultToDb(Person.id, "EditOrDelete");
 
                     transaction.Commit();
 
