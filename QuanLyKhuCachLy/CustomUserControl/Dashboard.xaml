@@ -201,7 +201,7 @@
             <ScrollViewer
                 Grid.Row="1"
                 Grid.Column="0"
-                Height="350"
+                Height="360"
                 VerticalAlignment="Top"
                 VerticalScrollBarVisibility="Auto">
                 <StackPanel Margin="10">
@@ -226,28 +226,7 @@
                                 Style="{StaticResource DashboardButton}" />
                         </StackPanel>
                     </Border>
-                    <Border Margin="0,20,0,0" Style="{StaticResource RecommendationField}">
-                        <StackPanel Margin="40,25">
-                            <TextBlock FontSize="20" Style="{StaticResource DashboardTitle}">
-                                GỬI THÔNG BÁO HOÀN THÀNH CÁCH LY
-                            </TextBlock>
-                            <TextBlock
-                                Margin="0,5,0,0"
-                                FontSize="14"
-                                Style="{StaticResource DashboardContent}">
-                                Có 39 người dự kiến hoàn thành cách ly hôm nay.
-                            </TextBlock>
-                            <Button
-                                Width="218"
-                                Height="35"
-                                Margin="0,20,0,0"
-                                HorizontalAlignment="Right"
-                                Content="Xem đề xuất gửi thông báo"
-                                FontSize="12"
-                                Style="{StaticResource DashboardButton}" />
-                        </StackPanel>
-                    </Border>
-                    <Border Margin="0,20,0,0" Style="{StaticResource RecommendationField}">
+                    <Border Margin="0,25,0,0" Style="{StaticResource RecommendationField}">
                         <StackPanel Margin="40,25">
                             <TextBlock FontSize="20" Style="{StaticResource DashboardTitle}">
                                 GỬI THÔNG BÁO HOÀN THÀNH CÁCH LY
@@ -273,7 +252,7 @@
             <Border
                 Grid.Row="1"
                 Grid.Column="1"
-                Margin="24,10,32,10"
+                Margin="24,10,32,0"
                 HorizontalAlignment="Right"
                 Background="#FFFAAC2D"
                 Style="{StaticResource RecommendationField}">
