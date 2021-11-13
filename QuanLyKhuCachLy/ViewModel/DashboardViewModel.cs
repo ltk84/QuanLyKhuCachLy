@@ -192,13 +192,23 @@ namespace QuanLyKhuCachLy.ViewModel
         #endregion
 
         public DashboardViewModel() {
-            Init();
+            StatisticInit();
+            ChartInit();
         }
         #region Method
 
         #region Fundamental Function
 
-        private void Init()
+        private void StatisticInit()
+        {
+            QuarantinePersonCount = CountQuarantinePersonStatistic();
+            NewQuarantinePersonCount = CountNewQuarantinePersonStatistic();
+            QPWithNoRoomCount = CountQuarantinePersonWithNoRoomStatistic();
+            QPFinishCount = CountFinishQuarantinePersonStatistic();
+            AvailableCapacity = CountAvailableCapacityStatistic();
+        }
+
+        private void ChartInit()
         {
             DateTime BeginDate = DateTime.Now.AddDays(-7).Date;
             DateTime EndDate = DateTime.Now.Date;
@@ -295,6 +305,88 @@ namespace QuanLyKhuCachLy.ViewModel
             FirstChartVisibility = Visibility.Hidden;
             SecondChartVisibility = Visibility.Hidden;
             ThirdChartVisibility = Visibility.Visible;
+        }
+
+        #endregion
+
+        #region General Statistic
+
+        private int CountQuarantinePersonStatistic()
+        {
+            int count = 0;
+            try
+            {
+                count = DataProvider.ins.db.QuarantinePersons.Count();
+            }
+            catch
+            {
+                MessageBox.Show("Xảy ra lỗi khi thực thi đếm người cách ly");
+            }
+            return count;
+        }
+
+        private int CountNewQuarantinePersonStatistic()
+        {
+            int count = 0;
+            DateTime date = DateTime.Now.Date;
+            try
+            {
+                count = DataProvider.ins.db.QuarantinePersons.Where(person => person.arrivedDate == date).Count();
+            }
+            catch
+            {
+                MessageBox.Show("Xảy ra lỗi khi thực thi đếm người cách ly mới");
+            }
+            return count;
+        }
+
+        private int CountQuarantinePersonWithNoRoomStatistic()
+        {
+            int count = 0;
+            try
+            {
+                ObservableCollection<Model.QuarantinePerson> QuarantinePersonList = new ObservableCollection<QuarantinePerson> (DataProvider.ins.db.QuarantinePersons);
+                count = QuarantinePersonList.Where(person => person.roomID == null).Count();
+            }
+            catch
+            {
+                MessageBox.Show("Xảy ra lỗi khi thực thi đếm người cách ly chưa có phòng");
+            }
+            return count;
+        }
+
+        private int CountFinishQuarantinePersonStatistic()
+        {
+            int count = 0;
+            DateTime date = DateTime.Now.Date;
+            try
+            {
+                count = DataProvider.ins.db.QuarantinePersons.Where(person => person.leaveDate == date).Count();
+            }
+            catch
+            {
+                MessageBox.Show("Xảy ra lỗi khi thực thi đếm người hoàn thành cách ly");
+            }
+            return count;
+        }
+
+        private int CountAvailableCapacityStatistic()
+        {
+            int count = 0;
+            DateTime date = DateTime.Now.Date;
+            try
+            {
+                ObservableCollection<Model.QuarantineRoom> QuarantineRoomList = new ObservableCollection<Model.QuarantineRoom>(DataProvider.ins.db.QuarantineRooms);
+                for (int i = 0; i < QuarantineRoomList.Count(); i++)
+                {
+                    count += QuarantineRoomList[i].capacity - QuarantineRoomList[i].QuarantinePersons.Count();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Xảy ra lỗi khi thực thi tính sức chứa khả dụng");
+            }
+            return count;
         }
 
         #endregion
