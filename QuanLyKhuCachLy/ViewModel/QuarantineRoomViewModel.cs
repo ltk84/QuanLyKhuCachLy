@@ -16,7 +16,76 @@ namespace QuanLyKhuCachLy.ViewModel
     {
 
         #region property
+
+
+        // Từ khóa cho việc tìm kiếm
+        private String _SearchKey;
+        public String SearchKey
+        {
+            get => _SearchKey; set
+            {
+                _SearchKey = value;
+                OnPropertyChanged();
+                SearchListRoom();
+            }
+        }
+
+        // Các tùy chọn lọc
+        private string[] _FilterType;
+        public string[] FilterType
+        {
+            get => _FilterType; set
+            {
+                _FilterType = value; OnPropertyChanged();
+            }
+        }
+
+        private string[] _FilterProperty;
+        public string[] FilterProperty
+        {
+            get => _FilterProperty; set
+            {
+                _FilterProperty = value; OnPropertyChanged();
+            }
+        }
+
+        // Các giá trị lọc
+        private string _SelectedFilterType;
+        public string SelectedFilterType
+        {
+            get => _SelectedFilterType; set
+            {
+                _SelectedFilterType = value;
+                OnPropertyChanged();
+                getFilterProperty();
+            }
+        }
+
+        private String _SelectedFilterProperty;
+        public String SelectedFilterProperty
+        {
+            get => _SelectedFilterProperty; set
+            {
+                _SelectedFilterProperty = value;
+                OnPropertyChanged();
+                SelectFilterProperty();
+            }
+        }
+
         #region list
+
+
+        private Model.QuarantineRoom[] _RoomListView;
+        public Model.QuarantineRoom[] RoomListView
+        {
+            get => _RoomListView; set
+            {
+                _RoomListView = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         private ObservableCollection<Model.QuarantineRoom> _RoomList;
         public ObservableCollection<Model.QuarantineRoom> RoomList
         {
@@ -168,7 +237,17 @@ namespace QuanLyKhuCachLy.ViewModel
             Tab2 = Visibility.Hidden;
 
             RoomList = new ObservableCollection<Model.QuarantineRoom>(DataProvider.ins.db.QuarantineRooms);
+            RoomListView = RoomList.ToArray();
             RoomLevelList = new ObservableCollection<Severity>(DataProvider.ins.db.Severities);
+
+
+
+
+            RoomListView = RoomList.ToArray();
+            FilterType = new string[] { "Loại phòng", "Sức chứa" };
+            SelectedFilterType = "Tất cả";
+            SelectedFilterProperty = "Chọn phương thức lọc";
+            getFilterProperty();
 
             _PersonInRoomViewModel = new QuarantinePersonInRoomViewModel(CurrentRoomID: RoomID);
 
@@ -251,6 +330,84 @@ namespace QuanLyKhuCachLy.ViewModel
         }
 
         #region method
+
+
+        // hàm gọi khi thay đổi SearchKey, thay đổi giá trị của RoomListView.
+        void SearchListRoom()
+        {
+            SelectedFilterType = "Tất cả";
+            if (SearchKey == "")
+            {
+                RoomListView = RoomList.ToArray();
+
+            }
+
+            else
+            {
+
+
+                RoomListView = RoomList.ToArray();
+                String[] Value = new string[RoomListView.Length];
+
+                for (int i = 0; i < RoomListView.Length; i++)
+                {
+                    Value[i] = RoomListView[i].displayName.ToString() + "@@" + RoomListView[i].Severity.level.ToString() + "@@" + RoomListView[i].capacity.ToString();
+
+                }
+
+                RoomListView = RoomListView.Where((val, index) => Value[index].Contains(SearchKey)).ToArray();
+            }
+        }
+
+
+        // Hàm cho filter
+        void getFilterProperty()
+        {
+            SelectedFilterProperty = "Tất cả";
+
+            //FilterProperty = DataProvider.ins.db.Staffs.Select(staff => staff.GetType().GetProperty(SelectedFilterType)).Distinct();
+            if (SelectedFilterType == "Tất cả")
+            {
+                SelectedFilterProperty = "Chọn phương thức lọc";
+                FilterProperty = new string[] { "Chọn phương thức lọc" };
+            }
+            else if (SelectedFilterType == "Loại phòng")
+            {
+                FilterProperty = DataProvider.ins.db.QuarantineRooms.Select(room => room.Severity.level).ToArray();
+                FilterProperty = FilterProperty.Distinct().ToArray();
+            }
+            else if (SelectedFilterType == "Sức chứa")
+            {
+                FilterProperty = DataProvider.ins.db.QuarantineRooms.Select(room => room.capacity.ToString()).ToArray();
+                FilterProperty = FilterProperty.Distinct().ToArray();
+            }
+            
+
+            RoomListView = DataProvider.ins.db.QuarantineRooms.ToArray();
+        }
+
+        void SelectFilterProperty()
+        {
+            if (SelectedFilterType == "Tất cả")
+            {
+            }
+            else if (SelectedFilterType == "Loại phòng")
+            {
+                RoomListView = DataProvider.ins.db.QuarantineRooms.Where(x => x.Severity.level == SelectedFilterProperty).ToArray();
+            }
+            else if (SelectedFilterType == "Sức chứa")
+            {
+                RoomListView = DataProvider.ins.db.QuarantineRooms.Where(x => x.capacity.ToString() == SelectedFilterProperty).ToArray();
+            }
+      
+
+
+        }
+
+
+
+
+
         void AddQuarantineRoom()
         {
             using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
@@ -264,7 +421,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     DataProvider.ins.db.SaveChanges();
 
                     RoomList.Add(QuarantineRoom);
-
+                    RoomListView = RoomList.ToArray();
                     transaction.Commit();
 
                 }
@@ -376,7 +533,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     DataProvider.ins.db.SaveChanges();
 
                     RoomList.Remove(Room);
-
+                    RoomListView = RoomList.ToArray();
                     transaction.Commit();
                 }
                 catch (DbUpdateException e)

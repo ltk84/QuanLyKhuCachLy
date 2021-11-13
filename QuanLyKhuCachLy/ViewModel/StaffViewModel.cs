@@ -848,7 +848,8 @@ namespace QuanLyKhuCachLy.ViewModel
                     SelectStaff.dateOfBirth = DateOfBirth;
                     SelectStaff.citizenID = CitizenID;
                     SelectStaff.addressID = StaffAdress.id;
-
+                    SelectStaff.jobTitle = JobTitle;
+                    SelectStaff.department = Department;
                     InitDisplayAddress(StaffAdress);
 
                     DataProvider.ins.db.SaveChanges();
