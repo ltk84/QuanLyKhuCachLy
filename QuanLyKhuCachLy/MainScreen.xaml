@@ -57,10 +57,10 @@
                             </Border.Style>
                         </Border>
                         <Border
-                            Width="100"
-                            Height="44"
+                            Width="276"
+                            Height="43.5"
                             HorizontalAlignment="Left"
-                            Background="#FF3D4466" />
+                            Background="White" />
                         <Border
                             Width="276"
                             Height="848"
@@ -68,6 +68,13 @@
                             Background="#FF3D4466"
                             CornerRadius="0,10,0,0" />
                     </StackPanel>
+                </Canvas>
+                <Canvas>
+                    <Border
+                        Width="100"
+                        Height="848"
+                        HorizontalAlignment="Left"
+                        Background="#FF3D4466" />
                 </Canvas>
                 <Image
                     Width="180"

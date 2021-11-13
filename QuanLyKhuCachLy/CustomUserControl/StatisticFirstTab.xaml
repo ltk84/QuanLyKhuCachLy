@@ -160,7 +160,8 @@
             <lvc:CartesianChart
                 x:Name="FirstReportChart"
                 LegendLocation="Bottom"
-                Series="{Binding FirstSeriesCollection}">
+                Series="{Binding FirstSeriesCollection}"
+                Zoom="X">
                 <lvc:CartesianChart.AxisX>
                     <lvc:Axis Title="Thời gian" Labels="{Binding FirstLabels}" />
                 </lvc:CartesianChart.AxisX>
@@ -169,6 +170,38 @@
                 </lvc:CartesianChart.AxisY>
             </lvc:CartesianChart>
         </Grid>
-
+        <StackPanel
+            Grid.Row="2"
+            Grid.Column="2"
+            Margin="24,0,32,5">
+            <TextBlock
+                Grid.Column="0"
+                VerticalAlignment="Top"
+                FontSize="16"
+                FontWeight="Bold">
+                Hướng dẫn
+            </TextBlock>
+            <TextBlock
+                Grid.Column="0"
+                VerticalAlignment="Top"
+                FontSize="14"
+                TextWrapping="Wrap">
+                Nhấp giữ chuột vào biểu đồ và kéo thả sang trái hoặc phải để di chuyển phần hiển thị sơ đồ.
+            </TextBlock>
+            <TextBlock
+                Grid.Column="0"
+                VerticalAlignment="Top"
+                FontSize="14"
+                TextWrapping="Wrap">
+                Lăn chuột để phóng to, thu nhỏ.
+            </TextBlock>
+            <TextBlock
+                Grid.Column="0"
+                VerticalAlignment="Top"
+                FontSize="14"
+                TextWrapping="Wrap">
+                Rê chuột vào cột để xem chi tiết.
+            </TextBlock>
+        </StackPanel>
     </Grid>
 </UserControl>
