@@ -99,7 +99,7 @@
     </Compile>
     <Compile Include="CustomUserControl\AddStaffSecondScreen.xaml.cs">
       <DependentUpon>AddStaffSecondScreen.xaml</DependentUpon>
-      </Compile>
+    </Compile>
     <Compile Include="CustomUserControl\EditQuarantinedPersonInformation.xaml.cs">
       <DependentUpon>EditQuarantinedPersonInformation.xaml</DependentUpon>
     </Compile>
@@ -120,6 +120,12 @@
     </Compile>
     <Compile Include="CustomUserControl\EditStaffSecondScreen.xaml.cs">
       <DependentUpon>EditStaffSecondScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\NotificationScreen.xaml.cs">
+      <DependentUpon>NotificationScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\NotificationScreenTemplateManage.xaml.cs">
+      <DependentUpon>NotificationScreenTemplateManage.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomUserControl\QuarantinePersonWrapperTab.xaml.cs">
       <DependentUpon>QuarantinePersonWrapperTab.xaml</DependentUpon>
@@ -332,6 +338,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomUserControl\EditStaffSecondScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\NotificationScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\NotificationScreenTemplateManage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -561,6 +575,7 @@
     <Resource Include="Resources\icons\complete-icon.png" />
     <Resource Include="Resources\icons\delete-white-icon.png" />
     <Resource Include="Resources\icons\empty-icon.png" />
+    <Resource Include="Resources\icons\add-icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
