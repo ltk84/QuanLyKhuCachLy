@@ -184,6 +184,103 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #endregion
 
+        #region Recommendation
+
+        private Visibility _NoneRecommendationVisibility;
+
+        public Visibility NoneRecommendationVisibility
+        {
+            get { return _NoneRecommendationVisibility; }
+            set { _NoneRecommendationVisibility = value; OnPropertyChanged(); }
+        }
+
+        #region First Recommendation
+
+        private Visibility _FirstRecommendationVisibility;
+
+        public Visibility FirstRecommendationVisibility
+        {
+            get { return _FirstRecommendationVisibility; }
+            set { _FirstRecommendationVisibility = value; OnPropertyChanged(); }
+        }
+
+        private string _FirstRecommendationTitle;
+
+        public string FirstRecommendationTitle
+        {
+            get { return _FirstRecommendationTitle; }
+            set { _FirstRecommendationTitle = value; OnPropertyChanged(); }
+        }
+
+        private string _FirstRecommendationContent;
+
+        public string FirstRecommendationContent
+        {
+            get { return _FirstRecommendationContent; }
+            set { _FirstRecommendationContent = value; OnPropertyChanged(); }
+        }
+
+
+        #endregion
+
+        #region Second Recommendation
+
+        private Visibility _SecondRecommendationVisibility;
+
+        public Visibility SecondRecommendationVisibility
+        {
+            get { return _SecondRecommendationVisibility; }
+            set { _SecondRecommendationVisibility = value; OnPropertyChanged(); }
+        }
+
+        private string _SecondRecommendationTitle;
+
+        public string SecondRecommendationTitle
+        {
+            get { return _SecondRecommendationTitle; }
+            set { _SecondRecommendationTitle = value; OnPropertyChanged(); }
+        }
+
+        private string _SecondRecommendationContent;
+
+        public string SecondRecommendationContent
+        {
+            get { return _SecondRecommendationContent; }
+            set { _SecondRecommendationContent = value; OnPropertyChanged(); }
+        }
+
+        #endregion
+
+        #region Third Recommendation
+
+        private Visibility _ThirdRecommendationVisibility;
+
+        public Visibility ThirdRecommendationVisibility
+        {
+            get { return _ThirdRecommendationVisibility; }
+            set { _ThirdRecommendationVisibility = value; OnPropertyChanged(); }
+        }
+
+        private string _ThirdRecommendationTitle;
+
+        public string ThirdRecommendationTitle
+        {
+            get { return _ThirdRecommendationTitle; }
+            set { _ThirdRecommendationTitle = value; OnPropertyChanged(); }
+        }
+
+        private string _ThirdRecommendationContent;
+
+        public string ThirdRecommendationContent
+        {
+            get { return _ThirdRecommendationContent; }
+            set { _ThirdRecommendationContent = value; OnPropertyChanged(); }
+        }
+
+        #endregion
+
+        #endregion
+
         #endregion
 
         #region Command
@@ -192,12 +289,29 @@ namespace QuanLyKhuCachLy.ViewModel
         #endregion
 
         public DashboardViewModel() {
+            RecommendationInit();
             StatisticInit();
             ChartInit();
         }
         #region Method
 
         #region Fundamental Function
+
+        private void RecommendationInit()
+        {
+            DefineFirstRecommendation();
+            DefineSecondRecommendation();
+            DefineThirdRecommendation();
+
+            if (FirstRecommendationVisibility == Visibility.Collapsed && SecondRecommendationVisibility == Visibility.Collapsed && ThirdRecommendationVisibility == Visibility.Collapsed)
+            {
+                NoneRecommendationVisibility = Visibility.Visible;
+            }
+            else
+            {
+                NoneRecommendationVisibility = Visibility.Collapsed;
+            }
+        }
 
         private void StatisticInit()
         {
@@ -305,6 +419,63 @@ namespace QuanLyKhuCachLy.ViewModel
             FirstChartVisibility = Visibility.Hidden;
             SecondChartVisibility = Visibility.Hidden;
             ThirdChartVisibility = Visibility.Visible;
+        }
+
+        #endregion
+
+        #region First Recommendation
+
+        private void DefineFirstRecommendation ()
+        {
+            int QPWithNoRoomCount = CountQuarantinePersonWithNoRoomStatistic();
+            if (QPWithNoRoomCount != 0)
+            {
+                FirstRecommendationVisibility = Visibility.Visible;
+                FirstRecommendationTitle = "SẮP XẾP PHÒNG CHO NGƯỜI CÁCH LY";
+                FirstRecommendationContent = $"Có {QPWithNoRoomCount} người chưa được sắp xếp phòng.";
+            }
+            else
+            {
+                FirstChartVisibility = Visibility.Collapsed;
+            }
+        }
+
+        #endregion
+
+        #region Second Recommendation
+
+        private void DefineSecondRecommendation()
+        {
+            int NewQuarantinePersonCount = CountNewQuarantinePersonStatistic();
+            if (NewQuarantinePersonCount != 0)
+            {
+                SecondRecommendationVisibility = Visibility.Visible;
+                SecondRecommendationTitle = "GỬI THÔNG BÁO HƯỚNG DẪN CÁCH LY";
+                SecondRecommendationContent = $"Có {NewQuarantinePersonCount} người cách ly mới trong hôm nay.";
+            }
+            else
+            {
+                SecondRecommendationVisibility = Visibility.Collapsed;
+            }
+        }
+
+        #endregion
+
+        #region Third Recommendation
+
+        private void DefineThirdRecommendation()
+        {
+            int FinishQuarantinePersonCount = CountFinishQuarantinePersonStatistic();
+            if (FinishQuarantinePersonCount != 0)
+            {
+                ThirdRecommendationVisibility = Visibility.Visible;
+                ThirdRecommendationTitle = "GỬI THÔNG BÁO HOÀN THÀNH CÁCH LY";
+                ThirdRecommendationContent = $"Có {FinishQuarantinePersonCount} người dự kiến hoàn thành cách ly hôm nay.";
+            }
+            else
+            {
+                ThirdRecommendationVisibility = Visibility.Collapsed;
+            }
         }
 
         #endregion

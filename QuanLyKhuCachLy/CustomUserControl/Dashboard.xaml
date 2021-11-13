@@ -190,6 +190,7 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Margin="12,0,0,5"
+                FontSize="24"
                 Style="{StaticResource DashboardTitle}">
                 Đề xuất
             </TextBlock>
@@ -199,18 +200,40 @@
                 Height="360"
                 VerticalAlignment="Top"
                 VerticalScrollBarVisibility="Auto">
-                <StackPanel Margin="10">
-                    <Border Style="{StaticResource RecommendationField}">
+                <StackPanel Margin="10" VerticalAlignment="Center">
+                    <StackPanel Visibility="{Binding NoneRecommendationVisibility}">
+                        <materialDesign:PackIcon
+                            Width="45"
+                            Height="45"
+                            HorizontalAlignment="Center"
+                            Foreground="#FF363636"
+                            Kind="FileOutline" />
+                        <TextBlock
+                            Margin="0,10,0,0"
+                            HorizontalAlignment="Center"
+                            FontSize="20"
+                            Style="{StaticResource DashboardTitle}">
+                            Trống
+                        </TextBlock>
+                        <TextBlock
+                            Margin="0,5,0,0"
+                            HorizontalAlignment="Center"
+                            FontSize="14"
+                            Style="{StaticResource DashboardContent}">
+                            Hiện tại không có thao tác nào được đề xuất.
+                        </TextBlock>
+                    </StackPanel>
+                    <Border Style="{StaticResource RecommendationField}" Visibility="{Binding FirstRecommendationVisibility}">
                         <StackPanel Margin="40,25">
-                            <TextBlock FontSize="20" Style="{StaticResource DashboardTitle}">
-                                SẮP XẾP PHÒNG CHO NGƯỜI CÁCH LY
-                            </TextBlock>
+                            <TextBlock
+                                FontSize="20"
+                                Style="{StaticResource DashboardTitle}"
+                                Text="{Binding FirstRecommendationTitle}" />
                             <TextBlock
                                 Margin="0,5,0,0"
                                 FontSize="14"
-                                Style="{StaticResource DashboardContent}">
-                                Có 55 người chưa được sắp xếp phòng.
-                            </TextBlock>
+                                Style="{StaticResource DashboardContent}"
+                                Text="{Binding FirstRecommendationContent}" />
                             <Button
                                 Width="218"
                                 Height="35"
@@ -221,17 +244,44 @@
                                 Style="{StaticResource DashboardButton}" />
                         </StackPanel>
                     </Border>
-                    <Border Margin="0,25,0,0" Style="{StaticResource RecommendationField}">
+                    <Border
+                        Margin="0,25,0,0"
+                        Style="{StaticResource RecommendationField}"
+                        Visibility="{Binding SecondRecommendationVisibility}">
                         <StackPanel Margin="40,25">
-                            <TextBlock FontSize="20" Style="{StaticResource DashboardTitle}">
-                                GỬI THÔNG BÁO HOÀN THÀNH CÁCH LY
-                            </TextBlock>
+                            <TextBlock
+                                FontSize="20"
+                                Style="{StaticResource DashboardTitle}"
+                                Text="{Binding SecondRecommendationTitle}" />
                             <TextBlock
                                 Margin="0,5,0,0"
                                 FontSize="14"
-                                Style="{StaticResource DashboardContent}">
-                                Có 39 người dự kiến hoàn thành cách ly hôm nay.
-                            </TextBlock>
+                                Style="{StaticResource DashboardContent}"
+                                Text="{Binding SecondRecommendationContent}" />
+                            <Button
+                                Width="218"
+                                Height="35"
+                                Margin="0,20,0,0"
+                                HorizontalAlignment="Right"
+                                Content="Xem đề xuất gửi thông báo"
+                                FontSize="12"
+                                Style="{StaticResource DashboardButton}" />
+                        </StackPanel>
+                    </Border>
+                    <Border
+                        Margin="0,25,0,0"
+                        Style="{StaticResource RecommendationField}"
+                        Visibility="{Binding ThirdRecommendationVisibility}">
+                        <StackPanel Margin="40,25">
+                            <TextBlock
+                                FontSize="20"
+                                Style="{StaticResource DashboardTitle}"
+                                Text="{Binding ThirdRecommendationTitle}" />
+                            <TextBlock
+                                Margin="0,5,0,0"
+                                FontSize="14"
+                                Style="{StaticResource DashboardContent}"
+                                Text="{Binding ThirdRecommendationContent}" />
                             <Button
                                 Width="218"
                                 Height="35"
