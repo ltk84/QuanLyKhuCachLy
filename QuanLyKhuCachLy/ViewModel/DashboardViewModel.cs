@@ -923,12 +923,13 @@ namespace QuanLyKhuCachLy.ViewModel
 
         private void LoadStafChart()
         {
-            var DepartmentList = DataProvider.ins.db.Staffs.Select(staff => staff.department).Distinct();
+            ObservableCollection<Model.Staff> StaffList = new ObservableCollection<Staff>(DataProvider.ins.db.Staffs);
+            var DepartmentList = StaffList.Select(staff => staff.department).Distinct();
             SecondSeriesCollection = new SeriesCollection();
 
             for (int i = 0; i < DepartmentList.Count(); i++)
             {
-                int StaffCount = CountStaffWithDepartment(DepartmentList.ElementAt(i).ToString());
+                int StaffCount = CountStaffWithDepartment(DepartmentList?.ElementAt(i).ToString());
                 SecondSeriesCollection.Add(
                 new PieSeries
                 {
