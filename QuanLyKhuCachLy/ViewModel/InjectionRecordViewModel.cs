@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
@@ -14,49 +15,16 @@ namespace QuanLyKhuCachLy.ViewModel
     {
         #region property
 
-        #region injection record
-        private int _IRID;
-        public int IRID
-        {
-            get => _IRID; set
-            {
-                _IRID = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private System.DateTime _IRDateInjection;
-        public System.DateTime IRDateInjection
-        {
-            get => _IRDateInjection; set
-            {
-                _IRDateInjection = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _IRVaccineName;
-        public string IRVaccineName
-        {
-            get => _IRVaccineName; set
-            {
-                _IRVaccineName = value;
-                OnPropertyChanged();
-            }
-        }
-
         private Nullable<int> _IRQuarantinePersonID;
         public Nullable<int> IRQuarantinePersonID
         {
             get => _IRQuarantinePersonID; set
             {
                 _IRQuarantinePersonID = value;
-                if (_IRDateInjection != null)
-                    InjectionRecordList = new ObservableCollection<InjectionRecord>(DataProvider.ins.db.InjectionRecords.Where(x => x.quarantinePersonID == _IRQuarantinePersonID));
+                InjectionRecordList = new ObservableCollection<InjectionRecord>(DataProvider.ins.db.InjectionRecords.Where(x => x.quarantinePersonID == _IRQuarantinePersonID));
                 OnPropertyChanged();
             }
         }
-        #endregion
 
         private InjectionRecord _SelectedItem;
         public InjectionRecord SelectedItem
@@ -66,12 +34,10 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 _SelectedItem = value;
                 OnPropertyChanged();
-                if (_SelectedItem != null)
-                {
-                    SetSelectedItemToProperty();
-                }
+
             }
         }
+
 
         #region list
         private ObservableCollection<InjectionRecord> _InjectionRecordList;
@@ -83,6 +49,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 OnPropertyChanged();
             }
         }
+
         #endregion
 
         #region command
@@ -90,9 +57,6 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand EditOnUICommand { get; set; }
         public ICommand DeleteOnUICommand { get; set; }
 
-        public ICommand AddCommand { get; set; }
-        public ICommand EditCommand { get; set; }
-        public ICommand DeleteCommand { get; set; }
         #endregion
 
         private static InjectionRecordViewModel _ins;
@@ -112,6 +76,7 @@ namespace QuanLyKhuCachLy.ViewModel
         {
 
             InjectionRecordList = new ObservableCollection<InjectionRecord>();
+
             AddOnUICommand = new RelayCommand<object>((p) =>
             {
                 return true;
@@ -121,45 +86,25 @@ namespace QuanLyKhuCachLy.ViewModel
                 AddInjectionRecordUI();
             });
 
-            EditOnUICommand = new RelayCommand<object>((p) =>
-            {
-                if (SelectedItem != null)
-                    return true;
-                return false;
-            }, (p) =>
-            {
-                EditInjectionRecordUI();
-            });
+            //EditOnUICommand = new RelayCommand<object>((p) =>
+            //{
+            //    if (SelectedItem != null)
+            //        return true;
+            //    return false;
+            //}, (p) =>
+            //{
+            //    EditInjectionRecordUI();
+            //});
 
             DeleteOnUICommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 DeleteInjectionRecordUI();
             });
 
-            //DeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
-            //{
-            //    DeleteInjectionRecord();
-            //});
-
-            //AddCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
-            // {
-            //     AddInjectionRecord();
-            // });
-
-            //EditCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
-            //{
-            //    EditInjectionRecord();
-            //});
 
         }
 
         #region method
-        void SetSelectedItemToProperty()
-        {
-            IRID = SelectedItem.id;
-            IRDateInjection = SelectedItem.dateInjection;
-            IRVaccineName = SelectedItem.vaccineName;
-        }
 
         void AddInjectionRecordUI()
         {
@@ -173,17 +118,11 @@ namespace QuanLyKhuCachLy.ViewModel
             InjectionRecordList.Add(injectionRecord);
         }
 
-        void EditInjectionRecordUI()
-        {
-            var injectionRecord = InjectionRecordList[InjectionRecordList.IndexOf(SelectedItem)];
-
-            InjectionRecordList[InjectionRecordList.IndexOf(injectionRecord)].dateInjection = SelectedItem.dateInjection;
-            InjectionRecordList[InjectionRecordList.IndexOf(injectionRecord)].vaccineName = SelectedItem.vaccineName;
-        }
 
         void DeleteInjectionRecordUI()
         {
             var injectionRecord = InjectionRecordList.Where(x => x == SelectedItem).FirstOrDefault();
+            if (injectionRecord == null) return;
             InjectionRecordList.Remove(injectionRecord);
         }
 
@@ -200,19 +139,13 @@ namespace QuanLyKhuCachLy.ViewModel
                 DataProvider.ins.db.SaveChanges();
                 ClearInjectionRecordList();
             }
-            else if (action == "EditOrDelete")
+            else
             {
                 List<InjectionRecord> IRList = DataProvider.ins.db.InjectionRecords.Where(x => x.quarantinePersonID == PersonID).ToList();
 
                 foreach (var irUI in InjectionRecordList)
                 {
-                    if (IRList.Contains(irUI))
-                    {
-                        var irDB = DataProvider.ins.db.InjectionRecords.Where(x => x.id == irUI.id).FirstOrDefault();
-                        if (irDB.dateInjection.CompareTo(irUI.dateInjection) != 0) irDB.dateInjection = irUI.dateInjection;
-                        if (irDB.vaccineName != irUI.vaccineName) irDB.vaccineName = irUI.vaccineName;
-                    }
-                    else
+                    if (!IRList.Contains(irUI))
                     {
                         irUI.quarantinePersonID = PersonID;
                         DataProvider.ins.db.InjectionRecords.Add(irUI);
@@ -224,21 +157,20 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     if (!InjectionRecordList.Contains(irInDB))
                     {
-                        //var irUI = InjectionRecordList.Where(x => x.id == irInDB.id).FirstOrDefault();
-                        //if (irInDB.dateInjection.CompareTo(irUI.dateInjection) != 0) irInDB.dateInjection = irUI.dateInjection;
-                        //if (irInDB.vaccineName != irUI.vaccineName) irInDB.vaccineName = irUI.vaccineName;
-
                         DataProvider.ins.db.InjectionRecords.Remove(irInDB);
                     }
                 }
 
                 DataProvider.ins.db.SaveChanges();
-                SyncInjectionRecordList(PersonID);
+                InjectionRecordList = new ObservableCollection<InjectionRecord>(DataProvider.ins.db.InjectionRecords.Where(x => x.quarantinePersonID == PersonID));
             }
-
         }
 
-        public void SyncInjectionRecordList(int PersonID) => InjectionRecordList = new ObservableCollection<InjectionRecord>(DataProvider.ins.db.InjectionRecords.Where(x => x.quarantinePersonID == PersonID));
+        public void RollbackTransaction(int PersonID)
+        {
+            DataProvider.ins.db.ChangeTracker.Entries().Where(e => e.Entity != null).ToList().ForEach(e => e.State = EntityState.Detached);
+            InjectionRecordList = new ObservableCollection<InjectionRecord>(DataProvider.ins.db.InjectionRecords.Where(x => x.quarantinePersonID == PersonID));
+        }
 
         public void ClearInjectionRecordList() => InjectionRecordList.Clear();
 

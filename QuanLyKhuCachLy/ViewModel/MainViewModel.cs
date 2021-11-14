@@ -103,6 +103,7 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand LoadedCommand { get; set; }
 
         #endregion
+
         #endregion
 
         public MainViewModel()
@@ -152,7 +153,7 @@ namespace QuanLyKhuCachLy.ViewModel
             NotificationVM = new NotificationViewModel();
             // test room
             //ToDashboard();
-            ToStaff();
+            ToRoom();
         }
 
         private void ToDashboard()

@@ -16,14 +16,15 @@ using System.Windows.Shapes;
 namespace QuanLyKhuCachLy.CustomUserControl
 {
     /// <summary>
-    /// Interaction logic for EditQuarantinedPersonInformationThirdPage.xaml
+    /// Interaction logic for EditQuarantinePersonInRoomFirstPage.xaml
     /// </summary>
-    public partial class EditQuarantinedPersonInformationThirdPage : UserControl
+    public partial class EditQuarantinePersonInRoomFirstPage : UserControl
     {
-        public EditQuarantinedPersonInformationThirdPage()
+        public EditQuarantinePersonInRoomFirstPage()
         {
             InitializeComponent();
         }
+
         private void CheckIsNumeric(TextCompositionEventArgs e)
         {
             int result;
@@ -38,7 +39,5 @@ namespace QuanLyKhuCachLy.CustomUserControl
         {
             CheckIsNumeric(e);
         }
-
-
     }
 }

@@ -87,8 +87,7 @@ namespace QuanLyKhuCachLy.Model
 
         public bool CheckValidateProperty()
         {
-            if (string.IsNullOrWhiteSpace(province) || string.IsNullOrWhiteSpace(district) || string.IsNullOrWhiteSpace(ward)
-                || string.IsNullOrWhiteSpace(streetName) || string.IsNullOrWhiteSpace(apartmentNumber))
+            if (string.IsNullOrWhiteSpace(province) || string.IsNullOrWhiteSpace(district) || string.IsNullOrWhiteSpace(ward))
                 return false;
 
             return true;

@@ -8,6 +8,7 @@
     <viewmodel:DashboardViewModel x:Key="DashboardVM" />
     <viewmodel:NotificationViewModel x:Key="NotiVM" />
     <viewmodel:QuarantinePersonViewModel x:Key="PersonVM" />
+    <viewmodel:QuarantinePersonInRoomViewModel x:Key="PersonInRoomVM" />
     <viewmodel:QuarantineRoomViewModel x:Key="RoomVM" />
     <viewmodel:ReportViewModel x:Key="ReportVM" />
     <viewmodel:StaffViewModel x:Key="StaffVM" />
@@ -15,4 +16,5 @@
     <viewmodel:DestinationHistoryViewModel x:Key="DestinationVM" />
     <viewmodel:SeverityViewModel x:Key="SeverityVM" />
     <viewmodel:NotificationViewModel x:Key="NotificationVM" />
+    <viewmodel:TestingResultViewModel x:Key="TestingVM" />
 </ResourceDictionary>

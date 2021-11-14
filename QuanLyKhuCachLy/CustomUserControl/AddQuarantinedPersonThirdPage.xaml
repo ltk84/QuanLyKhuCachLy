@@ -2,6 +2,7 @@
     x:Class="QuanLyKhuCachLy.CustomUserControl.AddQuarantinedPersonThirdPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:convert="clr-namespace:QuanLyKhuCachLy.Converter"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
@@ -9,7 +10,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    DataContext="{StaticResource PersonVM}"
     mc:Ignorable="d">
     <StackPanel Margin="0,0,0,0">
         <TextBlock
@@ -96,11 +96,11 @@
                     ItemsSource="{Binding InjectionRecordViewModel.InjectionRecordList}"
                     SelectedItem="{Binding InjectionRecordViewModel.SelectedItem}">
 
-                    <i:Interaction.Triggers>
+                    <!--<i:Interaction.Triggers>
                         <i:EventTrigger EventName="CellEditEnding">
                             <i:InvokeCommandAction Command="{Binding InjectionRecordViewModel.EditOnUICommand}" />
                         </i:EventTrigger>
-                    </i:Interaction.Triggers>
+                    </i:Interaction.Triggers>-->
 
                     <DataGrid.Columns>
                         <DataGridTextColumn
@@ -188,12 +188,13 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         FontWeight="Bold"
-                        Foreground="#FF434A54"><Run Text="Lịch sử di chuyển" /></TextBlock>
+                        Foreground="#FF434A54"><Run Text="Kết quả xét nghiệm" /></TextBlock>
                     <Button
                         Grid.Row="0"
                         Grid.Column="1"
                         Margin="165,-10,0,10"
                         VerticalAlignment="Bottom"
+                        Command="{Binding TestingResultViewModel.AddOnUICommand}"
                         Template="{StaticResource plus-button}" />
                 </Grid>
                 <Separator Margin="15,0,0,0">
@@ -212,18 +213,29 @@
                     <ColumnDefinition SharedSizeGroup="A" />
                 </Grid.ColumnDefinitions>
                 <DataGrid
-                    x:Name="travelHistory"
+                    x:Name="testingResult"
                     Grid.ColumnSpan="4"
                     Height="280"
                     Margin="15,15,0,0"
                     AutoGenerateColumns="False"
                     BorderBrush="Black"
-                    BorderThickness="1">
+                    BorderThickness="1"
+                    CanUserAddRows="False"
+                    CanUserReorderColumns="False"
+                    CanUserResizeColumns="False"
+                    CanUserResizeRows="False"
+                    ItemsSource="{Binding TestingResultViewModel.TestingResultList}"
+                    SelectedItem="{Binding TestingResultViewModel.SelectedItem}">
+                    <DataGrid.Resources>
+                        <convert:TestResultToBoolConverter x:Key="convert" />
+                    </DataGrid.Resources>
                     <DataGrid.Columns>
                         <DataGridTextColumn
                             Width="*"
                             MinWidth="70"
-                            Header="Ngày">
+                            Binding="{Binding id}"
+                            Header="Lần"
+                            IsReadOnly="True">
                             <DataGridColumn.HeaderStyle>
                                 <Style TargetType="DataGridColumnHeader">
                                     <Setter Property="FontSize" Value="14" />
@@ -233,10 +245,15 @@
                                 </Style>
                             </DataGridColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn
+                        <DataGridTemplateColumn
                             Width="*"
-                            MinWidth="90"
-                            Header="Địa điểm">
+                            MinWidth="120"
+                            Header="Ngày xét nghiệm">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <DatePicker materialDesign:HintAssist.Hint="Chọn ngày cuối" SelectedDate="{Binding dateTesting, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
                             <DataGridColumn.HeaderStyle>
                                 <Style TargetType="DataGridColumnHeader">
                                     <Setter Property="FontSize" Value="14" />
@@ -245,11 +262,48 @@
                                     <Setter Property="Background" Value="Transparent" />
                                 </Style>
                             </DataGridColumn.HeaderStyle>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn
+                            Width="*"
+                            MinWidth="150"
+                            Header="Kết quả">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox
+                                        DisplayMemberPath="Key"
+                                        ItemsSource="{Binding TestingResultViewModel.ResultList, Source={StaticResource PersonVM}}"
+                                        SelectedValue="{Binding isPositive, UpdateSourceTrigger=PropertyChanged}"
+                                        SelectedValuePath="Value"
+                                        Style="{StaticResource ComboBoxField}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                            <DataGridColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="FontSize" Value="14" />
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="Background" Value="Transparent" />
+                                </Style>
+                            </DataGridColumn.HeaderStyle>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn
                             Width="*"
                             MinWidth="70"
                             Header="">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button
+                                        HorizontalAlignment="Right"
+                                        Command="{Binding TestingResultViewModel.DeleteOnUICommand}"
+                                        DataContext="{StaticResource PersonVM}"
+                                        Style="{StaticResource DataGridButtonDelete}">
+                                        <materialDesign:PackIcon
+                                            Width="16"
+                                            Height="16"
+                                            Kind="Delete" />
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
                             <DataGridColumn.HeaderStyle>
                                 <Style TargetType="DataGridColumnHeader">
                                     <Setter Property="FontSize" Value="14" />
@@ -258,7 +312,7 @@
                                     <Setter Property="Background" Value="Transparent" />
                                 </Style>
                             </DataGridColumn.HeaderStyle>
-                        </DataGridTextColumn>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

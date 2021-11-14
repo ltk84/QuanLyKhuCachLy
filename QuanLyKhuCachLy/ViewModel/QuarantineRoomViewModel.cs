@@ -114,6 +114,16 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #region child view model
         private QuarantinePersonInRoomViewModel _PersonInRoomViewModel;
+        public QuarantinePersonInRoomViewModel PersonInRoomViewModel
+        {
+            get => _PersonInRoomViewModel;
+            set
+            {
+                _PersonInRoomViewModel = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         private Model.QuarantineRoom _SelectedItem;
@@ -126,6 +136,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 if (_SelectedItem != null)
                 {
                     SetSelectedItemToProperty();
+                    PersonInRoomViewModel.Parent = this;
+
                 }
             }
         }
@@ -191,6 +203,15 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
+        private Visibility _Tab3;
+        public Visibility Tab3
+        {
+            get => _Tab3; set
+            {
+                _Tab3 = value; OnPropertyChanged();
+            }
+        }
+
 
         #endregion
 
@@ -216,6 +237,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #endregion
 
+
         #endregion
 
         #region command
@@ -240,6 +262,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             Tab1 = Visibility.Visible;
             Tab2 = Visibility.Hidden;
+            Tab3 = Visibility.Hidden;
 
             RoomList = new ObservableCollection<Model.QuarantineRoom>(DataProvider.ins.db.QuarantineRooms);
             RoomListView = RoomList.ToArray();
@@ -253,8 +276,7 @@ namespace QuanLyKhuCachLy.ViewModel
             SelectedFilterType = "Tất cả";
             SelectedFilterProperty = "Chọn phương thức lọc";
             getFilterProperty();
-
-            _PersonInRoomViewModel = new QuarantinePersonInRoomViewModel(CurrentRoomID: RoomID);
+            PersonInRoomViewModel = QuarantinePersonInRoomViewModel.ins;
 
             ToAddManualCommand = new RelayCommand<object>((p) =>
             {
@@ -291,7 +313,7 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 Tab1 = Visibility.Hidden;
                 Tab2 = Visibility.Visible;
-
+                Tab3 = Visibility.Hidden;
             });
 
             ToMainCommand = new RelayCommand<object>((p) =>
@@ -301,6 +323,7 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 Tab2 = Visibility.Hidden;
                 Tab1 = Visibility.Visible;
+                Tab3 = Visibility.Hidden;
             });
 
             AddRoomManualCommand = new RelayCommand<Window>((p) =>
@@ -525,6 +548,20 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             RoomListView = new ObservableCollection<Model.QuarantineRoom>(DataProvider.ins.db.QuarantineRooms).ToArray();
         }
+        public void ToPersonInformation()
+        {
+            Tab1 = Visibility.Hidden;
+            Tab2 = Visibility.Hidden;
+            Tab3 = Visibility.Visible;
+        }
+
+        public void BackToRoomInformation()
+        {
+            Tab1 = Visibility.Hidden;
+            Tab3 = Visibility.Hidden;
+            Tab2 = Visibility.Visible;
+        }
+
         void AddQuarantineRoom()
         {
             using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
@@ -699,6 +736,7 @@ namespace QuanLyKhuCachLy.ViewModel
         }
         void SetSelectedItemToProperty()
         {
+            RoomID = SelectedItem.id;
             RoomDisplayName = SelectedItem.displayName;
             RoomCapacity = SelectedItem.capacity;
             RoomSelectedSeverity = SelectedItem.Severity;

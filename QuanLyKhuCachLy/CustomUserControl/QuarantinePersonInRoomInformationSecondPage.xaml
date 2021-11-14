@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="QuanLyKhuCachLy.CustomUserControl.QuarantinedPersonInformationSecondPage"
+    x:Class="QuanLyKhuCachLy.CustomUserControl.QuarantinePersonInRoomInformationSecondPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -41,8 +41,8 @@
                 CanUserReorderColumns="False"
                 CanUserResizeColumns="False"
                 CanUserResizeRows="False"
-                ItemsSource="{Binding InjectionRecordViewModel.InjectionRecordList}"
-                SelectedItem="{Binding InjectionRecordViewModel.SelectedItem}">
+                ItemsSource="{Binding PersonInRoomViewModel.InjectionRecordViewModel.InjectionRecordList}"
+                SelectedItem="{Binding PersonInRoomViewModel.InjectionRecordViewModel.SelectedItem}">
                 <DataGrid.Columns>
                     <DataGridTextColumn
                         Width="*"
@@ -118,8 +118,8 @@
                 CanUserReorderColumns="False"
                 CanUserResizeColumns="False"
                 CanUserResizeRows="False"
-                ItemsSource="{Binding TestingResultViewModel.TestingResultList}"
-                SelectedItem="{Binding TestingResultViewModel.SelectedItem}">
+                ItemsSource="{Binding PersonInRoomViewModel.TestingResultViewModel.TestingResultList}"
+                SelectedItem="{Binding PersonInRoomViewModel.TestingResultViewModel.SelectedItem}">
                 <DataGrid.Columns>
                     <DataGridTextColumn
                         Width="*"

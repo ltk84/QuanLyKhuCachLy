@@ -52,7 +52,6 @@ namespace QuanLyKhuCachLy.ValidationRules
                         {
                             return new ValidationResult(false, $"Thông tin này là bắt buộc.");
                         }
-                        return ValidationResult.ValidResult;
                     }
                 }
             }

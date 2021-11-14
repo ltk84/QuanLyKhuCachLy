@@ -1,5 +1,5 @@
-﻿<UserControl
-    x:Class="QuanLyKhuCachLy.CustomUserControl.EditQuarantinedPersonInformationThirdPage"
+﻿<Window
+    x:Class="QuanLyKhuCachLy.CustomUserControl.UpdatePersonListOfRoom"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:convert="clr-namespace:QuanLyKhuCachLy.Converter"
@@ -8,8 +8,11 @@
     xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Name="UpdateList"
+    Height="540"
     d:DesignHeight="450"
     d:DesignWidth="800"
+    DataContext="{StaticResource RoomVM}"
     mc:Ignorable="d">
     <StackPanel Margin="0,0,0,0">
         <TextBlock
@@ -18,8 +21,14 @@
             FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
             FontSize="24"
             FontWeight="Bold">
-            Thông tin người cách ky
+            CẬP NHẬT DANH SÁCH NGƯỜI CÁCH LY
         </TextBlock>
+        <TextBlock
+            Margin="0,2,0,0"
+            HorizontalAlignment="Center"
+            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+            FontSize="16"
+            Text="{Binding RoomDisplayName, StringFormat=Phòng {0}}" />
         <Grid Margin="30,20,30,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition SharedSizeGroup="A" />
@@ -34,10 +43,8 @@
                 <Grid Margin="0,0,15,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition SharedSizeGroup="A" />
-                        <ColumnDefinition SharedSizeGroup="A" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <TextBlock
@@ -47,16 +54,8 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         FontWeight="Bold"
-                        Foreground="#FF434A54"><Run Text="Thông tin tiêm chủng" /></TextBlock>
-                    <Button
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        Margin="155,-10,0,10"
-                        VerticalAlignment="Bottom"
-                        Background="Transparent"
-                        Command="{Binding InjectionRecordViewModel.AddOnUICommand}"
-                        Foreground="Transparent"
-                        Template="{StaticResource plus-button}" />
+                        Foreground="#FF434A54"><Run Text="Danh sách người chưa có phòng" /></TextBlock>
+
                 </Grid>
                 <Separator Margin="0,0,15,0">
                     <Separator.RenderTransform>
@@ -75,7 +74,7 @@
                     <ColumnDefinition SharedSizeGroup="A" />
                 </Grid.ColumnDefinitions>
                 <DataGrid
-                    x:Name="vaccinationInformation"
+                    x:Name="notRoomPersonList"
                     Grid.ColumnSpan="4"
                     Height="280"
                     Margin="0,15,15,0"
@@ -86,20 +85,15 @@
                     CanUserReorderColumns="False"
                     CanUserResizeColumns="False"
                     CanUserResizeRows="False"
-                    ItemsSource="{Binding InjectionRecordViewModel.InjectionRecordList}"
-                    SelectedItem="{Binding InjectionRecordViewModel.SelectedItem}">
-                    <!--<i:Interaction.Triggers>
-                        <i:EventTrigger EventName="CellEditEnding">
-                            <i:InvokeCommandAction Command="{Binding InjectionRecordViewModel.EditOnUICommand}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>-->
+                    ItemsSource="{Binding PersonInRoomViewModel.PersonNotRoomList}"
+                    SelectedItem="{Binding PersonInRoomViewModel.NotRoomSelectedItem}">
 
                     <DataGrid.Columns>
                         <DataGridTextColumn
                             Width="*"
                             MinWidth="70"
-                            Binding="{Binding id, UpdateSourceTrigger=PropertyChanged}"
-                            Header="Lần"
+                            Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"
+                            Header="Tên"
                             IsReadOnly="True">
                             <DataGridColumn.HeaderStyle>
                                 <Style TargetType="DataGridColumnHeader">
@@ -113,8 +107,9 @@
                         <DataGridTextColumn
                             Width="*"
                             MinWidth="90"
-                            Binding="{Binding vaccineName, UpdateSourceTrigger=PropertyChanged}"
-                            Header="Tên">
+                            Binding="{Binding dateOfBirth, UpdateSourceTrigger=PropertyChanged}"
+                            EditingElementStyle="{StaticResource EditingDataGridElement}"
+                            Header="Ngày sinh">
                             <DataGridColumn.HeaderStyle>
                                 <Style TargetType="DataGridColumnHeader">
                                     <Setter Property="FontSize" Value="14" />
@@ -124,51 +119,23 @@
                                 </Style>
                             </DataGridColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTemplateColumn
-                            Width="*"
-                            MinWidth="70"
-                            Header="Ngày tiêm">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <DatePicker materialDesign:HintAssist.Hint="Chọn ngày cuối" SelectedDate="{Binding dateInjection, UpdateSourceTrigger=PropertyChanged}" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                            <DataGridColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="FontSize" Value="14" />
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                    <Setter Property="HorizontalAlignment" Value="Center" />
-                                    <Setter Property="Background" Value="Transparent" />
-                                </Style>
-                            </DataGridColumn.HeaderStyle>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn
-                            Width="*"
-                            MinWidth="60"
-                            Header=" ">
+
+                        <DataGridTemplateColumn Width="*" MinWidth="70">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button
+                                        Width="20"
+                                        Height="20"
                                         HorizontalAlignment="Right"
-                                        Command="{Binding InjectionRecordViewModel.DeleteOnUICommand}"
-                                        DataContext="{StaticResource PersonVM}"
+                                        Command="{Binding PersonInRoomViewModel.AddPersonToRoomUI, Source={StaticResource RoomVM}}"
                                         Style="{StaticResource DataGridButtonDelete}">
                                         <materialDesign:PackIcon
-                                            Width="16"
-                                            Height="16"
-                                            Kind="Delete" />
+                                            Width="20"
+                                            Height="20"
+                                            Kind="ArrowRightBoldBox" />
                                     </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
-                            <DataGridColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="FontSize" Value="14" />
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                    <Setter Property="HorizontalAlignment" Value="Center" />
-                                    <Setter Property="Background" Value="Transparent" />
-                                </Style>
-                            </DataGridColumn.HeaderStyle>
-
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
@@ -177,10 +144,8 @@
                 <Grid Margin="0,0,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition SharedSizeGroup="A" />
-                        <ColumnDefinition SharedSizeGroup="A" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <TextBlock
@@ -190,14 +155,8 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         FontWeight="Bold"
-                        Foreground="#FF434A54"><Run Text="Kết quả xét nghiệm" /></TextBlock>
-                    <Button
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        Margin="165,-10,0,10"
-                        VerticalAlignment="Bottom"
-                        Command="{Binding TestingResultViewModel.AddOnUICommand}"
-                        Template="{StaticResource plus-button}" />
+                        Foreground="#FF434A54"><Run Text="Danh sách người cách ly trong phòng" /></TextBlock>
+
                 </Grid>
                 <Separator Margin="15,0,0,0">
                     <Separator.RenderTransform>
@@ -215,7 +174,7 @@
                     <ColumnDefinition SharedSizeGroup="A" />
                 </Grid.ColumnDefinitions>
                 <DataGrid
-                    x:Name="travelHistory"
+                    x:Name="testingResult"
                     Grid.ColumnSpan="4"
                     Height="280"
                     Margin="15,15,0,0"
@@ -226,83 +185,26 @@
                     CanUserReorderColumns="False"
                     CanUserResizeColumns="False"
                     CanUserResizeRows="False"
-                    ItemsSource="{Binding TestingResultViewModel.TestingResultList}"
-                    SelectedItem="{Binding TestingResultViewModel.SelectedItem}">
-                    <DataGrid.Resources>
-                        <convert:TestResultToBoolConverter x:Key="convert" />
-                    </DataGrid.Resources>
+                    ItemsSource="{Binding PersonInRoomViewModel.QuarantinePersonList}"
+                    SelectedItem="{Binding PersonInRoomViewModel.SelectedItem}">
+
                     <DataGrid.Columns>
-                        <DataGridTextColumn
-                            Width="*"
-                            MinWidth="70"
-                            Binding="{Binding id}"
-                            Header="Lần"
-                            IsReadOnly="True">
-                            <DataGridColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="FontSize" Value="14" />
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                    <Setter Property="HorizontalAlignment" Value="Center" />
-                                    <Setter Property="Background" Value="Transparent" />
-                                </Style>
-                            </DataGridColumn.HeaderStyle>
-                        </DataGridTextColumn>
                         <DataGridTemplateColumn
-                            Width="*"
-                            MinWidth="120"
-                            Header="Ngày xét nghiệm">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <DatePicker materialDesign:HintAssist.Hint="Chọn ngày cuối" SelectedDate="{Binding dateTesting, UpdateSourceTrigger=PropertyChanged}" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                            <DataGridColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="FontSize" Value="14" />
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                    <Setter Property="HorizontalAlignment" Value="Center" />
-                                    <Setter Property="Background" Value="Transparent" />
-                                </Style>
-                            </DataGridColumn.HeaderStyle>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn
-                            Width="*"
-                            MinWidth="150"
-                            Header="Kết quả">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <ComboBox
-                                        DisplayMemberPath="Key"
-                                        ItemsSource="{Binding TestingResultViewModel.ResultList, Source={StaticResource PersonVM}}"
-                                        SelectedValue="{Binding isPositive, UpdateSourceTrigger=PropertyChanged}"
-                                        SelectedValuePath="Value"
-                                        Style="{StaticResource ComboBoxField}" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                            <DataGridColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="FontSize" Value="14" />
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                    <Setter Property="HorizontalAlignment" Value="Center" />
-                                    <Setter Property="Background" Value="Transparent" />
-                                </Style>
-                            </DataGridColumn.HeaderStyle>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn
-                            Width="*"
-                            MinWidth="70"
+                            Width="50"
+                            MinWidth="50"
                             Header="">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button
+                                        Width="20"
+                                        Height="20"
                                         HorizontalAlignment="Right"
-                                        Command="{Binding TestingResultViewModel.DeleteOnUICommand}"
-                                        DataContext="{StaticResource PersonVM}"
+                                        Command="{Binding PersonInRoomViewModel.RemovePersonFromRoomUI, Source={StaticResource RoomVM}}"
                                         Style="{StaticResource DataGridButtonDelete}">
                                         <materialDesign:PackIcon
-                                            Width="16"
-                                            Height="16"
-                                            Kind="Delete" />
+                                            Width="20"
+                                            Height="20"
+                                            Kind="ArrowLeftBoldBox" />
                                     </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -315,9 +217,76 @@
                                 </Style>
                             </DataGridColumn.HeaderStyle>
                         </DataGridTemplateColumn>
+                        <DataGridTextColumn
+                            Width="*"
+                            MinWidth="70"
+                            Binding="{Binding name}"
+                            Header="Tên"
+                            IsReadOnly="True">
+                            <DataGridColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="FontSize" Value="14" />
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="Background" Value="Transparent" />
+                                </Style>
+                            </DataGridColumn.HeaderStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
+                            Width="*"
+                            MinWidth="120"
+                            Binding="{Binding dateOfBirth}"
+                            Header="Ngày sinh">
+                            <DataGridColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="FontSize" Value="14" />
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="Background" Value="Transparent" />
+                                </Style>
+                            </DataGridColumn.HeaderStyle>
+                        </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
         </Grid>
+        <StackPanel
+            Margin="5,20,30,10"
+            HorizontalAlignment="Right"
+            Orientation="Horizontal">
+            <Button
+                Width="120"
+                Height="37"
+                Margin="24,0,0,0"
+                materialDesign:ButtonAssist.CornerRadius="8"
+                materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                Background="#FF434A54"
+                BorderBrush="{x:Null}"
+                Command="{Binding PersonInRoomViewModel.CancelCommand}"
+                CommandParameter="{Binding ElementName=UpdateList}"
+                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                FontSize="16"
+                FontWeight="Bold"
+                Style="{StaticResource MaterialDesignRaisedButton}">
+                <TextBlock Text="Trở lại" />
+            </Button>
+            <Button
+                Width="120"
+                Height="37"
+                Margin="24,0,0,0"
+                VerticalAlignment="Center"
+                materialDesign:ButtonAssist.CornerRadius="8"
+                materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                Background="#FF1D9583"
+                BorderBrush="{x:Null}"
+                Command="{Binding PersonInRoomViewModel.UpdatePersonListCommand}"
+                CommandParameter="{Binding ElementName=UpdateList}"
+                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                FontSize="12"
+                FontWeight="Bold"
+                Visibility="Visible">
+                <TextBlock FontSize="16" Text="Cập nhật" />
+            </Button>
+        </StackPanel>
     </StackPanel>
-</UserControl>
+</Window>
