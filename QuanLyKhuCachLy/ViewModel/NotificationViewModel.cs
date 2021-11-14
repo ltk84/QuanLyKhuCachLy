@@ -1,6 +1,6 @@
 ﻿namespace QuanLyKhuCachLy.ViewModel
 {
-    class NotificationViewModel : BaseViewModel
+    public class NotificationViewModel : BaseViewModel
     {
         public NotificationViewModel() { }
     }

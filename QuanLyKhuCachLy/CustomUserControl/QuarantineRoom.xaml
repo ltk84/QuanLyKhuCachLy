@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:utility="clr-namespace:QuanLyKhuCachLy.Utility"
     xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -11,31 +12,133 @@
     DataContext="{StaticResource ResourceKey=RoomVM}"
     mc:Ignorable="d">
     <StackPanel Width="Auto" Margin="25,45,45,0">
-        <TextBlock
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock
             Grid.Row="0"
             Grid.Column="0"
             Style="{StaticResource DashboardTitle}">
             DANH SÁCH PHÒNG
-        </TextBlock>
-        <Button
-            Width="170"
-            Height="32"
-            Margin="0,20,0,0"
-            HorizontalAlignment="Right"
-            Content="Thêm phòng"
-            FontSize="12"
-            PreviewMouseDown="Button_PreviewMouseDown"
-            Style="{StaticResource DashboardButton}">
-            <Button.ContextMenu>
-                <ContextMenu>
-                    <ContextMenu.Template>
-                        <ControlTemplate>
-                            <local:AddRoomFunctionMenu />
-                        </ControlTemplate>
-                    </ContextMenu.Template>
-                </ContextMenu>
-            </Button.ContextMenu>
-        </Button>
+            </TextBlock>
+            <Button
+                Grid.Column="1"
+                Width="170"
+                Height="32"
+                Margin="0,20,0,0"
+                HorizontalAlignment="Right"
+                Content="Thêm phòng"
+                FontSize="12"
+                PreviewMouseDown="Button_PreviewMouseDown"
+                Style="{StaticResource DashboardButton}">
+                <Button.ContextMenu>
+                    <ContextMenu>
+                        <ContextMenu.Template>
+                            <ControlTemplate>
+                                <local:AddRoomFunctionMenu />
+                            </ControlTemplate>
+                        </ContextMenu.Template>
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
+        </Grid>
+        
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+
+            <StackPanel  Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="0,15,24,0"
+                        VerticalAlignment="Bottom">
+                <TextBlock
+                            Margin="0,0,0,0"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="16"
+                            Foreground="#FF434A54">
+                            Nhập bất kì để tìm kiếm
+                </TextBlock>
+                <TextBox    Width="300"
+                                    HorizontalAlignment="Left"
+                                    Height="40"
+                                    Margin="0, 8, 0,0"
+                                    Padding="10,8,8,10"
+                                    materialDesign:HintAssist.Hint="Tên, CMND,...."
+                                    MaxLength="20"
+                                    Style="{StaticResource TextInputField}">
+                    <TextBox.Text>
+                        <Binding  Mode="TwoWay" Path="SearchKey" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+
+                </TextBox>
+            </StackPanel>
+
+
+            <StackPanel
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="0,0,0,0"
+                        VerticalAlignment="Bottom">
+
+                <TextBlock
+                            Margin="5,0,0,5"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="16"
+                            Foreground="#FF434A54">
+                            Lọc theo
+                </TextBlock>
+                <ComboBox
+                    Padding="10,8,8,10"
+                    utility:ProtocolSettingsLayout.MVVMHasError="{Binding SexFieldHasError}"
+                    ItemsSource="{Binding FilterType}"
+                    Style="{StaticResource ComboBoxField}">
+                    <ComboBox.SelectedItem>
+                        <Binding Path="SelectedFilterType" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.SelectedItem>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Margin="24,0,0,0"
+                    VerticalAlignment="Bottom">
+                <TextBlock
+                        Margin="5,0,0,5"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        Foreground="#FF434A54">
+                        Bộ lọc
+                </TextBlock>
+                <ComboBox
+                    Padding="10,8,8,10"
+                    utility:ProtocolSettingsLayout.MVVMHasError="{Binding SexFieldHasError}"
+                    ItemsSource="{Binding FilterProperty}"
+                    Style="{StaticResource ComboBoxField}">
+                    <ComboBox.SelectedItem>
+                        <Binding Path="SelectedFilterProperty" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.SelectedItem>
+                </ComboBox>
+            </StackPanel>
+
+        </Grid>
+
         <DataGrid
             Height="460"
             Margin="0,20,0,20"
@@ -46,7 +149,7 @@
             CanUserResizeColumns="False"
             CanUserResizeRows="False"
             IsReadOnly="True"
-            ItemsSource="{Binding RoomList}"
+            ItemsSource="{Binding RoomListView}"
             SelectedItem="{Binding SelectedItem}"
             SelectionMode="Single"
             SelectionUnit="FullRow">

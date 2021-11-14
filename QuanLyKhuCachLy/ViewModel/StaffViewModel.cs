@@ -112,6 +112,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #region property
 
+
         private string _Name;
         public string Name
         {
@@ -119,6 +120,17 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 _Name = value;
                 OnPropertyChanged();
+            }
+        }
+
+        private string _SearchKey;
+        public string SearchKey
+        {
+            get => _SearchKey; set
+            {
+                _SearchKey = value;
+                OnPropertyChanged();
+                FilterListView();
             }
         }
 
@@ -161,6 +173,30 @@ namespace QuanLyKhuCachLy.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        private string _SelectedFilterType;
+        public string SelectedFilterType
+        {
+            get => _SelectedFilterType; set
+            {
+                _SelectedFilterType = value;
+                OnPropertyChanged();
+                getFilterProperty();
+            }
+        }
+
+        private String _SelectedFilterProperty;
+        public String SelectedFilterProperty
+        {
+            get => _SelectedFilterProperty; set
+            {
+                _SelectedFilterProperty = value;
+                OnPropertyChanged();
+                SelectFilterProperty();
+            }
+        }
+
+
 
         private string _HealthInsuranceID;
         public string HealthInsuranceID
@@ -246,6 +282,35 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
+        private Staff[] _StaffListView;
+        public Staff[] StaffListView
+        {
+            get => _StaffListView; set
+            {
+                _StaffListView = value; OnPropertyChanged();
+            }
+        }
+
+
+        private string[] _FilterType;
+        public string[] FilterType
+        {
+            get => _FilterType; set
+            {
+                _FilterType = value; OnPropertyChanged();
+            }
+        }
+
+        private string[] _FilterProperty;
+        public string[] FilterProperty
+        {
+            get => _FilterProperty; set
+            {
+                _FilterProperty = value; OnPropertyChanged();
+            }
+        }
+
+
         private ObservableCollection<string> _ProvinceList;
         public ObservableCollection<string> ProvinceList
         {
@@ -294,6 +359,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #region command
         public ICommand AddCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
 
@@ -423,6 +489,11 @@ namespace QuanLyKhuCachLy.ViewModel
             SetDefaultAddStaff();
 
             StaffList = new ObservableCollection<Staff>(DataProvider.ins.db.Staffs);
+            StaffListView = StaffList.ToArray();
+            FilterType = new string[] { "Tất cả", "Giới tính", "Quốc tịch", "Chức vụ", "Bộ phận" };
+            SelectedFilterType = "Tất cả";
+            SelectedFilterProperty = "Chọn phương thức lọc";
+            getFilterProperty();
 
             NationalityList = new ObservableCollection<string>() {
                 "VietNam", "Ameriden", "Phap", "Dut", "Em"
@@ -512,6 +583,15 @@ namespace QuanLyKhuCachLy.ViewModel
                 SetSelectedItemToProperty();
                 editStaffScreen = new EditStaffScreen();
                 editStaffScreen.ShowDialog();
+            });
+
+
+            SearchCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                Console.WriteLine(SearchKey);
             });
 
             ToViewCommand = new RelayCommand<object>((p) =>
@@ -703,6 +783,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     DataProvider.ins.db.SaveChanges();
 
                     StaffList.Add(NewStaff);
+                    StaffListView = StaffList.ToArray();
 
                     transaction.Commit();
                 }
@@ -767,7 +848,8 @@ namespace QuanLyKhuCachLy.ViewModel
                     SelectStaff.dateOfBirth = DateOfBirth;
                     SelectStaff.citizenID = CitizenID;
                     SelectStaff.addressID = StaffAdress.id;
-
+                    SelectStaff.jobTitle = JobTitle;
+                    SelectStaff.department = Department;
                     InitDisplayAddress(StaffAdress);
 
                     DataProvider.ins.db.SaveChanges();
@@ -887,6 +969,138 @@ namespace QuanLyKhuCachLy.ViewModel
 
             InitDisplayAddress(StaffAdress);
         }
+
+
+        void FilterListView()
+        {
+            SelectedFilterType = "Tất cả";
+            if (SearchKey == "")
+            {
+                StaffListView = StaffList.ToArray();
+
+            }
+
+            else
+            {
+
+
+                StaffListView = StaffList.ToArray();
+                String[] Value = new string[StaffListView.Length];
+
+                for (int i = 0; i < StaffListView.Length; i++)
+                {
+                    Value[i] = StaffListView[i].name.ToString() + "@@" + StaffListView[i].citizenID.ToString() + "@@" + StaffListView[i].id.ToString() + "@@" + StaffListView[i].department.ToString() + "@@" + StaffListView[i].jobTitle.ToString();
+
+                }
+
+                StaffListView = StaffListView.Where((val, index) => Value[index].Contains(SearchKey)).ToArray();
+            }
+        }
+
+
+        void getFilterProperty()
+        {
+            SelectedFilterProperty = "Tất cả";
+
+            //FilterProperty = DataProvider.ins.db.Staffs.Select(staff => staff.GetType().GetProperty(SelectedFilterType)).Distinct();
+            if (SelectedFilterType == "Tất cả")
+            {
+                SelectedFilterProperty = "Chọn phương thức lọc";
+                FilterProperty = new string[] { "Chọn phương thức lọc" };
+            }
+            else if (SelectedFilterType == "Giới tính")
+            {
+                FilterProperty = new string[] { "Nam", "Nữ" };
+                SelectedFilterProperty = "Tất cả";
+            }
+            else if (SelectedFilterType == "Quốc tịch")
+            {
+                FilterProperty = DataProvider.ins.db.Staffs.Select(staff => staff.nationality).ToArray();
+                FilterProperty = FilterProperty.Distinct().ToArray();
+            }
+            else if (SelectedFilterType == "Chức vụ")
+            {
+                FilterProperty = DataProvider.ins.db.Staffs.Select(staff => staff.jobTitle).ToArray();
+                FilterProperty = FilterProperty.Distinct().ToArray();
+            }
+            else if (SelectedFilterType == "Bộ phận")
+            {
+                FilterProperty = DataProvider.ins.db.Staffs.Select(staff => staff.department).ToArray();
+                FilterProperty = FilterProperty.Distinct().ToArray();
+            }
+
+            StaffListView = DataProvider.ins.db.Staffs.ToArray();
+        }
+
+        void SelectFilterProperty()
+        {
+            if (SelectedFilterType == "Tất cả")
+            {
+            }
+            else if (SelectedFilterType == "Giới tính")
+            {
+                StaffListView = DataProvider.ins.db.Staffs.Where(x => x.sex == SelectedFilterProperty).ToArray();
+            }
+            else if (SelectedFilterType == "Quốc tịch")
+            {
+                StaffListView = DataProvider.ins.db.Staffs.Where(x => x.nationality == SelectedFilterProperty).ToArray();
+            }
+            else if (SelectedFilterType == "Chức vụ")
+            {
+
+                StaffListView = DataProvider.ins.db.Staffs.Where(x => x.jobTitle == SelectedFilterProperty).ToArray();
+            }
+            else if (SelectedFilterType == "Bộ phận")
+            {
+
+                StaffListView = DataProvider.ins.db.Staffs.Where(x => x.department == SelectedFilterProperty).ToArray();
+            }
+            
+            
+        }
+
+        //String RemoveSign4VietnameseString(String str)
+        //{
+        //    String[] VietnameseSigns = new String[]
+        //        {
+
+        //            "aAeEoOuUiIdDyY",
+
+        //            "áàạảãâấầậẩẫăắằặẳẵ",
+
+        //            "ÁÀẠẢÃÂẤẦẬẨẪĂẮẰẶẲẴ",
+
+        //            "éèẹẻẽêếềệểễ",
+
+        //            "ÉÈẸẺẼÊẾỀỆỂỄ",
+
+        //            "óòọỏõôốồộổỗơớờợởỡ",
+
+        //            "ÓÒỌỎÕÔỐỒỘỔỖƠỚỜỢỞỠ",
+
+        //            "úùụủũưứừựửữ",
+
+        //            "ÚÙỤỦŨƯỨỪỰỬỮ",
+
+        //            "íìịỉĩ",
+
+        //            "ÍÌỊỈĨ",
+
+        //            "đ",
+
+        //            "Đ",
+
+        //            "ýỳỵỷỹ",
+
+        //            "ÝỲỴỶỸ"
+        //        };
+        //    for (int i = 1; i < VietnameseSigns.Length; i++)
+        //    {
+        //        for (int j = 0; j < VietnameseSigns[i].Length; j++)
+        //            str = str.Replace(VietnameseSigns[i][j], VietnameseSigns[0][i - 1]);
+        //    }
+        //    return str;
+        //}
 
         #endregion
     }

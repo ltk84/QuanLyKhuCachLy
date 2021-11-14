@@ -49,6 +49,10 @@
             <DataTemplate DataType="{x:Type viewModel:ReportViewModel}">
                 <userControl:StatisticWrapper />
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:NotificationViewModel}">
+                <userControl:NotificationScreenWrapper />
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

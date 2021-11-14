@@ -137,6 +137,15 @@
     <Compile Include="CustomUserControl\FailNotification.xaml.cs">
       <DependentUpon>FailNotification.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomUserControl\NotificationScreen.xaml.cs">
+      <DependentUpon>NotificationScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\NotificationScreenTemplateManage.xaml.cs">
+      <DependentUpon>NotificationScreenTemplateManage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\NotificationScreenWrapper.xaml.cs">
+      <DependentUpon>NotificationScreenWrapper.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomUserControl\QuarantinePersonWrapperTab.xaml.cs">
       <DependentUpon>QuarantinePersonWrapperTab.xaml</DependentUpon>
     </Compile>
@@ -367,6 +376,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomUserControl\FailNotification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\NotificationScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\NotificationScreenTemplateManage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\NotificationScreenWrapper.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -620,6 +641,7 @@
     <Resource Include="Resources\icons\complete-icon.png" />
     <Resource Include="Resources\icons\delete-white-icon.png" />
     <Resource Include="Resources\icons\empty-icon.png" />
+    <Resource Include="Resources\icons\add-icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
