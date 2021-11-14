@@ -158,6 +158,9 @@
     <Compile Include="CustomUserControl\StaffFunctionMenu.xaml.cs">
       <DependentUpon>StaffFunctionMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomUserControl\UpdatePersonListOfRoom.xaml.cs">
+      <DependentUpon>UpdatePersonListOfRoom.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InitialSettingScreen.xaml.cs">
       <DependentUpon>InitialSettingScreen.xaml</DependentUpon>
     </Compile>
@@ -398,6 +401,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomUserControl\StaffFunctionMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\UpdatePersonListOfRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -208,6 +208,7 @@
             <Button
                 Grid.Column="1"
                 Background="#FF434A54"
+                Command="{Binding PersonInRoomViewModel.ToUpdateListCommand}"
                 Style="{StaticResource AddObjectButton}">
                 Cập nhật danh sách
             </Button>
