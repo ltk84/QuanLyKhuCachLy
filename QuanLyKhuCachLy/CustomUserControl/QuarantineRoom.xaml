@@ -8,9 +8,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="750"
-    mc:Ignorable="d"
-     DataContext="{StaticResource ResourceKey=RoomVM}">
-    <StackPanel Width="Auto" Margin="25,25,45,0">
+    DataContext="{StaticResource ResourceKey=RoomVM}"
+    mc:Ignorable="d">
+    <StackPanel Width="Auto" Margin="25,45,45,0">
         <TextBlock
             Grid.Row="0"
             Grid.Column="0"
@@ -94,7 +94,7 @@
                                     <ContextMenu>
                                         <ContextMenu.Template>
                                             <ControlTemplate>
-                                                <local:QuarantineRoomFunctionMenu Visibility="{Binding VisibilityMenu}"/>
+                                                <local:QuarantineRoomFunctionMenu Visibility="{Binding VisibilityMenu}" />
                                             </ControlTemplate>
                                         </ContextMenu.Template>
                                     </ContextMenu>
