@@ -14,6 +14,7 @@ using System.Data.Entity.Validation;
 using System.IO;
 using Microsoft.Win32;
 using Excel = Microsoft.Office.Interop.Excel;
+using System.Windows.Media;
 
 namespace QuanLyKhuCachLy.ViewModel
 {
@@ -1204,7 +1205,19 @@ namespace QuanLyKhuCachLy.ViewModel
                         DataProvider.ins.db.SaveChanges();
                         StaffList.Add(listStaff[i]);
                     }
+                    Window SuccessDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new SuccessNotification()
+                    };
                     transaction.Commit();
+                    SuccessDialog.ShowDialog();
                 }
                 catch (DbUpdateException e)
                 {
@@ -1242,6 +1255,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     MessageBox.Show(error);
                 }
             }
+            StaffListView = new ObservableCollection<Model.Staff>(DataProvider.ins.db.Staffs).ToArray();
         }
 
         #endregion

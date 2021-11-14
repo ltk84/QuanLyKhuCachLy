@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.IO;
 using Microsoft.Win32;
 using Excel = Microsoft.Office.Interop.Excel;
+using System.Windows.Media;
+
 namespace QuanLyKhuCachLy.ViewModel
 {
     public class QuarantinePersonViewModel : BaseViewModel
@@ -1174,8 +1176,21 @@ namespace QuanLyKhuCachLy.ViewModel
                         DataProvider.ins.db.HealthInformations.Add(listHealthInformation[i]);
                         DataProvider.ins.db.SaveChanges();
                     }
+                    Window SuccessDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new SuccessNotification()
+                    };
                     transaction.Commit();
-                    MessageBox.Show("Đã thêm từ file excel");
+                    //MessageBox.Show("Đã thêm từ file excel");
+
+                    SuccessDialog.ShowDialog();
                     return;
                 }
                 catch (DbUpdateException e)
@@ -1214,6 +1229,8 @@ namespace QuanLyKhuCachLy.ViewModel
                     MessageBox.Show(error);
                 }
             }
+
+            PeopleListView = new ObservableCollection<Model.QuarantinePerson>(DataProvider.ins.db.QuarantinePersons).ToArray();
         }
         void InitDisplayAddress(Address PersonAddress)
         {

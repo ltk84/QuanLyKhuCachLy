@@ -491,7 +491,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-                MessageBox.Show("Xảy ra lỗi khi thực thi đếm người cách ly");
+                //MessageBox.Show("Xảy ra lỗi khi thực thi đếm người cách ly");
             }
             return count;
         }
@@ -506,7 +506,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-                MessageBox.Show("Xảy ra lỗi khi thực thi đếm người cách ly mới");
+                //MessageBox.Show("Xảy ra lỗi khi thực thi đếm người cách ly mới");
             }
             return count;
         }
@@ -521,7 +521,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-                MessageBox.Show("Xảy ra lỗi khi thực thi đếm người cách ly chưa có phòng");
+                //MessageBox.Show("Xảy ra lỗi khi thực thi đếm người cách ly chưa có phòng");
             }
             return count;
         }
@@ -536,7 +536,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-                MessageBox.Show("Xảy ra lỗi khi thực thi đếm người hoàn thành cách ly");
+                //MessageBox.Show("Xảy ra lỗi khi thực thi đếm người hoàn thành cách ly");
             }
             return count;
         }
@@ -555,7 +555,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-                MessageBox.Show("Xảy ra lỗi khi thực thi tính sức chứa khả dụng");
+                //MessageBox.Show("Xảy ra lỗi khi thực thi tính sức chứa khả dụng");
             }
             return count;
         }
@@ -610,7 +610,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-                MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng người cách ly!");
+               // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng người cách ly!");
             }
 
             return count;
@@ -626,7 +626,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-                MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng người cách ly mới!");
+               // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng người cách ly mới!");
             }
 
             return count;
@@ -644,7 +644,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-                MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng người hoàn thành cách ly!");
+               // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng người hoàn thành cách ly!");
             }
 
             return count;
@@ -709,7 +709,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-                MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng người cách ly mới!");
+               // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng người cách ly mới!");
             }
 
             return count;
@@ -830,7 +830,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-                MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng phòng đã đầy!");
+               // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng phòng đã đầy!");
             }
             return count;
         }
@@ -844,7 +844,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-                MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng phòng trống!");
+               // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng phòng trống!");
             }
             return count;
         }
@@ -911,7 +911,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-                MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng phòng theo mức độ!");
+               // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng phòng theo mức độ!");
             }
 
             return count;
@@ -959,7 +959,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-                MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng  nhân viên theo phòng ban!");
+              //  MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng  nhân viên theo phòng ban!");
             }
             return count;
         }
@@ -1004,7 +1004,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-                MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng xét nghiệm dương tính!");
+               // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng xét nghiệm dương tính!");
             }
             return count;
         }
@@ -1018,7 +1018,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-                MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng xét nghiệm âm tính!");
+               // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng xét nghiệm âm tính!");
             }
             return count;
         }

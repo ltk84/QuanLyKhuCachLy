@@ -13,6 +13,8 @@ using System.IO;
 using Microsoft.Win32;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Collections.Generic;
+using System.Windows.Media;
+
 namespace QuanLyKhuCachLy.ViewModel
 {
     public class QuarantineRoomViewModel : BaseViewModel
@@ -471,6 +473,18 @@ namespace QuanLyKhuCachLy.ViewModel
 
                         RoomList.Add(listRoom[i]);
                     }
+
+                    Window SuccessDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new SuccessNotification()
+                    };
                     transaction.Commit();
                 }
                 catch (DbUpdateException e)
@@ -509,6 +523,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     MessageBox.Show(error);
                 }
             }
+            RoomListView = new ObservableCollection<Model.QuarantineRoom>(DataProvider.ins.db.QuarantineRooms).ToArray();
         }
         void AddQuarantineRoom()
         {
