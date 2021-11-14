@@ -1108,6 +1108,25 @@ namespace QuanLyKhuCachLy.ViewModel
 
                         DataProvider.ins.db.SaveChanges();
                     }
+                    else
+                    {
+                        PersonAddress = new Address()
+                        {
+                            apartmentNumber = QPApartmentNumber,
+                            streetName = QPStreetName,
+                            ward = QPSelectedWard,
+                            district = QPSelectedDistrict,
+                            province = QPSelectedProvince
+                        };
+
+                        if (PersonAddress.CheckValidateProperty())
+                        {
+                            DataProvider.ins.db.Addresses.Add(PersonAddress);
+                            Person.addressID = PersonAddress.id;
+                            DataProvider.ins.db.SaveChanges();
+                        }
+                    }
+
 
                     // Tạo thông tin sức khỏe
                     HealthInformation PersonHealthInformation = DataProvider.ins.db.HealthInformations.Where(x => x.quarantinePersonID == Person.id).FirstOrDefault();
@@ -1135,6 +1154,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     Person.phoneNumber = QPPhoneNumber;
                     Person.healthInsuranceID = QPHealthInsuranceID;
 
+                    if (QPSelectedLevel != null) Person.levelID = QPSelectedLevel.id;
 
                     DataProvider.ins.db.SaveChanges();
 

@@ -8,6 +8,7 @@
     <viewmodel:DashboardViewModel x:Key="DashboardVM" />
     <viewmodel:NotificationViewModel x:Key="NotiVM" />
     <viewmodel:QuarantinePersonViewModel x:Key="PersonVM" />
+    <viewmodel:QuarantinePersonInRoomViewModel x:Key="PersonInRoomVM" />
     <viewmodel:QuarantineRoomViewModel x:Key="RoomVM" />
     <viewmodel:ReportViewModel x:Key="ReportVM" />
     <viewmodel:StaffViewModel x:Key="StaffVM" />

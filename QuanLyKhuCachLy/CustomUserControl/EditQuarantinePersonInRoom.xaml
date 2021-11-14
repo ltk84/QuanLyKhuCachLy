@@ -1,5 +1,5 @@
 ﻿<Window
-    x:Class="QuanLyKhuCachLy.CustomUserControl.AddQuarantinedPerson"
+    x:Class="QuanLyKhuCachLy.CustomUserControl.EditQuarantinePersonInRoom"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:control="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
@@ -7,10 +7,10 @@
     xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Name="AddQuarantinedPersonScreen"
+    Name="EditQuarantinedPersonScreen"
     d:DesignHeight="500"
     d:DesignWidth="830"
-    DataContext="{StaticResource ResourceKey=PersonVM}"
+    DataContext="{StaticResource ResourceKey=RoomVM}"
     WindowStyle="None"
     mc:Ignorable="d">
     <Viewbox
@@ -30,9 +30,12 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="450" />
                         </Grid.RowDefinitions>
-                        <control:AddQuarantinedPersonFirstPage Panel.ZIndex="-1" Visibility="{Binding Tab1}" />
-                        <control:AddQuarantinedPersonSecondPage Visibility="{Binding Tab2}" />
-                        <control:AddQuarantinedPersonThirdPage Panel.ZIndex="1" Visibility="{Binding Tab3}" />
+                        <control:EditQuarantinePersonInRoomFirstPage Panel.ZIndex="-1" Visibility="{Binding PersonInRoomViewModel.TabEdit1}" />
+                        <control:EditQuarantinePersonInRoomSecondPage Panel.ZIndex="-1" Visibility="{Binding PersonInRoomViewModel.TabEdit2}" />
+                        <control:EditQuarantinePersonInRoomThirdPage Panel.ZIndex="-1" Visibility="{Binding PersonInRoomViewModel.TabEdit3}" />
+                        <!--<control:EditQuarantinedPersonInformationFisrtPage Panel.ZIndex="-1" Visibility="{Binding TabEdit1}" />
+                        <control:EditQuarantinedPersonInformationSecondPage Visibility="{Binding TabEdit2}" />
+                        <control:EditQuarantinedPersonInformationThirdPage Panel.ZIndex="1" Visibility="{Binding TabEdit3}" />-->
                     </Grid>
                     <Grid
                         Grid.Row="3"
@@ -56,8 +59,8 @@
                                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
                                 Background="#FF434A54"
                                 BorderBrush="{x:Null}"
-                                Command="{Binding CancelCommand}"
-                                CommandParameter="{Binding ElementName=AddQuarantinedPersonScreen}"
+                                Command="{Binding PersonInRoomViewModel.CancelCommand}"
+                                CommandParameter="{Binding ElementName=EditQuarantinedPersonScreen}"
                                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                                 FontSize="16"
                                 FontWeight="Bold"
@@ -72,12 +75,12 @@
                                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
                                 Background="#FF434A54"
                                 BorderBrush="{x:Null}"
-                                Command="{Binding PreviousTabCommand}"
+                                Command="{Binding PersonInRoomViewModel.PreviousTabEditCommand}"
                                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                                 FontSize="16"
                                 FontWeight="Bold"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
-                                Visibility="{Binding ButtonReturn}">
+                                Visibility="{Binding PersonInRoomViewModel.ButtonEditReturn}">
                                 <TextBlock Text="Trở lại" />
                             </Button>
                             <Button
@@ -89,17 +92,17 @@
                                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
                                 Background="#FF1D9583"
                                 BorderBrush="{x:Null}"
-                                CommandParameter="{Binding ElementName=AddQuarantinedPersonScreen}"
+                                CommandParameter="{Binding ElementName=EditQuarantinedPersonScreen}"
                                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                                 FontSize="12"
                                 FontWeight="Bold"
                                 Visibility="Visible">
                                 <Button.Style>
                                     <Style BasedOn="{StaticResource MaterialDesignRaisedButton}" TargetType="{x:Type Button}">
-                                        <Setter Property="Command" Value="{Binding NextTabCommand}" />
+                                        <Setter Property="Command" Value="{Binding PersonInRoomViewModel.NextTabEditCommand}" />
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding ElementName=TabIndicator, Path=Text}" Value="3/3">
-                                                <Setter Property="Command" Value="{Binding AddCommand}" />
+                                            <DataTrigger Binding="{Binding ElementName=TabEditIndicator, Path=Text}" Value="3/3">
+                                                <Setter Property="Command" Value="{Binding PersonInRoomViewModel.EditCommand}" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -109,8 +112,8 @@
                                         <Style TargetType="TextBlock">
                                             <Setter Property="Text" Value="Tiếp theo" />
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding ElementName=TabIndicator, Path=Text}" Value="3/3">
-                                                    <Setter Property="Text" Value="Thêm" />
+                                                <DataTrigger Binding="{Binding ElementName=TabEditIndicator, Path=Text}" Value="3/3">
+                                                    <Setter Property="Text" Value="Chỉnh sửa" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
@@ -118,7 +121,7 @@
                                 </TextBlock>
                             </Button>
                             <TextBlock
-                                x:Name="TabIndicator"
+                                x:Name="TabEditIndicator"
                                 Margin="25,0,0,0"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Bottom"
@@ -126,7 +129,7 @@
                                 FontSize="16"
                                 FontWeight="Bold"
                                 Foreground="#FF434A54"
-                                Text="{Binding TabPosition}" />
+                                Text="{Binding PersonInRoomViewModel.TabEditPosition}" />
                         </StackPanel>
                     </Grid>
                 </StackPanel>
@@ -134,3 +137,4 @@
         </StackPanel>
     </Viewbox>
 </Window>
+

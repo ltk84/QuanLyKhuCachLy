@@ -12,5 +12,6 @@
     <Grid>
         <local:QuarantineRoom Visibility="{Binding Tab1}" />
         <local:QuarantineRoomInfomation Visibility="{Binding Tab2}" />
+        <local:QuarantinePersonInRoomInformation Visibility="{Binding Tab3}" />
     </Grid>
 </UserControl>

@@ -101,6 +101,7 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand LoadedCommand { get; set; }
 
         #endregion
+
         #endregion
 
         public MainViewModel()
@@ -148,7 +149,7 @@ namespace QuanLyKhuCachLy.ViewModel
             quarantinePersonViewModel = new QuarantinePersonViewModel();
             // test room
             //ToDashboard();
-            ToPerson();
+            ToRoom();
         }
 
         private void ToDashboard()
