@@ -108,21 +108,42 @@
                 FontWeight="Bold"
                 Style="{StaticResource DashboardContent}"
                 Text="{Binding AvailableCapacity}" />
-            <ComboBox
-                Grid.Row="0"
-                Grid.Column="2"
-                Margin="12,0,32,0"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top"
-                ItemsSource="{Binding DashboardChartObjects}"
-                SelectedItem="{Binding SelectedDashboardChartObject}"
-                Style="{StaticResource UnderlineComboBox}">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </ComboBox>
+            <Grid Grid.Row="0" Grid.Column="2">
+                <Button
+                    Width="168"
+                    Height="Auto"
+                    VerticalAlignment="Top"
+                    Command="{Binding DataContext.ToStatCommand, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=Window}}"
+                    Style="{StaticResource MenuButton}">
+                    <StackPanel Style="{StaticResource MenuStackPanel}">
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            FontSize="14"
+                            Style="{StaticResource MenuText}">
+                            Xem thống kê
+                        </TextBlock>
+                        <materialDesign:PackIcon
+                            Width="18"
+                            Height="18"
+                            Margin="4,0,0,0"
+                            Kind="NavigateNext"
+                            Style="{StaticResource MenuIcon}" />
+                    </StackPanel>
+                </Button>
+                <ComboBox
+                    Margin="12,0,32,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    ItemsSource="{Binding DashboardChartObjects}"
+                    SelectedItem="{Binding SelectedDashboardChartObject}"
+                    Style="{StaticResource UnderlineComboBox}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+            </Grid>
             <Grid
                 Grid.Row="1"
                 Grid.RowSpan="3"
