@@ -11,27 +11,6 @@ namespace QuanLyKhuCachLy.ViewModel
 {
     public class SeverityViewModel : BaseViewModel
     {
-
-
-        //private string _level;
-        //public string level
-        //{
-        //    get => _level; set
-        //    {
-        //        _level = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
-
-        //private string _description;
-        //public string description
-        //{
-        //    get => _description; set
-        //    {
-        //        _description = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
         private ObservableCollection<Severity> _listSeverity;
         private Severity _selectedItem;
 
@@ -42,11 +21,6 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 _selectedItem = value;
                 OnPropertyChanged();
-                if (_selectedItem != null)
-                {
-                    //level = SelectedItem.level;
-                    //description = SelectedItem.description;
-                }
             }
         }
 
@@ -55,6 +29,7 @@ namespace QuanLyKhuCachLy.ViewModel
             get { return _listSeverity; }
             set { _listSeverity = value; OnPropertyChanged(); }
         }
+
         public ICommand RemoveSeverityCommand { get; set; }
         public ICommand AddSeverityCommand { get; set; }
         public ICommand EditSeverityCommand { get; set; }
