@@ -22,7 +22,8 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 _PersonID = value;
                 DestinationHistoryList = new ObservableCollection<DestinationHistory>(DataProvider.ins.db.DestinationHistories.Where(x => x.quarantinePersonID == _PersonID));
-                idForTask = DestinationHistoryList.Last().id + 1;
+                if (DestinationHistoryList.Count != 0)
+                    idForTask = DestinationHistoryList.Last().id + 1;
                 OnPropertyChanged();
             }
         }

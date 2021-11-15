@@ -55,7 +55,7 @@
                     <StackPanel Style="{StaticResource MenuStackPanel}">
                         <materialDesign:PackIcon Kind="Broom" Style="{StaticResource MenuIcon}" />
                         <TextBlock Style="{StaticResource MenuText}">
-                            Làm trống
+                            Đổi phòng
                         </TextBlock>
                     </StackPanel>
                 </Button>

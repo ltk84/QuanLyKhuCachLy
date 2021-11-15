@@ -864,8 +864,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-                TabInformation = Visibility.Visible;
-                TabList = Visibility.Hidden;
+                ToDetailPersonTab();
             });
 
             ToMainCommand = new RelayCommand<object>((p) =>
@@ -873,11 +872,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-                TabInformation = Visibility.Hidden;
-                TabList = Visibility.Visible;
                 TabIndexInformation = 1;
-                TabInformation1 = Visibility.Visible;
-                TabInformation2 = Visibility.Hidden;
+                BackToPersonList();
             });
 
 
@@ -913,6 +909,7 @@ namespace QuanLyKhuCachLy.ViewModel
             DeleteCommand = new RelayCommand<object>((p) => { if (SelectedItem != null) return true; return false; }, (p) =>
             {
                 DeleteQuarantinePerson();
+                BackToPersonList();
             });
 
             CancelCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
@@ -929,6 +926,19 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #region method
 
+        void ToDetailPersonTab()
+        {
+            TabInformation = Visibility.Visible;
+            TabList = Visibility.Hidden;
+        }
+
+        void BackToPersonList()
+        {
+            TabInformation = Visibility.Hidden;
+            TabList = Visibility.Visible;
+            TabInformation1 = Visibility.Visible;
+            TabInformation2 = Visibility.Hidden;
+        }
 
         // Searching
         void FilterListView()
@@ -1574,6 +1584,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     TestingResultViewModel.ApplyTestingResultToDb(Person.id, "EditOrDelete");
                     DestinationHistoryViewModel.ins.ApplayDestinationHistoryToDB(Person.id, "EditOrDelete");
 
+                    PeopleListView = QuarantinePersonList.ToArray();
 
                     transaction.Commit();
 
@@ -1630,6 +1641,8 @@ namespace QuanLyKhuCachLy.ViewModel
                     DataProvider.ins.db.SaveChanges();
 
                     QuarantinePersonList.Remove(Person);
+
+                    PeopleListView = QuarantinePersonList.ToArray();
 
                     transaction.Commit();
                 }

@@ -552,6 +552,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }, (p) =>
             {
                 DeleteStaff();
+                BackToStaffList();
             });
 
             ToAddManualCommand = new RelayCommand<object>((p) =>
@@ -603,8 +604,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-                TabInformation = Visibility.Visible;
-                TabList = Visibility.Hidden;
+
+                ToDetailStaffTab();
             });
 
             ToMainCommand = new RelayCommand<object>((p) =>
@@ -612,8 +613,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-                TabInformation = Visibility.Hidden;
-                TabList = Visibility.Visible;
+                BackToStaffList();
             });
 
             CancelAddStaffTabCommand = new RelayCommand<object>((p) =>
@@ -634,7 +634,6 @@ namespace QuanLyKhuCachLy.ViewModel
             });
 
 
-
             NextStaffTabCommand = new RelayCommand<Window>((p) =>
             {
 
@@ -649,6 +648,17 @@ namespace QuanLyKhuCachLy.ViewModel
         }
 
         #region method
+        void BackToStaffList()
+        {
+            TabInformation = Visibility.Hidden;
+            TabList = Visibility.Visible;
+        }
+
+        void ToDetailStaffTab()
+        {
+            TabInformation = Visibility.Visible;
+            TabList = Visibility.Hidden;
+        }
 
         void HandleChangeTab(int index, string action, Window p)
         {
@@ -857,6 +867,9 @@ namespace QuanLyKhuCachLy.ViewModel
                     InitDisplayAddress(StaffAdress);
 
                     DataProvider.ins.db.SaveChanges();
+
+                    StaffListView = new ObservableCollection<Model.Staff>(DataProvider.ins.db.Staffs).ToArray();
+
                 }
                 catch (DbUpdateException e)
                 {
@@ -908,6 +921,8 @@ namespace QuanLyKhuCachLy.ViewModel
                     DataProvider.ins.db.SaveChanges();
 
                     StaffList.Remove(staff);
+
+                    StaffListView = new ObservableCollection<Model.Staff>(DataProvider.ins.db.Staffs).ToArray();
 
                     transaction.Commit();
                 }
@@ -1059,8 +1074,8 @@ namespace QuanLyKhuCachLy.ViewModel
 
                 StaffListView = DataProvider.ins.db.Staffs.Where(x => x.department == SelectedFilterProperty).ToArray();
             }
-            
-            
+
+
         }
 
         //String RemoveSign4VietnameseString(String str)

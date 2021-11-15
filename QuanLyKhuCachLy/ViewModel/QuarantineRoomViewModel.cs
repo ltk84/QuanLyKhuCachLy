@@ -23,6 +23,7 @@ namespace QuanLyKhuCachLy.ViewModel
         #region property
 
 
+        #region search & filter
         // Từ khóa cho việc tìm kiếm
         private String _SearchKey;
         public String SearchKey
@@ -76,6 +77,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 SelectFilterProperty();
             }
         }
+        #endregion
 
         #region list
 
@@ -311,9 +313,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-                Tab1 = Visibility.Hidden;
-                Tab2 = Visibility.Visible;
-                Tab3 = Visibility.Hidden;
+                ToDetailRoomTab();
             });
 
             ToMainCommand = new RelayCommand<object>((p) =>
@@ -321,9 +321,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-                Tab2 = Visibility.Hidden;
-                Tab1 = Visibility.Visible;
-                Tab3 = Visibility.Hidden;
+                BackToListRoomTab();
             });
 
             AddRoomManualCommand = new RelayCommand<Window>((p) =>
@@ -349,7 +347,9 @@ namespace QuanLyKhuCachLy.ViewModel
 
             DeleteRoomCommand = new RelayCommand<object>((p) => { if (SelectedItem != null) return true; return false; }, (p) =>
             {
+                // Chưa xử lý hiện bảng thông báo
                 DeleteQuarantineRoom();
+                BackToListRoomTab();
             });
 
             CancelCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
@@ -365,6 +365,19 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #region method
 
+        void BackToListRoomTab()
+        {
+            Tab2 = Visibility.Hidden;
+            Tab1 = Visibility.Visible;
+            Tab3 = Visibility.Hidden;
+        }
+
+        void ToDetailRoomTab()
+        {
+            Tab1 = Visibility.Hidden;
+            Tab2 = Visibility.Visible;
+            Tab3 = Visibility.Hidden;
+        }
 
         // hàm gọi khi thay đổi SearchKey, thay đổi giá trị của RoomListView.
         void SearchListRoom()
