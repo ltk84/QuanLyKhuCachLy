@@ -415,7 +415,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 FilterProperty = DataProvider.ins.db.QuarantineRooms.Select(room => room.capacity.ToString()).ToArray();
                 FilterProperty = FilterProperty.Distinct().ToArray();
             }
-            
+
 
             RoomListView = DataProvider.ins.db.QuarantineRooms.ToArray();
         }
@@ -433,8 +433,6 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 RoomListView = DataProvider.ins.db.QuarantineRooms.Where(x => x.capacity.ToString() == SelectedFilterProperty).ToArray();
             }
-      
-
 
         }
 

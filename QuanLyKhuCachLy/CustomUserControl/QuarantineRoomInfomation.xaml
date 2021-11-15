@@ -76,7 +76,7 @@
                     Height="30"
                     Margin="0,0,0,26"
                     Background="#FF1D9583"
-                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.CompleteQuarantineCommand}"
+                    Command="{Binding CompleteQuarantineCommand}"
                     Style="{StaticResource complete-button-with-background}">
                     Hoàn thành cách ly
                 </Button>
@@ -134,14 +134,14 @@
                         FontSize="19"
                         FontWeight="Regular"
                         Foreground="#FF363636"
-                        Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.SelectedItem.displayName, StringFormat=Phòng {0}}" />
+                        Text="{Binding SelectedItem.displayName, StringFormat=Phòng {0}}" />
                 </Grid>
 
                 <Button
                     Grid.Row="0"
                     Grid.Column="1"
                     Margin="0,0,0,10"
-                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ToEditCommand}"
+                    Command="{Binding ToEditCommand}"
                     Template="{StaticResource edit-button}">
                     Chỉnh sửa
                 </Button>

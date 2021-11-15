@@ -220,7 +220,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
-        
+
         #endregion
 
         #region Quarantine Person
@@ -387,7 +387,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     SetSelectedItemToProperty();
                     InjectionRecordViewModel.ins.IRQuarantinePersonID = SelectedItem.id;
-                    DestinationHistoryViewModel = new DestinationHistoryViewModel(currentPersonID: SelectedItem.id);
+                    DestinationHistoryViewModel.ins.PersonID = SelectedItem.id;
                     TestingResultViewModel.ins.PersonID = SelectedItem.id;
                 }
             }
@@ -795,7 +795,7 @@ namespace QuanLyKhuCachLy.ViewModel
             QAInformation = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
 
             InjectionRecordViewModel = InjectionRecordViewModel.ins;
-            DestinationHistoryViewModel = new DestinationHistoryViewModel();
+            DestinationHistoryViewModel = DestinationHistoryViewModel.ins;
             TestingResultViewModel = TestingResultViewModel.ins;
 
             NationalityList = new ObservableCollection<string>() {
@@ -921,6 +921,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     InjectionRecordViewModel.RollbackTransaction(SelectedItem.id);
                     TestingResultViewModel.RollbackTransaction(SelectedItem.id);
+                    DestinationHistoryViewModel.RollbackTransaction(SelectedItem.id);
                 }
                 p.Close();
             });
@@ -951,7 +952,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     Value[i] = PeopleListView[i].name?.ToString() + "@@" + PeopleListView[i].citizenID?.ToString() + "@@" + PeopleListView[i].id.ToString() + "@@" + PeopleListView[i].healthInsuranceID?.ToString() + "@@" + PeopleListView[i]?.phoneNumber.ToString() + "@@" + PeopleListView[i].QuarantineRoom?.displayName.ToString();
 
                 }
-                
+
                 PeopleListView = PeopleListView.Where((val, index) => Value[index].Contains(SearchKey)).ToArray();
             }
         }
@@ -1017,22 +1018,22 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType == "Phòng")
             {
-                
+
                 PeopleListView = DataProvider.ins.db.QuarantinePersons.Where(x => x.QuarantineRoom.displayName == SelectedFilterProperty).ToArray();
             }
             else if (SelectedFilterType == "Nhóm đối tượng")
             {
 
-               PeopleListView = DataProvider.ins.db.QuarantinePersons.Where(x => x.Severity.level == SelectedFilterProperty).ToArray();
+                PeopleListView = DataProvider.ins.db.QuarantinePersons.Where(x => x.Severity.level == SelectedFilterProperty).ToArray();
             }
             else if (SelectedFilterType == "Ngày đi")
             {
-               PeopleListView = DataProvider.ins.db.QuarantinePersons.Where(x => x.leaveDate.ToString() == SelectedFilterProperty).ToArray();
+                PeopleListView = DataProvider.ins.db.QuarantinePersons.Where(x => x.leaveDate.ToString() == SelectedFilterProperty).ToArray();
 
             }
             else if (SelectedFilterType == "Ngày đến")
             {
-               PeopleListView = DataProvider.ins.db.QuarantinePersons.Where(x => x.arrivedDate.ToString() == SelectedFilterProperty).ToArray();
+                PeopleListView = DataProvider.ins.db.QuarantinePersons.Where(x => x.arrivedDate.ToString() == SelectedFilterProperty).ToArray();
 
             }
 
@@ -1379,6 +1380,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             InjectionRecordViewModel.ins.ClearInjectionRecordList();
             TestingResultViewModel.ins.ClearTestingResultList();
+            DestinationHistoryViewModel.ins.ClearDestinationHistoryList();
         }
 
         void AddQuarantinePerson()
@@ -1449,6 +1451,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     InjectionRecordViewModel.ins.ApplyInjectionRecordToDB(Person.id, "Add");
                     TestingResultViewModel.ins.ApplyTestingResultToDb(Person.id, "Add");
+                    DestinationHistoryViewModel.ins.ApplayDestinationHistoryToDB(Person.id, "Add");
 
                     transaction.Commit();
 
@@ -1569,6 +1572,8 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     InjectionRecordViewModel.ApplyInjectionRecordToDB(Person.id, "EditOrDelete");
                     TestingResultViewModel.ApplyTestingResultToDb(Person.id, "EditOrDelete");
+                    DestinationHistoryViewModel.ins.ApplayDestinationHistoryToDB(Person.id, "EditOrDelete");
+
 
                     transaction.Commit();
 
