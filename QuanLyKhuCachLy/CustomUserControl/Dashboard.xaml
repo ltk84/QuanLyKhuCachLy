@@ -221,8 +221,22 @@
                 Height="360"
                 VerticalAlignment="Top"
                 VerticalScrollBarVisibility="Auto">
-                <StackPanel Margin="10" VerticalAlignment="Center">
-                    <StackPanel Visibility="{Binding NoneRecommendationVisibility}">
+                <StackPanel Margin="10">
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=NonRecommendationField, Path=Visibility}" Value="Visible">
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=NonRecommendationField, Path=Visibility}" Value="Collapsed">
+                                    <DataTrigger.Setters>
+                                        <Setter Property="VerticalAlignment" Value="Top" />
+                                    </DataTrigger.Setters>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                    <StackPanel x:Name="NonRecommendationField" Visibility="{Binding NoneRecommendationVisibility}">
                         <materialDesign:PackIcon
                             Width="45"
                             Height="45"

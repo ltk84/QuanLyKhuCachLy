@@ -10,58 +10,107 @@
     d:DesignWidth="705"
     DataContext="{StaticResource StaffVM}"
     mc:Ignorable="d">
-    <StackPanel Margin="40,30,40,30">
-        <Grid>
+    <StackPanel Margin="25,45,45,0">
+        <Grid Margin="0,0,0,17">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
-
             <Button
                 Grid.Column="0"
-                Margin="0,0,10,0"
+                Width="Auto"
+                Height="Auto"
+                Margin="-19,0,0,0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Command="{Binding ToMainCommand}"
                 IsEnabled="True"
                 RenderTransformOrigin="0.5,0.5"
-                Style="{StaticResource MaterialDesignIconButton}"
-                ToolTip="MaterialDesignIconButton">
-                <materialDesign:PackIcon Kind="ArrowLeftCircle" />
+                Style="{StaticResource MenuButton}">
+                <StackPanel Width="Auto" Style="{StaticResource MenuStackPanel}">
+                    <materialDesign:PackIcon
+                        Width="24"
+                        Height="24"
+                        Foreground="#FF434a54"
+                        Kind="ArrowLeftCircle"
+                        Style="{StaticResource MenuIcon}" />
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        FontSize="16"
+                        Foreground="#FF434a54"
+                        Style="{StaticResource MenuText}">
+                        DANH SÁCH NHÂN VIÊN
+                    </TextBlock>
+                </StackPanel>
             </Button>
-            <TextBlock
-                Grid.Column="1"
-                VerticalAlignment="Center"
-                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                FontSize="14"
-                FontWeight="Regular"
-                Foreground="#FF434A54">
-                DANH SÁCH NHÂN VIÊN
-            </TextBlock>
         </Grid>
 
-        <Grid Margin="0,30,0,0">
+        <Grid Margin="0,10,0,10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
-
-
             <Button
+                Grid.Row="0"
                 Grid.Column="1"
-                Margin="0,0,60,0"
+                Width="Auto"
+                Height="Auto"
+                Margin="0,0,25,0"
+                HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 Command="{Binding DeleteCommand}"
-                Content="Xóa nhân viên"
-                Template="{StaticResource delete-button}" />
+                Style="{StaticResource MenuButton}">
+                <StackPanel Orientation="Horizontal">
+                    <Image
+                        Grid.Column="0"
+                        Width="18"
+                        Height="16"
+                        Margin="0,0,15,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        RenderTransformOrigin="0.5,0.5"
+                        Source="/QuanLyKhuCachLy;component/Resources/icons/delete-icon.png" />
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="11"
+                        FontWeight="Regular"
+                        Foreground="#FF000000"
+                        Text="Xóa nhân viên" />
 
+                </StackPanel>
+            </Button>
             <Button
+                Grid.Row="0"
                 Grid.Column="2"
+                Width="Auto"
+                Height="Auto"
+                HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 Command="{Binding ToEditCommand}"
-                Content="Chỉnh sửa"
-                Template="{StaticResource edit-button}" />
+                Style="{StaticResource MenuButton}">
+                <StackPanel Orientation="Horizontal">
+                    <Image
+                        Grid.Column="0"
+                        Width="18"
+                        Height="16"
+                        Margin="0,0,15,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        RenderTransformOrigin="0.5,0.5"
+                        Source="/QuanLyKhuCachLy;component/Resources/icons/edit-icon.png" />
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="11"
+                        FontWeight="Regular"
+                        Foreground="#FF000000"
+                        Text="Chỉnh sửa" />
+                </StackPanel>
+            </Button>
 
 
             <Grid>
@@ -72,9 +121,10 @@
 
                 <TextBlock
                     Grid.Row="0"
+                    Margin="0,-10,0,0"
                     VerticalAlignment="Center"
                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                    FontSize="22"
+                    FontSize="24"
                     FontWeight="Bold"
                     Foreground="#FF363636">
                     THÔNG TIN
@@ -96,7 +146,7 @@
         </Grid>
         <Separator Margin="0,10,0,0" Background="#1E434A54" />
 
-        <Grid Margin="0,10,0,10">
+        <Grid Margin="0,20,0,10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="1*" />
@@ -203,7 +253,7 @@
 
         </Grid>
 
-        <Separator Margin="0,0,0,10" Background="#1E434A54" />
+        <Separator Margin="0,20,0,20" Background="#1E434A54" />
 
         <Grid>
             <Grid.ColumnDefinitions>

@@ -11,7 +11,7 @@
     d:DesignHeight="705"
     d:DesignWidth="757"
     mc:Ignorable="d">
-    <StackPanel Margin="40,30,40,30">
+    <StackPanel Width="Auto" Margin="25,45,45,0">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
@@ -19,21 +19,21 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock
-                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                FontSize="22"
-                FontWeight="Bold"
-                Foreground="#FF363636">
+                Grid.Row="0"
+                Grid.Column="0"
+                Style="{StaticResource DashboardTitle}">
                 DANH SÁCH NHÂN VIÊN
             </TextBlock>
             <Button
                 Grid.Column="1"
-                Width="140"
-                Height="35"
-                Background="#FF1D9583"
+                Width="170"
+                Height="32"
+                Margin="0,20,0,0"
+                HorizontalAlignment="Right"
                 Content="Thêm nhân viên"
-                FontSize="16"
+                FontSize="12"
                 PreviewMouseDown="Button_PreviewMouseDown"
-                Style="{StaticResource AddObjectButton}">
+                Style="{StaticResource DashboardButton}">
                 <Button.ContextMenu>
                     <ContextMenu>
                         <ContextMenu.Template>
@@ -50,54 +50,57 @@
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
-        
 
-            <StackPanel  Grid.Row="0"
-                        Grid.Column="0"
-                        Margin="0,25,24,0"
-                        VerticalAlignment="Bottom">
-                        <TextBlock
-                            Margin="0,10,0,0"
-                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                            FontSize="16"
-                            Foreground="#FF434A54">
-                            Nhập bất kì để tìm kiếm
-                        </TextBlock>
-                        <TextBox    Width="300"
-                                    HorizontalAlignment="Left"
-                                    Height="40"
-                                    Margin="0, 8, 0,0"
-                                    Padding="10,8,8,10"
-                                    materialDesign:HintAssist.Hint="Tên, CMND,...."
-                                    MaxLength="20"
-                                    Style="{StaticResource TextInputField}">
-                            <TextBox.Text>
-                                <Binding  Mode="TwoWay" Path="SearchKey" UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules>
-                                    </Binding.ValidationRules>
-                                </Binding>
-                            </TextBox.Text>
 
-                        </TextBox>          
+            <StackPanel
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="0,15,24,0"
+                VerticalAlignment="Bottom">
+                <TextBlock
+                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                    FontSize="16"
+                    Foreground="#FF434A54">
+                    Nhập bất kì để tìm kiếm
+                </TextBlock>
+                <TextBox
+                    Width="300"
+                    Height="40"
+                    Margin="0,8,0,0"
+                    Padding="10,8,8,10"
+                    HorizontalAlignment="Left"
+                    materialDesign:HintAssist.Hint="Tên, CMND,...."
+                    MaxLength="20"
+                    Style="{StaticResource TextInputField}">
+                    <TextBox.Text>
+                        <Binding
+                            Mode="TwoWay"
+                            Path="SearchKey"
+                            UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules />
+                        </Binding>
+                    </TextBox.Text>
+
+                </TextBox>
             </StackPanel>
 
 
             <StackPanel
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        Margin="0,25,0,0"
-                        VerticalAlignment="Bottom">
-                        
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="0,25,0,0"
+                VerticalAlignment="Bottom">
+
                 <TextBlock
-                            Margin="5,0,0,5"
-                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                            FontSize="16"
-                            Foreground="#FF434A54">
-                            Lọc theo
+                    Margin="5,0,0,5"
+                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                    FontSize="16"
+                    Foreground="#FF434A54">
+                    Lọc theo
                 </TextBlock>
                 <ComboBox
                     Padding="10,8,8,10"
@@ -106,24 +109,23 @@
                     Style="{StaticResource ComboBoxField}">
                     <ComboBox.SelectedItem>
                         <Binding Path="SelectedFilterType" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                            </Binding.ValidationRules>
+                            <Binding.ValidationRules />
                         </Binding>
                     </ComboBox.SelectedItem>
                 </ComboBox>
             </StackPanel>
 
             <StackPanel
-                    Grid.Row="0"
-                    Grid.Column="2"
-                    Margin="24,25,0,0"
-                    VerticalAlignment="Bottom">
+                Grid.Row="0"
+                Grid.Column="2"
+                Margin="24,25,0,0"
+                VerticalAlignment="Bottom">
                 <TextBlock
-                        Margin="5,0,0,5"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="16"
-                        Foreground="#FF434A54">
-                        Bộ lọc
+                    Margin="5,0,0,5"
+                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                    FontSize="16"
+                    Foreground="#FF434A54">
+                    Bộ lọc
                 </TextBlock>
                 <ComboBox
                     Padding="10,8,8,10"
@@ -132,8 +134,7 @@
                     Style="{StaticResource ComboBoxField}">
                     <ComboBox.SelectedItem>
                         <Binding Path="SelectedFilterProperty" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                            </Binding.ValidationRules>
+                            <Binding.ValidationRules />
                         </Binding>
                     </ComboBox.SelectedItem>
                 </ComboBox>
@@ -148,10 +149,13 @@
             AutoGenerateColumns="False"
             CanUserAddRows="False"
             CanUserReorderColumns="False"
-            CanUserResizeColumns="False"
+            CanUserResizeColumns="True"
             CanUserResizeRows="False"
+            IsReadOnly="True"
             ItemsSource="{Binding StaffListView}"
-            SelectedItem="{Binding SelectedItem}">
+            SelectedItem="{Binding SelectedItem}"
+            SelectionMode="Single"
+            SelectionUnit="FullRow">
             <DataGrid.Columns>
                 <materialDesign:DataGridTextColumn
                     Binding="{Binding id}"
@@ -174,7 +178,7 @@
                     Header="Giới tính"
                     HeaderStyle="{StaticResource DataGridHeader}"
                     MaxLength="30" />
-      
+
                 <materialDesign:DataGridTextColumn
                     Binding="{Binding jobTitle}"
                     EditingElementStyle="{StaticResource EditingDataGridElement}"
@@ -189,16 +193,14 @@
                     Header="Bộ phận"
                     HeaderStyle="{StaticResource DataGridHeader}"
                     MaxLength="30" />
-                
+
                 <DataGridTemplateColumn
                     Width="*"
                     HeaderStyle="{StaticResource DataGridButtonHeader}"
                     IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button
-                                HorizontalAlignment="Right"
-                                Style="{StaticResource DataGridButton}">
+                            <Button HorizontalAlignment="Right" Style="{StaticResource DataGridButton}">
                                 <materialDesign:PackIcon
                                     Width="16"
                                     Height="16"

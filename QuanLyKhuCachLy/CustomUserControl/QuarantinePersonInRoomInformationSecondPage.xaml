@@ -9,7 +9,7 @@
     d:DesignHeight="500"
     d:DesignWidth="700"
     mc:Ignorable="d">
-    <Grid>
+    <StackPanel>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" SharedSizeGroup="A" />
@@ -22,7 +22,6 @@
             <TextBlock
                 Grid.Row="0"
                 Grid.Column="0"
-                Margin="15,0,0,0"
                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                 FontSize="16"
                 FontWeight="Bold"
@@ -33,7 +32,7 @@
                 x:Name="vaccineInfo"
                 Grid.Row="0"
                 Grid.Column="0"
-                Margin="15,30,10,10"
+                Margin="0,30,10,10"
                 AutoGenerateColumns="False"
                 BorderBrush="Black"
                 BorderThickness="1"
@@ -98,7 +97,6 @@
             <TextBlock
                 Grid.Row="1"
                 Grid.Column="0"
-                Margin="15,0,0,0"
                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                 FontSize="16"
                 FontWeight="Bold"
@@ -110,7 +108,7 @@
                 x:Name="testingResult"
                 Grid.Row="1"
                 Grid.Column="0"
-                Margin="15,30,10,10"
+                Margin="0,30,10,5"
                 AutoGenerateColumns="False"
                 BorderBrush="Black"
                 BorderThickness="1"
@@ -193,7 +191,7 @@
                 Grid.Row="0"
                 Grid.RowSpan="2"
                 Grid.Column="1"
-                Margin="15,30,25,10"
+                Margin="15,30,0,5"
                 AutoGenerateColumns="False"
                 BorderBrush="Black"
                 BorderThickness="1">
@@ -228,5 +226,5 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-    </Grid>
+    </StackPanel>
 </UserControl>
