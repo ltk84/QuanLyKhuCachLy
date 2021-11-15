@@ -99,6 +99,9 @@
     <Compile Include="CustomUserControl\AddPersonFunctionMenu.xaml.cs">
       <DependentUpon>AddPersonFunctionMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomUserControl\AddQuarantinedPersonFouthPage.xaml.cs">
+      <DependentUpon>AddQuarantinedPersonFouthPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomUserControl\AddRoomFunctionMenu.xaml.cs">
       <DependentUpon>AddRoomFunctionMenu.xaml</DependentUpon>
     </Compile>
@@ -113,6 +116,9 @@
     </Compile>
     <Compile Include="CustomUserControl\AddStaffSecondScreen.xaml.cs">
       <DependentUpon>AddStaffSecondScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditQuarantinedPersonFouthPage.xaml.cs">
+      <DependentUpon>EditQuarantinedPersonFouthPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomUserControl\EditQuarantinedPersonInformation.xaml.cs">
       <DependentUpon>EditQuarantinedPersonInformation.xaml</DependentUpon>
@@ -354,6 +360,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CustomUserControl\AddQuarantinedPersonFouthPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomUserControl\AddRoomFunctionMenu.xaml" />
     <Page Include="CustomUserControl\AddStaffFirstScreen.xaml">
       <SubType>Designer</SubType>
@@ -368,6 +378,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomUserControl\AddStaffSecondScreen.xaml" />
+    <Page Include="CustomUserControl\EditQuarantinedPersonFouthPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomUserControl\EditQuarantinedPersonInformation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
