@@ -56,26 +56,9 @@
                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                     FontSize="16"
                     Foreground="#FF434A54">
-                    Thời gian đến (*)
-                </TextBlock>
-                <TextBox
-                    materialDesign:HintAssist.Hint="Thời gian đến"
-                    MaxLength="30"
-                    Style="{StaticResource TextInputField}">
-                </TextBox>
-            </StackPanel>
-            <StackPanel
-                Grid.Row="1"
-                Grid.Column="1"
-                Margin="0,10,24,10">
-                <TextBlock
-                    Margin="5,0,0,5"
-                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                    FontSize="16"
-                    Foreground="#FF434A54">
                     Ngày đến (*)
                 </TextBlock>
-                <DatePicker materialDesign:HintAssist.Hint="Nhập ngày sinh" Style="{StaticResource DatePickerField}">
+                <DatePicker materialDesign:HintAssist.Hint="Nhập ngày đến" Style="{StaticResource DatePickerField}">
                     <DatePicker.SelectedDate>
                         <Binding
                             Mode="OneWayToSource"
