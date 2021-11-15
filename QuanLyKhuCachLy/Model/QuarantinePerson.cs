@@ -154,7 +154,8 @@ namespace QuanLyKhuCachLy.Model
                 OnPropertyChanged();
             }
         }
-        public Nullable<bool> _completeQuarantine { get; set; }
+
+        private Nullable<bool> _completeQuarantine;
         public Nullable<bool> completeQuarantine
         {
             get => _completeQuarantine; set

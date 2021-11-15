@@ -357,13 +357,34 @@ namespace QuanLyKhuCachLy.ViewModel
                 p.Close();
             });
 
-            ClearCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            CompleteQuarantineCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
+                CompleteQuarantine();
+            });
 
+            ClearCommand = new RelayCommand<object>((p) =>
+            {
+                if (PersonInRoomViewModel.QuarantinePersonList.Count > 0)
+                    return true;
+                return false;
+            }
+            , (p) =>
+            {
+                ClearPersonList();
             });
         }
 
         #region method
+
+        void CompleteQuarantine()
+        {
+            PersonInRoomViewModel.CompeleteQuarantineRoom();
+        }
+
+        void ClearPersonList()
+        {
+            PersonInRoomViewModel.ClearPersonList();
+        }
 
         void BackToListRoomTab()
         {

@@ -27,5 +27,11 @@ namespace QuanLyKhuCachLy.CustomUserControl
             if (contextMenu == null) return;
             contextMenu.IsOpen = false;
         }
+
+        private void DataGrid_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            e.Row.Header = (e.Row.GetIndex() + 1).ToString();
+
+        }
     }
 }

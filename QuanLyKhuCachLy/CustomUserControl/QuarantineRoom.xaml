@@ -149,12 +149,13 @@
             CanUserResizeRows="False"
             IsReadOnly="True"
             ItemsSource="{Binding RoomListView}"
+            LoadingRow="DataGrid_LoadingRow"
             SelectedItem="{Binding SelectedItem}"
             SelectionMode="Single"
             SelectionUnit="FullRow">
             <DataGrid.Columns>
                 <materialDesign:DataGridTextColumn
-                    Binding="{Binding id}"
+                    Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=Header}"
                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                     ElementStyle="{StaticResource DataGridElement}"
                     Header="Số thứ tự"

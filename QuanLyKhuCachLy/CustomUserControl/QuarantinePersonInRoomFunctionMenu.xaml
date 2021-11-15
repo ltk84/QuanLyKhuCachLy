@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Name="PersonCM"
     Width="276"
-    Height="332"
+    Height="270"
     DataContext="{StaticResource RoomVM}"
     mc:Ignorable="d">
     <Border Padding="0,16,0,16" Style="{StaticResource RecommendationField}">
@@ -32,15 +32,15 @@
                     </TextBlock>
                 </StackPanel>
             </Button>
-            <Button Style="{StaticResource MenuButton}">
+            <!--<Button Command="{Binding PersonInRoomViewModel.DeleteCommand}" Style="{StaticResource MenuButton}">
                 <StackPanel Style="{StaticResource MenuStackPanel}">
                     <materialDesign:PackIcon Kind="DeleteOutline" Style="{StaticResource MenuIcon}" />
                     <TextBlock Style="{StaticResource MenuText}">
                         Xóa
                     </TextBlock>
                 </StackPanel>
-            </Button>
-            <Button Style="{StaticResource MenuButton}">
+            </Button>-->
+            <Button Command="{Binding PersonInRoomViewModel.CompleteQuarantinePersonCommand}" Style="{StaticResource MenuButton}">
                 <StackPanel Style="{StaticResource MenuStackPanel}">
                     <materialDesign:PackIcon Kind="CheckboxOutline" Style="{StaticResource MenuIcon}" />
                     <TextBlock Style="{StaticResource MenuText}">
@@ -52,7 +52,7 @@
                 <StackPanel Style="{StaticResource MenuStackPanel}">
                     <materialDesign:PackIcon Kind="Broom" Style="{StaticResource MenuIcon}" />
                     <TextBlock Style="{StaticResource MenuText}">
-                        Làm trống
+                        Đổi phòng
                     </TextBlock>
                 </StackPanel>
             </Button>

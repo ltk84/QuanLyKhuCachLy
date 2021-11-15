@@ -86,6 +86,7 @@
                     Height="30"
                     Margin="0,0,0,26"
                     Background="#FF2AC7D7"
+                    Command="{Binding ClearCommand}"
                     Style="{StaticResource clear-button-with-background}">
                     Làm trống
                 </Button>
@@ -233,12 +234,13 @@
                 CanUserResizeRows="False"
                 IsReadOnly="True"
                 ItemsSource="{Binding PersonInRoomViewModel.QuarantinePersonList}"
+                LoadingRow="DataGrid_LoadingRow"
                 SelectedItem="{Binding PersonInRoomViewModel.SelectedItem}"
                 SelectionMode="Single"
                 SelectionUnit="FullRow">
                 <DataGrid.Columns>
                     <materialDesign:DataGridTextColumn
-                        Binding="{Binding id}"
+                        Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=Header}"
                         EditingElementStyle="{StaticResource EditingDataGridElement}"
                         ElementStyle="{StaticResource DataGridElement}"
                         Header="Số thứ tự"

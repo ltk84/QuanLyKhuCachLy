@@ -53,7 +53,7 @@
                         </TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource MenuButton}">
+                <Button Command="{Binding ClearCommand}" Style="{StaticResource MenuButton}">
                     <StackPanel Style="{StaticResource MenuStackPanel}">
                         <materialDesign:PackIcon Kind="Broom" Style="{StaticResource MenuIcon}" />
                         <TextBlock Style="{StaticResource MenuText}">
