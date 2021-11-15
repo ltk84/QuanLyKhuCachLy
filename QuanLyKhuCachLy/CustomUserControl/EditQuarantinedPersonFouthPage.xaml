@@ -54,9 +54,10 @@
                         VerticalAlignment="Bottom"
                         HorizontalAlignment="Right"
                         Background="Transparent"
-                        Command="{Binding InjectionRecordViewModel.AddOnUICommand}"
+                        Command="{Binding ToAddDestinationCommand}"
                         Foreground="Transparent"
                         Template="{StaticResource plus-button}">
+                    
                 </Button>
             </Grid>
             <DataGrid
