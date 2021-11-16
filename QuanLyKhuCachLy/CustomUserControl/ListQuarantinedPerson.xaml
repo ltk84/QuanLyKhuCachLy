@@ -156,7 +156,6 @@
             ItemsSource="{Binding PeopleListView}"
             LoadingRow="QuarantinedPersonTable_LoadingRow"
             SelectedItem="{Binding SelectedItem}"
-            SelectionChanged="QuarantinedPersonTable_SelectionChanged"
             SelectionMode="Single"
             SelectionUnit="FullRow">
             <DataGrid.Columns>
@@ -164,7 +163,7 @@
                     Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=Header}"
                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                     ElementStyle="{StaticResource DataGridElement}"
-                    Header="Số thứ tự"
+                    Header="STT"
                     HeaderStyle="{StaticResource DataGridHeader}"
                     MaxLength="10" />
                 <materialDesign:DataGridTextColumn
@@ -175,7 +174,7 @@
                     HeaderStyle="{StaticResource DataGridHeader}"
                     MaxLength="30" />
                 <materialDesign:DataGridTextColumn
-                    Binding="{Binding dateOfBirth}"
+                    Binding="{Binding dateOfBirth, StringFormat=dd-MM-yyyy}"
                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                     ElementStyle="{StaticResource DataGridElement}"
                     Header="Ngày sinh"

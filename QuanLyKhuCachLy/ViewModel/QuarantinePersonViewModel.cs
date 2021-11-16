@@ -1226,6 +1226,8 @@ namespace QuanLyKhuCachLy.ViewModel
                         DataProvider.ins.db.HealthInformations.Add(listHealthInformation[i]);
                         DataProvider.ins.db.SaveChanges();
                     }
+                    PeopleListView = DataProvider.ins.db.QuarantinePersons.ToArray();
+                    QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
                     Window SuccessDialog = new Window
                     {
                         AllowsTransparency = true,
@@ -1279,8 +1281,6 @@ namespace QuanLyKhuCachLy.ViewModel
                     MessageBox.Show(error);
                 }
             }
-
-            PeopleListView = new ObservableCollection<Model.QuarantinePerson>(DataProvider.ins.db.QuarantinePersons).ToArray();
         }
         void InitDisplayAddress(Address PersonAddress)
         {

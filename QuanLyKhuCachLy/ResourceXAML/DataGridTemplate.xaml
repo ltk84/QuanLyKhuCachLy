@@ -14,7 +14,7 @@
         BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}"
         TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="HorizontalContentAlignment" Value="Left" />
-        <Setter Property="Margin" Value="16,0,16,0" />
+        <Setter Property="Margin" Value="8,0,8,0" />
         <Setter Property="FontFamily" Value="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="FontSize" Value="16" />
@@ -24,7 +24,7 @@
         BasedOn="{StaticResource MaterialDesignDataGridTextColumnStyle}"
         TargetType="{x:Type TextBlock}">
         <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="Margin" Value="16,0,16,0" />
+        <Setter Property="Margin" Value="8,0,8,0" />
         <Setter Property="FontFamily" Value="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans" />
         <Setter Property="FontSize" Value="16" />
     </Style>
@@ -32,7 +32,7 @@
         x:Key="EditingDataGridElement"
         BasedOn="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
         TargetType="{x:Type TextBox}">
-        <Setter Property="Margin" Value="16,0,16,0" />
+        <Setter Property="Margin" Value="8,0,8,0" />
         <Setter Property="FontFamily" Value="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans" />
         <Setter Property="FontSize" Value="16" />
     </Style>

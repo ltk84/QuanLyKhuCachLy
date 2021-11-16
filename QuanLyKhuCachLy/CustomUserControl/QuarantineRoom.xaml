@@ -158,7 +158,7 @@
                     Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=Header}"
                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                     ElementStyle="{StaticResource DataGridElement}"
-                    Header="Số thứ tự"
+                    Header="STT"
                     HeaderStyle="{StaticResource DataGridHeader}"
                     MaxLength="10" />
                 <materialDesign:DataGridTextColumn
@@ -176,7 +176,7 @@
                     HeaderStyle="{StaticResource DataGridHeader}"
                     MaxLength="30" />
                 <materialDesign:DataGridTextColumn
-                    Binding="{Binding Severity.level}"
+                    Binding="{Binding Severity.description}"
                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                     ElementStyle="{StaticResource DataGridElement}"
                     Header="Mức độ"

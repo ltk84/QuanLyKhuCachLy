@@ -210,7 +210,7 @@
                     Grid.Column="1"
                     HorizontalAlignment="Right"
                     Style="{StaticResource list-value-text}"
-                    Text="{Binding SelectedItem.Severity.level}" />
+                    Text="{Binding SelectedItem.Severity.description}" />
             </Grid>
         </Grid>
         <Grid Margin="0,32,0,0">
@@ -255,7 +255,7 @@
                 AutoGenerateColumns="False"
                 CanUserAddRows="False"
                 CanUserReorderColumns="False"
-                CanUserResizeColumns="False"
+                CanUserResizeColumns="True"
                 CanUserResizeRows="False"
                 IsReadOnly="True"
                 ItemsSource="{Binding PersonInRoomViewModel.QuarantinePersonList}"
@@ -279,10 +279,10 @@
                         HeaderStyle="{StaticResource DataGridHeader}"
                         MaxLength="30" />
                     <materialDesign:DataGridTextColumn
-                        Binding="{Binding dateOfBirth}"
+                        Binding="{Binding dateOfBirth, StringFormat=dd-MM-yyyy}"
                         EditingElementStyle="{StaticResource EditingDataGridElement}"
                         ElementStyle="{StaticResource DataGridElement}"
-                        Header="Số người"
+                        Header="Ngày sinh"
                         HeaderStyle="{StaticResource DataGridHeader}"
                         MaxLength="30" />
                     <materialDesign:DataGridTextColumn
