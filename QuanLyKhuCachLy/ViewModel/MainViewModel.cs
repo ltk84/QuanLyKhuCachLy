@@ -170,7 +170,7 @@ namespace QuanLyKhuCachLy.ViewModel
             SettingVM = new SettingViewModel();
             // test room
             //ToDashboard();
-            ToRoom();
+            ToPerson();
         }
 
         private void ToDashboard()

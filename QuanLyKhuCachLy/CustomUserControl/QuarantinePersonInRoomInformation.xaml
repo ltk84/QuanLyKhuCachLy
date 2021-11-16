@@ -53,16 +53,17 @@
                 Grid.Column="1"
                 Margin="0,0,60,0"
                 VerticalAlignment="Bottom"
+                Command="{Binding PersonInRoomViewModel.CompleteQuarantinePersonCommand}"
                 Content="Hoàn thành cách ly"
                 Template="{StaticResource completed-button}" />
 
-            <Button
+            <!--<Button
                 Grid.Column="2"
                 Margin="0,0,60,0"
                 VerticalAlignment="Bottom"
                 Command="{Binding PersonInRoomViewModel.DeleteCommand}"
                 Content="Xóa người cách ly"
-                Template="{StaticResource delete-button}" />
+                Template="{StaticResource delete-button}" />-->
 
             <Button
                 Grid.Column="3"

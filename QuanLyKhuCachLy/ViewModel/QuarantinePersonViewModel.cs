@@ -93,9 +93,11 @@ namespace QuanLyKhuCachLy.ViewModel
         private Visibility _TabInformation1;
         private Visibility _TabInformation2;
         private Visibility _Tab3;
+        private Visibility _Tab4;
         private Visibility _TabEdit1;
         private Visibility _TabEdit2;
         private Visibility _TabEdit3;
+        private Visibility _TabEdit4;
         private Visibility _ButtonReturn;
         private Visibility _ButtonEditReturn;
         private Visibility _TabList;
@@ -165,6 +167,13 @@ namespace QuanLyKhuCachLy.ViewModel
                 _Tab3 = value; OnPropertyChanged();
             }
         }
+        public Visibility Tab4
+        {
+            get => _Tab4; set
+            {
+                _Tab4 = value; OnPropertyChanged();
+            }
+        }
         public Visibility TabEdit1
         {
             get => _TabEdit1; set
@@ -185,6 +194,13 @@ namespace QuanLyKhuCachLy.ViewModel
             get => _TabEdit3; set
             {
                 _TabEdit3 = value; OnPropertyChanged();
+            }
+        }
+        public Visibility TabEdit4
+        {
+            get => _TabEdit4; set
+            {
+                _TabEdit4 = value; OnPropertyChanged();
             }
         }
         public int TabIndex { get; set; }
@@ -220,7 +236,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
-        
+
         #endregion
 
         #region Quarantine Person
@@ -387,7 +403,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     SetSelectedItemToProperty();
                     InjectionRecordViewModel.ins.IRQuarantinePersonID = SelectedItem.id;
-                    DestinationHistoryViewModel = new DestinationHistoryViewModel(currentPersonID: SelectedItem.id);
+                    DestinationHistoryViewModel.ins.PersonID = SelectedItem.id;
                     TestingResultViewModel.ins.PersonID = SelectedItem.id;
                 }
             }
@@ -693,6 +709,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         public ICommand ToAddManualCommand { get; set; }
         public ICommand ToAddExcelCommand { get; set; }
+
         public ICommand ToEditCommand { get; set; }
         public ICommand ToViewCommand { get; set; }
         public ICommand ToMainCommand { get; set; }
@@ -714,9 +731,11 @@ namespace QuanLyKhuCachLy.ViewModel
             Tab1 = Visibility.Visible;
             Tab2 = Visibility.Hidden;
             Tab3 = Visibility.Hidden;
+            Tab4 = Visibility.Hidden;
             TabEdit1 = Visibility.Visible;
             TabEdit2 = Visibility.Hidden;
             TabEdit3 = Visibility.Hidden;
+            TabEdit4 = Visibility.Hidden;
             TabInformation1 = Visibility.Visible;
             TabInformation2 = Visibility.Hidden;
             TabIndexInformation = 1;
@@ -724,9 +743,9 @@ namespace QuanLyKhuCachLy.ViewModel
             ButtonReturn = Visibility.Hidden;
             ButtonEditReturn = Visibility.Hidden;
             TabIndex = 1;
-            TabPosition = $"{TabIndex}/3";
+            TabPosition = $"{TabIndex}/4";
             TabEditIndex = 1;
-            TabEditPosition = $"{TabEditIndex}/3";
+            TabEditPosition = $"{TabEditIndex}/4";
 
             NextTabCommandInformation = new RelayCommand<Window>((p) =>
             {
@@ -749,7 +768,7 @@ namespace QuanLyKhuCachLy.ViewModel
             NextTabEditCommand = new RelayCommand<Window>((p) =>
             {
 
-                if (TabEditIndex < 3) return true;
+                if (TabEditIndex < 4) return true;
                 return false;
             }, (p) =>
             {
@@ -767,7 +786,7 @@ namespace QuanLyKhuCachLy.ViewModel
             NextTabCommand = new RelayCommand<Window>((p) =>
             {
 
-                if (TabIndex < 3) return true;
+                if (TabIndex < 4) return true;
                 return false;
             }, (p) =>
             {
@@ -795,7 +814,7 @@ namespace QuanLyKhuCachLy.ViewModel
             QAInformation = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
 
             InjectionRecordViewModel = InjectionRecordViewModel.ins;
-            DestinationHistoryViewModel = new DestinationHistoryViewModel();
+            DestinationHistoryViewModel = DestinationHistoryViewModel.ins;
             TestingResultViewModel = TestingResultViewModel.ins;
 
             NationalityList = new ObservableCollection<string>() {
@@ -818,6 +837,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 "Nam", "Nữ"
             };
 
+
             ToAddManualCommand = new RelayCommand<Window>((p) =>
             {
                 return true;
@@ -832,7 +852,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 Tab1 = Visibility.Visible;
                 Tab2 = Visibility.Hidden;
                 Tab3 = Visibility.Hidden;
-                TabPosition = $"{TabIndex}/3";
+                Tab4 = Visibility.Hidden;
+                TabPosition = $"{TabIndex}/4";
             });
 
             ToAddExcelCommand = new RelayCommand<Window>((p) =>
@@ -856,7 +877,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 TabEdit1 = Visibility.Visible;
                 TabEdit2 = Visibility.Hidden;
                 TabEdit3 = Visibility.Hidden;
-                TabEditPosition = $"{TabEditIndex}/3";
+                TabEdit4 = Visibility.Hidden;
+                TabEditPosition = $"{TabEditIndex}/4";
             });
 
             ToViewCommand = new RelayCommand<object>((p) =>
@@ -864,8 +886,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-                TabInformation = Visibility.Visible;
-                TabList = Visibility.Hidden;
+                ToDetailPersonTab();
             });
 
             ToMainCommand = new RelayCommand<object>((p) =>
@@ -873,11 +894,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-                TabInformation = Visibility.Hidden;
-                TabList = Visibility.Visible;
                 TabIndexInformation = 1;
-                TabInformation1 = Visibility.Visible;
-                TabInformation2 = Visibility.Hidden;
+                BackToPersonList();
             });
 
 
@@ -913,6 +931,7 @@ namespace QuanLyKhuCachLy.ViewModel
             DeleteCommand = new RelayCommand<object>((p) => { if (SelectedItem != null) return true; return false; }, (p) =>
             {
                 DeleteQuarantinePerson();
+                BackToPersonList();
             });
 
             CancelCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
@@ -921,6 +940,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     InjectionRecordViewModel.RollbackTransaction(SelectedItem.id);
                     TestingResultViewModel.RollbackTransaction(SelectedItem.id);
+                    DestinationHistoryViewModel.RollbackTransaction(SelectedItem.id);
                 }
                 p.Close();
             });
@@ -928,6 +948,19 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #region method
 
+        void ToDetailPersonTab()
+        {
+            TabInformation = Visibility.Visible;
+            TabList = Visibility.Hidden;
+        }
+
+        void BackToPersonList()
+        {
+            TabInformation = Visibility.Hidden;
+            TabList = Visibility.Visible;
+            TabInformation1 = Visibility.Visible;
+            TabInformation2 = Visibility.Hidden;
+        }
 
         // Searching
         void FilterListView()
@@ -951,7 +984,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     Value[i] = PeopleListView[i].name?.ToString() + "@@" + PeopleListView[i].citizenID?.ToString() + "@@" + PeopleListView[i].id.ToString() + "@@" + PeopleListView[i].healthInsuranceID?.ToString() + "@@" + PeopleListView[i]?.phoneNumber.ToString() + "@@" + PeopleListView[i].QuarantineRoom?.displayName.ToString();
 
                 }
-                
+
                 PeopleListView = PeopleListView.Where((val, index) => Value[index].Contains(SearchKey)).ToArray();
             }
         }
@@ -1017,22 +1050,22 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType == "Phòng")
             {
-                
+
                 PeopleListView = DataProvider.ins.db.QuarantinePersons.Where(x => x.QuarantineRoom.displayName == SelectedFilterProperty).ToArray();
             }
             else if (SelectedFilterType == "Nhóm đối tượng")
             {
 
-               PeopleListView = DataProvider.ins.db.QuarantinePersons.Where(x => x.Severity.level == SelectedFilterProperty).ToArray();
+                PeopleListView = DataProvider.ins.db.QuarantinePersons.Where(x => x.Severity.level == SelectedFilterProperty).ToArray();
             }
             else if (SelectedFilterType == "Ngày đi")
             {
-               PeopleListView = DataProvider.ins.db.QuarantinePersons.Where(x => x.leaveDate.ToString() == SelectedFilterProperty).ToArray();
+                PeopleListView = DataProvider.ins.db.QuarantinePersons.Where(x => x.leaveDate.ToString() == SelectedFilterProperty).ToArray();
 
             }
             else if (SelectedFilterType == "Ngày đến")
             {
-               PeopleListView = DataProvider.ins.db.QuarantinePersons.Where(x => x.arrivedDate.ToString() == SelectedFilterProperty).ToArray();
+                PeopleListView = DataProvider.ins.db.QuarantinePersons.Where(x => x.arrivedDate.ToString() == SelectedFilterProperty).ToArray();
 
             }
 
@@ -1071,7 +1104,8 @@ namespace QuanLyKhuCachLy.ViewModel
             xlRange.Cells[1, 10] == null || xlRange.Cells[1, 10].Value2 != "SĐT" ||
             xlRange.Cells[1, 11] == null || xlRange.Cells[1, 11].Value2 != "Triệu chứng" ||
             xlRange.Cells[1, 12] == null || xlRange.Cells[1, 12].Value2 != "Nhóm đối tượng" ||
-            xlRange.Cells[1, 13] == null || xlRange.Cells[1, 13].Value2 != "Ngày đến")
+            xlRange.Cells[1, 13] == null || xlRange.Cells[1, 13].Value2 != "Ngày đến" ||
+            xlRange.Cells[1, 13] == null || xlRange.Cells[1, 15].Value2 != "Thông tin tiêm chủng")
             {
                 MessageBox.Show("Không đúng định dạng file");
                 return;
@@ -1171,6 +1205,10 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     DateTime arrivedTime = DateTime.FromOADate(double.Parse(xlRange.Cells[i, 13].Value2.ToString()));
                     quarantinePerson.arrivedDate = arrivedTime;
+                }
+                if (xlRange.Cells[i, 15] != null && xlRange.Cells[i, 15].Value2 != null)
+                {
+
                 }
                 listAdress.Add(personAddress);
                 listHealthInformation.Add(healthInformation);
@@ -1379,6 +1417,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             InjectionRecordViewModel.ins.ClearInjectionRecordList();
             TestingResultViewModel.ins.ClearTestingResultList();
+            DestinationHistoryViewModel.ins.ClearDestinationHistoryList();
         }
 
         void AddQuarantinePerson()
@@ -1449,6 +1488,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     InjectionRecordViewModel.ins.ApplyInjectionRecordToDB(Person.id, "Add");
                     TestingResultViewModel.ins.ApplyTestingResultToDb(Person.id, "Add");
+                    DestinationHistoryViewModel.ins.ApplayDestinationHistoryToDB(Person.id, "Add");
 
                     transaction.Commit();
 
@@ -1569,6 +1609,9 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     InjectionRecordViewModel.ApplyInjectionRecordToDB(Person.id, "EditOrDelete");
                     TestingResultViewModel.ApplyTestingResultToDb(Person.id, "EditOrDelete");
+                    DestinationHistoryViewModel.ins.ApplayDestinationHistoryToDB(Person.id, "EditOrDelete");
+
+                    PeopleListView = QuarantinePersonList.ToArray();
 
                     transaction.Commit();
 
@@ -1626,6 +1669,8 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     QuarantinePersonList.Remove(Person);
 
+                    PeopleListView = QuarantinePersonList.ToArray();
+
                     transaction.Commit();
                 }
                 catch (DbUpdateException e)
@@ -1676,8 +1721,8 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 TabIndex--;
             }
-            if (TabIndex <= 3)
-                TabPosition = $"{TabIndex}/3";
+            if (TabIndex <= 4)
+                TabPosition = $"{TabIndex}/4";
 
             switch (TabIndex)
             {
@@ -1685,6 +1730,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     Tab1 = Visibility.Visible;
                     Tab2 = Visibility.Hidden;
                     Tab3 = Visibility.Hidden;
+                    Tab4 = Visibility.Hidden;
                     ButtonReturn = Visibility.Hidden;
 
                     break;
@@ -1692,16 +1738,24 @@ namespace QuanLyKhuCachLy.ViewModel
                     Tab1 = Visibility.Hidden;
                     Tab2 = Visibility.Visible;
                     Tab3 = Visibility.Hidden;
+                    Tab4 = Visibility.Hidden;
                     ButtonReturn = Visibility.Visible;
                     break;
                 case 3:
                     Tab1 = Visibility.Hidden;
                     Tab2 = Visibility.Hidden;
                     Tab3 = Visibility.Visible;
+                    Tab4 = Visibility.Hidden;
+                    ButtonReturn = Visibility.Visible;
+                    break;
+                case 4:
+                    Tab1 = Visibility.Hidden;
+                    Tab2 = Visibility.Hidden;
+                    Tab3 = Visibility.Hidden;
+                    Tab4 = Visibility.Visible;
                     ButtonReturn = Visibility.Visible;
                     break;
                 default:
-
                     p.Close();
                     break;
             }
@@ -1742,8 +1796,8 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 TabEditIndex--;
             }
-            if (TabEditIndex <= 3)
-                TabEditPosition = $"{TabEditIndex}/3";
+            if (TabEditIndex <= 4)
+                TabEditPosition = $"{TabEditIndex}/4";
 
             switch (TabEditIndex)
             {
@@ -1751,18 +1805,28 @@ namespace QuanLyKhuCachLy.ViewModel
                     TabEdit1 = Visibility.Visible;
                     TabEdit2 = Visibility.Hidden;
                     TabEdit3 = Visibility.Hidden;
+                    TabEdit4 = Visibility.Hidden;
                     ButtonEditReturn = Visibility.Hidden;
                     break;
                 case 2:
                     TabEdit1 = Visibility.Hidden;
                     TabEdit2 = Visibility.Visible;
                     TabEdit3 = Visibility.Hidden;
+                    TabEdit4 = Visibility.Hidden;
+                    ButtonEditReturn = Visibility.Visible;
+                    break;
+                case 3:
+                    TabEdit1 = Visibility.Hidden;
+                    TabEdit2 = Visibility.Hidden;
+                    TabEdit3 = Visibility.Visible;
+                    TabEdit4 = Visibility.Hidden;
                     ButtonEditReturn = Visibility.Visible;
                     break;
                 default:
                     TabEdit1 = Visibility.Hidden;
                     TabEdit2 = Visibility.Hidden;
-                    TabEdit3 = Visibility.Visible;
+                    TabEdit3 = Visibility.Hidden;
+                    TabEdit4 = Visibility.Visible;
                     ButtonEditReturn = Visibility.Visible;
                     break;
             }

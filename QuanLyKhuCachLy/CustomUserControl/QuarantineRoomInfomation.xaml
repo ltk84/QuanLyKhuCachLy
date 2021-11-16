@@ -79,7 +79,7 @@
                     Margin="0,0,0,26"
                     HorizontalAlignment="Right"
                     Background="#FF1D9583"
-                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.CompleteQuarantineCommand}"
+                    Command="{Binding CompleteQuarantineCommand}"
                     Style="{StaticResource complete-button-with-background}">
                     Hoàn thành cách ly
                 </Button>
@@ -90,6 +90,7 @@
                     Margin="0,0,0,26"
                     HorizontalAlignment="Right"
                     Background="#FF2AC7D7"
+                    Command="{Binding ClearCommand}"
                     Style="{StaticResource clear-button-with-background}">
                     Làm trống
                 </Button>
@@ -138,7 +139,7 @@
                         FontSize="19"
                         FontWeight="Regular"
                         Foreground="#FF363636"
-                        Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.SelectedItem.displayName, StringFormat=Phòng {0}}" />
+                        Text="{Binding SelectedItem.displayName, StringFormat=Phòng {0}}" />
                 </Grid>
 
                 <Button
@@ -148,7 +149,7 @@
                     Height="Auto"
                     Margin="0,0,-18,10"
                     HorizontalAlignment="Right"
-                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ToEditCommand}"
+                    Command="{Binding ToEditCommand}"
                     Style="{StaticResource MenuButton}">
                     <StackPanel Orientation="Horizontal">
                         <Image
@@ -258,12 +259,13 @@
                 CanUserResizeRows="False"
                 IsReadOnly="True"
                 ItemsSource="{Binding PersonInRoomViewModel.QuarantinePersonList}"
+                LoadingRow="DataGrid_LoadingRow"
                 SelectedItem="{Binding PersonInRoomViewModel.SelectedItem}"
                 SelectionMode="Single"
                 SelectionUnit="FullRow">
                 <DataGrid.Columns>
                     <materialDesign:DataGridTextColumn
-                        Binding="{Binding id}"
+                        Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=Header}"
                         EditingElementStyle="{StaticResource EditingDataGridElement}"
                         ElementStyle="{StaticResource DataGridElement}"
                         Header="Số thứ tự"

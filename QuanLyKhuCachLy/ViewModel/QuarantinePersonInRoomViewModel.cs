@@ -1,8 +1,11 @@
 ﻿using QuanLyKhuCachLy.CustomUserControl;
 using QuanLyKhuCachLy.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -72,6 +75,7 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand ToUpdateListCommand { get; set; }
         public ICommand AddPersonToRoomUI { get; set; }
         public ICommand RemovePersonFromRoomUI { get; set; }
+        public ICommand CompleteQuarantinePersonCommand { get; set; }
 
 
         #endregion
@@ -126,8 +130,6 @@ namespace QuanLyKhuCachLy.ViewModel
                 UpdatePersonList.ShowDialog();
             });
 
-
-
             AddPersonToRoomUI = new RelayCommand<Window>((p) =>
             {
                 return true;
@@ -152,6 +154,14 @@ namespace QuanLyKhuCachLy.ViewModel
                 p.Close();
                 RollbackTransaction();
             });
+
+            CompleteQuarantinePersonCommand = new RelayCommand<Window>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                CompleteQuarantinePerson();
+            });
         }
 
         #region method
@@ -167,6 +177,173 @@ namespace QuanLyKhuCachLy.ViewModel
             QuarantinePersonList.Remove(SelectedItem);
         }
 
+        void CompleteQuarantinePerson()
+        {
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    var Person = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+                    if (Person == null) return;
+
+                    Person.roomID = null;
+                    Person.completeQuarantine = true;
+
+                    QuarantinePersonList.Remove(SelectedItem);
+
+                    DataProvider.ins.db.SaveChanges();
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
+        }
+
+        public void CompeleteQuarantineRoom()
+        {
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    foreach (var p in QuarantinePersonList)
+                    {
+                        p.roomID = null;
+                        p.completeQuarantine = true;
+                    }
+
+                    DataProvider.ins.db.SaveChanges();
+
+                    QuarantinePersonList.Clear();
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
+        }
+
+        public void ClearPersonList()
+        {
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    foreach (var p in QuarantinePersonList)
+                    {
+                        p.roomID = null;
+                    }
+
+                    DataProvider.ins.db.SaveChanges();
+
+                    QuarantinePersonList.Clear();
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
+        }
+
         void UpdateList()
         {
             List<QuarantinePerson> ListInDB = new List<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == RoomID));
@@ -178,6 +355,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     p.roomID = RoomID;
                     DataProvider.ins.db.SaveChanges();
                 }
+
             }
 
             foreach (var pInDB in ListInDB)

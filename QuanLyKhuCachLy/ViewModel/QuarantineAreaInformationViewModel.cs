@@ -3,6 +3,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -242,6 +243,7 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand NextTabCommand { get; set; }
         public ICommand PreviousTabCommand { get; set; }
         public ICommand SetUpCommand { get; set; }
+        public ICommand EditCommand { get; set; }
 
         #endregion
 
@@ -269,6 +271,19 @@ namespace QuanLyKhuCachLy.ViewModel
             }, (p) =>
             {
                 UpdateQuarantineAreaInformation();
+                p.Close();
+            });
+
+            EditCommand = new RelayCommand<Window>((p) =>
+            {
+                if (!QANameFieldHasError && !QAProvinceFieldHasError && !QADistrictFieldHasError && !QAWardFieldHasError && !QATestCycleFieldHasError && !QARequiredDayFieldHasError
+                 && !MNameFieldHasError && !MDateOfBirthFieldHasError && !MSexFieldHasError && !MNationalityFieldHasError && !MJobTitleFieldHasError && !MDepartmentFieldHasError
+                 && !MProvinceFieldHasError && !MDistrictFieldHasError && !MWardFieldHasError && !MCitizenIDFieldHasError && !MPhoneNumberFieldHasError)
+                    return true;
+                return false;
+            }, (p) =>
+            {
+                EditQuarantineAreaInformation();
                 p.Close();
             });
 
@@ -359,7 +374,6 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
-
         void UpdateQuarantineAreaInformation()
         {
             using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
@@ -420,6 +434,70 @@ namespace QuanLyKhuCachLy.ViewModel
                     DataProvider.ins.db.SaveChanges();
 
                     isDoneSetUp = true;
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
+        }
+
+        void EditQuarantineAreaInformation()
+        {
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    var QuarantineArea = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
+                    if (QuarantineArea == null) return;
+
+                    var Address = DataProvider.ins.db.Addresses.Where(x => x.id == QuarantineArea.addressID).FirstOrDefault();
+                    if (Address == null) return;
+
+                    QuarantineArea.name = QAname;
+                    QuarantineArea.testCycle = QATestCycle;
+                    QuarantineArea.requiredDayToFinish = QARequiredDayToFinish;
+
+                    Address.apartmentNumber = QAApartmentNumber;
+                    Address.streetName = QAStreetName;
+                    Address.ward = QASelectedWard;
+                    Address.district = QASelectedDistrict;
+                    Address.province = QASelectedProvince;
+
+                    DataProvider.ins.db.SaveChanges();
 
                     transaction.Commit();
                 }

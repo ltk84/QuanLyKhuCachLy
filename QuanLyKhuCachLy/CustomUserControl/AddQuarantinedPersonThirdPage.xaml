@@ -94,19 +94,14 @@
                     CanUserResizeColumns="False"
                     CanUserResizeRows="False"
                     ItemsSource="{Binding InjectionRecordViewModel.InjectionRecordList}"
+                    LoadingRow="vaccinationInformation_LoadingRow"
                     SelectedItem="{Binding InjectionRecordViewModel.SelectedItem}">
-
-                    <!--<i:Interaction.Triggers>
-                        <i:EventTrigger EventName="CellEditEnding">
-                            <i:InvokeCommandAction Command="{Binding InjectionRecordViewModel.EditOnUICommand}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>-->
 
                     <DataGrid.Columns>
                         <DataGridTextColumn
                             Width="*"
                             MinWidth="70"
-                            Binding="{Binding id}"
+                            Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=Header}"
                             Header="Lần"
                             IsReadOnly="True">
                             <DataGridColumn.HeaderStyle>
@@ -225,6 +220,7 @@
                     CanUserResizeColumns="False"
                     CanUserResizeRows="False"
                     ItemsSource="{Binding TestingResultViewModel.TestingResultList}"
+                    LoadingRow="vaccinationInformation_LoadingRow"
                     SelectedItem="{Binding TestingResultViewModel.SelectedItem}">
                     <DataGrid.Resources>
                         <convert:TestResultToBoolConverter x:Key="convert" />
@@ -233,7 +229,7 @@
                         <DataGridTextColumn
                             Width="*"
                             MinWidth="70"
-                            Binding="{Binding id}"
+                            Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=Header}"
                             Header="Lần"
                             IsReadOnly="True">
                             <DataGridColumn.HeaderStyle>

@@ -34,7 +34,6 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 _SelectedItem = value;
                 OnPropertyChanged();
-
             }
         }
 

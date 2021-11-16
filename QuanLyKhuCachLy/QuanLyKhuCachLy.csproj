@@ -96,8 +96,14 @@
     <Compile Include="Converter\DateTimeToStringConverter.cs" />
     <Compile Include="Converter\IntToStringConverter.cs" />
     <Compile Include="Converter\TestResultToBoolConverter.cs" />
+    <Compile Include="CustomUserControl\AddDestinationHistory.xaml.cs">
+      <DependentUpon>AddDestinationHistory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomUserControl\AddPersonFunctionMenu.xaml.cs">
       <DependentUpon>AddPersonFunctionMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\AddQuarantinedPersonFouthPage.xaml.cs">
+      <DependentUpon>AddQuarantinedPersonFouthPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomUserControl\AddRoomFunctionMenu.xaml.cs">
       <DependentUpon>AddRoomFunctionMenu.xaml</DependentUpon>
@@ -113,6 +119,15 @@
     </Compile>
     <Compile Include="CustomUserControl\AddStaffSecondScreen.xaml.cs">
       <DependentUpon>AddStaffSecondScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\DestinationHistoryFunctionMenu.xaml.cs">
+      <DependentUpon>DestinationHistoryFunctionMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditDestinationHistory.xaml.cs">
+      <DependentUpon>EditDestinationHistory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditQuarantinedPersonFouthPage.xaml.cs">
+      <DependentUpon>EditQuarantinedPersonFouthPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomUserControl\EditQuarantinedPersonInformation.xaml.cs">
       <DependentUpon>EditQuarantinedPersonInformation.xaml</DependentUpon>
@@ -354,7 +369,15 @@
     <Compile Include="ViewModel\SeverityViewModel.cs" />
     <Compile Include="ViewModel\StaffViewModel.cs" />
     <Compile Include="ViewModel\TestingResultViewModel.cs" />
+    <Page Include="CustomUserControl\AddDestinationHistory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomUserControl\AddPersonFunctionMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\AddQuarantinedPersonFouthPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -372,6 +395,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomUserControl\AddStaffSecondScreen.xaml" />
+    <Page Include="CustomUserControl\DestinationHistoryFunctionMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\EditDestinationHistory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\EditQuarantinedPersonFouthPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomUserControl\EditQuarantinedPersonInformation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

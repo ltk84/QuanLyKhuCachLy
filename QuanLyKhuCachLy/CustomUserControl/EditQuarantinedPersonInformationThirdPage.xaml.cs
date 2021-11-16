@@ -39,6 +39,9 @@ namespace QuanLyKhuCachLy.CustomUserControl
             CheckIsNumeric(e);
         }
 
-
+        private void vaccinationInformation_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            e.Row.Header = (e.Row.GetIndex() + 1).ToString();
+        }
     }
 }

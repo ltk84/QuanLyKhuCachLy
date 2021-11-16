@@ -33,6 +33,8 @@
                         <control:EditQuarantinedPersonInformationFisrtPage Panel.ZIndex="-1" Visibility="{Binding TabEdit1}" />
                         <control:EditQuarantinedPersonInformationSecondPage Visibility="{Binding TabEdit2}" />
                         <control:EditQuarantinedPersonInformationThirdPage Panel.ZIndex="1" Visibility="{Binding TabEdit3}" />
+                        <control:EditQuarantinedPersonFouthPage Panel.ZIndex="1" Visibility="{Binding TabEdit4}" />
+
                     </Grid>
                     <Grid
                         Grid.Row="3"
@@ -98,7 +100,7 @@
                                     <Style BasedOn="{StaticResource MaterialDesignRaisedButton}" TargetType="{x:Type Button}">
                                         <Setter Property="Command" Value="{Binding NextTabEditCommand}" />
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding ElementName=TabEditIndicator, Path=Text}" Value="3/3">
+                                            <DataTrigger Binding="{Binding ElementName=TabEditIndicator, Path=Text}" Value="4/4">
                                                 <Setter Property="Command" Value="{Binding EditCommand}" />
                                             </DataTrigger>
                                         </Style.Triggers>
@@ -109,7 +111,7 @@
                                         <Style TargetType="TextBlock">
                                             <Setter Property="Text" Value="Tiếp theo" />
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding ElementName=TabEditIndicator, Path=Text}" Value="3/3">
+                                                <DataTrigger Binding="{Binding ElementName=TabEditIndicator, Path=Text}" Value="4/4">
                                                     <Setter Property="Text" Value="Chỉnh sửa" />
                                                 </DataTrigger>
                                             </Style.Triggers>
