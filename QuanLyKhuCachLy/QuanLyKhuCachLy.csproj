@@ -180,6 +180,9 @@
     <Compile Include="CustomUserControl\QuarantineRoomWrapperTab.xaml.cs">
       <DependentUpon>QuarantineRoomWrapperTab.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomUserControl\SettingQuarantineArea.xaml.cs">
+      <DependentUpon>SettingQuarantineArea.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomUserControl\StatisticFirstTab.xaml.cs">
       <DependentUpon>StatisticFirstTab.xaml</DependentUpon>
     </Compile>
@@ -347,6 +350,7 @@
     <Compile Include="ViewModel\QuarantinePersonViewModel.cs" />
     <Compile Include="ViewModel\QuarantineRoomViewModel.cs" />
     <Compile Include="ViewModel\ReportViewModel.cs" />
+    <Compile Include="ViewModel\SettingViewModel.cs" />
     <Compile Include="ViewModel\SeverityViewModel.cs" />
     <Compile Include="ViewModel\StaffViewModel.cs" />
     <Compile Include="ViewModel\TestingResultViewModel.cs" />
@@ -437,6 +441,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomUserControl\QuarantinePersonInRoomInformationFirstPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\SettingQuarantineArea.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -737,6 +745,12 @@
       <DependentUpon>DataModel.edmx</DependentUpon>
       <LastGenOutput>DataModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\icons\setting.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\icons\setting_selected.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">

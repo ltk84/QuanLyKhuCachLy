@@ -53,6 +53,9 @@
             <DataTemplate DataType="{x:Type viewModel:NotificationViewModel}">
                 <userControl:NotificationScreenWrapper />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:SettingViewModel}">
+                <userControl:SettingQuarantineArea />
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
