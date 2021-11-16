@@ -230,8 +230,8 @@ namespace QuanLyKhuCachLy.ViewModel
             }, (p) =>
             {
                 SetSelectedItemToProperty();
-                EditDestinationHistory EditScreen = new EditDestinationHistory();
-                EditScreen.ShowDialog();
+                //EditDestinationHistory EditScreen = new EditDestinationHistory();
+                //EditScreen.ShowDialog();
             });
 
             CancelCommand = new RelayCommand<Window>((p) =>

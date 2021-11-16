@@ -59,7 +59,6 @@
                 Margin="0,15,24,0"
                 VerticalAlignment="Bottom">
                 <TextBlock
-                    Margin="0,0,0,0"
                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                     FontSize="16"
                     Foreground="#FF434A54">
@@ -90,7 +89,7 @@
             <StackPanel
                 Grid.Row="0"
                 Grid.Column="1"
-                Margin="0,0,0,0"
+                Margin="0,25,0,0"
                 VerticalAlignment="Bottom">
 
                 <TextBlock
@@ -116,7 +115,7 @@
             <StackPanel
                 Grid.Row="0"
                 Grid.Column="2"
-                Margin="24,0,0,0"
+                Margin="24,25,0,0"
                 VerticalAlignment="Bottom">
                 <TextBlock
                     Margin="5,0,0,5"
@@ -151,13 +150,12 @@
             AutoGenerateColumns="False"
             CanUserAddRows="False"
             CanUserReorderColumns="False"
-            CanUserResizeColumns="False"
+            CanUserResizeColumns="True"
             CanUserResizeRows="False"
             IsReadOnly="True"
             ItemsSource="{Binding PeopleListView}"
             LoadingRow="QuarantinedPersonTable_LoadingRow"
             SelectedItem="{Binding SelectedItem}"
-            SelectionChanged="QuarantinedPersonTable_SelectionChanged"
             SelectionMode="Single"
             SelectionUnit="FullRow">
             <DataGrid.Columns>
@@ -165,7 +163,7 @@
                     Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=Header}"
                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                     ElementStyle="{StaticResource DataGridElement}"
-                    Header="Số thứ tự"
+                    Header="STT"
                     HeaderStyle="{StaticResource DataGridHeader}"
                     MaxLength="10" />
                 <materialDesign:DataGridTextColumn
@@ -176,7 +174,7 @@
                     HeaderStyle="{StaticResource DataGridHeader}"
                     MaxLength="30" />
                 <materialDesign:DataGridTextColumn
-                    Binding="{Binding dateOfBirth}"
+                    Binding="{Binding dateOfBirth, StringFormat=dd-MM-yyyy}"
                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                     ElementStyle="{StaticResource DataGridElement}"
                     Header="Ngày sinh"

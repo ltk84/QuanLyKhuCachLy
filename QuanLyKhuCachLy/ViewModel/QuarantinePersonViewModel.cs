@@ -1104,8 +1104,7 @@ namespace QuanLyKhuCachLy.ViewModel
             xlRange.Cells[1, 10] == null || xlRange.Cells[1, 10].Value2 != "SĐT" ||
             xlRange.Cells[1, 11] == null || xlRange.Cells[1, 11].Value2 != "Triệu chứng" ||
             xlRange.Cells[1, 12] == null || xlRange.Cells[1, 12].Value2 != "Nhóm đối tượng" ||
-            xlRange.Cells[1, 13] == null || xlRange.Cells[1, 13].Value2 != "Ngày đến" ||
-            xlRange.Cells[1, 13] == null || xlRange.Cells[1, 15].Value2 != "Thông tin tiêm chủng")
+            xlRange.Cells[1, 13] == null || xlRange.Cells[1, 13].Value2 != "Ngày đến")
             {
                 MessageBox.Show("Không đúng định dạng file");
                 return;
@@ -1206,10 +1205,6 @@ namespace QuanLyKhuCachLy.ViewModel
                     DateTime arrivedTime = DateTime.FromOADate(double.Parse(xlRange.Cells[i, 13].Value2.ToString()));
                     quarantinePerson.arrivedDate = arrivedTime;
                 }
-                if (xlRange.Cells[i, 15] != null && xlRange.Cells[i, 15].Value2 != null)
-                {
-
-                }
                 listAdress.Add(personAddress);
                 listHealthInformation.Add(healthInformation);
                 listQuarantinePerson.Add(quarantinePerson);
@@ -1231,6 +1226,8 @@ namespace QuanLyKhuCachLy.ViewModel
                         DataProvider.ins.db.HealthInformations.Add(listHealthInformation[i]);
                         DataProvider.ins.db.SaveChanges();
                     }
+                    PeopleListView = DataProvider.ins.db.QuarantinePersons.ToArray();
+                    QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
                     Window SuccessDialog = new Window
                     {
                         AllowsTransparency = true,
@@ -1284,8 +1281,6 @@ namespace QuanLyKhuCachLy.ViewModel
                     MessageBox.Show(error);
                 }
             }
-
-            PeopleListView = new ObservableCollection<Model.QuarantinePerson>(DataProvider.ins.db.QuarantinePersons).ToArray();
         }
         void InitDisplayAddress(Address PersonAddress)
         {

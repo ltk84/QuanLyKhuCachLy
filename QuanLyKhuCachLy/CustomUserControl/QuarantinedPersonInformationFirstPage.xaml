@@ -150,7 +150,7 @@
                 Grid.Row="1"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="{Binding SelectedItem.Severity.level}" />
+                Text="{Binding SelectedItem.Severity.description}" />
             <TextBlock
                 Grid.Row="2"
                 Grid.Column="0"

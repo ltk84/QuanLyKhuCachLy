@@ -52,6 +52,9 @@
                                         <DataTrigger Binding="{Binding Path=IsOnNotify}" Value="True">
                                             <Setter Property="Height" Value="488" />
                                         </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=IsOnSetting}" Value="True">
+                                            <Setter Property="Height" Value="559.2" />
+                                        </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
                             </Border.Style>
@@ -246,6 +249,34 @@
                             materialDesign:HintAssist.IsFloating="{Binding IsOnNotify}"
                             Style="{StaticResource TextStyleSectionButton}"
                             Text="Thông báo" />
+                        <Border Width="61" Background="Transparent" />
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton
+                    x:Name="btnSetting"
+                    Margin="24,24,0,0"
+                    Command="{Binding ToSettingCommand}"
+                    IsChecked="{Binding IsOnSetting}"
+                    Style="{StaticResource SectionButton}">
+                    <StackPanel Width="236" Orientation="Horizontal">
+                        <Image Height="28">
+                            <Image.Style>
+                                <Style TargetType="Image">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=IsOnSetting}" Value="True">
+                                            <Setter Property="Source" Value="/Resources/icons/setting_selected.png" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=IsOnSetting}" Value="False">
+                                            <Setter Property="Source" Value="/Resources/icons/setting.png" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <TextBlock
+                            materialDesign:HintAssist.IsFloating="{Binding IsOnSetting}"
+                            Style="{StaticResource TextStyleSectionButton}"
+                            Text="Cài đặt" />
                         <Border Width="61" Background="Transparent" />
                     </StackPanel>
                 </RadioButton>

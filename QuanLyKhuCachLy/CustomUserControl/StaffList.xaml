@@ -11,7 +11,7 @@
     d:DesignHeight="705"
     d:DesignWidth="757"
     mc:Ignorable="d">
-    <StackPanel Margin="40,30,40,30">
+    <StackPanel Width="Auto" Margin="25,45,45,0">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
@@ -19,21 +19,21 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock
-                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                FontSize="22"
-                FontWeight="Bold"
-                Foreground="#FF363636">
+                Grid.Row="0"
+                Grid.Column="0"
+                Style="{StaticResource DashboardTitle}">
                 DANH SÁCH NHÂN VIÊN
             </TextBlock>
             <Button
                 Grid.Column="1"
-                Width="140"
-                Height="35"
-                Background="#FF1D9583"
+                Width="170"
+                Height="32"
+                Margin="0,20,0,0"
+                HorizontalAlignment="Right"
                 Content="Thêm nhân viên"
-                FontSize="16"
+                FontSize="12"
                 PreviewMouseDown="Button_PreviewMouseDown"
-                Style="{StaticResource AddObjectButton}">
+                Style="{StaticResource DashboardButton}">
                 <Button.ContextMenu>
                     <ContextMenu>
                         <ContextMenu.Template>
@@ -59,10 +59,9 @@
             <StackPanel
                 Grid.Row="0"
                 Grid.Column="0"
-                Margin="0,25,24,0"
+                Margin="0,15,24,0"
                 VerticalAlignment="Bottom">
                 <TextBlock
-                    Margin="0,10,0,0"
                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                     FontSize="16"
                     Foreground="#FF434A54">
@@ -150,17 +149,20 @@
             AutoGenerateColumns="False"
             CanUserAddRows="False"
             CanUserReorderColumns="False"
-            CanUserResizeColumns="False"
+            CanUserResizeColumns="True"
             CanUserResizeRows="False"
+            IsReadOnly="True"
             ItemsSource="{Binding StaffListView}"
             LoadingRow="DataGrid_LoadingRow"
-            SelectedItem="{Binding SelectedItem}">
+            SelectedItem="{Binding SelectedItem}"
+            SelectionMode="Single"
+            SelectionUnit="FullRow">
             <DataGrid.Columns>
                 <materialDesign:DataGridTextColumn
                     Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=Header}"
                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                     ElementStyle="{StaticResource DataGridElement}"
-                    Header="ID"
+                    Header="STT"
                     HeaderStyle="{StaticResource DataGridHeader}"
                     MaxLength="10" />
                 <materialDesign:DataGridTextColumn
@@ -168,6 +170,13 @@
                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                     ElementStyle="{StaticResource DataGridElement}"
                     Header="Tên"
+                    HeaderStyle="{StaticResource DataGridHeader}"
+                    MaxLength="30" />
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding dateOfBirth, StringFormat=dd-MM-yyyy}"
+                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                    ElementStyle="{StaticResource DataGridElement}"
+                    Header="Ngày sinh"
                     HeaderStyle="{StaticResource DataGridHeader}"
                     MaxLength="30" />
                 <materialDesign:DataGridTextColumn

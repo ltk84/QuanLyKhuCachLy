@@ -1,0 +1,198 @@
+﻿<UserControl
+    x:Class="QuanLyKhuCachLy.CustomUserControl.SettingQuarantineArea"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="780"
+    d:DesignWidth="780"
+    DataContext="{StaticResource SettingVM}"
+    mc:Ignorable="d">
+    <StackPanel Margin="25,45,45,0">
+
+        <Grid Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+
+
+            <Button
+                Grid.Row="0"
+                Grid.Column="3"
+                Width="Auto"
+                Height="Auto"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Command="{Binding ToEditCommand}"
+                Style="{StaticResource MenuButton}">
+                <StackPanel Orientation="Horizontal">
+                    <Image
+                        Grid.Column="0"
+                        Width="18"
+                        Height="16"
+                        Margin="0,0,15,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        RenderTransformOrigin="0.5,0.5"
+                        Source="/QuanLyKhuCachLy;component/Resources/icons/edit-icon.png" />
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="11"
+                        FontWeight="Regular"
+                        Foreground="#FF000000"
+                        Text="Chỉnh sửa" />
+                </StackPanel>
+            </Button>
+
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Style="{StaticResource DashboardTitle}">
+                    THÔNG TIN
+                </TextBlock>
+
+                <TextBlock
+                    Grid.Row="1"
+                    VerticalAlignment="Center"
+                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                    FontSize="20"
+                    FontWeight="Light"
+                    Foreground="#FF363636">
+                    Khu cách ly
+                </TextBlock>
+            </Grid>
+        </Grid>
+
+        <Separator Margin="0,10,0,10" Background="#1E434A54" />
+
+        <Grid Margin="0,10,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Style="{StaticResource list-key-text}"
+                Text="Tên" />
+
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="1"
+                Style="{StaticResource list-value-text}"
+                Text="Alo" />
+
+
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                Style="{StaticResource list-key-text}"
+                Text="Quản lý" />
+
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="1"
+                Style="{StaticResource list-value-text}"
+                Text="Alo" />
+
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="0"
+                VerticalAlignment="Top"
+                Style="{StaticResource list-key-text}"
+                Text="Địa chỉ" />
+
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="1"
+                Style="{StaticResource list-value-text}"
+                Text="Alo" />
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="0"
+                Style="{StaticResource list-key-text}"
+                Text="Chu kỳ xét nghiệm" />
+
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="1"
+                Style="{StaticResource list-value-text}"
+                Text="Alo" />
+
+
+            <TextBlock
+                Grid.Row="4"
+                Grid.Column="0"
+                Style="{StaticResource list-key-text}"
+                Text="Số ngày hoàn thành cách ly" />
+
+            <TextBlock
+                Grid.Row="4"
+                Grid.Column="1"
+                Style="{StaticResource list-value-text}"
+                Text="Alo" />
+        </Grid>
+
+        <Separator Margin="0,10,0,10" Background="#1E434A54" />
+
+        <TextBlock
+            Margin="0,10,0,0"
+            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+            FontSize="18"
+            FontWeight="Bold"
+            Foreground="#FF363636"
+            Text="QUY ĐỊNH MỨC ĐỘ" />
+        <DataGrid
+            Grid.Row="1"
+            Height="300"
+            Margin="0,10,0,0"
+            materialDesign:DataGridAssist.CornerRadius="10"
+            AutoGenerateColumns="False"
+            CanUserAddRows="False"
+            CanUserReorderColumns="False"
+            CanUserResizeColumns="False"
+            CanUserResizeRows="False"
+            ItemsSource="{Binding ListSeverity}"
+            SelectedItem="{Binding SelectedItem}">
+            <DataGrid.Columns>
+                <materialDesign:DataGridTextColumn
+                    Width="150"
+                    Binding="{Binding level, UpdateSourceTrigger=PropertyChanged}"
+                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                    ElementStyle="{StaticResource DataGridElement}"
+                    Header="Mức độ"
+                    HeaderStyle="{StaticResource DataGridHeader}"
+                    MaxLength="10" />
+
+                <materialDesign:DataGridTextColumn
+                    Width="250"
+                    Binding="{Binding description, UpdateSourceTrigger=PropertyChanged}"
+                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                    ElementStyle="{StaticResource DataGridElement}"
+                    Header="Mô tả"
+                    HeaderStyle="{StaticResource DataGridHeader}"
+                    MaxLength="30" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+</UserControl>

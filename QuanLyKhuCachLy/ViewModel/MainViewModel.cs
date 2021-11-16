@@ -15,6 +15,7 @@ namespace QuanLyKhuCachLy.ViewModel
         public StaffViewModel StaffVM { get; set; }
         public ReportViewModel ReportVM { get; set; }
         public NotificationViewModel NotificationVM { get; set; }
+        public SettingViewModel SettingVM { get; set; }
 
 
         private object _currentView;
@@ -24,12 +25,14 @@ namespace QuanLyKhuCachLy.ViewModel
         private bool _isOnStaff;
         private bool _isOnStat;
         private bool _isOnNotify;
+        private bool _isOnSetting;
         public ICommand ToDashboardCommand { get; set; }
         public ICommand ToRoomCommand { get; set; }
         public ICommand ToPersonCommand { get; set; }
         public ICommand ToStaffCommand { get; set; }
         public ICommand ToStatCommand { get; set; }
         public ICommand ToNotifyCommand { get; set; }
+        public ICommand ToSettingCommand { get; set; }
 
         public object CurrentView
         {
@@ -95,6 +98,15 @@ namespace QuanLyKhuCachLy.ViewModel
                 OnPropertyChanged();
             }
         }
+        public bool IsOnSetting
+        {
+            get { return _isOnSetting; }
+            set
+            {
+                _isOnSetting = value;
+                OnPropertyChanged();
+            }
+        }
 
         #endregion
 
@@ -140,6 +152,10 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 ToNotify();
             });
+            ToSettingCommand = new RelayCommand<object>((p) => { return true; }, (o) =>
+            {
+                ToSetting();
+            });
         }
 
         #region method
@@ -151,6 +167,7 @@ namespace QuanLyKhuCachLy.ViewModel
             quarantinePersonViewModel = new QuarantinePersonViewModel();
             ReportVM = new ReportViewModel();
             NotificationVM = new NotificationViewModel();
+            SettingVM = new SettingViewModel();
             // test room
             //ToDashboard();
             ToPerson();
@@ -165,6 +182,7 @@ namespace QuanLyKhuCachLy.ViewModel
             _isOnStaff = false;
             _isOnStat = false;
             _isOnNotify = false;
+            _isOnSetting = false;
         }
 
         private void ToRoom()
@@ -176,6 +194,7 @@ namespace QuanLyKhuCachLy.ViewModel
             _isOnStaff = false;
             _isOnStat = false;
             _isOnNotify = false;
+            _isOnSetting = false;
         }
 
         private void ToPerson()
@@ -187,6 +206,7 @@ namespace QuanLyKhuCachLy.ViewModel
             _isOnStaff = false;
             _isOnStat = false;
             _isOnNotify = false;
+            _isOnSetting = false;
         }
 
         private void ToStaff()
@@ -198,6 +218,7 @@ namespace QuanLyKhuCachLy.ViewModel
             _isOnStaff = true;
             _isOnStat = false;
             _isOnNotify = false;
+            _isOnSetting = false;
         }
         private void ToStat()
         {
@@ -208,6 +229,7 @@ namespace QuanLyKhuCachLy.ViewModel
             _isOnStaff = false;
             _isOnStat = true;
             _isOnNotify = false;
+            _isOnSetting = false;
         }
         private void ToNotify()
         {
@@ -219,6 +241,19 @@ namespace QuanLyKhuCachLy.ViewModel
             _isOnStaff = false;
             _isOnStat = false;
             _isOnNotify = true;
+            _isOnSetting = false;
+        }
+
+        private void ToSetting()
+        {
+            CurrentView = SettingVM;
+            _isOnDashboard = false;
+            _isOnRoom = false;
+            _isOnPerson = false;
+            _isOnStaff = false;
+            _isOnStat = false;
+            _isOnNotify = false;
+            _isOnSetting = true;
         }
 
         void LoadLoginScreenAndCheckInitSetUp(Window p)
@@ -243,7 +278,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 // Chỗ này cần xử lý thêm: Hiện tại là nếu tắt screen inital set up giữa chừng thì sẽ close chương trình (không có thông báo)
                 // Mong muốn là khi đóng giữa chừng thì sẽ thông báo rồi mới close (hoặc xử lý kiểu khác)
                 // Test (suppose !CheckInit)
-                if (CheckInitialSetUp)
+                if (!CheckInitialSetUp)
                 {
                     InitialSettingScreen.ShowDialog();
                     // Xử lý close InitScrren ở button Xác nhận nữa

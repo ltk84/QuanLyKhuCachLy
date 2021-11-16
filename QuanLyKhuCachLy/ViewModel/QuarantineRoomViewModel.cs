@@ -274,7 +274,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
 
             RoomListView = RoomList.ToArray();
-            FilterType = new string[] { "Loại phòng", "Sức chứa" };
+            FilterType = new string[] { "Tất cả", "Loại phòng", "Sức chứa" };
             SelectedFilterType = "Tất cả";
             SelectedFilterProperty = "Chọn phương thức lọc";
             getFilterProperty();
@@ -419,7 +419,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                 for (int i = 0; i < RoomListView.Length; i++)
                 {
-                    Value[i] = RoomListView[i].displayName.ToString() + "@@" + RoomListView[i].Severity.level.ToString() + "@@" + RoomListView[i].capacity.ToString();
+                    Value[i] = RoomListView[i].displayName.ToString() + "@@" + RoomListView[i].Severity?.description.ToString() + "@@" + RoomListView[i].capacity.ToString();
 
                 }
 
@@ -601,7 +601,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 try
                 {
                     // List Severity được tạo từ trước nên không cần thêm
-                    Model.QuarantineRoom QuarantineRoom = new Model.QuarantineRoom { displayName = RoomDisplayName, capacity = RoomCapacity, levelID = RoomSelectedSeverity.id };
+                    Model.QuarantineRoom QuarantineRoom = new Model.QuarantineRoom { displayName = RoomDisplayName, capacity = RoomCapacity, levelID = RoomSelectedSeverity?.id };
 
                     DataProvider.ins.db.QuarantineRooms.Add(QuarantineRoom);
                     DataProvider.ins.db.SaveChanges();
