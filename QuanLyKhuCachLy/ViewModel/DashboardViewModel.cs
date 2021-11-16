@@ -436,7 +436,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else
             {
-                FirstChartVisibility = Visibility.Collapsed;
+                FirstRecommendationVisibility = Visibility.Collapsed;
             }
         }
 
