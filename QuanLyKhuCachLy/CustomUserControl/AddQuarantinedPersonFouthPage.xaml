@@ -130,7 +130,7 @@
                                         <ContextMenu>
                                             <ContextMenu.Template>
                                                 <ControlTemplate>
-                                                    <local:DestinationHistoryFunctionMenu />
+                                                    <!--<local:DestinationHistoryFunctionMenu />-->
                                                 </ControlTemplate>
                                             </ContextMenu.Template>
                                         </ContextMenu>
