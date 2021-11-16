@@ -710,7 +710,6 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand ToAddManualCommand { get; set; }
         public ICommand ToAddExcelCommand { get; set; }
 
-        public ICommand ToAddDestinationCommand { get; set; }
         public ICommand ToEditCommand { get; set; }
         public ICommand ToViewCommand { get; set; }
         public ICommand ToMainCommand { get; set; }
@@ -837,16 +836,7 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 "Nam", "Nữ"
             };
-            ToAddDestinationCommand = new RelayCommand<object>((p) =>
-            {
-                return true;
-            }, (p) =>
-            {
-                ClearData();
-                AddDestinationHistory AddDestinationHistory = new AddDestinationHistory();
-                AddDestinationHistory.ShowDialog();
-                ClearData();
-            });
+
 
             ToAddManualCommand = new RelayCommand<Window>((p) =>
             {
@@ -1114,7 +1104,7 @@ namespace QuanLyKhuCachLy.ViewModel
             xlRange.Cells[1, 10] == null || xlRange.Cells[1, 10].Value2 != "SĐT" ||
             xlRange.Cells[1, 11] == null || xlRange.Cells[1, 11].Value2 != "Triệu chứng" ||
             xlRange.Cells[1, 12] == null || xlRange.Cells[1, 12].Value2 != "Nhóm đối tượng" ||
-            xlRange.Cells[1, 13] == null || xlRange.Cells[1, 13].Value2 != "Ngày đến"||
+            xlRange.Cells[1, 13] == null || xlRange.Cells[1, 13].Value2 != "Ngày đến" ||
             xlRange.Cells[1, 13] == null || xlRange.Cells[1, 15].Value2 != "Thông tin tiêm chủng")
             {
                 MessageBox.Show("Không đúng định dạng file");
@@ -1218,7 +1208,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 }
                 if (xlRange.Cells[i, 15] != null && xlRange.Cells[i, 15].Value2 != null)
                 {
-                    
+
                 }
                 listAdress.Add(personAddress);
                 listHealthInformation.Add(healthInformation);

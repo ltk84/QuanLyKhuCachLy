@@ -6,6 +6,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using QuanLyKhuCachLy.CustomUserControl;
+
 
 namespace QuanLyKhuCachLy.ViewModel
 {
@@ -103,11 +105,10 @@ namespace QuanLyKhuCachLy.ViewModel
                     ClearAddressList();
                     foreach (DestinationHistory dh in DestinationHistoryList)
                     {
-                        //if (dh.displayAddress == null) return;
-                        //Address a = DataProvider.ins.db.Addresses.Where(x => x.id == dh.id).FirstOrDefault();
-                        //dh.displayAddress = $"{a.apartmentNumber} {a.streetName} {a.ward} {a.district} {a.province}";
-                        var add = DataProvider.ins.db.Addresses.Where(x => x.id == dh.quarantinePersonID).FirstOrDefault();
+                        var add = DataProvider.ins.db.Addresses.Where(x => x.id == dh.addressID).FirstOrDefault();
                         AddressList.Add(add);
+
+                        dh.displayAddress = InitDisplayAddress(add);
                     }
                 }
                 OnPropertyChanged();
@@ -128,15 +129,47 @@ namespace QuanLyKhuCachLy.ViewModel
         #endregion
 
         #region command
-        public ICommand ToAddCommand;
+        public ICommand ToAddCommand { get; set; }
 
-        public ICommand ToEditCommand;
+        public ICommand ToEditCommand { get; set; }
 
-        public ICommand AddOnUICommand;
+        public ICommand AddOnUICommand { get; set; }
 
-        public ICommand EditOnUICommand;
+        public ICommand EditOnUICommand { get; set; }
 
-        public ICommand DeleteOnUICommand;
+        public ICommand DeleteOnUICommand { get; set; }
+        public ICommand CancelCommand { get; set; }
+
+        #endregion
+
+        #region validation rule
+
+        private bool _ProvinceFieldHasError;
+        public bool ProvinceFieldHasError
+        {
+            get => _ProvinceFieldHasError; set
+            {
+                _ProvinceFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _DistrictFieldHasError;
+        public bool DistrictFieldHasError
+        {
+            get => _DistrictFieldHasError; set
+            {
+                _DistrictFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
+        private bool _WardFieldHasError;
+        public bool WardFieldHasError
+        {
+            get => _WardFieldHasError; set
+            {
+                _WardFieldHasError = value; OnPropertyChanged();
+            }
+        }
 
         #endregion
 
@@ -150,25 +183,31 @@ namespace QuanLyKhuCachLy.ViewModel
             AddressList = new ObservableCollection<Address>();
             idForTask = 0;
 
-            AddOnUICommand = new RelayCommand<object>((p) =>
+            AddOnUICommand = new RelayCommand<Window>((p) =>
             {
-                return true;
+                if (!DistrictFieldHasError && !ProvinceFieldHasError && !WardFieldHasError)
+                    return true;
+                return false;
             }, (p) =>
             {
                 AddDestinationHistoryUI();
+                p.Close();
             });
 
-            EditOnUICommand = new RelayCommand<object>((p) =>
+            EditOnUICommand = new RelayCommand<Window>((p) =>
             {
                 return true;
             }, (p) =>
             {
                 EditDestinationHistoryUI();
+                p.Close();
             });
 
             DeleteOnUICommand = new RelayCommand<object>((p) =>
             {
-                return true;
+                if (SelectedItem != null)
+                    return true;
+                return false;
             }, (p) =>
             {
                 DeleteDestinationHistoryUI();
@@ -179,7 +218,10 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-
+                ClearData();
+                AddDestinationHistory AddDestinationHistory = new AddDestinationHistory();
+                AddDestinationHistory.ShowDialog();
+                ClearData();
             });
 
             ToEditCommand = new RelayCommand<object>((p) =>
@@ -187,16 +229,37 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-                AddDestinationHistoryUI();
+                SetSelectedItemToProperty();
+                EditDestinationHistory EditScreen = new EditDestinationHistory();
+                EditScreen.ShowDialog();
+            });
+
+            CancelCommand = new RelayCommand<Window>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                p.Close();
             });
         }
 
         #region method
+
+        void ClearData()
+        {
+            HDDateArrive = DateTime.MinValue;
+            HDApartmentNumber = string.Empty;
+            HDStreetName = string.Empty;
+            HDSelectedWard = string.Empty;
+            HDSelectedDistrict = string.Empty;
+            HDSelectedProvince = string.Empty;
+        }
+
         void SetSelectedItemToProperty()
         {
             HDDateArrive = SelectedItem.dateArrive;
 
-            Address HDAddress = DataProvider.ins.db.Addresses.Where(x => x.id == SelectedItem.addressID).FirstOrDefault();
+            Address HDAddress = AddressList.Where(x => x.id == SelectedItem.addressID).FirstOrDefault();
             if (HDAddress == null) return;
 
             HDApartmentNumber = HDAddress.apartmentNumber;
@@ -231,9 +294,12 @@ namespace QuanLyKhuCachLy.ViewModel
                 dateArrive = HDDateArrive,
                 quarantinePersonID = PersonID,
                 addressID = DestinationHistoryAddress.id,
+                displayAddress = InitDisplayAddress(DestinationHistoryAddress),
             };
 
             DestinationHistoryList.Add(PersonDestinationHistory);
+
+            idForTask++;
         }
 
         void EditDestinationHistoryUI()
@@ -243,11 +309,19 @@ namespace QuanLyKhuCachLy.ViewModel
             var DesAdd = AddressList.Where(x => x.id == SelectedItem.addressID).FirstOrDefault();
             if (DesAdd == null) return;
 
-            AddressList[AddressList.IndexOf(DesAdd)].apartmentNumber = HDApartmentNumber;
-            AddressList[AddressList.IndexOf(DesAdd)].streetName = HDStreetName;
-            AddressList[AddressList.IndexOf(DesAdd)].ward = HDSelectedWard;
-            AddressList[AddressList.IndexOf(DesAdd)].district = HDSelectedDistrict;
-            AddressList[AddressList.IndexOf(DesAdd)].province = HDSelectedProvince;
+            //AddressList[AddressList.IndexOf(DesAdd)].apartmentNumber = HDApartmentNumber;
+            //AddressList[AddressList.IndexOf(DesAdd)].streetName = HDStreetName;
+            //AddressList[AddressList.IndexOf(DesAdd)].ward = HDSelectedWard;
+            //AddressList[AddressList.IndexOf(DesAdd)].district = HDSelectedDistrict;
+            //AddressList[AddressList.IndexOf(DesAdd)].province = HDSelectedProvince;
+
+            DesAdd.apartmentNumber = HDApartmentNumber;
+            DesAdd.streetName = HDStreetName;
+            DesAdd.ward = HDSelectedWard;
+            DesAdd.district = HDSelectedDistrict;
+            DesAdd.province = HDSelectedProvince;
+
+            DestinationHistoryList[DestinationHistoryList.IndexOf(SelectedItem)].displayAddress = InitDisplayAddress(DesAdd);
         }
 
         void DeleteDestinationHistoryUI()
@@ -313,12 +387,12 @@ namespace QuanLyKhuCachLy.ViewModel
 
                 DataProvider.ins.db.SaveChanges();
                 DestinationHistoryList = new ObservableCollection<DestinationHistory>(DataProvider.ins.db.DestinationHistories.Where(x => x.quarantinePersonID == PersonID));
-                ClearAddressList();
-                foreach (var dh in DestinationHistoryList)
-                {
-                    var add = DataProvider.ins.db.Addresses.Where(x => x.id == dh.quarantinePersonID).FirstOrDefault();
-                    AddressList.Add(add);
-                }
+                //ClearAddressList();
+                //foreach (var dh in DestinationHistoryList)
+                //{
+                //    var add = DataProvider.ins.db.Addresses.Where(x => x.id == dh.quarantinePersonID).FirstOrDefault();
+                //    AddressList.Add(add);
+                //}
             }
         }
 
@@ -336,6 +410,38 @@ namespace QuanLyKhuCachLy.ViewModel
 
         public void ClearDestinationHistoryList() { DestinationHistoryList.Clear(); ClearAddressList(); }
         public void ClearAddressList() => AddressList.Clear();
+
+        string InitDisplayAddress(Address address)
+        {
+            string DisplayAdress = String.Empty;
+
+            if (address == null) return "";
+            List<string> list = new List<string>()
+            {
+                address.apartmentNumber,
+                address.streetName,
+                address.ward,
+                address.district,
+                address.province
+
+            };
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (!string.IsNullOrWhiteSpace(list[i]))
+                {
+                    DisplayAdress += list[i];
+                }
+                if (i != list.Count - 1)
+                {
+                    if (i != 0)
+                        DisplayAdress += ", ";
+                    else DisplayAdress += " ";
+                }
+            }
+
+            return DisplayAdress;
+        }
         #endregion
     }
 }

@@ -198,13 +198,20 @@
                 Margin="15,30,25,10"
                 AutoGenerateColumns="False"
                 BorderBrush="Black"
-                BorderThickness="1">
+                BorderThickness="1"
+                CanUserAddRows="False"
+                CanUserReorderColumns="False"
+                CanUserResizeColumns="False"
+                CanUserResizeRows="False"
+                DataContext="{StaticResource PersonVM}"
+                IsReadOnly="True"
+                ItemsSource="{Binding DestinationHistoryViewModel.DestinationHistoryList}">
                 <DataGrid.Columns>
                     <DataGridTextColumn
-                        Width="*"
+                        Width="100"
                         MinWidth="70"
+                        Binding="{Binding dateArrive}"
                         Header="Ngày">
-
                         <DataGridColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="FontSize" Value="14" />
@@ -217,6 +224,7 @@
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="90"
+                        Binding="{Binding displayAddress}"
                         Header="Địa điểm">
                         <DataGridColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">

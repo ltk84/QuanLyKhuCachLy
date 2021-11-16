@@ -153,7 +153,7 @@ namespace QuanLyKhuCachLy.ViewModel
             NotificationVM = new NotificationViewModel();
             // test room
             //ToDashboard();
-            ToRoom();
+            ToPerson();
         }
 
         private void ToDashboard()

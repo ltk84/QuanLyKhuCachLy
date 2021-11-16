@@ -120,6 +120,12 @@
     <Compile Include="CustomUserControl\AddStaffSecondScreen.xaml.cs">
       <DependentUpon>AddStaffSecondScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomUserControl\DestinationHistoryFunctionMenu.xaml.cs">
+      <DependentUpon>DestinationHistoryFunctionMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditDestinationHistory.xaml.cs">
+      <DependentUpon>EditDestinationHistory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomUserControl\EditQuarantinedPersonFouthPage.xaml.cs">
       <DependentUpon>EditQuarantinedPersonFouthPage.xaml</DependentUpon>
     </Compile>
@@ -385,6 +391,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomUserControl\AddStaffSecondScreen.xaml" />
+    <Page Include="CustomUserControl\DestinationHistoryFunctionMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\EditDestinationHistory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomUserControl\EditQuarantinedPersonFouthPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
