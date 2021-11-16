@@ -1,0 +1,159 @@
+﻿<UserControl x:Class="QuanLyKhuCachLy.CustomUserControl.EditQuarantinedPersonFouthPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel>
+        <TextBlock
+            Margin="0,32,0,0"
+            HorizontalAlignment="Center"
+            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+            FontSize="24"
+            FontWeight="Bold">
+            Thông tin người cách ly
+        </TextBlock>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition SharedSizeGroup="A" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="A" />
+                    <ColumnDefinition SharedSizeGroup="A" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Grid.Column="0">
+                    <TextBlock
+                    Margin="30,5,0,0"
+                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Foreground="#FF434A54">
+                    Lịch sử di chuyển
+                    </TextBlock>
+                    <Separator Margin="30,5,0,2">
+                        <Separator.RenderTransform>
+                            <ScaleTransform ScaleY="1" />
+                        </Separator.RenderTransform>
+                    </Separator>
+                </StackPanel>
+                <Button
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="0,0,30,10"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Right"
+                        Background="Transparent"
+                        Command="{Binding ToAddDestinationCommand}"
+                        Foreground="Transparent"
+                        Template="{StaticResource plus-button}">
+                    
+                </Button>
+            </Grid>
+            <DataGrid
+                    x:Name="travelHistory"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    MinHeight="330"
+                    Margin="30,15,30,0"
+                    AutoGenerateColumns="False"
+                    BorderBrush="Black"
+                    BorderThickness="1"
+                    CanUserAddRows="False"
+                    CanUserReorderColumns="False"
+                    CanUserResizeColumns="False"
+                    CanUserResizeRows="False"
+                    >
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                            Width="*"
+                            MinWidth="70"
+                            Header="Ngày"
+                            IsReadOnly="True">
+                        <DataGridColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="FontSize" Value="14" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="Background" Value="Transparent" />
+                            </Style>
+                        </DataGridColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    <DataGridTemplateColumn
+                            Width="*"
+                            MinWidth="70"
+                            Header="Thời gian">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DatePicker materialDesign:HintAssist.Hint="Chọn ngày cuối" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="FontSize" Value="14" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="Background" Value="Transparent" />
+                            </Style>
+                        </DataGridColumn.HeaderStyle>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn
+                            Width="*"
+                            MinWidth="250"
+                            Header="Địa điểm">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox
+                                        DisplayMemberPath="Key"
+                                        />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="FontSize" Value="14" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="Background" Value="Transparent" />
+                            </Style>
+                        </DataGridColumn.HeaderStyle>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn
+                            Width="*"
+                            MinWidth="70"
+                            Header="">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button
+                                        HorizontalAlignment="Right"
+                                        >
+                                    <materialDesign:PackIcon
+                                            Width="16"
+                                            Height="16"
+                                            Kind="Delete" />
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="FontSize" Value="14" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="Background" Value="Transparent" />
+                            </Style>
+                        </DataGridColumn.HeaderStyle>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </StackPanel>
+</UserControl>

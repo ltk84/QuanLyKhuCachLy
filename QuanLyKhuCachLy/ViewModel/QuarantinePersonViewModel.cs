@@ -93,9 +93,11 @@ namespace QuanLyKhuCachLy.ViewModel
         private Visibility _TabInformation1;
         private Visibility _TabInformation2;
         private Visibility _Tab3;
+        private Visibility _Tab4;
         private Visibility _TabEdit1;
         private Visibility _TabEdit2;
         private Visibility _TabEdit3;
+        private Visibility _TabEdit4;
         private Visibility _ButtonReturn;
         private Visibility _ButtonEditReturn;
         private Visibility _TabList;
@@ -165,6 +167,13 @@ namespace QuanLyKhuCachLy.ViewModel
                 _Tab3 = value; OnPropertyChanged();
             }
         }
+        public Visibility Tab4
+        {
+            get => _Tab4; set
+            {
+                _Tab4 = value; OnPropertyChanged();
+            }
+        }
         public Visibility TabEdit1
         {
             get => _TabEdit1; set
@@ -185,6 +194,13 @@ namespace QuanLyKhuCachLy.ViewModel
             get => _TabEdit3; set
             {
                 _TabEdit3 = value; OnPropertyChanged();
+            }
+        }
+        public Visibility TabEdit4
+        {
+            get => _TabEdit4; set
+            {
+                _TabEdit4 = value; OnPropertyChanged();
             }
         }
         public int TabIndex { get; set; }
@@ -693,6 +709,8 @@ namespace QuanLyKhuCachLy.ViewModel
 
         public ICommand ToAddManualCommand { get; set; }
         public ICommand ToAddExcelCommand { get; set; }
+
+        public ICommand ToAddDestinationCommand { get; set; }
         public ICommand ToEditCommand { get; set; }
         public ICommand ToViewCommand { get; set; }
         public ICommand ToMainCommand { get; set; }
@@ -714,9 +732,11 @@ namespace QuanLyKhuCachLy.ViewModel
             Tab1 = Visibility.Visible;
             Tab2 = Visibility.Hidden;
             Tab3 = Visibility.Hidden;
+            Tab4 = Visibility.Hidden;
             TabEdit1 = Visibility.Visible;
             TabEdit2 = Visibility.Hidden;
             TabEdit3 = Visibility.Hidden;
+            TabEdit4 = Visibility.Hidden;
             TabInformation1 = Visibility.Visible;
             TabInformation2 = Visibility.Hidden;
             TabIndexInformation = 1;
@@ -724,9 +744,9 @@ namespace QuanLyKhuCachLy.ViewModel
             ButtonReturn = Visibility.Hidden;
             ButtonEditReturn = Visibility.Hidden;
             TabIndex = 1;
-            TabPosition = $"{TabIndex}/3";
+            TabPosition = $"{TabIndex}/4";
             TabEditIndex = 1;
-            TabEditPosition = $"{TabEditIndex}/3";
+            TabEditPosition = $"{TabEditIndex}/4";
 
             NextTabCommandInformation = new RelayCommand<Window>((p) =>
             {
@@ -749,7 +769,7 @@ namespace QuanLyKhuCachLy.ViewModel
             NextTabEditCommand = new RelayCommand<Window>((p) =>
             {
 
-                if (TabEditIndex < 3) return true;
+                if (TabEditIndex < 4) return true;
                 return false;
             }, (p) =>
             {
@@ -767,7 +787,7 @@ namespace QuanLyKhuCachLy.ViewModel
             NextTabCommand = new RelayCommand<Window>((p) =>
             {
 
-                if (TabIndex < 3) return true;
+                if (TabIndex < 4) return true;
                 return false;
             }, (p) =>
             {
@@ -817,6 +837,16 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 "Nam", "Nữ"
             };
+            ToAddDestinationCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                ClearData();
+                AddDestinationHistory AddDestinationHistory = new AddDestinationHistory();
+                AddDestinationHistory.ShowDialog();
+                ClearData();
+            });
 
             ToAddManualCommand = new RelayCommand<Window>((p) =>
             {
@@ -832,7 +862,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 Tab1 = Visibility.Visible;
                 Tab2 = Visibility.Hidden;
                 Tab3 = Visibility.Hidden;
-                TabPosition = $"{TabIndex}/3";
+                Tab4 = Visibility.Hidden;
+                TabPosition = $"{TabIndex}/4";
             });
 
             ToAddExcelCommand = new RelayCommand<Window>((p) =>
@@ -856,7 +887,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 TabEdit1 = Visibility.Visible;
                 TabEdit2 = Visibility.Hidden;
                 TabEdit3 = Visibility.Hidden;
-                TabEditPosition = $"{TabEditIndex}/3";
+                TabEdit4 = Visibility.Hidden;
+                TabEditPosition = $"{TabEditIndex}/4";
             });
 
             ToViewCommand = new RelayCommand<object>((p) =>
@@ -1082,7 +1114,8 @@ namespace QuanLyKhuCachLy.ViewModel
             xlRange.Cells[1, 10] == null || xlRange.Cells[1, 10].Value2 != "SĐT" ||
             xlRange.Cells[1, 11] == null || xlRange.Cells[1, 11].Value2 != "Triệu chứng" ||
             xlRange.Cells[1, 12] == null || xlRange.Cells[1, 12].Value2 != "Nhóm đối tượng" ||
-            xlRange.Cells[1, 13] == null || xlRange.Cells[1, 13].Value2 != "Ngày đến")
+            xlRange.Cells[1, 13] == null || xlRange.Cells[1, 13].Value2 != "Ngày đến"||
+            xlRange.Cells[1, 13] == null || xlRange.Cells[1, 15].Value2 != "Thông tin tiêm chủng")
             {
                 MessageBox.Show("Không đúng định dạng file");
                 return;
@@ -1182,6 +1215,10 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     DateTime arrivedTime = DateTime.FromOADate(double.Parse(xlRange.Cells[i, 13].Value2.ToString()));
                     quarantinePerson.arrivedDate = arrivedTime;
+                }
+                if (xlRange.Cells[i, 15] != null && xlRange.Cells[i, 15].Value2 != null)
+                {
+                    
                 }
                 listAdress.Add(personAddress);
                 listHealthInformation.Add(healthInformation);
@@ -1694,8 +1731,8 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 TabIndex--;
             }
-            if (TabIndex <= 3)
-                TabPosition = $"{TabIndex}/3";
+            if (TabIndex <= 4)
+                TabPosition = $"{TabIndex}/4";
 
             switch (TabIndex)
             {
@@ -1703,6 +1740,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     Tab1 = Visibility.Visible;
                     Tab2 = Visibility.Hidden;
                     Tab3 = Visibility.Hidden;
+                    Tab4 = Visibility.Hidden;
                     ButtonReturn = Visibility.Hidden;
 
                     break;
@@ -1710,16 +1748,24 @@ namespace QuanLyKhuCachLy.ViewModel
                     Tab1 = Visibility.Hidden;
                     Tab2 = Visibility.Visible;
                     Tab3 = Visibility.Hidden;
+                    Tab4 = Visibility.Hidden;
                     ButtonReturn = Visibility.Visible;
                     break;
                 case 3:
                     Tab1 = Visibility.Hidden;
                     Tab2 = Visibility.Hidden;
                     Tab3 = Visibility.Visible;
+                    Tab4 = Visibility.Hidden;
+                    ButtonReturn = Visibility.Visible;
+                    break;
+                case 4:
+                    Tab1 = Visibility.Hidden;
+                    Tab2 = Visibility.Hidden;
+                    Tab3 = Visibility.Hidden;
+                    Tab4 = Visibility.Visible;
                     ButtonReturn = Visibility.Visible;
                     break;
                 default:
-
                     p.Close();
                     break;
             }
@@ -1760,8 +1806,8 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 TabEditIndex--;
             }
-            if (TabEditIndex <= 3)
-                TabEditPosition = $"{TabEditIndex}/3";
+            if (TabEditIndex <= 4)
+                TabEditPosition = $"{TabEditIndex}/4";
 
             switch (TabEditIndex)
             {
@@ -1769,18 +1815,28 @@ namespace QuanLyKhuCachLy.ViewModel
                     TabEdit1 = Visibility.Visible;
                     TabEdit2 = Visibility.Hidden;
                     TabEdit3 = Visibility.Hidden;
+                    TabEdit4 = Visibility.Hidden;
                     ButtonEditReturn = Visibility.Hidden;
                     break;
                 case 2:
                     TabEdit1 = Visibility.Hidden;
                     TabEdit2 = Visibility.Visible;
                     TabEdit3 = Visibility.Hidden;
+                    TabEdit4 = Visibility.Hidden;
+                    ButtonEditReturn = Visibility.Visible;
+                    break;
+                case 3:
+                    TabEdit1 = Visibility.Hidden;
+                    TabEdit2 = Visibility.Hidden;
+                    TabEdit3 = Visibility.Visible;
+                    TabEdit4 = Visibility.Hidden;
                     ButtonEditReturn = Visibility.Visible;
                     break;
                 default:
                     TabEdit1 = Visibility.Hidden;
                     TabEdit2 = Visibility.Hidden;
-                    TabEdit3 = Visibility.Visible;
+                    TabEdit3 = Visibility.Hidden;
+                    TabEdit4 = Visibility.Visible;
                     ButtonEditReturn = Visibility.Visible;
                     break;
             }

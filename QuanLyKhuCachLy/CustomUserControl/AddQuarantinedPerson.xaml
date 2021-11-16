@@ -33,6 +33,8 @@
                         <control:AddQuarantinedPersonFirstPage Panel.ZIndex="-1" Visibility="{Binding Tab1}" />
                         <control:AddQuarantinedPersonSecondPage Visibility="{Binding Tab2}" />
                         <control:AddQuarantinedPersonThirdPage Panel.ZIndex="1" Visibility="{Binding Tab3}" />
+                        <control:AddQuarantinedPersonFouthPage Panel.ZIndex="1" Visibility="{Binding Tab4}" />
+
                     </Grid>
                     <Grid
                         Grid.Row="3"
@@ -98,7 +100,7 @@
                                     <Style BasedOn="{StaticResource MaterialDesignRaisedButton}" TargetType="{x:Type Button}">
                                         <Setter Property="Command" Value="{Binding NextTabCommand}" />
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding ElementName=TabIndicator, Path=Text}" Value="3/3">
+                                            <DataTrigger Binding="{Binding ElementName=TabIndicator, Path=Text}" Value="4/4">
                                                 <Setter Property="Command" Value="{Binding AddCommand}" />
                                             </DataTrigger>
                                         </Style.Triggers>
@@ -109,7 +111,7 @@
                                         <Style TargetType="TextBlock">
                                             <Setter Property="Text" Value="Tiếp theo" />
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding ElementName=TabIndicator, Path=Text}" Value="3/3">
+                                                <DataTrigger Binding="{Binding ElementName=TabIndicator, Path=Text}" Value="4/4">
                                                     <Setter Property="Text" Value="Thêm" />
                                                 </DataTrigger>
                                             </Style.Triggers>
