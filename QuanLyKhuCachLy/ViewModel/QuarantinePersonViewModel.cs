@@ -1612,8 +1612,8 @@ namespace QuanLyKhuCachLy.ViewModel
                     DestinationHistoryViewModel.ins.ApplayDestinationHistoryToDB(Person.id, "EditOrDelete");
 
                     PeopleListView = QuarantinePersonList.ToArray();
-
-                    transaction.Commit();
+                    SelectedItem = Person;
+                    transaction.Commit(); 
 
                 }
                 catch (DbUpdateException e)

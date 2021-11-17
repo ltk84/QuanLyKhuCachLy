@@ -94,7 +94,7 @@
                                 <Style BasedOn="{StaticResource MaterialDesignRaisedButton}" TargetType="{x:Type Button}">
                                     <Setter Property="Command" Value="{Binding PersonInRoomViewModel.NextTabEditCommand}" />
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding ElementName=TabEditIndicator, Path=Text}" Value="3/3">
+                                        <DataTrigger Binding="{Binding ElementName=TabEditIndicator, Path=Text}" Value="4/4">
                                             <Setter Property="Command" Value="{Binding PersonInRoomViewModel.EditCommand}" />
                                         </DataTrigger>
                                     </Style.Triggers>
@@ -106,36 +106,24 @@
                                         <Setter Property="Text" Value="Tiếp theo" />
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding ElementName=TabEditIndicator, Path=Text}" Value="4/4">
-                                                <Setter Property="Command" Value="{Binding PersonInRoomViewModel.EditCommand}" />
+                                                <Setter Property="Text" Value="Chỉnh sửa" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
-                                </Button.Style>
-                                <TextBlock FontSize="16">
-                                    <TextBlock.Style>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="Text" Value="Tiếp theo" />
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding ElementName=TabEditIndicator, Path=Text}" Value="4/4">
-                                                    <Setter Property="Text" Value="Chỉnh sửa" />
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBlock.Style>
-                                </TextBlock>
-                            </Button>
-                            <TextBlock
-                                x:Name="TabEditIndicator"
-                                Margin="25,0,0,0"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Bottom"
-                                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                                FontSize="16"
-                                FontWeight="Bold"
-                                Foreground="#FF434A54"
-                                Text="{Binding PersonInRoomViewModel.TabEditPosition}" />
-                        </StackPanel>
-                    </Grid>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Button>
+                        <TextBlock
+                            x:Name="TabEditIndicator"
+                            Margin="25,0,0,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Foreground="#FF434A54"
+                            Text="{Binding PersonInRoomViewModel.TabEditPosition}" />
+                    </StackPanel>
                 </StackPanel>
             </Border>
         </StackPanel>
