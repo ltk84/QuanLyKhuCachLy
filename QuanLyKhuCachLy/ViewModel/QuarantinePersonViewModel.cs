@@ -843,6 +843,9 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
+
+
+
                 ClearData();
                 AddQuarantinedPerson addQuarantinePerson = new AddQuarantinedPerson();
                 addQuarantinePerson.ShowDialog();
@@ -1258,7 +1261,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     SuccessDialog.ShowDialog();
 
-                    DashboardViewModel.ins.Init();
+                    //DashboardViewModel.ins.Init();
                 }
                 catch (DbUpdateException e)
                 {
