@@ -286,10 +286,10 @@
                         HeaderStyle="{StaticResource DataGridHeader}"
                         MaxLength="30" />
                     <materialDesign:DataGridTextColumn
-                        Binding="{Binding nationality}"
+                        Binding="{Binding Severity.description}"
                         EditingElementStyle="{StaticResource EditingDataGridElement}"
                         ElementStyle="{StaticResource DataGridElement}"
-                        Header="Quốc tịch"
+                        Header="Nhóm đối tượng"
                         HeaderStyle="{StaticResource DataGridHeader}"
                         MaxLength="30" />
                     <DataGridTemplateColumn

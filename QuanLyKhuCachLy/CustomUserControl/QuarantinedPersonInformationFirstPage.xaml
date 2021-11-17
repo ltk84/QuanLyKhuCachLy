@@ -145,7 +145,7 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Style="{StaticResource list-key-text}"
-                Text="Nhớm đối tượng" />
+                Text="Nhóm đối tượng" />
             <TextBlock
                 Grid.Row="1"
                 Grid.Column="1"
@@ -160,7 +160,7 @@
                 Grid.Row="2"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="{Binding SelectedItem.arrivedDate}" />
+                Text="{Binding SelectedItem.arrivedDate, StringFormat=dd-MM-yyyy}" />
             <TextBlock
                 Grid.Row="3"
                 Grid.Column="0"
@@ -170,7 +170,7 @@
                 Grid.Row="3"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="{Binding SelectedItem.leaveDate}" />
+                Text="{Binding SelectedItem.leaveDate, StringFormat=dd-MM-yyyy}" />
             <TextBlock
                 Grid.Row="4"
                 Grid.Column="0"
