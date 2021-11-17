@@ -194,11 +194,14 @@
                 Margin="15,30,0,5"
                 AutoGenerateColumns="False"
                 BorderBrush="Black"
-                BorderThickness="1">
+                BorderThickness="1"
+                IsReadOnly="True"
+                ItemsSource="{Binding PersonInRoomViewModel.DestinationHistoryViewModel.DestinationHistoryList}">
                 <DataGrid.Columns>
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="70"
+                        Binding="{Binding dateArrive}"
                         Header="Ngày">
 
                         <DataGridColumn.HeaderStyle>
@@ -213,6 +216,7 @@
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="90"
+                        Binding="{Binding displayAddress}"
                         Header="Địa điểm">
                         <DataGridColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">

@@ -99,6 +99,9 @@
     <Compile Include="CustomUserControl\AddDestinationHistory.xaml.cs">
       <DependentUpon>AddDestinationHistory.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomUserControl\AddDestinationHistoryPersonInRoom.xaml.cs">
+      <DependentUpon>AddDestinationHistoryPersonInRoom.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomUserControl\AddPersonFunctionMenu.xaml.cs">
       <DependentUpon>AddPersonFunctionMenu.xaml</DependentUpon>
     </Compile>
@@ -120,6 +123,15 @@
     <Compile Include="CustomUserControl\AddStaffSecondScreen.xaml.cs">
       <DependentUpon>AddStaffSecondScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomUserControl\DestinationHistoryFunctionMenu.xaml.cs">
+      <DependentUpon>DestinationHistoryFunctionMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditDestinationHistory.xaml.cs">
+      <DependentUpon>EditDestinationHistory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditDestinationHistoryPersonInRoom.xaml.cs">
+      <DependentUpon>EditDestinationHistoryPersonInRoom.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomUserControl\EditQuarantinedPersonFouthPage.xaml.cs">
       <DependentUpon>EditQuarantinedPersonFouthPage.xaml</DependentUpon>
     </Compile>
@@ -140,6 +152,9 @@
     </Compile>
     <Compile Include="CustomUserControl\EditQuarantinePersonInRoomFirstPage.xaml.cs">
       <DependentUpon>EditQuarantinePersonInRoomFirstPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditQuarantinePersonInRoomFourthPage.xaml.cs">
+      <DependentUpon>EditQuarantinePersonInRoomFourthPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomUserControl\EditQuarantinePersonInRoomSecondPage.xaml.cs">
       <DependentUpon>EditQuarantinePersonInRoomSecondPage.xaml</DependentUpon>
@@ -367,6 +382,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CustomUserControl\AddDestinationHistoryPersonInRoom.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="CustomUserControl\AddPersonFunctionMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -389,6 +408,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomUserControl\AddStaffSecondScreen.xaml" />
+    <Page Include="CustomUserControl\DestinationHistoryFunctionMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomUserControl\EditDestinationHistory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomUserControl\EditDestinationHistoryPersonInRoom.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="CustomUserControl\EditQuarantinedPersonFouthPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -416,6 +447,10 @@
     <Page Include="CustomUserControl\EditQuarantinePersonInRoomFirstPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\EditQuarantinePersonInRoomFourthPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="CustomUserControl\EditQuarantinePersonInRoomSecondPage.xaml">
       <SubType>Designer</SubType>
