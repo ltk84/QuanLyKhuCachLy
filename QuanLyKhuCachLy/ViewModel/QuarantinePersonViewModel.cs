@@ -740,8 +740,8 @@ namespace QuanLyKhuCachLy.ViewModel
             TabInformation2 = Visibility.Hidden;
             TabIndexInformation = 1;
             TabPositionInformation = $"{TabIndexInformation}/2";
-            ButtonReturn = Visibility.Hidden;
-            ButtonEditReturn = Visibility.Hidden;
+            ButtonReturn = Visibility.Collapsed;
+            ButtonEditReturn = Visibility.Collapsed;
             TabIndex = 1;
             TabPosition = $"{TabIndex}/4";
             TabEditIndex = 1;
@@ -1726,7 +1726,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     Tab2 = Visibility.Hidden;
                     Tab3 = Visibility.Hidden;
                     Tab4 = Visibility.Hidden;
-                    ButtonReturn = Visibility.Hidden;
+                    ButtonReturn = Visibility.Collapsed;
 
                     break;
                 case 2:
@@ -1801,7 +1801,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     TabEdit2 = Visibility.Hidden;
                     TabEdit3 = Visibility.Hidden;
                     TabEdit4 = Visibility.Hidden;
-                    ButtonEditReturn = Visibility.Hidden;
+                    ButtonEditReturn = Visibility.Collapsed;
                     break;
                 case 2:
                     TabEdit1 = Visibility.Hidden;
