@@ -100,7 +100,7 @@
                 Grid.Row="0"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="Alo" />
+                Text="{Binding QuarantineArea.name}" />
 
 
             <TextBlock
@@ -113,7 +113,7 @@
                 Grid.Row="1"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="Alo" />
+                Text="{Binding Manager.name}" />
 
             <TextBlock
                 Grid.Row="2"
@@ -126,31 +126,31 @@
                 Grid.Row="2"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="Alo" />
+                Text="{Binding QuarantineAreaAddress}" />
             <TextBlock
                 Grid.Row="3"
                 Grid.Column="0"
                 Style="{StaticResource list-key-text}"
-                Text="Chu kỳ xét nghiệm" />
+                Text="Chu kỳ xét nghiệm (ngày)" />
 
             <TextBlock
                 Grid.Row="3"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="Alo" />
+                Text="{Binding QuarantineArea.testCycle}" />
 
 
             <TextBlock
                 Grid.Row="4"
                 Grid.Column="0"
                 Style="{StaticResource list-key-text}"
-                Text="Số ngày hoàn thành cách ly" />
+                Text="Số ngày hoàn thành cách ly (ngày)" />
 
             <TextBlock
                 Grid.Row="4"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
-                Text="Alo" />
+                Text="{Binding QuarantineArea.requiredDayToFinish}" />
         </Grid>
 
         <Separator Margin="0,10,0,10" Background="#1E434A54" />
@@ -172,6 +172,8 @@
             CanUserReorderColumns="False"
             CanUserResizeColumns="False"
             CanUserResizeRows="False"
+            DataContext="{StaticResource SeverityVM}"
+            IsReadOnly="True"
             ItemsSource="{Binding ListSeverity}"
             SelectedItem="{Binding SelectedItem}">
             <DataGrid.Columns>
