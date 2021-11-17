@@ -343,7 +343,10 @@
                         Style="{StaticResource DashboardHeader}">
                         THAO TÁC NHANH
                     </TextBlock>
-                    <Button Style="{StaticResource FastButton}">
+                    <Button
+                        DataContext="{StaticResource PersonVM}"
+                        PreviewMouseDown="Button_PreviewMouseDown"
+                        Style="{StaticResource FastButton}">
                         <TextBlock
                             Margin="16,0,16,0"
                             FontSize="14"
@@ -351,6 +354,36 @@
                             Style="{StaticResource DashboardContent}">
                             Thêm người cách ly
                         </TextBlock>
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <ContextMenu.Template>
+                                    <ControlTemplate>
+                                        <local:AddPersonFunctionMenu />
+                                    </ControlTemplate>
+                                </ContextMenu.Template>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+                    <Button
+                        DataContext="{StaticResource RoomVM}"
+                        PreviewMouseDown="Button_PreviewMouseDown1"
+                        Style="{StaticResource FastButton}">
+                        <TextBlock
+                            Margin="16,0,16,0"
+                            FontSize="14"
+                            FontWeight="Bold"
+                            Style="{StaticResource DashboardContent}">
+                            Thêm phòng
+                        </TextBlock>
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <ContextMenu.Template>
+                                    <ControlTemplate>
+                                        <local:AddRoomFunctionMenu />
+                                    </ControlTemplate>
+                                </ContextMenu.Template>
+                            </ContextMenu>
+                        </Button.ContextMenu>
                     </Button>
                     <Button Style="{StaticResource FastButton}">
                         <TextBlock
@@ -368,15 +401,6 @@
                             FontWeight="Bold"
                             Style="{StaticResource DashboardContent}">
                             Xử lý đổi phòng
-                        </TextBlock>
-                    </Button>
-                    <Button Style="{StaticResource FastButton}">
-                        <TextBlock
-                            Margin="16,0,16,0"
-                            FontSize="14"
-                            FontWeight="Bold"
-                            Style="{StaticResource DashboardContent}">
-                            Thêm phòng
                         </TextBlock>
                     </Button>
                 </StackPanel>
