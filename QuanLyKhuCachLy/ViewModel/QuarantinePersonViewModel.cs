@@ -614,15 +614,15 @@ namespace QuanLyKhuCachLy.ViewModel
         #endregion
 
         #region quarantine area information
-        private QuarantineArea _QAInformation;
-        public QuarantineArea QAInformation
-        {
-            get => _QAInformation; set
-            {
-                _QAInformation = value;
-                OnPropertyChanged();
-            }
-        }
+        //private QuarantineArea _QAInformation;
+        //public QuarantineArea QAInformation
+        //{
+        //    get => _QAInformation; set
+        //    {
+        //        _QAInformation = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
         #endregion
 
 
@@ -811,7 +811,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             SeverityList = new ObservableCollection<Severity>(DataProvider.ins.db.Severities);
 
-            QAInformation = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
+            //QAInformation = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
 
             InjectionRecordViewModel = InjectionRecordViewModel.ins;
             DestinationHistoryViewModel = DestinationHistoryViewModel.ins;
@@ -1218,6 +1218,9 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 try
                 {
+                    var QAInformation = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
+                    if (QAInformation == null) return;
+
                     for (int i = 0; i < listQuarantinePerson.Count; i++)
                     {
                         DataProvider.ins.db.Addresses.Add(listAdress[i]);
@@ -1444,6 +1447,9 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     // Tạo thông tin sức khỏe
 
+
+                    var QAInformation = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
+                    if (QAInformation == null) return;
 
                     // Tạo người cách ly
                     QuarantinePerson Person = new QuarantinePerson()
