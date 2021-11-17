@@ -1611,6 +1611,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     TestingResultViewModel.ApplyTestingResultToDb(Person.id, "EditOrDelete");
                     DestinationHistoryViewModel.ins.ApplayDestinationHistoryToDB(Person.id, "EditOrDelete");
 
+                    QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
                     PeopleListView = QuarantinePersonList.ToArray();
                     SelectedItem = Person;
                     transaction.Commit(); 
