@@ -843,9 +843,6 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-
-
-
                 ClearData();
                 AddQuarantinedPerson addQuarantinePerson = new AddQuarantinedPerson();
                 addQuarantinePerson.ShowDialog();

@@ -312,7 +312,6 @@ namespace QuanLyKhuCachLy.ViewModel
 
             NextTabCommand = new RelayCommand<Window>((p) =>
             {
-
                 if (TabIndex <= 4) return true;
 
                 return false;
