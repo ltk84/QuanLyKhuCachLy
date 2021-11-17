@@ -1287,7 +1287,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 }
             }
         }
-        void InitDisplayAddress(Address PersonAddress)
+        protected void InitDisplayAddress(Address PersonAddress)
         {
             if (PersonAddress == null) return;
             List<string> list = new List<string>()
@@ -1316,7 +1316,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
-        void InitDisplayHealthInformation(HealthInformation HF)
+        protected void InitDisplayHealthInformation(HealthInformation HF)
         {
             DisplayHealthInfor = string.Empty;
 
@@ -1532,7 +1532,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
 
         }
-        void EditQuarantinePerson()
+        protected virtual void EditQuarantinePerson()
         {
             using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
             {
@@ -1611,9 +1611,12 @@ namespace QuanLyKhuCachLy.ViewModel
                     TestingResultViewModel.ApplyTestingResultToDb(Person.id, "EditOrDelete");
                     DestinationHistoryViewModel.ins.ApplayDestinationHistoryToDB(Person.id, "EditOrDelete");
 
+                    transaction.Commit();
+
+                    QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
                     PeopleListView = QuarantinePersonList.ToArray();
 
-                    transaction.Commit();
+                    SelectedItem = Person;
 
                 }
                 catch (DbUpdateException e)
