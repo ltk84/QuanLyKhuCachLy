@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="QuanLyKhuCachLy.CustomUserControl.EditQuarantinedPersonFouthPage"
+    x:Class="QuanLyKhuCachLy.CustomUserControl.EditQuarantinePersonInRoomFourthPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    DataContext="{StaticResource PersonVM}"
+    DataContext="{StaticResource RoomVM}"
     mc:Ignorable="d">
     <StackPanel>
         <TextBlock
@@ -57,7 +57,7 @@
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
                     Background="Transparent"
-                    Command="{Binding DestinationHistoryViewModel.ToAddCommand}"
+                    Command="{Binding PersonInRoomViewModel.DestinationHistoryViewModel.ToAddCommand}"
                     Foreground="Transparent"
                     Template="{StaticResource plus-button}" />
             </Grid>
@@ -74,8 +74,8 @@
                 CanUserReorderColumns="False"
                 CanUserResizeColumns="False"
                 CanUserResizeRows="False"
-                ItemsSource="{Binding DestinationHistoryViewModel.DestinationHistoryList}"
-                SelectedItem="{Binding DestinationHistoryViewModel.SelectedItem}">
+                ItemsSource="{Binding PersonInRoomViewModel.DestinationHistoryViewModel.DestinationHistoryList}"
+                SelectedItem="{Binding PersonInRoomViewModel.DestinationHistoryViewModel.SelectedItem}">
                 <DataGrid.Columns>
                     <DataGridTextColumn
                         Width="*"

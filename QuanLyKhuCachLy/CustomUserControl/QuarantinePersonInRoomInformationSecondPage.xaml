@@ -42,12 +42,13 @@
                 CanUserResizeColumns="False"
                 CanUserResizeRows="False"
                 ItemsSource="{Binding PersonInRoomViewModel.InjectionRecordViewModel.InjectionRecordList}"
+                LoadingRow="vaccineInfo_LoadingRow"
                 SelectedItem="{Binding PersonInRoomViewModel.InjectionRecordViewModel.SelectedItem}">
                 <DataGrid.Columns>
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="70"
-                        Binding="{Binding id}"
+                        Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=Header}"
                         EditingElementStyle="{StaticResource EditingDataGridElement}"
                         ElementStyle="{StaticResource DataGridElement}"
                         Header="Lần"
@@ -118,12 +119,13 @@
                 CanUserResizeColumns="False"
                 CanUserResizeRows="False"
                 ItemsSource="{Binding PersonInRoomViewModel.TestingResultViewModel.TestingResultList}"
+                LoadingRow="vaccineInfo_LoadingRow"
                 SelectedItem="{Binding PersonInRoomViewModel.TestingResultViewModel.SelectedItem}">
                 <DataGrid.Columns>
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="70"
-                        Binding="{Binding id}"
+                        Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=Header}"
                         Header="Lần">
                         <DataGridColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
@@ -195,11 +197,14 @@
                 Margin="15,30,0,10"
                 AutoGenerateColumns="False"
                 BorderBrush="Black"
-                BorderThickness="1">
+                BorderThickness="1"
+                IsReadOnly="True"
+                ItemsSource="{Binding PersonInRoomViewModel.DestinationHistoryViewModel.DestinationHistoryList}">
                 <DataGrid.Columns>
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="70"
+                        Binding="{Binding dateArrive}"
                         Header="Ngày">
 
                         <DataGridColumn.HeaderStyle>
@@ -214,6 +219,7 @@
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="90"
+                        Binding="{Binding displayAddress}"
                         Header="Địa điểm">
                         <DataGridColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">

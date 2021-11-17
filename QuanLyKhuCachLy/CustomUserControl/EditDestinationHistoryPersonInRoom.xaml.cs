@@ -10,24 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace QuanLyKhuCachLy.CustomUserControl
 {
     /// <summary>
-    /// Interaction logic for EditQuarantinePersonInRoomThirdPage.xaml
+    /// Interaction logic for EditDestinationHistoryPersonInRoom.xaml
     /// </summary>
-    public partial class EditQuarantinePersonInRoomThirdPage : UserControl
+    public partial class EditDestinationHistoryPersonInRoom : Window
     {
-        public EditQuarantinePersonInRoomThirdPage()
+        public EditDestinationHistoryPersonInRoom()
         {
             InitializeComponent();
-        }
-
-        private void vaccinationInformation_LoadingRow(object sender, DataGridRowEventArgs e)
-        {
-            e.Row.Header = (e.Row.GetIndex() + 1).ToString();
         }
     }
 }

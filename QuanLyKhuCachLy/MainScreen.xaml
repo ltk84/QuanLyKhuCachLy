@@ -290,4 +290,5 @@
             <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName=MainWindow}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
+
 </Window>

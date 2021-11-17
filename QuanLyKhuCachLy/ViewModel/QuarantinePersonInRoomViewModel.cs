@@ -109,6 +109,7 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 EditQuarantinePersonInRoom editScreen = new EditQuarantinePersonInRoom();
                 editScreen.ShowDialog();
+                ResetToDeaultTabEditAfterEdit();
             });
 
             UpdatePersonListCommand = new RelayCommand<Window>((p) =>
@@ -151,8 +152,13 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
+                if (SelectedItem != null)
+                {
+                    InjectionRecordViewModel.RollbackTransaction(SelectedItem.id);
+                    TestingResultViewModel.RollbackTransaction(SelectedItem.id);
+                    DestinationHistoryViewModel.RollbackTransaction(SelectedItem.id);
+                }
                 p.Close();
-                RollbackTransaction();
             });
 
             CompleteQuarantinePersonCommand = new RelayCommand<Window>((p) =>

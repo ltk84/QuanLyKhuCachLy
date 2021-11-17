@@ -873,12 +873,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 SetSelectedItemToProperty();
                 EditQuarantinedPersonInformation editPerson = new EditQuarantinedPersonInformation();
                 editPerson.ShowDialog();
-                TabEditIndex = 1;
-                TabEdit1 = Visibility.Visible;
-                TabEdit2 = Visibility.Hidden;
-                TabEdit3 = Visibility.Hidden;
-                TabEdit4 = Visibility.Hidden;
-                TabEditPosition = $"{TabEditIndex}/4";
+                ResetToDeaultTabEditAfterEdit();
             });
 
             ToViewCommand = new RelayCommand<object>((p) =>
@@ -947,6 +942,16 @@ namespace QuanLyKhuCachLy.ViewModel
         }
 
         #region method
+
+        protected void ResetToDeaultTabEditAfterEdit()
+        {
+            TabEditIndex = 1;
+            TabEdit1 = Visibility.Visible;
+            TabEdit2 = Visibility.Hidden;
+            TabEdit3 = Visibility.Hidden;
+            TabEdit4 = Visibility.Hidden;
+            TabEditPosition = $"{TabEditIndex}/4";
+        }
 
         void ToDetailPersonTab()
         {
