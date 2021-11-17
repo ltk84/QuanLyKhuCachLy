@@ -500,18 +500,18 @@ namespace QuanLyKhuCachLy.ViewModel
             getFilterProperty();
 
             NationalityList = new ObservableCollection<string>() {
-                "VietNam", "Ameriden", "Phap", "Dut", "Em"
+                "Việt Nam", "Mỹ", "Pháp", "Đức", "Trung Quốc"
             };
 
             ProvinceList = new ObservableCollection<string>() {
-                "Ho Chi Minh", "Binh Duong", "Vinh Long"
+                "Hồ Chí Minh", "Bình Dương", "Vĩnh Long"
             };
             DistrictList = new ObservableCollection<string>() {
-                "Quan 1", "Quan 2", "Quan 3", "Quan 4"
+                "Quận 1", "Quận 2", "Quận 3", "Quận 4"
             };
             WardList = new ObservableCollection<string>()
             {
-                "Phu Thanh", "Phu Tho Hoa", "Binh Hung Hoa"
+                "Phú Thạnh", "Phú Thọ Hòa", "Bình Hưng Hòa"
             };
 
             SexList = new ObservableCollection<string>()
