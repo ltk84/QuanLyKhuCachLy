@@ -1,0 +1,206 @@
+﻿<UserControl
+    x:Class="QuanLyKhuCachLy.CustomUserControl.ArrangeRoomRecommendation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="1024"
+    d:DesignWidth="1225"
+    mc:Ignorable="d">
+    <Border Style="{StaticResource RecommendationField}">
+        <StackPanel>
+            <TextBlock
+                Margin="0,36,0,0"
+                HorizontalAlignment="Center"
+                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                FontSize="32"
+                FontWeight="Bold">
+                Thêm phòng thủ công
+            </TextBlock>
+            <TextBlock
+                Margin="0,2,0,0"
+                HorizontalAlignment="Center"
+                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                FontSize="18">
+                Điền các thông tin bên dưới để tạo phòng
+            </TextBlock>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="4*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="0,0,0,0"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#FF434A54"><Run Text="Danh sách phòng" /></TextBlock>
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="0,0,0,0"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#FF434A54"><Run Text="Danh sách người chưa có phòng" /></TextBlock>
+                    <DataGrid
+                        x:Name="notRoomPersonList"
+                        Grid.ColumnSpan="4"
+                        Height="280"
+                        Margin="0,15,15,0"
+                        AutoGenerateColumns="False"
+                        BorderBrush="Black"
+                        BorderThickness="1"
+                        CanUserAddRows="False"
+                        CanUserReorderColumns="False"
+                        CanUserResizeColumns="False"
+                        CanUserResizeRows="False"
+                        ItemsSource="{Binding PersonInRoomViewModel.PersonNotRoomList}"
+                        SelectedItem="{Binding PersonInRoomViewModel.NotRoomSelectedItem}">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn
+                                Width="*"
+                                MinWidth="70"
+                                Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"
+                                Header="Tên"
+                                IsReadOnly="True">
+                                <DataGridColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="FontSize" Value="14" />
+                                        <Setter Property="FontWeight" Value="Bold" />
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                        <Setter Property="Background" Value="Transparent" />
+                                    </Style>
+                                </DataGridColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn
+                                Width="*"
+                                MinWidth="90"
+                                Binding="{Binding dateOfBirth, UpdateSourceTrigger=PropertyChanged}"
+                                EditingElementStyle="{StaticResource EditingDataGridElement}"
+                                Header="Ngày sinh">
+                                <DataGridColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="FontSize" Value="14" />
+                                        <Setter Property="FontWeight" Value="Bold" />
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                        <Setter Property="Background" Value="Transparent" />
+                                    </Style>
+                                </DataGridColumn.HeaderStyle>
+                            </DataGridTextColumn>
+
+                            <DataGridTemplateColumn Width="*" MinWidth="70">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button
+                                            Width="20"
+                                            Height="20"
+                                            HorizontalAlignment="Right"
+                                            Command="{Binding PersonInRoomViewModel.AddPersonToRoomUI, Source={StaticResource RoomVM}}"
+                                            Style="{StaticResource DataGridButtonDelete}">
+                                            <materialDesign:PackIcon
+                                                Width="20"
+                                                Height="20"
+                                                Kind="ArrowRightBoldBox" />
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="15,0,0,0"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#FF434A54"><Run Text="Danh sách người cách ly trong phòng" /></TextBlock>
+                    <DataGrid
+                        x:Name="testingResult"
+                        Grid.ColumnSpan="4"
+                        Height="280"
+                        Margin="15,15,0,0"
+                        AutoGenerateColumns="False"
+                        BorderBrush="Black"
+                        BorderThickness="1"
+                        CanUserAddRows="False"
+                        CanUserReorderColumns="False"
+                        CanUserResizeColumns="False"
+                        CanUserResizeRows="False"
+                        ItemsSource="{Binding PersonInRoomViewModel.QuarantinePersonList}"
+                        SelectedItem="{Binding PersonInRoomViewModel.SelectedItem}">
+
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn
+                                Width="50"
+                                MinWidth="50"
+                                Header="">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button
+                                            Width="20"
+                                            Height="20"
+                                            HorizontalAlignment="Right"
+                                            Command="{Binding PersonInRoomViewModel.RemovePersonFromRoomUI, Source={StaticResource RoomVM}}"
+                                            Style="{StaticResource DataGridButtonDelete}">
+                                            <materialDesign:PackIcon
+                                                Width="20"
+                                                Height="20"
+                                                Kind="ArrowLeftBoldBox" />
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="FontSize" Value="14" />
+                                        <Setter Property="FontWeight" Value="Bold" />
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                        <Setter Property="Background" Value="Transparent" />
+                                    </Style>
+                                </DataGridColumn.HeaderStyle>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn
+                                Width="*"
+                                MinWidth="70"
+                                Binding="{Binding name}"
+                                Header="Tên"
+                                IsReadOnly="True">
+                                <DataGridColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="FontSize" Value="14" />
+                                        <Setter Property="FontWeight" Value="Bold" />
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                        <Setter Property="Background" Value="Transparent" />
+                                    </Style>
+                                </DataGridColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn
+                                Width="*"
+                                MinWidth="120"
+                                Binding="{Binding dateOfBirth}"
+                                Header="Ngày sinh">
+                                <DataGridColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="FontSize" Value="14" />
+                                        <Setter Property="FontWeight" Value="Bold" />
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                        <Setter Property="Background" Value="Transparent" />
+                                    </Style>
+                                </DataGridColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </Border>
+</UserControl>
