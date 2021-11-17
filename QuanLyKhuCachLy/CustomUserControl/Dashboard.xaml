@@ -38,6 +38,17 @@
                 Style="{StaticResource DashboardTitle}">
                 THỐNG KÊ CHUNG
             </TextBlock>
+            <Button
+                Grid.Row="0"
+                Grid.Column="1"
+                Width="Auto"
+                Height="Auto"
+                Margin="0,0,-20,0"
+                HorizontalAlignment="Right"
+                Command="{Binding Refresh}"
+                Style="{StaticResource MenuButton}">
+                <materialDesign:PackIcon Kind="Sync" Style="{StaticResource MenuIcon}" />
+            </Button>
             <TextBlock
                 Grid.Row="1"
                 Grid.Column="0"

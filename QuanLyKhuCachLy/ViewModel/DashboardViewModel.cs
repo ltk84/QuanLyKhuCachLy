@@ -297,10 +297,19 @@ namespace QuanLyKhuCachLy.ViewModel
         #region Command
         public ICommand SelectionChangedCommand { get; set; }
 
+        public ICommand Refresh { get; set; }
+
         #endregion
 
         public DashboardViewModel()
         {
+            Refresh = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                Init();
+            });
             RecommendationInit();
             StatisticInit();
             ChartInit();

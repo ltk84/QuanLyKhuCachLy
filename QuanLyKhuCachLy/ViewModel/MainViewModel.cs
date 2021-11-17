@@ -169,8 +169,8 @@ namespace QuanLyKhuCachLy.ViewModel
             NotificationVM = new NotificationViewModel();
             SettingVM = new SettingViewModel();
             // test room
-            //ToDashboard();
-            ToPerson();
+            ToDashboard();
+            //ToPerson();
         }
 
         private void ToDashboard()
