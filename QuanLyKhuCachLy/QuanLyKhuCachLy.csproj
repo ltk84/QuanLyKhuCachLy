@@ -120,6 +120,9 @@
     <Compile Include="CustomUserControl\AddStaffSecondScreen.xaml.cs">
       <DependentUpon>AddStaffSecondScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomUserControl\ArrangeRoomRecommendation.xaml.cs">
+      <DependentUpon>ArrangeRoomRecommendation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomUserControl\EditQuarantinedPersonFouthPage.xaml.cs">
       <DependentUpon>EditQuarantinedPersonFouthPage.xaml</DependentUpon>
     </Compile>
@@ -389,6 +392,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomUserControl\AddStaffSecondScreen.xaml" />
+    <Page Include="CustomUserControl\ArrangeRoomRecommendation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomUserControl\EditQuarantinedPersonFouthPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
