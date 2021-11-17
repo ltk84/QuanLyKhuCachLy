@@ -177,7 +177,7 @@
                     Binding="{Binding name}"
                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                     ElementStyle="{StaticResource DataGridElement}"
-                    Header="Tên"
+                    Header="Họ và tên"
                     HeaderStyle="{StaticResource DataGridHeader}"
                     MaxLength="30" />
                 <materialDesign:DataGridTextColumn
