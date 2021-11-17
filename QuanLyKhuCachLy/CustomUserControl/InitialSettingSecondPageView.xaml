@@ -151,7 +151,7 @@
                         FontWeight="Bold"
                         Foreground="#FF434A54"
                         TextWrapping="Wrap">
-                        Lưu ý
+                        Hướng dẫn
                     </TextBlock>
                     <TextBlock
                         Margin="0,0,24,0"
@@ -159,7 +159,23 @@
                         FontSize="16"
                         Foreground="#FF434A54"
                         TextWrapping="Wrap">
-                        Những ô được đánh dấu (*) là thông tin bắt buộc phải điền, không được để trống.
+                        Nhấn nút hình chữ thập ở bên phải ngoài cùng của dòng đầu tiên để thêm một dòng vào danh sách bên trái (tương ứng với một mức độ).
+                    </TextBlock>
+                    <TextBlock
+                        Margin="0,0,24,0"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        Foreground="#FF434A54"
+                        TextWrapping="Wrap">
+                        Nhấn đúp vào ô trong bảng bên trái để chỉnh sửa mức độ.
+                    </TextBlock>
+                    <TextBlock
+                        Margin="0,0,24,0"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        Foreground="#FF434A54"
+                        TextWrapping="Wrap">
+                        Ví dụ: Mức độ = 1, mô tả = F1; Mức độ = 2, mô tả = F0.
                     </TextBlock>
                 </StackPanel>
             </Grid>
