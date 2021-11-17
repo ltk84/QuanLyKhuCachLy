@@ -161,7 +161,7 @@ namespace QuanLyKhuCachLy.ViewModel
         #region method
         private void Init()
         {
-            DashboardVM = new DashboardViewModel();
+            DashboardVM = DashboardViewModel.ins;
             QuarantineRoomVM = new QuarantineRoomViewModel();
             StaffVM = new StaffViewModel();
             quarantinePersonViewModel = new QuarantinePersonViewModel();

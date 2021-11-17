@@ -614,15 +614,15 @@ namespace QuanLyKhuCachLy.ViewModel
         #endregion
 
         #region quarantine area information
-        //private QuarantineArea _QAInformation;
-        //public QuarantineArea QAInformation
-        //{
-        //    get => _QAInformation; set
-        //    {
-        //        _QAInformation = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
+        private QuarantineArea _QAInformation;
+        public QuarantineArea QAInformation
+        {
+            get => _QAInformation; set
+            {
+                _QAInformation = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
 
@@ -811,7 +811,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             SeverityList = new ObservableCollection<Severity>(DataProvider.ins.db.Severities);
 
-            //QAInformation = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
+            QAInformation = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
 
             InjectionRecordViewModel = InjectionRecordViewModel.ins;
             DestinationHistoryViewModel = DestinationHistoryViewModel.ins;
@@ -1218,8 +1218,9 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 try
                 {
-                    var QAInformation = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
-                    if (QAInformation == null) return;
+                    var temptQAInformation = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
+                    if (temptQAInformation == null) return;
+                    QAInformation = temptQAInformation;
 
                     for (int i = 0; i < listQuarantinePerson.Count; i++)
                     {
@@ -1247,11 +1248,17 @@ namespace QuanLyKhuCachLy.ViewModel
                         WindowStyle = WindowStyle.None,
                         Content = new SuccessNotification()
                     };
+
+
+                    DataProvider.ins.db.SaveChanges();
+
                     transaction.Commit();
+
                     //MessageBox.Show("Đã thêm từ file excel");
 
                     SuccessDialog.ShowDialog();
-                    return;
+
+                    DashboardViewModel.ins.Init();
                 }
                 catch (DbUpdateException e)
                 {
@@ -1448,8 +1455,9 @@ namespace QuanLyKhuCachLy.ViewModel
                     // Tạo thông tin sức khỏe
 
 
-                    var QAInformation = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
-                    if (QAInformation == null) return;
+                    var temptQAInformation = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
+                    if (temptQAInformation == null) return;
+                    QAInformation = temptQAInformation;
 
                     // Tạo người cách ly
                     QuarantinePerson Person = new QuarantinePerson()

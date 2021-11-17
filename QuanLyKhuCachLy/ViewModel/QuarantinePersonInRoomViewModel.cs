@@ -34,6 +34,8 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 _RoomID = value;
                 QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == RoomID));
+                PersonNotRoomList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == null));
+
                 OnPropertyChanged();
             }
         }
@@ -84,7 +86,7 @@ namespace QuanLyKhuCachLy.ViewModel
         {
 
             QuarantinePersonList = new ObservableCollection<QuarantinePerson>();
-            PersonNotRoomList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == null));
+            PersonNotRoomList = new ObservableCollection<QuarantinePerson>();
 
             ToViewCommand = new RelayCommand<object>((p) =>
             {
