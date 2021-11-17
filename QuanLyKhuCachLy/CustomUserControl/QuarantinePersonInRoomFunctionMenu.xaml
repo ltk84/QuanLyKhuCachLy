@@ -7,56 +7,61 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Name="PersonCM"
-    Width="276"
-    Height="270"
+    Width="250"
+    Height="300"
     DataContext="{StaticResource RoomVM}"
     mc:Ignorable="d">
-    <Border Padding="0,16,0,16" Style="{StaticResource RecommendationField}">
-        <StackPanel>
-            <Button
-                Command="{Binding PersonInRoomViewModel.ToViewCommand}"
-                CommandParameter="{Binding ElementName=PersonCM}"
-                Style="{StaticResource MenuButton}">
-                <StackPanel Style="{StaticResource MenuStackPanel}">
-                    <materialDesign:PackIcon Kind="AccountDetailsOutline" Style="{StaticResource MenuIcon}" />
-                    <TextBlock Style="{StaticResource MenuText}">
-                        Xem thông tin
-                    </TextBlock>
-                </StackPanel>
-            </Button>
-            <Button Command="{Binding PersonInRoomViewModel.ToEditCommand}" Style="{StaticResource MenuButton}">
-                <StackPanel Style="{StaticResource MenuStackPanel}">
-                    <materialDesign:PackIcon Kind="PencilOutline" Style="{StaticResource MenuIcon}" />
-                    <TextBlock Style="{StaticResource MenuText}">
-                        Chỉnh sửa
-                    </TextBlock>
-                </StackPanel>
-            </Button>
-            <!--<Button Command="{Binding PersonInRoomViewModel.DeleteCommand}" Style="{StaticResource MenuButton}">
-                <StackPanel Style="{StaticResource MenuStackPanel}">
-                    <materialDesign:PackIcon Kind="DeleteOutline" Style="{StaticResource MenuIcon}" />
-                    <TextBlock Style="{StaticResource MenuText}">
-                        Xóa
-                    </TextBlock>
-                </StackPanel>
-            </Button>-->
-            <Button Command="{Binding PersonInRoomViewModel.CompleteQuarantinePersonCommand}" Style="{StaticResource MenuButton}">
-                <StackPanel Style="{StaticResource MenuStackPanel}">
-                    <materialDesign:PackIcon Kind="CheckboxOutline" Style="{StaticResource MenuIcon}" />
-                    <TextBlock Style="{StaticResource MenuText}">
-                        Hoàn thành cách ly
-                    </TextBlock>
-                </StackPanel>
-            </Button>
-            <Button Style="{StaticResource MenuButton}">
-                <StackPanel Style="{StaticResource MenuStackPanel}">
-                    <materialDesign:PackIcon Kind="Broom" Style="{StaticResource MenuIcon}" />
-                    <TextBlock Style="{StaticResource MenuText}">
-                        Đổi phòng
-                    </TextBlock>
-                </StackPanel>
-            </Button>
-        </StackPanel>
-    </Border>
+    <Viewbox Width="250" Height="300">
+        <Border
+            Margin="20"
+            Padding="0,16,0,16"
+            Style="{StaticResource RecommendationField}">
+            <StackPanel>
+                <Button
+                    Command="{Binding PersonInRoomViewModel.ToViewCommand}"
+                    CommandParameter="{Binding ElementName=PersonCM}"
+                    Style="{StaticResource MenuButton}">
+                    <StackPanel Style="{StaticResource MenuStackPanel}">
+                        <materialDesign:PackIcon Kind="AccountDetailsOutline" Style="{StaticResource MenuIcon}" />
+                        <TextBlock Style="{StaticResource MenuText}">
+                            Xem thông tin
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding PersonInRoomViewModel.ToEditCommand}" Style="{StaticResource MenuButton}">
+                    <StackPanel Style="{StaticResource MenuStackPanel}">
+                        <materialDesign:PackIcon Kind="PencilOutline" Style="{StaticResource MenuIcon}" />
+                        <TextBlock Style="{StaticResource MenuText}">
+                            Chỉnh sửa
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding PersonInRoomViewModel.DeleteCommand}" Style="{StaticResource MenuButton}">
+                    <StackPanel Style="{StaticResource MenuStackPanel}">
+                        <materialDesign:PackIcon Kind="DeleteOutline" Style="{StaticResource MenuIcon}" />
+                        <TextBlock Style="{StaticResource MenuText}">
+                            Xóa
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding PersonInRoomViewModel.CompleteQuarantinePersonCommand}" Style="{StaticResource MenuButton}">
+                    <StackPanel Style="{StaticResource MenuStackPanel}">
+                        <materialDesign:PackIcon Kind="CheckboxOutline" Style="{StaticResource MenuIcon}" />
+                        <TextBlock Style="{StaticResource MenuText}">
+                            Hoàn thành cách ly
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource MenuButton}">
+                    <StackPanel Style="{StaticResource MenuStackPanel}">
+                        <materialDesign:PackIcon Kind="Sync" Style="{StaticResource MenuIcon}" />
+                        <TextBlock Style="{StaticResource MenuText}">
+                            Đổi phòng
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Border>
+    </Viewbox>
 </UserControl>
 

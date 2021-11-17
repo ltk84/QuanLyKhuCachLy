@@ -53,7 +53,7 @@
                 </Button>
                 <Button Style="{StaticResource MenuButton}">
                     <StackPanel Style="{StaticResource MenuStackPanel}">
-                        <materialDesign:PackIcon Kind="Broom" Style="{StaticResource MenuIcon}" />
+                        <materialDesign:PackIcon Kind="Sync" Style="{StaticResource MenuIcon}" />
                         <TextBlock Style="{StaticResource MenuText}">
                             Đổi phòng
                         </TextBlock>
