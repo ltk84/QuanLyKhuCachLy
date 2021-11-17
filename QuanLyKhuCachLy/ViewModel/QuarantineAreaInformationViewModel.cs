@@ -248,6 +248,29 @@ namespace QuanLyKhuCachLy.ViewModel
         #endregion
 
 
+        private MainViewModel _ParentVM;
+        public MainViewModel ParentVM
+        {
+            get => _ParentVM;
+            set
+            {
+                _ParentVM = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private static QuarantineAreaInformationViewModel _ins;
+        public static QuarantineAreaInformationViewModel ins
+        {
+            get
+            {
+                if (_ins == null) _ins = new QuarantineAreaInformationViewModel();
+                return _ins;
+            }
+            set => _ins = value;
+        }
+
+
         #endregion
 
         public QuarantineAreaInformationViewModel()
@@ -436,6 +459,8 @@ namespace QuanLyKhuCachLy.ViewModel
                     isDoneSetUp = true;
 
                     transaction.Commit();
+
+                    ParentVM.Init();
                 }
                 catch (DbUpdateException e)
                 {

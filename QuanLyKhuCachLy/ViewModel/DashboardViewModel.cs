@@ -281,16 +281,6 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #endregion
 
-        private static DashboardViewModel _ins;
-        public static DashboardViewModel ins
-        {
-            get
-            {
-                if (_ins == null) _ins = new DashboardViewModel();
-                return _ins;
-            }
-            set => _ins = value;
-        }
 
         #endregion
 
