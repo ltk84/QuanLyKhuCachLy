@@ -14,6 +14,7 @@ using Microsoft.Win32;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Collections.Generic;
 using System.Windows.Media;
+using System.Threading.Tasks;
 
 namespace QuanLyKhuCachLy.ViewModel
 {
@@ -313,6 +314,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
+                BufferWindow bufferWindow = new BufferWindow();
+                bufferWindow.ShowDialog();
                 ToDetailRoomTab();
             });
 
@@ -347,6 +350,8 @@ namespace QuanLyKhuCachLy.ViewModel
 
             DeleteRoomCommand = new RelayCommand<object>((p) => { if (SelectedItem != null) return true; return false; }, (p) =>
             {
+                BufferWindow bufferWindow = new BufferWindow();
+                bufferWindow.ShowDialog();
                 // Chưa xử lý hiện bảng thông báo
                 DeleteQuarantineRoom();
                 BackToListRoomTab();
@@ -359,6 +364,8 @@ namespace QuanLyKhuCachLy.ViewModel
 
             CompleteQuarantineCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
+                BufferWindow bufferWindow = new BufferWindow();
+                bufferWindow.ShowDialog();
                 CompleteQuarantine();
             });
 
@@ -370,6 +377,8 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             , (p) =>
             {
+                BufferWindow bufferWindow = new BufferWindow();
+                bufferWindow.ShowDialog();
                 ClearPersonList();
             });
         }

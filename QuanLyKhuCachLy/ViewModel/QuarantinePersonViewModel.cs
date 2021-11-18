@@ -884,6 +884,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
+                BufferWindow bufferWindow = new BufferWindow();
+                bufferWindow.ShowDialog();
                 ToDetailPersonTab();
             });
 
@@ -928,6 +930,8 @@ namespace QuanLyKhuCachLy.ViewModel
 
             DeleteCommand = new RelayCommand<object>((p) => { if (SelectedItem != null) return true; return false; }, (p) =>
             {
+                BufferWindow bufferWindow = new BufferWindow();
+                bufferWindow.ShowDialog();
                 DeleteQuarantinePerson();
                 BackToPersonList();
             });

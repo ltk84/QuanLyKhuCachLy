@@ -551,6 +551,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 return false;
             }, (p) =>
             {
+                BufferWindow bufferWindow = new BufferWindow();
+                bufferWindow.ShowDialog();
                 DeleteStaff();
                 BackToStaffList();
             });
@@ -604,7 +606,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-
+                BufferWindow bufferWindow = new BufferWindow();
+                bufferWindow.ShowDialog();
                 ToDetailStaffTab();
             });
 
