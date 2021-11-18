@@ -12,6 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="1*"/>
@@ -19,6 +20,9 @@
 
 
         </Grid.RowDefinitions>
+
+            <TextBlock Margin="0,15,0,15" HorizontalAlignment="Center" TextDecorations="Underline" Foreground="#FF3D3F66" FontSize="13" FontWeight="Bold" FontStyle="Italic"  Grid.Row="2">Danh sách đối tượng nhận thông báo</TextBlock>
+        
         <TextBlock
             Grid.Row="0"
             
@@ -72,7 +76,7 @@
                 Template="{StaticResource add-button-no-background}" />
         </Grid>
 
-            <Border Grid.Row="2" Background="Transparent" BorderBrush="#FF000000" BorderThickness="1" CornerRadius="8,8,8,8" Margin="0, 0,0,0" Padding="0,5,0,5">
+            <Border Grid.Row="3" Background="Transparent" BorderBrush="#FF000000" BorderThickness="1" CornerRadius="8,8,8,8" Margin="0, 0,0,0" Padding="0,5,0,5">
                 <ScrollViewer
             HorizontalScrollBarVisibility="Hidden">
                     <ListView Margin="10" Name="lvDataBinding">
@@ -150,18 +154,9 @@
             </Border>
 
             <Grid
-            Grid.Row="3"
+            Grid.Row="4"
             
-            Margin="0,0,0,8"
-            >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="27"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-
-            <Grid
-                Grid.Column="0">
+            Margin="0,0,0,8">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="auto"/>
@@ -181,62 +176,11 @@
                 Command="{Binding ToEditCommand}"
                 Content="Chỉnh sửa"
                 Template="{StaticResource edit-button}" />
-
-
-            </Grid>
-
-
-            <Grid
-                Grid.Column="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock
-                    VerticalAlignment="Bottom"
-                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                    FontSize="16.52"
-                    FontWeight="Bold"
-                    Foreground="#FF363636">
-                    Đối tượng
-                </TextBlock>
-                <Button
-                Grid.Column="2"
-                VerticalAlignment="Bottom"
-                Command="{Binding ToEditCommand}"
-                Content="Chỉnh sửa"
-                Template="{StaticResource edit-button}" />
-
-
-            </Grid>
-
-
-
-
         </Grid>
 
-        <Grid
-            Grid.Row="4"
-            >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="27"/>
-                <ColumnDefinition Width="1*"/>
-
-
-            </Grid.ColumnDefinitions>
-
-                <Border Grid.Column="0" Background="Transparent" BorderBrush="#FF000000" BorderThickness="1" CornerRadius="8,8,8,8" Margin="0, 0,0,0" Padding="0,5,0,5">
-                    <TextBox
-                        Grid.Column="0"
-                        Background="#fff"
-                        Margin="0,0,0,0" Grid.ColumnSpan="2">
-                        This is the content
-                    </TextBox>
-                </Border>
-
-
+            <Grid
+            Grid.Row="5"
+            >         
                 <Border Grid.Column="2" Background="Transparent" BorderBrush="#FF000000" BorderThickness="1" CornerRadius="8,8,8,8" Margin="0, 0,0,0" Padding="0,5,0,5">
                     <TextBox
                         Grid.Column="0"
@@ -248,7 +192,7 @@
             </Grid>
         <Button
             HorizontalAlignment="Right"
-            Grid.Row="5"
+            Grid.Row="6"
             Margin="0,10,0,0"
             Width="137"
             Height="32"
