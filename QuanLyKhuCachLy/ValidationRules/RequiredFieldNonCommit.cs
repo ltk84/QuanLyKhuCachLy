@@ -13,6 +13,7 @@ namespace QuanLyKhuCachLy.ValidationRules
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
+
             if (value is int)
             {
                 return Int32.Parse(value.ToString()) <= 0 ? new ValidationResult(false, $"Thông tin này là bắt buộc.") : ValidationResult.ValidResult;
@@ -36,6 +37,7 @@ namespace QuanLyKhuCachLy.ValidationRules
                 }
             }
 
+            if (value == null) return new ValidationResult(false, $"Thông tin này là bắt buộc.");
 
             return ValidationResult.ValidResult;
         }
