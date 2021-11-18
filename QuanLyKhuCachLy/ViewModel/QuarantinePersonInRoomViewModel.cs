@@ -400,7 +400,9 @@ namespace QuanLyKhuCachLy.ViewModel
                     Person.roomID = null;
                     Person.completeQuarantine = true;
 
-                    QuarantinePersonList.Remove(SelectedItem);
+                    RemoveFromRoomUI();
+
+                    PersonNotRoomList = new ObservableCollection<QuarantinePerson>(PersonNotRoomList.OrderBy(x => x.id));
 
                     DataProvider.ins.db.SaveChanges();
 
