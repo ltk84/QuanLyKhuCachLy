@@ -262,7 +262,7 @@
                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
                 Background="#FF434A54"
                 BorderBrush="{x:Null}"
-                Command="{Binding PersonInRoomViewModel.CancelCommand}"
+                Command="{Binding PersonInRoomViewModel.CancelUpdatePersonListCommand}"
                 CommandParameter="{Binding ElementName=UpdateList}"
                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                 FontSize="16"

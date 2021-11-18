@@ -36,10 +36,7 @@
                         </TextBlock>
                     </StackPanel>
                 </Button>
-                <Button
-                    Command="{Binding PersonInRoomViewModel.DeleteCommand}"
-                    IsEnabled="False"
-                    Style="{StaticResource MenuButton}">
+                <Button Command="{Binding PersonInRoomViewModel.RemovePersonFromRoomCommand}" Style="{StaticResource MenuButton}">
                     <StackPanel Style="{StaticResource MenuStackPanel}">
                         <materialDesign:PackIcon Kind="DeleteOutline" Style="{StaticResource MenuIcon}" />
                         <TextBlock Style="{StaticResource MenuText}">

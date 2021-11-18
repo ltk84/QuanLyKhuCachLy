@@ -357,7 +357,13 @@ namespace QuanLyKhuCachLy.ViewModel
                 p.Close();
             });
 
-            CompleteQuarantineCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            CompleteQuarantineCommand = new RelayCommand<object>((p) =>
+            {
+                if (PersonInRoomViewModel.QuarantinePersonList.Count > 0)
+                    return true;
+                return false;
+            },
+            (p) =>
             {
                 CompleteQuarantine();
             });
@@ -659,7 +665,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     Model.QuarantineRoom QuarantineRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == SelectedItem.id).FirstOrDefault();
                     QuarantineRoom.displayName = RoomDisplayName;
                     QuarantineRoom.capacity = RoomCapacity;
-                    QuarantineRoom.levelID = RoomSelectedSeverity.id;
+                    QuarantineRoom.levelID = RoomSelectedSeverity?.id;
 
                     DataProvider.ins.db.SaveChanges();
 
@@ -715,10 +721,10 @@ namespace QuanLyKhuCachLy.ViewModel
                     var Room = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == SelectedItem.id).FirstOrDefault();
                     if (Room == null) return;
 
+                    RoomList.Remove(Room);
                     DataProvider.ins.db.QuarantineRooms.Remove(Room);
                     DataProvider.ins.db.SaveChanges();
 
-                    RoomList.Remove(Room);
                     RoomListView = RoomList.ToArray();
                     transaction.Commit();
                 }
