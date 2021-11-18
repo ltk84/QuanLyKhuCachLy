@@ -82,7 +82,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #endregion
 
-        public QuarantinePersonInRoomViewModel()
+        public QuarantinePersonInRoomViewModel() : base()
         {
 
             QuarantinePersonList = new ObservableCollection<QuarantinePerson>();
@@ -439,6 +439,8 @@ namespace QuanLyKhuCachLy.ViewModel
                     DataProvider.ins.db.SaveChanges();
 
                     QuarantinePersonList.Clear();
+
+                    PersonNotRoomList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == null));
 
                     transaction.Commit();
                 }

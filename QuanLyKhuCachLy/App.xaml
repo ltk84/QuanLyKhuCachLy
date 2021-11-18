@@ -5,7 +5,7 @@
     xmlns:userControl="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:viewModel="clr-namespace:QuanLyKhuCachLy.ViewModel"
     ShutdownMode="OnMainWindowClose"
-    StartupUri="CustomUserControl/NotificationPeopleList.xaml">
+    StartupUri="MainScreen.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

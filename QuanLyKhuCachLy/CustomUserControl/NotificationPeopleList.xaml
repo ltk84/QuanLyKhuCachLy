@@ -7,7 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
         mc:Ignorable="d" 
-        DataContext="NotiVM"
+        DataContext="{StaticResource NotiVM}"
         Title="Chọn danh sách người cách ly" Height="833" Width="1380">
     <Grid>
         <Grid.RowDefinitions>
@@ -198,27 +198,19 @@
                             HeaderStyle="{StaticResource DataGridHeader}"
                             MaxLength="30" />
 
-                            <DataGridTemplateColumn
-                            Width="*"
-                            HeaderStyle="{StaticResource DataGridButtonHeader}"
-                            IsReadOnly="True">
+                            <DataGridTemplateColumn Width="*" MinWidth="70">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button HorizontalAlignment="Right" Style="{StaticResource DataGridButton}">
+                                        <Button
+                                        Width="20"
+                                        Height="20"
+                                        HorizontalAlignment="Right"
+                                        Command="{Binding PersonInRoomViewModel.AddPersonToRoomUI, Source={StaticResource RoomVM}}"
+                                        Style="{StaticResource DataGridButtonDelete}">
                                             <materialDesign:PackIcon
-                                            Width="16"
-                                            Height="16"
-                                            Kind="DotsHorizontal" />
-                                            <!--<Button.ContextMenu>
-
-                                                <ContextMenu PreviewMouseUp="ContextMenu_PreviewMouseUp">
-                                                    <ContextMenu.Template>
-                                                        <ControlTemplate>
-                                                            <local:StaffFunctionMenu />
-                                                        </ControlTemplate>
-                                                    </ContextMenu.Template>
-                                                </ContextMenu>
-                                            </Button.ContextMenu>-->
+                                            Width="20"
+                                            Height="20"
+                                            Kind="ArrowRightBoldBox" />
                                         </Button>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -407,27 +399,19 @@
                             HeaderStyle="{StaticResource DataGridHeader}"
                             MaxLength="30" />
 
-                            <DataGridTemplateColumn
-                            Width="*"
-                            HeaderStyle="{StaticResource DataGridButtonHeader}"
-                            IsReadOnly="True">
+                            <DataGridTemplateColumn Width="*" MinWidth="70">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button HorizontalAlignment="Right" Style="{StaticResource DataGridButton}">
+                                        <Button
+                                        Width="20"
+                                        Height="20"
+                                        HorizontalAlignment="Right"
+                                        Command="{Binding PersonInRoomViewModel.AddPersonToRoomUI, Source={StaticResource RoomVM}}"
+                                        Style="{StaticResource DataGridButtonDelete}">
                                             <materialDesign:PackIcon
-                                            Width="16"
-                                            Height="16"
-                                            Kind="DotsHorizontal" />
-                                            <!--<Button.ContextMenu>
-
-                                                <ContextMenu PreviewMouseUp="ContextMenu_PreviewMouseUp">
-                                                    <ContextMenu.Template>
-                                                        <ControlTemplate>
-                                                            <local:StaffFunctionMenu />
-                                                        </ControlTemplate>
-                                                    </ContextMenu.Template>
-                                                </ContextMenu>
-                                            </Button.ContextMenu>-->
+                                            Width="20"
+                                            Height="20"
+                                            Kind="ArrowRightBoldBox" />
                                         </Button>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>

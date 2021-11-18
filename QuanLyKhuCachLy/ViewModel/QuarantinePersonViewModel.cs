@@ -417,13 +417,21 @@ namespace QuanLyKhuCachLy.ViewModel
         public string QPApartmentNumber { get => _QPApartmentNumber; set { _QPApartmentNumber = value; OnPropertyChanged(); } }
 
         private string _QPSelectedProvince;
-        public string QPSelectedProvince { get => _QPSelectedProvince; set { _QPSelectedProvince = value; OnPropertyChanged(); } }
+        public string QPSelectedProvince { get => _QPSelectedProvince; set { _QPSelectedProvince = value; OnPropertyChanged(); InitDistrictList(); } }
 
         private string _QPSelectedWard;
-        public string QPSelectedWard { get => _QPSelectedWard; set { _QPSelectedWard = value; OnPropertyChanged(); } }
+        public string QPSelectedWard
+        {
+            get => _QPSelectedWard;
+            set { _QPSelectedWard = value; OnPropertyChanged(); }
+        }
 
         private string _QPSelectedDistrict;
-        public string QPSelectedDistrict { get => _QPSelectedDistrict; set { _QPSelectedDistrict = value; OnPropertyChanged(); } }
+        public string QPSelectedDistrict
+        {
+            get => _QPSelectedDistrict;
+            set { _QPSelectedDistrict = value; OnPropertyChanged(); InitWardList(); }
+        }
 
         private string _DisplayAddress;
         public string DisplayAddress { get => _DisplayAddress; set { _DisplayAddress = value; OnPropertyChanged(); } }
@@ -553,6 +561,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        public AddressViewModel AddressViewModel { get; set; }
         #endregion
 
         #region validation
@@ -816,21 +826,19 @@ namespace QuanLyKhuCachLy.ViewModel
             InjectionRecordViewModel = InjectionRecordViewModel.ins;
             DestinationHistoryViewModel = DestinationHistoryViewModel.ins;
             TestingResultViewModel = TestingResultViewModel.ins;
+            AddressViewModel = new AddressViewModel();
 
             NationalityList = new ObservableCollection<string>() {
                 "Việt Nam", "Mỹ", "Pháp", "Đức", "Trung Quốc"
             };
 
-            ProvinceList = new ObservableCollection<string>() {
-                "Hồ Chí Minh", "Bình Dương", "Vĩnh Long"
-            };
-            DistrictList = new ObservableCollection<string>() {
-                "Quận 1", "Quận 2", "Quận 3", "Quận 4"
-            };
-            WardList = new ObservableCollection<string>()
-            {
-                "Phú Thạnh", "Phú Thọ Hòa", "Bình Hưng Hòa"
-            };
+            ProvinceList = new ObservableCollection<string>();
+
+            DistrictList = new ObservableCollection<string>();
+
+            WardList = new ObservableCollection<string>();
+
+            InitProvinceList();
 
             SexList = new ObservableCollection<string>()
             {
@@ -843,9 +851,6 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-
-
-
                 ClearData();
                 AddQuarantinedPerson addQuarantinePerson = new AddQuarantinedPerson();
                 addQuarantinePerson.ShowDialog();
@@ -945,6 +950,34 @@ namespace QuanLyKhuCachLy.ViewModel
         }
 
         #region method
+
+        void InitProvinceList()
+        {
+            foreach (var item in AddressViewModel.ProvinceList)
+            {
+                ProvinceList.Add(item.name);
+            }
+        }
+
+        void InitDistrictList()
+        {
+            AddressViewModel.ProvinceSelectEvent(QPSelectedProvince);
+            DistrictList.Clear();
+            foreach (var item in AddressViewModel.DistrictList)
+            {
+                DistrictList.Add(item.name);
+            }
+        }
+
+        void InitWardList()
+        {
+            AddressViewModel.DistrictSelectEVent(QPSelectedDistrict);
+            WardList.Clear();
+            foreach (var item in AddressViewModel.WardList)
+            {
+                WardList.Add(item.name);
+            }
+        }
 
         protected void ResetToDeaultTabEditAfterEdit()
         {
@@ -1361,11 +1394,11 @@ namespace QuanLyKhuCachLy.ViewModel
 
             if (PersonAddress != null)
             {
-                QPApartmentNumber = PersonAddress.apartmentNumber;
-                QPStreetName = PersonAddress.streetName;
-                QPSelectedWard = PersonAddress.ward;
-                QPSelectedDistrict = PersonAddress.district;
                 QPSelectedProvince = PersonAddress.province;
+                QPSelectedDistrict = PersonAddress.district;
+                QPSelectedWard = PersonAddress.ward;
+                QPStreetName = PersonAddress.streetName;
+                QPApartmentNumber = PersonAddress.apartmentNumber;
             }
 
             if (HealthInfor != null)
@@ -1633,7 +1666,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
                     PeopleListView = QuarantinePersonList.ToArray();
 
-                    SelectedItem = Person;
+                    //SelectedItem = Person;
 
                 }
                 catch (DbUpdateException e)

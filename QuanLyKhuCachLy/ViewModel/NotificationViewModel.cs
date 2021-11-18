@@ -7,16 +7,16 @@ namespace QuanLyKhuCachLy.ViewModel
     public class NotificationViewModel : BaseViewModel
     {
 
-        private Staff[] _StaffListView;
-        public Staff[] StaffListView
+        private QuarantinePerson[] _StaffListView;
+        public QuarantinePerson[] StaffListView
         {
             get => _StaffListView; set
             {
                 _StaffListView = value; OnPropertyChanged();
             }
         }
-        private Staff _SelectedItem;
-        public Staff SelectedItem
+        private QuarantinePerson _SelectedItem;
+        public QuarantinePerson SelectedItem
         {
             get => _SelectedItem; set
             {
@@ -28,7 +28,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
         public NotificationViewModel() {
-            var StaffList = new ObservableCollection<Staff>(DataProvider.ins.db.Staffs);
+            var StaffList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
             StaffListView = StaffList.ToArray();
 
         }
