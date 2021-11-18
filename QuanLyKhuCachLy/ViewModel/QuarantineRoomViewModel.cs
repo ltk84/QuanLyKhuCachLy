@@ -497,7 +497,19 @@ namespace QuanLyKhuCachLy.ViewModel
             xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2 != "Sức chứa" ||
             xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2 != "Loại phòng" || colCount != 4)
             {
-                MessageBox.Show("Không đúng định dạng file");
+                Window ErrorDialog = new Window
+                {
+                    AllowsTransparency = true,
+                    Background = Brushes.Transparent,
+                    Width = 600,
+                    Height = 400,
+                    ResizeMode = ResizeMode.NoResize,
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                    WindowStyle = WindowStyle.None,
+                    Content = new FailNotification()
+                };
+                ErrorDialog.ShowDialog();
+                //MessageBox.Show("Không đúng định dạng file");
                 return;
             }
             for (int i = 2; i <= rowCount; i++)
@@ -541,6 +553,7 @@ namespace QuanLyKhuCachLy.ViewModel
                         Content = new SuccessNotification()
                     };
                     transaction.Commit();
+                    SuccessDialog.ShowDialog();
                 }
                 catch (DbUpdateException e)
                 {

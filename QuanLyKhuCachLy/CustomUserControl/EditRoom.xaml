@@ -14,7 +14,7 @@
     AllowsTransparency="True"
     Background="{x:Null}"
     DataContext="{StaticResource RoomVM}"
-    WindowStartupLocation="CenterOwner"
+    WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
     <Border Margin="15" Style="{StaticResource RecommendationField}">

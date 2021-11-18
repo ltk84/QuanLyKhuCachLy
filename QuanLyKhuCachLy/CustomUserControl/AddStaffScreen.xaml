@@ -12,7 +12,7 @@
     AllowsTransparency="True"
     Background="{x:Null}"
     DataContext="{StaticResource StaffVM}"
-    WindowStartupLocation="CenterOwner"
+    WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
     <Viewbox>

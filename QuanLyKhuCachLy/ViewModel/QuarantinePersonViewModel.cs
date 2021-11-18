@@ -1114,7 +1114,19 @@ namespace QuanLyKhuCachLy.ViewModel
             xlRange.Cells[1, 12] == null || xlRange.Cells[1, 12].Value2 != "Nhóm đối tượng" ||
             xlRange.Cells[1, 13] == null || xlRange.Cells[1, 13].Value2 != "Ngày đến")
             {
-                MessageBox.Show("Không đúng định dạng file");
+                Window ErrorDialog = new Window
+                {
+                    AllowsTransparency = true,
+                    Background = Brushes.Transparent,
+                    Width = 600,
+                    Height = 400,
+                    ResizeMode = ResizeMode.NoResize,
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                    WindowStyle = WindowStyle.None,
+                    Content = new FailNotification()
+                };
+                ErrorDialog.ShowDialog();
+                //MessageBox.Show("Không đúng định dạng file");
                 return;
             }
             for (int i = 2; i <= rowCount; i++)
