@@ -440,6 +440,8 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     QuarantinePersonList.Clear();
 
+                    PersonNotRoomList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == null));
+
                     transaction.Commit();
                 }
                 catch (DbUpdateException e)
