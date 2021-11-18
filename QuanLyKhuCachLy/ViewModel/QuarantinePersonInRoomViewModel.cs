@@ -82,7 +82,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #endregion
 
-        public QuarantinePersonInRoomViewModel()
+        public QuarantinePersonInRoomViewModel() : base()
         {
 
             QuarantinePersonList = new ObservableCollection<QuarantinePerson>();
