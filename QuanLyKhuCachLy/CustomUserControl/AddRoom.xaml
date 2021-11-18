@@ -11,14 +11,15 @@
     xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
     Name="AddRoomManualScreen"
     Title="AddRoom"
-    Width="552.747"
-    Height="552.857"
+    Width="575"
+    Height="575"
+    AllowsTransparency="True"
     Background="{x:Null}"
     DataContext="{StaticResource RoomVM}"
-    WindowStartupLocation="CenterScreen"
+    WindowStartupLocation="CenterOwner"
     WindowStyle="None"
     mc:Ignorable="d">
-    <Border Style="{StaticResource RecommendationField}">
+    <Border Margin="15" Style="{StaticResource RecommendationField}">
         <StackPanel>
             <TextBlock
                 Margin="0,36,0,0"
@@ -105,7 +106,7 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Loại phòng
+                        Nhóm đối tượng
                     </TextBlock>
                     <ComboBox
                         Name="RoomTypeInput"

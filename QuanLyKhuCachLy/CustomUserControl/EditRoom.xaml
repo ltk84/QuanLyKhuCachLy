@@ -9,12 +9,15 @@
     xmlns:utility="clr-namespace:QuanLyKhuCachLy.Utility"
     xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
     Name="EditRoomScreen"
-    Width="552.747"
-    Height="552.857"
+    Width="575"
+    Height="575"
+    AllowsTransparency="True"
+    Background="{x:Null}"
     DataContext="{StaticResource RoomVM}"
+    WindowStartupLocation="CenterOwner"
     WindowStyle="None"
     mc:Ignorable="d">
-    <Border Style="{StaticResource RecommendationField}">
+    <Border Margin="15" Style="{StaticResource RecommendationField}">
         <StackPanel>
             <TextBlock
                 Margin="0,36,0,0"
@@ -90,7 +93,7 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Loại phòng
+                        Nhóm đối tượng
                     </TextBlock>
                     <ComboBox
                         DisplayMemberPath="level"

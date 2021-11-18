@@ -7,104 +7,109 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="AddStaffScreen"
-    Width="900"
-    Height="520"
+    d:DesignHeight="530"
+    d:DesignWidth="850"
+    AllowsTransparency="True"
+    Background="{x:Null}"
     DataContext="{StaticResource StaffVM}"
     WindowStartupLocation="CenterOwner"
     WindowStyle="None"
     mc:Ignorable="d">
-    <Grid Margin="50,50,50,0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="350" />
-            <RowDefinition Height="auto" />
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <control:EditStaffFirstScreen Visibility="{Binding AddStaffTab1}" />
-            <control:EditStaffSecondScreen Visibility="{Binding AddStaffTab2}" />
-        </Grid>
-        <StackPanel
-            Grid.Row="1"
-            Margin="0,24,0,0"
-            HorizontalAlignment="Right"
-            Orientation="Horizontal">
+    <Viewbox>
+        <Border Margin="10" Style="{StaticResource RecommendationField}">
+            <StackPanel Margin="32,0,32,32">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="450" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <control:EditStaffFirstScreen Visibility="{Binding AddStaffTab1}" />
+                    <control:EditStaffSecondScreen Visibility="{Binding AddStaffTab2}" />
+                </Grid>
+                <StackPanel
+                    Width="Auto"
+                    Margin="0,25,0,0"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
 
-            <Button
-                Width="145"
-                Height="37"
-                Margin="0"
-                materialDesign:ButtonAssist.CornerRadius="8"
-                materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                Background="#FF434A54"
-                BorderBrush="{x:Null}"
-                Command="{Binding CancelAddStaffTabCommand}"
-                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                FontSize="16"
-                FontWeight="Bold"
-                Style="{StaticResource MaterialDesignRaisedButton}">
-                <TextBlock Text="Hủy" />
-            </Button>
-            <Button
-                Width="145"
-                Height="37"
-                Margin="24,0,0,0"
-                materialDesign:ButtonAssist.CornerRadius="8"
-                materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                Background="#FF434A54"
-                BorderBrush="{x:Null}"
-                Command="{Binding PreviousStaffTabCommand}"
-                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                FontSize="16"
-                FontWeight="Bold"
-                Style="{StaticResource MaterialDesignRaisedButton}"
-                Visibility="{Binding AddStaffPreviousBtn}">
-                <TextBlock Text="Trở lại" />
-            </Button>
-            <Button
-                Width="145"
-                Height="37"
-                Margin="24,0,0,0"
-                VerticalAlignment="Center"
-                materialDesign:ButtonAssist.CornerRadius="8"
-                materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                Background="#FF1D9583"
-                BorderBrush="{x:Null}"
-                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                FontSize="12"
-                FontWeight="Bold">
-                <Button.Style>
-                    <Style BasedOn="{StaticResource MaterialDesignRaisedButton}" TargetType="{x:Type Button}">
-                        <Setter Property="Command" Value="{Binding NextStaffTabCommand}" />
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding ElementName=TabIndicator, Path=Text}" Value="2/2">
-                                <Setter Property="Command" Value="{Binding EditCommand}" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-                <TextBlock FontSize="16">
-                    <TextBlock.Style>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="Text" Value="Tiếp theo" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=TabIndicator, Path=Text}" Value="2/2">
-                                    <Setter Property="Text" Value="Xác nhận" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
-            </Button>
-            <TextBlock
-                x:Name="TabIndicator"
-                Margin="25,0,0,0"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                FontSize="16"
-                FontWeight="Bold"
-                Foreground="#FF434A54"
-                Text="{Binding TabPosition}" />
-        </StackPanel>
-
-    </Grid>
+                    <Button
+                        Width="145"
+                        Height="37"
+                        Margin="0"
+                        materialDesign:ButtonAssist.CornerRadius="8"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                        Background="#FF434A54"
+                        BorderBrush="{x:Null}"
+                        Command="{Binding CancelAddStaffTabCommand}"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Style="{StaticResource MaterialDesignRaisedButton}">
+                        <TextBlock Text="Hủy" />
+                    </Button>
+                    <Button
+                        Width="145"
+                        Height="37"
+                        Margin="24,0,0,0"
+                        materialDesign:ButtonAssist.CornerRadius="8"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                        Background="#FF434A54"
+                        BorderBrush="{x:Null}"
+                        Command="{Binding PreviousStaffTabCommand}"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        Visibility="{Binding AddStaffPreviousBtn}">
+                        <TextBlock Text="Trở lại" />
+                    </Button>
+                    <Button
+                        Width="145"
+                        Height="37"
+                        Margin="24,0,0,0"
+                        VerticalAlignment="Center"
+                        materialDesign:ButtonAssist.CornerRadius="8"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                        Background="#FF1D9583"
+                        BorderBrush="{x:Null}"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="12"
+                        FontWeight="Bold">
+                        <Button.Style>
+                            <Style BasedOn="{StaticResource MaterialDesignRaisedButton}" TargetType="{x:Type Button}">
+                                <Setter Property="Command" Value="{Binding NextStaffTabCommand}" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=TabIndicator, Path=Text}" Value="2/2">
+                                        <Setter Property="Command" Value="{Binding EditCommand}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <TextBlock FontSize="16">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Text" Value="Tiếp theo" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=TabIndicator, Path=Text}" Value="2/2">
+                                            <Setter Property="Text" Value="Xác nhận" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Button>
+                    <TextBlock
+                        x:Name="TabIndicator"
+                        Margin="25,0,0,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#FF434A54"
+                        Text="{Binding TabPosition}" />
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Viewbox>
 </Window>
