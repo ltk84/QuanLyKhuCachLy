@@ -224,7 +224,7 @@
                             </Grid.RowDefinitions>
                             <Button
                                 Width="136"
-                                Height="37"
+                                Height="36"
                                 VerticalAlignment="Bottom"
                                 materialDesign:ButtonAssist.CornerRadius="8"
                                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
@@ -236,11 +236,19 @@
                                 FontWeight="Bold"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Visibility="{Binding PersonInRoomViewModel.TabInformation1}">
-                                <TextBlock Text="Trang sau" />
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="14" Text="Trang sau" />
+                                    <materialDesign:PackIcon
+                                        Width="20"
+                                        Height="20"
+                                        Margin="0,0,-8,0"
+                                        VerticalAlignment="Center"
+                                        Kind="MenuRight" />
+                                </StackPanel>
                             </Button>
                             <Button
                                 Width="136"
-                                Height="37"
+                                Height="36"
                                 VerticalAlignment="Bottom"
                                 materialDesign:ButtonAssist.CornerRadius="8"
                                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
@@ -252,7 +260,15 @@
                                 FontWeight="Bold"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Visibility="{Binding PersonInRoomViewModel.TabInformation2}">
-                                <TextBlock Text="Trang trước" />
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon
+                                        Width="20"
+                                        Height="20"
+                                        Margin="-8,0,0,0"
+                                        VerticalAlignment="Center"
+                                        Kind="MenuLeft" />
+                                    <TextBlock FontSize="14" Text="Trang trước" />
+                                </StackPanel>
                             </Button>
                         </Grid>
                         <TextBlock
