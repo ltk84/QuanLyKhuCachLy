@@ -12,24 +12,27 @@ namespace QuanLyKhuCachLy.Model
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
+    
     public partial class QLKCLEntities : DbContext
     {
         public QLKCLEntities()
             : base("name=QLKCLEntities")
         {
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-
+    
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Address> Addresses { get; set; }
         public virtual DbSet<DestinationHistory> DestinationHistories { get; set; }
+        public virtual DbSet<DISTRICT> DISTRICTs { get; set; }
         public virtual DbSet<HealthInformation> HealthInformations { get; set; }
         public virtual DbSet<InjectionRecord> InjectionRecords { get; set; }
+        public virtual DbSet<NotificationTemplate> NotificationTemplates { get; set; }
+        public virtual DbSet<PROVINCE> PROVINCEs { get; set; }
         public virtual DbSet<QuarantineArea> QuarantineAreas { get; set; }
         public virtual DbSet<QuarantinePerson> QuarantinePersons { get; set; }
         public virtual DbSet<QuarantineRoom> QuarantineRooms { get; set; }
@@ -37,5 +40,6 @@ namespace QuanLyKhuCachLy.Model
         public virtual DbSet<Staff> Staffs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TestingResult> TestingResults { get; set; }
+        public virtual DbSet<WARD> WARDs { get; set; }
     }
 }
