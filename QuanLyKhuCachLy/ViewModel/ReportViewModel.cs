@@ -229,7 +229,10 @@ namespace QuanLyKhuCachLy.ViewModel
                 try
                 {
                     PrintDialog printDlg = new PrintDialog();
-                    printDlg.PrintVisual(v, "Chart Printing");
+                    if (printDlg.ShowDialog() == true)
+                    {
+                        printDlg.PrintVisual(v, "Chart Printing");
+                    }
                 }
                 catch
                 {
@@ -246,19 +249,6 @@ namespace QuanLyKhuCachLy.ViewModel
                     };
                     FailDialog.ShowDialog();
                 }
-
-                Window SuccessDialog = new Window
-                {
-                    AllowsTransparency = true,
-                    Background = Brushes.Transparent,
-                    Width = 600,
-                    Height = 400,
-                    ResizeMode = ResizeMode.NoResize,
-                    WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                    WindowStyle = WindowStyle.None,
-                    Content = new SuccessNotification()
-                };
-                SuccessDialog.ShowDialog();
             });
 
             ToFirstTab();
