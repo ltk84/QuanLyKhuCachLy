@@ -52,7 +52,7 @@
                             materialDesign:ShadowAssist.ShadowDepth="Depth0"
                             Background="#FF434A54"
                             BorderBrush="{x:Null}"
-                            Command="{Binding PersonInRoomVIewModel.CancelCommand}"
+                            Command="{Binding PersonInRoomViewModel.CancelCommand}"
                             CommandParameter="{Binding ElementName=EditQuarantinedPersonScreen}"
                             FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                             FontSize="16"

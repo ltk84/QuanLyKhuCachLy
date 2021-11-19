@@ -139,7 +139,6 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     SetSelectedItemToProperty();
                     PersonInRoomViewModel.Parent = this;
-
                 }
             }
         }
@@ -256,6 +255,7 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand ToEditCommand { get; set; }
         public ICommand ToViewCommand { get; set; }
         public ICommand ToMainCommand { get; set; }
+        public ICommand RefeshCommand { get; set; }
         #endregion
 
 
@@ -272,6 +272,7 @@ namespace QuanLyKhuCachLy.ViewModel
             SelectedFilterType = "Tất cả";
             SelectedFilterProperty = "Chọn phương thức lọc";
             getFilterProperty();
+
             PersonInRoomViewModel = QuarantinePersonInRoomViewModel.ins;
 
             ToAddManualCommand = new RelayCommand<object>((p) =>
@@ -372,9 +373,24 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 ClearPersonList();
             });
+
+            RefeshCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }
+            , (p) =>
+            {
+                RefeshTab();
+            });
         }
 
         #region method
+
+        void RefeshTab()
+        {
+            SetDefaultUI();
+            SelectedItem = null;
+        }
 
         void CompleteQuarantine()
         {
