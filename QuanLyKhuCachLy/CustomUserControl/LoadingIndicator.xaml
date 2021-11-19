@@ -12,7 +12,7 @@
     AllowsTransparency="True"
     Background="Black"
     Opacity="0.4"
-    Topmost="True"
+    Topmost="False"
     WindowState="Maximized"
     WindowStyle="None"
     mc:Ignorable="d">

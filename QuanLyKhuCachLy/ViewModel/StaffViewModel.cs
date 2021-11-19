@@ -1124,10 +1124,8 @@ namespace QuanLyKhuCachLy.ViewModel
         //    return str;
         //}
 
-        void AddStaffFromExcel()
+        async void AddStaffFromExcel()
         {
-            List<Address> listStaffAddress = new List<Address>();
-            List<Staff> listStaff = new List<Staff>();
             string path = "";
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Multiselect = false;
@@ -1137,24 +1135,151 @@ namespace QuanLyKhuCachLy.ViewModel
                 path = openFileDialog.FileName;
             else
                 return;
-            Excel.Application xlApp = new Excel.Application();
-            Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(path);
-            Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
-            Excel.Range xlRange = xlWorksheet.UsedRange;
-            int rowCount = xlRange.Rows.Count;
-            int colCount = xlRange.Columns.Count;
-            if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2 != "STT" ||
-            xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2 != "Họ và tên" ||
-            xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2 != "Ngày sinh" ||
-            xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2 != "Giới tính" ||
-            xlRange.Cells[1, 5] == null || xlRange.Cells[1, 5].Value2 != "CMND/CCCD" ||
-            xlRange.Cells[1, 6] == null || xlRange.Cells[1, 6].Value2 != "Quốc tịch" ||
-            xlRange.Cells[1, 7] == null || xlRange.Cells[1, 7].Value2 != "SĐT" ||
-            xlRange.Cells[1, 8] == null || xlRange.Cells[1, 8].Value2 != "MaBH" ||
-            xlRange.Cells[1, 9] == null || xlRange.Cells[1, 9].Value2 != "Chức vụ" ||
-            xlRange.Cells[1, 10] == null || xlRange.Cells[1, 10].Value2 != "Phòng ban" ||
-            xlRange.Cells[1, 11] == null || xlRange.Cells[1, 11].Value2 != "Địa chỉ")
+            LoadingIndicator loadingIndicator = new LoadingIndicator();
+            Task task = ExecuteAddStaffFromExcel(loadingIndicator, path);
+            loadingIndicator.ShowDialog();
+            await task;
+        }
+
+        async Task ExecuteAddStaffFromExcel(LoadingIndicator loadingIndicator, string path)
+        {
+            bool isSuccess = false;
+            await Task.Run(() =>
             {
+                List<Address> listStaffAddress = new List<Address>();
+                List<Staff> listStaff = new List<Staff>();
+                Excel.Application xlApp = new Excel.Application();
+                Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(path);
+                Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
+                Excel.Range xlRange = xlWorksheet.UsedRange;
+                int rowCount = xlRange.Rows.Count;
+                int colCount = xlRange.Columns.Count;
+                if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2 != "STT" ||
+                xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2 != "Họ và tên" ||
+                xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2 != "Ngày sinh" ||
+                xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2 != "Giới tính" ||
+                xlRange.Cells[1, 5] == null || xlRange.Cells[1, 5].Value2 != "CMND/CCCD" ||
+                xlRange.Cells[1, 6] == null || xlRange.Cells[1, 6].Value2 != "Quốc tịch" ||
+                xlRange.Cells[1, 7] == null || xlRange.Cells[1, 7].Value2 != "SĐT" ||
+                xlRange.Cells[1, 8] == null || xlRange.Cells[1, 8].Value2 != "MaBH" ||
+                xlRange.Cells[1, 9] == null || xlRange.Cells[1, 9].Value2 != "Chức vụ" ||
+                xlRange.Cells[1, 10] == null || xlRange.Cells[1, 10].Value2 != "Phòng ban" ||
+                xlRange.Cells[1, 11] == null || xlRange.Cells[1, 11].Value2 != "Địa chỉ")
+                {
+                    //MessageBox.Show("Không đúng định dạng file");
+                    return;
+                }
+                for (int i = 2; i <= rowCount; i++)
+                {
+                    Staff staff = new Staff();
+                    Address address = new Address();
+                    if (xlRange.Cells[i, 2] != null && xlRange.Cells[i, 2].Value2 != null)
+                    {
+                        staff.name = xlRange.Cells[i, 2].Value2.ToString();
+                    }
+                    if (xlRange.Cells[i, 3] != null && xlRange.Cells[i, 3].Value2 != null)
+                    {
+                        DateTime birth = DateTime.FromOADate(double.Parse(xlRange.Cells[i, 3].Value2.ToString()));
+                        staff.dateOfBirth = birth;
+                    }
+                    if (xlRange.Cells[i, 4] != null && xlRange.Cells[i, 4].Value2 != null)
+                    {
+                        staff.sex = xlRange.Cells[i, 4].Value2.ToString();
+                    }
+                    if (xlRange.Cells[i, 11] != null && xlRange.Cells[i, 11].Value2 != null)
+                    {
+                        string[] arrListStr = xlRange.Cells[i, 11].Value2.ToString().Split(',');
+                        address.district = arrListStr[2];
+                        address.province = arrListStr[3];
+                        address.ward = arrListStr[1];
+                        address.streetName = arrListStr[0];
+                    }
+                    if (xlRange.Cells[i, 5] != null && xlRange.Cells[i, 5].Value2 != null)
+                    {
+                        staff.citizenID = xlRange.Cells[i, 5].Value2.ToString();
+                    }
+                    if (xlRange.Cells[i, 8] != null && xlRange.Cells[i, 8].Value2 != null)
+                    {
+                        staff.healthInsuranceID = xlRange.Cells[i, 8].Value2.ToString();
+                    }
+                    if (xlRange.Cells[i, 6] != null && xlRange.Cells[i, 6].Value2 != null)
+                    {
+                        staff.nationality = xlRange.Cells[i, 6].Value2.ToString();
+                    }
+                    if (xlRange.Cells[i, 7] != null && xlRange.Cells[i, 7].Value2 != null)
+                    {
+                        staff.phoneNumber = xlRange.Cells[i, 7].Value2.ToString();
+                    }
+                    if (xlRange.Cells[i, 9] != null && xlRange.Cells[i, 9].Value2 != null)
+                    {
+                        staff.jobTitle = xlRange.Cells[i, 9].Value2.ToString();
+                    }
+                    if (xlRange.Cells[i, 10] != null && xlRange.Cells[i, 10].Value2 != null)
+                    {
+                        staff.department = xlRange.Cells[i, 10].Value2.ToString();
+                    }
+                    listStaff.Add(staff);
+                    listStaffAddress.Add(address);
+                }
+                using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        for (int i = 0; i < listStaff.Count; i++)
+                        {
+                            DataProvider.ins.db.Addresses.Add(listStaffAddress[i]);
+                            DataProvider.ins.db.SaveChanges();
+                            listStaff[i].addressID = listStaffAddress[i].id;
+                            DataProvider.ins.db.Staffs.Add(listStaff[i]);
+                            DataProvider.ins.db.SaveChanges();
+                            StaffList.Add(listStaff[i]);
+                        }
+                        transaction.Commit();
+                        isSuccess = true;
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (DbEntityValidationException e)
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (NotSupportedException e)
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (ObjectDisposedException e)
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (InvalidOperationException e)
+                    {
+                        transaction.Rollback();
+                    }
+                }
+                StaffListView = new ObservableCollection<Model.Staff>(DataProvider.ins.db.Staffs).ToArray();
+            });
+            loadingIndicator.Close();
+            if (isSuccess)
+            {
+
+                Window SuccessDialog = new Window
+                {
+                    AllowsTransparency = true,
+                    Background = Brushes.Transparent,
+                    Width = 600,
+                    Height = 400,
+                    ResizeMode = ResizeMode.NoResize,
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                    WindowStyle = WindowStyle.None,
+                    Content = new SuccessNotification()
+                };
+                SuccessDialog.ShowDialog();
+            }
+            else
+            {
+
                 Window ErrorDialog = new Window
                 {
                     AllowsTransparency = true,
@@ -1167,125 +1292,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     Content = new FailNotification()
                 };
                 ErrorDialog.ShowDialog();
-                //MessageBox.Show("Không đúng định dạng file");
-                return;
             }
-            for (int i = 2; i <= rowCount; i++)
-            {
-                Staff staff = new Staff();
-                Address address = new Address();
-                if (xlRange.Cells[i, 2] != null && xlRange.Cells[i, 2].Value2 != null)
-                {
-                    staff.name = xlRange.Cells[i, 2].Value2.ToString();
-                }
-                if (xlRange.Cells[i, 3] != null && xlRange.Cells[i, 3].Value2 != null)
-                {
-                    DateTime birth = DateTime.FromOADate(double.Parse(xlRange.Cells[i, 3].Value2.ToString()));
-                    staff.dateOfBirth = birth;
-                }
-                if (xlRange.Cells[i, 4] != null && xlRange.Cells[i, 4].Value2 != null)
-                {
-                    staff.sex = xlRange.Cells[i, 4].Value2.ToString();
-                }
-                if (xlRange.Cells[i, 11] != null && xlRange.Cells[i, 11].Value2 != null)
-                {
-                    string[] arrListStr = xlRange.Cells[i, 11].Value2.ToString().Split(',');
-                    address.district = arrListStr[2];
-                    address.province = arrListStr[3];
-                    address.ward = arrListStr[1];
-                    address.streetName = arrListStr[0];
-                }
-                if (xlRange.Cells[i, 5] != null && xlRange.Cells[i, 5].Value2 != null)
-                {
-                    staff.citizenID = xlRange.Cells[i, 5].Value2.ToString();
-                }
-                if (xlRange.Cells[i, 8] != null && xlRange.Cells[i, 8].Value2 != null)
-                {
-                    staff.healthInsuranceID = xlRange.Cells[i, 8].Value2.ToString();
-                }
-                if (xlRange.Cells[i, 6] != null && xlRange.Cells[i, 6].Value2 != null)
-                {
-                    staff.nationality = xlRange.Cells[i, 6].Value2.ToString();
-                }
-                if (xlRange.Cells[i, 7] != null && xlRange.Cells[i, 7].Value2 != null)
-                {
-                    staff.phoneNumber = xlRange.Cells[i, 7].Value2.ToString();
-                }
-                if (xlRange.Cells[i, 9] != null && xlRange.Cells[i, 9].Value2 != null)
-                {
-                    staff.jobTitle = xlRange.Cells[i, 9].Value2.ToString();
-                }
-                if (xlRange.Cells[i, 10] != null && xlRange.Cells[i, 10].Value2 != null)
-                {
-                    staff.department = xlRange.Cells[i, 10].Value2.ToString();
-                }
-                listStaff.Add(staff);
-                listStaffAddress.Add(address);
-            }
-            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
-            {
-                try
-                {
-                    for (int i = 0; i < listStaff.Count; i++)
-                    {
-                        DataProvider.ins.db.Addresses.Add(listStaffAddress[i]);
-                        DataProvider.ins.db.SaveChanges();
-                        listStaff[i].addressID = listStaffAddress[i].id;
-                        DataProvider.ins.db.Staffs.Add(listStaff[i]);
-                        DataProvider.ins.db.SaveChanges();
-                        StaffList.Add(listStaff[i]);
-                    }
-                    Window SuccessDialog = new Window
-                    {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new SuccessNotification()
-                    };
-                    transaction.Commit();
-                    SuccessDialog.ShowDialog();
-                }
-                catch (DbUpdateException e)
-                {
-                    transaction.Rollback();
-                    string error = "Lỗi db update";
-
-                    MessageBox.Show(error);
-                }
-                catch (DbEntityValidationException e)
-                {
-                    transaction.Rollback();
-                    string error = "Lỗi validation";
-
-                    MessageBox.Show(error);
-                }
-                catch (NotSupportedException e)
-                {
-                    transaction.Rollback();
-                    string error = "Lỗi db đéo support";
-
-                    MessageBox.Show(error);
-                }
-                catch (ObjectDisposedException e)
-                {
-                    transaction.Rollback();
-                    string error = "Lỗi db object disposed";
-
-                    MessageBox.Show(error);
-                }
-                catch (InvalidOperationException e)
-                {
-                    transaction.Rollback();
-                    string error = "Lỗi invalid operation";
-
-                    MessageBox.Show(error);
-                }
-            }
-            StaffListView = new ObservableCollection<Model.Staff>(DataProvider.ins.db.Staffs).ToArray();
         }
 
         #endregion
