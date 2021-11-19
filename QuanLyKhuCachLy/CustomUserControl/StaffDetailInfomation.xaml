@@ -168,7 +168,7 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Style="{StaticResource list-key-text}"
-                Text="Tên" />
+                Text="Tên:" />
 
             <TextBlock
                 Grid.Row="0"
@@ -181,7 +181,7 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Style="{StaticResource list-key-text}"
-                Text="Giới Tính" />
+                Text="Giới tính:" />
 
             <TextBlock
                 Grid.Row="1"
@@ -194,7 +194,7 @@
                 Grid.Row="2"
                 Grid.Column="0"
                 Style="{StaticResource list-key-text}"
-                Text="Quốc Tịch" />
+                Text="Quốc tịch:" />
 
             <TextBlock
                 Grid.Row="2"
@@ -206,7 +206,7 @@
                 Grid.Row="3"
                 Grid.Column="0"
                 Style="{StaticResource list-key-text}"
-                Text="CMND/CCCD" />
+                Text="CMND/CCCD:" />
 
             <TextBlock
                 Grid.Row="3"
@@ -218,7 +218,7 @@
                 Grid.Row="4"
                 Grid.Column="0"
                 Style="{StaticResource list-key-text}"
-                Text="Số điện thoại" />
+                Text="Số điện thoại:" />
 
             <TextBlock
                 Grid.Row="4"
@@ -230,7 +230,7 @@
                 Grid.Row="5"
                 Grid.Column="0"
                 Style="{StaticResource list-key-text}"
-                Text="Mã số BHYT" />
+                Text="Mã số BHYT:" />
 
             <TextBlock
                 Grid.Row="5"
@@ -243,7 +243,7 @@
                 Grid.Column="0"
                 VerticalAlignment="Top"
                 Style="{StaticResource list-key-text}"
-                Text="Địa chỉ" />
+                Text="Địa chỉ:" />
 
             <TextBlock
                 Grid.Row="6"
@@ -273,7 +273,7 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Style="{StaticResource list-key-text}"
-                Text="Chức vụ" />
+                Text="Chức vụ:" />
             <TextBlock
                 Grid.Row="0"
                 Grid.Column="1"
@@ -284,7 +284,7 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Style="{StaticResource list-key-text}"
-                Text="Bộ phận" />
+                Text="Bộ phận:" />
             <TextBlock
                 Grid.Row="1"
                 Grid.Column="1"

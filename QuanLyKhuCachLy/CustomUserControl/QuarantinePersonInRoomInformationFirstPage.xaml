@@ -31,7 +31,7 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Style="{StaticResource list-key-text}"
-                Text="Tên" />
+                Text="Tên:" />
 
             <TextBlock
                 Grid.Row="0"
@@ -44,7 +44,7 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Style="{StaticResource list-key-text}"
-                Text="Giới Tính" />
+                Text="Giới tính:" />
 
             <TextBlock
                 Grid.Row="1"
@@ -57,7 +57,7 @@
                 Grid.Row="2"
                 Grid.Column="0"
                 Style="{StaticResource list-key-text}"
-                Text="Quốc Tịch" />
+                Text="Quốc tịch:" />
 
             <TextBlock
                 Grid.Row="2"
@@ -69,7 +69,7 @@
                 Grid.Row="3"
                 Grid.Column="0"
                 Style="{StaticResource list-key-text}"
-                Text="CMND/CCCD" />
+                Text="CMND/CCCD:" />
 
             <TextBlock
                 Grid.Row="3"
@@ -81,7 +81,7 @@
                 Grid.Row="4"
                 Grid.Column="0"
                 Style="{StaticResource list-key-text}"
-                Text="Số điện thoại" />
+                Text="Số điện thoại:" />
 
             <TextBlock
                 Grid.Row="4"
@@ -93,7 +93,7 @@
                 Grid.Row="5"
                 Grid.Column="0"
                 Style="{StaticResource list-key-text}"
-                Text="Mã số BHYT" />
+                Text="Mã số BHYT:" />
 
             <TextBlock
                 Grid.Row="5"
@@ -106,7 +106,7 @@
                 Grid.Column="0"
                 VerticalAlignment="Top"
                 Style="{StaticResource list-key-text}"
-                Text="Địa chỉ" />
+                Text="Địa chỉ:" />
 
             <TextBlock
                 Grid.Row="6"
@@ -134,7 +134,7 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Style="{StaticResource list-key-text}"
-                Text="Triệu chứng" />
+                Text="Triệu chứng:" />
             <TextBlock
                 Grid.Row="0"
                 Grid.Column="1"
@@ -145,7 +145,7 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Style="{StaticResource list-key-text}"
-                Text="Nhóm đối tượng" />
+                Text="Nhóm đối tượng:" />
             <TextBlock
                 Grid.Row="1"
                 Grid.Column="1"
@@ -155,7 +155,7 @@
                 Grid.Row="2"
                 Grid.Column="0"
                 Style="{StaticResource list-key-text}"
-                Text="Ngày cách ly" />
+                Text="Ngày cách ly:" />
             <TextBlock
                 Grid.Row="2"
                 Grid.Column="1"
@@ -165,7 +165,7 @@
                 Grid.Row="3"
                 Grid.Column="0"
                 Style="{StaticResource list-key-text}"
-                Text="Dự kiến hoàn thành cách ly" />
+                Text="Dự kiến hoàn thành cách ly:" />
             <TextBlock
                 Grid.Row="3"
                 Grid.Column="1"
@@ -175,7 +175,7 @@
                 Grid.Row="4"
                 Grid.Column="0"
                 Style="{StaticResource list-key-text}"
-                Text="Phòng" />
+                Text="Phòng:" />
             <TextBlock
                 Grid.Row="4"
                 Grid.Column="1"
