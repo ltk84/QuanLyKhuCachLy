@@ -933,8 +933,12 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 BufferWindow bufferWindow = new BufferWindow();
                 bufferWindow.ShowDialog();
-                DeleteQuarantinePerson();
-                BackToPersonList();
+                DeleteConfirmation confirmation = new DeleteConfirmation();
+                if (confirmation.ShowDialog() == true)
+                {
+                    DeleteQuarantinePerson();
+                    BackToPersonList();
+                }
             });
 
             CancelCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>

@@ -361,6 +361,7 @@
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\DeleteConfirmationViewModel.cs" />
     <Compile Include="ViewModel\DestinationHistoryViewModel.cs" />
     <Compile Include="ViewModel\InjectionRecordViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />

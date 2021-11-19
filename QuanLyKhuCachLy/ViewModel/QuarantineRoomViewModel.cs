@@ -352,9 +352,12 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 BufferWindow bufferWindow = new BufferWindow();
                 bufferWindow.ShowDialog();
-                // Chưa xử lý hiện bảng thông báo
-                DeleteQuarantineRoom();
-                BackToListRoomTab();
+                DeleteConfirmation confirmation = new DeleteConfirmation();
+                if (confirmation.ShowDialog() == true)
+                {
+                    DeleteQuarantineRoom();
+                    BackToListRoomTab();
+                }
             });
 
             CancelCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>

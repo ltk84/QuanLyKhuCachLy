@@ -553,8 +553,12 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 BufferWindow bufferWindow = new BufferWindow();
                 bufferWindow.ShowDialog();
-                DeleteStaff();
-                BackToStaffList();
+                DeleteConfirmation confirmation = new DeleteConfirmation();
+                if (confirmation.ShowDialog() == true)
+                {
+                    DeleteStaff();
+                    BackToStaffList();
+                }
             });
 
             ToAddManualCommand = new RelayCommand<object>((p) =>
