@@ -86,30 +86,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #region change room
 
-        private Model.QuarantineRoom _NewRoomSelected;
-        public Model.QuarantineRoom NewRoomSelected
-        {
-            get => _NewRoomSelected;
-            set
-            {
-                _NewRoomSelected = value;
-                OnPropertyChanged();
-                if (_NewRoomSelected != null)
-                    ChangeRoom();
 
-            }
-        }
-
-        private ObservableCollection<Model.QuarantineRoom> _RemainRoomList;
-        public ObservableCollection<Model.QuarantineRoom> RemainRoomList
-        {
-            get => _RemainRoomList;
-            set
-            {
-                _RemainRoomList = value;
-                OnPropertyChanged();
-            }
-        }
 
         #endregion
 
@@ -224,13 +201,12 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #region method
 
-        void ChangeRoom()
+        protected override void ChangeRoom()
         {
             using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
             {
                 try
                 {
-
                     var Person = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == SelectedItem.id).FirstOrDefault();
                     if (Person == null) return;
 

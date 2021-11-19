@@ -51,13 +51,21 @@
                         </TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource MenuButton}">
+                <Button PreviewMouseDown="Button_PreviewMouseDown" Style="{StaticResource MenuButton}">
                     <StackPanel Style="{StaticResource MenuStackPanel}">
                         <materialDesign:PackIcon Kind="Sync" Style="{StaticResource MenuIcon}" />
                         <TextBlock Style="{StaticResource MenuText}">
                             Đổi phòng
                         </TextBlock>
                     </StackPanel>
+                    <Button.ContextMenu>
+                        <ContextMenu Background="White">
+                            <ComboBox
+                                DisplayMemberPath="displayName"
+                                ItemsSource="{Binding RemainRoomList}"
+                                SelectedItem="{Binding NewRoomSelected, Mode=TwoWay}" />
+                        </ContextMenu>
+                    </Button.ContextMenu>
                 </Button>
             </StackPanel>
         </Border>
