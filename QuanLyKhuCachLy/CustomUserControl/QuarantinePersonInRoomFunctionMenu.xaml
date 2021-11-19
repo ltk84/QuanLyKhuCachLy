@@ -61,7 +61,10 @@
                     </StackPanel>
                     <Button.ContextMenu>
                         <ContextMenu Background="White">
-                            <ComboBox DisplayMemberPath="displayName" ItemsSource="{Binding RoomList}" />
+                            <ComboBox
+                                DisplayMemberPath="displayName"
+                                ItemsSource="{Binding PersonInRoomViewModel.RemainRoomList}"
+                                SelectedItem="{Binding PersonInRoomViewModel.NewRoomSelected}" />
                         </ContextMenu>
                     </Button.ContextMenu>
                 </Button>
