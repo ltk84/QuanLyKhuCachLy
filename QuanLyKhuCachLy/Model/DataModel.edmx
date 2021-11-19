@@ -109,6 +109,7 @@
           <Property Name="addressID" Type="int" />
           <Property Name="roomID" Type="int" />
           <Property Name="completeQuarantine" Type="bit" />
+          <Property Name="healthInsuranceID" Type="nchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="QuarantineRoom">
           <Key>
@@ -544,6 +545,7 @@
           <Property Name="addressID" Type="Int32" />
           <Property Name="roomID" Type="Int32" />
           <Property Name="completeQuarantine" Type="Boolean" />
+          <Property Name="healthInsuranceID" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Address" Relationship="Self.FK__Quarantin__addre__3C69FB99" FromRole="QuarantinePerson" ToRole="Address" />
           <NavigationProperty Name="DestinationHistories" Relationship="Self.FK__Destinati__quara__38996AB5" FromRole="QuarantinePerson" ToRole="DestinationHistory" />
           <NavigationProperty Name="HealthInformations" Relationship="Self.FK_HealthInfor_Person" FromRole="QuarantinePerson" ToRole="HealthInformation" />
@@ -990,6 +992,7 @@
                 <ScalarProperty Name="addressID" ColumnName="addressID" />
                 <ScalarProperty Name="roomID" ColumnName="roomID" />
                 <ScalarProperty Name="completeQuarantine" ColumnName="completeQuarantine" />
+                <ScalarProperty Name="healthInsuranceID" ColumnName="healthInsuranceID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
