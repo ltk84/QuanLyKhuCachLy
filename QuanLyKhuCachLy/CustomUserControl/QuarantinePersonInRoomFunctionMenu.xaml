@@ -59,6 +59,11 @@
                             Đổi phòng
                         </TextBlock>
                     </StackPanel>
+                    <Button.ContextMenu>
+                        <ContextMenu Background="White">
+                            <ComboBox ItemsSource="{Binding Alo}" SelectedItem="{Binding Alo}" />
+                        </ContextMenu>
+                    </Button.ContextMenu>
                 </Button>
             </StackPanel>
         </Border>
