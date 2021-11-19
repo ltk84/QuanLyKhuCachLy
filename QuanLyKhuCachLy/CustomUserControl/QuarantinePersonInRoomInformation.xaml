@@ -228,13 +228,12 @@
                                 VerticalAlignment="Bottom"
                                 materialDesign:ButtonAssist.CornerRadius="8"
                                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                                Background="#FF434A54"
                                 BorderBrush="{x:Null}"
                                 Command="{Binding PersonInRoomViewModel.NextTabCommandInformation}"
                                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                                 FontSize="16"
                                 FontWeight="Bold"
-                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Style="{StaticResource ButtonDarkTemplate}"
                                 Visibility="{Binding PersonInRoomViewModel.TabInformation1}">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock FontSize="14" Text="Trang sau" />
@@ -252,13 +251,12 @@
                                 VerticalAlignment="Bottom"
                                 materialDesign:ButtonAssist.CornerRadius="8"
                                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                                Background="#FF434A54"
                                 BorderBrush="{x:Null}"
                                 Command="{Binding PersonInRoomViewModel.PreviousTabCommandInformation}"
                                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                                 FontSize="16"
                                 FontWeight="Bold"
-                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Style="{StaticResource ButtonDarkTemplate}"
                                 Visibility="{Binding PersonInRoomViewModel.TabInformation2}">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon

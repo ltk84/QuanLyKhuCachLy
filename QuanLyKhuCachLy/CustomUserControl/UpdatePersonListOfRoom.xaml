@@ -233,14 +233,13 @@
                         Margin="24,0,0,0"
                         materialDesign:ButtonAssist.CornerRadius="8"
                         materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                        Background="#FF434A54"
                         BorderBrush="{x:Null}"
                         Command="{Binding PersonInRoomViewModel.CancelCommand}"
                         CommandParameter="{Binding ElementName=UpdateList}"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         FontWeight="Bold"
-                        Style="{StaticResource MaterialDesignRaisedButton}">
+                        Style="{StaticResource ButtonDarkTemplate}">
                         <TextBlock Text="Trở lại" />
                     </Button>
                     <Button
@@ -250,13 +249,13 @@
                         VerticalAlignment="Center"
                         materialDesign:ButtonAssist.CornerRadius="8"
                         materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                        Background="#FF1D9583"
                         BorderBrush="{x:Null}"
                         Command="{Binding PersonInRoomViewModel.UpdatePersonListCommand}"
                         CommandParameter="{Binding ElementName=UpdateList}"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="12"
                         FontWeight="Bold"
+                        Style="{StaticResource ButtonAccentTemplate}"
                         Visibility="Visible">
                         <TextBlock FontSize="16" Text="Cập nhật" />
                     </Button>

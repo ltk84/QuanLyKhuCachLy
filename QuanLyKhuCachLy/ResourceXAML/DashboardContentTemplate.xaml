@@ -9,12 +9,22 @@
         <Setter Property="Height" Value="50" />
         <Setter Property="Margin" Value="40,20,-1.2,0" />
         <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="10,0,0,10" />
-        <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth1" />
+        <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth0" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <Setter Property="Foreground" Value="#FF363636" />
-        <Setter Property="Background" Value="White" />
+        <!--<Setter Property="Foreground" Value="#FF363636" />-->
+        <!--<Setter Property="Background" Value="White" />-->
         <Setter Property="BorderBrush" Value="{x:Null}" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="#FFFFFFFF" />
+                <Setter Property="Background" Value="#AA363636" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Foreground" Value="#FF363636" />
+                <Setter Property="Background" Value="White" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
     <Style x:Key="DashboardHeader" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="/QuanLyKhuCachLy;component/Resources/fonts/#Baloo" />
@@ -43,13 +53,21 @@
         <Setter Property="Padding" Value="16,5" />
         <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="5" />
         <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth0" />
-        <Setter Property="Background" Value="#FF1D9583" />
+        <!--<Setter Property="Background" Value="#FF1D9583" />-->
         <Setter Property="BorderBrush" Value="{x:Null}" />
         <Setter Property="FontFamily" Value="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans" />
         <Setter Property="FontSize" Value="10" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="VerticalAlignment" Value="Bottom" />
         <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FFcce6e2" />
+                <Setter Property="Foreground" Value="#AA1D9583" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Background" Value="#FF1D9583" />
+                <Setter Property="Foreground" Value="White" />
+            </Trigger>
             <EventTrigger RoutedEvent="Click">
                 <EventTrigger.Actions>
                     <BeginStoryboard>

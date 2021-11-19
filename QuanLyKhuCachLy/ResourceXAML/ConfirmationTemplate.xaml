@@ -52,11 +52,34 @@
         <Setter Property="Height" Value="37" />
         <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="8" />
         <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth0" />
-        <Setter Property="Background" Value="White" />
         <Setter Property="BorderBrush" Value="{x:Null}" />
         <Setter Property="FontFamily" Value="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans" />
         <Setter Property="FontSize" Value="16" />
         <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="Foreground" Value="#FF434A54" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Background" Value="#DD434A54" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Foreground" Value="#FF434A54" />
+                <Setter Property="Background" Value="White" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style
+        x:Key="DeleteConfirmationButton"
+        BasedOn="{StaticResource ConfirmationButton}"
+        TargetType="Button">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Background" Value="#24000000" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Foreground" Value="#FFF27251" />
+                <Setter Property="Background" Value="White" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>
