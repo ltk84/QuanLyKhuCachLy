@@ -19,6 +19,13 @@
             FontWeight="Bold">
             Thông tin người cách ly
         </TextBlock>
+        <TextBlock
+            Margin="0,2,0,0"
+            HorizontalAlignment="Center"
+            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+            FontSize="16">
+            Thay đổi thông tin để thực hiện chỉnh sửa
+        </TextBlock>
         <Grid Grid.Row="0" Margin="30,0,30,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition SharedSizeGroup="A" />
