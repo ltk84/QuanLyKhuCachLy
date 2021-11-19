@@ -93,12 +93,14 @@
             <TextBlock
                 Grid.Row="0"
                 Grid.Column="0"
+                Margin="0,0,10,10"
                 Style="{StaticResource list-key-text}"
-                Text="Tên" />
+                Text="Tên:" />
 
             <TextBlock
                 Grid.Row="0"
                 Grid.Column="1"
+                Margin="10,0,0,10"
                 Style="{StaticResource list-value-text}"
                 Text="{Binding QuarantineArea.name}" />
 
@@ -106,36 +108,41 @@
             <TextBlock
                 Grid.Row="1"
                 Grid.Column="0"
+                Margin="0,0,10,10"
                 Style="{StaticResource list-key-text}"
-                Text="Quản lý" />
+                Text="Quản lý:" />
 
             <TextBlock
                 Grid.Row="1"
                 Grid.Column="1"
+                Margin="10,0,0,10"
                 Style="{StaticResource list-value-text}"
                 Text="{Binding Manager.name}" />
 
             <TextBlock
                 Grid.Row="2"
                 Grid.Column="0"
-                VerticalAlignment="Top"
+                Margin="0,0,10,10"
                 Style="{StaticResource list-key-text}"
-                Text="Địa chỉ" />
+                Text="Địa chỉ:" />
 
             <TextBlock
                 Grid.Row="2"
                 Grid.Column="1"
+                Margin="10,0,0,10"
                 Style="{StaticResource list-value-text}"
                 Text="{Binding QuarantineAreaAddress}" />
             <TextBlock
                 Grid.Row="3"
                 Grid.Column="0"
+                Margin="0,0,10,10"
                 Style="{StaticResource list-key-text}"
-                Text="Chu kỳ xét nghiệm (ngày)" />
+                Text="Chu kỳ xét nghiệm (ngày):" />
 
             <TextBlock
                 Grid.Row="3"
                 Grid.Column="1"
+                Margin="10,0,0,10"
                 Style="{StaticResource list-value-text}"
                 Text="{Binding QuarantineArea.testCycle}" />
 
@@ -143,58 +150,149 @@
             <TextBlock
                 Grid.Row="4"
                 Grid.Column="0"
+                Margin="0,0,10,10"
                 Style="{StaticResource list-key-text}"
-                Text="Số ngày hoàn thành cách ly (ngày)" />
+                Text="Số ngày hoàn thành cách ly (ngày):" />
 
             <TextBlock
                 Grid.Row="4"
                 Grid.Column="1"
+                Margin="10,0,0,10"
                 Style="{StaticResource list-value-text}"
                 Text="{Binding QuarantineArea.requiredDayToFinish}" />
         </Grid>
 
         <Separator Margin="0,10,0,10" Background="#1E434A54" />
 
-        <TextBlock
-            Margin="0,10,0,0"
-            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-            FontSize="18"
-            FontWeight="Bold"
-            Foreground="#FF363636"
-            Text="QUY ĐỊNH MỨC ĐỘ" />
-        <DataGrid
-            Grid.Row="1"
-            Height="300"
-            Margin="0,10,0,0"
-            materialDesign:DataGridAssist.CornerRadius="10"
-            AutoGenerateColumns="False"
-            CanUserAddRows="False"
-            CanUserReorderColumns="False"
-            CanUserResizeColumns="False"
-            CanUserResizeRows="False"
-            DataContext="{StaticResource SeverityVM}"
-            IsReadOnly="True"
-            ItemsSource="{Binding ListSeverity}"
-            SelectedItem="{Binding SelectedItem}">
-            <DataGrid.Columns>
-                <materialDesign:DataGridTextColumn
-                    Width="150"
-                    Binding="{Binding level, UpdateSourceTrigger=PropertyChanged}"
-                    EditingElementStyle="{StaticResource EditingDataGridElement}"
-                    ElementStyle="{StaticResource DataGridElement}"
-                    Header="Mức độ"
-                    HeaderStyle="{StaticResource DataGridHeader}"
-                    MaxLength="10" />
+        <Grid Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                <TextBlock
+                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                    FontSize="18"
+                    FontWeight="Bold"
+                    Foreground="#FF363636"
+                    Text="QUY ĐỊNH MỨC ĐỘ" />
+                <DataGrid
+                    Height="300"
+                    Margin="0,10,0,0"
+                    materialDesign:DataGridAssist.CornerRadius="10"
+                    AutoGenerateColumns="False"
+                    CanUserAddRows="False"
+                    CanUserReorderColumns="False"
+                    CanUserResizeColumns="False"
+                    CanUserResizeRows="False"
+                    DataContext="{StaticResource SeverityVM}"
+                    IsReadOnly="True"
+                    ItemsSource="{Binding ListSeverity}"
+                    SelectedItem="{Binding SelectedItem}">
+                    <DataGrid.Columns>
+                        <materialDesign:DataGridTextColumn
+                            Width="150"
+                            Binding="{Binding level, UpdateSourceTrigger=PropertyChanged}"
+                            EditingElementStyle="{StaticResource EditingDataGridElement}"
+                            ElementStyle="{StaticResource DataGridElement}"
+                            Header="Mức độ"
+                            HeaderStyle="{StaticResource DataGridHeader}"
+                            MaxLength="10" />
 
-                <materialDesign:DataGridTextColumn
-                    Width="250"
-                    Binding="{Binding description, UpdateSourceTrigger=PropertyChanged}"
-                    EditingElementStyle="{StaticResource EditingDataGridElement}"
-                    ElementStyle="{StaticResource DataGridElement}"
-                    Header="Mô tả"
-                    HeaderStyle="{StaticResource DataGridHeader}"
-                    MaxLength="30" />
-            </DataGrid.Columns>
-        </DataGrid>
+                        <materialDesign:DataGridTextColumn
+                            Width="250"
+                            Binding="{Binding description, UpdateSourceTrigger=PropertyChanged}"
+                            EditingElementStyle="{StaticResource EditingDataGridElement}"
+                            ElementStyle="{StaticResource DataGridElement}"
+                            Header="Mô tả"
+                            HeaderStyle="{StaticResource DataGridHeader}"
+                            MaxLength="30" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                    FontSize="18"
+                    FontWeight="Bold"
+                    Foreground="#FF363636"
+                    Text="LÀM MỚI CƠ SỞ DỮ LIỆU" />
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="0,10,0,0"
+                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                    FontSize="14"
+                    FontWeight="Regular"
+                    Foreground="#FF363636"
+                    Text="Thực hiện xóa tất cả dữ liệu liên quan." />
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="14"
+                        FontWeight="Regular"
+                        Foreground="#FF363636"
+                        Text="Dữ liệu sau khi xóa sẽ " />
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="14"
+                        FontWeight="Bold"
+                        Foreground="#FFF27251"
+                        Text="không thể khôi phục." />
+                </StackPanel>
+                <StackPanel Margin="0,15,0,0" Orientation="Horizontal">
+                    <ComboBox
+                        Padding="12,5,12,5"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        FontSize="14"
+                        Style="{StaticResource ComboBoxField}" />
+                    <Button
+                        Width="120"
+                        Height="32"
+                        Margin="12,0,0,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        materialDesign:ButtonAssist.CornerRadius="5"
+                        Command="{Binding ToEditCommand}">
+                        <Button.Style>
+                            <Style BasedOn="{StaticResource MenuButton}" TargetType="Button">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#88ffffff" />
+                                        <Setter Property="Foreground" Value="#FFF27251" />
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="False">
+                                        <Setter Property="Background" Value="#FFF27251" />
+                                        <Setter Property="Foreground" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="14"
+                                Height="14"
+                                Margin="0,0,8,0"
+                                Kind="GarbageCanOutline" />
+                            <TextBlock
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                                FontSize="11"
+                                FontWeight="Bold"
+                                Text="Xác nhận" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
     </StackPanel>
 </UserControl>

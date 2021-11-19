@@ -53,7 +53,7 @@
                                             <Setter Property="Height" Value="488" />
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding Path=IsOnSetting}" Value="True">
-                                            <Setter Property="Height" Value="559.2" />
+                                            <Setter Property="Height" Value="558.2" />
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
