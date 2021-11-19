@@ -19,9 +19,11 @@ namespace QuanLyKhuCachLy.CustomUserControl
     /// </summary>
     public partial class LoadingIndicator : Window
     {
+
         public LoadingIndicator()
         {
-            InitializeComponent(); CloseWindow();
+            InitializeComponent(); 
+            //CloseWindow();
         }
 
         private async void CloseWindow()
