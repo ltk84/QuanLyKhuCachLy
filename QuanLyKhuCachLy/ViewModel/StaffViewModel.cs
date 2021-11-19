@@ -380,6 +380,7 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand NextStaffTabCommand { get; set; }
         public ICommand PreviousStaffTabCommand { get; set; }
         public ICommand CancelAddStaffTabCommand { get; set; }
+        public ICommand RefeshCommand { get; set; }
         #endregion
 
         #region validation
@@ -487,12 +488,8 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #endregion
         public StaffViewModel()
-
         {
-            Tab1 = Visibility.Visible;
-            Tab2 = Visibility.Hidden;
-            TabList = Visibility.Visible;
-            TabInformation = Visibility.Hidden;
+            SetDefaultUI();
 
             SetDefaultAddStaff();
 
@@ -646,9 +643,31 @@ namespace QuanLyKhuCachLy.ViewModel
                 HandleChangeTab(AddStaffTabIndex, "next", addStaffScreen);
             });
 
+            RefeshCommand = new RelayCommand<Window>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                RefeshTab();
+            });
+
         }
 
         #region method
+
+        void RefeshTab()
+        {
+            SetDefaultUI();
+            SelectedItem = null;
+        }
+
+        void SetDefaultUI()
+        {
+            Tab1 = Visibility.Visible;
+            Tab2 = Visibility.Hidden;
+            TabList = Visibility.Visible;
+            TabInformation = Visibility.Hidden;
+        }
 
         void InitProvinceList()
         {

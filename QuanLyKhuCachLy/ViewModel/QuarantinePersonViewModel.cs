@@ -733,32 +733,14 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand NextTabEditCommand { get; set; }
         public ICommand PreviousTabEditCommand { get; set; }
         public ICommand CompleteQuarantinePersonCommand { get; set; }
+        public ICommand RefeshCommand { get; set; }
 
 
 
         #endregion
         public QuarantinePersonViewModel()
         {
-            TabList = Visibility.Visible;
-            TabInformation = Visibility.Hidden;
-            Tab1 = Visibility.Visible;
-            Tab2 = Visibility.Hidden;
-            Tab3 = Visibility.Hidden;
-            Tab4 = Visibility.Hidden;
-            TabEdit1 = Visibility.Visible;
-            TabEdit2 = Visibility.Hidden;
-            TabEdit3 = Visibility.Hidden;
-            TabEdit4 = Visibility.Hidden;
-            TabInformation1 = Visibility.Visible;
-            TabInformation2 = Visibility.Hidden;
-            TabIndexInformation = 1;
-            TabPositionInformation = $"{TabIndexInformation}/2";
-            ButtonReturn = Visibility.Collapsed;
-            ButtonEditReturn = Visibility.Collapsed;
-            TabIndex = 1;
-            TabPosition = $"{TabIndex}/4";
-            TabEditIndex = 1;
-            TabEditPosition = $"{TabEditIndex}/4";
+            SetDefaultUI();
 
             NextTabCommandInformation = new RelayCommand<Window>((p) =>
             {
@@ -962,9 +944,47 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 CompleteQuarantinePerson();
             });
+
+            RefeshCommand = new RelayCommand<Window>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                RefeshTab();
+            });
         }
 
         #region method
+
+        void RefeshTab()
+        {
+            SetDefaultUI();
+            SelectedItem = null;
+        }
+
+        void SetDefaultUI()
+        {
+            TabList = Visibility.Visible;
+            TabInformation = Visibility.Hidden;
+            Tab1 = Visibility.Visible;
+            Tab2 = Visibility.Hidden;
+            Tab3 = Visibility.Hidden;
+            Tab4 = Visibility.Hidden;
+            TabEdit1 = Visibility.Visible;
+            TabEdit2 = Visibility.Hidden;
+            TabEdit3 = Visibility.Hidden;
+            TabEdit4 = Visibility.Hidden;
+            TabInformation1 = Visibility.Visible;
+            TabInformation2 = Visibility.Hidden;
+            TabIndexInformation = 1;
+            TabPositionInformation = $"{TabIndexInformation}/2";
+            ButtonReturn = Visibility.Collapsed;
+            ButtonEditReturn = Visibility.Collapsed;
+            TabIndex = 1;
+            TabPosition = $"{TabIndex}/4";
+            TabEditIndex = 1;
+            TabEditPosition = $"{TabEditIndex}/4";
+        }
 
         protected virtual void CompleteQuarantinePerson()
         {

@@ -12,7 +12,7 @@
     mc:Ignorable="d">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding RefeshCommand}" CommandParameter="{Binding ElementName=MainWindow}" />
+            <i:InvokeCommandAction Command="{Binding RefeshCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>

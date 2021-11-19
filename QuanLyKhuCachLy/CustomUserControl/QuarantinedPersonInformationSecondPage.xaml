@@ -203,7 +203,6 @@
                 CanUserReorderColumns="False"
                 CanUserResizeColumns="False"
                 CanUserResizeRows="False"
-                DataContext="{StaticResource PersonVM}"
                 IsReadOnly="True"
                 ItemsSource="{Binding DestinationHistoryViewModel.DestinationHistoryList}">
                 <DataGrid.Columns>
