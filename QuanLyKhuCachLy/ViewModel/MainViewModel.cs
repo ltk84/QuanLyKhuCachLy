@@ -213,7 +213,6 @@ namespace QuanLyKhuCachLy.ViewModel
 
         private void ToRoom()
         {
-            QuarantineRoomVM = new QuarantineRoomViewModel();
             CurrentView = QuarantineRoomVM;
             _isOnDashboard = false;
             _isOnRoom = true;

@@ -135,6 +135,11 @@ namespace QuanLyKhuCachLy.ViewModel
 
             AddPersonToRoomUI = new RelayCommand<Window>((p) =>
             {
+                var room = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == RoomID).FirstOrDefault();
+                if (room == null) return false;
+
+                if (QuarantinePersonList.Count >= room.capacity) return false;
+
                 return true;
             }, (p) =>
             {
