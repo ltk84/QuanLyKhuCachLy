@@ -43,7 +43,7 @@
                         </TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource MenuButton}">
+                <Button Command="{Binding CompleteQuarantinePersonCommand}" Style="{StaticResource MenuButton}">
                     <StackPanel Style="{StaticResource MenuStackPanel}">
                         <materialDesign:PackIcon Kind="CheckboxOutline" Style="{StaticResource MenuIcon}" />
                         <TextBlock Style="{StaticResource MenuText}">

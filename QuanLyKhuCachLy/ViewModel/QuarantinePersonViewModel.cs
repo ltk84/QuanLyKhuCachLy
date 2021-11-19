@@ -732,6 +732,9 @@ namespace QuanLyKhuCachLy.ViewModel
 
         public ICommand NextTabEditCommand { get; set; }
         public ICommand PreviousTabEditCommand { get; set; }
+        public ICommand CompleteQuarantinePersonCommand { get; set; }
+
+
 
         #endregion
         public QuarantinePersonViewModel()
@@ -811,6 +814,8 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 HandleChangeTab(TabIndex, "previous", p);
             });
+
+
             QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
             PeopleListView = QuarantinePersonList.ToArray();
 
@@ -947,9 +952,73 @@ namespace QuanLyKhuCachLy.ViewModel
                 }
                 p.Close();
             });
+
+            CompleteQuarantinePersonCommand = new RelayCommand<Window>((p) =>
+            {
+                if (SelectedItem != null && SelectedItem.roomID != null)
+                    return true;
+                return false;
+            }, (p) =>
+            {
+                CompleteQuarantinePerson();
+            });
         }
 
         #region method
+
+        protected virtual void CompleteQuarantinePerson()
+        {
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    var Person = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+                    if (Person == null) return;
+
+                    Person.roomID = null;
+                    Person.completeQuarantine = true;
+
+                    DataProvider.ins.db.SaveChanges();
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
+        }
 
         void InitProvinceList()
         {
