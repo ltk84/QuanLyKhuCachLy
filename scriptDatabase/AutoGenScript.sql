@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [QLKCL]    Script Date: 18-Nov-21 7:17:10 PM ******/
+/****** Object:  Database [QLKCL]    Script Date: 19-Nov-21 1:58:25 PM ******/
 CREATE DATABASE [QLKCL]
 GO
 
@@ -17,7 +17,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Address]    Script Date: 18-Nov-21 7:17:10 PM ******/
+/****** Object:  Table [dbo].[Address]    Script Date: 19-Nov-21 1:58:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -35,7 +35,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DestinationHistory]    Script Date: 18-Nov-21 7:17:10 PM ******/
+/****** Object:  Table [dbo].[DestinationHistory]    Script Date: 19-Nov-21 1:58:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -51,7 +51,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DISTRICT]    Script Date: 18-Nov-21 7:17:10 PM ******/
+/****** Object:  Table [dbo].[DISTRICT]    Script Date: 19-Nov-21 1:58:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -66,7 +66,7 @@ CREATE TABLE [dbo].[DISTRICT](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[HealthInformation]    Script Date: 18-Nov-21 7:17:10 PM ******/
+/****** Object:  Table [dbo].[HealthInformation]    Script Date: 19-Nov-21 1:58:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -88,7 +88,7 @@ CREATE TABLE [dbo].[HealthInformation](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[InjectionRecord]    Script Date: 18-Nov-21 7:17:10 PM ******/
+/****** Object:  Table [dbo].[InjectionRecord]    Script Date: 19-Nov-21 1:58:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -104,7 +104,7 @@ CREATE TABLE [dbo].[InjectionRecord](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[NotificationTemplate]    Script Date: 18-Nov-21 7:17:10 PM ******/
+/****** Object:  Table [dbo].[NotificationTemplate]    Script Date: 19-Nov-21 1:58:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -119,7 +119,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PROVINCE]    Script Date: 18-Nov-21 7:17:10 PM ******/
+/****** Object:  Table [dbo].[PROVINCE]    Script Date: 19-Nov-21 1:58:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -133,7 +133,7 @@ CREATE TABLE [dbo].[PROVINCE](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[QuarantineArea]    Script Date: 18-Nov-21 7:17:10 PM ******/
+/****** Object:  Table [dbo].[QuarantineArea]    Script Date: 19-Nov-21 1:58:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -151,7 +151,7 @@ CREATE TABLE [dbo].[QuarantineArea](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[QuarantinePerson]    Script Date: 18-Nov-21 7:17:10 PM ******/
+/****** Object:  Table [dbo].[QuarantinePerson]    Script Date: 19-Nov-21 1:58:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -171,13 +171,14 @@ CREATE TABLE [dbo].[QuarantinePerson](
 	[addressID] [int] NULL,
 	[roomID] [int] NULL,
 	[completeQuarantine] [bit] NULL,
+	[healthInsuranceID] [nchar](20) NULL,
  CONSTRAINT [PK__Quaranti__3213E83FE7EE8910] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[QuarantineRoom]    Script Date: 18-Nov-21 7:17:10 PM ******/
+/****** Object:  Table [dbo].[QuarantineRoom]    Script Date: 19-Nov-21 1:58:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -193,7 +194,7 @@ CREATE TABLE [dbo].[QuarantineRoom](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Severity]    Script Date: 18-Nov-21 7:17:10 PM ******/
+/****** Object:  Table [dbo].[Severity]    Script Date: 19-Nov-21 1:58:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -208,7 +209,7 @@ CREATE TABLE [dbo].[Severity](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Staff]    Script Date: 18-Nov-21 7:17:10 PM ******/
+/****** Object:  Table [dbo].[Staff]    Script Date: 19-Nov-21 1:58:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -231,7 +232,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TestingResult]    Script Date: 18-Nov-21 7:17:10 PM ******/
+/****** Object:  Table [dbo].[TestingResult]    Script Date: 19-Nov-21 1:58:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -247,7 +248,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[WARD]    Script Date: 18-Nov-21 7:17:10 PM ******/
+/****** Object:  Table [dbo].[WARD]    Script Date: 19-Nov-21 1:58:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -616,7 +617,7 @@ INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apa
 GO
 INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (178, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'62 Cây Keo', NULL)
 GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (179, N'Tỉnh Điện Biên', N'Huyện Mường Nhé', N'Xã Sín Thầu', N'63 Cây Keo', N'123')
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (179, N'Tỉnh Hải Dương', N'Huyện Kim Thành', N'Xã Lai Vu', N'63 Cây Keo', N'123')
 GO
 INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (180, N'Tỉnh Hà Giang', N'Huyện Đồng Văn', N'Thị trấn Đồng Văn', N'64 Cây Keo', NULL)
 GO
@@ -2212,35 +2213,33 @@ SET IDENTITY_INSERT [dbo].[QuarantineArea] OFF
 GO
 SET IDENTITY_INSERT [dbo].[QuarantinePerson] ON 
 GO
-INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine]) VALUES (151, N'Trần Lê Thanh Tùng', CAST(N'2000-12-21' AS Date), N'Nam', N'79201016283', N'Việt Nam', N'84035725516', NULL, CAST(N'2021-11-14' AS Date), CAST(N'2021-11-16' AS Date), 0, 179, 10, NULL)
+INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (151, N'Trần Lê Thanh Tùng', CAST(N'2000-12-21' AS Date), N'Nam', N'79201016283', N'Việt Nam', N'84035725516', NULL, CAST(N'2021-11-14' AS Date), CAST(N'2021-11-16' AS Date), 0, 179, NULL, 1, N'123321              ')
 GO
-INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine]) VALUES (152, N'Trương Kim Phục', CAST(N'1987-09-30' AS Date), N'Nam', N'79201027283', N'Việt Nam', N'84035725517', NULL, CAST(N'2021-11-14' AS Date), CAST(N'2021-11-16' AS Date), 0, 180, NULL, NULL)
+INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (152, N'Trương Kim Phục', CAST(N'1987-09-30' AS Date), N'Nam', N'79201027283', N'Việt Nam', N'84035725517', NULL, CAST(N'2021-11-14' AS Date), CAST(N'2021-11-16' AS Date), 0, 180, NULL, 1, NULL)
 GO
-INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine]) VALUES (153, N'Trương Kim Thế', CAST(N'1987-08-22' AS Date), N'Nam', N'79201087283', N'Việt Nam', N'84035725518', NULL, CAST(N'2021-11-15' AS Date), CAST(N'2021-11-17' AS Date), 0, 181, 10, NULL)
+INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (153, N'Trương Kim Thế', CAST(N'1987-08-22' AS Date), N'Nam', N'79201087283', N'Việt Nam', N'84035725518', NULL, CAST(N'2021-11-15' AS Date), CAST(N'2021-11-17' AS Date), 0, 181, NULL, 1, NULL)
 GO
-INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine]) VALUES (154, N'Trần Lê Thanh Thế', CAST(N'1987-08-23' AS Date), N'Nam', N'79201029283', N'Việt Nam', N'84035725519', NULL, CAST(N'2021-11-15' AS Date), CAST(N'2021-11-17' AS Date), 0, 182, NULL, NULL)
+INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (154, N'Trần Lê Thanh Thế', CAST(N'1987-08-23' AS Date), N'Nam', N'79201029283', N'Việt Nam', N'84035725519', NULL, CAST(N'2021-11-15' AS Date), CAST(N'2021-11-17' AS Date), 0, 182, NULL, 1, NULL)
 GO
-INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine]) VALUES (155, N'Trương Thanh Phục', CAST(N'1987-08-24' AS Date), N'Nam', N'79201098283', N'Việt Nam', N'84035725520', NULL, CAST(N'2021-11-15' AS Date), CAST(N'2021-11-17' AS Date), 0, 183, NULL, NULL)
+INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (155, N'Trương Thanh Phục', CAST(N'1987-08-24' AS Date), N'Nam', N'79201098283', N'Việt Nam', N'84035725520', NULL, CAST(N'2021-11-15' AS Date), CAST(N'2021-11-17' AS Date), 0, 183, NULL, NULL, NULL)
 GO
-INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine]) VALUES (156, N'Huỳnh Trọng Lâm', CAST(N'1987-08-25' AS Date), N'Nam', N'79201018273', N'Việt Nam', N'84035725521', NULL, CAST(N'2021-11-15' AS Date), CAST(N'2021-11-17' AS Date), 0, 184, NULL, NULL)
+INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (156, N'Huỳnh Trọng Lâm', CAST(N'1987-08-25' AS Date), N'Nam', N'79201018273', N'Việt Nam', N'84035725521', NULL, CAST(N'2021-11-15' AS Date), CAST(N'2021-11-17' AS Date), 0, 184, NULL, NULL, NULL)
 GO
-INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine]) VALUES (157, N'Dương Hiển Tùng', CAST(N'1987-08-26' AS Date), N'Nam', N'79201090283', N'Việt Nam', N'84035725522', NULL, CAST(N'2021-11-15' AS Date), CAST(N'2021-11-17' AS Date), 0, 185, NULL, NULL)
+INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (157, N'Dương Hiển Tùng', CAST(N'1987-08-26' AS Date), N'Nam', N'79201090283', N'Việt Nam', N'84035725522', NULL, CAST(N'2021-11-15' AS Date), CAST(N'2021-11-17' AS Date), 0, 185, NULL, NULL, NULL)
 GO
-INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine]) VALUES (158, N'Dương Lê Thanh Thế', CAST(N'1987-08-27' AS Date), N'Nam', N'79201017219', N'Việt Nam', N'84035725523', NULL, CAST(N'2021-11-16' AS Date), CAST(N'2021-11-18' AS Date), 0, 186, NULL, NULL)
+INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (158, N'Dương Lê Thanh Thế', CAST(N'1987-08-27' AS Date), N'Nam', N'79201017219', N'Việt Nam', N'84035725523', NULL, CAST(N'2021-11-16' AS Date), CAST(N'2021-11-18' AS Date), 0, 186, NULL, NULL, NULL)
 GO
-INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine]) VALUES (159, N'Huỳnh Trọng Thế', CAST(N'1987-08-28' AS Date), N'Nam', N'79201017220', N'Việt Nam', N'84035725524', NULL, CAST(N'2021-11-16' AS Date), CAST(N'2021-11-18' AS Date), 0, 187, NULL, NULL)
+INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (159, N'Huỳnh Trọng Thế', CAST(N'1987-08-28' AS Date), N'Nam', N'79201017220', N'Việt Nam', N'84035725524', NULL, CAST(N'2021-11-16' AS Date), CAST(N'2021-11-18' AS Date), 0, 187, NULL, NULL, NULL)
 GO
-INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine]) VALUES (160, N'Dương Hiển Trọng Phục', CAST(N'1987-08-29' AS Date), N'Nam', N'79201017592', N'Việt Nam', N'84035725525', NULL, CAST(N'2021-11-16' AS Date), CAST(N'2021-11-18' AS Date), 0, 188, NULL, NULL)
+INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (160, N'Dương Hiển Trọng Phục', CAST(N'1987-08-29' AS Date), N'Nam', N'79201017592', N'Việt Nam', N'84035725525', NULL, CAST(N'2021-11-16' AS Date), CAST(N'2021-11-18' AS Date), 0, 188, NULL, NULL, NULL)
 GO
-INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine]) VALUES (161, N'Trương Kim Tùng', CAST(N'1987-08-30' AS Date), N'Nam', N'79201018592', N'Việt Nam', N'84035725526', NULL, CAST(N'2021-11-17' AS Date), CAST(N'2021-11-19' AS Date), 0, 189, NULL, NULL)
+INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (161, N'Trương Kim Tùng', CAST(N'1987-08-30' AS Date), N'Nam', N'79201018592', N'Việt Nam', N'84035725526', NULL, CAST(N'2021-11-17' AS Date), CAST(N'2021-11-19' AS Date), 0, 189, NULL, NULL, NULL)
 GO
 SET IDENTITY_INSERT [dbo].[QuarantinePerson] OFF
 GO
 SET IDENTITY_INSERT [dbo].[QuarantineRoom] ON 
 GO
-INSERT [dbo].[QuarantineRoom] ([id], [displayName], [capacity], [levelID]) VALUES (10, N'a', 201, 8)
-GO
-INSERT [dbo].[QuarantineRoom] ([id], [displayName], [capacity], [levelID]) VALUES (11, N'VC', 23, 8)
+INSERT [dbo].[QuarantineRoom] ([id], [displayName], [capacity], [levelID]) VALUES (13, N'BVB', 20, NULL)
 GO
 SET IDENTITY_INSERT [dbo].[QuarantineRoom] OFF
 GO
@@ -2252,7 +2251,7 @@ SET IDENTITY_INSERT [dbo].[Severity] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Staff] ON 
 GO
-INSERT [dbo].[Staff] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [healthInsuranceID], [phoneNumber], [addressID], [jobTitle], [department]) VALUES (16, N'1', CAST(N'2021-11-16' AS Date), N'Nam', N'12', N'Việt Nam', N'123', N'1', 175, N'1', N'1')
+INSERT [dbo].[Staff] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [healthInsuranceID], [phoneNumber], [addressID], [jobTitle], [department]) VALUES (16, N'1', CAST(N'2021-11-16' AS Date), N'Nam', N'12', N'Việt Nam', N'123', N'1', 175, N'Stop', N'Me')
 GO
 SET IDENTITY_INSERT [dbo].[Staff] OFF
 GO
@@ -23456,7 +23455,7 @@ INSERT [dbo].[WARD] ([id], [name], [districtID]) VALUES (10599, N'Xã Đất Mũ
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UQ_Quarantine_CitizenID]    Script Date: 18-Nov-21 7:17:10 PM ******/
+/****** Object:  Index [UQ_Quarantine_CitizenID]    Script Date: 19-Nov-21 1:58:25 PM ******/
 CREATE UNIQUE NONCLUSTERED INDEX [UQ_Quarantine_CitizenID] ON [dbo].[QuarantinePerson]
 (
 	[citizenID] ASC
@@ -23466,7 +23465,17 @@ WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNOR
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UQ_Staff_CitizenID]    Script Date: 18-Nov-21 7:17:10 PM ******/
+/****** Object:  Index [UQ_Quarantine_HealthInsurID]    Script Date: 19-Nov-21 1:58:25 PM ******/
+CREATE UNIQUE NONCLUSTERED INDEX [UQ_Quarantine_HealthInsurID] ON [dbo].[QuarantinePerson]
+(
+	[healthInsuranceID] ASC
+)
+WHERE ([healthInsuranceID] IS NOT NULL AND [healthInsuranceID]<>'')
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [UQ_Staff_CitizenID]    Script Date: 19-Nov-21 1:58:25 PM ******/
 CREATE UNIQUE NONCLUSTERED INDEX [UQ_Staff_CitizenID] ON [dbo].[Staff]
 (
 	[citizenID] ASC
@@ -23476,7 +23485,7 @@ WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNOR
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UQ_Staff_HealthInsurID]    Script Date: 18-Nov-21 7:17:10 PM ******/
+/****** Object:  Index [UQ_Staff_HealthInsurID]    Script Date: 19-Nov-21 1:58:25 PM ******/
 CREATE UNIQUE NONCLUSTERED INDEX [UQ_Staff_HealthInsurID] ON [dbo].[Staff]
 (
 	[healthInsuranceID] ASC
