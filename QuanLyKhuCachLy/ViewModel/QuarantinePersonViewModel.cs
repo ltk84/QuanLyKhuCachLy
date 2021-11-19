@@ -12,7 +12,12 @@ using System.IO;
 using Microsoft.Win32;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Windows.Media;
-
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Sheets.v4;
+using Google.Apis.Sheets.v4.Data;
+using Google.Apis.Services;
+using Google.Apis.Util.Store;
+using System.Threading;
 namespace QuanLyKhuCachLy.ViewModel
 {
     public class QuarantinePersonViewModel : BaseViewModel
@@ -1866,6 +1871,51 @@ namespace QuanLyKhuCachLy.ViewModel
                     ButtonEditReturn = Visibility.Visible;
                     break;
             }
+        }
+        void ImportFileFromGoogleSheet()
+        {
+            string[] Scopes = { SheetsService.Scope.SpreadsheetsReadonly };
+            string ApplicationName = "QLKCL";
+            UserCredential credential;
+            using (var stream =
+                new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
+            {
+               
+                string credPath = "token.json";
+                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                    GoogleClientSecrets.Load(stream).Secrets,
+                    Scopes,
+                    "user",
+                    CancellationToken.None,
+                    new FileDataStore(credPath, true)).Result;
+            }
+
+            var service = new SheetsService(new BaseClientService.Initializer()
+            {
+                HttpClientInitializer = credential,
+                ApplicationName = ApplicationName,
+            });
+
+            String spreadsheetId = "1NlQ3tmbvGJE2hSkUZgupY3tRqUJTcC9SAfD9SoqQGMM";
+            String range = "Class Data!A2:E";
+            SpreadsheetsResource.ValuesResource.GetRequest request =
+                    service.Spreadsheets.Values.Get(spreadsheetId, range);
+
+            ValueRange response = request.Execute();
+            IList<IList<Object>> values = response.Values;
+            if (values != null && values.Count > 0)
+            {
+                Console.WriteLine("Name, Major");
+                foreach (var row in values)
+                {
+                    MessageBox.Show("Get data");
+                }
+            }
+            else
+            {
+                MessageBox.Show("No data found.");
+            }
+
         }
         #endregion
     }
