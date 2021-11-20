@@ -128,7 +128,7 @@
     </Compile>
     <Compile Include="CustomUserControl\ArrangeRoomRecommendation.xaml.cs">
       <DependentUpon>ArrangeRoomRecommendation.xaml</DependentUpon>
-      </Compile>
+    </Compile>
     <Compile Include="CustomUserControl\BufferWindow.xaml.cs">
       <DependentUpon>BufferWindow.xaml</DependentUpon>
     </Compile>
@@ -359,6 +359,7 @@
     <Compile Include="ValidationRules\OnlyNumber.cs" />
     <Compile Include="ValidationRules\RequiredField.cs" />
     <Compile Include="ValidationRules\RequiredFieldNonCommit.cs" />
+    <Compile Include="ViewModel\ArrangeRoomRecommendationViewModel.cs" />
     <Compile Include="ViewModel\DashboardViewModel.cs" />
     <Compile Include="CustomUserControl\Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>

@@ -285,6 +285,7 @@
                                 Height="35"
                                 Margin="0,20,0,0"
                                 HorizontalAlignment="Right"
+                                Command="{Binding ToArrangeRoomRecommendation}"
                                 Content="Xem đề xuất sắp xếp phòng"
                                 FontSize="12"
                                 Style="{StaticResource DashboardButton}" />

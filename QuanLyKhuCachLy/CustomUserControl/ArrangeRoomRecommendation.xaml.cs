@@ -18,7 +18,7 @@ namespace QuanLyKhuCachLy.CustomUserControl
     /// <summary>
     /// Interaction logic for ArrangeRoomRecommendation.xaml
     /// </summary>
-    public partial class ArrangeRoomRecommendation : UserControl
+    public partial class ArrangeRoomRecommendation : Window
     {
         public ArrangeRoomRecommendation()
         {

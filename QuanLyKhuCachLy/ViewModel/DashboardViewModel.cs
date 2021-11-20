@@ -1,6 +1,7 @@
 ﻿using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
+using QuanLyKhuCachLy.CustomUserControl;
 using QuanLyKhuCachLy.Model;
 using System;
 using System.Collections.ObjectModel;
@@ -289,6 +290,8 @@ namespace QuanLyKhuCachLy.ViewModel
 
         public ICommand Refresh { get; set; }
 
+        public ICommand ToArrangeRoomRecommendation { get; set; }
+
         #endregion
 
         public DashboardViewModel()
@@ -329,6 +332,15 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 NoneRecommendationVisibility = Visibility.Collapsed;
             }
+
+            ToArrangeRoomRecommendation = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                ArrangeRoomRecommendation arrangeRoomRecommendation = new ArrangeRoomRecommendation();
+                arrangeRoomRecommendation.ShowDialog();
+            });
         }
 
         private void StatisticInit()

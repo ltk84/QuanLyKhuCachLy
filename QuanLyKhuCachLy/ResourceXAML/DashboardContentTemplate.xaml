@@ -68,7 +68,7 @@
                 <Setter Property="Background" Value="#FF1D9583" />
                 <Setter Property="Foreground" Value="White" />
             </Trigger>
-            <EventTrigger RoutedEvent="Click">
+            <!--<EventTrigger RoutedEvent="Click">
                 <EventTrigger.Actions>
                     <BeginStoryboard>
                         <Storyboard>
@@ -78,7 +78,7 @@
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger.Actions>
-            </EventTrigger>
+            </EventTrigger>-->
         </Style.Triggers>
     </Style>
     <Style x:Key="RecommendationField" TargetType="Border">
