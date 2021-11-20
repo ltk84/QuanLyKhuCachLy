@@ -281,7 +281,10 @@
                     </StackPanel>
                 </RadioButton>
             </StackPanel>
-            <ContentControl Grid.Column="1" Content="{Binding CurrentView}" />
+            <ContentControl
+                Grid.Column="1"
+                Margin="16,0,0,0"
+                Content="{Binding CurrentView}" />
         </Grid>
     </Viewbox>
 
