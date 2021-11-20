@@ -72,52 +72,41 @@
                 x:Name="travelHistory"
                 Grid.Row="1"
                 Grid.Column="0"
-                MinHeight="330"
+                Height="280"
                 Margin="30,15,30,0"
+                materialDesign:DataGridAssist.CornerRadius="10"
                 AutoGenerateColumns="False"
-                BorderBrush="Black"
-                BorderThickness="1"
                 CanUserAddRows="False"
                 CanUserReorderColumns="False"
-                CanUserResizeColumns="False"
+                CanUserResizeColumns="True"
                 CanUserResizeRows="False"
                 ItemsSource="{Binding DestinationHistoryViewModel.DestinationHistoryList}"
                 SelectedItem="{Binding DestinationHistoryViewModel.SelectedItem}">
                 <DataGrid.Columns>
                     <DataGridTextColumn
-                        Width="*"
+                        Width="Auto"
                         MinWidth="70"
-                        Binding="{Binding dateArrive}"
+                        Binding="{Binding dateArrive, StringFormat=dd-MM-yyyy}"
+                        EditingElementStyle="{StaticResource EditingDataGridElement}"
+                        ElementStyle="{StaticResource DataGridElement}"
                         Header="Ngày"
-                        IsReadOnly="True">
-                        <DataGridColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="FontSize" Value="14" />
-                                <Setter Property="FontWeight" Value="Bold" />
-                                <Setter Property="HorizontalAlignment" Value="Center" />
-                                <Setter Property="Background" Value="Transparent" />
-                            </Style>
-                        </DataGridColumn.HeaderStyle>
-                    </DataGridTextColumn>
+                        HeaderStyle="{StaticResource DataGridHeader}"
+                        IsReadOnly="True" />
 
                     <DataGridTextColumn
-                        Width="*"
+                        Width="Auto"
                         MinWidth="250"
                         Binding="{Binding displayAddress}"
-                        Header="Địa điểm">
-                        <DataGridColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="FontSize" Value="14" />
-                                <Setter Property="FontWeight" Value="Bold" />
-                                <Setter Property="HorizontalAlignment" Value="Center" />
-                                <Setter Property="Background" Value="Transparent" />
-                            </Style>
-                        </DataGridColumn.HeaderStyle>
-                    </DataGridTextColumn>
+                        EditingElementStyle="{StaticResource EditingDataGridElement}"
+                        ElementStyle="{StaticResource DataGridElement}"
+                        Header="Địa điểm"
+                        HeaderStyle="{StaticResource DataGridHeader}" />
                     <DataGridTemplateColumn
-                        Width="*"
+                        Width="Auto"
                         MinWidth="70"
-                        Header="">
+                        CellStyle="{StaticResource DataGridElement}"
+                        Header=""
+                        HeaderStyle="{StaticResource DataGridHeader}">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button HorizontalAlignment="Right" Style="{StaticResource DataGridButton}">
@@ -137,14 +126,6 @@
                                 </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
-                        <DataGridColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="FontSize" Value="14" />
-                                <Setter Property="FontWeight" Value="Bold" />
-                                <Setter Property="HorizontalAlignment" Value="Center" />
-                                <Setter Property="Background" Value="Transparent" />
-                            </Style>
-                        </DataGridColumn.HeaderStyle>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
