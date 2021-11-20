@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace QuanLyKhuCachLy.CustomUserControl
 {
     /// <summary>
-    /// Interaction logic for EditQuarantinePersonInRoomThirdPage.xaml
+    /// Interaction logic for DestinationHistoryFunctionMenu.xaml
     /// </summary>
-    public partial class EditQuarantinePersonInRoomThirdPage : UserControl
+    public partial class DestinationHistoryFunctionMenu : UserControl
     {
-        public EditQuarantinePersonInRoomThirdPage()
+        public DestinationHistoryFunctionMenu()
         {
             InitializeComponent();
-        }
-
-        private void vaccinationInformation_LoadingRow(object sender, DataGridRowEventArgs e)
-        {
-            e.Row.Header = (e.Row.GetIndex() + 1).ToString();
         }
     }
 }

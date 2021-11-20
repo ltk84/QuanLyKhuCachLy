@@ -14,6 +14,7 @@ using Microsoft.Win32;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Collections.Generic;
 using System.Windows.Media;
+using System.Threading.Tasks;
 
 namespace QuanLyKhuCachLy.ViewModel
 {
@@ -313,6 +314,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
+                BufferWindow bufferWindow = new BufferWindow();
+                bufferWindow.ShowDialog();
                 ToDetailRoomTab();
             });
 
@@ -347,9 +350,14 @@ namespace QuanLyKhuCachLy.ViewModel
 
             DeleteRoomCommand = new RelayCommand<object>((p) => { if (SelectedItem != null) return true; return false; }, (p) =>
             {
-                // Chưa xử lý hiện bảng thông báo
-                DeleteQuarantineRoom();
-                BackToListRoomTab();
+                BufferWindow bufferWindow = new BufferWindow();
+                bufferWindow.ShowDialog();
+                DeleteConfirmation confirmation = new DeleteConfirmation();
+                if (confirmation.ShowDialog() == true)
+                {
+                    DeleteQuarantineRoom();
+                    BackToListRoomTab();
+                }
             });
 
             CancelCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
@@ -359,6 +367,8 @@ namespace QuanLyKhuCachLy.ViewModel
 
             CompleteQuarantineCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
+                BufferWindow bufferWindow = new BufferWindow();
+                bufferWindow.ShowDialog();
                 CompleteQuarantine();
             });
 
@@ -370,6 +380,8 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             , (p) =>
             {
+                BufferWindow bufferWindow = new BufferWindow();
+                bufferWindow.ShowDialog();
                 ClearPersonList();
             });
         }
@@ -474,9 +486,8 @@ namespace QuanLyKhuCachLy.ViewModel
 
 
 
-        void AddRoomFromExcel()
+        async void AddRoomFromExcel()
         {
-            List<Model.QuarantineRoom> listRoom = new List<Model.QuarantineRoom>();
             string path = "";
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Multiselect = false;
@@ -486,99 +497,118 @@ namespace QuanLyKhuCachLy.ViewModel
                 path = openFileDialog.FileName;
             else
                 return;
-            Excel.Application xlApp = new Excel.Application();
-            Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(path);
-            Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
-            Excel.Range xlRange = xlWorksheet.UsedRange;
-            int rowCount = xlRange.Rows.Count;
-            int colCount = xlRange.Columns.Count;
-            if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2 != "STT" ||
-            xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2 != "Tên" ||
-            xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2 != "Sức chứa" ||
-            xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2 != "Loại phòng" || colCount != 4)
-            {
-                MessageBox.Show("Không đúng định dạng file");
-                return;
-            }
-            for (int i = 2; i <= rowCount; i++)
-            {
-                Model.QuarantineRoom room = new Model.QuarantineRoom();
-                if (xlRange.Cells[i, 2] != null && xlRange.Cells[i, 2].Value2 != null)
-                {
-                    room.displayName = xlRange.Cells[i, 2].Value2.ToString();
-                }
-                if (xlRange.Cells[i, 3] != null && xlRange.Cells[i, 3].Value2 != null)
-                {
-                    room.capacity = Int32.Parse(xlRange.Cells[i, 3].Value2.ToString());
-                }
-                if (xlRange.Cells[i, 4] != null && xlRange.Cells[i, 4].Value2 != null)
-                {
-                    room.levelID = Int32.Parse(xlRange.Cells[i, 4].Value2.ToString());
-                }
-                listRoom.Add(room);
-            }
-            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
-            {
-                try
-                {
-                    for (int i = 0; i < listRoom.Count; i++)
-                    {
-                        DataProvider.ins.db.QuarantineRooms.Add(listRoom[i]);
-                        DataProvider.ins.db.SaveChanges();
+            LoadingIndicator loadingIndicator = new LoadingIndicator();
+            Task task = ExecuteAddRoomFromExcel(loadingIndicator, path);
+            loadingIndicator.ShowDialog();
+            await task;
+        }
 
-                        RoomList.Add(listRoom[i]);
+        async Task ExecuteAddRoomFromExcel(LoadingIndicator loadingIndicator, string path)
+        {
+            bool isSuccess = false;
+            await Task.Run(() => {
+                List<Model.QuarantineRoom> listRoom = new List<Model.QuarantineRoom>();
+                Excel.Application xlApp = new Excel.Application();
+                Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(path);
+                Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
+                Excel.Range xlRange = xlWorksheet.UsedRange;
+                int rowCount = xlRange.Rows.Count;
+                int colCount = xlRange.Columns.Count;
+                if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2 != "STT" ||
+                xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2 != "Tên" ||
+                xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2 != "Sức chứa" ||
+                xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2 != "Loại phòng" || colCount != 4)
+                {
+                    //MessageBox.Show("Không đúng định dạng file");
+                    return;
+                }
+                for (int i = 2; i <= rowCount; i++)
+                {
+                    Model.QuarantineRoom room = new Model.QuarantineRoom();
+                    if (xlRange.Cells[i, 2] != null && xlRange.Cells[i, 2].Value2 != null)
+                    {
+                        room.displayName = xlRange.Cells[i, 2].Value2.ToString();
                     }
-
-                    Window SuccessDialog = new Window
+                    if (xlRange.Cells[i, 3] != null && xlRange.Cells[i, 3].Value2 != null)
                     {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new SuccessNotification()
-                    };
-                    transaction.Commit();
+                        room.capacity = Int32.Parse(xlRange.Cells[i, 3].Value2.ToString());
+                    }
+                    if (xlRange.Cells[i, 4] != null && xlRange.Cells[i, 4].Value2 != null)
+                    {
+                        room.levelID = Int32.Parse(xlRange.Cells[i, 4].Value2.ToString());
+                    }
+                    listRoom.Add(room);
                 }
-                catch (DbUpdateException e)
+                using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
                 {
-                    transaction.Rollback();
-                    string error = "Lỗi db update";
+                    try
+                    {
+                        for (int i = 0; i < listRoom.Count; i++)
+                        {
+                            DataProvider.ins.db.QuarantineRooms.Add(listRoom[i]);
+                            DataProvider.ins.db.SaveChanges();
 
-                    MessageBox.Show(error);
+                            RoomList.Add(listRoom[i]);
+                        }
+                        transaction.Commit();
+                        isSuccess = true;
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (DbEntityValidationException e)
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (NotSupportedException e)
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (ObjectDisposedException e)
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (InvalidOperationException e)
+                    {
+                        transaction.Rollback();
+                    }
                 }
-                catch (DbEntityValidationException e)
+                RoomListView = new ObservableCollection<Model.QuarantineRoom>(DataProvider.ins.db.QuarantineRooms).ToArray();
+            });
+            loadingIndicator.Close();
+            if (isSuccess)
+            {
+
+                Window SuccessDialog = new Window
                 {
-                    transaction.Rollback();
-                    string error = "Lỗi validation";
+                    AllowsTransparency = true,
+                    Background = Brushes.Transparent,
+                    Width = 600,
+                    Height = 400,
+                    ResizeMode = ResizeMode.NoResize,
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                    WindowStyle = WindowStyle.None,
+                    Content = new SuccessNotification()
+                };
+                SuccessDialog.ShowDialog();
+            } 
+            else
+            {
 
-                    MessageBox.Show(error);
-                }
-                catch (NotSupportedException e)
+                Window ErrorDialog = new Window
                 {
-                    transaction.Rollback();
-                    string error = "Lỗi db đéo support";
-
-                    MessageBox.Show(error);
-                }
-                catch (ObjectDisposedException e)
-                {
-                    transaction.Rollback();
-                    string error = "Lỗi db object disposed";
-
-                    MessageBox.Show(error);
-                }
-                catch (InvalidOperationException e)
-                {
-                    transaction.Rollback();
-                    string error = "Lỗi invalid operation";
-
-                    MessageBox.Show(error);
-                }
+                    AllowsTransparency = true,
+                    Background = Brushes.Transparent,
+                    Width = 600,
+                    Height = 400,
+                    ResizeMode = ResizeMode.NoResize,
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                    WindowStyle = WindowStyle.None,
+                    Content = new FailNotification()
+                };
+                ErrorDialog.ShowDialog();
             }
-            RoomListView = new ObservableCollection<Model.QuarantineRoom>(DataProvider.ins.db.QuarantineRooms).ToArray();
         }
         public void ToPersonInformation()
         {

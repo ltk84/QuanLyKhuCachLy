@@ -72,6 +72,8 @@
                     Padding="10,8,8,10"
                     HorizontalAlignment="Left"
                     materialDesign:HintAssist.Hint="Tên, CMND,...."
+                    materialDesign:TextFieldAssist.HasTrailingIcon="True"
+                    materialDesign:TextFieldAssist.TrailingIcon="Search"
                     MaxLength="20"
                     Style="{StaticResource TextInputField}">
                     <TextBox.Text>
@@ -92,14 +94,19 @@
                 Grid.Column="1"
                 Margin="0,25,0,0"
                 VerticalAlignment="Bottom">
-
-                <TextBlock
-                    Margin="5,0,0,5"
-                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                    FontSize="16"
-                    Foreground="#FF434A54">
-                    Lọc theo
-                </TextBlock>
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal">
+                    <materialDesign:PackIcon
+                        VerticalAlignment="Center"
+                        Foreground="#FF434A54"
+                        Kind="FilterOutline" />
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        Foreground="#FF434A54">
+                        Lọc theo
+                    </TextBlock>
+                </StackPanel>
                 <ComboBox
                     Padding="10,8,8,10"
                     ItemsSource="{Binding FilterType}"
@@ -179,7 +186,7 @@
                     Binding="{Binding Severity.description}"
                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                     ElementStyle="{StaticResource DataGridElement}"
-                    Header="Mức độ"
+                    Header="Nhóm đối tượng"
                     HeaderStyle="{StaticResource DataGridHeader}"
                     MaxLength="30" />
                 <DataGridTemplateColumn

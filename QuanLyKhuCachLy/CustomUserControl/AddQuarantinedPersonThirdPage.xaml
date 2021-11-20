@@ -86,12 +86,11 @@
                     Grid.ColumnSpan="4"
                     Height="280"
                     Margin="0,15,15,0"
+                    materialDesign:DataGridAssist.CornerRadius="10"
                     AutoGenerateColumns="False"
-                    BorderBrush="Black"
-                    BorderThickness="1"
                     CanUserAddRows="False"
                     CanUserReorderColumns="False"
-                    CanUserResizeColumns="False"
+                    CanUserResizeColumns="True"
                     CanUserResizeRows="False"
                     ItemsSource="{Binding InjectionRecordViewModel.InjectionRecordList}"
                     LoadingRow="vaccinationInformation_LoadingRow"
@@ -99,54 +98,39 @@
 
                     <DataGrid.Columns>
                         <DataGridTextColumn
-                            Width="*"
+                            Width="Auto"
                             MinWidth="70"
                             Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=Header}"
+                            EditingElementStyle="{StaticResource EditingDataGridElement}"
+                            ElementStyle="{StaticResource DataGridElement}"
                             Header="Lần"
-                            IsReadOnly="True">
-                            <DataGridColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="FontSize" Value="14" />
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                    <Setter Property="HorizontalAlignment" Value="Center" />
-                                    <Setter Property="Background" Value="Transparent" />
-                                </Style>
-                            </DataGridColumn.HeaderStyle>
-                        </DataGridTextColumn>
+                            HeaderStyle="{StaticResource DataGridHeader}"
+                            IsReadOnly="True" />
                         <DataGridTextColumn
-                            Width="*"
+                            Width="Auto"
                             MinWidth="90"
                             Binding="{Binding vaccineName, UpdateSourceTrigger=PropertyChanged}"
                             EditingElementStyle="{StaticResource EditingDataGridElement}"
-                            Header="Tên">
-                            <DataGridColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="FontSize" Value="14" />
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                    <Setter Property="HorizontalAlignment" Value="Center" />
-                                    <Setter Property="Background" Value="Transparent" />
-                                </Style>
-                            </DataGridColumn.HeaderStyle>
-                        </DataGridTextColumn>
+                            ElementStyle="{StaticResource DataGridElement}"
+                            Header="Tên"
+                            HeaderStyle="{StaticResource DataGridHeader}" />
                         <DataGridTemplateColumn
-                            Width="*"
+                            Width="Auto"
                             MinWidth="70"
-                            Header="Ngày tiêm">
+                            CellStyle="{StaticResource DataGridElement}"
+                            Header="Ngày tiêm"
+                            HeaderStyle="{StaticResource DataGridHeader}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <DatePicker materialDesign:HintAssist.Hint="Chọn ngày cuối" SelectedDate="{Binding dateInjection, UpdateSourceTrigger=PropertyChanged}" />
+                                    <DatePicker materialDesign:HintAssist.Hint="Chọn ngày tiêm" SelectedDate="{Binding dateInjection, StringFormat=dd-MM-yyyy, UpdateSourceTrigger=PropertyChanged}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
-                            <DataGridColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="FontSize" Value="14" />
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                    <Setter Property="HorizontalAlignment" Value="Center" />
-                                    <Setter Property="Background" Value="Transparent" />
-                                </Style>
-                            </DataGridColumn.HeaderStyle>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Width="*" MinWidth="70">
+                        <DataGridTemplateColumn
+                            Width="Auto"
+                            MinWidth="70"
+                            CellStyle="{StaticResource DataGridElement}"
+                            HeaderStyle="{StaticResource DataGridHeader}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button
@@ -212,12 +196,11 @@
                     Grid.ColumnSpan="4"
                     Height="280"
                     Margin="15,15,0,0"
+                    materialDesign:DataGridAssist.CornerRadius="10"
                     AutoGenerateColumns="False"
-                    BorderBrush="Black"
-                    BorderThickness="1"
                     CanUserAddRows="False"
                     CanUserReorderColumns="False"
-                    CanUserResizeColumns="False"
+                    CanUserResizeColumns="True"
                     CanUserResizeRows="False"
                     ItemsSource="{Binding TestingResultViewModel.TestingResultList}"
                     LoadingRow="vaccinationInformation_LoadingRow"
@@ -227,42 +210,32 @@
                     </DataGrid.Resources>
                     <DataGrid.Columns>
                         <DataGridTextColumn
-                            Width="*"
+                            Width="Auto"
                             MinWidth="70"
                             Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=Header}"
+                            EditingElementStyle="{StaticResource EditingDataGridElement}"
+                            ElementStyle="{StaticResource DataGridElement}"
                             Header="Lần"
-                            IsReadOnly="True">
-                            <DataGridColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="FontSize" Value="14" />
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                    <Setter Property="HorizontalAlignment" Value="Center" />
-                                    <Setter Property="Background" Value="Transparent" />
-                                </Style>
-                            </DataGridColumn.HeaderStyle>
-                        </DataGridTextColumn>
+                            HeaderStyle="{StaticResource DataGridHeader}"
+                            IsReadOnly="True" />
                         <DataGridTemplateColumn
-                            Width="*"
+                            Width="Auto"
                             MinWidth="120"
-                            Header="Ngày xét nghiệm">
+                            CellStyle="{StaticResource DataGridElement}"
+                            Header="Ngày xét nghiệm"
+                            HeaderStyle="{StaticResource DataGridHeader}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <DatePicker materialDesign:HintAssist.Hint="Chọn ngày cuối" SelectedDate="{Binding dateTesting, UpdateSourceTrigger=PropertyChanged}" />
+                                    <DatePicker materialDesign:HintAssist.Hint="Chọn ngày xét nghiệm" SelectedDate="{Binding dateTesting, StringFormat=dd-MM-yyyy, UpdateSourceTrigger=PropertyChanged}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
-                            <DataGridColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="FontSize" Value="14" />
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                    <Setter Property="HorizontalAlignment" Value="Center" />
-                                    <Setter Property="Background" Value="Transparent" />
-                                </Style>
-                            </DataGridColumn.HeaderStyle>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn
-                            Width="*"
+                            Width="Auto"
                             MinWidth="150"
-                            Header="Kết quả">
+                            CellStyle="{StaticResource DataGridElement}"
+                            Header="Kết quả"
+                            HeaderStyle="{StaticResource DataGridHeader}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <ComboBox
@@ -273,19 +246,13 @@
                                         Style="{StaticResource ComboBoxField}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
-                            <DataGridColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="FontSize" Value="14" />
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                    <Setter Property="HorizontalAlignment" Value="Center" />
-                                    <Setter Property="Background" Value="Transparent" />
-                                </Style>
-                            </DataGridColumn.HeaderStyle>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn
-                            Width="*"
+                            Width="Auto"
                             MinWidth="70"
-                            Header="">
+                            CellStyle="{StaticResource DataGridElement}"
+                            Header=""
+                            HeaderStyle="{StaticResource DataGridHeader}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button
@@ -300,14 +267,6 @@
                                     </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
-                            <DataGridColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="FontSize" Value="14" />
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                    <Setter Property="HorizontalAlignment" Value="Center" />
-                                    <Setter Property="Background" Value="Transparent" />
-                                </Style>
-                            </DataGridColumn.HeaderStyle>
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>

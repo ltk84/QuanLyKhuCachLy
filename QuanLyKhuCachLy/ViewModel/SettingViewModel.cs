@@ -39,9 +39,12 @@ namespace QuanLyKhuCachLy.ViewModel
 
         public SettingViewModel()
         {
-            QuarantineArea = DataProvider.ins.db.QuarantineAreas.First();
-            QuarantineAreaAddress = $"{QuarantineArea.Address?.apartmentNumber} {QuarantineArea.Address?.streetName}, {QuarantineArea.Address.ward}, {QuarantineArea.Address.district}, {QuarantineArea.Address.province}";
-            Manager = DataProvider.ins.db.Staffs.Where(staff => staff.id == QuarantineArea.managerID).First();
+            if (DataProvider.ins.db.QuarantineAreas.Count() != 0)
+            {
+                QuarantineArea = DataProvider.ins.db.QuarantineAreas.First();
+                QuarantineAreaAddress = $"{QuarantineArea.Address?.apartmentNumber} {QuarantineArea.Address?.streetName}, {QuarantineArea.Address.ward}, {QuarantineArea.Address.district}, {QuarantineArea.Address.province}";
+                Manager = DataProvider.ins.db.Staffs.Where(staff => staff.id == QuarantineArea.managerID).First();
+            }
         }
     }
 }

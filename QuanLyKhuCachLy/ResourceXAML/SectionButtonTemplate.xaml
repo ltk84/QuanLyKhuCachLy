@@ -9,14 +9,32 @@
         TargetType="RadioButton">
         <Setter Property="Height" Value="47" />
         <Setter Property="Margin" Value="24,0,0,0" />
-        <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="10" />
+        <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="10,0,0,10" />
         <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth0" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Width" Value="252" />
         <Setter Property="Background" Value="White" />
         <Setter Property="BorderBrush" Value="{x:Null}" />
         <Style.Triggers>
-            <Trigger Property="IsChecked" Value="False">
-                <Setter Property="Background" Value="Transparent" />
-            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="False" />
+                    <Condition Property="IsMouseOver" Value="False" />
+                </MultiTrigger.Conditions>
+                <MultiTrigger.Setters>
+                    <Setter Property="Background" Value="Transparent" />
+                </MultiTrigger.Setters>
+            </MultiTrigger>
+
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="False" />
+                    <Condition Property="IsMouseOver" Value="True" />
+                </MultiTrigger.Conditions>
+                <MultiTrigger.Setters>
+                    <Setter Property="Background" Value="#AC323854" />
+                </MultiTrigger.Setters>
+            </MultiTrigger>
         </Style.Triggers>
     </Style>
     <Style x:Key="TextStyleSectionButton" TargetType="TextBlock">
@@ -42,6 +60,7 @@
         <Setter Property="Foreground" Value="White" />
         <Setter Property="Height" Value="23.4" />
         <Setter Property="Width" Value="121" />
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -61,5 +80,35 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+    <Style
+        x:Key="ButtonDarkTemplate"
+        BasedOn="{StaticResource MaterialDesignRaisedButton}"
+        TargetType="Button">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FFcad6e8" />
+                <Setter Property="Foreground" Value="#DD434A54" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Background" Value="#FF434A54" />
+                <Setter Property="Foreground" Value="White" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style
+        x:Key="ButtonAccentTemplate"
+        BasedOn="{StaticResource MaterialDesignRaisedButton}"
+        TargetType="Button">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FFcce6e2" />
+                <Setter Property="Foreground" Value="#AA1D9583" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Background" Value="#FF1D9583" />
+                <Setter Property="Foreground" Value="White" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>

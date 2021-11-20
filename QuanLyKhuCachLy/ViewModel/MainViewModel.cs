@@ -17,6 +17,18 @@ namespace QuanLyKhuCachLy.ViewModel
         public NotificationViewModel NotificationVM { get; set; }
         public SettingViewModel SettingVM { get; set; }
 
+        private QuarantineAreaInformationViewModel _QAInformation;
+        public QuarantineAreaInformationViewModel QAInformationVM
+        {
+            get => _QAInformation;
+            set
+            {
+                _QAInformation = value;
+                OnPropertyChanged();
+            }
+        }
+
+
 
         private object _currentView;
         private bool _isOnDashboard;
@@ -33,6 +45,7 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand ToStatCommand { get; set; }
         public ICommand ToNotifyCommand { get; set; }
         public ICommand ToSettingCommand { get; set; }
+        public ICommand InitCommand { get; set; }
 
         public object CurrentView
         {
@@ -126,7 +139,13 @@ namespace QuanLyKhuCachLy.ViewModel
                 LoadLoginScreenAndCheckInitSetUp(p);
             });
 
-            Init();
+            //Init();
+
+            QAInformationVM = QuarantineAreaInformationViewModel.ins;
+            QAInformationVM.ParentVM = this;
+
+            IsOnDashboard = true;
+
 
             ToDashboardCommand = new RelayCommand<object>((p) => { return true; }, (o) =>
             {
@@ -156,10 +175,11 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 ToSetting();
             });
+
         }
 
         #region method
-        private void Init()
+        public void Init()
         {
             DashboardVM = new DashboardViewModel();
             QuarantineRoomVM = new QuarantineRoomViewModel();
@@ -169,8 +189,8 @@ namespace QuanLyKhuCachLy.ViewModel
             NotificationVM = new NotificationViewModel();
             SettingVM = new SettingViewModel();
             // test room
-            //ToDashboard();
-            ToPerson();
+            ToDashboard();
+            //ToPerson();
         }
 
         private void ToDashboard()
@@ -272,6 +292,7 @@ namespace QuanLyKhuCachLy.ViewModel
             InitialSettingScreen InitialSettingScreen = new InitialSettingScreen();
             if (InitialSettingScreen.DataContext == null) return;
             var InitVM = InitialSettingScreen.DataContext as QuarantineAreaInformationViewModel;
+            InitVM.ParentVM = this;
 
             if (loginVM.isLogin)
             {
@@ -284,9 +305,11 @@ namespace QuanLyKhuCachLy.ViewModel
                     // Xử lý close InitScrren ở button Xác nhận nữa
                     if (InitVM.isDoneSetUp) p.Show();
                     else p.Close();
+
                 }
                 else
                 {
+                    Init();
                     p.Show();
                 }
             }

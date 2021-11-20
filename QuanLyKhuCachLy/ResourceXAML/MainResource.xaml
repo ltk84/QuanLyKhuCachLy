@@ -18,4 +18,5 @@
     <viewmodel:NotificationViewModel x:Key="NotificationVM" />
     <viewmodel:SettingViewModel x:Key="SettingVM" />
     <viewmodel:TestingResultViewModel x:Key="TestingVM" />
+    <viewmodel:DeleteConfirmationViewModel x:Key="DeleteConfirmationVM" />
 </ResourceDictionary>

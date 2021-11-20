@@ -53,7 +53,7 @@
                                             <Setter Property="Height" Value="488" />
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding Path=IsOnSetting}" Value="True">
-                                            <Setter Property="Height" Value="559.2" />
+                                            <Setter Property="Height" Value="558.2" />
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -281,7 +281,10 @@
                     </StackPanel>
                 </RadioButton>
             </StackPanel>
-            <ContentControl Grid.Column="1" Content="{Binding CurrentView}" />
+            <ContentControl
+                Grid.Column="1"
+                Margin="16,0,0,0"
+                Content="{Binding CurrentView}" />
         </Grid>
     </Viewbox>
 
@@ -290,4 +293,5 @@
             <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName=MainWindow}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
+
 </Window>

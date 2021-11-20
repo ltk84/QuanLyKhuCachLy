@@ -38,6 +38,17 @@
                 Style="{StaticResource DashboardTitle}">
                 THỐNG KÊ CHUNG
             </TextBlock>
+            <Button
+                Grid.Row="0"
+                Grid.Column="1"
+                Width="Auto"
+                Height="Auto"
+                Margin="0,0,-20,0"
+                HorizontalAlignment="Right"
+                Command="{Binding Refresh}"
+                Style="{StaticResource MenuButton}">
+                <materialDesign:PackIcon Kind="Sync" Style="{StaticResource MenuIcon}" />
+            </Button>
             <TextBlock
                 Grid.Row="1"
                 Grid.Column="0"
@@ -349,9 +360,10 @@
                         Style="{StaticResource FastButton}">
                         <TextBlock
                             Margin="16,0,16,0"
+                            VerticalAlignment="Bottom"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                             FontSize="14"
-                            FontWeight="Bold"
-                            Style="{StaticResource DashboardContent}">
+                            FontWeight="Bold">
                             Thêm người cách ly
                         </TextBlock>
                         <Button.ContextMenu>
@@ -370,9 +382,10 @@
                         Style="{StaticResource FastButton}">
                         <TextBlock
                             Margin="16,0,16,0"
+                            VerticalAlignment="Bottom"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                             FontSize="14"
-                            FontWeight="Bold"
-                            Style="{StaticResource DashboardContent}">
+                            FontWeight="Bold">
                             Thêm phòng
                         </TextBlock>
                         <Button.ContextMenu>
@@ -388,18 +401,20 @@
                     <Button Style="{StaticResource FastButton}">
                         <TextBlock
                             Margin="16,0,16,0"
+                            VerticalAlignment="Bottom"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                             FontSize="14"
-                            FontWeight="Bold"
-                            Style="{StaticResource DashboardContent}">
+                            FontWeight="Bold">
                             Cập nhật xét nghiệm
                         </TextBlock>
                     </Button>
                     <Button Style="{StaticResource FastButton}">
                         <TextBlock
                             Margin="16,0,16,0"
+                            VerticalAlignment="Bottom"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                             FontSize="14"
-                            FontWeight="Bold"
-                            Style="{StaticResource DashboardContent}">
+                            FontWeight="Bold">
                             Xử lý đổi phòng
                         </TextBlock>
                     </Button>

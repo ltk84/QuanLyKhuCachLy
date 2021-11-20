@@ -1,0 +1,28 @@
+﻿<Window
+    x:Class="QuanLyKhuCachLy.CustomUserControl.LoadingIndicator"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fa="http://schemas.fontawesome.io/icons/"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="LoadingIndicator"
+    Width="800"
+    Height="450"
+    AllowsTransparency="True"
+    Background="Black"
+    Opacity="0.4"
+    Topmost="False"
+    WindowState="Maximized"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Grid>
+        <fa:ImageAwesome
+            Width="48"
+            Height="48"
+            Foreground="White"
+            Icon="CircleOutlineNotch"
+            Opacity="1"
+            Spin="True" />
+    </Grid>
+</Window>

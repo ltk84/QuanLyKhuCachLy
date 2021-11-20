@@ -214,6 +214,7 @@
         <Setter Property="Foreground" Value="White" />
         <Setter Property="Height" Value="20" />
         <Setter Property="Width" Value="175.5" />
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
                 <!--<ControlTemplate TargetType="Button">
@@ -266,6 +267,7 @@
         <Setter Property="Foreground" Value="White" />
         <Setter Property="Height" Value="20" />
         <Setter Property="Width" Value="175.5" />
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
                 <!--<ControlTemplate TargetType="Button">
@@ -318,6 +320,7 @@
         <Setter Property="Foreground" Value="White" />
         <Setter Property="Height" Value="20" />
         <Setter Property="Width" Value="175.5" />
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
                 <!--<ControlTemplate TargetType="Button">

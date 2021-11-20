@@ -11,14 +11,15 @@
     xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
     Name="AddRoomManualScreen"
     Title="AddRoom"
-    Width="552.747"
-    Height="552.857"
+    Width="575"
+    Height="575"
+    AllowsTransparency="True"
     Background="{x:Null}"
     DataContext="{StaticResource RoomVM}"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
-    <Border Style="{StaticResource RecommendationField}">
+    <Border Margin="15" Style="{StaticResource RecommendationField}">
         <StackPanel>
             <TextBlock
                 Margin="0,36,0,0"
@@ -105,7 +106,7 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Loại phòng
+                        Nhóm đối tượng
                     </TextBlock>
                     <ComboBox
                         Name="RoomTypeInput"
@@ -128,14 +129,13 @@
                         Margin="0"
                         materialDesign:ButtonAssist.CornerRadius="8"
                         materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                        Background="#FF434A54"
                         BorderBrush="{x:Null}"
                         Command="{Binding CancelCommand}"
                         CommandParameter="{Binding ElementName=AddRoomManualScreen}"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         FontWeight="Bold"
-                        Style="{StaticResource MaterialDesignRaisedButton}">
+                        Style="{StaticResource ButtonDarkTemplate}">
                         <TextBlock Text="Hủy bỏ" />
                     </Button>
                     <Button
@@ -145,7 +145,6 @@
                         VerticalAlignment="Center"
                         materialDesign:ButtonAssist.CornerRadius="8"
                         materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                        Background="#FF1D9583"
                         BorderBrush="{x:Null}"
                         Command="{Binding AddRoomManualCommand}"
                         CommandParameter="{Binding ElementName=AddRoomManualScreen}"
@@ -153,7 +152,7 @@
                         FontSize="12"
                         FontWeight="Bold">
                         <Button.Style>
-                            <Style BasedOn="{StaticResource MaterialDesignRaisedButton}" TargetType="Button">
+                            <Style BasedOn="{StaticResource ButtonAccentTemplate}" TargetType="Button">
                                 <Style.Triggers>
                                     <MultiDataTrigger>
                                         <MultiDataTrigger.Conditions>

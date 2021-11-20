@@ -10,24 +10,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace QuanLyKhuCachLy.CustomUserControl
 {
     /// <summary>
-    /// Interaction logic for EditQuarantinePersonInRoomThirdPage.xaml
+    /// Interaction logic for BufferWindow.xaml
     /// </summary>
-    public partial class EditQuarantinePersonInRoomThirdPage : UserControl
+    public partial class BufferWindow : Window
     {
-        public EditQuarantinePersonInRoomThirdPage()
+        public BufferWindow()
         {
-            InitializeComponent();
+            InitializeComponent(); CloseWindow();
         }
 
-        private void vaccinationInformation_LoadingRow(object sender, DataGridRowEventArgs e)
+        private async void CloseWindow()
         {
-            e.Row.Header = (e.Row.GetIndex() + 1).ToString();
+            await Task.Delay(1);
+            this.Close();
         }
     }
 }

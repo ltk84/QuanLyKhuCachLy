@@ -34,6 +34,8 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 _RoomID = value;
                 QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == RoomID));
+                PersonNotRoomList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == null));
+
                 OnPropertyChanged();
             }
         }
@@ -84,13 +86,15 @@ namespace QuanLyKhuCachLy.ViewModel
         {
 
             QuarantinePersonList = new ObservableCollection<QuarantinePerson>();
-            PersonNotRoomList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == null));
+            PersonNotRoomList = new ObservableCollection<QuarantinePerson>();
 
             ToViewCommand = new RelayCommand<object>((p) =>
             {
                 return true;
             }, (p) =>
             {
+                BufferWindow bufferWindow = new BufferWindow();
+                bufferWindow.ShowDialog();
                 Parent.ToPersonInformation();
             });
 
@@ -109,6 +113,7 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 EditQuarantinePersonInRoom editScreen = new EditQuarantinePersonInRoom();
                 editScreen.ShowDialog();
+                ResetToDeaultTabEditAfterEdit();
             });
 
             UpdatePersonListCommand = new RelayCommand<Window>((p) =>
@@ -143,6 +148,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
+                BufferWindow bufferWindow = new BufferWindow();
+                bufferWindow.ShowDialog();
                 RemoveFromRoomUI();
             });
 
@@ -151,8 +158,13 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
+                if (SelectedItem != null)
+                {
+                    InjectionRecordViewModel.RollbackTransaction(SelectedItem.id);
+                    TestingResultViewModel.RollbackTransaction(SelectedItem.id);
+                    DestinationHistoryViewModel.RollbackTransaction(SelectedItem.id);
+                }
                 p.Close();
-                RollbackTransaction();
             });
 
             CompleteQuarantinePersonCommand = new RelayCommand<Window>((p) =>
@@ -160,11 +172,141 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
+                BufferWindow bufferWindow = new BufferWindow();
+                bufferWindow.ShowDialog();
                 CompleteQuarantinePerson();
             });
         }
 
         #region method
+
+        protected override void EditQuarantinePerson()
+        {
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    QuarantinePerson Person = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+                    if (Person == null) return;
+
+                    // Tạo địa chỉ hiện ở của người cách ly
+                    Address PersonAddress = DataProvider.ins.db.Addresses.Where(x => x.id == Person.addressID).FirstOrDefault();
+
+                    if (PersonAddress != null)
+                    {
+                        PersonAddress.apartmentNumber = QPApartmentNumber;
+                        PersonAddress.streetName = QPStreetName;
+                        PersonAddress.ward = QPSelectedWard;
+                        PersonAddress.district = QPSelectedDistrict;
+                        PersonAddress.province = QPSelectedProvince;
+
+                        DataProvider.ins.db.SaveChanges();
+                    }
+                    else
+                    {
+                        PersonAddress = new Address()
+                        {
+                            apartmentNumber = QPApartmentNumber,
+                            streetName = QPStreetName,
+                            ward = QPSelectedWard,
+                            district = QPSelectedDistrict,
+                            province = QPSelectedProvince
+                        };
+
+                        if (PersonAddress.CheckValidateProperty())
+                        {
+                            DataProvider.ins.db.Addresses.Add(PersonAddress);
+                            Person.addressID = PersonAddress.id;
+                            DataProvider.ins.db.SaveChanges();
+                        }
+                    }
+
+
+                    // Tạo thông tin sức khỏe
+                    HealthInformation PersonHealthInformation = DataProvider.ins.db.HealthInformations.Where(x => x.quarantinePersonID == Person.id).FirstOrDefault();
+
+                    if (PersonHealthInformation != null)
+                    {
+                        PersonHealthInformation.isCough = IsCough;
+                        PersonHealthInformation.isDisease = IsDisease;
+                        PersonHealthInformation.isFever = IsFever;
+                        PersonHealthInformation.isLossOfTatse = IsLossOfTatse;
+                        PersonHealthInformation.isTired = IsTired;
+                        PersonHealthInformation.isOtherSymptoms = IsOtherSymptoms;
+                        PersonHealthInformation.isShortnessOfBreath = IsShortnessOfBreath;
+                        PersonHealthInformation.isSoreThroat = IsSoreThroat;
+
+                        DataProvider.ins.db.SaveChanges();
+                    }
+
+                    // Tạo người cách ly
+                    Person.name = QPName;
+                    Person.dateOfBirth = QPDateOfBirth;
+                    Person.sex = QPSelectedSex;
+                    Person.citizenID = QPCitizenID;
+                    Person.nationality = QPSelectedNationality;
+                    Person.phoneNumber = QPPhoneNumber;
+                    Person.healthInsuranceID = QPHealthInsuranceID;
+
+                    if (QPSelectedLevel != null) Person.levelID = QPSelectedLevel.id;
+
+                    DataProvider.ins.db.SaveChanges();
+
+                    InitDisplayAddress(PersonAddress);
+                    InitDisplayHealthInformation(PersonHealthInformation);
+
+                    InjectionRecordViewModel.ApplyInjectionRecordToDB(Person.id, "EditOrDelete");
+                    TestingResultViewModel.ApplyTestingResultToDb(Person.id, "EditOrDelete");
+                    DestinationHistoryViewModel.ins.ApplayDestinationHistoryToDB(Person.id, "EditOrDelete");
+
+                    transaction.Commit();
+
+                    QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == RoomID));
+
+
+                    SelectedItem = Person;
+
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
+
+
+        }
+
 
         void AddToRoomUI()
         {

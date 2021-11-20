@@ -74,6 +74,8 @@
                     Padding="10,8,8,10"
                     HorizontalAlignment="Left"
                     materialDesign:HintAssist.Hint="Tên, CMND,...."
+                    materialDesign:TextFieldAssist.HasTrailingIcon="True"
+                    materialDesign:TextFieldAssist.TrailingIcon="Search"
                     MaxLength="20"
                     Style="{StaticResource TextInputField}">
                     <TextBox.Text>
@@ -95,13 +97,19 @@
                 Margin="0,25,0,0"
                 VerticalAlignment="Bottom">
 
-                <TextBlock
-                    Margin="5,0,0,5"
-                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                    FontSize="16"
-                    Foreground="#FF434A54">
-                    Lọc theo
-                </TextBlock>
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal">
+                    <materialDesign:PackIcon
+                        VerticalAlignment="Center"
+                        Foreground="#FF434A54"
+                        Kind="FilterOutline" />
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        Foreground="#FF434A54">
+                        Lọc theo
+                    </TextBlock>
+                </StackPanel>
                 <ComboBox
                     Padding="10,8,8,10"
                     utility:ProtocolSettingsLayout.MVVMHasError="{Binding SexFieldHasError}"
@@ -169,7 +177,7 @@
                     Binding="{Binding name}"
                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                     ElementStyle="{StaticResource DataGridElement}"
-                    Header="Tên"
+                    Header="Họ và tên"
                     HeaderStyle="{StaticResource DataGridHeader}"
                     MaxLength="30" />
                 <materialDesign:DataGridTextColumn
