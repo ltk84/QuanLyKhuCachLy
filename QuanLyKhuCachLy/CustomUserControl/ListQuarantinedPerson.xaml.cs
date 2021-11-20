@@ -29,7 +29,7 @@ namespace QuanLyKhuCachLy.CustomUserControl
 
         private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://docs.google.com/spreadsheets/d/1NlQ3tmbvGJE2hSkUZgupY3tRqUJTcC9SAfD9SoqQGMM/edit#gid=0");
+            System.Diagnostics.Process.Start("https://docs.google.com/spreadsheets/d/1R6zuZB_xFuzWrCnl4j0JLZ3da5HtprRrmjeQ3LdxW44/edit#gid=0");
         }
     }
 }

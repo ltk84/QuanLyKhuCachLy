@@ -1883,7 +1883,7 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             string[] Scopes = { SheetsService.Scope.Spreadsheets};
             string ApplicationName = "QLKCL";
-            String spreadsheetId = "1NlQ3tmbvGJE2hSkUZgupY3tRqUJTcC9SAfD9SoqQGMM";
+            String spreadsheetId = "1R6zuZB_xFuzWrCnl4j0JLZ3da5HtprRrmjeQ3LdxW44";
             String range = "Sheet1";
             string credentialPath = Path.Combine(Environment.CurrentDirectory, ".credentials", ApplicationName);
             UserCredential credential;
@@ -1915,8 +1915,7 @@ namespace QuanLyKhuCachLy.ViewModel
             int rowCount = values.Count();
             if (values != null && values.Count > 0)
             {
-                MessageBox.Show(values[1][1].ToString() + rowCount.ToString());
-                
+              
                 for (int i = 1; i < rowCount; i++)
                 {
                     
@@ -2045,8 +2044,7 @@ namespace QuanLyKhuCachLy.ViewModel
                             listHealthInformation[i].quarantinePersonID = listQuarantinePerson[i].id;
                             DataProvider.ins.db.HealthInformations.Add(listHealthInformation[i]);
                             DataProvider.ins.db.SaveChanges();
-                            MessageBox.Show("haha");
-
+                          
                         }
                         PeopleListView = DataProvider.ins.db.QuarantinePersons.ToArray();
                         QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
