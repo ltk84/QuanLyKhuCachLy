@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="768"
+    d:DesignHeight="720"
     d:DesignWidth="1024"
     mc:Ignorable="d">
     <Border Style="{StaticResource RecommendationField}">
@@ -24,14 +24,14 @@
                 HorizontalAlignment="Center"
                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                 FontSize="18">
-                Những người cách ly chưa có phòng đã được tự động đề xuất thêm vào các phòng như bên dưới
+                Những người cách ly chưa có phòng đã được tự động đề xuất thêm vào các phòng còn trống
             </TextBlock>
             <Grid Margin="55,25,55,0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*" />
                     <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="3*" />
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
+                <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
@@ -40,13 +40,14 @@
                     </Grid.RowDefinitions>
                     <TextBlock
                         Grid.Row="0"
+                        VerticalAlignment="Center"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="18"
                         FontWeight="Bold"
                         Foreground="#FF434A54"><Run Text="Danh sách phòng" /></TextBlock>
                     <DataGrid
                         Grid.Row="1"
-                        Margin="0,10,0,32"
+                        Margin="0,5,0,32"
                         materialDesign:DataGridAssist.CornerRadius="10"
                         AutoGenerateColumns="False"
                         CanUserAddRows="False"
@@ -59,19 +60,19 @@
 
                         <DataGrid.Columns>
                             <materialDesign:DataGridTextColumn
-                                Width="*"
+                                Width="Auto"
                                 ElementStyle="{StaticResource DataGridElement}"
                                 Header="Tên"
                                 HeaderStyle="{StaticResource DataGridHeader}"
                                 IsReadOnly="True" />
                             <materialDesign:DataGridTextColumn
-                                Width="*"
+                                Width="Auto"
                                 EditingElementStyle="{StaticResource EditingDataGridElement}"
                                 ElementStyle="{StaticResource DataGridElement}"
                                 Header="Mức độ"
                                 HeaderStyle="{StaticResource DataGridHeader}" />
                             <materialDesign:DataGridTextColumn
-                                Width="*"
+                                Width="Auto"
                                 EditingElementStyle="{StaticResource EditingDataGridElement}"
                                 ElementStyle="{StaticResource DataGridElement}"
                                 Header="Sức chứa"
@@ -81,13 +82,14 @@
 
                     <TextBlock
                         Grid.Row="2"
+                        VerticalAlignment="Center"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="18"
                         FontWeight="Bold"
                         Foreground="#FF434A54"><Run Text="Danh sách người chưa có phòng" /></TextBlock>
                     <DataGrid
                         Grid.Row="3"
-                        Margin="0,10,0,20"
+                        Margin="0,5,0,20"
                         materialDesign:DataGridAssist.CornerRadius="10"
                         AutoGenerateColumns="False"
                         CanUserAddRows="False"
@@ -100,19 +102,19 @@
 
                         <DataGrid.Columns>
                             <materialDesign:DataGridTextColumn
-                                Width="*"
+                                Width="Auto"
                                 ElementStyle="{StaticResource DataGridElement}"
                                 Header="Tên"
                                 HeaderStyle="{StaticResource DataGridHeader}"
                                 IsReadOnly="True" />
                             <materialDesign:DataGridTextColumn
-                                Width="*"
+                                Width="Auto"
                                 EditingElementStyle="{StaticResource EditingDataGridElement}"
                                 ElementStyle="{StaticResource DataGridElement}"
                                 Header="Ngày sinh"
                                 HeaderStyle="{StaticResource DataGridHeader}" />
                             <materialDesign:DataGridTextColumn
-                                Width="*"
+                                Width="Auto"
                                 EditingElementStyle="{StaticResource EditingDataGridElement}"
                                 ElementStyle="{StaticResource DataGridElement}"
                                 Header="Mức độ"
@@ -136,21 +138,45 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
-                <Grid Grid.Column="1" Margin="32,0,0,0">
+                <Grid Grid.Column="0" Margin="0,0,32,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <TextBlock
-                        Grid.Row="0"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="18"
-                        FontWeight="Bold"
-                        Foreground="#FF434A54"><Run Text="Danh sách người cách ly trong phòng" /></TextBlock>
+                    <Grid Grid.Row="0" Margin="0,0,5,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                                FontSize="18"
+                                FontWeight="Bold"
+                                Foreground="#FF434A54"
+                                Text="Danh sách người sẽ được thêm vào " />
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                                FontSize="18"
+                                FontWeight="Bold"
+                                Foreground="#FFFAAC2D"
+                                Text="phòng A2" />
+                        </StackPanel>
+                        <TextBlock
+                            Grid.Column="1"
+                            VerticalAlignment="Center"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="14"
+                            FontWeight="Regular"
+                            Foreground="#FF434A54"
+                            Text="0/12" />
+                    </Grid>
                     <DataGrid
                         Grid.Row="1"
                         Height="460"
-                        Margin="0,10,0,20"
+                        Margin="0,5,0,20"
                         materialDesign:DataGridAssist.CornerRadius="10"
                         AutoGenerateColumns="False"
                         CanUserAddRows="False"
@@ -162,31 +188,35 @@
                         SelectionUnit="FullRow">
                         <DataGrid.Columns>
                             <materialDesign:DataGridTextColumn
+                                Width="Auto"
                                 EditingElementStyle="{StaticResource EditingDataGridElement}"
                                 ElementStyle="{StaticResource DataGridElement}"
                                 Header="STT"
                                 HeaderStyle="{StaticResource DataGridHeader}"
                                 MaxLength="10" />
                             <materialDesign:DataGridTextColumn
+                                Width="Auto"
                                 EditingElementStyle="{StaticResource EditingDataGridElement}"
                                 ElementStyle="{StaticResource DataGridElement}"
                                 Header="Họ và tên"
                                 HeaderStyle="{StaticResource DataGridHeader}"
                                 MaxLength="30" />
                             <materialDesign:DataGridTextColumn
+                                Width="Auto"
                                 EditingElementStyle="{StaticResource EditingDataGridElement}"
                                 ElementStyle="{StaticResource DataGridElement}"
                                 Header="Ngày sinh"
                                 HeaderStyle="{StaticResource DataGridHeader}"
                                 MaxLength="30" />
                             <materialDesign:DataGridTextColumn
+                                Width="Auto"
                                 EditingElementStyle="{StaticResource EditingDataGridElement}"
                                 ElementStyle="{StaticResource DataGridElement}"
                                 Header="Mức độ"
                                 HeaderStyle="{StaticResource DataGridHeader}"
                                 MaxLength="30" />
                             <DataGridTemplateColumn
-                                Width="*"
+                                Width="Auto"
                                 HeaderStyle="{StaticResource DataGridButtonHeader}"
                                 IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
@@ -205,7 +235,6 @@
                                                     </ContextMenu.Template>
                                                 </ContextMenu>
                                             </Button.ContextMenu>
-
                                         </Button>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -214,6 +243,42 @@
                     </DataGrid>
                 </Grid>
             </Grid>
+            <StackPanel
+                Width="Auto"
+                Margin="55,10,55,0"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal">
+
+                <Button
+                    Width="145"
+                    Height="37"
+                    Margin="0"
+                    materialDesign:ButtonAssist.CornerRadius="8"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                    BorderBrush="{x:Null}"
+                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Style="{StaticResource ButtonDarkTemplate}">
+                    <TextBlock Text="Hủy" />
+                </Button>
+                <Button
+                    Width="145"
+                    Height="37"
+                    Margin="24,0,0,0"
+                    VerticalAlignment="Center"
+                    materialDesign:ButtonAssist.CornerRadius="8"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                    BorderBrush="{x:Null}"
+                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                    FontSize="12"
+                    FontWeight="Bold"
+                    Style="{StaticResource ButtonAccentTemplate}">
+                    <TextBlock FontSize="16">
+                        Xác nhận
+                    </TextBlock>
+                </Button>
+            </StackPanel>
         </StackPanel>
     </Border>
 </UserControl>
