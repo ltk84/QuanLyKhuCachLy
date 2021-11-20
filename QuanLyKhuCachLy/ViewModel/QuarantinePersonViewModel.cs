@@ -715,6 +715,8 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand ToAddManualCommand { get; set; }
         public ICommand ToAddExcelCommand { get; set; }
 
+        public ICommand ToViewGoogleSheet { get; set; }
+
         public ICommand ToEditCommand { get; set; }
         public ICommand ToViewCommand { get; set; }
         public ICommand ToMainCommand { get; set; }
@@ -841,16 +843,11 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 "Nam", "Nữ"
             };
-
-
             ToAddManualCommand = new RelayCommand<Window>((p) =>
             {
                 return true;
             }, (p) =>
             {
-
-
-
                 ClearData();
                 AddQuarantinedPerson addQuarantinePerson = new AddQuarantinedPerson();
                 addQuarantinePerson.ShowDialog();
@@ -917,6 +914,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 p.Close();
                 TabIndex = 1;
             });
+
 
             EditCommand = new RelayCommand<Window>((p) =>
             {
