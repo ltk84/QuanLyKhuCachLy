@@ -33,7 +33,7 @@
                         </TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Command="{Binding }" Style="{StaticResource MenuButton}">
+                <Button Command="{Binding ToInportFormGoogleSheet }" Style="{StaticResource MenuButton}">
                     <StackPanel Style="{StaticResource MenuStackPanel}">
                         <materialDesign:PackIcon Kind="FileExcelOutline" Style="{StaticResource MenuIcon}" />
                         <TextBlock Style="{StaticResource MenuText}">

@@ -715,7 +715,7 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand ToAddManualCommand { get; set; }
         public ICommand ToAddExcelCommand { get; set; }
 
-        public ICommand ToViewGoogleSheet { get; set; }
+        public ICommand ToInportFormGoogleSheet { get; set; }
 
         public ICommand ToEditCommand { get; set; }
         public ICommand ToViewCommand { get; set; }
@@ -859,6 +859,15 @@ namespace QuanLyKhuCachLy.ViewModel
                 Tab3 = Visibility.Hidden;
                 Tab4 = Visibility.Hidden;
                 TabPosition = $"{TabIndex}/4";
+            });
+
+
+            ToInportFormGoogleSheet = new RelayCommand<Window>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                ImportFileFromGoogleSheetAsync();
             });
 
             ToAddExcelCommand = new RelayCommand<Window>((p) =>
@@ -1870,44 +1879,39 @@ namespace QuanLyKhuCachLy.ViewModel
                     break;
             }
         }
-        void ImportFileFromGoogleSheet()
+        async System.Threading.Tasks.Task ImportFileFromGoogleSheetAsync()
         {
-            string[] Scopes = { SheetsService.Scope.SpreadsheetsReadonly };
+            string[] Scopes = { SheetsService.Scope.Spreadsheets};
             string ApplicationName = "QLKCL";
+            String spreadsheetId = "1NlQ3tmbvGJE2hSkUZgupY3tRqUJTcC9SAfD9SoqQGMM";
+            String range = "Sheet1";
+            string credentialPath = Path.Combine(Environment.CurrentDirectory, ".credentials", ApplicationName);
             UserCredential credential;
             using (var stream =
                 new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
             {
-               
-                string credPath = "token.json";
-                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-                    GoogleClientSecrets.Load(stream).Secrets,
-                    Scopes,
-                    "user",
-                    CancellationToken.None,
-                    new FileDataStore(credPath, true)).Result;
+                    credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
+                    clientSecrets: GoogleClientSecrets.FromStream(stream).Secrets,
+                    scopes: Scopes,
+                    user: "user",
+                    taskCancellationToken: CancellationToken.None,
+                    new FileDataStore(credentialPath, true)
+                    );
             }
-
-            var service = new SheetsService(new BaseClientService.Initializer()
+            var service = new SheetsService(new Google.Apis.Services.BaseClientService.Initializer()
             {
                 HttpClientInitializer = credential,
                 ApplicationName = ApplicationName,
             });
 
-            String spreadsheetId = "1NlQ3tmbvGJE2hSkUZgupY3tRqUJTcC9SAfD9SoqQGMM";
-            String range = "Class Data!A2:E";
-            SpreadsheetsResource.ValuesResource.GetRequest request =
+            var request =
                     service.Spreadsheets.Values.Get(spreadsheetId, range);
 
             ValueRange response = request.Execute();
             IList<IList<Object>> values = response.Values;
             if (values != null && values.Count > 0)
             {
-                Console.WriteLine("Name, Major");
-                foreach (var row in values)
-                {
-                    MessageBox.Show("Get data");
-                }
+                MessageBox.Show(values[1][1].ToString());
             }
             else
             {
