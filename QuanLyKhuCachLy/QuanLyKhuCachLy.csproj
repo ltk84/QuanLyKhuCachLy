@@ -325,6 +325,9 @@
     <Compile Include="Model\InjectionRecord.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\NATION.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\NotificationTemplate.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
@@ -378,6 +381,7 @@
     <Compile Include="ViewModel\InjectionRecordViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\NationViewModel.cs" />
     <Compile Include="ViewModel\NotificationViewModel.cs" />
     <Compile Include="ViewModel\QuarantineAreaInformationViewModel.cs" />
     <Compile Include="AuthenticationScreen.xaml.cs">

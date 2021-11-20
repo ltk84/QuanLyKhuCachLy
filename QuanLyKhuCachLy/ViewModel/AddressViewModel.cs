@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace QuanLyKhuCachLy.ViewModel
 {
-    public class AddressViewModel : BaseViewModel
+    public class AddressViewModel
     {
         public static List<PROVINCE> ProvinceList { get; set; }
         public static List<DISTRICT> DistrictList { get; set; }
         public static List<WARD> WardList { get; set; }
 
-        public AddressViewModel()
+        static AddressViewModel()
         {
             ProvinceList = new List<PROVINCE>(DataProvider.ins.db.PROVINCEs);
 

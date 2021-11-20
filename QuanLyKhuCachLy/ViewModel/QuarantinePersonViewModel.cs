@@ -562,8 +562,6 @@ namespace QuanLyKhuCachLy.ViewModel
                 OnPropertyChanged();
             }
         }
-
-        public AddressViewModel AddressViewModel { get; set; }
         #endregion
 
         #region validation
@@ -769,63 +767,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #endregion
 
-        protected virtual void ChangeRoom()
-        {
-            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
-            {
-                try
-                {
-                    var Person = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == SelectedItem.id).FirstOrDefault();
-                    if (Person == null) return;
 
-                    var Room = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == NewRoomSelected.id).FirstOrDefault();
-                    if (Room == null) return;
-
-                    Person.roomID = Room.id;
-
-                    DataProvider.ins.db.SaveChanges();
-
-                    NewRoomSelected = null;
-
-                    transaction.Commit();
-                }
-                catch (DbUpdateException e)
-                {
-                    transaction.Rollback();
-                    string error = "Lỗi db update";
-
-                    MessageBox.Show(error);
-                }
-                catch (DbEntityValidationException e)
-                {
-                    transaction.Rollback();
-                    string error = "Lỗi validation";
-
-                    MessageBox.Show(error);
-                }
-                catch (NotSupportedException e)
-                {
-                    transaction.Rollback();
-                    string error = "Lỗi db đéo support";
-
-                    MessageBox.Show(error);
-                }
-                catch (ObjectDisposedException e)
-                {
-                    transaction.Rollback();
-                    string error = "Lỗi db object disposed";
-
-                    MessageBox.Show(error);
-                }
-                catch (InvalidOperationException e)
-                {
-                    transaction.Rollback();
-                    string error = "Lỗi invalid operation";
-
-                    MessageBox.Show(error);
-                }
-            }
-        }
 
         public QuarantinePersonViewModel()
         {
@@ -903,17 +845,16 @@ namespace QuanLyKhuCachLy.ViewModel
             InjectionRecordViewModel = InjectionRecordViewModel.ins;
             DestinationHistoryViewModel = DestinationHistoryViewModel.ins;
             TestingResultViewModel = TestingResultViewModel.ins;
-            AddressViewModel = new AddressViewModel();
 
-            NationalityList = new ObservableCollection<string>() {
-                "Việt Nam", "Mỹ", "Pháp", "Đức", "Trung Quốc"
-            };
+            NationalityList = new ObservableCollection<string>();
 
             ProvinceList = new ObservableCollection<string>();
 
             DistrictList = new ObservableCollection<string>();
 
             WardList = new ObservableCollection<string>();
+
+            InitNationList();
 
             InitProvinceList();
 
@@ -1046,6 +987,64 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #region method
 
+        protected virtual void ChangeRoom()
+        {
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    var Person = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+                    if (Person == null) return;
+
+                    var Room = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == NewRoomSelected.id).FirstOrDefault();
+                    if (Room == null) return;
+
+                    Person.roomID = Room.id;
+
+                    DataProvider.ins.db.SaveChanges();
+
+                    NewRoomSelected = null;
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
+        }
+
         void RefeshTab()
         {
             SetDefaultUI();
@@ -1127,6 +1126,14 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     MessageBox.Show(error);
                 }
+            }
+        }
+
+        void InitNationList()
+        {
+            foreach (var item in NationViewModel.NationList)
+            {
+                NationalityList.Add(item.NAME);
             }
         }
 

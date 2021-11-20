@@ -361,9 +361,6 @@ namespace QuanLyKhuCachLy.ViewModel
         }
         #endregion
 
-        #region child view model
-        private AddressViewModel AddressViewModel { get; set; }
-        #endregion
 
         #region command
         public ICommand AddCommand { get; set; }
@@ -500,15 +497,12 @@ namespace QuanLyKhuCachLy.ViewModel
             SelectedFilterProperty = "Chọn phương thức lọc";
             getFilterProperty();
 
-            NationalityList = new ObservableCollection<string>() {
-                "Việt Nam", "Mỹ", "Pháp", "Đức", "Trung Quốc"
-            };
-
-            AddressViewModel = new AddressViewModel();
-
+            NationalityList = new ObservableCollection<string>();
             ProvinceList = new ObservableCollection<string>();
             DistrictList = new ObservableCollection<string>();
             WardList = new ObservableCollection<string>();
+
+            InitNationList();
 
             InitProvinceList();
 
@@ -667,6 +661,14 @@ namespace QuanLyKhuCachLy.ViewModel
             Tab2 = Visibility.Hidden;
             TabList = Visibility.Visible;
             TabInformation = Visibility.Hidden;
+        }
+
+        void InitNationList()
+        {
+            foreach (var item in NationViewModel.NationList)
+            {
+                NationalityList.Add(item.NAME);
+            }
         }
 
         void InitProvinceList()

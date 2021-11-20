@@ -41,5 +41,6 @@ namespace QuanLyKhuCachLy.Model
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TestingResult> TestingResults { get; set; }
         public virtual DbSet<WARD> WARDs { get; set; }
+        public virtual DbSet<NATION> NATIONs { get; set; }
     }
 }

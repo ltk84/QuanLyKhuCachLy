@@ -35,6 +35,7 @@
         <AssociationConnector Association="QLKCLModel.FK__Quarantin__roomI__3F466844" ManuallyRouted="false" />
         <AssociationConnector Association="QLKCLModel.FK__TestingRe__quara__4222D4EF" ManuallyRouted="false" />
         <AssociationConnector Association="QLKCLModel.FK__Quarantin__level__403A8C7D" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="QLKCLModel.NATION" Width="1.5" PointX="0.75" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
