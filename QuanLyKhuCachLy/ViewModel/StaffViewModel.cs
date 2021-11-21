@@ -492,6 +492,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             StaffList = new ObservableCollection<Staff>(DataProvider.ins.db.Staffs);
             StaffListView = StaffList.ToArray();
+
             FilterType = new string[] { "Tất cả", "Giới tính", "Quốc tịch", "Chức vụ", "Bộ phận" };
             SelectedFilterType = "Tất cả";
             SelectedFilterProperty = "Chọn phương thức lọc";
@@ -624,7 +625,6 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 HandleChangeTab(AddStaffTabIndex, "previous", addStaffScreen);
             });
-
 
             NextStaffTabCommand = new RelayCommand<Window>((p) =>
             {

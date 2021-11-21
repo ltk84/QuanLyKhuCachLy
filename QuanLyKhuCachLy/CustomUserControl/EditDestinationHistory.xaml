@@ -64,7 +64,10 @@
                     Foreground="#FF434A54">
                     Ngày đến (*)
                 </TextBlock>
-                <DatePicker materialDesign:HintAssist.Hint="Nhập ngày đến" Style="{StaticResource DatePickerField}">
+                <DatePicker
+                    materialDesign:HintAssist.Hint="Nhập ngày đến"
+                    utility:ProtocolSettingsLayout.MVVMHasError="{Binding DestinationHistoryViewModel.DateTimeFieldHasError}"
+                    Style="{StaticResource DatePickerField}">
                     <DatePicker.SelectedDate>
                         <Binding
                             Path="DestinationHistoryViewModel.HDDateArrive"
@@ -73,6 +76,9 @@
                             <Binding.Converter>
                                 <convert:DateTimeToStringConverter />
                             </Binding.Converter>
+                            <Binding.ValidationRules>
+                                <vr:RequiredField />
+                            </Binding.ValidationRules>
                         </Binding>
                     </DatePicker.SelectedDate>
                 </DatePicker>
@@ -101,12 +107,13 @@
                 </TextBlock>
                 <ComboBox
                     utility:ProtocolSettingsLayout.MVVMHasError="{Binding DestinationHistoryViewModel.ProvinceFieldHasError}"
-                    ItemsSource="{Binding ProvinceList}"
+                    ItemsSource="{Binding DestinationHistoryViewModel.ProvinceList}"
                     Style="{StaticResource ComboBoxField}">
+
                     <ComboBox.SelectedItem>
                         <Binding Path="DestinationHistoryViewModel.HDSelectedProvince" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
-                                <vr:RequiredFieldNonCommit />
+                                <vr:RequiredField />
                             </Binding.ValidationRules>
                         </Binding>
                     </ComboBox.SelectedItem>
@@ -126,10 +133,14 @@
                 </TextBlock>
                 <ComboBox
                     utility:ProtocolSettingsLayout.MVVMHasError="{Binding DestinationHistoryViewModel.DistrictFieldHasError}"
-                    ItemsSource="{Binding DistrictList}"
+                    ItemsSource="{Binding DestinationHistoryViewModel.DistrictList}"
                     Style="{StaticResource ComboBoxField}">
                     <ComboBox.SelectedItem>
-                        <Binding Path="DestinationHistoryViewModel.HDSelectedDistrict" UpdateSourceTrigger="PropertyChanged" />
+                        <Binding Path="DestinationHistoryViewModel.HDSelectedDistrict" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <vr:RequiredField />
+                            </Binding.ValidationRules>
+                        </Binding>
                     </ComboBox.SelectedItem>
                 </ComboBox>
             </StackPanel>
@@ -147,10 +158,14 @@
                 </TextBlock>
                 <ComboBox
                     utility:ProtocolSettingsLayout.MVVMHasError="{Binding DestinationHistoryViewModel.WardFieldHasError}"
-                    ItemsSource="{Binding WardList}"
+                    ItemsSource="{Binding DestinationHistoryViewModel.WardList}"
                     Style="{StaticResource ComboBoxField}">
                     <ComboBox.SelectedItem>
-                        <Binding Path="DestinationHistoryViewModel.HDSelectedWard" UpdateSourceTrigger="PropertyChanged" />
+                        <Binding Path="DestinationHistoryViewModel.HDSelectedWard" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <vr:RequiredField />
+                            </Binding.ValidationRules>
+                        </Binding>
                     </ComboBox.SelectedItem>
                 </ComboBox>
             </StackPanel>

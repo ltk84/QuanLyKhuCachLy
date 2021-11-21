@@ -31,6 +31,7 @@ namespace QuanLyKhuCachLy.Model
         public virtual DbSet<DISTRICT> DISTRICTs { get; set; }
         public virtual DbSet<HealthInformation> HealthInformations { get; set; }
         public virtual DbSet<InjectionRecord> InjectionRecords { get; set; }
+        public virtual DbSet<NATION> NATIONs { get; set; }
         public virtual DbSet<NotificationTemplate> NotificationTemplates { get; set; }
         public virtual DbSet<PROVINCE> PROVINCEs { get; set; }
         public virtual DbSet<QuarantineArea> QuarantineAreas { get; set; }
@@ -41,6 +42,5 @@ namespace QuanLyKhuCachLy.Model
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TestingResult> TestingResults { get; set; }
         public virtual DbSet<WARD> WARDs { get; set; }
-        public virtual DbSet<NATION> NATIONs { get; set; }
     }
 }

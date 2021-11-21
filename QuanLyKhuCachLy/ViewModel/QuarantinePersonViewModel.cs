@@ -418,7 +418,11 @@ namespace QuanLyKhuCachLy.ViewModel
         public string QPApartmentNumber { get => _QPApartmentNumber; set { _QPApartmentNumber = value; OnPropertyChanged(); } }
 
         private string _QPSelectedProvince;
-        public string QPSelectedProvince { get => _QPSelectedProvince; set { _QPSelectedProvince = value; OnPropertyChanged(); InitDistrictList(); } }
+        public string QPSelectedProvince
+        {
+            get => _QPSelectedProvince;
+            set { _QPSelectedProvince = value; OnPropertyChanged(); InitDistrictList(); }
+        }
 
         private string _QPSelectedWard;
         public string QPSelectedWard

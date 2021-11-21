@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="QLKCLModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="QLKCLModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="id" />
@@ -18,11 +18,11 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="province" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="district" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="ward" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="streetName" Type="nvarchar" MaxLength="20" />
-          <Property Name="apartmentNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="province" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="district" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ward" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="streetName" Type="nvarchar" MaxLength="255" />
+          <Property Name="apartmentNumber" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="DestinationHistory">
           <Key>
@@ -107,7 +107,7 @@
           <Property Name="dateOfBirth" Type="date" Nullable="false" />
           <Property Name="sex" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="citizenID" Type="varchar" MaxLength="20" />
-          <Property Name="nationality" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="nationality" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="phoneNumber" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="levelID" Type="int" />
           <Property Name="arrivedDate" Type="date" Nullable="false" />
@@ -144,7 +144,7 @@
           <Property Name="dateOfBirth" Type="date" Nullable="false" />
           <Property Name="sex" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="citizenID" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="nationality" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="nationality" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="healthInsuranceID" Type="varchar" MaxLength="20" />
           <Property Name="phoneNumber" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="addressID" Type="int" Nullable="false" />
@@ -431,7 +431,8 @@
             <End Role="WARD" EntitySet="WARD" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QLKCLModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -448,11 +449,11 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="province" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="district" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ward" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="streetName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="apartmentNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="province" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="district" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ward" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="streetName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="apartmentNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DestinationHistories" Relationship="Self.FK__Destinati__addre__37A5467C" FromRole="Address" ToRole="DestinationHistory" />
           <NavigationProperty Name="QuarantineAreas" Relationship="Self.FK__Quarantin__addre__3A81B327" FromRole="Address" ToRole="QuarantineArea" />
           <NavigationProperty Name="QuarantinePersons" Relationship="Self.FK__Quarantin__addre__3C69FB99" FromRole="Address" ToRole="QuarantinePerson" />
@@ -505,6 +506,13 @@
           <Property Name="quarantinePersonID" Type="Int32" />
           <NavigationProperty Name="QuarantinePerson" Relationship="Self.FK__Injection__quara__398D8EEE" FromRole="InjectionRecord" ToRole="QuarantinePerson" />
         </EntityType>
+        <EntityType Name="NATION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="NotificationTemplate">
           <Key>
             <PropertyRef Name="id" />
@@ -543,7 +551,7 @@
           <Property Name="dateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="sex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="citizenID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="nationality" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nationality" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="phoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="levelID" Type="Int32" />
           <Property Name="arrivedDate" Type="DateTime" Nullable="false" Precision="0" />
@@ -591,7 +599,7 @@
           <Property Name="dateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="sex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="citizenID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nationality" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nationality" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="healthInsuranceID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="phoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="addressID" Type="Int32" Nullable="false" />
@@ -814,6 +822,7 @@
           <EntitySet Name="DISTRICTs" EntityType="Self.DISTRICT" />
           <EntitySet Name="HealthInformations" EntityType="Self.HealthInformation" />
           <EntitySet Name="InjectionRecords" EntityType="Self.InjectionRecord" />
+          <EntitySet Name="NATIONs" EntityType="Self.NATION" />
           <EntitySet Name="NotificationTemplates" EntityType="Self.NotificationTemplate" />
           <EntitySet Name="PROVINCEs" EntityType="Self.PROVINCE" />
           <EntitySet Name="QuarantineAreas" EntityType="Self.QuarantineArea" />
@@ -880,15 +889,7 @@
             <End Role="Severity" EntitySet="Severities" />
             <End Role="QuarantineRoom" EntitySet="QuarantineRooms" />
           </AssociationSet>
-          <EntitySet Name="NATIONs" EntityType="QLKCLModel.NATION" />
         </EntityContainer>
-        <EntityType Name="NATION">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -958,6 +959,14 @@
                 <ScalarProperty Name="dateInjection" ColumnName="dateInjection" />
                 <ScalarProperty Name="vaccineName" ColumnName="vaccineName" />
                 <ScalarProperty Name="quarantinePersonID" ColumnName="quarantinePersonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NATIONs">
+            <EntityTypeMapping TypeName="QLKCLModel.NATION">
+              <MappingFragment StoreEntitySet="NATION">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1074,14 +1083,6 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="districtID" ColumnName="districtID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="NATIONs">
-            <EntityTypeMapping TypeName="QLKCLModel.NATION">
-              <MappingFragment StoreEntitySet="NATION">
-                <ScalarProperty Name="NAME" ColumnName="NAME" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -183,7 +183,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 QuarantineArea = DataProvider.ins.db.QuarantineAreas.First();
                 QAAdress = QuarantineArea.Address;
                 QuarantineAreaAddress = $"{QuarantineArea.Address?.apartmentNumber} {QuarantineArea.Address?.streetName}, {QuarantineArea.Address.ward}, {QuarantineArea.Address.district}, {QuarantineArea.Address.province}";
-                Manager = DataProvider.ins.db.Staffs.Where(staff => staff.id == QuarantineArea.managerID).First();
+                Manager = DataProvider.ins.db.Staffs.Where(staff => staff.id == QuarantineArea.managerID).FirstOrDefault();
             }
         }
 

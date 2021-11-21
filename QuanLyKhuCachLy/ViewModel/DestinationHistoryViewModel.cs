@@ -78,13 +78,25 @@ namespace QuanLyKhuCachLy.ViewModel
         public string HDApartmentNumber { get => _HDApartmentNumber; set { _HDApartmentNumber = value; OnPropertyChanged(); } }
 
         private string _HDSelectedProvince;
-        public string HDSelectedProvince { get => _HDSelectedProvince; set { _HDSelectedProvince = value; OnPropertyChanged(); } }
+        public string HDSelectedProvince
+        {
+            get => _HDSelectedProvince;
+            set { _HDSelectedProvince = value; OnPropertyChanged(); InitDistrictList(); }
+        }
 
         private string _HDSelectedWard;
-        public string HDSelectedWard { get => _HDSelectedWard; set { _HDSelectedWard = value; OnPropertyChanged(); } }
+        public string HDSelectedWard
+        {
+            get => _HDSelectedWard;
+            set { _HDSelectedWard = value; OnPropertyChanged(); }
+        }
 
         private string _HDSelectedDistrict;
-        public string HDSelectedDistrict { get => _HDSelectedDistrict; set { _HDSelectedDistrict = value; OnPropertyChanged(); } }
+        public string HDSelectedDistrict
+        {
+            get => _HDSelectedDistrict;
+            set { _HDSelectedDistrict = value; OnPropertyChanged(); InitWardList(); }
+        }
 
         private string _HDDisplayAddress;
         public string HDDisplayAddress { get => _HDDisplayAddress; set { _HDDisplayAddress = value; OnPropertyChanged(); } }
@@ -123,6 +135,33 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 _AddressList = value;
                 OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<string> _ProvinceList;
+        public ObservableCollection<string> ProvinceList
+        {
+            get => _ProvinceList; set
+            {
+                _ProvinceList = value; OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<string> _DistrictList;
+        public ObservableCollection<string> DistrictList
+        {
+            get => _DistrictList; set
+            {
+                _DistrictList = value; OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<string> _WardList;
+        public ObservableCollection<string> WardList
+        {
+            get => _WardList; set
+            {
+                _WardList = value; OnPropertyChanged();
             }
         }
 
@@ -171,6 +210,15 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
+        private bool _DateTimeFieldHasError;
+        public bool DateTimeFieldHasError
+        {
+            get => _DateTimeFieldHasError; set
+            {
+                _DateTimeFieldHasError = value; OnPropertyChanged();
+            }
+        }
+
         #endregion
 
 
@@ -181,11 +229,17 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             DestinationHistoryList = new ObservableCollection<DestinationHistory>();
             AddressList = new ObservableCollection<Address>();
+            ProvinceList = new ObservableCollection<string>();
+            WardList = new ObservableCollection<string>();
+            DistrictList = new ObservableCollection<string>();
+
+            InitProvinceList();
+
             idForTask = 0;
 
             AddOnUICommand = new RelayCommand<Window>((p) =>
             {
-                if (!DistrictFieldHasError && !ProvinceFieldHasError && !WardFieldHasError)
+                if (!DistrictFieldHasError && !ProvinceFieldHasError && !WardFieldHasError && !DateTimeFieldHasError)
                     return true;
                 return false;
             }, (p) =>
@@ -196,7 +250,9 @@ namespace QuanLyKhuCachLy.ViewModel
 
             EditOnUICommand = new RelayCommand<Window>((p) =>
             {
-                return true;
+                if (!DistrictFieldHasError && !ProvinceFieldHasError && !WardFieldHasError && !DateTimeFieldHasError)
+                    return true;
+                return false;
             }, (p) =>
             {
                 EditDestinationHistoryUI();
@@ -245,6 +301,34 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #region method
 
+        void InitProvinceList()
+        {
+            foreach (var item in AddressViewModel.ProvinceList)
+            {
+                ProvinceList.Add(item.name);
+            }
+        }
+
+        void InitDistrictList()
+        {
+            AddressViewModel.ProvinceSelectEvent(HDSelectedProvince);
+            DistrictList.Clear();
+            foreach (var item in AddressViewModel.DistrictList)
+            {
+                DistrictList.Add(item.name);
+            }
+        }
+
+        void InitWardList()
+        {
+            AddressViewModel.DistrictSelectEVent(HDSelectedDistrict);
+            WardList.Clear();
+            foreach (var item in AddressViewModel.WardList)
+            {
+                WardList.Add(item.name);
+            }
+        }
+
         void ClearData()
         {
             HDDateArrive = DateTime.MinValue;
@@ -262,11 +346,12 @@ namespace QuanLyKhuCachLy.ViewModel
             Address HDAddress = AddressList.Where(x => x.id == SelectedItem.addressID).FirstOrDefault();
             if (HDAddress == null) return;
 
+
+            HDSelectedProvince = HDAddress.province;
+            HDSelectedDistrict = HDAddress.district;
+            HDSelectedWard = HDAddress.ward;
             HDApartmentNumber = HDAddress.apartmentNumber;
             HDStreetName = HDAddress.streetName;
-            HDSelectedWard = HDAddress.ward;
-            HDSelectedDistrict = HDAddress.district;
-            HDSelectedProvince = HDAddress.province;
         }
 
         void AddDestinationHistoryUI()
