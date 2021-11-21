@@ -32,6 +32,21 @@ namespace QuanLyKhuCachLy.ViewModel
             set { _QAAdress = value; }
         }
 
+        private string _StreetName;
+        public string StreetName { get => _StreetName; set { _StreetName = value; OnPropertyChanged(); } }
+
+        private string _ApartmentNumber;
+        public string ApartmentNumber { get => _ApartmentNumber; set { _ApartmentNumber = value; OnPropertyChanged(); } }
+
+        private string _SelectedProvince;
+        public string SelectedProvince { get => _SelectedProvince; set { _SelectedProvince = value; OnPropertyChanged(); InitDistrictList(); } }
+
+        private string _SelectedWard;
+        public string SelectedWard { get => _SelectedWard; set { _SelectedWard = value; OnPropertyChanged(); } }
+
+        private string _SelectedDistrict;
+        public string SelectedDistrict { get => _SelectedDistrict; set { _SelectedDistrict = value; OnPropertyChanged(); InitWardList(); } }
+
         private Model.Staff _Manager;
 
         public Model.Staff Manager
@@ -167,27 +182,55 @@ namespace QuanLyKhuCachLy.ViewModel
             });
 
 
-            ProvinceList = new ObservableCollection<string>() {
-                "Hồ Chí Minh", "Bình Dương", "Vĩnh Long"
-            };
-            DistrictList = new ObservableCollection<string>() {
-                "Quận 1", "Quận 2", "Quận 3", "Quận 4"
-            };
-            WardList = new ObservableCollection<string>()
-            {
-                "Phú Thạnh", "Phú Thọ Hòa", "Bình Hưng Hòa"
-            };
+            ProvinceList = new ObservableCollection<string>();
+            DistrictList = new ObservableCollection<string>();
+            WardList = new ObservableCollection<string>();
+
+            InitProvinceList();
 
             if (DataProvider.ins.db.QuarantineAreas.Count() != 0)
             {
                 QuarantineArea = DataProvider.ins.db.QuarantineAreas.First();
                 QAAdress = QuarantineArea.Address;
                 QuarantineAreaAddress = $"{QuarantineArea.Address?.apartmentNumber} {QuarantineArea.Address?.streetName}, {QuarantineArea.Address.ward}, {QuarantineArea.Address.district}, {QuarantineArea.Address.province}";
+                SelectedProvince = QAAdress.province;
+                SelectedDistrict = QAAdress.district;
+                SelectedWard = QAAdress.ward;
+                ApartmentNumber = QAAdress.apartmentNumber;
+                StreetName = QAAdress.streetName;
                 Manager = DataProvider.ins.db.Staffs.Where(staff => staff.id == QuarantineArea.managerID).FirstOrDefault();
             }
         }
 
         #region method
+
+        void InitProvinceList()
+        {
+            foreach (var item in AddressViewModel.ProvinceList)
+            {
+                ProvinceList.Add(item.name);
+            }
+        }
+
+        void InitDistrictList()
+        {
+            AddressViewModel.ProvinceSelectEvent(SelectedProvince);
+            DistrictList.Clear();
+            foreach (var item in AddressViewModel.DistrictList)
+            {
+                DistrictList.Add(item.name);
+            }
+        }
+
+        void InitWardList()
+        {
+            AddressViewModel.DistrictSelectEVent(SelectedDistrict);
+            WardList.Clear();
+            foreach (var item in AddressViewModel.WardList)
+            {
+                WardList.Add(item.name);
+            }
+        }
 
         void SetDefaultEditTab()
         {
@@ -203,6 +246,13 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 try
                 {
+
+                    QAAdress.province = SelectedProvince;
+                    QAAdress.district = SelectedDistrict;
+                    QAAdress.ward = SelectedWard;
+                    QAAdress.apartmentNumber = ApartmentNumber;
+                    QAAdress.streetName = StreetName;
+
                     DataProvider.ins.db.SaveChanges();
 
                     QuarantineAreaAddress = $"{QuarantineArea.Address?.apartmentNumber} {QuarantineArea.Address?.streetName}, {QuarantineArea.Address.ward}, {QuarantineArea.Address.district}, {QuarantineArea.Address.province}";

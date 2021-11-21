@@ -127,7 +127,7 @@
                         ItemsSource="{Binding ProvinceList}"
                         Style="{StaticResource ComboBoxField}">
                         <ComboBox.SelectedItem>
-                            <Binding Path="QAAdress.province" UpdateSourceTrigger="PropertyChanged">
+                            <Binding Path="SelectedProvince" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <vr:RequiredFieldNonCommit />
                                 </Binding.ValidationRules>
@@ -152,7 +152,7 @@
                         ItemsSource="{Binding DistrictList}"
                         Style="{StaticResource ComboBoxField}">
                         <ComboBox.SelectedItem>
-                            <Binding Path="QAAdress.district" UpdateSourceTrigger="PropertyChanged">
+                            <Binding Path="SelectedDistrict" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <vr:RequiredFieldNonCommit />
                                 </Binding.ValidationRules>
@@ -177,7 +177,7 @@
                         ItemsSource="{Binding WardList}"
                         Style="{StaticResource ComboBoxField}">
                         <ComboBox.SelectedItem>
-                            <Binding Path="QAAdress.ward" UpdateSourceTrigger="PropertyChanged">
+                            <Binding Path="SelectedWard" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <vr:RequiredFieldNonCommit />
                                 </Binding.ValidationRules>
