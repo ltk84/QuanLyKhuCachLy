@@ -10,7 +10,16 @@ namespace QuanLyKhuCachLy.ViewModel
         #region property
         #region Handle Dashboard
         public DashboardViewModel DashboardVM { get; set; }
-        public QuarantineRoomViewModel QuarantineRoomVM { get; set; }
+
+        private QuarantineRoomViewModel _QuarantineRoomVM;
+        public QuarantineRoomViewModel QuarantineRoomVM
+        {
+            get => _QuarantineRoomVM; set
+            {
+                _QuarantineRoomVM = value;
+                OnPropertyChanged();
+            }
+        }
         public QuarantinePersonViewModel quarantinePersonViewModel { get; set; }
         public StaffViewModel StaffVM { get; set; }
         public ReportViewModel ReportVM { get; set; }
@@ -139,7 +148,6 @@ namespace QuanLyKhuCachLy.ViewModel
                 LoadLoginScreenAndCheckInitSetUp(p);
             });
 
-            //Init();
 
             QAInformationVM = QuarantineAreaInformationViewModel.ins;
             QAInformationVM.ParentVM = this;
@@ -188,9 +196,7 @@ namespace QuanLyKhuCachLy.ViewModel
             ReportVM = new ReportViewModel();
             NotificationVM = new NotificationViewModel();
             SettingVM = new SettingViewModel();
-            // test room
             ToDashboard();
-            //ToPerson();
         }
 
         private void ToDashboard()

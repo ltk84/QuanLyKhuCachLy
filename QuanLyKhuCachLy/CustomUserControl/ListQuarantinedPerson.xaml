@@ -184,7 +184,7 @@
             IsReadOnly="True"
             ItemsSource="{Binding PeopleListView}"
             LoadingRow="QuarantinedPersonTable_LoadingRow"
-            SelectedItem="{Binding SelectedItem}"
+            SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
             SelectionMode="Single"
             SelectionUnit="FullRow">
             <DataGrid.Columns>

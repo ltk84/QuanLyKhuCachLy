@@ -125,7 +125,7 @@
                     </TextBlock>
                     <ComboBox
                         utility:ProtocolSettingsLayout.MVVMHasError="{Binding QAProvinceFieldHasError}"
-                        ItemsSource="{Binding ProvinceList}"
+                        ItemsSource="{Binding QAProvinceList}"
                         Style="{StaticResource ComboBoxField}">
                         <ComboBox.SelectedItem>
                             <Binding Path="QASelectedProvince" UpdateSourceTrigger="PropertyChanged">
@@ -150,7 +150,7 @@
                     </TextBlock>
                     <ComboBox
                         utility:ProtocolSettingsLayout.MVVMHasError="{Binding QADistrictFieldHasError}"
-                        ItemsSource="{Binding DistrictList}"
+                        ItemsSource="{Binding QADistrictList}"
                         Style="{StaticResource ComboBoxField}">
                         <ComboBox.SelectedItem>
                             <Binding Path="QASelectedDistrict" UpdateSourceTrigger="PropertyChanged">
@@ -175,7 +175,7 @@
                     </TextBlock>
                     <ComboBox
                         utility:ProtocolSettingsLayout.MVVMHasError="{Binding QAWardFieldHasError}"
-                        ItemsSource="{Binding WardList}"
+                        ItemsSource="{Binding QAWardList}"
                         Style="{StaticResource ComboBoxField}">
                         <ComboBox.SelectedItem>
                             <Binding Path="QASelectedWard" UpdateSourceTrigger="PropertyChanged">

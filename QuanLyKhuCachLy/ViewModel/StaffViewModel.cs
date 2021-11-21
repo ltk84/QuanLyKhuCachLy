@@ -250,13 +250,13 @@ namespace QuanLyKhuCachLy.ViewModel
         public string ApartmentNumber { get => _ApartmentNumber; set { _ApartmentNumber = value; OnPropertyChanged(); } }
 
         private string _SelectedProvince;
-        public string SelectedProvince { get => _SelectedProvince; set { _SelectedProvince = value; OnPropertyChanged(); } }
+        public string SelectedProvince { get => _SelectedProvince; set { _SelectedProvince = value; OnPropertyChanged(); InitDistrictList(); } }
 
         private string _SelectedWard;
         public string SelectedWard { get => _SelectedWard; set { _SelectedWard = value; OnPropertyChanged(); } }
 
         private string _SelectedDistrict;
-        public string SelectedDistrict { get => _SelectedDistrict; set { _SelectedDistrict = value; OnPropertyChanged(); } }
+        public string SelectedDistrict { get => _SelectedDistrict; set { _SelectedDistrict = value; OnPropertyChanged(); InitWardList(); } }
 
         private string _DisplayAdress;
         public string DisplayAddress { get => _DisplayAdress; set { _DisplayAdress = value; OnPropertyChanged(); } }
@@ -361,6 +361,7 @@ namespace QuanLyKhuCachLy.ViewModel
         }
         #endregion
 
+
         #region command
         public ICommand AddCommand { get; set; }
         public ICommand SearchCommand { get; set; }
@@ -376,6 +377,7 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand NextStaffTabCommand { get; set; }
         public ICommand PreviousStaffTabCommand { get; set; }
         public ICommand CancelAddStaffTabCommand { get; set; }
+        public ICommand RefeshCommand { get; set; }
         #endregion
 
         #region validation
@@ -483,36 +485,27 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #endregion
         public StaffViewModel()
-
         {
-            Tab1 = Visibility.Visible;
-            Tab2 = Visibility.Hidden;
-            TabList = Visibility.Visible;
-            TabInformation = Visibility.Hidden;
+            SetDefaultUI();
 
             SetDefaultAddStaff();
 
             StaffList = new ObservableCollection<Staff>(DataProvider.ins.db.Staffs);
             StaffListView = StaffList.ToArray();
+
             FilterType = new string[] { "Tất cả", "Giới tính", "Quốc tịch", "Chức vụ", "Bộ phận" };
             SelectedFilterType = "Tất cả";
             SelectedFilterProperty = "Chọn phương thức lọc";
             getFilterProperty();
 
-            NationalityList = new ObservableCollection<string>() {
-                "Việt Nam", "Mỹ", "Pháp", "Đức", "Trung Quốc"
-            };
+            NationalityList = new ObservableCollection<string>();
+            ProvinceList = new ObservableCollection<string>();
+            DistrictList = new ObservableCollection<string>();
+            WardList = new ObservableCollection<string>();
 
-            ProvinceList = new ObservableCollection<string>() {
-                "Hồ Chí Minh", "Bình Dương", "Vĩnh Long"
-            };
-            DistrictList = new ObservableCollection<string>() {
-                "Quận 1", "Quận 2", "Quận 3", "Quận 4"
-            };
-            WardList = new ObservableCollection<string>()
-            {
-                "Phú Thạnh", "Phú Thọ Hòa", "Bình Hưng Hòa"
-            };
+            InitNationList();
+
+            InitProvinceList();
 
             SexList = new ObservableCollection<string>()
             {
@@ -640,7 +633,6 @@ namespace QuanLyKhuCachLy.ViewModel
                 HandleChangeTab(AddStaffTabIndex, "previous", addStaffScreen);
             });
 
-
             NextStaffTabCommand = new RelayCommand<Window>((p) =>
             {
 
@@ -652,9 +644,68 @@ namespace QuanLyKhuCachLy.ViewModel
                 HandleChangeTab(AddStaffTabIndex, "next", addStaffScreen);
             });
 
+            RefeshCommand = new RelayCommand<Window>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                RefeshTab();
+            });
+
         }
 
         #region method
+
+        void RefeshTab()
+        {
+            SetDefaultUI();
+            SelectedItem = null;
+        }
+
+        void SetDefaultUI()
+        {
+            Tab1 = Visibility.Visible;
+            Tab2 = Visibility.Hidden;
+            TabList = Visibility.Visible;
+            TabInformation = Visibility.Hidden;
+        }
+
+        void InitNationList()
+        {
+            foreach (var item in NationViewModel.NationList)
+            {
+                NationalityList.Add(item.NAME);
+            }
+        }
+
+        void InitProvinceList()
+        {
+            foreach (var item in AddressViewModel.ProvinceList)
+            {
+                ProvinceList.Add(item.name);
+            }
+        }
+
+        void InitDistrictList()
+        {
+            AddressViewModel.ProvinceSelectEvent(SelectedProvince);
+            DistrictList.Clear();
+            foreach (var item in AddressViewModel.DistrictList)
+            {
+                DistrictList.Add(item.name);
+            }
+        }
+
+        void InitWardList()
+        {
+            AddressViewModel.DistrictSelectEVent(SelectedDistrict);
+            WardList.Clear();
+            foreach (var item in AddressViewModel.WardList)
+            {
+                WardList.Add(item.name);
+            }
+        }
+
         void BackToStaffList()
         {
             TabInformation = Visibility.Hidden;
@@ -877,6 +928,8 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     StaffListView = new ObservableCollection<Model.Staff>(DataProvider.ins.db.Staffs).ToArray();
 
+                    transaction.Commit();
+
                 }
                 catch (DbUpdateException e)
                 {
@@ -986,12 +1039,12 @@ namespace QuanLyKhuCachLy.ViewModel
 
             Address StaffAdress = DataProvider.ins.db.Addresses.Where(x => x.id == SelectedItem.addressID).FirstOrDefault();
 
-
+            SelectedProvince = StaffAdress.province;
+            SelectedDistrict = StaffAdress.district;
+            SelectedWard = StaffAdress.ward;
             StreetName = StaffAdress.streetName;
             ApartmentNumber = StaffAdress.apartmentNumber;
-            SelectedProvince = StaffAdress.province;
-            SelectedWard = StaffAdress.ward;
-            SelectedDistrict = StaffAdress.district;
+
 
             InitDisplayAddress(StaffAdress);
         }

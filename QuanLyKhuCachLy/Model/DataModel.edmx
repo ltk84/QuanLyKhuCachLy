@@ -18,11 +18,11 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="province" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="district" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="ward" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="streetName" Type="nvarchar" MaxLength="20" />
-          <Property Name="apartmentNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="province" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="district" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ward" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="streetName" Type="nvarchar" MaxLength="255" />
+          <Property Name="apartmentNumber" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="DestinationHistory">
           <Key>
@@ -32,6 +32,14 @@
           <Property Name="dateArrive" Type="date" Nullable="false" />
           <Property Name="quarantinePersonID" Type="int" Nullable="false" />
           <Property Name="addressID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DISTRICT">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
+          <Property Name="provinceID" Type="int" />
         </EntityType>
         <EntityType Name="HealthInformation">
           <Key>
@@ -55,7 +63,29 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="dateInjection" Type="date" Nullable="false" />
           <Property Name="vaccineName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="quarantinePersonID" Type="int" Nullable="false" />
+          <Property Name="quarantinePersonID" Type="int" />
+        </EntityType>
+        <EntityType Name="NATION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="NotificationTemplate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="content" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="PROVINCE">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="QuarantineArea">
           <Key>
@@ -77,15 +107,16 @@
           <Property Name="dateOfBirth" Type="date" Nullable="false" />
           <Property Name="sex" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="citizenID" Type="varchar" MaxLength="20" />
-          <Property Name="nationality" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="nationality" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="phoneNumber" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="levelID" Type="int" Nullable="false" />
+          <Property Name="levelID" Type="int" />
           <Property Name="arrivedDate" Type="date" Nullable="false" />
           <Property Name="leaveDate" Type="date" Nullable="false" />
           <Property Name="quarantineDays" Type="int" Nullable="false" />
           <Property Name="addressID" Type="int" />
           <Property Name="roomID" Type="int" />
           <Property Name="completeQuarantine" Type="bit" />
+          <Property Name="healthInsuranceID" Type="nchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="QuarantineRoom">
           <Key>
@@ -94,7 +125,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="displayName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="capacity" Type="int" Nullable="false" />
-          <Property Name="levelID" Type="int" Nullable="false" />
+          <Property Name="levelID" Type="int" />
         </EntityType>
         <EntityType Name="Severity">
           <Key>
@@ -113,7 +144,7 @@
           <Property Name="dateOfBirth" Type="date" Nullable="false" />
           <Property Name="sex" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="citizenID" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="nationality" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="nationality" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="healthInsuranceID" Type="varchar" MaxLength="20" />
           <Property Name="phoneNumber" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="addressID" Type="int" Nullable="false" />
@@ -138,6 +169,14 @@
           <Property Name="dateTesting" Type="date" Nullable="false" />
           <Property Name="isPositive" Type="bit" Nullable="false" />
           <Property Name="quarantinePersonID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WARD">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
+          <Property Name="districtID" Type="int" />
         </EntityType>
         <Association Name="FK__Destinati__addre__37A5467C">
           <End Role="Address" Type="Self.Address" Multiplicity="1" />
@@ -166,7 +205,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Injection__quara__398D8EEE">
-          <End Role="QuarantinePerson" Type="Self.QuarantinePerson" Multiplicity="1">
+          <End Role="QuarantinePerson" Type="Self.QuarantinePerson" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="InjectionRecord" Type="Self.InjectionRecord" Multiplicity="*" />
@@ -204,7 +243,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Quarantin__level__3E52440B">
-          <End Role="Severity" Type="Self.Severity" Multiplicity="1" />
+          <End Role="Severity" Type="Self.Severity" Multiplicity="0..1" />
           <End Role="QuarantinePerson" Type="Self.QuarantinePerson" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Severity">
@@ -216,7 +255,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Quarantin__level__403A8C7D">
-          <End Role="Severity" Type="Self.Severity" Multiplicity="1" />
+          <End Role="Severity" Type="Self.Severity" Multiplicity="0..1" />
           <End Role="QuarantineRoom" Type="Self.QuarantineRoom" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Severity">
@@ -267,6 +306,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DISTRICT_PROVINCE">
+          <End Role="PROVINCE" Type="Self.PROVINCE" Multiplicity="0..1" />
+          <End Role="DISTRICT" Type="Self.DISTRICT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVINCE">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DISTRICT">
+              <PropertyRef Name="provinceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_HealthInfor_Person">
           <End Role="QuarantinePerson" Type="Self.QuarantinePerson" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -293,12 +344,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_WARD_DISTRICT">
+          <End Role="DISTRICT" Type="Self.DISTRICT" Multiplicity="0..1" />
+          <End Role="WARD" Type="Self.WARD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DISTRICT">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="WARD">
+              <PropertyRef Name="districtID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="QLKCLModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DestinationHistory" EntityType="Self.DestinationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DISTRICT" EntityType="Self.DISTRICT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HealthInformation" EntityType="Self.HealthInformation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InjectionRecord" EntityType="Self.InjectionRecord" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NATION" EntityType="Self.NATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NotificationTemplate" EntityType="Self.NotificationTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROVINCE" EntityType="Self.PROVINCE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QuarantineArea" EntityType="Self.QuarantineArea" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QuarantinePerson" EntityType="Self.QuarantinePerson" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QuarantineRoom" EntityType="Self.QuarantineRoom" Schema="dbo" store:Type="Tables" />
@@ -306,6 +373,7 @@
           <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TestingResult" EntityType="Self.TestingResult" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WARD" EntityType="Self.WARD" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Destinati__addre__37A5467C" Association="Self.FK__Destinati__addre__37A5467C">
             <End Role="Address" EntitySet="Address" />
             <End Role="DestinationHistory" EntitySet="DestinationHistory" />
@@ -346,6 +414,10 @@
             <End Role="QuarantinePerson" EntitySet="QuarantinePerson" />
             <End Role="TestingResult" EntitySet="TestingResult" />
           </AssociationSet>
+          <AssociationSet Name="FK_DISTRICT_PROVINCE" Association="Self.FK_DISTRICT_PROVINCE">
+            <End Role="PROVINCE" EntitySet="PROVINCE" />
+            <End Role="DISTRICT" EntitySet="DISTRICT" />
+          </AssociationSet>
           <AssociationSet Name="FK_HealthInfor_Person" Association="Self.FK_HealthInfor_Person">
             <End Role="QuarantinePerson" EntitySet="QuarantinePerson" />
             <End Role="HealthInformation" EntitySet="HealthInformation" />
@@ -353,6 +425,10 @@
           <AssociationSet Name="FK_QuarantineArea_managerID" Association="Self.FK_QuarantineArea_managerID">
             <End Role="Staff" EntitySet="Staff" />
             <End Role="QuarantineArea" EntitySet="QuarantineArea" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WARD_DISTRICT" Association="Self.FK_WARD_DISTRICT">
+            <End Role="DISTRICT" EntitySet="DISTRICT" />
+            <End Role="WARD" EntitySet="WARD" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -373,11 +449,11 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="province" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="district" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ward" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="streetName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="apartmentNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="province" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="district" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ward" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="streetName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="apartmentNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DestinationHistories" Relationship="Self.FK__Destinati__addre__37A5467C" FromRole="Address" ToRole="DestinationHistory" />
           <NavigationProperty Name="QuarantineAreas" Relationship="Self.FK__Quarantin__addre__3A81B327" FromRole="Address" ToRole="QuarantineArea" />
           <NavigationProperty Name="QuarantinePersons" Relationship="Self.FK__Quarantin__addre__3C69FB99" FromRole="Address" ToRole="QuarantinePerson" />
@@ -393,6 +469,16 @@
           <Property Name="addressID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Address" Relationship="Self.FK__Destinati__addre__37A5467C" FromRole="DestinationHistory" ToRole="Address" />
           <NavigationProperty Name="QuarantinePerson" Relationship="Self.FK__Destinati__quara__38996AB5" FromRole="DestinationHistory" ToRole="QuarantinePerson" />
+        </EntityType>
+        <EntityType Name="DISTRICT">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="provinceID" Type="Int32" />
+          <NavigationProperty Name="PROVINCE" Relationship="Self.FK_DISTRICT_PROVINCE" FromRole="DISTRICT" ToRole="PROVINCE" />
+          <NavigationProperty Name="WARDs" Relationship="Self.FK_WARD_DISTRICT" FromRole="DISTRICT" ToRole="WARD" />
         </EntityType>
         <EntityType Name="HealthInformation">
           <Key>
@@ -417,8 +503,31 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="dateInjection" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="vaccineName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="quarantinePersonID" Type="Int32" Nullable="false" />
+          <Property Name="quarantinePersonID" Type="Int32" />
           <NavigationProperty Name="QuarantinePerson" Relationship="Self.FK__Injection__quara__398D8EEE" FromRole="InjectionRecord" ToRole="QuarantinePerson" />
+        </EntityType>
+        <EntityType Name="NATION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="NotificationTemplate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="content" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PROVINCE">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DISTRICTs" Relationship="Self.FK_DISTRICT_PROVINCE" FromRole="PROVINCE" ToRole="DISTRICT" />
         </EntityType>
         <EntityType Name="QuarantineArea">
           <Key>
@@ -442,15 +551,16 @@
           <Property Name="dateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="sex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="citizenID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="nationality" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nationality" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="phoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="levelID" Type="Int32" Nullable="false" />
+          <Property Name="levelID" Type="Int32" />
           <Property Name="arrivedDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="leaveDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="quarantineDays" Type="Int32" Nullable="false" />
           <Property Name="addressID" Type="Int32" />
           <Property Name="roomID" Type="Int32" />
           <Property Name="completeQuarantine" Type="Boolean" />
+          <Property Name="healthInsuranceID" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Address" Relationship="Self.FK__Quarantin__addre__3C69FB99" FromRole="QuarantinePerson" ToRole="Address" />
           <NavigationProperty Name="DestinationHistories" Relationship="Self.FK__Destinati__quara__38996AB5" FromRole="QuarantinePerson" ToRole="DestinationHistory" />
           <NavigationProperty Name="HealthInformations" Relationship="Self.FK_HealthInfor_Person" FromRole="QuarantinePerson" ToRole="HealthInformation" />
@@ -466,7 +576,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="displayName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="capacity" Type="Int32" Nullable="false" />
-          <Property Name="levelID" Type="Int32" Nullable="false" />
+          <Property Name="levelID" Type="Int32" />
           <NavigationProperty Name="QuarantinePersons" Relationship="Self.FK__Quarantin__roomI__3F466844" FromRole="QuarantineRoom" ToRole="QuarantinePerson" />
           <NavigationProperty Name="Severity" Relationship="Self.FK__Quarantin__level__403A8C7D" FromRole="QuarantineRoom" ToRole="Severity" />
         </EntityType>
@@ -489,7 +599,7 @@
           <Property Name="dateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="sex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="citizenID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nationality" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nationality" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="healthInsuranceID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="phoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="addressID" Type="Int32" Nullable="false" />
@@ -517,6 +627,15 @@
           <Property Name="isPositive" Type="Boolean" Nullable="false" />
           <Property Name="quarantinePersonID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="QuarantinePerson" Relationship="Self.FK__TestingRe__quara__4222D4EF" FromRole="TestingResult" ToRole="QuarantinePerson" />
+        </EntityType>
+        <EntityType Name="WARD">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="districtID" Type="Int32" />
+          <NavigationProperty Name="DISTRICT" Relationship="Self.FK_WARD_DISTRICT" FromRole="WARD" ToRole="DISTRICT" />
         </EntityType>
         <Association Name="FK__Destinati__addre__37A5467C">
           <End Role="Address" Type="Self.Address" Multiplicity="1" />
@@ -582,6 +701,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DISTRICT_PROVINCE">
+          <End Role="PROVINCE" Type="Self.PROVINCE" Multiplicity="0..1" />
+          <End Role="DISTRICT" Type="Self.DISTRICT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVINCE">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DISTRICT">
+              <PropertyRef Name="provinceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WARD_DISTRICT">
+          <End Role="DISTRICT" Type="Self.DISTRICT" Multiplicity="0..1" />
+          <End Role="WARD" Type="Self.WARD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DISTRICT">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="WARD">
+              <PropertyRef Name="districtID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_HealthInfor_Person">
           <End Role="QuarantinePerson" Type="Self.QuarantinePerson" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -597,7 +740,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Injection__quara__398D8EEE">
-          <End Role="QuarantinePerson" Type="Self.QuarantinePerson" Multiplicity="1">
+          <End Role="QuarantinePerson" Type="Self.QuarantinePerson" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="InjectionRecord" Type="Self.InjectionRecord" Multiplicity="*" />
@@ -623,7 +766,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Quarantin__level__3E52440B">
-          <End Role="Severity" Type="Self.Severity" Multiplicity="1" />
+          <End Role="Severity" Type="Self.Severity" Multiplicity="0..1" />
           <End Role="QuarantinePerson" Type="Self.QuarantinePerson" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Severity">
@@ -661,7 +804,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Quarantin__level__403A8C7D">
-          <End Role="Severity" Type="Self.Severity" Multiplicity="1" />
+          <End Role="Severity" Type="Self.Severity" Multiplicity="0..1" />
           <End Role="QuarantineRoom" Type="Self.QuarantineRoom" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Severity">
@@ -672,12 +815,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="QLKCLEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="Addresses" EntityType="Self.Address" />
           <EntitySet Name="DestinationHistories" EntityType="Self.DestinationHistory" />
+          <EntitySet Name="DISTRICTs" EntityType="Self.DISTRICT" />
           <EntitySet Name="HealthInformations" EntityType="Self.HealthInformation" />
           <EntitySet Name="InjectionRecords" EntityType="Self.InjectionRecord" />
+          <EntitySet Name="NATIONs" EntityType="Self.NATION" />
+          <EntitySet Name="NotificationTemplates" EntityType="Self.NotificationTemplate" />
+          <EntitySet Name="PROVINCEs" EntityType="Self.PROVINCE" />
           <EntitySet Name="QuarantineAreas" EntityType="Self.QuarantineArea" />
           <EntitySet Name="QuarantinePersons" EntityType="Self.QuarantinePerson" />
           <EntitySet Name="QuarantineRooms" EntityType="Self.QuarantineRoom" />
@@ -685,6 +832,7 @@
           <EntitySet Name="Staffs" EntityType="Self.Staff" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="TestingResults" EntityType="Self.TestingResult" />
+          <EntitySet Name="WARDs" EntityType="Self.WARD" />
           <AssociationSet Name="FK__Destinati__addre__37A5467C" Association="Self.FK__Destinati__addre__37A5467C">
             <End Role="Address" EntitySet="Addresses" />
             <End Role="DestinationHistory" EntitySet="DestinationHistories" />
@@ -704,6 +852,14 @@
           <AssociationSet Name="FK__Destinati__quara__38996AB5" Association="Self.FK__Destinati__quara__38996AB5">
             <End Role="QuarantinePerson" EntitySet="QuarantinePersons" />
             <End Role="DestinationHistory" EntitySet="DestinationHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DISTRICT_PROVINCE" Association="Self.FK_DISTRICT_PROVINCE">
+            <End Role="PROVINCE" EntitySet="PROVINCEs" />
+            <End Role="DISTRICT" EntitySet="DISTRICTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WARD_DISTRICT" Association="Self.FK_WARD_DISTRICT">
+            <End Role="DISTRICT" EntitySet="DISTRICTs" />
+            <End Role="WARD" EntitySet="WARDs" />
           </AssociationSet>
           <AssociationSet Name="FK_HealthInfor_Person" Association="Self.FK_HealthInfor_Person">
             <End Role="QuarantinePerson" EntitySet="QuarantinePersons" />
@@ -739,7 +895,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="QLKCLModelStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="QLKCLModelStoreContainer" CdmEntityContainer="QLKCLEntities">
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="QLKCLModel.Account">
               <MappingFragment StoreEntitySet="Account">
@@ -771,6 +927,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DISTRICTs">
+            <EntityTypeMapping TypeName="QLKCLModel.DISTRICT">
+              <MappingFragment StoreEntitySet="DISTRICT">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="provinceID" ColumnName="provinceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="HealthInformations">
             <EntityTypeMapping TypeName="QLKCLModel.HealthInformation">
               <MappingFragment StoreEntitySet="HealthInformation">
@@ -794,6 +959,31 @@
                 <ScalarProperty Name="dateInjection" ColumnName="dateInjection" />
                 <ScalarProperty Name="vaccineName" ColumnName="vaccineName" />
                 <ScalarProperty Name="quarantinePersonID" ColumnName="quarantinePersonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NATIONs">
+            <EntityTypeMapping TypeName="QLKCLModel.NATION">
+              <MappingFragment StoreEntitySet="NATION">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NotificationTemplates">
+            <EntityTypeMapping TypeName="QLKCLModel.NotificationTemplate">
+              <MappingFragment StoreEntitySet="NotificationTemplate">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="content" ColumnName="content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROVINCEs">
+            <EntityTypeMapping TypeName="QLKCLModel.PROVINCE">
+              <MappingFragment StoreEntitySet="PROVINCE">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -826,6 +1016,7 @@
                 <ScalarProperty Name="addressID" ColumnName="addressID" />
                 <ScalarProperty Name="roomID" ColumnName="roomID" />
                 <ScalarProperty Name="completeQuarantine" ColumnName="completeQuarantine" />
+                <ScalarProperty Name="healthInsuranceID" ColumnName="healthInsuranceID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -883,6 +1074,15 @@
                 <ScalarProperty Name="dateTesting" ColumnName="dateTesting" />
                 <ScalarProperty Name="isPositive" ColumnName="isPositive" />
                 <ScalarProperty Name="quarantinePersonID" ColumnName="quarantinePersonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WARDs">
+            <EntityTypeMapping TypeName="QLKCLModel.WARD">
+              <MappingFragment StoreEntitySet="WARD">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="districtID" ColumnName="districtID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

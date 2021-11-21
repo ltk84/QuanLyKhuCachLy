@@ -70,7 +70,11 @@
                     ItemsSource="{Binding ProvinceList}"
                     Style="{StaticResource ComboBoxField}">
                     <ComboBox.SelectedItem>
-                        <Binding Path="QPSelectedProvince" UpdateSourceTrigger="PropertyChanged" />
+                        <Binding Path="QPSelectedProvince" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <vr:RequiredField />
+                            </Binding.ValidationRules>
+                        </Binding>
                     </ComboBox.SelectedItem>
                 </ComboBox>
             </StackPanel>
@@ -91,7 +95,11 @@
                     ItemsSource="{Binding DistrictList}"
                     Style="{StaticResource ComboBoxField}">
                     <ComboBox.SelectedItem>
-                        <Binding Path="QPSelectedDistrict" UpdateSourceTrigger="PropertyChanged" />
+                        <Binding Path="QPSelectedDistrict" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <vr:RequiredField />
+                            </Binding.ValidationRules>
+                        </Binding>
                     </ComboBox.SelectedItem>
                 </ComboBox>
             </StackPanel>
@@ -112,7 +120,11 @@
                     ItemsSource="{Binding WardList}"
                     Style="{StaticResource ComboBoxField}">
                     <ComboBox.SelectedItem>
-                        <Binding Path="QPSelectedWard" UpdateSourceTrigger="PropertyChanged" />
+                        <Binding Path="QPSelectedWard" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <vr:RequiredField />
+                            </Binding.ValidationRules>
+                        </Binding>
                     </ComboBox.SelectedItem>
                 </ComboBox>
             </StackPanel>

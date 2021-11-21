@@ -28,8 +28,24 @@ namespace QuanLyKhuCachLy.ValidationRules
                 if (sourceItem != null)
                 {
                     var propertyName = expression.ParentBinding != null && expression.ParentBinding.Path != null ? expression.ParentBinding.Path.Path : null;
-                    var sourceValue = sourceItem.GetType().GetProperty(propertyName).GetValue(sourceItem, null);
-                    var propertyType = sourceItem.GetType().GetProperty(propertyName).PropertyType;
+                    object sourceValue;
+                    Type propertyType;
+                    if (!propertyName.Contains("."))
+                    {
+                        sourceValue = sourceItem.GetType().GetProperty(propertyName).GetValue(sourceItem, null);
+                        propertyType = sourceItem.GetType().GetProperty(propertyName).PropertyType;
+                    }
+                    else
+                    {
+                        var dotIndex = propertyName.IndexOf(".");
+                        var childVM = propertyName.Substring(0, dotIndex);
+                        var subProperty = propertyName.Substring(dotIndex + 1);
+
+                        var x = sourceItem.GetType().GetProperty(childVM).GetValue(sourceItem);
+                        var y = x.GetType().GetProperty(subProperty).GetValue(x, null);
+                        sourceValue = y;
+                        propertyType = x.GetType().GetProperty(subProperty).PropertyType;
+                    }
 
                     if (propertyType.Name == "Int32")
                     {

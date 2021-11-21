@@ -16,15 +16,13 @@ using System.Windows.Shapes;
 namespace QuanLyKhuCachLy.CustomUserControl
 {
     /// <summary>
-    /// Interaction logic for QuarantineRoomWrapperTab.xaml
+    /// Interaction logic for EditQuarantineAreaSecondPage.xaml
     /// </summary>
-    public partial class QuarantineRoomWrapperTab
+    public partial class EditQuarantineAreaSecondPage : UserControl
     {
-        public QuarantineRoomWrapperTab()
+        public EditQuarantineAreaSecondPage()
         {
             InitializeComponent();
         }
-
-
     }
 }

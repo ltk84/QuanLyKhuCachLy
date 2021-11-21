@@ -91,7 +91,11 @@
                     ItemsSource="{Binding PersonInRoomViewModel.DistrictList}"
                     Style="{StaticResource ComboBoxField}">
                     <ComboBox.SelectedItem>
-                        <Binding Path="PersonInRoomViewModel.QPSelectedDistrict" UpdateSourceTrigger="PropertyChanged" />
+                        <Binding Path="PersonInRoomViewModel.QPSelectedDistrict" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <vr:RequiredFieldNonCommit />
+                            </Binding.ValidationRules>
+                        </Binding>
                     </ComboBox.SelectedItem>
                 </ComboBox>
             </StackPanel>
@@ -112,7 +116,11 @@
                     ItemsSource="{Binding PersonInRoomViewModel.WardList}"
                     Style="{StaticResource ComboBoxField}">
                     <ComboBox.SelectedItem>
-                        <Binding Path="PersonInRoomViewModel.QPSelectedWard" UpdateSourceTrigger="PropertyChanged" />
+                        <Binding Path="PersonInRoomViewModel.QPSelectedWard" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <vr:RequiredFieldNonCommit />
+                            </Binding.ValidationRules>
+                        </Binding>
                     </ComboBox.SelectedItem>
                 </ComboBox>
             </StackPanel>

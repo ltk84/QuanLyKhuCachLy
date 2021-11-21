@@ -34,7 +34,8 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 _RoomID = value;
                 QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == RoomID));
-                PersonNotRoomList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == null));
+                InitPersonNotRoomList();
+                InitRemainRoomList();
 
                 OnPropertyChanged();
             }
@@ -73,20 +74,31 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
+        #region command
         public ICommand UpdatePersonListCommand { get; set; }
         public ICommand ToUpdateListCommand { get; set; }
         public ICommand AddPersonToRoomUI { get; set; }
         public ICommand RemovePersonFromRoomUI { get; set; }
-        public ICommand CompleteQuarantinePersonCommand { get; set; }
+        public ICommand CancelUpdatePersonListCommand { get; set; }
+        public ICommand RemovePersonFromRoomCommand { get; set; }
+
+        #endregion
+
+        #region change room
+
 
 
         #endregion
 
-        public QuarantinePersonInRoomViewModel()
+
+        #endregion
+
+        public QuarantinePersonInRoomViewModel() : base()
         {
 
             QuarantinePersonList = new ObservableCollection<QuarantinePerson>();
             PersonNotRoomList = new ObservableCollection<QuarantinePerson>();
+            RemainRoomList = new ObservableCollection<Model.QuarantineRoom>();
 
             ToViewCommand = new RelayCommand<object>((p) =>
             {
@@ -118,7 +130,6 @@ namespace QuanLyKhuCachLy.ViewModel
 
             UpdatePersonListCommand = new RelayCommand<Window>((p) =>
             {
-
                 return true;
             }, (p) =>
             {
@@ -137,6 +148,11 @@ namespace QuanLyKhuCachLy.ViewModel
 
             AddPersonToRoomUI = new RelayCommand<Window>((p) =>
             {
+                var room = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == RoomID).FirstOrDefault();
+                if (room == null) return false;
+
+                if (QuarantinePersonList.Count >= room.capacity) return false;
+
                 return true;
             }, (p) =>
             {
@@ -167,7 +183,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 p.Close();
             });
 
-            CompleteQuarantinePersonCommand = new RelayCommand<Window>((p) =>
+            CancelUpdatePersonListCommand = new RelayCommand<Window>((p) =>
             {
                 return true;
             }, (p) =>
@@ -175,10 +191,82 @@ namespace QuanLyKhuCachLy.ViewModel
                 BufferWindow bufferWindow = new BufferWindow();
                 bufferWindow.ShowDialog();
                 CompleteQuarantinePerson();
+                RollbackTransaction();
+                p.Close();
+            });
+
+            RemovePersonFromRoomCommand = new RelayCommand<Window>((p) =>
+            {
+                if (SelectedItem != null)
+                    return true;
+                return false;
+            }, (p) =>
+            {
+                BufferWindow bufferWindow = new BufferWindow();
+                bufferWindow.ShowDialog();
+                RemovePersonFromRoom();
             });
         }
 
         #region method
+
+        protected override void ChangeRoom()
+        {
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    var Person = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+                    if (Person == null) return;
+
+                    var NewRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == NewRoomSelected.id).FirstOrDefault();
+                    if (NewRoom == null) return;
+
+                    Person.roomID = NewRoom.id;
+
+                    DataProvider.ins.db.SaveChanges();
+
+                    RemoveFromRoomUI();
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
+        }
 
         protected override void EditQuarantinePerson()
         {
@@ -304,9 +392,64 @@ namespace QuanLyKhuCachLy.ViewModel
                 }
             }
 
-
         }
 
+        void RemovePersonFromRoom()
+        {
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    var Person = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+                    if (Person == null) return;
+
+                    Person.roomID = null;
+
+                    RemoveFromRoomUI();
+
+                    PersonNotRoomList = new ObservableCollection<QuarantinePerson>(PersonNotRoomList.OrderBy(x => x.id));
+
+                    DataProvider.ins.db.SaveChanges();
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
+        }
 
         void AddToRoomUI()
         {
@@ -319,7 +462,7 @@ namespace QuanLyKhuCachLy.ViewModel
             QuarantinePersonList.Remove(SelectedItem);
         }
 
-        void CompleteQuarantinePerson()
+        protected override void CompleteQuarantinePerson()
         {
             using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
             {
@@ -331,7 +474,9 @@ namespace QuanLyKhuCachLy.ViewModel
                     Person.roomID = null;
                     Person.completeQuarantine = true;
 
-                    QuarantinePersonList.Remove(SelectedItem);
+                    RemoveFromRoomUI();
+
+                    PersonNotRoomList = new ObservableCollection<QuarantinePerson>(PersonNotRoomList.OrderBy(x => x.id));
 
                     DataProvider.ins.db.SaveChanges();
 
@@ -387,9 +532,11 @@ namespace QuanLyKhuCachLy.ViewModel
                         p.completeQuarantine = true;
                     }
 
+                    QuarantinePersonList.Clear();
+
                     DataProvider.ins.db.SaveChanges();
 
-                    QuarantinePersonList.Clear();
+                    InitPersonNotRoomList();
 
                     transaction.Commit();
                 }
@@ -445,6 +592,8 @@ namespace QuanLyKhuCachLy.ViewModel
                     DataProvider.ins.db.SaveChanges();
 
                     QuarantinePersonList.Clear();
+
+                    InitPersonNotRoomList();
 
                     transaction.Commit();
                 }
@@ -516,7 +665,12 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             DataProvider.ins.db.ChangeTracker.Entries().Where(e => e.Entity != null).ToList().ForEach(e => e.State = EntityState.Detached);
             QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == RoomID));
+            InitPersonNotRoomList();
         }
+
+        void InitPersonNotRoomList() => PersonNotRoomList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == null && x.completeQuarantine != true));
+
+        void InitRemainRoomList() => RemainRoomList = new ObservableCollection<Model.QuarantineRoom>(DataProvider.ins.db.QuarantineRooms.Where(x => x.id != RoomID && x.QuarantinePersons.Count < x.capacity));
         #endregion
     }
 }

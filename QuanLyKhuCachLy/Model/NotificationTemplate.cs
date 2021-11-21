@@ -11,24 +11,11 @@ namespace QuanLyKhuCachLy.Model
 {
     using System;
     using System.Collections.Generic;
-
-    public partial class QuarantineArea
+    
+    public partial class NotificationTemplate
     {
         public int id { get; set; }
         public string name { get; set; }
-        public int testCycle { get; set; }
-        public int requiredDayToFinish { get; set; }
-        public int addressID { get; set; }
-        public Nullable<int> managerID { get; set; }
-
-        public virtual Address Address { get; set; }
-        public virtual Staff Staff { get; set; }
-
-        public bool CheckValidateProperty()
-        {
-            if (string.IsNullOrWhiteSpace(name) || testCycle < 0 || requiredDayToFinish < 0)
-                return false;
-            return true;
-        }
+        public string content { get; set; }
     }
 }

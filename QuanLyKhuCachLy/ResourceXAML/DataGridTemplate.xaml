@@ -29,6 +29,15 @@
         <Setter Property="FontSize" Value="16" />
     </Style>
     <Style
+        x:Key="DataGridCellElement"
+        BasedOn="{StaticResource MaterialDesignDataGridCell}"
+        TargetType="{x:Type DataGridCell}">
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Margin" Value="8,0,8,0" />
+        <Setter Property="FontFamily" Value="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+    <Style
         x:Key="EditingDataGridElement"
         BasedOn="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
         TargetType="{x:Type TextBox}">

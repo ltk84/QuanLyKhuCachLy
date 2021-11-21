@@ -303,9 +303,8 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 Init();
             });
-            RecommendationInit();
-            StatisticInit();
-            ChartInit();
+
+            Init();
         }
         #region Method
 

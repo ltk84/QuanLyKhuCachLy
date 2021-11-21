@@ -36,10 +36,7 @@
                         </TextBlock>
                     </StackPanel>
                 </Button>
-                <Button
-                    Command="{Binding PersonInRoomViewModel.DeleteCommand}"
-                    IsEnabled="False"
-                    Style="{StaticResource MenuButton}">
+                <Button Command="{Binding PersonInRoomViewModel.RemovePersonFromRoomCommand}" Style="{StaticResource MenuButton}">
                     <StackPanel Style="{StaticResource MenuStackPanel}">
                         <materialDesign:PackIcon Kind="DeleteOutline" Style="{StaticResource MenuIcon}" />
                         <TextBlock Style="{StaticResource MenuText}">
@@ -55,13 +52,21 @@
                         </TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource MenuButton}">
+                <Button PreviewMouseDown="Button_PreviewMouseDown" Style="{StaticResource MenuButton}">
                     <StackPanel Style="{StaticResource MenuStackPanel}">
                         <materialDesign:PackIcon Kind="Sync" Style="{StaticResource MenuIcon}" />
                         <TextBlock Style="{StaticResource MenuText}">
                             Đổi phòng
                         </TextBlock>
                     </StackPanel>
+                    <Button.ContextMenu>
+                        <ContextMenu Background="White">
+                            <ComboBox
+                                DisplayMemberPath="displayName"
+                                ItemsSource="{Binding PersonInRoomViewModel.RemainRoomList}"
+                                SelectedItem="{Binding PersonInRoomViewModel.NewRoomSelected}" />
+                        </ContextMenu>
+                    </Button.ContextMenu>
                 </Button>
             </StackPanel>
         </Border>

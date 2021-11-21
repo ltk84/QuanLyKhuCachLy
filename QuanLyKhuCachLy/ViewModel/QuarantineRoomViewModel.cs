@@ -140,7 +140,6 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     SetSelectedItemToProperty();
                     PersonInRoomViewModel.Parent = this;
-
                 }
             }
         }
@@ -241,6 +240,7 @@ namespace QuanLyKhuCachLy.ViewModel
         #endregion
 
 
+
         #endregion
 
         #region command
@@ -257,28 +257,24 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand ToEditCommand { get; set; }
         public ICommand ToViewCommand { get; set; }
         public ICommand ToMainCommand { get; set; }
+        public ICommand RefeshCommand { get; set; }
         #endregion
 
 
         public QuarantineRoomViewModel()
         {
-
-            Tab1 = Visibility.Visible;
-            Tab2 = Visibility.Hidden;
-            Tab3 = Visibility.Hidden;
+            SetDefaultUI();
 
             RoomList = new ObservableCollection<Model.QuarantineRoom>(DataProvider.ins.db.QuarantineRooms);
             RoomListView = RoomList.ToArray();
             RoomLevelList = new ObservableCollection<Severity>(DataProvider.ins.db.Severities);
-
-
-
 
             RoomListView = RoomList.ToArray();
             FilterType = new string[] { "Tất cả", "Loại phòng", "Sức chứa" };
             SelectedFilterType = "Tất cả";
             SelectedFilterProperty = "Chọn phương thức lọc";
             getFilterProperty();
+
             PersonInRoomViewModel = QuarantinePersonInRoomViewModel.ins;
 
             ToAddManualCommand = new RelayCommand<object>((p) =>
@@ -365,7 +361,13 @@ namespace QuanLyKhuCachLy.ViewModel
                 p.Close();
             });
 
-            CompleteQuarantineCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            CompleteQuarantineCommand = new RelayCommand<object>((p) =>
+            {
+                if (PersonInRoomViewModel.QuarantinePersonList.Count > 0)
+                    return true;
+                return false;
+            },
+            (p) =>
             {
                 BufferWindow bufferWindow = new BufferWindow();
                 bufferWindow.ShowDialog();
@@ -384,9 +386,24 @@ namespace QuanLyKhuCachLy.ViewModel
                 bufferWindow.ShowDialog();
                 ClearPersonList();
             });
+
+            RefeshCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }
+            , (p) =>
+            {
+                RefeshTab();
+            });
         }
 
         #region method
+
+        void RefeshTab()
+        {
+            SetDefaultUI();
+            SelectedItem = null;
+        }
 
         void CompleteQuarantine()
         {
@@ -399,6 +416,13 @@ namespace QuanLyKhuCachLy.ViewModel
         }
 
         void BackToListRoomTab()
+        {
+            Tab2 = Visibility.Hidden;
+            Tab1 = Visibility.Visible;
+            Tab3 = Visibility.Hidden;
+        }
+
+        public void SetDefaultUI()
         {
             Tab2 = Visibility.Hidden;
             Tab1 = Visibility.Visible;
@@ -419,13 +443,10 @@ namespace QuanLyKhuCachLy.ViewModel
             if (SearchKey == "")
             {
                 RoomListView = RoomList.ToArray();
-
             }
 
             else
             {
-
-
                 RoomListView = RoomList.ToArray();
                 String[] Value = new string[RoomListView.Length];
 
@@ -610,6 +631,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 ErrorDialog.ShowDialog();
             }
         }
+
         public void ToPersonInformation()
         {
             Tab1 = Visibility.Hidden;
@@ -679,7 +701,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             }
         }
-        //untest
+
         void EditQuarantineRoom()
         {
             using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
@@ -689,7 +711,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     Model.QuarantineRoom QuarantineRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == SelectedItem.id).FirstOrDefault();
                     QuarantineRoom.displayName = RoomDisplayName;
                     QuarantineRoom.capacity = RoomCapacity;
-                    QuarantineRoom.levelID = RoomSelectedSeverity.id;
+                    QuarantineRoom.levelID = RoomSelectedSeverity?.id;
 
                     DataProvider.ins.db.SaveChanges();
 
@@ -736,6 +758,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             }
         }
+
         void DeleteQuarantineRoom()
         {
             using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
@@ -745,10 +768,10 @@ namespace QuanLyKhuCachLy.ViewModel
                     var Room = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == SelectedItem.id).FirstOrDefault();
                     if (Room == null) return;
 
+                    RoomList.Remove(Room);
                     DataProvider.ins.db.QuarantineRooms.Remove(Room);
                     DataProvider.ins.db.SaveChanges();
 
-                    RoomList.Remove(Room);
                     RoomListView = RoomList.ToArray();
                     transaction.Commit();
                 }
@@ -790,12 +813,14 @@ namespace QuanLyKhuCachLy.ViewModel
 
             }
         }
+
         void ClearData()
         {
             RoomDisplayName = "";
             RoomCapacity = 0;
             RoomSelectedSeverity = null;
         }
+
         void SetSelectedItemToProperty()
         {
             RoomID = SelectedItem.id;
@@ -803,6 +828,7 @@ namespace QuanLyKhuCachLy.ViewModel
             RoomCapacity = SelectedItem.capacity;
             RoomSelectedSeverity = SelectedItem.Severity;
         }
+
         #endregion
     }
 }

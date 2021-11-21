@@ -10,21 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace QuanLyKhuCachLy.CustomUserControl
 {
     /// <summary>
-    /// Interaction logic for QuarantineRoomWrapperTab.xaml
+    /// Interaction logic for EditQuarantineArea.xaml
     /// </summary>
-    public partial class QuarantineRoomWrapperTab
+    public partial class EditQuarantineArea : Window
     {
-        public QuarantineRoomWrapperTab()
+        public EditQuarantineArea()
         {
             InitializeComponent();
         }
-
-
     }
 }

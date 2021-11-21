@@ -412,6 +412,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     InjectionRecordViewModel.ins.IRQuarantinePersonID = SelectedItem.id;
                     DestinationHistoryViewModel.ins.PersonID = SelectedItem.id;
                     TestingResultViewModel.ins.PersonID = SelectedItem.id;
+                    RemainRoomList = new ObservableCollection<Model.QuarantineRoom>(DataProvider.ins.db.QuarantineRooms.Where(x => x.id != SelectedItem.roomID && x.QuarantinePersons.Count < x.capacity));
                 }
             }
         }
@@ -424,13 +425,25 @@ namespace QuanLyKhuCachLy.ViewModel
         public string QPApartmentNumber { get => _QPApartmentNumber; set { _QPApartmentNumber = value; OnPropertyChanged(); } }
 
         private string _QPSelectedProvince;
-        public string QPSelectedProvince { get => _QPSelectedProvince; set { _QPSelectedProvince = value; OnPropertyChanged(); } }
+        public string QPSelectedProvince
+        {
+            get => _QPSelectedProvince;
+            set { _QPSelectedProvince = value; OnPropertyChanged(); InitDistrictList(); }
+        }
 
         private string _QPSelectedWard;
-        public string QPSelectedWard { get => _QPSelectedWard; set { _QPSelectedWard = value; OnPropertyChanged(); } }
+        public string QPSelectedWard
+        {
+            get => _QPSelectedWard;
+            set { _QPSelectedWard = value; OnPropertyChanged(); }
+        }
 
         private string _QPSelectedDistrict;
-        public string QPSelectedDistrict { get => _QPSelectedDistrict; set { _QPSelectedDistrict = value; OnPropertyChanged(); } }
+        public string QPSelectedDistrict
+        {
+            get => _QPSelectedDistrict;
+            set { _QPSelectedDistrict = value; OnPropertyChanged(); InitWardList(); }
+        }
 
         private string _DisplayAddress;
         public string DisplayAddress { get => _DisplayAddress; set { _DisplayAddress = value; OnPropertyChanged(); } }
@@ -731,30 +744,47 @@ namespace QuanLyKhuCachLy.ViewModel
 
         public ICommand NextTabEditCommand { get; set; }
         public ICommand PreviousTabEditCommand { get; set; }
+        public ICommand CompleteQuarantinePersonCommand { get; set; }
+        public ICommand RefeshCommand { get; set; }
+
+
 
         #endregion
+
+        #region change room 
+
+        protected Model.QuarantineRoom _NewRoomSelected;
+        public Model.QuarantineRoom NewRoomSelected
+        {
+            get => _NewRoomSelected;
+            set
+            {
+                _NewRoomSelected = value;
+                OnPropertyChanged();
+                if (_NewRoomSelected != null)
+                    ChangeRoom();
+
+            }
+        }
+
+        protected ObservableCollection<Model.QuarantineRoom> _RemainRoomList;
+        public ObservableCollection<Model.QuarantineRoom> RemainRoomList
+        {
+            get => _RemainRoomList;
+            set
+            {
+                _RemainRoomList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+
+
         public QuarantinePersonViewModel()
         {
-            TabList = Visibility.Visible;
-            TabInformation = Visibility.Hidden;
-            Tab1 = Visibility.Visible;
-            Tab2 = Visibility.Hidden;
-            Tab3 = Visibility.Hidden;
-            Tab4 = Visibility.Hidden;
-            TabEdit1 = Visibility.Visible;
-            TabEdit2 = Visibility.Hidden;
-            TabEdit3 = Visibility.Hidden;
-            TabEdit4 = Visibility.Hidden;
-            TabInformation1 = Visibility.Visible;
-            TabInformation2 = Visibility.Hidden;
-            TabIndexInformation = 1;
-            TabPositionInformation = $"{TabIndexInformation}/2";
-            ButtonReturn = Visibility.Collapsed;
-            ButtonEditReturn = Visibility.Collapsed;
-            TabIndex = 1;
-            TabPosition = $"{TabIndex}/4";
-            TabEditIndex = 1;
-            TabEditPosition = $"{TabEditIndex}/4";
+            SetDefaultUI();
 
             NextTabCommandInformation = new RelayCommand<Window>((p) =>
             {
@@ -810,7 +840,10 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 HandleChangeTab(TabIndex, "previous", p);
             });
+
+
             QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
+            RemainRoomList = new ObservableCollection<Model.QuarantineRoom>();
             PeopleListView = QuarantinePersonList.ToArray();
 
             FilterType = new string[] { "Tất cả", "Giới tính", "Quốc tịch", "Phòng", "Nhóm đối tượng", "Ngày đi", "Ngày đến" };
@@ -826,20 +859,17 @@ namespace QuanLyKhuCachLy.ViewModel
             DestinationHistoryViewModel = DestinationHistoryViewModel.ins;
             TestingResultViewModel = TestingResultViewModel.ins;
 
-            NationalityList = new ObservableCollection<string>() {
-                "Việt Nam", "Mỹ", "Pháp", "Đức", "Trung Quốc"
-            };
+            NationalityList = new ObservableCollection<string>();
 
-            ProvinceList = new ObservableCollection<string>() {
-                "Hồ Chí Minh", "Bình Dương", "Vĩnh Long"
-            };
-            DistrictList = new ObservableCollection<string>() {
-                "Quận 1", "Quận 2", "Quận 3", "Quận 4"
-            };
-            WardList = new ObservableCollection<string>()
-            {
-                "Phú Thạnh", "Phú Thọ Hòa", "Bình Hưng Hòa"
-            };
+            ProvinceList = new ObservableCollection<string>();
+
+            DistrictList = new ObservableCollection<string>();
+
+            WardList = new ObservableCollection<string>();
+
+            InitNationList();
+
+            InitProvinceList();
 
             SexList = new ObservableCollection<string>()
             {
@@ -964,9 +994,205 @@ namespace QuanLyKhuCachLy.ViewModel
                 }
                 p.Close();
             });
+
+            CompleteQuarantinePersonCommand = new RelayCommand<Window>((p) =>
+            {
+                if (SelectedItem != null && SelectedItem.roomID != null)
+                    return true;
+                return false;
+            }, (p) =>
+            {
+                CompleteQuarantinePerson();
+            });
+
+            RefeshCommand = new RelayCommand<Window>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                RefeshTab();
+            });
         }
 
         #region method
+
+        protected virtual void ChangeRoom()
+        {
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    var Person = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+                    if (Person == null) return;
+
+                    var Room = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == NewRoomSelected.id).FirstOrDefault();
+                    if (Room == null) return;
+
+                    Person.roomID = Room.id;
+
+                    DataProvider.ins.db.SaveChanges();
+
+                    NewRoomSelected = null;
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
+        }
+
+        void RefeshTab()
+        {
+            SetDefaultUI();
+            SelectedItem = null;
+        }
+
+        void SetDefaultUI()
+        {
+            TabList = Visibility.Visible;
+            TabInformation = Visibility.Hidden;
+            Tab1 = Visibility.Visible;
+            Tab2 = Visibility.Hidden;
+            Tab3 = Visibility.Hidden;
+            Tab4 = Visibility.Hidden;
+            TabEdit1 = Visibility.Visible;
+            TabEdit2 = Visibility.Hidden;
+            TabEdit3 = Visibility.Hidden;
+            TabEdit4 = Visibility.Hidden;
+            TabInformation1 = Visibility.Visible;
+            TabInformation2 = Visibility.Hidden;
+            TabIndexInformation = 1;
+            TabPositionInformation = $"{TabIndexInformation}/2";
+            ButtonReturn = Visibility.Collapsed;
+            ButtonEditReturn = Visibility.Collapsed;
+            TabIndex = 1;
+            TabPosition = $"{TabIndex}/4";
+            TabEditIndex = 1;
+            TabEditPosition = $"{TabEditIndex}/4";
+        }
+
+        protected virtual void CompleteQuarantinePerson()
+        {
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    var Person = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+                    if (Person == null) return;
+
+                    Person.roomID = null;
+                    Person.completeQuarantine = true;
+
+                    DataProvider.ins.db.SaveChanges();
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
+        }
+
+        void InitNationList()
+        {
+            foreach (var item in NationViewModel.NationList)
+            {
+                NationalityList.Add(item.NAME);
+            }
+        }
+
+        void InitProvinceList()
+        {
+            foreach (var item in AddressViewModel.ProvinceList)
+            {
+                ProvinceList.Add(item.name);
+            }
+        }
+
+        void InitDistrictList()
+        {
+            AddressViewModel.ProvinceSelectEvent(QPSelectedProvince);
+            DistrictList.Clear();
+            foreach (var item in AddressViewModel.DistrictList)
+            {
+                DistrictList.Add(item.name);
+            }
+        }
+
+        void InitWardList()
+        {
+            AddressViewModel.DistrictSelectEVent(QPSelectedDistrict);
+            WardList.Clear();
+            foreach (var item in AddressViewModel.WardList)
+            {
+                WardList.Add(item.name);
+            }
+        }
 
         protected void ResetToDeaultTabEditAfterEdit()
         {
@@ -1401,11 +1627,11 @@ namespace QuanLyKhuCachLy.ViewModel
 
             if (PersonAddress != null)
             {
-                QPApartmentNumber = PersonAddress.apartmentNumber;
-                QPStreetName = PersonAddress.streetName;
-                QPSelectedWard = PersonAddress.ward;
-                QPSelectedDistrict = PersonAddress.district;
                 QPSelectedProvince = PersonAddress.province;
+                QPSelectedDistrict = PersonAddress.district;
+                QPSelectedWard = PersonAddress.ward;
+                QPStreetName = PersonAddress.streetName;
+                QPApartmentNumber = PersonAddress.apartmentNumber;
             }
 
             if (HealthInfor != null)
@@ -1673,7 +1899,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
                     PeopleListView = QuarantinePersonList.ToArray();
 
-                    SelectedItem = Person;
+                    //SelectedItem = Person;
 
                 }
                 catch (DbUpdateException e)

@@ -162,7 +162,7 @@
             IsReadOnly="True"
             ItemsSource="{Binding StaffListView}"
             LoadingRow="DataGrid_LoadingRow"
-            SelectedItem="{Binding SelectedItem}"
+            SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
             SelectionMode="Single"
             SelectionUnit="FullRow">
             <DataGrid.Columns>
