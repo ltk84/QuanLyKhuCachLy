@@ -71,14 +71,14 @@
                                     materialDesign:HintAssist.Hint="Tên, CMND,...."
                                     MaxLength="20"
                                     Style="{StaticResource TextInputField}">
-                            <!--<TextBox.Text>
-                                        <Binding
+                            <TextBox.Text>
+                                <Binding
                                     Mode="TwoWay"
-                                    Path="SearchKey"
+                                    Path="SearchKey1"
                                     UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules />
-                                        </Binding>
-                                    </TextBox.Text>-->
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </TextBox.Text>
 
                         </TextBox>
                     </StackPanel>
@@ -101,13 +101,13 @@
                                     FontSize="10"
                             Padding="7,5,5,7"
                             utility:ProtocolSettingsLayout.MVVMHasError="{Binding SexFieldHasError}"
-                            ItemsSource="{Binding FilterType}"
+                            ItemsSource="{Binding FilterType1}"
                             Style="{StaticResource ComboBoxField}">
-                            <!--<ComboBox.SelectedItem>
-                                        <Binding Path="SelectedFilterType" UpdateSourceTrigger="PropertyChanged">
+                            <ComboBox.SelectedItem>
+                                        <Binding Path="SelectedFilterType1" UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules />
                                         </Binding>
-                                    </ComboBox.SelectedItem>-->
+                                    </ComboBox.SelectedItem>
                         </ComboBox>
                     </StackPanel>
 
@@ -127,13 +127,13 @@
                             Padding="7,5,5,7"
                             FontSize="10"
                             utility:ProtocolSettingsLayout.MVVMHasError="{Binding SexFieldHasError}"
-                            ItemsSource="{Binding FilterProperty}"
+                            ItemsSource="{Binding FilterProperty1}"
                             Style="{StaticResource ComboBoxField}">
-                            <!--<ComboBox.SelectedItem>
-                                        <Binding Path="SelectedFilterProperty" UpdateSourceTrigger="PropertyChanged">
+                            <ComboBox.SelectedItem>
+                                        <Binding Path="SelectedFilterProperty1" UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules />
                                         </Binding>
-                                    </ComboBox.SelectedItem>-->
+                                    </ComboBox.SelectedItem>
                         </ComboBox>
                     </StackPanel>
 
@@ -146,66 +146,23 @@
                     AutoGenerateColumns="False"
                     CanUserAddRows="False"
                     CanUserReorderColumns="False"
-                    CanUserResizeColumns="True"
+                    CanUserResizeColumns="False"
                     CanUserResizeRows="False"
                     IsReadOnly="True"
-                    ItemsSource="{Binding StaffListView}"
-                    SelectedItem="{Binding SelectedItem}"
+                    ItemsSource="{Binding PeopleListView1}"
+                    SelectedItem="{Binding SelectedItem1}"
                     SelectionMode="Single"
                     SelectionUnit="FullRow">
-                        <DataGrid.Columns>
-                            <materialDesign:DataGridTextColumn
-                            Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=Header}"
-                            EditingElementStyle="{StaticResource EditingDataGridElement}"
-                            ElementStyle="{StaticResource DataGridElement}"
-                            Header="STT"
-                            HeaderStyle="{StaticResource DataGridHeader}"
-                            MaxLength="10" />
-                            <materialDesign:DataGridTextColumn
-                            Binding="{Binding name}"
-                            EditingElementStyle="{StaticResource EditingDataGridElement}"
-                            ElementStyle="{StaticResource DataGridElement}"
-                            Header="Tên"
-                            HeaderStyle="{StaticResource DataGridHeader}"
-                            MaxLength="30" />
-                            <materialDesign:DataGridTextColumn
-                            Binding="{Binding dateOfBirth, StringFormat=dd-MM-yyyy}"
-                            EditingElementStyle="{StaticResource EditingDataGridElement}"
-                            ElementStyle="{StaticResource DataGridElement}"
-                            Header="CMND"
-                            HeaderStyle="{StaticResource DataGridHeader}"
-                            MaxLength="30" />
-                            <materialDesign:DataGridTextColumn
-                            Binding="{Binding sex}"
-                            EditingElementStyle="{StaticResource EditingDataGridElement}"
-                            ElementStyle="{StaticResource DataGridElement}"
-                            Header="Phòng"
-                            HeaderStyle="{StaticResource DataGridHeader}"
-                            MaxLength="30" />
-
-                            <materialDesign:DataGridTextColumn
-                            Binding="{Binding jobTitle}"
-                            EditingElementStyle="{StaticResource EditingDataGridElement}"
-                            ElementStyle="{StaticResource DataGridElement}"
-                            Header="Ngày đến"
-                            HeaderStyle="{StaticResource DataGridHeader}"
-                            MaxLength="30" />
-                            <materialDesign:DataGridTextColumn
-                            Binding="{Binding department}"
-                            EditingElementStyle="{StaticResource EditingDataGridElement}"
-                            ElementStyle="{StaticResource DataGridElement}"
-                            Header="Mức độ"
-                            HeaderStyle="{StaticResource DataGridHeader}"
-                            MaxLength="30" />
-
-                            <DataGridTemplateColumn Width="*" MinWidth="70">
+                        <DataGrid.Columns
+                            >
+                            <DataGridTemplateColumn Width="50" MinWidth="50">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button
                                         Width="20"
                                         Height="20"
+                                        Command="{Binding Path=DataContext.SelectPerson, RelativeSource={RelativeSource AncestorType=DataGrid,Mode=FindAncestor}}" 
                                         HorizontalAlignment="Right"
-                                        Command="{Binding PersonInRoomViewModel.AddPersonToRoomUI, Source={StaticResource RoomVM}}"
                                         Style="{StaticResource DataGridButtonDelete}">
                                             <materialDesign:PackIcon
                                             Width="20"
@@ -215,27 +172,61 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
+                            <materialDesign:DataGridTextColumn
+                            Binding="{Binding name}"
+                            EditingElementStyle="{StaticResource EditingDataGridElement}"
+                            ElementStyle="{StaticResource DataGridElement}"
+                            Header="Tên"
+                            HeaderStyle="{StaticResource DataGridHeader}"
+                            MaxLength="30" />
+                            <materialDesign:DataGridTextColumn
+                            Binding="{Binding citizenID}"
+                            EditingElementStyle="{StaticResource EditingDataGridElement}"
+                            ElementStyle="{StaticResource DataGridElement}"
+                            Header="CMND"
+                            HeaderStyle="{StaticResource DataGridHeader}"
+                            MaxLength="30" />
+                            <materialDesign:DataGridTextColumn
+                            Binding="{Binding roomID}"
+                            EditingElementStyle="{StaticResource EditingDataGridElement}"
+                            ElementStyle="{StaticResource DataGridElement}"
+                            Header="Phòng"
+                            HeaderStyle="{StaticResource DataGridHeader}"
+                            MaxLength="30" />
+
+                            <materialDesign:DataGridTextColumn
+                            Binding="{Binding arrivedDate, StringFormat=dd-MM-yyyy}"
+                            EditingElementStyle="{StaticResource EditingDataGridElement}"
+                            ElementStyle="{StaticResource DataGridElement}"
+                            Header="Ngày đến"
+                            HeaderStyle="{StaticResource DataGridHeader}"
+                            MaxLength="30" />
+                            <materialDesign:DataGridTextColumn
+                            Binding="{Binding Severity.description}"
+                            EditingElementStyle="{StaticResource EditingDataGridElement}"
+                            ElementStyle="{StaticResource DataGridElement}"
+                            Header="Mức độ"
+                            HeaderStyle="{StaticResource DataGridHeader}"
+                            MaxLength="30" />
+
+                            
+                            
                         </DataGrid.Columns>
                     </DataGrid>
                 </Border>
 
                 <Button
-                Width="160"
+                Width="180"
                 Height="26"
                 Margin="0,0,0,0"
                 HorizontalAlignment="Right"
-                Content="Thêm vào danh sách"
+                Command="{Binding SelectAllPeople}"
+                Content="Chọn tất cả trong bộ lọc"
                 FontSize="12"
-                Style="{StaticResource DashboardButton}">
-                    <!--<Button.ContextMenu>
-                        <ContextMenu>
-                            <ContextMenu.Template>
-                                <ControlTemplate>
-                                    <local:AddStaffFunctionMenu />
-                                </ControlTemplate>
-                            </ContextMenu.Template>
-                        </ContextMenu>
-                    </Button.ContextMenu>-->
+                Background="#ff1D9583"
+                BorderBrush="#ff1D9583"
+                                 
+                    >
                 </Button>
             </StackPanel>
 
@@ -272,14 +263,14 @@
                                     materialDesign:HintAssist.Hint="Tên, CMND,...."
                                     MaxLength="20"
                                     Style="{StaticResource TextInputField}">
-                            <!--<TextBox.Text>
+                            <TextBox.Text>
                                         <Binding
                                     Mode="TwoWay"
-                                    Path="SearchKey"
+                                    Path="SearchKey2"
                                     UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules />
                                         </Binding>
-                                    </TextBox.Text>-->
+                                    </TextBox.Text>
 
                         </TextBox>
                     </StackPanel>
@@ -302,13 +293,13 @@
                                     FontSize="10"
                             Padding="7,5,5,7"
                             utility:ProtocolSettingsLayout.MVVMHasError="{Binding SexFieldHasError}"
-                            ItemsSource="{Binding FilterType}"
+                            ItemsSource="{Binding FilterType2}"
                             Style="{StaticResource ComboBoxField}">
-                            <!--<ComboBox.SelectedItem>
-                                        <Binding Path="SelectedFilterType" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules />
-                                        </Binding>
-                                    </ComboBox.SelectedItem>-->
+                            <ComboBox.SelectedItem>
+                                <Binding Path="SelectedFilterType2" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </ComboBox.SelectedItem>
                         </ComboBox>
                     </StackPanel>
 
@@ -328,18 +319,18 @@
                             Padding="7,5,5,7"
                             FontSize="10"
                             utility:ProtocolSettingsLayout.MVVMHasError="{Binding SexFieldHasError}"
-                            ItemsSource="{Binding FilterProperty}"
+                            ItemsSource="{Binding FilterProperty2}"
                             Style="{StaticResource ComboBoxField}">
-                            <!--<ComboBox.SelectedItem>
-                                        <Binding Path="SelectedFilterProperty" UpdateSourceTrigger="PropertyChanged">
+                            <ComboBox.SelectedItem>
+                                        <Binding Path="SelectedFilterProperty2" UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules />
                                         </Binding>
-                                    </ComboBox.SelectedItem>-->
+                                    </ComboBox.SelectedItem>
                         </ComboBox>
                     </StackPanel>
 
                 </Grid>
-                <Border Background="Transparent" BorderBrush="#FF000000" BorderThickness="1" CornerRadius="8,8,8,8" Margin="0, 8,0,28" Padding="0,0,0,0">
+                <Border Background="Transparent" BorderBrush="#FF000000" BorderThickness="1" CornerRadius="8,8,8,8" Margin="0, 8,0,4" Padding="0,0,0,0">
                     <DataGrid
                     Height="467"
                     Margin="0,0,0,0"
@@ -350,18 +341,41 @@
                     CanUserResizeColumns="True"
                     CanUserResizeRows="False"
                     IsReadOnly="True"
-                    ItemsSource="{Binding StaffListView}"
-                    SelectedItem="{Binding SelectedItem}"
+                    ItemsSource="{Binding PeopleListView2}"
+                    SelectedItem="{Binding SelectedItem2}"
                     SelectionMode="Single"
                     SelectionUnit="FullRow">
                         <DataGrid.Columns>
-                            <materialDesign:DataGridTextColumn
-                            Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=Header}"
-                            EditingElementStyle="{StaticResource EditingDataGridElement}"
-                            ElementStyle="{StaticResource DataGridElement}"
-                            Header="STT"
-                            HeaderStyle="{StaticResource DataGridHeader}"
-                            MaxLength="10" />
+                            <DataGridTemplateColumn
+                            Width="50"
+                            MinWidth="50"
+                            Header="">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button
+                                        Width="20"
+                                        Height="20"
+                                        HorizontalAlignment="Right"
+                                        Command="{Binding Path=DataContext.DeletePerSon, RelativeSource={RelativeSource AncestorType=DataGrid,Mode=FindAncestor}}" 
+                        
+                                        Style="{StaticResource DataGridButtonDelete}">
+                                            <materialDesign:PackIcon
+                                            Width="20"
+                                            Height="20"
+                                            Kind="ArrowLeftBoldBox" />
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="FontSize" Value="14" />
+                                        <Setter Property="FontWeight" Value="Bold" />
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                        <Setter Property="Background" Value="Transparent" />
+                                    </Style>
+                                </DataGridColumn.HeaderStyle>
+                            </DataGridTemplateColumn>
+                           
                             <materialDesign:DataGridTextColumn
                             Binding="{Binding name}"
                             EditingElementStyle="{StaticResource EditingDataGridElement}"
@@ -370,14 +384,14 @@
                             HeaderStyle="{StaticResource DataGridHeader}"
                             MaxLength="30" />
                             <materialDesign:DataGridTextColumn
-                            Binding="{Binding dateOfBirth, StringFormat=dd-MM-yyyy}"
+                            Binding="{Binding citizenID}"
                             EditingElementStyle="{StaticResource EditingDataGridElement}"
                             ElementStyle="{StaticResource DataGridElement}"
                             Header="CMND"
                             HeaderStyle="{StaticResource DataGridHeader}"
                             MaxLength="30" />
                             <materialDesign:DataGridTextColumn
-                            Binding="{Binding sex}"
+                            Binding="{Binding roomID}"
                             EditingElementStyle="{StaticResource EditingDataGridElement}"
                             ElementStyle="{StaticResource DataGridElement}"
                             Header="Phòng"
@@ -385,42 +399,26 @@
                             MaxLength="30" />
 
                             <materialDesign:DataGridTextColumn
-                            Binding="{Binding jobTitle}"
+                            Binding="{Binding arrivedDate, StringFormat=dd-MM-yyyy}"
                             EditingElementStyle="{StaticResource EditingDataGridElement}"
                             ElementStyle="{StaticResource DataGridElement}"
                             Header="Ngày đến"
                             HeaderStyle="{StaticResource DataGridHeader}"
                             MaxLength="30" />
                             <materialDesign:DataGridTextColumn
-                            Binding="{Binding department}"
+                            Binding="{Binding Severity.description}"
                             EditingElementStyle="{StaticResource EditingDataGridElement}"
                             ElementStyle="{StaticResource DataGridElement}"
                             Header="Mức độ"
                             HeaderStyle="{StaticResource DataGridHeader}"
                             MaxLength="30" />
-
-                            <DataGridTemplateColumn Width="*" MinWidth="70">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button
-                                        Width="20"
-                                        Height="20"
-                                        HorizontalAlignment="Right"
-                                        Command="{Binding PersonInRoomViewModel.AddPersonToRoomUI, Source={StaticResource RoomVM}}"
-                                        Style="{StaticResource DataGridButtonDelete}">
-                                            <materialDesign:PackIcon
-                                            Width="20"
-                                            Height="20"
-                                            Kind="ArrowRightBoldBox" />
-                                        </Button>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Border>
 
-                <Grid HorizontalAlignment="Right">
+                <TextBlock Text="{Binding countReceiver}"/>
+
+                <Grid HorizontalAlignment="Right" Margin="0,10,0,0">
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
@@ -433,10 +431,10 @@
                         Margin="0,0,12,0"
                         HorizontalAlignment="Right"
                         Background="#ff434A54"
-                        Content="Xóa khỏi danh sách"
+                        Content="Xóa tất cả từ bộ lọc"
                         FontSize="12"
-                        
-                        Style="{StaticResource DashboardButton}"
+                        Command="{Binding DeleteAllPeople}"
+                        BorderBrush="#ff434A54"
                         >
                     </Button>
 
@@ -448,8 +446,9 @@
                             HorizontalAlignment="Right"
                             Content="Xác nhận"
                             FontSize="12"
-                        
-                            Style="{StaticResource DashboardButton}">
+                        Command="{Binding ConfirmPeopleList}"
+                            Background="#ff1D9583"
+                BorderBrush="#ff1D9583">
                     </Button>
 
 

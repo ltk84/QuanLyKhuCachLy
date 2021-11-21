@@ -15,7 +15,6 @@
     <viewmodel:InjectionRecordViewModel x:Key="InjectionVM" />
     <viewmodel:DestinationHistoryViewModel x:Key="DestinationVM" />
     <viewmodel:SeverityViewModel x:Key="SeverityVM" />
-    <viewmodel:NotificationViewModel x:Key="NotificationVM" />
     <viewmodel:SettingViewModel x:Key="SettingVM" />
     <viewmodel:TestingResultViewModel x:Key="TestingVM" />
 </ResourceDictionary>

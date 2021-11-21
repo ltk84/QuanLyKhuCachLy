@@ -8,11 +8,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="705"
     d:DesignWidth="757"
-    DataContext="{StaticResource NotificationVM}"
+    DataContext="{StaticResource NotiVM}"
     mc:Ignorable="d">
 
     <Grid>
-        <control:NotificationScreen Visibility="Hidden" />
-        <control:NotificationScreenTemplateManage Visibility="Visible" />
+        <control:NotificationScreen Visibility="{Binding MainTab}" />
+        <control:NotificationScreenTemplateManage Visibility="{Binding ManagerTemplateTab}" />
     </Grid>
 </UserControl>

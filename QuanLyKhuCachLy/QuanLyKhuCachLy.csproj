@@ -102,6 +102,9 @@
     <Compile Include="CustomUserControl\AddDestinationHistoryPersonInRoom.xaml.cs">
       <DependentUpon>AddDestinationHistoryPersonInRoom.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomUserControl\AddNewNotificationTemplate.xaml.cs">
+      <DependentUpon>AddNewNotificationTemplate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomUserControl\AddPersonFunctionMenu.xaml.cs">
       <DependentUpon>AddPersonFunctionMenu.xaml</DependentUpon>
     </Compile>
@@ -131,6 +134,9 @@
     </Compile>
     <Compile Include="CustomUserControl\EditDestinationHistoryPersonInRoom.xaml.cs">
       <DependentUpon>EditDestinationHistoryPersonInRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditNotificationTemplateWindown.xaml.cs">
+      <DependentUpon>EditNotificationTemplateWindown.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomUserControl\EditQuarantineArea.xaml.cs">
       <DependentUpon>EditQuarantineArea.xaml</DependentUpon>
@@ -411,6 +417,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="CustomUserControl\AddNewNotificationTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomUserControl\AddPersonFunctionMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -444,6 +454,10 @@
     <Page Include="CustomUserControl\EditDestinationHistoryPersonInRoom.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomUserControl\EditNotificationTemplateWindown.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomUserControl\EditQuarantineArea.xaml">
       <SubType>Designer</SubType>
