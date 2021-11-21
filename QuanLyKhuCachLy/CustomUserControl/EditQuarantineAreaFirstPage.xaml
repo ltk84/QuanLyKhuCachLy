@@ -307,6 +307,45 @@
                         </TextBox.Text>
                     </TextBox>
                 </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="2">
+                    <TextBlock
+                        Margin="0,10,0,0"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="18"
+                        FontWeight="Bold"
+                        Foreground="#FF434A54">
+                        Người quản lý
+                    </TextBlock>
+                    <Separator Margin="0,5,24,2">
+                        <Separator.RenderTransform>
+                            <ScaleTransform ScaleY="2" />
+                        </Separator.RenderTransform>
+                    </Separator>
+                </StackPanel>
+                <StackPanel
+                    Grid.Row="2"
+                    Grid.Column="2"
+                    Margin="0,25,24,0">
+                    <TextBlock
+                        Margin="5,0,0,5"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        Foreground="#FF434A54">
+                        Tên người quản lý (*)
+                    </TextBlock>
+                    <ComboBox
+                        utility:ProtocolSettingsLayout.MVVMHasError="{Binding QAWardFieldHasError}"
+                        ItemsSource="{Binding WardList}"
+                        Style="{StaticResource ComboBoxField}">
+                        <ComboBox.SelectedItem>
+                            <Binding Path="SelectedWard" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vr:RequiredFieldNonCommit />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </ComboBox.SelectedItem>
+                    </ComboBox>
+                </StackPanel>
             </Grid>
         </Grid>
     </StackPanel>
