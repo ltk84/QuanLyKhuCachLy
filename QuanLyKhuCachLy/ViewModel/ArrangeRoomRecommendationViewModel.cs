@@ -177,10 +177,10 @@ namespace QuanLyKhuCachLy.ViewModel
         // Khởi tạo theo đề xuất
         private void InitByRecommendation()
         {
-            for (int i = 0; i < AvailableRooms.Count(); i++)
-            {
-                _QuarantinePersonsToAddByRoom.Add(AvailableRooms[i], new ObservableCollection<QuarantinePerson>(PersonWitN));
-            }
+            //for (int i = 0; i < AvailableRooms.Count(); i++)
+            //{
+            //    _QuarantinePersonsToAddByRoom.Add(AvailableRooms[i], new ObservableCollection<QuarantinePerson>(PersonWitN));
+            //}
         }
     }
 }
