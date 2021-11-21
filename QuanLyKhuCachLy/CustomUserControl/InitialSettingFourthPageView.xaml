@@ -162,7 +162,7 @@
                     </TextBlock>
                     <ComboBox
                         utility:ProtocolSettingsLayout.MVVMHasError="{Binding MProvinceFieldHasError}"
-                        ItemsSource="{Binding ProvinceList}"
+                        ItemsSource="{Binding ManagerProvinceList}"
                         Style="{StaticResource ComboBoxField}">
                         <ComboBox.SelectedItem>
                             <Binding Path="ManagerSelectedProvince" UpdateSourceTrigger="PropertyChanged">
@@ -187,7 +187,7 @@
                     </TextBlock>
                     <ComboBox
                         utility:ProtocolSettingsLayout.MVVMHasError="{Binding MDistrictFieldHasError}"
-                        ItemsSource="{Binding DistrictList}"
+                        ItemsSource="{Binding ManagerDistrictList}"
                         Style="{StaticResource ComboBoxField}">
                         <ComboBox.SelectedItem>
                             <Binding Path="ManagerSelectedDistrict" UpdateSourceTrigger="PropertyChanged">
@@ -212,7 +212,7 @@
                     </TextBlock>
                     <ComboBox
                         utility:ProtocolSettingsLayout.MVVMHasError="{Binding MWardFieldHasError}"
-                        ItemsSource="{Binding WardList}"
+                        ItemsSource="{Binding ManagerWardList}"
                         Style="{StaticResource ComboBoxField}">
                         <ComboBox.SelectedItem>
                             <Binding Path="ManagerSelectedWard" UpdateSourceTrigger="PropertyChanged">

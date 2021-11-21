@@ -13,6 +13,7 @@ namespace QuanLyKhuCachLy.ViewModel
     public class QuarantineAreaInformationViewModel : BaseViewModel
     {
         #region property
+
         #region Quarantine Area
         private string _QAName;
         public string QAname { get => _QAName; set { _QAName = value; OnPropertyChanged(); } }
@@ -24,13 +25,13 @@ namespace QuanLyKhuCachLy.ViewModel
         public string QAApartmentNumber { get => _QAApartmentNumber; set { _QAApartmentNumber = value; OnPropertyChanged(); } }
 
         private string _QASelectedProvince;
-        public string QASelectedProvince { get => _QASelectedProvince; set { _QASelectedProvince = value; OnPropertyChanged(); } }
+        public string QASelectedProvince { get => _QASelectedProvince; set { _QASelectedProvince = value; OnPropertyChanged(); InitQADistrictList(); } }
 
         private string _QASelectedWard;
         public string QASelectedWard { get => _QASelectedWard; set { _QASelectedWard = value; OnPropertyChanged(); } }
 
         private string _QASelectedDistrict;
-        public string QASelectedDistrict { get => _QASelectedDistrict; set { _QASelectedDistrict = value; OnPropertyChanged(); } }
+        public string QASelectedDistrict { get => _QASelectedDistrict; set { _QASelectedDistrict = value; OnPropertyChanged(); InitQAWardList(); } }
 
         private int _QATestCycle;
         public int QATestCycle { get => _QATestCycle; set { _QATestCycle = value; OnPropertyChanged(); } }
@@ -48,13 +49,13 @@ namespace QuanLyKhuCachLy.ViewModel
         public string ManagerApartmentNumber { get => _ManagerApartmentNumber; set { _ManagerApartmentNumber = value; OnPropertyChanged(); } }
 
         private string _ManagerSelectedProvince;
-        public string ManagerSelectedProvince { get => _ManagerSelectedProvince; set { _ManagerSelectedProvince = value; OnPropertyChanged(); } }
+        public string ManagerSelectedProvince { get => _ManagerSelectedProvince; set { _ManagerSelectedProvince = value; OnPropertyChanged(); InitManagerDistrictList(); } }
 
         private string _ManagerSelectedWard;
         public string ManagerSelectedWard { get => _ManagerSelectedWard; set { _ManagerSelectedWard = value; OnPropertyChanged(); } }
 
         private string _ManagerSelectedDistrict;
-        public string ManagerSelectedDistrict { get => _ManagerSelectedDistrict; set { _ManagerSelectedDistrict = value; OnPropertyChanged(); } }
+        public string ManagerSelectedDistrict { get => _ManagerSelectedDistrict; set { _ManagerSelectedDistrict = value; OnPropertyChanged(); InitManagerWardList(); } }
 
         private string _ManagerName;
         public string ManagerName { get => _ManagerName; set { _ManagerName = value; OnPropertyChanged(); } }
@@ -138,30 +139,57 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #region list
         // đang dummy data (đáng lẻ nên lấy data từ đâu đó)
-        private ObservableCollection<string> _ProvinceList;
-        public ObservableCollection<string> ProvinceList
+        private ObservableCollection<string> _QAProvinceList;
+        public ObservableCollection<string> QAProvinceList
         {
-            get => _ProvinceList; set
+            get => _QAProvinceList; set
             {
-                _ProvinceList = value; OnPropertyChanged();
+                _QAProvinceList = value; OnPropertyChanged();
             }
         }
 
-        private ObservableCollection<string> _DistrictList;
-        public ObservableCollection<string> DistrictList
+        private ObservableCollection<string> _QADistrictList;
+        public ObservableCollection<string> QADistrictList
         {
-            get => _DistrictList; set
+            get => _QADistrictList; set
             {
-                _DistrictList = value; OnPropertyChanged();
+                _QADistrictList = value; OnPropertyChanged();
             }
         }
 
-        private ObservableCollection<string> _WardList;
-        public ObservableCollection<string> WardList
+        private ObservableCollection<string> _QAWardList;
+        public ObservableCollection<string> QAWardList
         {
-            get => _WardList; set
+            get => _QAWardList; set
             {
-                _WardList = value; OnPropertyChanged();
+                _QAWardList = value; OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<string> _ManagerProvinceList;
+        public ObservableCollection<string> ManagerProvinceList
+        {
+            get => _ManagerProvinceList; set
+            {
+                _ManagerProvinceList = value; OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<string> _ManagerDistrictList;
+        public ObservableCollection<string> ManagerDistrictList
+        {
+            get => _ManagerDistrictList; set
+            {
+                _ManagerDistrictList = value; OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<string> _ManagerWardList;
+        public ObservableCollection<string> ManagerWardList
+        {
+            get => _ManagerWardList; set
+            {
+                _ManagerWardList = value; OnPropertyChanged();
             }
         }
 
@@ -259,6 +287,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
+        #region singleton
         private static QuarantineAreaInformationViewModel _ins;
         public static QuarantineAreaInformationViewModel ins
         {
@@ -269,6 +298,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             set => _ins = value;
         }
+        #endregion
 
 
         #endregion
@@ -329,28 +359,93 @@ namespace QuanLyKhuCachLy.ViewModel
                 HandleChangeTab(TabIndex, "previous", p);
             });
 
-            NationalityList = new ObservableCollection<string>() {
-                "Việt Nam", "Mỹ", "Pháp", "Đức", "Trung Quốc"
-            };
+            NationalityList = new ObservableCollection<string>();
 
-            ProvinceList = new ObservableCollection<string>() {
-                "Hồ Chí Minh", "Bình Dương", "Vĩnh Long"
-            };
-            DistrictList = new ObservableCollection<string>() {
-                "Quận 1", "Quận 2", "Quận 3", "Quận 4"
-            };
-            WardList = new ObservableCollection<string>()
-            {
-                "Phú Thạnh", "Phú Thọ Hòa", "Bình Hưng Hòa"
-            };
+            QAProvinceList = new ObservableCollection<string>();
+            QADistrictList = new ObservableCollection<string>();
+            QAWardList = new ObservableCollection<string>();
+
+
+            ManagerProvinceList = new ObservableCollection<string>();
+            ManagerDistrictList = new ObservableCollection<string>();
+            ManagerWardList = new ObservableCollection<string>();
+
             SexList = new ObservableCollection<string>()
             {
                 "Nam", "Nữ"
             };
 
+            InitQAProvinceList();
+            InitManagerProvinceList();
+            InitNationList();
+
         }
 
         #region Methods
+
+        void InitNationList()
+        {
+            foreach (var item in NationViewModel.NationList)
+            {
+                NationalityList.Add(item.NAME);
+            }
+        }
+
+        void InitQAProvinceList()
+        {
+            foreach (var item in AddressViewModel.ProvinceList)
+            {
+                QAProvinceList.Add(item.name);
+            }
+        }
+
+        void InitQADistrictList()
+        {
+            AddressViewModel.ProvinceSelectEvent(QASelectedProvince);
+            QADistrictList.Clear();
+            foreach (var item in AddressViewModel.DistrictList)
+            {
+                QADistrictList.Add(item.name);
+            }
+        }
+
+        void InitQAWardList()
+        {
+            AddressViewModel.DistrictSelectEVent(QASelectedDistrict);
+            QAWardList.Clear();
+            foreach (var item in AddressViewModel.WardList)
+            {
+                QAWardList.Add(item.name);
+            }
+        }
+
+        void InitManagerProvinceList()
+        {
+            foreach (var item in AddressViewModel.ProvinceList)
+            {
+                ManagerProvinceList.Add(item.name);
+            }
+        }
+
+        void InitManagerDistrictList()
+        {
+            AddressViewModel.ProvinceSelectEvent(ManagerSelectedProvince);
+            ManagerDistrictList.Clear();
+            foreach (var item in AddressViewModel.DistrictList)
+            {
+                ManagerDistrictList.Add(item.name);
+            }
+        }
+
+        void InitManagerWardList()
+        {
+            AddressViewModel.DistrictSelectEVent(ManagerSelectedDistrict);
+            ManagerWardList.Clear();
+            foreach (var item in AddressViewModel.WardList)
+            {
+                ManagerWardList.Add(item.name);
+            }
+        }
 
         void HandleChangeTab(int index, string action, Window p)
         {
