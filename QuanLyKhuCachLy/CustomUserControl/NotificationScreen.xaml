@@ -3,8 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
+             xmlns:utility="clr-namespace:QuanLyKhuCachLy.Utility"
              xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="705" d:DesignWidth="757">
     <StackPanel  Margin="40,30,40,30">
@@ -25,11 +27,11 @@
             </Grid.ColumnDefinitions>
 
             <Button
+                Command="{Binding SwitchTab}"
                 Grid.Column="0"
                 Margin="0,0,10,0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Command="{Binding ToMainCommand}"
                 IsEnabled="True"
                 RenderTransformOrigin="0.5,0.5"
                 Style="{StaticResource MaterialDesignIconButton}"
@@ -82,6 +84,7 @@
             </StackPanel>
 
             <Button
+                Command="{Binding ShowAddNewNT}"
                 Grid.Column="1"
                 VerticalAlignment="Center"
                 FontSize="11"
@@ -93,49 +96,48 @@
             <Border Grid.Row="2" Background="Transparent" BorderBrush="#FF000000" BorderThickness="1" CornerRadius="8,8,8,8" Margin="0, 0,0,0" Padding="0,5,0,5">
                 <ScrollViewer
             HorizontalScrollBarVisibility="Hidden">
-                    <ListView Margin="10" Name="lvDataBinding">
-                        <ListView.ItemTemplate>
+                    <ListView 
+                        
+                        ItemsSource="{Binding TemplateList}"
+                        SelectedItem="{Binding selectedTemplate}"
+                        Margin="0" Name="lvDataBinding" >
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate
+                            >
                             <DataTemplate>
-                                <Grid>
+                                <Grid
+                                    Margin="10,10,10,10"
+                                    >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="1*"/>
                                         <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="auto"/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock
-                                Grid.Column="0"
-                                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                                FontSize="18"
-                                FontWeight="Regular"
-                                Foreground="#ff363636"
-                                Margin="0,0,18,0"
-                                Text="Đây là tiêu đề mẫu"
-                                >
+                                        VerticalAlignment="Bottom"
+                                        Grid.Column="0"
+                                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                                        FontSize="12.39"
+                                        FontWeight="Regular"
+                                        Foreground="#ff363636"
+                                        Margin="0,0,0,0"
+                                        Text="{Binding Path=name}"
+                                    >   
 
                                     </TextBlock>
 
-                                    <Button
-                                Grid.Column="1"
-                                Margin="0,0,24,0"
-                                Width="93"
-                                Height="35"
-                                Background="#FF1D9583"
-                                Content="Chọn"
-                                FontSize="16"
-                                
-                                Style="{StaticResource AddObjectButton}">
-                                        <Button.ContextMenu>
-                                            <ContextMenu>
-                                                <ContextMenu.Template>
-                                                    <ControlTemplate>
-                                                        <local:AddStaffFunctionMenu />
-                                                    </ControlTemplate>
-                                                </ContextMenu.Template>
-                                            </ContextMenu>
-                                        </Button.ContextMenu>
-                                    </Button>
+                                    <!--<Button
+                                        Grid.Column="1"
+                                        VerticalAlignment="Bottom"
+                                        Command="{Binding Path=DataContext.editTemplateCommand, RelativeSource={RelativeSource AncestorType=DataGrid,Mode=FindAncestor}}" 
+                                     
+                                        Content="Chỉnh sửa"
+                                        Template="{StaticResource edit-button}" />-->
 
-                                    <Grid>
+                                    <!--<Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="auto" />
                                             <RowDefinition Height="auto" />
@@ -159,7 +161,7 @@
                                     Text="12" />
 
 
-                                    </Grid>
+                                    </Grid>-->
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
@@ -185,24 +187,35 @@
                     Foreground="#FF363636">
                     Nội dung
             </TextBlock>
-            <Button
+                <Button
                 Grid.Column="2"
                 VerticalAlignment="Bottom"
-                Command="{Binding ToEditCommand}"
+                Command="{Binding editTemplateCommand}"
                 Content="Chỉnh sửa"
                 Template="{StaticResource edit-button}" />
 
 
-        </Grid>
+            </Grid>
 
-        <Border Grid.Row="4" Background="Transparent" BorderBrush="#FF000000" BorderThickness="1" CornerRadius="8,8,8,8" Margin="0, 13,0,0" Padding="10">
             <TextBox
-            Background="#FFF"
-            />
-        </Border>
-        
+                        IsReadOnly="True"
+                        Grid.Row="4"
+                        materialDesign:HintAssist.Hint="Nhập nội dung thông báo"
+                        utility:ProtocolSettingsLayout.MVVMHasError="{Binding Path=DisplayNameFieldHasError}"
+                        Height="200"
+                        Style="{StaticResource TextInputField}">
+                <TextBox.Text>
+                    <Binding Path="message" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <!--<vr:RequiredField />-->
+                            <vr:NoSpecialChar />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
 
 
-    </Grid>
+
+        </Grid>
     </StackPanel>
 </UserControl>

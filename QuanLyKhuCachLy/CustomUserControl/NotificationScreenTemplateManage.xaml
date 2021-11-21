@@ -2,9 +2,11 @@
             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                xmlns:utility="clr-namespace:QuanLyKhuCachLy.Utility"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
              xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="705" d:DesignWidth="757">
     <StackPanel Margin="40,30,40,30">
@@ -12,13 +14,15 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="1*"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
 
-
-        </Grid.RowDefinitions>
+            <Button Margin="0,15,0,15" BorderBrush="Transparent" Background="Transparent" Command="{Binding ShowPeopleList}" HorizontalAlignment="Center"  Foreground="#FF3D3F66" FontSize="13" FontWeight="Bold" FontStyle="Italic"  Grid.Row="2" Content="{Binding textBtnTitle}"></Button>
+        
         <TextBlock
             Grid.Row="0"
             
@@ -69,54 +73,57 @@
                 VerticalAlignment="Center"
                 FontSize="11"
                 Content="Quãn lý mẫu"
+                Command="{Binding SwitchTab }"
                 Template="{StaticResource add-button-no-background}" />
         </Grid>
 
-            <Border Grid.Row="2" Background="Transparent" BorderBrush="#FF000000" BorderThickness="1" CornerRadius="8,8,8,8" Margin="0, 0,0,0" Padding="0,5,0,5">
+            <Border Grid.Row="3" Background="Transparent" BorderBrush="#FF000000" BorderThickness="1" CornerRadius="8,8,8,8" Margin="0, 0,0,0" Padding="0,5,0,5">
                 <ScrollViewer
             HorizontalScrollBarVisibility="Hidden">
-                    <ListView Margin="10" Name="lvDataBinding">
-                        <ListView.ItemTemplate>
+                    <ListView 
+                        
+                        ItemsSource="{Binding TemplateList}"
+                        SelectedItem="{Binding selectedTemplate}"
+                        Margin="0" Name="lvDataBinding" >
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate
+                            >
                             <DataTemplate>
-                                <Grid>
+                                <Grid
+                                    Margin="10,10,10,10"
+                                    >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="1*"/>
-                                        <ColumnDefinition Width="auto"/>
                                         <ColumnDefinition Width="auto"/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock
                                 Grid.Column="0"
                                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                                FontSize="18"
+                                FontSize="12.39"
                                 FontWeight="Regular"
                                 Foreground="#ff363636"
                                 Margin="0,0,18,0"
-                                Text="Đây là tiêu đề mẫu"
+                                Text="{Binding Path=name}"
                                 >
 
                                     </TextBlock>
 
                                     <Button
                                 Grid.Column="1"
-                                Margin="0,0,24,0"
-                                Width="93"
-                                Height="35"
+                                Margin="0,0,0,0"
+                                Width="64"
+                                Height="22"
                                 Background="#FF1D9583"
                                 Content="Chọn"
-                                FontSize="16"
+                                FontSize="11"
                                 Style="{StaticResource AddObjectButton}">
-                                        <Button.ContextMenu>
-                                            <ContextMenu>
-                                                <ContextMenu.Template>
-                                                    <ControlTemplate>
-                                                        <local:AddStaffFunctionMenu />
-                                                    </ControlTemplate>
-                                                </ContextMenu.Template>
-                                            </ContextMenu>
-                                        </Button.ContextMenu>
                                     </Button>
 
-                                    <Grid>
+                                    <!--<Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="auto" />
                                             <RowDefinition Height="auto" />
@@ -140,7 +147,7 @@
                                     Text="12" />
 
 
-                                    </Grid>
+                                    </Grid>-->
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
@@ -150,18 +157,9 @@
             </Border>
 
             <Grid
-            Grid.Row="3"
+            Grid.Row="4"
             
-            Margin="0,0,0,8"
-            >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="27"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-
-            <Grid
-                Grid.Column="0">
+            Margin="0,0,0,8">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="auto"/>
@@ -175,80 +173,35 @@
                     Foreground="#FF363636">
                     Nội dung
                 </TextBlock>
-                <Button
+                <!--<Button
                 Grid.Column="2"
                 VerticalAlignment="Bottom"
                 Command="{Binding ToEditCommand}"
                 Content="Chỉnh sửa"
-                Template="{StaticResource edit-button}" />
-
-
-            </Grid>
-
-
-            <Grid
-                Grid.Column="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock
-                    VerticalAlignment="Bottom"
-                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                    FontSize="16.52"
-                    FontWeight="Bold"
-                    Foreground="#FF363636">
-                    Đối tượng
-                </TextBlock>
-                <Button
-                Grid.Column="2"
-                VerticalAlignment="Bottom"
-                Command="{Binding ToEditCommand}"
-                Content="Chỉnh sửa"
-                Template="{StaticResource edit-button}" />
-
-
-            </Grid>
-
-
-
-
+                Template="{StaticResource edit-button}" />-->
         </Grid>
 
-        <Grid
-            Grid.Row="4"
+            <Grid
+            Grid.Row="5"
             >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="27"/>
-                <ColumnDefinition Width="1*"/>
-
-
-            </Grid.ColumnDefinitions>
-
-                <Border Grid.Column="0" Background="Transparent" BorderBrush="#FF000000" BorderThickness="1" CornerRadius="8,8,8,8" Margin="0, 0,0,0" Padding="0,5,0,5">
-                    <TextBox
-                        Grid.Column="0"
-                        Background="#fff"
-                        Margin="0,0,0,0" Grid.ColumnSpan="2">
-                        This is the content
-                    </TextBox>
-                </Border>
-
-
-                <Border Grid.Column="2" Background="Transparent" BorderBrush="#FF000000" BorderThickness="1" CornerRadius="8,8,8,8" Margin="0, 0,0,0" Padding="0,5,0,5">
-                    <TextBox
-                        Grid.Column="0"
-                        Background="#fff"
-                        Margin="0,0,0,0" Grid.ColumnSpan="2">
-                        This is the content
-                    </TextBox>
-                </Border>
+                <TextBox
+                        materialDesign:HintAssist.Hint="Nhập nội dung thông báo"
+                        utility:ProtocolSettingsLayout.MVVMHasError="{Binding Path=DisplayNameFieldHasError}"
+                        Height="200"
+                        Style="{StaticResource TextInputField}">
+                    <TextBox.Text>
+                        <Binding Path="message" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <!--<vr:RequiredField />-->
+                                <vr:NoSpecialChar />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
             </Grid>
         <Button
             HorizontalAlignment="Right"
-            Grid.Row="5"
+            Grid.Row="6"
             Margin="0,10,0,0"
             Width="137"
             Height="32"

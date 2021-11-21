@@ -10,24 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace QuanLyKhuCachLy.CustomUserControl
 {
     /// <summary>
-    /// Interaction logic for NotificationScreenWrapper.xaml
+    /// Interaction logic for EditNotificationTemplateWindown.xaml
     /// </summary>
-    public partial class NotificationScreenWrapper : UserControl
+    public partial class EditNotificationTemplateWindown : Window
     {
-        public NotificationScreenWrapper()
+        public EditNotificationTemplateWindown()
         {
             InitializeComponent();
-        }
-
-        private void NotificationScreenTemplateManage_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
