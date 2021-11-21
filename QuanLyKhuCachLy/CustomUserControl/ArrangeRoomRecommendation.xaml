@@ -3,12 +3,13 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Name="ArrangeRoomRecommendationWindow"
-    Width="1024"
-    Height="720"
+    Width="1280"
+    Height="768"
     AllowsTransparency="True"
     Background="Transparent"
     DataContext="{StaticResource ArrangeRoomRecommendationVM}"
@@ -18,8 +19,8 @@
     mc:Ignorable="d">
     <Viewbox>
         <Border
-            Width="1024"
-            Height="720"
+            Width="1280"
+            Height="768"
             Margin="10"
             Style="{StaticResource RecommendationField}">
             <StackPanel>
@@ -38,7 +39,7 @@
                     FontSize="18">
                     Những người cách ly chưa có phòng đã được tự động đề xuất thêm vào các phòng còn trống
                 </TextBlock>
-                <Grid Margin="55,25,55,0">
+                <Grid Margin="55,25,55,0" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="4*" />
                         <ColumnDefinition Width="3*" />
@@ -59,7 +60,7 @@
                             Foreground="#FF434A54"><Run Text="Danh sách phòng được đề xuất" /></TextBlock>
                         <DataGrid
                             Grid.Row="1"
-                            Height="200"
+                            Height="225"
                             Margin="0,5,0,32"
                             materialDesign:DataGridAssist.CornerRadius="10"
                             AutoGenerateColumns="False"
@@ -69,9 +70,14 @@
                             CanUserResizeRows="False"
                             IsReadOnly="True"
                             ItemsSource="{Binding AvailableRooms}"
+                            SelectedItem="{Binding SelectedAvailableRoom}"
                             SelectionMode="Single"
                             SelectionUnit="FullRow">
-
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding UpdatePersonsToAddToRoomCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                             <DataGrid.Columns>
                                 <materialDesign:DataGridTextColumn
                                     Width="Auto"
@@ -106,7 +112,7 @@
                             Foreground="#FF434A54"><Run Text="Danh sách người chưa có phòng" /></TextBlock>
                         <DataGrid
                             Grid.Row="3"
-                            Height="200"
+                            Height="225"
                             Margin="0,5,0,20"
                             materialDesign:DataGridAssist.CornerRadius="10"
                             AutoGenerateColumns="False"
@@ -116,6 +122,7 @@
                             CanUserResizeRows="False"
                             IsReadOnly="True"
                             ItemsSource="{Binding PersonsWithNoRoom}"
+                            SelectedItem="{Binding SelectedPersonWithNoRoom}"
                             SelectionMode="Single"
                             SelectionUnit="FullRow">
 
@@ -130,6 +137,7 @@
                                                 Width="20"
                                                 Height="20"
                                                 HorizontalAlignment="Right"
+                                                Command="{Binding AddPersonToRoomCommand, Source={StaticResource ArrangeRoomRecommendationVM}}"
                                                 Style="{StaticResource DataGridButtonDelete}">
                                                 <materialDesign:PackIcon
                                                     Width="20"
@@ -143,7 +151,7 @@
                                     Width="Auto"
                                     Binding="{Binding name}"
                                     ElementStyle="{StaticResource DataGridElement}"
-                                    Header="Tên"
+                                    Header="Họ và tên"
                                     HeaderStyle="{StaticResource DataGridHeader}"
                                     IsReadOnly="True" />
                                 <materialDesign:DataGridTextColumn
@@ -163,10 +171,13 @@
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
-                    <Grid Grid.Column="0" Margin="0,0,32,0">
+                    <Grid
+                        Grid.Column="0"
+                        Margin="0,0,32,0"
+                        VerticalAlignment="Top">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0" Margin="0,0,5,0">
                             <Grid.ColumnDefinitions>
@@ -187,20 +198,30 @@
                                     FontSize="18"
                                     FontWeight="Bold"
                                     Foreground="#FFFAAC2D"
-                                    Text="phòng A2" />
+                                    Text="{Binding SelectedRoomDisplayName}" />
                             </StackPanel>
-                            <TextBlock
-                                Grid.Column="1"
-                                VerticalAlignment="Center"
-                                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                                FontSize="14"
-                                FontWeight="Regular"
-                                Foreground="#FF434A54"
-                                Text="0/12" />
+                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                <TextBlock
+                                    Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                                    FontSize="14"
+                                    FontWeight="Regular"
+                                    Foreground="#FF434A54"
+                                    Text="Số người: " />
+                                <TextBlock
+                                    Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                                    FontSize="14"
+                                    FontWeight="Regular"
+                                    Foreground="#FF434A54"
+                                    Text="{Binding SelectedRoomAvailableCapacity}" />
+                            </StackPanel>
                         </Grid>
                         <DataGrid
                             Grid.Row="1"
-                            Height="460"
+                            Height="512"
                             Margin="0,5,0,20"
                             materialDesign:DataGridAssist.CornerRadius="10"
                             AutoGenerateColumns="False"
@@ -210,43 +231,15 @@
                             CanUserResizeRows="False"
                             HorizontalScrollBarVisibility="Visible"
                             IsReadOnly="True"
+                            ItemsSource="{Binding PersonsToAddToSelectedRoom}"
+                            SelectedItem="{Binding SelectedPersonToAddToRoom}"
                             SelectionMode="Single"
                             SelectionUnit="FullRow"
                             VerticalScrollBarVisibility="Visible">
                             <DataGrid.Columns>
-                                <DataGridTemplateColumn
-                                    Width="Auto"
-                                    HeaderStyle="{StaticResource DataGridButtonHeader}"
-                                    IsReadOnly="True">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button HorizontalAlignment="Right" Style="{StaticResource DataGridButton}">
-                                                <materialDesign:PackIcon
-                                                    Width="16"
-                                                    Height="16"
-                                                    Kind="DotsHorizontal" />
-                                                <Button.ContextMenu>
-                                                    <ContextMenu>
-                                                        <ContextMenu.Template>
-                                                            <ControlTemplate>
-                                                                <local:QuarantinePersonFunctionMenu />
-                                                            </ControlTemplate>
-                                                        </ContextMenu.Template>
-                                                    </ContextMenu>
-                                                </Button.ContextMenu>
-                                            </Button>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
                                 <materialDesign:DataGridTextColumn
                                     Width="Auto"
-                                    EditingElementStyle="{StaticResource EditingDataGridElement}"
-                                    ElementStyle="{StaticResource DataGridElement}"
-                                    Header="STT"
-                                    HeaderStyle="{StaticResource DataGridHeader}"
-                                    MaxLength="10" />
-                                <materialDesign:DataGridTextColumn
-                                    Width="Auto"
+                                    Binding="{Binding Path=name}"
                                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                                     ElementStyle="{StaticResource DataGridElement}"
                                     Header="Họ và tên"
@@ -254,6 +247,7 @@
                                     MaxLength="30" />
                                 <materialDesign:DataGridTextColumn
                                     Width="Auto"
+                                    Binding="{Binding Path=dateOfBirth, StringFormat=dd-MM-yyyy}"
                                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                                     ElementStyle="{StaticResource DataGridElement}"
                                     Header="Ngày sinh"
@@ -261,11 +255,33 @@
                                     MaxLength="30" />
                                 <materialDesign:DataGridTextColumn
                                     Width="Auto"
+                                    Binding="{Binding Path=Severity.description}"
                                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                                     ElementStyle="{StaticResource DataGridElement}"
                                     Header="Nhóm đối tượng"
                                     HeaderStyle="{StaticResource DataGridHeader}"
                                     MaxLength="30" />
+
+                                <DataGridTemplateColumn
+                                    Width="Auto"
+                                    Header=""
+                                    HeaderStyle="{StaticResource DataGridHeader}">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button
+                                                Width="20"
+                                                Height="20"
+                                                HorizontalAlignment="Right"
+                                                Command="{Binding RemovePersonFromRoomCommand, Source={StaticResource ArrangeRoomRecommendationVM}}"
+                                                Style="{StaticResource DataGridButtonDelete}">
+                                                <materialDesign:PackIcon
+                                                    Width="20"
+                                                    Height="20"
+                                                    Kind="ArrowRightBoldBox" />
+                                            </Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
