@@ -104,7 +104,6 @@
                     <DataGridTemplateColumn
                         Width="Auto"
                         MinWidth="70"
-                        CellStyle="{StaticResource DataGridCellElement}"
                         Header=""
                         HeaderStyle="{StaticResource DataGridHeader}">
                         <DataGridTemplateColumn.CellTemplate>

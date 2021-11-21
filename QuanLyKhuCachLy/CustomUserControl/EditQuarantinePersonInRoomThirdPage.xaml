@@ -118,7 +118,6 @@
                         <DataGridTemplateColumn
                             Width="Auto"
                             MinWidth="70"
-                            CellStyle="{StaticResource DataGridElement}"
                             Header="Ngày tiêm"
                             HeaderStyle="{StaticResource DataGridHeader}">
                             <DataGridTemplateColumn.CellTemplate>
@@ -130,7 +129,6 @@
                         <DataGridTemplateColumn
                             Width="Auto"
                             MinWidth="60"
-                            CellStyle="{StaticResource DataGridElement}"
                             Header=" "
                             HeaderStyle="{StaticResource DataGridHeader}">
                             <DataGridTemplateColumn.CellTemplate>
@@ -223,7 +221,6 @@
                         <DataGridTemplateColumn
                             Width="Auto"
                             MinWidth="120"
-                            CellStyle="{StaticResource DataGridElement}"
                             Header="Ngày xét nghiệm"
                             HeaderStyle="{StaticResource DataGridHeader}">
                             <DataGridTemplateColumn.CellTemplate>
@@ -235,7 +232,6 @@
                         <DataGridTemplateColumn
                             Width="Auto"
                             MinWidth="150"
-                            CellStyle="{StaticResource DataGridElement}"
                             Header="Kết quả"
                             HeaderStyle="{StaticResource DataGridHeader}">
                             <DataGridTemplateColumn.CellTemplate>
@@ -252,7 +248,6 @@
                         <DataGridTemplateColumn
                             Width="Auto"
                             MinWidth="70"
-                            CellStyle="{StaticResource DataGridElement}"
                             Header=""
                             HeaderStyle="{StaticResource DataGridHeader}">
                             <DataGridTemplateColumn.CellTemplate>
