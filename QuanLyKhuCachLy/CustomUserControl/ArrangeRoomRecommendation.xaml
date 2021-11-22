@@ -129,6 +129,7 @@
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn
                                     Width="Auto"
+                                    CellStyle="{StaticResource DataGridCellElement}"
                                     Header=""
                                     HeaderStyle="{StaticResource DataGridHeader}">
                                     <DataGridTemplateColumn.CellTemplate>
@@ -264,6 +265,7 @@
 
                                 <DataGridTemplateColumn
                                     Width="Auto"
+                                    CellStyle="{StaticResource DataGridCellElement}"
                                     Header=""
                                     HeaderStyle="{StaticResource DataGridHeader}">
                                     <DataGridTemplateColumn.CellTemplate>

@@ -118,6 +118,7 @@
                         <DataGridTemplateColumn
                             Width="Auto"
                             MinWidth="70"
+                            CellStyle="{StaticResource DataGridCellElement}"
                             Header="Ngày tiêm"
                             HeaderStyle="{StaticResource DataGridHeader}">
                             <DataGridTemplateColumn.CellTemplate>
@@ -129,6 +130,7 @@
                         <DataGridTemplateColumn
                             Width="Auto"
                             MinWidth="60"
+                            CellStyle="{StaticResource DataGridCellElement}"
                             Header=" "
                             HeaderStyle="{StaticResource DataGridHeader}">
                             <DataGridTemplateColumn.CellTemplate>
@@ -221,6 +223,7 @@
                         <DataGridTemplateColumn
                             Width="Auto"
                             MinWidth="120"
+                            CellStyle="{StaticResource DataGridCellElement}"
                             Header="Ngày xét nghiệm"
                             HeaderStyle="{StaticResource DataGridHeader}">
                             <DataGridTemplateColumn.CellTemplate>
@@ -232,6 +235,7 @@
                         <DataGridTemplateColumn
                             Width="Auto"
                             MinWidth="150"
+                            CellStyle="{StaticResource DataGridCellElement}"
                             Header="Kết quả"
                             HeaderStyle="{StaticResource DataGridHeader}">
                             <DataGridTemplateColumn.CellTemplate>
@@ -248,6 +252,7 @@
                         <DataGridTemplateColumn
                             Width="Auto"
                             MinWidth="70"
+                            CellStyle="{StaticResource DataGridCellElement}"
                             Header=""
                             HeaderStyle="{StaticResource DataGridHeader}">
                             <DataGridTemplateColumn.CellTemplate>

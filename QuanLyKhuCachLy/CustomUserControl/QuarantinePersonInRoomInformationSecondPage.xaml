@@ -117,6 +117,7 @@
                     <DataGridTemplateColumn
                         Width="Auto"
                         MinWidth="90"
+                        CellStyle="{StaticResource DataGridCellElement}"
                         Header="Kết quả"
                         HeaderStyle="{StaticResource DataGridHeader}">
                         <DataGridTemplateColumn.CellTemplate>

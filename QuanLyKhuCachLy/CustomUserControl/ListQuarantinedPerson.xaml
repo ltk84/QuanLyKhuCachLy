@@ -51,18 +51,16 @@
                 Margin="10,10,0,0"
                 Padding="0"
                 HorizontalAlignment="Right"
-                Content="Xem danh sách đăng ký"
-                FontSize="12"
-                materialDesign:ButtonAssist.CornerRadius ="5"
-                materialDesign:ShadowAssist.ShadowDepth ="Depth0"
-                BorderBrush="{x:Null}"
+                materialDesign:ButtonAssist.CornerRadius="5"
+                materialDesign:ShadowAssist.ShadowDepth="Depth0"
                 Background="#FF1D9583"
-                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans" 
+                BorderBrush="{x:Null}"
+                Click="Button_Click"
+                Content="Xem danh sách đăng ký"
+                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                FontSize="12"
                 FontWeight="Bold"
-                Style="{StaticResource MaterialDesignRaisedButton}"
-                Click="Button_Click">
-               
-            </Button>
+                Style="{StaticResource MaterialDesignRaisedButton}" />
         </Grid>
 
 
@@ -71,7 +69,7 @@
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="171.2" />
-                <ColumnDefinition Width="8.8"/>
+                <ColumnDefinition Width="8.8" />
             </Grid.ColumnDefinitions>
 
 
@@ -144,8 +142,9 @@
             <StackPanel
                 Grid.Row="0"
                 Grid.Column="2"
+                Grid.ColumnSpan="2"
                 Margin="24,0,0,-0.4"
-                VerticalAlignment="Bottom" Grid.ColumnSpan="2">
+                VerticalAlignment="Bottom">
                 <TextBlock
                     Margin="5,0,0,5"
                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
@@ -225,6 +224,7 @@
                     MaxLength="30" />
                 <DataGridTemplateColumn
                     Width="*"
+                    CellStyle="{StaticResource DataGridCellElement}"
                     HeaderStyle="{StaticResource DataGridButtonHeader}"
                     IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
