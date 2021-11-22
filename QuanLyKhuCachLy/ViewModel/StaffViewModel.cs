@@ -378,6 +378,7 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand PreviousStaffTabCommand { get; set; }
         public ICommand CancelAddStaffTabCommand { get; set; }
         public ICommand RefeshCommand { get; set; }
+        public ICommand ToExportExcel { get; set; }
         #endregion
 
         #region validation
@@ -511,6 +512,14 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 "Nam", "Nữ"
             };
+
+            ToExportExcel = new RelayCommand<Window>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                ExportExcel();
+            });
 
             AddCommand = new RelayCommand<object>((p) =>
             {
@@ -1351,7 +1360,66 @@ namespace QuanLyKhuCachLy.ViewModel
                 ErrorDialog.ShowDialog();
             }
         }
+        void ExportExcel()
+        {
+            int count = StaffListView.Length;
+            Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
+            app.Visible = true;
+            app.WindowState = Microsoft.Office.Interop.Excel.XlWindowState.xlMaximized;
+            Microsoft.Office.Interop.Excel.Workbook file = app.Workbooks.Add(Microsoft.Office.Interop.Excel.XlWBATemplate.xlWBATWorksheet);
+            Microsoft.Office.Interop.Excel.Worksheet sheet = file.Worksheets[1];
+            sheet.Columns[1].ColumnWidth = 5;
+            sheet.Columns[2].ColumnWidth = 25;
+            sheet.Columns[3].ColumnWidth = 12;
+            sheet.Columns[4].ColumnWidth = 9;
+            sheet.Columns[5].ColumnWidth = 50;
+            sheet.Columns[6].ColumnWidth = 12;
+            sheet.Columns[7].ColumnWidth = 12;
+            sheet.Columns[8].ColumnWidth = 10;
+            sheet.Columns[9].ColumnWidth = 12;
+            sheet.Columns[10].ColumnWidth = 12;
+            sheet.Columns[11].ColumnWidth = 12;
+            sheet.Range["A1"].Value = "STT";
+            sheet.Range["B1"].Value = "Họ và tên";
+            sheet.Range["C1"].Value = "Ngày sinh";
+            sheet.Range["D1"].Value = "Giới tính";
+            sheet.Range["E1"].Value = "Địa chỉ";
+            sheet.Range["F1"].Value = "MaBH";
+            sheet.Range["G1"].Value = "CMND/CCCD";
+            sheet.Range["H1"].Value = "Quốc tịch";
+            sheet.Range["I1"].Value = "SĐT";
+            sheet.Range["J1"].Value = "Chức vụ";
+            sheet.Range["K1"].Value = "Bộ phận";
 
+            for (int i = 2; i <= count + 1; i++)
+            {
+                int addressID = StaffListView[i - 2].addressID;
+                Address address = DataProvider.ins.db.Addresses.Where(x => x.id == addressID).FirstOrDefault();
+                String personAddress = "";
+                if (address.apartmentNumber != null)
+                    personAddress += address.apartmentNumber.ToString();
+                if (address.streetName != null)
+                    personAddress += " " + address.streetName.ToString();
+                if (address.ward != null)
+                    personAddress += ", " + address.ward.ToString();
+                if (address.district != null)
+                    personAddress += ", " + address.district.ToString();
+                if (address.province != null)
+                    personAddress += ", " + address.province.ToString();
+                Severity severity = new Severity();
+                sheet.Range["A" + i.ToString()].Value = (i - 1).ToString();
+                sheet.Range["B" + i.ToString()].Value = StaffListView[i - 2].name;
+                sheet.Range["C" + i.ToString()].Value = StaffListView[i - 2].dateOfBirth;
+                sheet.Range["D" + i.ToString()].Value = StaffListView[i - 2].sex;
+                sheet.Range["E" + i.ToString()].Value = personAddress;
+                sheet.Range["F" + i.ToString()].Value = StaffListView[i - 2].healthInsuranceID;
+                sheet.Range["G" + i.ToString()].Value = StaffListView[i - 2].citizenID;
+                sheet.Range["H" + i.ToString()].Value = StaffListView[i - 2].nationality;
+                sheet.Range["I" + i.ToString()].Value = StaffListView[i - 2].phoneNumber;
+                sheet.Range["J" + i.ToString()].Value = StaffListView[i - 2].jobTitle;
+                sheet.Range["K" + i.ToString()].Value = StaffListView[i - 2].department;
+            }
+        }
         #endregion
     }
 }
