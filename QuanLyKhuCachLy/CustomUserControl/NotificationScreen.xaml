@@ -177,10 +177,12 @@
                 Margin="0,12,0,8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
             <TextBlock
+                Grid.Column="0"
                      FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                     FontSize="16.52"
                     FontWeight="Bold"
@@ -190,6 +192,15 @@
                 <Button
                 Grid.Column="2"
                 VerticalAlignment="Bottom"
+                Command="{Binding deleteNotificationTemplate}"
+                Content="Xóa"
+                Template="{StaticResource delete-button}" />
+                
+
+                <Button
+                    Margin="0,0,24,0"
+                Grid.Column="1"
+                VerticalAlignment="Bottom"
                 Command="{Binding editTemplateCommand}"
                 Content="Chỉnh sửa"
                 Template="{StaticResource edit-button}" />
@@ -197,23 +208,48 @@
 
             </Grid>
 
-            <TextBox
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox
+                        Grid.Column="0"
                         IsReadOnly="True"
-                        Grid.Row="4"
                         materialDesign:HintAssist.Hint="Nhập nội dung thông báo"
                         utility:ProtocolSettingsLayout.MVVMHasError="{Binding Path=DisplayNameFieldHasError}"
                         Height="200"
+                        MaxLines="100"
                         Style="{StaticResource TextInputField}">
-                <TextBox.Text>
-                    <Binding Path="message" UpdateSourceTrigger="PropertyChanged">
-                        <Binding.ValidationRules>
-                            <!--<vr:RequiredField />-->
-                            <vr:NoSpecialChar />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
+                    <TextBox.Text>
+                        <Binding Path="message" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
 
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+
+                <StackPanel Grid.Column="1" Margin="24,0,0,0">
+                    <TextBlock
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16.52"
+                        FontWeight="Bold"
+                        Foreground="#FF363636"
+                        >Nội dung đầy đủ</TextBlock>
+
+                    <TextBlock
+                        TextWrapping="Wrap"
+                        Margin="0,8,0,0"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="12"
+                        FontWeight="Regular"
+                        Text="{Binding fullyMessage}"
+                        Foreground="#FF262626"/>
+                </StackPanel>
+            </Grid>
+            
 
 
         </Grid>

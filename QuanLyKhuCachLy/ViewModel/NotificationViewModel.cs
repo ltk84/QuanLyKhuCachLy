@@ -13,6 +13,16 @@ namespace QuanLyKhuCachLy.ViewModel
     public class NotificationViewModel : BaseViewModel
     {
 
+        private String _fullyMessage;
+        public string fullyMessage
+        {
+            get => _fullyMessage; set
+            {
+                _fullyMessage = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         #region SelectPeopleWindown
 
@@ -444,7 +454,7 @@ namespace QuanLyKhuCachLy.ViewModel
             get => _selectedTemplate; set
             {
                 _selectedTemplate = value; OnPropertyChanged();
-                message = _selectedTemplate.content;
+                message = _selectedTemplate?.content;
             }
         }
 
@@ -524,6 +534,7 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 _Message = value;
                 OnPropertyChanged();
+                SetFullyMessage();
             }
         }
 
@@ -542,14 +553,19 @@ namespace QuanLyKhuCachLy.ViewModel
 
         public ICommand addNotificationTemplate { get; set; }
         public ICommand editNotificationTemplate { get; set; }
+        public ICommand deleteNotificationTemplate { get; set; }
         public ICommand SaveNotificationTemplate { get; set; }
         public ICommand CancelAddTemplate { get; set; }
         public ICommand CancelEditTemplate { get; set; }
 
 
         #endregion
+        public ICommand SendNotification { get; set; }
+
+
         public NotificationViewModel() {
 
+            fullyMessage = "";
             TemplateList = new ObservableCollection<NotificationTemplate>(DataProvider.ins.db.NotificationTemplates);
             PeopleList1 = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
             PeopleListView1 = PeopleList1.ToArray();
@@ -569,7 +585,14 @@ namespace QuanLyKhuCachLy.ViewModel
             InitFilter();
 
 
-
+            SendNotification = new RelayCommand<object>((p) =>
+            {
+                if (message == "" || PeopleList2.ToArray().Length == 0) return false;
+                return true;
+            }, (p) =>
+            {
+                SendMessage();
+            });
 
 
             SelectPerson = new RelayCommand<object>((p) =>
@@ -681,6 +704,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             editTemplateCommand = new RelayCommand<object>((p) =>
             {
+                if (selectedTemplate == null) return false;
                 return true;
             }, (p) =>
             {
@@ -717,7 +741,19 @@ namespace QuanLyKhuCachLy.ViewModel
                 addTemplate.Close();
 
             });
-            
+
+
+
+            deleteNotificationTemplate = new RelayCommand<object>((p) =>
+            {
+                if (selectedTemplate == null || selectedTemplate.id < 5) return false;
+                return true;
+            }, (p) =>
+            {
+                DeleteTemplate();
+
+            });
+
             CancelAddTemplate = new RelayCommand<object>((p) =>
             {
              
@@ -1073,6 +1109,61 @@ namespace QuanLyKhuCachLy.ViewModel
         #region methodAddEdit
 
         
+        void DeleteTemplate()
+        {
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    NotificationTemplate NotiTemplate = DataProvider.ins.db.NotificationTemplates.Where(x => x.id == selectedTemplate.id).FirstOrDefault();
+                    if (NotiTemplate == null) return;
+
+                    DataProvider.ins.db.NotificationTemplates.Remove(NotiTemplate);
+                    DataProvider.ins.db.SaveChanges();
+
+                    TemplateList.Remove(NotiTemplate);
+
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
+        }
+
         void AddTemplate()
         {
             using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
@@ -1187,5 +1278,91 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
         #endregion
+
+
+        void SetFullyMessage()
+        {
+            var QAName = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().name;
+
+            if (selectedTemplate == null)
+            {
+                fullyMessage = "Chao a/c " + "{Tên người nhận}" + ", day la thong bao den tu ban quan ly cua khu cach ly " + QAName  + ". " + message + "Xin cam on";
+            }
+            else
+            {
+                if (selectedTemplate.id == 1) fullyMessage = "Chao a/c " + "{Tên người nhận}" + ", day la thong bao den tu ban quan ly cua khu cach ly " + QAName + ". " + message + "Xin cam on";
+                else if (selectedTemplate.id == 2) fullyMessage = "Chao a/c " + "{Tên người nhận}" + ", day la thong bao den tu ban quan ly cua khu cach ly " + QAName + ". " + message + "Xin cam on";
+                else if (selectedTemplate.id == 3) fullyMessage = "Chao a/c " + "{Tên người nhận}" + ", day la thong bao den tu ban quan ly cua khu cach ly " + QAName + ". " + message + "Xin cam on";
+                else if (selectedTemplate.id == 4) fullyMessage = "Chao a/c " + "{Tên người nhận}" + ", day la thong bao den tu ban quan ly cua khu cach ly " + QAName + ". " + message + "Ban se duoc chuyen toi phong " + "{Ten phong}" + " voi suc chua " + "{Suc chua}" + " nguoi" + "Xin cam on";
+
+                else fullyMessage = "Chao a/c " + "{Tên người nhận}" + ", day la thong bao den tu ban quan ly cua khu cach ly " + QAName + ". " + message + "Xin cam on";
+            }
+        }
+
+
+        void SendMessage()
+        {
+            for (int i = 0; i < PeopleList2.ToArray().Length; i++)
+            {
+                if (selectedTemplate == null)
+                {
+                    SendMessageToPerson(PeopleList2[i]);
+                }
+                else
+                {
+                    if (selectedTemplate.id == 1) StartIntroduction(PeopleList2[i]);
+                    else if (selectedTemplate.id == 2) EndIntroduction(PeopleList2[i]);
+                    else if (selectedTemplate.id == 3) TestingNotification(PeopleList2[i]);
+                    else if (selectedTemplate.id == 4) ChangeRoomNotification(PeopleList2[i]);
+                }
+            }
+               
+            
+        }
+
+
+        void SendMessageToPerson(QuarantinePerson person)
+        {
+
+            var QAName = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().name;
+            string CombinedMessage = "Chao a/c " + person.name + ", day la thong bao den tu ban quan ly cua khu cach ly " + QAName + ". " + message + "Xin cam on";
+            MessageBox.Show(CombinedMessage);
+        }
+
+        void ChangeRoomNotification(QuarantinePerson person)
+        {
+            var DestinationRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == person.roomID).FirstOrDefault();
+            var QAName = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().name;
+            string CombinedMessage = "Chao a/c " + person.name + ", day la thong bao den tu ban quan ly cua khu cach ly " + QAName + ". " + message + "Ban se duoc chuyen toi phong " + DestinationRoom.displayName + " voi suc chua " + DestinationRoom.capacity + " nguoi" + "Xin cam on";
+            MessageBox.Show(CombinedMessage);
+        }
+
+
+        void TestingNotification(QuarantinePerson person)
+        {
+            var DestinationRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == person.roomID).FirstOrDefault();
+            var QAName = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().name;
+            string CombinedMessage = "Chao a/c " + person.name + ", day la thong bao den tu ban quan ly cua khu cach ly " + QAName + ". " + message + "Ban se duoc chuyen toi phong " + DestinationRoom.displayName + " voi suc chua " + DestinationRoom.capacity + " nguoi" + "Xin cam on";
+            MessageBox.Show(CombinedMessage);
+        }
+
+
+        void StartIntroduction(QuarantinePerson person)
+        {
+            var DestinationRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == person.roomID).FirstOrDefault();
+            var QAName = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().name;
+            string CombinedMessage = "Chao a/c " + person.name + ", day la thong bao den tu ban quan ly cua khu cach ly " + QAName + ". " + message + "Ban se duoc chuyen toi phong " + DestinationRoom.displayName + " voi suc chua " + DestinationRoom.capacity + " nguoi" + "Xin cam on";
+            MessageBox.Show(CombinedMessage);
+        }
+
+
+        void EndIntroduction(QuarantinePerson person)
+        {
+            var DestinationRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == person.roomID).FirstOrDefault();
+            var QAName = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().name;
+            string CombinedMessage = "Chao a/c " + person.name + ", day la thong bao den tu ban quan ly cua khu cach ly " + QAName + ". " + message + "Ban se duoc chuyen toi phong " + DestinationRoom.displayName + " voi suc chua " + DestinationRoom.capacity + " nguoi" + "Xin cam on";
+            MessageBox.Show(CombinedMessage);
+        }
+
     }
 }

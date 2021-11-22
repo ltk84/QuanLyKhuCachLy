@@ -159,7 +159,7 @@
             <Grid
             Grid.Row="4"
             
-            Margin="0,0,0,8">
+            Margin="0,15,0,8">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="auto"/>
@@ -184,23 +184,51 @@
             <Grid
             Grid.Row="5"
             >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
                 <TextBox
+                        Grid.Column="0"
                         materialDesign:HintAssist.Hint="Nhập nội dung thông báo"
                         utility:ProtocolSettingsLayout.MVVMHasError="{Binding Path=DisplayNameFieldHasError}"
                         Height="200"
+                        MaxLines="100"
                         Style="{StaticResource TextInputField}">
-                    <TextBox.Text>
-                        <Binding Path="message" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <!--<vr:RequiredField />-->
-                                <vr:NoSpecialChar />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
+                        <TextBox.Text>
+                            <Binding Path="message" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                               
+                                </Binding.ValidationRules>
+                            </Binding>
+                         </TextBox.Text>
                 </TextBox>
+
+
+                <StackPanel Grid.Column="1" Margin="24,0,0,0">
+                    <TextBlock
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16.52"
+                        FontWeight="Bold"
+                        Foreground="#FF363636"
+                        >Nội dung đầy đủ</TextBlock>
+
+                    <TextBlock
+                        TextWrapping="Wrap"
+                        Margin="0,8,0,0"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="12"
+                        FontWeight="Regular"
+                        Text="{Binding fullyMessage}"
+                        Foreground="#FF262626"/>
+                </StackPanel>
+                
+                
             </Grid>
         <Button
+            
             HorizontalAlignment="Right"
+            Command="{Binding SendNotification}"
             Grid.Row="6"
             Margin="0,10,0,0"
             Width="137"

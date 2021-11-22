@@ -814,6 +814,8 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
+
+
         void ClearData()
         {
             RoomDisplayName = "";
