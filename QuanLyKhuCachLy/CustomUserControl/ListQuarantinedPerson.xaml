@@ -69,7 +69,7 @@
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="171.2" />
-                <ColumnDefinition Width="8.8" />
+                <ColumnDefinition Width="171.2" />
             </Grid.ColumnDefinitions>
 
 
@@ -107,10 +107,34 @@
                 </TextBox>
             </StackPanel>
 
-
             <StackPanel
                 Grid.Row="0"
                 Grid.Column="1"
+                Margin="24,0,24,-0.4"
+                VerticalAlignment="Bottom">
+                <TextBlock
+                    Margin="5,0,0,5"
+                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                    FontSize="16"
+                    Foreground="#FF434A54">
+                    Tình trạng
+                </TextBlock>
+                <ComboBox
+                    Padding="10,8,8,10"
+                    utility:ProtocolSettingsLayout.MVVMHasError="{Binding SexFieldHasError}"
+                    ItemsSource="{Binding ExperationType}"
+                    Style="{StaticResource ComboBoxField}">
+                    <ComboBox.SelectedItem>
+                        <Binding Path="ExperationProperty" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules />
+                        </Binding>
+                    </ComboBox.SelectedItem>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel
+                Grid.Row="0"
+                Grid.Column="2"
                 Margin="0,0,0,-0.4"
                 VerticalAlignment="Bottom">
                 <StackPanel Margin="0,0,0,5" Orientation="Horizontal">
@@ -141,8 +165,7 @@
 
             <StackPanel
                 Grid.Row="0"
-                Grid.Column="2"
-                Grid.ColumnSpan="2"
+                Grid.Column="3"
                 Margin="24,0,0,-0.4"
                 VerticalAlignment="Bottom">
                 <TextBlock
