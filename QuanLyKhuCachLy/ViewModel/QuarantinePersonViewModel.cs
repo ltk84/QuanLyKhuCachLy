@@ -786,6 +786,24 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             SetDefaultUI();
 
+            InitBasic();
+
+            InjectionRecordViewModel = InjectionRecordViewModel.ins;
+            DestinationHistoryViewModel = DestinationHistoryViewModel.ins;
+            TestingResultViewModel = TestingResultViewModel.ins;
+
+            NationalityList = new ObservableCollection<string>();
+
+            ProvinceList = new ObservableCollection<string>();
+
+            DistrictList = new ObservableCollection<string>();
+
+            WardList = new ObservableCollection<string>();
+
+            InitNationList();
+
+            InitProvinceList();
+
             NextTabCommandInformation = new RelayCommand<Window>((p) =>
             {
 
@@ -840,36 +858,6 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 HandleChangeTab(TabIndex, "previous", p);
             });
-
-
-            QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
-            RemainRoomList = new ObservableCollection<Model.QuarantineRoom>();
-            PeopleListView = QuarantinePersonList.ToArray();
-
-            FilterType = new string[] { "Tất cả", "Giới tính", "Quốc tịch", "Phòng", "Nhóm đối tượng", "Ngày đi", "Ngày đến" };
-            SelectedFilterType = "Tất cả";
-            SelectedFilterProperty = "Chọn phương thức lọc";
-            getFilterProperty();
-
-            SeverityList = new ObservableCollection<Severity>(DataProvider.ins.db.Severities);
-
-            QAInformation = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
-
-            InjectionRecordViewModel = InjectionRecordViewModel.ins;
-            DestinationHistoryViewModel = DestinationHistoryViewModel.ins;
-            TestingResultViewModel = TestingResultViewModel.ins;
-
-            NationalityList = new ObservableCollection<string>();
-
-            ProvinceList = new ObservableCollection<string>();
-
-            DistrictList = new ObservableCollection<string>();
-
-            WardList = new ObservableCollection<string>();
-
-            InitNationList();
-
-            InitProvinceList();
 
             SexList = new ObservableCollection<string>()
             {
@@ -1078,7 +1066,24 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             SetDefaultUI();
             SelectedItem = null;
+            InitBasic();
+        }
+
+        void InitBasic()
+        {
+
+            QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
+            RemainRoomList = new ObservableCollection<Model.QuarantineRoom>();
+            PeopleListView = QuarantinePersonList.ToArray();
+
+            FilterType = new string[] { "Tất cả", "Giới tính", "Quốc tịch", "Phòng", "Nhóm đối tượng", "Ngày đi", "Ngày đến" };
+            SelectedFilterType = "Tất cả";
+            SelectedFilterProperty = "Chọn phương thức lọc";
+            getFilterProperty();
+
             SeverityList = new ObservableCollection<Severity>(DataProvider.ins.db.Severities);
+
+            QAInformation = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
         }
 
         void SetDefaultUI()

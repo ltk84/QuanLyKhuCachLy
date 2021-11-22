@@ -200,7 +200,7 @@
                         materialDesign:HintAssist.Hint="Nhập tên đường"
                         MaxLength="20"
                         Style="{StaticResource TextInputField}"
-                        Text="{Binding QAAdress.streetName}" />
+                        Text="{Binding StreetName}" />
                 </StackPanel>
                 <StackPanel
                     Grid.Row="2"
@@ -218,7 +218,7 @@
                         MaxLength="20"
                         Style="{StaticResource TextInputField}">
                         <TextBox.Text>
-                            <Binding Path="QAAdress.apartmentNumber" UpdateSourceTrigger="PropertyChanged">
+                            <Binding Path="ApartmentNumber" UpdateSourceTrigger="PropertyChanged">
                                 <!--<Binding.ValidationRules>
                                     <vr:RequiredField />
                                 </Binding.ValidationRules>-->

@@ -265,17 +265,9 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             SetDefaultUI();
 
-            RoomList = new ObservableCollection<Model.QuarantineRoom>(DataProvider.ins.db.QuarantineRooms);
-            RoomListView = RoomList.ToArray();
-            RoomLevelList = new ObservableCollection<Severity>(DataProvider.ins.db.Severities);
 
-            RoomListView = RoomList.ToArray();
-            FilterType = new string[] { "Tất cả", "Loại phòng", "Sức chứa" };
-            SelectedFilterType = "Tất cả";
-            SelectedFilterProperty = "Chọn phương thức lọc";
-            getFilterProperty();
 
-            PersonInRoomViewModel = QuarantinePersonInRoomViewModel.ins;
+            InitBasic();
 
             ToAddManualCommand = new RelayCommand<object>((p) =>
             {
@@ -402,8 +394,23 @@ namespace QuanLyKhuCachLy.ViewModel
         void RefeshTab()
         {
             SetDefaultUI();
-            RoomLevelList = new ObservableCollection<Severity>(DataProvider.ins.db.Severities);
+            InitBasic();
             SelectedItem = null;
+        }
+
+        void InitBasic()
+        {
+            RoomList = new ObservableCollection<Model.QuarantineRoom>(DataProvider.ins.db.QuarantineRooms);
+            RoomListView = RoomList.ToArray();
+            RoomLevelList = new ObservableCollection<Severity>(DataProvider.ins.db.Severities);
+            RoomListView = RoomList.ToArray();
+
+            FilterType = new string[] { "Tất cả", "Loại phòng", "Sức chứa" };
+            SelectedFilterType = "Tất cả";
+            SelectedFilterProperty = "Chọn phương thức lọc";
+            getFilterProperty();
+
+            PersonInRoomViewModel = QuarantinePersonInRoomViewModel.ins;
         }
 
         void CompleteQuarantine()

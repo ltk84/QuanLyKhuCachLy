@@ -305,6 +305,8 @@
                         VerticalAlignment="Center"
                         VerticalContentAlignment="Center"
                         FontSize="14"
+                        ItemsSource="{Binding EntityList}"
+                        SelectedItem="{Binding SelectedEntity}"
                         Style="{StaticResource ComboBoxField}" />
                     <Button
                         Width="120"
@@ -313,7 +315,7 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         materialDesign:ButtonAssist.CornerRadius="5"
-                        Command="{Binding ToEditCommand}">
+                        Command="{Binding DeleteEntityCommand}">
                         <Button.Style>
                             <Style BasedOn="{StaticResource MenuButton}" TargetType="Button">
                                 <Style.Triggers>

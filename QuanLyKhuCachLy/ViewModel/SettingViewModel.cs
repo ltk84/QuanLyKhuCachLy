@@ -71,6 +71,14 @@ namespace QuanLyKhuCachLy.ViewModel
             set { _QuarantineAreaAddress = value; OnPropertyChanged(); }
         }
 
+        private string _SelectedEntity;
+
+        public string SelectedEntity
+        {
+            get { return _SelectedEntity; }
+            set { _SelectedEntity = value; OnPropertyChanged(); }
+        }
+
         //#region UI
 
         //private Visibility _Tab1;
@@ -98,6 +106,7 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand EditCommand { get; set; }
         public ICommand CancelCommand { get; set; }
         public ICommand RefeshCommand { get; set; }
+        public ICommand DeleteEntityCommand { get; set; }
 
         #endregion
 
@@ -125,6 +134,15 @@ namespace QuanLyKhuCachLy.ViewModel
         #endregion
 
         #region list
+
+        private ObservableCollection<string> _EntityList;
+        public ObservableCollection<string> EntityList
+        {
+            get => _EntityList; set
+            {
+                _EntityList = value; OnPropertyChanged();
+            }
+        }
 
         private ObservableCollection<Staff> _StaffList;
         public ObservableCollection<Staff> StaffList
@@ -214,10 +232,24 @@ namespace QuanLyKhuCachLy.ViewModel
                 RefeshTab();
             });
 
+            DeleteEntityCommand = new RelayCommand<object>((p) =>
+            {
+                if (!string.IsNullOrWhiteSpace(SelectedEntity))
+                    return true;
+                return false;
+            }, (o) =>
+            {
+                DeleteEntity();
+            });
+
 
             ProvinceList = new ObservableCollection<string>();
             DistrictList = new ObservableCollection<string>();
             WardList = new ObservableCollection<string>();
+            EntityList = new ObservableCollection<string>()
+            {
+                "Tất cả", "Phòng", "Người cách ly", "Nhân viên"
+            };
 
             InitProvinceList();
 
@@ -228,6 +260,288 @@ namespace QuanLyKhuCachLy.ViewModel
         }
 
         #region method
+
+        void DeleteEntity()
+        {
+            switch (SelectedEntity)
+            {
+                case "Tất cả":
+                    DeleteAll();
+                    break;
+                case "Phòng":
+                    DeleteAllRecordInRoomList();
+                    break;
+                case "Người cách ly":
+                    DeleteAllRecordInPersonList();
+                    break;
+                case "Nhân viên":
+                    DeleteAllRecordInStaffList();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        void RestartApplication()
+        {
+            System.Windows.Forms.Application.Restart();
+            System.Windows.Application.Current.Shutdown();
+        }
+
+        void DeleteAll()
+        {
+            DeleteAllRecordInRoomList();
+            DeleteAllRecordInPersonList();
+            DeleteAllRecordInStaffList();
+            DeleteQuarantineAreaInformation();
+            DeleteSeverityList();
+            RestartApplication();
+        }
+
+        void DeleteSeverityList()
+        {
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    DataProvider.ins.db.Severities.RemoveRange(DataProvider.ins.db.Severities);
+                    DataProvider.ins.db.SaveChanges();
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
+        }
+
+        void DeleteQuarantineAreaInformation()
+        {
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    DataProvider.ins.db.QuarantineAreas.RemoveRange(DataProvider.ins.db.QuarantineAreas);
+                    DataProvider.ins.db.SaveChanges();
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
+        }
+
+        void DeleteAllRecordInStaffList()
+        {
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    DataProvider.ins.db.Staffs.RemoveRange(DataProvider.ins.db.Staffs);
+                    DataProvider.ins.db.SaveChanges();
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
+        }
+
+        void DeleteAllRecordInPersonList()
+        {
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    DataProvider.ins.db.QuarantinePersons.RemoveRange(DataProvider.ins.db.QuarantinePersons);
+                    DataProvider.ins.db.SaveChanges();
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
+        }
+
+        void DeleteAllRecordInRoomList()
+        {
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    DataProvider.ins.db.QuarantineRooms.RemoveRange(DataProvider.ins.db.QuarantineRooms);
+                    DataProvider.ins.db.SaveChanges();
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
+        }
 
         void RefeshTab()
         {

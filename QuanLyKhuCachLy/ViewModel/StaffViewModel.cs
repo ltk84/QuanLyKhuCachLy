@@ -490,13 +490,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             SetDefaultAddStaff();
 
-            StaffList = new ObservableCollection<Staff>(DataProvider.ins.db.Staffs);
-            StaffListView = StaffList.ToArray();
-
-            FilterType = new string[] { "Tất cả", "Giới tính", "Quốc tịch", "Chức vụ", "Bộ phận" };
-            SelectedFilterType = "Tất cả";
-            SelectedFilterProperty = "Chọn phương thức lọc";
-            getFilterProperty();
+            InitBasic();
 
             NationalityList = new ObservableCollection<string>();
             ProvinceList = new ObservableCollection<string>();
@@ -660,6 +654,18 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             SetDefaultUI();
             SelectedItem = null;
+            InitBasic();
+        }
+
+        void InitBasic()
+        {
+            StaffList = new ObservableCollection<Staff>(DataProvider.ins.db.Staffs);
+            StaffListView = StaffList.ToArray();
+
+            FilterType = new string[] { "Tất cả", "Giới tính", "Quốc tịch", "Chức vụ", "Bộ phận" };
+            SelectedFilterType = "Tất cả";
+            SelectedFilterProperty = "Chọn phương thức lọc";
+            getFilterProperty();
         }
 
         void SetDefaultUI()
