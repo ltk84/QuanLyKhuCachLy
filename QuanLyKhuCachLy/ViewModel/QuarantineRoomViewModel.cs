@@ -258,6 +258,9 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand ToViewCommand { get; set; }
         public ICommand ToMainCommand { get; set; }
         public ICommand RefeshCommand { get; set; }
+
+        public ICommand ToExportExcel { get; set; }
+
         #endregion
 
 
@@ -342,6 +345,14 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 EditQuarantineRoom();
                 p.Close();
+            });
+
+            ToExportExcel = new RelayCommand<Window>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                ExportExcel();
             });
 
             DeleteRoomCommand = new RelayCommand<object>((p) => { if (SelectedItem != null) return true; return false; }, (p) =>
@@ -828,7 +839,42 @@ namespace QuanLyKhuCachLy.ViewModel
             RoomCapacity = SelectedItem.capacity;
             RoomSelectedSeverity = SelectedItem.Severity;
         }
-
+        void ExportExcel()
+        {
+            int count = RoomListView.Length;
+            Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
+            app.Visible = true;
+            app.WindowState = Microsoft.Office.Interop.Excel.XlWindowState.xlMaximized;
+            Microsoft.Office.Interop.Excel.Workbook file = app.Workbooks.Add(Microsoft.Office.Interop.Excel.XlWBATemplate.xlWBATWorksheet);
+            Microsoft.Office.Interop.Excel.Worksheet sheet = file.Worksheets[1];
+            sheet.Columns[1].ColumnWidth = 5;
+            sheet.Columns[2].ColumnWidth = 15;
+            sheet.Columns[3].ColumnWidth = 10;
+            sheet.Columns[4].ColumnWidth = 10;
+            sheet.Columns[5].ColumnWidth = 15;
+            sheet.Range["A1"].Value = "STT";
+            sheet.Range["B1"].Value = "Tên";
+            sheet.Range["C1"].Value = "Sức chứa";
+            sheet.Range["D1"].Value = "Còn trống";
+            sheet.Range["E1"].Value = "Loại phòng";
+           
+            for (int i = 2; i <= count + 1; i++)
+            {
+                int roomID = RoomListView[i - 2].id;
+                Severity severity = new Severity();
+                if (RoomListView[i - 2].Severity != null)
+                {
+                    int severityID = RoomListView[i - 2].levelID.Value;
+                    severity = DataProvider.ins.db.Severities.Where(x => x.id == severityID).FirstOrDefault();
+                }
+                int countInRoom = DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == roomID).Count();
+                sheet.Range["A" + i.ToString()].Value = (i - 1).ToString();
+                sheet.Range["B" + i.ToString()].Value = RoomListView[i - 2].displayName;
+                sheet.Range["C" + i.ToString()].Value = RoomListView[i - 2].capacity;
+                sheet.Range["D" + i.ToString()].Value = (RoomListView[i - 2].capacity - countInRoom).ToString();
+                sheet.Range["E" + i.ToString()].Value = RoomListView[i - 2].levelID != null?severity.description:"";
+            }
+        }
         #endregion
     }
 }

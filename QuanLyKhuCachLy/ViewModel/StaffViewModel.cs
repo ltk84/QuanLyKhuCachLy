@@ -1406,7 +1406,6 @@ namespace QuanLyKhuCachLy.ViewModel
                     personAddress += ", " + address.district.ToString();
                 if (address.province != null)
                     personAddress += ", " + address.province.ToString();
-                Severity severity = new Severity();
                 sheet.Range["A" + i.ToString()].Value = (i - 1).ToString();
                 sheet.Range["B" + i.ToString()].Value = StaffListView[i - 2].name;
                 sheet.Range["C" + i.ToString()].Value = StaffListView[i - 2].dateOfBirth;
