@@ -402,6 +402,7 @@ namespace QuanLyKhuCachLy.ViewModel
         void RefeshTab()
         {
             SetDefaultUI();
+            RoomLevelList = new ObservableCollection<Severity>(DataProvider.ins.db.Severities);
             SelectedItem = null;
         }
 
@@ -527,7 +528,8 @@ namespace QuanLyKhuCachLy.ViewModel
         async Task ExecuteAddRoomFromExcel(LoadingIndicator loadingIndicator, string path)
         {
             bool isSuccess = false;
-            await Task.Run(() => {
+            await Task.Run(() =>
+            {
                 List<Model.QuarantineRoom> listRoom = new List<Model.QuarantineRoom>();
                 Excel.Application xlApp = new Excel.Application();
                 Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(path);
@@ -613,7 +615,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     Content = new SuccessNotification()
                 };
                 SuccessDialog.ShowDialog();
-            } 
+            }
             else
             {
 

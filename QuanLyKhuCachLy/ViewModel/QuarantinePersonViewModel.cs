@@ -897,9 +897,9 @@ namespace QuanLyKhuCachLy.ViewModel
             ToInportFormGoogleSheet = new RelayCommand<Window>((p) =>
             {
                 return true;
-            }, (p) =>
+            }, async (p) =>
             {
-                ImportFileFromGoogleSheetAsync();
+                await ImportFileFromGoogleSheetAsync();
             });
 
             ToAddExcelCommand = new RelayCommand<Window>((p) =>
@@ -1078,6 +1078,7 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             SetDefaultUI();
             SelectedItem = null;
+            SeverityList = new ObservableCollection<Severity>(DataProvider.ins.db.Severities);
         }
 
         void SetDefaultUI()
@@ -1349,7 +1350,8 @@ namespace QuanLyKhuCachLy.ViewModel
         async Task ExecuteAddPersonFromExcel(LoadingIndicator loadingIndicator, string path)
         {
             bool isSuccess = false;
-            await Task.Run(() => {
+            await Task.Run(() =>
+            {
                 List<Address> listAdress = new List<Address>();
                 List<QuarantinePerson> listQuarantinePerson = new List<QuarantinePerson>();
                 List<HealthInformation> listHealthInformation = new List<HealthInformation>();
@@ -2119,7 +2121,7 @@ namespace QuanLyKhuCachLy.ViewModel
         }
         async System.Threading.Tasks.Task ImportFileFromGoogleSheetAsync()
         {
-            string[] Scopes = { SheetsService.Scope.Spreadsheets};
+            string[] Scopes = { SheetsService.Scope.Spreadsheets };
             string ApplicationName = "QLKCL";
             String spreadsheetId = "1R6zuZB_xFuzWrCnl4j0JLZ3da5HtprRrmjeQ3LdxW44";
             String range = "Sheet1";
@@ -2128,13 +2130,13 @@ namespace QuanLyKhuCachLy.ViewModel
             using (var stream =
                 new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
             {
-                    credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
-                    clientSecrets: GoogleClientSecrets.FromStream(stream).Secrets,
-                    scopes: Scopes,
-                    user: "user",
-                    taskCancellationToken: CancellationToken.None,
-                    new FileDataStore(credentialPath, true)
-                    );
+                credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
+                clientSecrets: GoogleClientSecrets.FromStream(stream).Secrets,
+                scopes: Scopes,
+                user: "user",
+                taskCancellationToken: CancellationToken.None,
+                new FileDataStore(credentialPath, true)
+                );
             }
             var service = new SheetsService(new Google.Apis.Services.BaseClientService.Initializer()
             {
@@ -2153,10 +2155,10 @@ namespace QuanLyKhuCachLy.ViewModel
             int rowCount = values.Count();
             if (values != null && values.Count > 0)
             {
-              
+
                 for (int i = 1; i < rowCount; i++)
                 {
-                    
+
                     Address personAddress = new Address();
                     QuarantinePerson quarantinePerson = new QuarantinePerson();
                     HealthInformation healthInformation = new HealthInformation();
@@ -2168,14 +2170,14 @@ namespace QuanLyKhuCachLy.ViewModel
                     {
                         DateTime birth = Convert.ToDateTime(values[i][2].ToString());
                         quarantinePerson.dateOfBirth = birth;
-                      
+
                     }
-                    
+
                     if (values[i][3] != null)
                     {
                         quarantinePerson.sex = values[i][3].ToString();
                     }
-                    
+
                     if (values[i][4] != null)
                     {
                         string[] arrListStr = values[i][4].ToString().Split(',');
@@ -2184,16 +2186,16 @@ namespace QuanLyKhuCachLy.ViewModel
                         personAddress.ward = arrListStr[1];
                         personAddress.streetName = arrListStr[0];
                     }
-                   
+
                     if (values[i][6] != null)
                     {
                         quarantinePerson.citizenID = values[i][6].ToString();
                     }
-                    if (values[i][7] != null )
+                    if (values[i][7] != null)
                     {
-                        quarantinePerson.healthInsuranceID = values[i][ 7].ToString();
+                        quarantinePerson.healthInsuranceID = values[i][7].ToString();
                     }
-                    if (values[i][ 8] != null )
+                    if (values[i][8] != null)
                     {
                         quarantinePerson.nationality = values[i][8].ToString();
                     }
@@ -2204,7 +2206,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (values[i][10] != null)
                     {
                         string health = values[i][10].ToString();
-                        
+
                         if (health.Contains("sốt") || health.Contains("Sốt"))
                         {
                             healthInformation.isFever = true;
@@ -2249,19 +2251,19 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (values[i][11] != null)
                     {
                         quarantinePerson.levelID = Int32.Parse(values[i][11].ToString());
-                        
+
                     }
-                    if (values[i][ 12] != null)
+                    if (values[i][12] != null)
                     {
                         DateTime arrivedTime = Convert.ToDateTime(values[i][12].ToString());
                         quarantinePerson.arrivedDate = arrivedTime;
-                        
+
                     }
                     listAdress.Add(personAddress);
                     listHealthInformation.Add(healthInformation);
                     listQuarantinePerson.Add(quarantinePerson);
                 }
-               
+
                 using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
                 {
                     try
@@ -2282,7 +2284,7 @@ namespace QuanLyKhuCachLy.ViewModel
                             listHealthInformation[i].quarantinePersonID = listQuarantinePerson[i].id;
                             DataProvider.ins.db.HealthInformations.Add(listHealthInformation[i]);
                             DataProvider.ins.db.SaveChanges();
-                          
+
                         }
                         PeopleListView = DataProvider.ins.db.QuarantinePersons.ToArray();
                         QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);

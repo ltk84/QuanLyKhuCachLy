@@ -64,31 +64,32 @@ namespace QuanLyKhuCachLy.ViewModel
             set { _QuarantineAreaAddress = value; OnPropertyChanged(); }
         }
 
-        #region UI
+        //#region UI
 
-        private Visibility _Tab1;
-        public Visibility Tab1 { get => _Tab1; set { _Tab1 = value; OnPropertyChanged(); } }
+        //private Visibility _Tab1;
+        //public Visibility Tab1 { get => _Tab1; set { _Tab1 = value; OnPropertyChanged(); } }
 
-        private Visibility _Tab2;
-        public Visibility Tab2 { get => _Tab2; set { _Tab2 = value; OnPropertyChanged(); } }
-        public int TabIndex { get; set; }
+        //private Visibility _Tab2;
+        //public Visibility Tab2 { get => _Tab2; set { _Tab2 = value; OnPropertyChanged(); } }
+        //public int TabIndex { get; set; }
 
-        private String _TabPostion;
-        public String TabPosition
-        {
-            get => _TabPostion; set
-            {
-                _TabPostion = value; OnPropertyChanged();
-            }
-        }
+        //private String _TabPostion;
+        //public String TabPosition
+        //{
+        //    get => _TabPostion; set
+        //    {
+        //        _TabPostion = value; OnPropertyChanged();
+        //    }
+        //}
 
-        #endregion
+        //#endregion
 
         #region command
         public ICommand ToEditCommand { get; set; }
         public ICommand PreviousTabCommand { get; set; }
         public ICommand NextTabCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public ICommand CancelCommand { get; set; }
 
         #endregion
 
@@ -147,7 +148,6 @@ namespace QuanLyKhuCachLy.ViewModel
 
         public SettingViewModel()
         {
-            SetDefaultEditTab();
 
             ToEditCommand = new RelayCommand<object>((p) => { return true; }, (o) =>
             {
@@ -158,27 +158,34 @@ namespace QuanLyKhuCachLy.ViewModel
             EditCommand = new RelayCommand<Window>((p) => { return true; }, (o) =>
             {
                 EditQuarantineAreaInformation();
-                SetDefaultEditTab();
                 o.Close();
             });
 
-            PreviousTabCommand = new RelayCommand<object>((p) =>
-            {
-                if (TabIndex > 1) return true;
-                return false;
-            }, (o) =>
-            {
-                HandleChangeTab(TabIndex, "previous");
-            });
+            //PreviousTabCommand = new RelayCommand<object>((p) =>
+            //{
+            //    if (TabIndex > 1) return true;
+            //    return false;
+            //}, (o) =>
+            //{
+            //    HandleChangeTab(TabIndex, "previous");
+            //});
 
-            NextTabCommand = new RelayCommand<object>((p) =>
+            //NextTabCommand = new RelayCommand<object>((p) =>
+            //{
+            //    if (TabIndex <= 2)
+            //        return true;
+            //    return false;
+            //}, (o) =>
+            //{
+            //    HandleChangeTab(TabIndex, "next");
+            //});
+
+            CancelCommand = new RelayCommand<Window>((p) =>
             {
-                if (TabIndex <= 2)
-                    return true;
-                return false;
+                return true;
             }, (o) =>
             {
-                HandleChangeTab(TabIndex, "next");
+                o.Close();
             });
 
 
@@ -232,13 +239,13 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
-        void SetDefaultEditTab()
-        {
-            Tab1 = Visibility.Visible;
-            Tab2 = Visibility.Hidden;
-            TabIndex = 1;
-            TabPosition = $"{TabIndex}/2";
-        }
+        //void SetDefaultEditTab()
+        //{
+        //    Tab1 = Visibility.Visible;
+        //    Tab2 = Visibility.Hidden;
+        //    TabIndex = 1;
+        //    TabPosition = $"{TabIndex}/2";
+        //}
 
         void EditQuarantineAreaInformation()
         {
@@ -297,33 +304,33 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
-        void HandleChangeTab(int index, string action)
-        {
-            if (action == "next")
-            {
-                TabIndex++;
-            }
-            else
-            {
-                TabIndex--;
-            }
-            if (TabIndex <= 2)
-                TabPosition = $"{TabIndex}/2";
+        //void HandleChangeTab(int index, string action)
+        //{
+        //    if (action == "next")
+        //    {
+        //        TabIndex++;
+        //    }
+        //    else
+        //    {
+        //        TabIndex--;
+        //    }
+        //    if (TabIndex <= 2)
+        //        TabPosition = $"{TabIndex}/2";
 
-            switch (TabIndex)
-            {
-                case 1:
-                    Tab1 = Visibility.Visible;
-                    Tab2 = Visibility.Hidden;
-                    break;
-                case 2:
-                    Tab1 = Visibility.Hidden;
-                    Tab2 = Visibility.Visible;
-                    break;
-                default:
-                    break;
-            }
-        }
+        //    switch (TabIndex)
+        //    {
+        //        case 1:
+        //            Tab1 = Visibility.Visible;
+        //            Tab2 = Visibility.Hidden;
+        //            break;
+        //        case 2:
+        //            Tab1 = Visibility.Hidden;
+        //            Tab2 = Visibility.Visible;
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //}
 
         #endregion
     }

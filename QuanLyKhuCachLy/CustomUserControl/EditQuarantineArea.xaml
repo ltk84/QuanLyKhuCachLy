@@ -17,8 +17,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="660" />
             </Grid.RowDefinitions>
-            <local:EditQuarantineAreaFirstPage Panel.ZIndex="-1" Visibility="{Binding Tab1}" />
-            <local:EditQuarantineAreaSecondPage Visibility="{Binding Tab2}" />
+            <local:EditQuarantineAreaFirstPage />
+            <!--<local:EditQuarantineAreaSecondPage Visibility="{Binding Tab2}" />-->
         </Grid>
         <Grid
             Grid.Row="3"
@@ -41,6 +41,22 @@
                     materialDesign:ShadowAssist.ShadowDepth="Depth0"
                     Background="#FF434A54"
                     BorderBrush="{x:Null}"
+                    Command="{Binding CancelCommand}"
+                    CommandParameter="{Binding ElementName=EditQAScreen}"
+                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Style="{StaticResource MaterialDesignRaisedButton}">
+                    <TextBlock Text="Hủy" />
+                </Button>
+                <Button
+                    Width="145"
+                    Height="37"
+                    Margin="24,0,0,0"
+                    materialDesign:ButtonAssist.CornerRadius="8"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                    Background="#FF434A54"
+                    BorderBrush="{x:Null}"
                     Command="{Binding PreviousTabCommand}"
                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                     FontSize="16"
@@ -57,11 +73,12 @@
                     materialDesign:ShadowAssist.ShadowDepth="Depth0"
                     Background="#FF1D9583"
                     BorderBrush="{x:Null}"
+                    Command="{Binding EditCommand}"
                     CommandParameter="{Binding ElementName=EditQAScreen}"
                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                     FontSize="12"
                     FontWeight="Bold">
-                    <Button.Style>
+                    <!--<Button.Style>
                         <Style BasedOn="{StaticResource MaterialDesignRaisedButton}" TargetType="{x:Type Button}">
                             <Setter Property="Command" Value="{Binding NextTabCommand}" />
                             <Style.Triggers>
@@ -70,9 +87,9 @@
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
-                    </Button.Style>
-                    <TextBlock FontSize="16">
-                        <TextBlock.Style>
+                    </Button.Style>-->
+                    <TextBlock FontSize="16" Text="Xác nhận">
+                        <!--<TextBlock.Style>
                             <Style TargetType="TextBlock">
                                 <Setter Property="Text" Value="Tiếp theo" />
                                 <Style.Triggers>
@@ -81,10 +98,10 @@
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
-                        </TextBlock.Style>
+                        </TextBlock.Style>-->
                     </TextBlock>
                 </Button>
-                <TextBlock
+                <!--<TextBlock
                     x:Name="TabIndicator"
                     Margin="25,0,0,0"
                     HorizontalAlignment="Right"
@@ -93,7 +110,7 @@
                     FontSize="16"
                     FontWeight="Bold"
                     Foreground="#FF434A54"
-                    Text="{Binding TabPosition}" />
+                    Text="{Binding TabPosition}" />-->
             </StackPanel>
         </Grid>
     </StackPanel>
