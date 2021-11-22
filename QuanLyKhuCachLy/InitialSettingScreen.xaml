@@ -63,13 +63,12 @@
                                 Margin="0"
                                 materialDesign:ButtonAssist.CornerRadius="8"
                                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                                Background="#FF434A54"
                                 BorderBrush="{x:Null}"
                                 Command="{Binding PreviousTabCommand}"
                                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                                 FontSize="16"
                                 FontWeight="Bold"
-                                Style="{StaticResource MaterialDesignRaisedButton}">
+                                Style="{StaticResource ButtonDarkTemplate}">
                                 <TextBlock Text="Trở lại" />
                             </Button>
                             <Button
@@ -79,14 +78,13 @@
                                 VerticalAlignment="Center"
                                 materialDesign:ButtonAssist.CornerRadius="8"
                                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                                Background="#FF1D9583"
                                 BorderBrush="{x:Null}"
                                 CommandParameter="{Binding ElementName=InitScreen}"
                                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                                 FontSize="12"
                                 FontWeight="Bold">
                                 <Button.Style>
-                                    <Style BasedOn="{StaticResource MaterialDesignRaisedButton}" TargetType="{x:Type Button}">
+                                    <Style BasedOn="{StaticResource ButtonAccentTemplate}" TargetType="{x:Type Button}">
                                         <Setter Property="Command" Value="{Binding NextTabCommand}" />
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding ElementName=TabIndicator, Path=Text}" Value="4/4">
