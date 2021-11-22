@@ -305,6 +305,7 @@ namespace QuanLyKhuCachLy.ViewModel
             });
 
             Init();
+
         }
         #region Method
 
@@ -338,7 +339,11 @@ namespace QuanLyKhuCachLy.ViewModel
             }, (p) =>
             {
                 ArrangeRoomRecommendation arrangeRoomRecommendation = new ArrangeRoomRecommendation();
-                arrangeRoomRecommendation.ShowDialog();
+                
+                if (arrangeRoomRecommendation.ShowDialog() == true)
+                {
+                    Init();
+                }
             });
         }
 

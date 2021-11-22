@@ -17,6 +17,11 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding RefreshCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Viewbox>
         <Border
             Width="1280"
@@ -317,6 +322,8 @@
                         materialDesign:ButtonAssist.CornerRadius="8"
                         materialDesign:ShadowAssist.ShadowDepth="Depth0"
                         BorderBrush="{x:Null}"
+                        Command="{Binding ConfirmCommand}"
+                        CommandParameter="{Binding ElementName=ArrangeRoomRecommendationWindow}"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="12"
                         FontWeight="Bold"

@@ -198,7 +198,10 @@ namespace QuanLyKhuCachLy.ViewModel
                 SelectedWard = QAAdress.ward;
                 ApartmentNumber = QAAdress.apartmentNumber;
                 StreetName = QAAdress.streetName;
-                Manager = DataProvider.ins.db.Staffs.Where(staff => staff.id == QuarantineArea.managerID).FirstOrDefault();
+                if (DataProvider.ins.db.Staffs.Count() != 0)
+                {
+                    Manager = DataProvider.ins.db.Staffs.Where(staff => staff.id == QuarantineArea.managerID).FirstOrDefault();
+                }
             }
         }
 
