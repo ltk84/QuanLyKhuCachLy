@@ -10,243 +10,254 @@
     xmlns:utility="clr-namespace:QuanLyKhuCachLy.Utility"
     xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
     Name="AddDestinationScreen"
-    d:DesignHeight="500"
+    d:DesignHeight="510"
     d:DesignWidth="800"
+    AllowsTransparency="True"
+    Background="{x:Null}"
     DataContext="{StaticResource PersonVM}"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
     mc:Ignorable="d">
-    <StackPanel Margin="0,0,0,0">
-        <TextBlock
-            Margin="0,32,0,0"
-            HorizontalAlignment="Center"
-            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-            FontSize="24"
-            FontWeight="Bold">
-            Lịch sử di chuyển
-        </TextBlock>
-        <TextBlock
-            Margin="0,2,0,0"
-            HorizontalAlignment="Center"
-            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-            FontSize="16">
-            Vui lòng điền thông tin bên dưới
-        </TextBlock>
-        <Grid Grid.Row="0" Margin="30,0,30,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition SharedSizeGroup="A" />
-                <ColumnDefinition SharedSizeGroup="A" />
-                <ColumnDefinition SharedSizeGroup="A" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Grid.Column="0">
+    <Viewbox>
+        <Border
+            Width="825"
+            Margin="10"
+            Style="{StaticResource RecommendationField}">
+            <StackPanel Margin="15,0,15,0">
                 <TextBlock
-                    Margin="0,0,0,0"
+                    Margin="0,32,0,0"
+                    HorizontalAlignment="Center"
                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                    FontSize="16"
-                    FontWeight="Bold"
-                    Foreground="#FF434A54">
-                    Thời gian
+                    FontSize="24"
+                    FontWeight="Bold">
+                    Lịch sử di chuyển
                 </TextBlock>
-            </StackPanel>
-            <StackPanel
-                Grid.Row="1"
-                Grid.Column="0"
-                Margin="0,10,24,10">
                 <TextBlock
-                    Margin="5,0,0,5"
+                    Margin="0,2,0,0"
+                    HorizontalAlignment="Center"
                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                    FontSize="16"
-                    Foreground="#FF434A54">
-                    Ngày đến (*)
+                    FontSize="16">
+                    Vui lòng điền thông tin bên dưới
                 </TextBlock>
-                <DatePicker
-                    materialDesign:HintAssist.Hint="Nhập ngày đến"
-                    utility:ProtocolSettingsLayout.MVVMHasError="{Binding DestinationHistoryViewModel.DateTimeFieldHasError}"
-                    Style="{StaticResource DatePickerField}">
+                <Grid Grid.Row="0" Margin="30,0,30,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition SharedSizeGroup="A" />
+                        <ColumnDefinition SharedSizeGroup="A" />
+                        <ColumnDefinition SharedSizeGroup="A" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Grid.Column="0">
+                        <TextBlock
+                            Margin="0,0,0,0"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Foreground="#FF434A54">
+                            Thời gian
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="0,10,24,10">
+                        <TextBlock
+                            Margin="5,0,0,5"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="16"
+                            Foreground="#FF434A54">
+                            Ngày đến (*)
+                        </TextBlock>
+                        <DatePicker
+                            materialDesign:HintAssist.Hint="Nhập ngày đến"
+                            utility:ProtocolSettingsLayout.MVVMHasError="{Binding DestinationHistoryViewModel.DateTimeFieldHasError}"
+                            Style="{StaticResource DatePickerField}">
 
-                    <DatePicker.SelectedDate>
-                        <Binding
-                            Mode="OneWayToSource"
-                            Path="DestinationHistoryViewModel.HDDateArrive"
-                            StringFormat="dd/MM/yyyy"
-                            UpdateSourceTrigger="PropertyChanged">
-                            <Binding.Converter>
-                                <convert:DateTimeToStringConverter />
-                            </Binding.Converter>
-                            <Binding.ValidationRules>
-                                <vr:RequiredField />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </DatePicker.SelectedDate>
-                </DatePicker>
+                            <DatePicker.SelectedDate>
+                                <Binding
+                                    Mode="OneWayToSource"
+                                    Path="DestinationHistoryViewModel.HDDateArrive"
+                                    StringFormat="dd/MM/yyyy"
+                                    UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.Converter>
+                                        <convert:DateTimeToStringConverter />
+                                    </Binding.Converter>
+                                    <Binding.ValidationRules>
+                                        <vr:RequiredField />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </DatePicker.SelectedDate>
+                        </DatePicker>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Grid.Column="0">
+                        <TextBlock
+                            Margin="0,0,0,0"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Foreground="#FF434A54">
+                            Địa điểm đã đến
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        Margin="0,5,14,0"
+                        VerticalAlignment="Bottom">
+                        <TextBlock
+                            Margin="5,0,0,5"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="16"
+                            Foreground="#FF434A54">
+                            Tỉnh/Thành phố (*)
+                        </TextBlock>
+                        <ComboBox
+                            utility:ProtocolSettingsLayout.MVVMHasError="{Binding DestinationHistoryViewModel.ProvinceFieldHasError}"
+                            ItemsSource="{Binding DestinationHistoryViewModel.ProvinceList}"
+                            Style="{StaticResource ComboBoxField}">
+                            <ComboBox.SelectedItem>
+                                <Binding Path="DestinationHistoryViewModel.HDSelectedProvince" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <vr:RequiredField />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </ComboBox.SelectedItem>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Margin="0,15,24,0"
+                        VerticalAlignment="Bottom">
+                        <TextBlock
+                            Margin="5,0,0,5"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="16"
+                            Foreground="#FF434A54">
+                            Quận/Huyện (*)
+                        </TextBlock>
+                        <ComboBox
+                            utility:ProtocolSettingsLayout.MVVMHasError="{Binding DestinationHistoryViewModel.DistrictFieldHasError}"
+                            ItemsSource="{Binding DestinationHistoryViewModel.DistrictList}"
+                            Style="{StaticResource ComboBoxField}">
+                            <ComboBox.SelectedItem>
+                                <Binding Path="DestinationHistoryViewModel.HDSelectedDistrict" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <vr:RequiredField />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </ComboBox.SelectedItem>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel
+                        Grid.Row="3"
+                        Grid.Column="2"
+                        Margin="0,15,0,0"
+                        VerticalAlignment="Bottom">
+                        <TextBlock
+                            Margin="5,0,0,5"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="16"
+                            Foreground="#FF434A54">
+                            Phường/Xã (*)
+                        </TextBlock>
+                        <ComboBox
+                            utility:ProtocolSettingsLayout.MVVMHasError="{Binding DestinationHistoryViewModel.WardFieldHasError}"
+                            ItemsSource="{Binding DestinationHistoryViewModel.WardList}"
+                            Style="{StaticResource ComboBoxField}">
+                            <ComboBox.SelectedItem>
+                                <Binding Path="DestinationHistoryViewModel.HDSelectedWard" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <vr:RequiredField />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </ComboBox.SelectedItem>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel
+                        Grid.Row="4"
+                        Grid.Column="0"
+                        Margin="0,15,24,0">
+                        <TextBlock
+                            Margin="5,0,0,5"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="16"
+                            Foreground="#FF434A54">
+                            Đường
+                        </TextBlock>
+                        <TextBox
+                            materialDesign:HintAssist.Hint="Nhập tên đường"
+                            MaxLength="20"
+                            Style="{StaticResource TextInputField}"
+                            Text="{Binding DestinationHistoryViewModel.HDStreetName}" />
+                    </StackPanel>
+                    <StackPanel
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        Margin="0,15,24,0">
+                        <TextBlock
+                            Margin="5,0,0,5"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="16"
+                            Foreground="#FF434A54">
+                            Số (*)
+                        </TextBlock>
+                        <TextBox
+                            materialDesign:HintAssist.Hint="Nhập số địa chỉ"
+                            MaxLength="20"
+                            Style="{StaticResource TextInputField}"
+                            Text="{Binding DestinationHistoryViewModel.HDApartmentNumber, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                </Grid>
+                <StackPanel
+                    Grid.Row="3"
+                    Margin="0,32,30,30"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+                    <Button
+                        Width="145"
+                        Height="37"
+                        Margin="0"
+                        materialDesign:ButtonAssist.CornerRadius="8"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                        Background="#FF434A54"
+                        BorderBrush="{x:Null}"
+                        Command="{Binding DestinationHistoryViewModel.CancelCommand}"
+                        CommandParameter="{Binding ElementName=AddDestinationScreen}"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Style="{StaticResource MaterialDesignRaisedButton}">
+                        <TextBlock Text="Hủy bỏ" />
+                    </Button>
+                    <Button
+                        Width="145"
+                        Height="37"
+                        Margin="12,0,0,0"
+                        VerticalAlignment="Center"
+                        materialDesign:ButtonAssist.CornerRadius="8"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                        Background="#FF1D9583"
+                        BorderBrush="{x:Null}"
+                        Command="{Binding DestinationHistoryViewModel.AddOnUICommand}"
+                        CommandParameter="{Binding ElementName=AddDestinationScreen}"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="12"
+                        FontWeight="Bold">
+                        <Button.Style>
+                            <Style BasedOn="{StaticResource MaterialDesignRaisedButton}" TargetType="Button" />
+                        </Button.Style>
+                        <TextBlock FontSize="16">
+                            Thêm
+                        </TextBlock>
+                    </Button>
+                </StackPanel>
             </StackPanel>
-            <StackPanel Grid.Row="2" Grid.Column="0">
-                <TextBlock
-                    Margin="0,0,0,0"
-                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                    FontSize="16"
-                    FontWeight="Bold"
-                    Foreground="#FF434A54">
-                    Địa điểm đã đến
-                </TextBlock>
-            </StackPanel>
-            <StackPanel
-                Grid.Row="3"
-                Grid.Column="0"
-                Margin="0,5,14,0"
-                VerticalAlignment="Bottom">
-                <TextBlock
-                    Margin="5,0,0,5"
-                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                    FontSize="16"
-                    Foreground="#FF434A54">
-                    Tỉnh/Thành phố (*)
-                </TextBlock>
-                <ComboBox
-                    utility:ProtocolSettingsLayout.MVVMHasError="{Binding DestinationHistoryViewModel.ProvinceFieldHasError}"
-                    ItemsSource="{Binding DestinationHistoryViewModel.ProvinceList}"
-                    Style="{StaticResource ComboBoxField}">
-                    <ComboBox.SelectedItem>
-                        <Binding Path="DestinationHistoryViewModel.HDSelectedProvince" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <vr:RequiredField />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </ComboBox.SelectedItem>
-                </ComboBox>
-            </StackPanel>
-            <StackPanel
-                Grid.Row="3"
-                Grid.Column="1"
-                Margin="0,15,24,0"
-                VerticalAlignment="Bottom">
-                <TextBlock
-                    Margin="5,0,0,5"
-                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                    FontSize="16"
-                    Foreground="#FF434A54">
-                    Quận/Huyện (*)
-                </TextBlock>
-                <ComboBox
-                    utility:ProtocolSettingsLayout.MVVMHasError="{Binding DestinationHistoryViewModel.DistrictFieldHasError}"
-                    ItemsSource="{Binding DestinationHistoryViewModel.DistrictList}"
-                    Style="{StaticResource ComboBoxField}">
-                    <ComboBox.SelectedItem>
-                        <Binding Path="DestinationHistoryViewModel.HDSelectedDistrict" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <vr:RequiredField />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </ComboBox.SelectedItem>
-                </ComboBox>
-            </StackPanel>
-            <StackPanel
-                Grid.Row="3"
-                Grid.Column="2"
-                Margin="0,15,0,0"
-                VerticalAlignment="Bottom">
-                <TextBlock
-                    Margin="5,0,0,5"
-                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                    FontSize="16"
-                    Foreground="#FF434A54">
-                    Phường/Xã (*)
-                </TextBlock>
-                <ComboBox
-                    utility:ProtocolSettingsLayout.MVVMHasError="{Binding DestinationHistoryViewModel.WardFieldHasError}"
-                    ItemsSource="{Binding DestinationHistoryViewModel.WardList}"
-                    Style="{StaticResource ComboBoxField}">
-                    <ComboBox.SelectedItem>
-                        <Binding Path="DestinationHistoryViewModel.HDSelectedWard" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <vr:RequiredField />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </ComboBox.SelectedItem>
-                </ComboBox>
-            </StackPanel>
-            <StackPanel
-                Grid.Row="4"
-                Grid.Column="0"
-                Margin="0,15,24,0">
-                <TextBlock
-                    Margin="5,0,0,5"
-                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                    FontSize="16"
-                    Foreground="#FF434A54">
-                    Đường
-                </TextBlock>
-                <TextBox
-                    materialDesign:HintAssist.Hint="Nhập tên đường"
-                    MaxLength="20"
-                    Style="{StaticResource TextInputField}"
-                    Text="{Binding DestinationHistoryViewModel.HDStreetName}" />
-            </StackPanel>
-            <StackPanel
-                Grid.Row="4"
-                Grid.Column="1"
-                Margin="0,15,24,0">
-                <TextBlock
-                    Margin="5,0,0,5"
-                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                    FontSize="16"
-                    Foreground="#FF434A54">
-                    Số (*)
-                </TextBlock>
-                <TextBox
-                    materialDesign:HintAssist.Hint="Nhập số địa chỉ"
-                    MaxLength="20"
-                    Style="{StaticResource TextInputField}"
-                    Text="{Binding DestinationHistoryViewModel.HDApartmentNumber, UpdateSourceTrigger=PropertyChanged}" />
-            </StackPanel>
-        </Grid>
-        <StackPanel
-            Grid.Row="3"
-            Margin="0,32,30,30"
-            HorizontalAlignment="Right"
-            Orientation="Horizontal">
-            <Button
-                Width="145"
-                Height="37"
-                Margin="0"
-                materialDesign:ButtonAssist.CornerRadius="8"
-                materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                Background="#FF434A54"
-                BorderBrush="{x:Null}"
-                Command="{Binding DestinationHistoryViewModel.CancelCommand}"
-                CommandParameter="{Binding ElementName=AddDestinationScreen}"
-                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                FontSize="16"
-                FontWeight="Bold"
-                Style="{StaticResource MaterialDesignRaisedButton}">
-                <TextBlock Text="Hủy bỏ" />
-            </Button>
-            <Button
-                Width="145"
-                Height="37"
-                Margin="12,0,0,0"
-                VerticalAlignment="Center"
-                materialDesign:ButtonAssist.CornerRadius="8"
-                materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                Background="#FF1D9583"
-                BorderBrush="{x:Null}"
-                Command="{Binding DestinationHistoryViewModel.AddOnUICommand}"
-                CommandParameter="{Binding ElementName=AddDestinationScreen}"
-                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                FontSize="12"
-                FontWeight="Bold">
-                <Button.Style>
-                    <Style BasedOn="{StaticResource MaterialDesignRaisedButton}" TargetType="Button" />
-                </Button.Style>
-                <TextBlock FontSize="16">
-                    Thêm
-                </TextBlock>
-            </Button>
-        </StackPanel>
-    </StackPanel>
+        </Border>
+    </Viewbox>
 </Window>

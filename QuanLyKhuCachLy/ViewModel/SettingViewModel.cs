@@ -192,7 +192,7 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 QuarantineArea = DataProvider.ins.db.QuarantineAreas.First();
                 QAAdress = QuarantineArea.Address;
-                QuarantineAreaAddress = $"{QuarantineArea.Address?.apartmentNumber} {QuarantineArea.Address?.streetName}, {QuarantineArea.Address.ward}, {QuarantineArea.Address.district}, {QuarantineArea.Address.province}";
+                UpdateDisplayAddress(QuarantineArea.Address);
                 SelectedProvince = QAAdress.province;
                 SelectedDistrict = QAAdress.district;
                 SelectedWard = QAAdress.ward;
@@ -255,7 +255,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     DataProvider.ins.db.SaveChanges();
 
-                    QuarantineAreaAddress = $"{QuarantineArea.Address?.apartmentNumber} {QuarantineArea.Address?.streetName}, {QuarantineArea.Address.ward}, {QuarantineArea.Address.district}, {QuarantineArea.Address.province}";
+                    UpdateDisplayAddress(QuarantineArea.Address);
 
                     transaction.Commit();
                 }
@@ -324,6 +324,36 @@ namespace QuanLyKhuCachLy.ViewModel
                     break;
             }
         }
+
+        void UpdateDisplayAddress(Address PersonAddress)
+        {
+            if (PersonAddress == null) return;
+            List<string> list = new List<string>()
+            {
+                PersonAddress.apartmentNumber,
+                PersonAddress.streetName,
+                PersonAddress.ward,
+                PersonAddress.district,
+                PersonAddress.province
+
+            };
+
+            QuarantineAreaAddress = string.Empty;
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (!string.IsNullOrWhiteSpace(list[i]))
+                {
+                    QuarantineAreaAddress += list[i];
+                }
+                if (i != list.Count - 1)
+                {
+                    if (i != 0)
+                        QuarantineAreaAddress += ", ";
+                    else QuarantineAreaAddress += "";
+                }
+            }
+        }
+
 
         #endregion
     }
