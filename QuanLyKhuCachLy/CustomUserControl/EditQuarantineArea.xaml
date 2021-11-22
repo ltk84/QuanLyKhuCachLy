@@ -49,21 +49,7 @@
                     Style="{StaticResource MaterialDesignRaisedButton}">
                     <TextBlock Text="Hủy" />
                 </Button>
-                <Button
-                    Width="145"
-                    Height="37"
-                    Margin="24,0,0,0"
-                    materialDesign:ButtonAssist.CornerRadius="8"
-                    materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                    Background="#FF434A54"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding PreviousTabCommand}"
-                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                    FontSize="16"
-                    FontWeight="Bold"
-                    Style="{StaticResource MaterialDesignRaisedButton}">
-                    <TextBlock Text="Trở lại" />
-                </Button>
+
                 <Button
                     Width="145"
                     Height="37"

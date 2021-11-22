@@ -334,11 +334,11 @@
                         Tên người quản lý (*)
                     </TextBlock>
                     <ComboBox
-                        utility:ProtocolSettingsLayout.MVVMHasError="{Binding QAWardFieldHasError}"
-                        ItemsSource="{Binding WardList}"
+                        DisplayMemberPath="name"
+                        ItemsSource="{Binding StaffList}"
                         Style="{StaticResource ComboBoxField}">
                         <ComboBox.SelectedItem>
-                            <Binding Path="SelectedWard" UpdateSourceTrigger="PropertyChanged">
+                            <Binding Path="SelectedStaff" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <vr:RequiredFieldNonCommit />
                                 </Binding.ValidationRules>

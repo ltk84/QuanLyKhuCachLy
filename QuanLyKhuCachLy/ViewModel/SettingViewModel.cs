@@ -52,9 +52,16 @@ namespace QuanLyKhuCachLy.ViewModel
         public Model.Staff Manager
         {
             get { return _Manager; }
-            set { _Manager = value; }
+            set { _Manager = value; OnPropertyChanged(); }
         }
 
+        private Model.Staff _SelectedStaff;
+
+        public Model.Staff SelectedStaff
+        {
+            get { return _SelectedStaff; }
+            set { _SelectedStaff = value; OnPropertyChanged(); }
+        }
 
         private string _QuarantineAreaAddress;
 
@@ -90,6 +97,7 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand NextTabCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand CancelCommand { get; set; }
+        public ICommand RefeshCommand { get; set; }
 
         #endregion
 
@@ -117,6 +125,16 @@ namespace QuanLyKhuCachLy.ViewModel
         #endregion
 
         #region list
+
+        private ObservableCollection<Staff> _StaffList;
+        public ObservableCollection<Staff> StaffList
+        {
+            get => _StaffList; set
+            {
+                _StaffList = value; OnPropertyChanged();
+            }
+        }
+
         private ObservableCollection<string> _ProvinceList;
         public ObservableCollection<string> ProvinceList
         {
@@ -188,6 +206,14 @@ namespace QuanLyKhuCachLy.ViewModel
                 o.Close();
             });
 
+            RefeshCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (o) =>
+            {
+                RefeshTab();
+            });
+
 
             ProvinceList = new ObservableCollection<string>();
             DistrictList = new ObservableCollection<string>();
@@ -197,19 +223,31 @@ namespace QuanLyKhuCachLy.ViewModel
 
             if (DataProvider.ins.db.QuarantineAreas.Count() != 0)
             {
-                QuarantineArea = DataProvider.ins.db.QuarantineAreas.First();
-                QAAdress = QuarantineArea.Address;
-                QuarantineAreaAddress = $"{QuarantineArea.Address?.apartmentNumber} {QuarantineArea.Address?.streetName}, {QuarantineArea.Address.ward}, {QuarantineArea.Address.district}, {QuarantineArea.Address.province}";
-                SelectedProvince = QAAdress.province;
-                SelectedDistrict = QAAdress.district;
-                SelectedWard = QAAdress.ward;
-                ApartmentNumber = QAAdress.apartmentNumber;
-                StreetName = QAAdress.streetName;
-                Manager = DataProvider.ins.db.Staffs.Where(staff => staff.id == QuarantineArea.managerID).FirstOrDefault();
+                Init();
             }
         }
 
         #region method
+
+        void RefeshTab()
+        {
+            Init();
+        }
+
+        void Init()
+        {
+            QuarantineArea = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
+            QAAdress = QuarantineArea.Address;
+            QuarantineAreaAddress = $"{QuarantineArea.Address?.apartmentNumber} {QuarantineArea.Address?.streetName}, {QuarantineArea.Address.ward}, {QuarantineArea.Address.district}, {QuarantineArea.Address.province}";
+            SelectedProvince = QAAdress.province;
+            SelectedDistrict = QAAdress.district;
+            SelectedWard = QAAdress.ward;
+            ApartmentNumber = QAAdress.apartmentNumber;
+            StreetName = QAAdress.streetName;
+            Manager = DataProvider.ins.db.Staffs.Where(staff => staff.id == QuarantineArea.managerID).FirstOrDefault();
+            SelectedStaff = Manager;
+            StaffList = new ObservableCollection<Staff>(DataProvider.ins.db.Staffs);
+        }
 
         void InitProvinceList()
         {
@@ -259,6 +297,11 @@ namespace QuanLyKhuCachLy.ViewModel
                     QAAdress.ward = SelectedWard;
                     QAAdress.apartmentNumber = ApartmentNumber;
                     QAAdress.streetName = StreetName;
+
+                    Manager = SelectedStaff;
+
+                    if (Manager != null)
+                        QuarantineArea.managerID = Manager.id;
 
                     DataProvider.ins.db.SaveChanges();
 
