@@ -1255,10 +1255,24 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (xlRange.Cells[i, 11] != null && xlRange.Cells[i, 11].Value2 != null)
                     {
                         string[] arrListStr = xlRange.Cells[i, 11].Value2.ToString().Split(',');
-                        address.district = arrListStr[2];
-                        address.province = arrListStr[3];
-                        address.ward = arrListStr[1];
-                        address.streetName = arrListStr[0];
+                        if (arrListStr.Length < 3)
+                        {
+                            MessageBox.Show(xlRange.Cells[i, 2].Value2.ToString() + " has error in address");
+                            return;
+                        }
+                        if (arrListStr.Length == 3)
+                        {
+                            address.province = arrListStr[2];
+                            address.district = arrListStr[1];
+                            address.ward = arrListStr[0];
+                        }
+                        else
+                        {
+                            address.province = arrListStr[3];
+                            address.district = arrListStr[2];
+                            address.ward = arrListStr[1];
+                            address.streetName = arrListStr[0];
+                        }
                     }
                     if (xlRange.Cells[i, 5] != null && xlRange.Cells[i, 5].Value2 != null)
                     {

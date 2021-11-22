@@ -1404,10 +1404,24 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (xlRange.Cells[i, 5] != null && xlRange.Cells[i, 5].Value2 != null)
                     {
                         string[] arrListStr = xlRange.Cells[i, 5].Value2.ToString().Split(',');
-                        personAddress.district = arrListStr[2];
-                        personAddress.province = arrListStr[3];
-                        personAddress.ward = arrListStr[1];
-                        personAddress.streetName = arrListStr[0];
+                        if (arrListStr.Length < 3)
+                        {
+                            MessageBox.Show(xlRange.Cells[i, 2].Value2.ToString() + " has error in address");
+                            return;
+                        }
+                        if (arrListStr.Length == 3)
+                        {
+                            personAddress.province = arrListStr[2];
+                            personAddress.district = arrListStr[1];
+                            personAddress.ward = arrListStr[0];
+                        }
+                        else
+                        {
+                            personAddress.province = arrListStr[3];
+                            personAddress.district = arrListStr[2];
+                            personAddress.ward = arrListStr[1];
+                            personAddress.streetName = arrListStr[0];
+                        }
                     }
                     if (xlRange.Cells[i, 7] != null && xlRange.Cells[i, 7].Value2 != null)
                     {
@@ -2187,10 +2201,24 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (values[i][4] != null)
                     {
                         string[] arrListStr = values[i][4].ToString().Split(',');
-                        personAddress.district = arrListStr[2];
-                        personAddress.province = arrListStr[3];
-                        personAddress.ward = arrListStr[1];
-                        personAddress.streetName = arrListStr[0];
+                        if(arrListStr.Length < 3)
+                        {
+                            MessageBox.Show(values[i][1].ToString() + " has error in address");
+                            return;
+                        }
+                        if (arrListStr.Length == 3)
+                        {
+                            personAddress.province = arrListStr[2];
+                            personAddress.district = arrListStr[1];
+                            personAddress.ward = arrListStr[0];
+                        }
+                        else
+                        {
+                            personAddress.province = arrListStr[3];
+                            personAddress.district = arrListStr[2];
+                            personAddress.ward = arrListStr[1];
+                            personAddress.streetName = arrListStr[0];
+                        }
                     }
                    
                     if (values[i][6] != null)
