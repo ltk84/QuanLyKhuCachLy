@@ -456,7 +456,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                 }
 
-                RoomListView = RoomListView.Where((val, index) => Value[index].Contains(SearchKey)).ToArray();
+                RoomListView = RoomListView.Where((val, index) => Value[index].ToUpper().Contains(SearchKey.ToUpper())).ToArray();
             }
         }
 

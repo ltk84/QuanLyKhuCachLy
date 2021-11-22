@@ -846,7 +846,7 @@ namespace QuanLyKhuCachLy.ViewModel
             RemainRoomList = new ObservableCollection<Model.QuarantineRoom>();
             PeopleListView = QuarantinePersonList.ToArray();
 
-            FilterType = new string[] { "Tất cả", "Giới tính", "Quốc tịch", "Phòng", "Nhóm đối tượng", "Ngày đi", "Ngày đến" };
+            FilterType = new string[] { "Tất cả", "Giới tính", "Quốc tịch", "Phòng", "Nhóm đối tượng", "Ngày đi", "Ngày đến", "Người đến kì hạn xét nghiệm" };
             SelectedFilterType = "Tất cả";
             SelectedFilterProperty = "Chọn phương thức lọc";
             getFilterProperty();
@@ -1241,7 +1241,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                 }
 
-                PeopleListView = PeopleListView.Where((val, index) => Value[index].Contains(SearchKey)).ToArray();
+                PeopleListView = PeopleListView.Where((val, index) => Value[index].ToUpper().Contains(SearchKey.ToUpper())).ToArray();
             }
         }
 
@@ -1250,6 +1250,7 @@ namespace QuanLyKhuCachLy.ViewModel
         void getFilterProperty()
         {
             SelectedFilterProperty = "Tất cả";
+            PeopleListView = DataProvider.ins.db.QuarantinePersons.ToArray();
 
             //FilterProperty = DataProvider.ins.db.Staffs.Select(staff => staff.GetType().GetProperty(SelectedFilterType)).Distinct();
             if (SelectedFilterType == "Tất cả")
@@ -1287,8 +1288,15 @@ namespace QuanLyKhuCachLy.ViewModel
                 FilterProperty = DataProvider.ins.db.QuarantinePersons.Select(person => person.arrivedDate.ToString()).ToArray();
                 FilterProperty = FilterProperty.Distinct().ToArray();
             }
+            else if (SelectedFilterProperty == "Người đến kì hạn xét nghiệm")
+            {
+                FilterProperty = new string[] { "Lần 1", "Lần 2", "Lần 3" };
+            }
+            else if (SelectedFilterProperty == "Người sấp đến kì hạn xét nghiệm")
+            {
+                FilterProperty = new string[] { "Hôm qua", "Hôm nay", "Ngày mai" };
+            }
 
-            PeopleListView = DataProvider.ins.db.QuarantinePersons.ToArray();
         }
 
         void SelectFilterProperty()
@@ -1322,6 +1330,11 @@ namespace QuanLyKhuCachLy.ViewModel
             else if (SelectedFilterType == "Ngày đến")
             {
                 PeopleListView = DataProvider.ins.db.QuarantinePersons.Where(x => x.arrivedDate.ToString() == SelectedFilterProperty).ToArray();
+
+            }
+            else if (SelectedFilterType == "Người đến kì hạn xét nghiệm")
+            {
+               // PeopleListView = DataProvider.ins.db.QuarantinePersons.Where(x => x.arrivedDate.ToString() == SelectedFilterProperty).ToArray();
 
             }
 
