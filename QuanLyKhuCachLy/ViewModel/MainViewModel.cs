@@ -193,11 +193,14 @@ namespace QuanLyKhuCachLy.ViewModel
             QuarantineRoomVM = new QuarantineRoomViewModel();
             StaffVM = new StaffViewModel();
             quarantinePersonViewModel = new QuarantinePersonViewModel();
+            quarantinePersonViewModel.UpdateQuarantineDaysForPerson();
             ReportVM = new ReportViewModel();
             NotificationVM = new NotificationViewModel();
             SettingVM = new SettingViewModel();
             ToDashboard();
         }
+
+
 
         private void ToDashboard()
         {

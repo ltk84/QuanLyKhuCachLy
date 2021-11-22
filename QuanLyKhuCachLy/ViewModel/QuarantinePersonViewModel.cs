@@ -1004,6 +1004,62 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #region method
 
+        public void UpdateQuarantineDaysForPerson()
+        {
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    foreach (var p in QuarantinePersonList)
+                    {
+                        var now = DateTime.Today;
+                        if (p.leaveDate > now) return;
+                        var numberOfDays = (int)(now - p.arrivedDate).TotalDays;
+                        if (p.quarantineDays != numberOfDays) p.quarantineDays = numberOfDays;
+                    }
+
+                    DataProvider.ins.db.SaveChanges();
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db update";
+
+                    MessageBox.Show(error);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi validation";
+
+                    MessageBox.Show(error);
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db đéo support";
+
+                    MessageBox.Show(error);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi db object disposed";
+
+                    MessageBox.Show(error);
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+                    string error = "Lỗi invalid operation";
+
+                    MessageBox.Show(error);
+                }
+            }
+        }
+
         protected virtual void ChangeRoom()
         {
             using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
