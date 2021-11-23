@@ -658,11 +658,6 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-
-                //PeopleList2 = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
-                //PeopleListView2 = PeopleList2.ToArray();
-                //PeopleList1 = new ObservableCollection<QuarantinePerson>();
-                //PeopleListView1 = PeopleList1.ToArray();
                 PeopleListView1.ToList().ForEach(PeopleList2.Add);
                 PeopleListView1.ToList().ForEach(RemoveItemFormList1);
                 InitFilter();
@@ -844,8 +839,8 @@ namespace QuanLyKhuCachLy.ViewModel
 
         void InitFilter()
         {
-            FilterType1 = new string[] { "Tất cả", "Giới tính", "Quốc tịch", "Phòng", "Nhóm đối tượng", "Ngày đi", "Ngày đến" };
-            FilterType2 = new string[] { "Tất cả", "Giới tính", "Quốc tịch", "Phòng", "Nhóm đối tượng", "Ngày đi", "Ngày đến" };
+            FilterType1 = new string[] { "Tất cả", "Giới tính", "Quốc tịch", "Phòng", "Nhóm đối tượng", "Ngày đi", "Ngày đến", "Ngày đến kì hạn xét nghiệm" };
+            FilterType2 = new string[] { "Tất cả", "Giới tính", "Quốc tịch", "Phòng", "Nhóm đối tượng", "Ngày đi", "Ngày đến", "Ngày đến kì hạn xét nghiệm" };
             SelectedFilterType1 = "Tất cả";
             SelectedFilterType2 = "Tất cả";
             SelectedFilterProperty1 = "Chọn phương thức lọc";
@@ -1018,6 +1013,10 @@ namespace QuanLyKhuCachLy.ViewModel
                 FilterProperty1 = PeopleList1.Select(person => person.arrivedDate.ToString()).ToArray();
                 FilterProperty1 = FilterProperty1.Distinct().ToArray();
             }
+            else if (SelectedFilterType1 == "Ngày đến kì hạn xét nghiệm")
+            {
+                FilterProperty1 = new string[] { "Hôm qua", "Hôm nay", "Ngày mai" };
+            }
 
             PeopleListView1 = PeopleList1.ToArray();
         }
@@ -1064,6 +1063,11 @@ namespace QuanLyKhuCachLy.ViewModel
                 FilterProperty2 = PeopleList2.Select(person => person.arrivedDate.ToString()).ToArray();
                 FilterProperty2 = FilterProperty2.Distinct().ToArray();
             }
+            else if (SelectedFilterType2 == "Ngày đến kì hạn xét nghiệm")
+            {
+                FilterProperty2 = new string[] { "Hôm qua", "Hôm nay", "Ngày mai" };
+            }
+
 
             PeopleListView2 = PeopleList2.ToArray();
         }
@@ -1099,6 +1103,25 @@ namespace QuanLyKhuCachLy.ViewModel
             else if (SelectedFilterType1 == "Ngày đến")
             {
                 PeopleListView1 = PeopleList1.Where(x => x.arrivedDate.ToString() == SelectedFilterProperty1).ToArray();
+            }
+            else if (SelectedFilterType1 == "Ngày đến kì hạn xét nghiệm")
+            {
+                if (SelectedFilterProperty1 == "Hôm nay")
+                {
+                    FilterPersonIsOnTestingDateToday1(DateTime.Now.Date);
+                }
+                else if (SelectedFilterProperty1 == "Hôm qua")
+                {
+                    FilterPersonIsOnTestingDateToday1(DateTime.Today.AddDays(-1).Date);
+
+                }
+                else if (SelectedFilterProperty1 == "Ngày mai")
+                {
+                    FilterPersonIsOnTestingDateToday1(DateTime.Today.AddDays(1).Date);
+
+                }
+
+
             }
 
 
@@ -1139,8 +1162,124 @@ namespace QuanLyKhuCachLy.ViewModel
                 PeopleListView2 = PeopleList2.Where(x => x.arrivedDate.ToString() == SelectedFilterProperty2).ToArray();
 
             }
+            else if (SelectedFilterType2 == "Ngày đến kì hạn xét nghiệm")
+            {
+                if (SelectedFilterProperty2 == "Hôm nay")
+                {
+                    FilterPersonIsOnTestingDateToday2(DateTime.Now.Date);
+                }
+                else if (SelectedFilterProperty2 == "Hôm qua")
+                {
+                    FilterPersonIsOnTestingDateToday2(DateTime.Today.AddDays(-1).Date);
+
+                }
+                else if (SelectedFilterProperty2 == "Ngày mai")
+                {
+                    FilterPersonIsOnTestingDateToday2(DateTime.Today.AddDays(1).Date);
+
+                }
 
 
+            }
+
+
+        }
+
+        void FilterPersonIsOnTestingDateToday1(DateTime SelectedDate)
+        {
+            int maxQuarantineDay = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().requiredDayToFinish;
+            int testCycle = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().testCycle;
+            var tempPeopleList = PeopleList1.ToArray();
+            var tempQuarantinePersonList = new ObservableCollection<QuarantinePerson>();
+            for (int i = 0; i < tempPeopleList.Length; i++)
+            {
+                var tempID = tempPeopleList[i].id;
+                var TestingResultList = new ObservableCollection<TestingResult>(DataProvider.ins.db.TestingResults.Where(x => x.quarantinePersonID == tempID));
+
+                // Nếu còn cách li
+                if ((SelectedDate - tempPeopleList[i].leaveDate.Date).TotalDays <= 0)
+                {
+                    // Ngày cuối cách ly
+                    if ((SelectedDate - tempPeopleList[i].leaveDate.Date).TotalDays == 0)
+                    {
+                        tempQuarantinePersonList.Add(tempPeopleList[i]);
+                    }
+                    // Chưa xét nghiệm lần nào
+                    else if (TestingResultList.ToArray().Length == 0)
+                    {
+                        if ((SelectedDate - tempPeopleList[i].arrivedDate.Date).TotalDays >= testCycle)
+                        {
+                            tempQuarantinePersonList.Add(tempPeopleList[i]);
+                        }
+
+
+                    }
+                    // Đã xét nghiệm
+                    else
+                    {
+                        DateTime max = TestingResultList[0].dateTesting;
+                        for (int j = 1; j < TestingResultList.ToArray().Length; j++)
+                            if ((max - TestingResultList[j].dateTesting).TotalDays < 0) max = TestingResultList[j].dateTesting;
+
+                        if ((DateTime.Now.Date - max.Date).TotalDays >= testCycle)
+                        {
+                            tempQuarantinePersonList.Add(tempPeopleList[i]);
+                        }
+                    }
+                }
+            }
+
+            //if (SearchKey1 != "" && SearchKey1 != null)
+                PeopleListView1 = tempQuarantinePersonList.ToArray();
+        }
+
+
+        void FilterPersonIsOnTestingDateToday2(DateTime SelectedDate)
+        {
+            int maxQuarantineDay = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().requiredDayToFinish;
+            int testCycle = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().testCycle;
+            var tempPeopleList = PeopleList1.ToArray();
+            var tempQuarantinePersonList = new ObservableCollection<QuarantinePerson>();
+            for (int i = 0; i < tempPeopleList.Length; i++)
+            {
+                var tempID = tempPeopleList[i].id;
+                var TestingResultList = new ObservableCollection<TestingResult>(DataProvider.ins.db.TestingResults.Where(x => x.quarantinePersonID == tempID));
+
+                // Nếu còn cách li
+                if ((SelectedDate - tempPeopleList[i].leaveDate.Date).TotalDays <= 0)
+                {
+                    // Ngày cuối cách ly
+                    if ((SelectedDate - tempPeopleList[i].leaveDate.Date).TotalDays == 0)
+                    {
+                        tempQuarantinePersonList.Add(tempPeopleList[i]);
+                    }
+                    // Chưa xét nghiệm lần nào
+                    else if (TestingResultList.ToArray().Length == 0)
+                    {
+                        if ((SelectedDate - tempPeopleList[i].arrivedDate.Date).TotalDays >= testCycle)
+                        {
+                            tempQuarantinePersonList.Add(tempPeopleList[i]);
+                        }
+
+
+                    }
+                    // Đã xét nghiệm
+                    else
+                    {
+                        DateTime max = TestingResultList[0].dateTesting;
+                        for (int j = 1; j < TestingResultList.ToArray().Length; j++)
+                            if ((max - TestingResultList[j].dateTesting).TotalDays < 0) max = TestingResultList[j].dateTesting;
+
+                        if ((DateTime.Now.Date - max.Date).TotalDays >= testCycle)
+                        {
+                            tempQuarantinePersonList.Add(tempPeopleList[i]);
+                        }
+                    }
+                }
+            }
+
+            //if (SearchKey1 != "" && SearchKey1 != null)
+                PeopleListView1 = tempQuarantinePersonList.ToArray();
         }
 
 

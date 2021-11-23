@@ -1385,12 +1385,11 @@ namespace QuanLyKhuCachLy.ViewModel
                     // Đã xét nghiệm
                     else
                     {
-                        TestingResultList.ToList().Sort((a, b) =>
-                        {
-                            return ((int)(b.dateTesting - a.dateTesting).TotalDays);
-                        });
+                        DateTime max = TestingResultList[0].dateTesting;
+                        for ( int j = 1; j < TestingResultList.ToArray().Length; j++)
+                            if ((max - TestingResultList[j].dateTesting).TotalDays < 0) max = TestingResultList[j].dateTesting;
 
-                        if ((DateTime.Now.Date - TestingResultList[0].dateTesting).TotalDays >= testCycle)
+                        if ((DateTime.Now.Date - max.Date).TotalDays >= testCycle)
                         {
                             tempQuarantinePersonList.Add(tempPeopleList[i]);
                         }
@@ -1398,7 +1397,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 }
             }
 
-            if (SearchKey != "" && SearchKey != null)
+            //if (SearchKey != "" && SearchKey != null)
             PeopleListView = tempQuarantinePersonList.ToArray();
         }
 
