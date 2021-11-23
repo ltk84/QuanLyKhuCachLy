@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace QuanLyKhuCachLy.ViewModel
 {
@@ -264,21 +265,52 @@ namespace QuanLyKhuCachLy.ViewModel
         // Hàm thực thi thêm người vào phòng trên database
         private void ConfirmAddPersonToRoom()
         {
-            foreach (var item in _QuarantinePersonsToAddByRoom)
+            try
             {
-                var room = DataProvider.ins.db.QuarantineRooms.Where(r => r.id == item.Key.id).FirstOrDefault();
-                if (room == null)
-                    return;
-                foreach(var p in item.Value)
+                foreach (var item in _QuarantinePersonsToAddByRoom)
                 {
-                    var person = DataProvider.ins.db.QuarantinePersons.Where(pe => pe.id == p.id).FirstOrDefault();
-                    if (person == null)
+                    var room = DataProvider.ins.db.QuarantineRooms.Where(r => r.id == item.Key.id).FirstOrDefault();
+                    if (room == null)
                         return;
-                    person.roomID = room.id;
+                    foreach (var p in item.Value)
+                    {
+                        var person = DataProvider.ins.db.QuarantinePersons.Where(pe => pe.id == p.id).FirstOrDefault();
+                        if (person == null)
+                            return;
+                        person.roomID = room.id;
+                    }
+                    DataProvider.ins.db.SaveChanges();
                 }
                 DataProvider.ins.db.SaveChanges();
             }
-            DataProvider.ins.db.SaveChanges();
+            catch
+            {
+                Window ErrorDialog = new Window
+                {
+                    AllowsTransparency = true,
+                    Background = Brushes.Transparent,
+                    Width = 600,
+                    Height = 400,
+                    ResizeMode = ResizeMode.NoResize,
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                    WindowStyle = WindowStyle.None,
+                    Content = new CustomUserControl.FailNotification()
+                };
+                ErrorDialog.ShowDialog();
+            }
+
+            Window SuccessDialog = new Window
+            {
+                AllowsTransparency = true,
+                Background = Brushes.Transparent,
+                Width = 600,
+                Height = 400,
+                ResizeMode = ResizeMode.NoResize,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                WindowStyle = WindowStyle.None,
+                Content = new CustomUserControl.SuccessNotification()
+            };
+            SuccessDialog.ShowDialog();
         }
     }
 }
