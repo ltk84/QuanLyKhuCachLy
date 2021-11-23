@@ -20,7 +20,7 @@
             <StackPanel Margin="32,0,32,32">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="450" />
+                        <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
                     <control:EditStaffFirstScreen Visibility="{Binding AddStaffTab1}" />
