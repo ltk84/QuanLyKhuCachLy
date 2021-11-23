@@ -30,6 +30,11 @@
                 <ResourceDictionary Source="/ResourceXAML/ConfirmationTemplate.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
+            <Style TargetType="ComboBoxItem">
+                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+            </Style>
+
             <DataTemplate DataType="{x:Type viewModel:DashboardViewModel}">
                 <userControl:Dashboard />
             </DataTemplate>

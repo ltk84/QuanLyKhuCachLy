@@ -111,6 +111,7 @@
                     Padding="10,8,8,10"
                     ItemsSource="{Binding FilterType}"
                     Style="{StaticResource ComboBoxField}">
+
                     <ComboBox.SelectedItem>
                         <Binding Path="SelectedFilterType" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules />
@@ -135,6 +136,7 @@
                     Padding="10,8,8,10"
                     ItemsSource="{Binding FilterProperty}"
                     Style="{StaticResource ComboBoxField}">
+
                     <ComboBox.SelectedItem>
                         <Binding Path="SelectedFilterProperty" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules />
