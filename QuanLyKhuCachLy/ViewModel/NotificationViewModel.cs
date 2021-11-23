@@ -29,6 +29,50 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #region SelectPeopleWindown
 
+
+        private string[] _ExperationType1;
+        public string[] ExperationType1
+        {
+            get => _ExperationType1; set
+            {
+                _ExperationType1 = value; OnPropertyChanged();
+            }
+        }
+
+
+        private string _ExperationProperty1;
+        public string ExperationProperty1
+        {
+            get => _ExperationProperty1; set
+            {
+                _ExperationProperty1 = value;
+                OnPropertyChanged();
+                ExperationPropertySelected1();
+            }
+        }
+
+        private string[] _ExperationType2;
+        public string[] ExperationType2
+        {
+            get => _ExperationType2; set
+            {
+                _ExperationType2 = value; OnPropertyChanged();
+            }
+        }
+
+
+        private string _ExperationProperty2;
+        public string ExperationProperty2
+        {
+            get => _ExperationProperty2; set
+            {
+                _ExperationProperty2 = value;
+                OnPropertyChanged();
+                ExperationPropertySelected2();
+            }
+        }
+
+
         private String _countReceiver;
         public string countReceiver
         {
@@ -606,9 +650,7 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 PeopleList2.Add(SelectedItem1);
                 PeopleList1.Remove(SelectedItem1);
-                PeopleListView1 = PeopleList1.ToArray();
-                PeopleListView2 = PeopleList2.ToArray();
-                countReceiver = "Danh sách nhận thông báo có " + PeopleListView2.ToArray().Length + " người";
+                InitFilter();
             });
 
             SelectAllPeople = new RelayCommand<object>((p) =>
@@ -633,9 +675,8 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 PeopleList1.Add(SelectedItem2);
                 PeopleList2.Remove(SelectedItem2);
-                PeopleListView1 = PeopleList1.ToArray();
-                PeopleListView2 = PeopleList2.ToArray();
-                countReceiver = "Danh sách nhận thông báo có " + PeopleListView2.ToArray().Length + " người";
+
+                InitFilter();
             });
 
             DeleteAllPeople = new RelayCommand<object>((p) =>
@@ -811,9 +852,15 @@ namespace QuanLyKhuCachLy.ViewModel
             SelectedFilterProperty2 = "Chọn phương thức lọc";
             getFilterProperty1();
             getFilterProperty2();
+
             PeopleListView1 = PeopleList1.ToArray();
             PeopleListView2 = PeopleList2.ToArray();
+
             countReceiver = "Danh sách nhận thông báo có " + PeopleListView2.ToArray().Length + " người";
+            ExperationType1 = new string[] { "Toàn bộ", "Người đang cách ly", "Hoàn thành cách ly" };
+            ExperationProperty1 = "Toàn bộ";
+            ExperationType2 = new string[] { "Toàn bộ", "Người đang cách ly", "Hoàn thành cách ly" };
+            ExperationProperty2 = "Toàn bộ";
 
         }
 
@@ -845,6 +892,62 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
+        void ExperationPropertySelected1()
+        {
+            var today = DateTime.Now.Date;
+            var temp = new ObservableCollection<QuarantinePerson>(PeopleList1);
+
+            if (ExperationProperty1 == "Người đang cách ly")
+            {
+                var tempPeopleArray = temp.ToArray();
+                for (int i = 0; i < tempPeopleArray.Length; i++)
+                {
+                    if ((today - tempPeopleArray[i].leaveDate).TotalDays > 0) temp.Remove(tempPeopleArray[i]);
+                }
+
+            }
+
+            else if (ExperationProperty1 == "Hoàn thành cách ly")
+            {
+                var tempPeopleArray = temp.ToArray();
+                for (int i = 0; i < tempPeopleArray.Length; i++)
+                {
+                    if ((today - tempPeopleArray[i].leaveDate).TotalDays <= 0) temp.Remove(tempPeopleArray[i]);
+                }
+            }
+            
+
+            PeopleListView1 = temp.ToArray();
+        }
+
+
+        void ExperationPropertySelected2()
+        {
+            var today = DateTime.Now.Date;
+            var temp = new ObservableCollection<QuarantinePerson>(PeopleList2);
+            if (ExperationProperty2 == "Người đang cách ly")
+            {
+                var tempPeopleArray = temp.ToArray();
+                for (int i = 0; i < tempPeopleArray.Length; i++)
+                {
+                    if ((today - tempPeopleArray[i].leaveDate).TotalDays > 0) temp.Remove(tempPeopleArray[i]);
+                }
+
+            }
+
+            else if (ExperationProperty2 == "Hoàn thành cách ly")
+            {
+                var tempPeopleArray = temp.ToArray();
+                for (int i = 0; i < tempPeopleArray.Length; i++)
+                {
+                    if ((today - tempPeopleArray[i].leaveDate).TotalDays <= 0) temp.Remove(tempPeopleArray[i]);
+                }
+            }
+
+            
+
+            PeopleListView2 = temp.ToArray();
+        }
 
         void SearchList2()
         {
