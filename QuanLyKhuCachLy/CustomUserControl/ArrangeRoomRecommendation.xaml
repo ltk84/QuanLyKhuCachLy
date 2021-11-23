@@ -47,9 +47,10 @@
                 <Grid Margin="55,25,55,0" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="4*" />
+                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="3*" />
                     </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="1">
+                    <Grid Grid.Column="2" Margin="15,0,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
@@ -177,9 +178,44 @@
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
+                    <StackPanel
+                        Grid.Column="1"
+                        Margin="0,0,0,100"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom">
+                        <TextBlock
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="10"
+                            Foreground="#FF434A54"
+                            TextWrapping="Wrap">
+                            Tất cả
+                        </TextBlock>
+                        <Button
+                            Width="24"
+                            Height="24"
+                            Margin="0,5,0,0"
+                            Command="{Binding AddAllPersonToRoomCommand, Source={StaticResource ArrangeRoomRecommendationVM}}"
+                            Style="{StaticResource DataGridButtonDelete}">
+                            <materialDesign:PackIcon
+                                Width="24"
+                                Height="24"
+                                Kind="ArrowLeftBoldBox" />
+                        </Button>
+                        <Button
+                            Width="24"
+                            Height="24"
+                            Margin="0,5,0,0"
+                            Command="{Binding RemoveAllPersonFromRoomCommand, Source={StaticResource ArrangeRoomRecommendationVM}}"
+                            Style="{StaticResource DataGridButtonDelete}">
+                            <materialDesign:PackIcon
+                                Width="24"
+                                Height="24"
+                                Kind="ArrowRightBoldBox" />
+                        </Button>
+                    </StackPanel>
                     <Grid
                         Grid.Column="0"
-                        Margin="0,0,32,0"
+                        Margin="0,0,15,0"
                         VerticalAlignment="Top">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />

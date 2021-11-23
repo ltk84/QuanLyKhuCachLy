@@ -91,6 +91,8 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand UpdatePersonsToAddToRoomCommand { get; set; }
         public ICommand AddPersonToRoomCommand { get; set; }
         public ICommand RemovePersonFromRoomCommand { get; set; }
+        public ICommand AddAllPersonToRoomCommand { get; set; }
+        public ICommand RemoveAllPersonFromRoomCommand { get; set; }
         public ICommand RefreshCommand { get; set; }
 
         #endregion
@@ -142,7 +144,31 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-                RemovePersonFromRoon(_QuarantinePersonsToAddByRoom[SelectedAvailableRoom], PersonsWithNoRoom, SelectedPersonToAddToRoom);
+                RemovePersonFromRoom(_QuarantinePersonsToAddByRoom[SelectedAvailableRoom], PersonsWithNoRoom, SelectedPersonToAddToRoom);
+                UpdateInfo();
+            });
+            AddAllPersonToRoomCommand = new RelayCommand<object>((p) => {
+                if (SelectedAvailableRoom == null || PersonsWithNoRoom == null)
+                    return false;
+                if (PersonsWithNoRoom.Count() > 0 && IsRoomAvailable(SelectedAvailableRoom, PersonsToAddToSelectedRoom))
+                    return true;
+                else
+                    return false;
+            }, (p) =>
+            {
+                AddManyPersonToRoom(SelectedAvailableRoom, _QuarantinePersonsToAddByRoom[SelectedAvailableRoom], PersonsWithNoRoom);
+                UpdateInfo();
+            });
+            RemoveAllPersonFromRoomCommand = new RelayCommand<object>((p) => {
+                if (SelectedAvailableRoom == null || _QuarantinePersonsToAddByRoom == null)
+                    return false;
+                if (_QuarantinePersonsToAddByRoom[SelectedAvailableRoom].Count() > 0)
+                    return true;
+                else
+                    return false;
+            }, (p) =>
+            {
+                RemoveManyPersonFromRoom(_QuarantinePersonsToAddByRoom[SelectedAvailableRoom], PersonsWithNoRoom);
                 UpdateInfo();
             });
             RefreshCommand = new RelayCommand<object>((p) =>
@@ -256,10 +282,35 @@ namespace QuanLyKhuCachLy.ViewModel
         }
 
         // Hàm xóa người ra khỏi danh sách sẽ thêm vào phòng
-        private void RemovePersonFromRoon(ObservableCollection<QuarantinePerson> personInRoomList, ObservableCollection<QuarantinePerson> personsWithNoRoom, QuarantinePerson person)
+        private void RemovePersonFromRoom(ObservableCollection<QuarantinePerson> personInRoomList, ObservableCollection<QuarantinePerson> personsWithNoRoom, QuarantinePerson person)
         {
             personsWithNoRoom.Add(person);
             personInRoomList.Remove(person);
+        }
+        
+        // Hàm thêm nhiều người vào danh sách sẽ thêm phòng
+        private void AddManyPersonToRoom(QuarantineRoom room, ObservableCollection<QuarantinePerson> personInRoomList, ObservableCollection<QuarantinePerson> personsWithNoRoom)
+        {
+            var TempPersonsWithNoRoom = new ObservableCollection<QuarantinePerson>(personsWithNoRoom);
+            foreach (var person in TempPersonsWithNoRoom)
+            {
+                if (IsRoomAvailable(room, personInRoomList))
+                {
+                    personInRoomList.Add(person);
+                    personsWithNoRoom.Remove(person);
+                }
+            }
+        }
+
+        // Hàm xóa nhiều người ra khỏi danh sách sẽ thêm vào phòng
+        private void RemoveManyPersonFromRoom(ObservableCollection<QuarantinePerson> personInRoomList, ObservableCollection<QuarantinePerson> personsWithNoRoom)
+        {
+            var TempPersonsInRoomList = new ObservableCollection<QuarantinePerson>(personInRoomList);
+            foreach (var person in TempPersonsInRoomList)
+            {
+                personsWithNoRoom.Add(person);
+                personInRoomList.Remove(person);
+            }
         }
 
         // Hàm thực thi thêm người vào phòng trên database

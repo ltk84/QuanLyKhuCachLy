@@ -36,8 +36,9 @@
                     Text="{Binding RoomDisplayName, StringFormat=Phòng {0}}" />
                 <Grid Margin="30,25,30,10">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition SharedSizeGroup="A" />
-                        <ColumnDefinition SharedSizeGroup="A" />
+                        <ColumnDefinition Width="*" SharedSizeGroup="A" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" SharedSizeGroup="A" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -134,7 +135,40 @@
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
-                    <StackPanel Grid.Row="0" Grid.Column="1">
+                    <StackPanel
+                        Grid.RowSpan="2"
+                        Grid.Column="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                        <TextBlock
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="10"
+                            Foreground="#FF434A54"
+                            TextWrapping="Wrap">
+                            Tất cả
+                        </TextBlock>
+                        <Button
+                            Width="24"
+                            Height="24"
+                            Margin="0,5,0,0"
+                            Style="{StaticResource DataGridButtonDelete}">
+                            <materialDesign:PackIcon
+                                Width="24"
+                                Height="24"
+                                Kind="ArrowLeftBoldBox" />
+                        </Button>
+                        <Button
+                            Width="24"
+                            Height="24"
+                            Margin="0,5,0,0"
+                            Style="{StaticResource DataGridButtonDelete}">
+                            <materialDesign:PackIcon
+                                Width="24"
+                                Height="24"
+                                Kind="ArrowRightBoldBox" />
+                        </Button>
+                    </StackPanel>
+                    <StackPanel Grid.Row="0" Grid.Column="2">
                         <Grid Margin="0,0,0,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition SharedSizeGroup="A" />
@@ -160,7 +194,7 @@
                     </StackPanel>
                     <Grid
                         Grid.Row="1"
-                        Grid.Column="1"
+                        Grid.Column="2"
                         Margin="0,0,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition SharedSizeGroup="A" />
