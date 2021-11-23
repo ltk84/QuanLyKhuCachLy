@@ -8,11 +8,12 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Name="AuthScreen"
-    Title="Authentication Screen"
+    Title="Xác thực người dùng"
     MinWidth="575"
     MinHeight="535"
     Background="#FF3D4466"
     DataContext="{StaticResource LoginVM}"
+    Icon="logo.ico"
     WindowStartupLocation="CenterScreen"
     WindowState="Maximized"
     mc:Ignorable="d">
