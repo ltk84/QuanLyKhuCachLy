@@ -18,11 +18,11 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="province" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="district" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="ward" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="streetName" Type="nvarchar" MaxLength="255" />
-          <Property Name="apartmentNumber" Type="nvarchar" MaxLength="255" />
+          <Property Name="province" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="district" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ward" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="streetName" Type="nvarchar" MaxLength="20" />
+          <Property Name="apartmentNumber" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="DestinationHistory">
           <Key>
@@ -107,7 +107,7 @@
           <Property Name="dateOfBirth" Type="date" Nullable="false" />
           <Property Name="sex" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="citizenID" Type="varchar" MaxLength="20" />
-          <Property Name="nationality" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="nationality" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="phoneNumber" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="levelID" Type="int" />
           <Property Name="arrivedDate" Type="date" Nullable="false" />
@@ -116,7 +116,7 @@
           <Property Name="addressID" Type="int" />
           <Property Name="roomID" Type="int" />
           <Property Name="completeQuarantine" Type="bit" />
-          <Property Name="healthInsuranceID" Type="nchar" MaxLength="20" />
+          <Property Name="healthInsuranceID" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="QuarantineRoom">
           <Key>
@@ -144,22 +144,12 @@
           <Property Name="dateOfBirth" Type="date" Nullable="false" />
           <Property Name="sex" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="citizenID" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="nationality" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="nationality" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="healthInsuranceID" Type="varchar" MaxLength="20" />
           <Property Name="phoneNumber" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="addressID" Type="int" Nullable="false" />
           <Property Name="jobTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="department" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="TestingResult">
           <Key>
@@ -178,7 +168,7 @@
           <Property Name="name" Type="nvarchar" MaxLength="255" />
           <Property Name="districtID" Type="int" />
         </EntityType>
-        <Association Name="FK__Destinati__addre__37A5467C">
+        <Association Name="FK__Destinati__addre__3F466844">
           <End Role="Address" Type="Self.Address" Multiplicity="1" />
           <End Role="DestinationHistory" Type="Self.DestinationHistory" Multiplicity="*" />
           <ReferentialConstraint>
@@ -371,10 +361,9 @@
           <EntitySet Name="QuarantineRoom" EntityType="Self.QuarantineRoom" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Severity" EntityType="Self.Severity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TestingResult" EntityType="Self.TestingResult" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WARD" EntityType="Self.WARD" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Destinati__addre__37A5467C" Association="Self.FK__Destinati__addre__37A5467C">
+          <AssociationSet Name="FK__Destinati__addre__3F466844" Association="Self.FK__Destinati__addre__3F466844">
             <End Role="Address" EntitySet="Address" />
             <End Role="DestinationHistory" EntitySet="DestinationHistory" />
           </AssociationSet>
@@ -449,12 +438,12 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="province" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="district" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ward" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="streetName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="apartmentNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="DestinationHistories" Relationship="Self.FK__Destinati__addre__37A5467C" FromRole="Address" ToRole="DestinationHistory" />
+          <Property Name="province" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="district" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ward" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="streetName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="apartmentNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DestinationHistories" Relationship="Self.FK__Destinati__addre__3F466844" FromRole="Address" ToRole="DestinationHistory" />
           <NavigationProperty Name="QuarantineAreas" Relationship="Self.FK__Quarantin__addre__3A81B327" FromRole="Address" ToRole="QuarantineArea" />
           <NavigationProperty Name="QuarantinePersons" Relationship="Self.FK__Quarantin__addre__3C69FB99" FromRole="Address" ToRole="QuarantinePerson" />
           <NavigationProperty Name="Staffs" Relationship="Self.FK__Staff__addressID__412EB0B6" FromRole="Address" ToRole="Staff" />
@@ -467,7 +456,7 @@
           <Property Name="dateArrive" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="quarantinePersonID" Type="Int32" Nullable="false" />
           <Property Name="addressID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Address" Relationship="Self.FK__Destinati__addre__37A5467C" FromRole="DestinationHistory" ToRole="Address" />
+          <NavigationProperty Name="Address" Relationship="Self.FK__Destinati__addre__3F466844" FromRole="DestinationHistory" ToRole="Address" />
           <NavigationProperty Name="QuarantinePerson" Relationship="Self.FK__Destinati__quara__38996AB5" FromRole="DestinationHistory" ToRole="QuarantinePerson" />
         </EntityType>
         <EntityType Name="DISTRICT">
@@ -551,7 +540,7 @@
           <Property Name="dateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="sex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="citizenID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="nationality" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nationality" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="phoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="levelID" Type="Int32" />
           <Property Name="arrivedDate" Type="DateTime" Nullable="false" Precision="0" />
@@ -560,7 +549,7 @@
           <Property Name="addressID" Type="Int32" />
           <Property Name="roomID" Type="Int32" />
           <Property Name="completeQuarantine" Type="Boolean" />
-          <Property Name="healthInsuranceID" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="healthInsuranceID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Address" Relationship="Self.FK__Quarantin__addre__3C69FB99" FromRole="QuarantinePerson" ToRole="Address" />
           <NavigationProperty Name="DestinationHistories" Relationship="Self.FK__Destinati__quara__38996AB5" FromRole="QuarantinePerson" ToRole="DestinationHistory" />
           <NavigationProperty Name="HealthInformations" Relationship="Self.FK_HealthInfor_Person" FromRole="QuarantinePerson" ToRole="HealthInformation" />
@@ -599,7 +588,7 @@
           <Property Name="dateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="sex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="citizenID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nationality" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nationality" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="healthInsuranceID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="phoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="addressID" Type="Int32" Nullable="false" />
@@ -607,16 +596,6 @@
           <Property Name="department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Address" Relationship="Self.FK__Staff__addressID__412EB0B6" FromRole="Staff" ToRole="Address" />
           <NavigationProperty Name="QuarantineAreas" Relationship="Self.FK_QuarantineArea_managerID" FromRole="Staff" ToRole="QuarantineArea" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TestingResult">
           <Key>
@@ -637,7 +616,7 @@
           <Property Name="districtID" Type="Int32" />
           <NavigationProperty Name="DISTRICT" Relationship="Self.FK_WARD_DISTRICT" FromRole="WARD" ToRole="DISTRICT" />
         </EntityType>
-        <Association Name="FK__Destinati__addre__37A5467C">
+        <Association Name="FK__Destinati__addre__3F466844">
           <End Role="Address" Type="Self.Address" Multiplicity="1" />
           <End Role="DestinationHistory" Type="Self.DestinationHistory" Multiplicity="*" />
           <ReferentialConstraint>
@@ -830,10 +809,9 @@
           <EntitySet Name="QuarantineRooms" EntityType="Self.QuarantineRoom" />
           <EntitySet Name="Severities" EntityType="Self.Severity" />
           <EntitySet Name="Staffs" EntityType="Self.Staff" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="TestingResults" EntityType="Self.TestingResult" />
           <EntitySet Name="WARDs" EntityType="Self.WARD" />
-          <AssociationSet Name="FK__Destinati__addre__37A5467C" Association="Self.FK__Destinati__addre__37A5467C">
+          <AssociationSet Name="FK__Destinati__addre__3F466844" Association="Self.FK__Destinati__addre__3F466844">
             <End Role="Address" EntitySet="Addresses" />
             <End Role="DestinationHistory" EntitySet="DestinationHistories" />
           </AssociationSet>
@@ -1053,17 +1031,6 @@
                 <ScalarProperty Name="addressID" ColumnName="addressID" />
                 <ScalarProperty Name="jobTitle" ColumnName="jobTitle" />
                 <ScalarProperty Name="department" ColumnName="department" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="QLKCLModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

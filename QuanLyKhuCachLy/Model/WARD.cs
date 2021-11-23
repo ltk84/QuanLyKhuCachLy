@@ -11,13 +11,13 @@ namespace QuanLyKhuCachLy.Model
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class WARD
     {
         public long id { get; set; }
         public string name { get; set; }
         public Nullable<int> districtID { get; set; }
-    
+
         public virtual DISTRICT DISTRICT { get; set; }
     }
 }
