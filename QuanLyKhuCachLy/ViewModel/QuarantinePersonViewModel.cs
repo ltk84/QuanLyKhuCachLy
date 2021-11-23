@@ -748,6 +748,7 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand RefeshCommand { get; set; }
 
         public ICommand ToExportExcel { get; set; }
+        public ICommand ToAddTestingResutlFromExcel { get; set; }
 
         #endregion
 
@@ -901,7 +902,13 @@ namespace QuanLyKhuCachLy.ViewModel
                 ExportExcel();
             });
 
-
+            ToAddTestingResutlFromExcel = new RelayCommand<Window>((p) =>
+            {
+                return true;
+            },  (p) =>
+            {
+                 AddTestingResutlFromExcel();
+            });
             ToInportFormGoogleSheet = new RelayCommand<Window>((p) =>
             {
                 return true;
@@ -2474,6 +2481,147 @@ namespace QuanLyKhuCachLy.ViewModel
                 sheet.Range["N" + i.ToString()].Value = PeopleListView[i - 2].roomID != null?room.displayName:"";
                 sheet.Range["O" + i.ToString()].Value = PeopleListView[i - 2].completeQuarantine== true ? "X":"";
                 sheet.Range["P" + i.ToString()].Value = countInjectionRecord;
+            }
+        }
+
+        async void AddTestingResutlFromExcel()
+        {
+            string path = "";
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = false;
+            openFileDialog.Filter = "Excel files (*.xlsx;*.xlsm;*xls)|*.xlsx;*.xlsm;*xls|All files (*.*)|*.*";
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            if (openFileDialog.ShowDialog() == true)
+                path = openFileDialog.FileName;
+            else
+                return;
+            LoadingIndicator loadingIndicator = new LoadingIndicator();
+            Task task = AddTestingResutlFromExcelAsync(loadingIndicator, path);
+            loadingIndicator.ShowDialog();
+            await task;
+        }
+        async Task AddTestingResutlFromExcelAsync(LoadingIndicator loadingIndicator, string path)
+        {
+            bool isSuccess = false;
+            await Task.Run(() =>
+            {
+                List<TestingResult> listTestingResults = new List<TestingResult>();
+                Excel.Application xlApp = new Excel.Application();
+                Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(path);
+                Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
+                Excel.Range xlRange = xlWorksheet.UsedRange;
+                int rowCount = xlRange.Rows.Count;
+                int colCount = xlRange.Columns.Count;
+                if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2 != "ID" ||
+                xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2 != "Kết quả" ||
+                xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2 != "Ngày xét nghiệm")
+                {
+                    MessageBox.Show("Không đúng định dạng file");
+                    return;
+                }
+                for (int i = 2; i <= rowCount; i++)
+                {
+                    TestingResult testingResult = new TestingResult();
+                    if (xlRange.Cells[i, 1] != null && xlRange.Cells[i, 1].Value2 != null)
+                    {
+                        testingResult.quarantinePersonID = Int32.Parse(xlRange.Cells[i, 1].Value2.ToString());
+                    }
+                    else
+                    {
+                        MessageBox.Show("id error");
+                        return;
+                    }
+                    if (xlRange.Cells[i, 2] != null && xlRange.Cells[i, 2].Value2 != null)
+                    {
+                        testingResult.isPositive = (xlRange.Cells[i, 2].Value2.ToString() == "âm tính"
+                            || xlRange.Cells[i, 1].Value2.ToString() == "Âm tính") ? false : true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("result error");
+                        return;
+                    }
+                    if (xlRange.Cells[i, 3] != null && xlRange.Cells[i, 3].Value2 != null)
+                    {
+                        DateTime date = DateTime.FromOADate(double.Parse(xlRange.Cells[i, 3].Value2.ToString()));
+                        testingResult.dateTesting = date;
+                    }
+                    else
+                    {
+                        MessageBox.Show("date error");
+                        return;
+                    }
+                    listTestingResults.Add(testingResult);
+                }
+                using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        for (int i=0;i<listTestingResults.Count;i++)
+                        {
+                            DataProvider.ins.db.TestingResults.Add(listTestingResults[i]);
+                        }
+                        DataProvider.ins.db.SaveChanges();
+                        transaction.Commit();
+                        //MessageBox.Show("Đã thêm từ file excel");
+                        isSuccess = true;
+
+                        //DashboardViewModel.ins.Init();
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (DbEntityValidationException e)
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (NotSupportedException e)
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (ObjectDisposedException e)
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (InvalidOperationException e)
+                    {
+                        transaction.Rollback();
+                    }
+                }
+            });
+            loadingIndicator.Close();
+            if (isSuccess)
+            {
+
+                Window SuccessDialog = new Window
+                {
+                    AllowsTransparency = true,
+                    Background = Brushes.Transparent,
+                    Width = 600,
+                    Height = 400,
+                    ResizeMode = ResizeMode.NoResize,
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                    WindowStyle = WindowStyle.None,
+                    Content = new SuccessNotification()
+                };
+                SuccessDialog.ShowDialog();
+            }
+            else
+            {
+
+                Window ErrorDialog = new Window
+                {
+                    AllowsTransparency = true,
+                    Background = Brushes.Transparent,
+                    Width = 600,
+                    Height = 400,
+                    ResizeMode = ResizeMode.NoResize,
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                    WindowStyle = WindowStyle.None,
+                    Content = new FailNotification()
+                };
+                ErrorDialog.ShowDialog();
             }
         }
         #endregion
