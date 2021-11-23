@@ -2402,7 +2402,11 @@ namespace QuanLyKhuCachLy.ViewModel
             app.Visible = true;
             app.WindowState = Microsoft.Office.Interop.Excel.XlWindowState.xlMaximized;
             Microsoft.Office.Interop.Excel.Workbook file = app.Workbooks.Add(Microsoft.Office.Interop.Excel.XlWBATemplate.xlWBATWorksheet);
+            file.Sheets.Add();
             Microsoft.Office.Interop.Excel.Worksheet sheet = file.Worksheets[1];
+            Microsoft.Office.Interop.Excel.Worksheet sheet2 = file.Worksheets[2];
+            sheet2.Name = "DS ID";
+            sheet.Name = "Danh sách người cách ly";
             sheet.Columns[1].ColumnWidth = 5;
             sheet.Columns[2].ColumnWidth = 25;
             sheet.Columns[3].ColumnWidth = 12;
@@ -2419,6 +2423,12 @@ namespace QuanLyKhuCachLy.ViewModel
             sheet.Columns[14].ColumnWidth = 7;
             sheet.Columns[15].ColumnWidth = 15;
             sheet.Columns[16].ColumnWidth = 15;
+            sheet2.Columns[1].ColumnWidth = 10;
+            sheet2.Columns[2].ColumnWidth = 10;
+            sheet2.Columns[3].ColumnWidth = 15;
+            sheet2.Range["A1"].Value = "ID";
+            sheet2.Range["B1"].Value = "Kết quả";
+            sheet2.Range["C1"].Value = "Ngày xét nghiệm";
             sheet.Range["A1"].Value = "STT";
             sheet.Range["B1"].Value = "Họ và tên";
             sheet.Range["C1"].Value = "Ngày sinh";
@@ -2481,6 +2491,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 sheet.Range["N" + i.ToString()].Value = PeopleListView[i - 2].roomID != null?room.displayName:"";
                 sheet.Range["O" + i.ToString()].Value = PeopleListView[i - 2].completeQuarantine== true ? "X":"";
                 sheet.Range["P" + i.ToString()].Value = countInjectionRecord;
+                sheet2.Range["A" + i.ToString()].Value = PeopleListView[i - 2].id;
             }
         }
 
