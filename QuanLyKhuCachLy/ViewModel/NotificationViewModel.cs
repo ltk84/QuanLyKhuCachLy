@@ -7,6 +7,9 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
+using Twilio.Types;
 
 namespace QuanLyKhuCachLy.ViewModel
 {
@@ -563,7 +566,8 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand SendNotification { get; set; }
 
 
-        public NotificationViewModel() {
+        public NotificationViewModel()
+        {
 
             fullyMessage = "";
             TemplateList = new ObservableCollection<NotificationTemplate>(DataProvider.ins.db.NotificationTemplates);
@@ -577,7 +581,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             countReceiver = "Danh sách nhận thông báo có " + PeopleList2.ToArray().Length + " người";
 
-            message = title = content ="";
+            message = title = content = "";
             textBtnTitle = PeopleList2.ToArray().Length > 0 ? "Xem danh sách người nhận thông báo (" + PeopleList2.ToArray().Length + ')' : "Chọn danh sách người nhận thông báo";
 
 
@@ -756,7 +760,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             CancelAddTemplate = new RelayCommand<object>((p) =>
             {
-             
+
                 return true;
             }, (p) =>
             {
@@ -770,10 +774,10 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-                
+
                 title = content = "";
                 editTemplateWindown.Close();
-                
+
 
             });
 
@@ -837,7 +841,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 }
 
                 PeopleListView1 = temp.Where((val, index) => Value[index].ToUpper().Contains(SearchKey1.ToUpper())).ToArray();
-                
+
             }
         }
 
@@ -1044,9 +1048,9 @@ namespace QuanLyKhuCachLy.ViewModel
             var PersonSeverity = DataProvider.ins.db.Severities.Where(x => x.id == Person.levelID).FirstOrDefault();
             var PersonRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == Person.roomID).FirstOrDefault();
 
-            
 
-            
+
+
 
             QPName = Person.name;
             QPSelectedSex = Person.sex;
@@ -1108,7 +1112,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #region methodAddEdit
 
-        
+
         void DeleteTemplate()
         {
             using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
@@ -1286,7 +1290,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             if (selectedTemplate == null)
             {
-                fullyMessage = "Chao a/c " + "{Tên người nhận}" + ", day la thong bao den tu ban quan ly cua khu cach ly " + QAName  + ". " + message + "Xin cam on";
+                fullyMessage = "Chao a/c " + "{Tên người nhận}" + ", day la thong bao den tu ban quan ly cua khu cach ly " + QAName + ". " + message + "Xin cam on";
             }
             else
             {
@@ -1304,64 +1308,126 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             for (int i = 0; i < PeopleList2.ToArray().Length; i++)
             {
+                var messageContent = "";
                 if (selectedTemplate == null)
                 {
-                    SendMessageToPerson(PeopleList2[i]);
+                    messageContent = SendMessageToPerson(PeopleList2[i]);
                 }
                 else
                 {
-                    if (selectedTemplate.id == 1) StartIntroduction(PeopleList2[i]);
-                    else if (selectedTemplate.id == 2) EndIntroduction(PeopleList2[i]);
-                    else if (selectedTemplate.id == 3) TestingNotification(PeopleList2[i]);
-                    else if (selectedTemplate.id == 4) ChangeRoomNotification(PeopleList2[i]);
+                    if (selectedTemplate.id == 1)
+                    {
+                        messageContent = StartIntroduction(PeopleList2[i]);
+                    }
+                    else if (selectedTemplate.id == 2)
+                    {
+                        messageContent = EndIntroduction(PeopleList2[i]);
+                    }
+                    else if (selectedTemplate.id == 3)
+                    {
+                        messageContent = TestingNotification(PeopleList2[i]);
+                    }
+                    else if (selectedTemplate.id == 4)
+                    {
+                        messageContent = ChangeRoomNotification(PeopleList2[i]);
+                    }
+                    else messageContent = SendMessageToPerson(PeopleList2[i]);
+
+
+
+
+
+
                 }
+
+
+                if (PeopleList2[i].phoneNumber != "" && PeopleList2[i] != null)
+                {
+                    sendMessageWithTwillo(messageContent, fomatPhoneNumber(PeopleList2[i].phoneNumber));
+
+                }
+
             }
-               
-            
+
+            MessageBox.Show("Gửi thông báo thành công!");
+            // Reset nè
+            PeopleList2 = new ObservableCollection<QuarantinePerson>();
+
+
+        }
+
+        string fomatPhoneNumber(string phoneNumber)
+        {
+            phoneNumber = phoneNumber.Replace(" ", String.Empty);
+            phoneNumber = phoneNumber.Remove(0, 1);
+            phoneNumber = "+84" + phoneNumber;
+            return phoneNumber;
+        }
+
+        void sendMessageWithTwillo(string messageContent, string phoneNumber)
+        {
+            try
+            {
+                var accountSid = "AC9cb120d0ee9f5196f765af6db11ce3dd";
+                var authToken = "bc71a9857ca07babd055e845b0eeef2c";
+                TwilioClient.Init(accountSid, authToken);
+
+                var messageOptions = new CreateMessageOptions(
+                   new PhoneNumber(phoneNumber));
+                messageOptions.MessagingServiceSid = "MG9ba537e9324fff8eeac2f4eeb109d1f0";
+                messageOptions.Body = messageContent;
+
+                var message = MessageResource.Create(messageOptions);
+                MessageBox.Show(message.Body);
+            }
+            catch
+            {
+                MessageBox.Show("Loi roi");
+            }
         }
 
 
-        void SendMessageToPerson(QuarantinePerson person)
+        string SendMessageToPerson(QuarantinePerson person)
         {
 
             var QAName = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().name;
             string CombinedMessage = "Chao a/c " + person.name + ", day la thong bao den tu ban quan ly cua khu cach ly " + QAName + ". " + message + "Xin cam on";
-            MessageBox.Show(CombinedMessage);
+            return CombinedMessage;
         }
 
-        void ChangeRoomNotification(QuarantinePerson person)
+        string ChangeRoomNotification(QuarantinePerson person)
         {
             var DestinationRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == person.roomID).FirstOrDefault();
             var QAName = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().name;
-            string CombinedMessage = "Chao a/c " + person.name + ", day la thong bao den tu ban quan ly cua khu cach ly " + QAName + ". " + message + "Ban se duoc chuyen toi phong " + DestinationRoom.displayName + " voi suc chua " + DestinationRoom.capacity + " nguoi" + "Xin cam on";
-            MessageBox.Show(CombinedMessage);
+            string CombinedMessage = "Chao a/c " + person.name + ", day la thong bao den tu ban quan ly cua khu cach ly " + QAName + ". " + message + "Ban se duoc chuyen toi phong " + DestinationRoom?.displayName + " voi suc chua " + DestinationRoom?.capacity + " nguoi" + "Xin cam on";
+            return CombinedMessage;
         }
 
 
-        void TestingNotification(QuarantinePerson person)
+        string TestingNotification(QuarantinePerson person)
         {
             var DestinationRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == person.roomID).FirstOrDefault();
             var QAName = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().name;
-            string CombinedMessage = "Chao a/c " + person.name + ", day la thong bao den tu ban quan ly cua khu cach ly " + QAName + ". " + message + "Ban se duoc chuyen toi phong " + DestinationRoom.displayName + " voi suc chua " + DestinationRoom.capacity + " nguoi" + "Xin cam on";
-            MessageBox.Show(CombinedMessage);
+            string CombinedMessage = "Chao a/c " + person.name + ", day la thong bao den tu ban quan ly cua khu cach ly " + QAName + ". " + message  + "Xin cam on";
+            return CombinedMessage;
         }
 
 
-        void StartIntroduction(QuarantinePerson person)
+        string StartIntroduction(QuarantinePerson person)
         {
             var DestinationRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == person.roomID).FirstOrDefault();
             var QAName = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().name;
-            string CombinedMessage = "Chao a/c " + person.name + ", day la thong bao den tu ban quan ly cua khu cach ly " + QAName + ". " + message + "Ban se duoc chuyen toi phong " + DestinationRoom.displayName + " voi suc chua " + DestinationRoom.capacity + " nguoi" + "Xin cam on";
-            MessageBox.Show(CombinedMessage);
+            string CombinedMessage = "Chao a/c " + person.name + ", day la thong bao den tu ban quan ly cua khu cach ly " + QAName + ". " + message + "Xin cam on";
+            return CombinedMessage;
         }
 
 
-        void EndIntroduction(QuarantinePerson person)
+        string EndIntroduction(QuarantinePerson person)
         {
             var DestinationRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == person.roomID).FirstOrDefault();
             var QAName = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().name;
-            string CombinedMessage = "Chao a/c " + person.name + ", day la thong bao den tu ban quan ly cua khu cach ly " + QAName + ". " + message + "Ban se duoc chuyen toi phong " + DestinationRoom.displayName + " voi suc chua " + DestinationRoom.capacity + " nguoi" + "Xin cam on";
-            MessageBox.Show(CombinedMessage);
+            string CombinedMessage = "Chao a/c " + person.name + ", day la thong bao den tu ban quan ly cua khu cach ly " + QAName + ". " + message  + "Xin cam on";
+            return CombinedMessage;
         }
 
     }
