@@ -113,6 +113,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 _SelectedFilterProperty = value;
                 OnPropertyChanged();
                 SelectFilterProperty();
+                SearchKey = "";
             }
         }
 
@@ -1274,18 +1275,14 @@ namespace QuanLyKhuCachLy.ViewModel
         void SearchWithKey()
         {
 
-            //SelectedFilterType = "Tất cả";
+            
             if (SearchKey == "" || SearchKey == null)
             {
-                PeopleListView = QuarantinePersonList.ToArray();
-
             }
-
             else
             {
-                
 
-                PeopleListView = QuarantinePersonList.ToArray();
+                SelectFilterProperty();
                 String[] Value = new string[PeopleListView.Length];
 
                 for (int i = 0; i < PeopleListView.Length; i++)
@@ -1304,12 +1301,13 @@ namespace QuanLyKhuCachLy.ViewModel
 
         void getFilterProperty()
         {
-            SelectedFilterProperty = "Tất cả";
+            SelectedFilterProperty = "";
+            SearchKey = "";
 
             //FilterProperty = DataProvider.ins.db.Staffs.Select(staff => staff.GetType().GetProperty(SelectedFilterType)).Distinct();
             if (SelectedFilterType == "Tất cả")
             {
-
+                FilterProperty = new string[] { };
             }
             else if (SelectedFilterType == "Giới tính")
             {
@@ -1405,11 +1403,9 @@ namespace QuanLyKhuCachLy.ViewModel
 
         void SelectFilterProperty()
         {
-            SearchWithKey();
-            if (SelectedFilterType == "Tất cả")
-            {
-            }
-            else if (SelectedFilterType == "Giới tính")
+            PeopleListView = QuarantinePersonList.ToArray();
+            if (SelectedFilterProperty == "" || SelectedFilterProperty == null || SelectedFilterProperty == "Tất cả") return;
+            if (SelectedFilterType == "Giới tính")
             {
                 PeopleListView = QuarantinePersonList.Where(x => x.sex == SelectedFilterProperty).ToArray();
             }
@@ -1443,7 +1439,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     FilterPersonIsOnTestingDateToday(DateTime.Now.Date);
                 }
-                else if(SelectedFilterProperty == "Hôm qua")
+                else if (SelectedFilterProperty == "Hôm qua")
                 {
                     FilterPersonIsOnTestingDateToday(DateTime.Today.AddDays(-1).Date);
 
