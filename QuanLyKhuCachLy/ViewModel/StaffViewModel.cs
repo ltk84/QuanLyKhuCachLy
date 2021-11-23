@@ -15,6 +15,7 @@ using System.IO;
 using Microsoft.Win32;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Windows.Media;
+using System.Data.Entity;
 
 namespace QuanLyKhuCachLy.ViewModel
 {
@@ -862,6 +863,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     StaffList.Add(NewStaff);
                     StaffListView = StaffList.ToArray();
+                    RollBackChange();
 
                     transaction.Commit();
                 }
@@ -869,6 +871,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db update";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -876,6 +879,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi validation";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -883,6 +887,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db đéo support";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -890,6 +895,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db object disposed";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -897,6 +903,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi invalid operation";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -941,6 +948,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db update";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -948,6 +956,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi validation";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -955,6 +964,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db đéo support";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -962,6 +972,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db object disposed";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -969,6 +980,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi invalid operation";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -996,6 +1008,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db update";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -1003,6 +1016,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi validation";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -1010,6 +1024,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db đéo support";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -1017,6 +1032,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db object disposed";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -1024,6 +1040,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi invalid operation";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -1053,6 +1070,13 @@ namespace QuanLyKhuCachLy.ViewModel
 
 
             InitDisplayAddress(StaffAdress);
+        }
+
+        void RollBackChange()
+        {
+            DataProvider.ins.db.ChangeTracker.Entries().Where(ex => ex.Entity != null).ToList().ForEach(ex => ex.State = EntityState.Detached);
+            StaffList = new ObservableCollection<Staff>(DataProvider.ins.db.Staffs);
+            if (SelectedItem != null) SelectedItem = StaffList.Where(x => x.id == SelectedItem.id).FirstOrDefault();
         }
 
 
@@ -1303,22 +1327,32 @@ namespace QuanLyKhuCachLy.ViewModel
                     catch (DbUpdateException e)
                     {
                         transaction.Rollback();
+                        RollBackChange();
+
                     }
                     catch (DbEntityValidationException e)
                     {
                         transaction.Rollback();
+                        RollBackChange();
+
                     }
                     catch (NotSupportedException e)
                     {
                         transaction.Rollback();
+                        RollBackChange();
+
                     }
                     catch (ObjectDisposedException e)
                     {
                         transaction.Rollback();
+                        RollBackChange();
+
                     }
                     catch (InvalidOperationException e)
                     {
                         transaction.Rollback();
+                        RollBackChange();
+
                     }
                 }
                 StaffListView = new ObservableCollection<Model.Staff>(DataProvider.ins.db.Staffs).ToArray();

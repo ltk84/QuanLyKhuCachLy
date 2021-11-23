@@ -234,6 +234,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db update";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -241,6 +242,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi validation";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -248,6 +250,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db đéo support";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -255,6 +258,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db object disposed";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -262,6 +266,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi invalid operation";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -359,6 +364,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db update";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -366,6 +372,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi validation";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -373,6 +380,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db đéo support";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -380,6 +388,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db object disposed";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -387,6 +396,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi invalid operation";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -417,6 +427,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db update";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -424,6 +435,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi validation";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -431,6 +443,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db đéo support";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -438,6 +451,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db object disposed";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -445,6 +459,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi invalid operation";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -486,6 +501,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db update";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -493,6 +509,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi validation";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -500,6 +517,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db đéo support";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -507,6 +525,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db object disposed";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -514,6 +533,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi invalid operation";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -544,6 +564,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db update";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -551,6 +572,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi validation";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -558,6 +580,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db đéo support";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -565,6 +588,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db object disposed";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -572,6 +596,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi invalid operation";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -601,6 +626,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db update";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -608,6 +634,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi validation";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -615,6 +642,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db đéo support";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -622,6 +650,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db object disposed";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -629,6 +658,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi invalid operation";
+                    RollbackTransaction();
 
                     MessageBox.Show(error);
                 }
@@ -666,6 +696,7 @@ namespace QuanLyKhuCachLy.ViewModel
             DataProvider.ins.db.ChangeTracker.Entries().Where(e => e.Entity != null).ToList().ForEach(e => e.State = EntityState.Detached);
             QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == RoomID));
             InitPersonNotRoomList();
+            if (SelectedItem != null) SelectedItem = QuarantinePersonList.Where(x => x.id == SelectedItem.id).FirstOrDefault();
         }
 
         void InitPersonNotRoomList() => PersonNotRoomList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == null && x.completeQuarantine != true));

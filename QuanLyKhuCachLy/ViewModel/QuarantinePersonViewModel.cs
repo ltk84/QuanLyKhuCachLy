@@ -20,6 +20,8 @@ using Google.Apis.Sheets.v4.Data;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using System.Threading;
+using System.Data.Entity;
+
 namespace QuanLyKhuCachLy.ViewModel
 {
     public class QuarantinePersonViewModel : BaseViewModel
@@ -1576,22 +1578,28 @@ namespace QuanLyKhuCachLy.ViewModel
                     catch (DbUpdateException e)
                     {
                         transaction.Rollback();
+                        RollBackChange();
+
                     }
                     catch (DbEntityValidationException e)
                     {
                         transaction.Rollback();
+                        RollBackChange();
                     }
                     catch (NotSupportedException e)
                     {
                         transaction.Rollback();
+                        RollBackChange();
                     }
                     catch (ObjectDisposedException e)
                     {
                         transaction.Rollback();
+                        RollBackChange();
                     }
                     catch (InvalidOperationException e)
                     {
                         transaction.Rollback();
+                        RollBackChange();
                     }
                 }
             });
@@ -1718,16 +1726,16 @@ namespace QuanLyKhuCachLy.ViewModel
             QPHealthInsuranceID = Person.healthInsuranceID;
             QPSelectedLevel = PersonSeverity;
 
-            SelectedItem.name = Person.name;
-            SelectedItem.sex = Person.sex;
-            SelectedItem.dateOfBirth = Person.dateOfBirth;
-            SelectedItem.citizenID = Person.citizenID;
-            SelectedItem.nationality = Person.nationality;
-            SelectedItem.phoneNumber = Person.phoneNumber;
-            SelectedItem.healthInsuranceID = Person.healthInsuranceID;
-            if (PersonSeverity != null) SelectedItem.levelID = PersonSeverity.id;
-            SelectedItem.arrivedDate = Person.arrivedDate;
-            SelectedItem.leaveDate = Person.leaveDate;
+            //SelectedItem.name = Person.name;
+            //SelectedItem.sex = Person.sex;
+            //SelectedItem.dateOfBirth = Person.dateOfBirth;
+            //SelectedItem.citizenID = Person.citizenID;
+            //SelectedItem.nationality = Person.nationality;
+            //SelectedItem.phoneNumber = Person.phoneNumber;
+            //SelectedItem.healthInsuranceID = Person.healthInsuranceID;
+            //if (PersonSeverity != null) SelectedItem.levelID = PersonSeverity.id;
+            //SelectedItem.arrivedDate = Person.arrivedDate;
+            //SelectedItem.leaveDate = Person.leaveDate;
             Room = PersonRoom;
             InitDisplayAddress(PersonAddress);
             InitDisplayHealthInformation(HealthInfor);
@@ -1844,12 +1852,18 @@ namespace QuanLyKhuCachLy.ViewModel
                     transaction.Rollback();
                     string error = "Lỗi db update";
 
+                    RollBackChange();
+
                     MessageBox.Show(error);
+
+
                 }
                 catch (DbEntityValidationException e)
                 {
                     transaction.Rollback();
                     string error = "Lỗi validation";
+
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -1857,6 +1871,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db đéo support";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -1864,6 +1879,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db object disposed";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -1871,6 +1887,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi invalid operation";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -1946,6 +1963,8 @@ namespace QuanLyKhuCachLy.ViewModel
                     Person.phoneNumber = QPPhoneNumber;
                     Person.healthInsuranceID = QPHealthInsuranceID;
 
+                    DataProvider.ins.db.SaveChanges();
+
                     if (QPSelectedLevel != null) Person.levelID = QPSelectedLevel.id;
 
                     DataProvider.ins.db.SaveChanges();
@@ -1962,13 +1981,14 @@ namespace QuanLyKhuCachLy.ViewModel
                     QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
                     PeopleListView = QuarantinePersonList.ToArray();
 
-                    //SelectedItem = Person;
+                    SelectedItem = Person;
 
                 }
                 catch (DbUpdateException e)
                 {
                     transaction.Rollback();
                     string error = "Lỗi db update";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -1976,6 +1996,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi validation";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -1983,6 +2004,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db đéo support";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -1990,6 +2012,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db object disposed";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -1997,6 +2020,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi invalid operation";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -2026,6 +2050,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db update";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -2033,6 +2058,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi validation";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -2040,6 +2066,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db đéo support";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -2047,6 +2074,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi db object disposed";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
@@ -2054,10 +2082,18 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     transaction.Rollback();
                     string error = "Lỗi invalid operation";
+                    RollBackChange();
 
                     MessageBox.Show(error);
                 }
             }
+        }
+
+        void RollBackChange()
+        {
+            DataProvider.ins.db.ChangeTracker.Entries().Where(ex => ex.Entity != null).ToList().ForEach(ex => ex.State = EntityState.Detached);
+            QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
+            if (SelectedItem != null) SelectedItem = QuarantinePersonList.Where(x => x.id == SelectedItem.id).FirstOrDefault();
         }
 
         void HandleChangeTab(int index, string action, Window p)
@@ -2376,6 +2412,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     {
                         transaction.Rollback();
                         string error = "Lỗi db update";
+                        RollBackChange();
 
                         MessageBox.Show(error);
                     }
@@ -2383,6 +2420,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     {
                         transaction.Rollback();
                         string error = "Lỗi validation";
+                        RollBackChange();
 
                         MessageBox.Show(error);
                     }
@@ -2390,6 +2428,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     {
                         transaction.Rollback();
                         string error = "Lỗi db đéo support";
+                        RollBackChange();
 
                         MessageBox.Show(error);
                     }
@@ -2397,6 +2436,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     {
                         transaction.Rollback();
                         string error = "Lỗi db object disposed";
+                        RollBackChange();
 
                         MessageBox.Show(error);
                     }
@@ -2404,6 +2444,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     {
                         transaction.Rollback();
                         string error = "Lỗi invalid operation";
+                        RollBackChange();
 
                         MessageBox.Show(error);
                     }
