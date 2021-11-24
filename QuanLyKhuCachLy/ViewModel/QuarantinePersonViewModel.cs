@@ -2179,13 +2179,14 @@ namespace QuanLyKhuCachLy.ViewModel
             List<Address> listAdress = new List<Address>();
             List<QuarantinePerson> listQuarantinePerson = new List<QuarantinePerson>();
             List<HealthInformation> listHealthInformation = new List<HealthInformation>();
+            List<List<InjectionRecord>> listInjectionRecords = new List<List<InjectionRecord>>();
             int rowCount = values.Count();
             if (values != null && values.Count > 0)
             {
               
                 for (int i = 1; i < rowCount; i++)
                 {
-                    
+                    List<InjectionRecord> injectionRecords = new List<InjectionRecord>();
                     Address personAddress = new Address();
                     QuarantinePerson quarantinePerson = new QuarantinePerson();
                     HealthInformation healthInformation = new HealthInformation();
@@ -2300,9 +2301,36 @@ namespace QuanLyKhuCachLy.ViewModel
                         quarantinePerson.arrivedDate = arrivedTime;
                         
                     }
+                    if (values[i][12] != null)
+                    {
+                        DateTime arrivedTime = Convert.ToDateTime(values[i][12].ToString());
+                        quarantinePerson.arrivedDate = arrivedTime;
+
+                    }
+                    if (values[i][13].ToString() != "Chưa tiêm")
+                    {
+                        var records = values[i][13].ToString().Split(',');
+                        for (int j= 0; j < records.Length; j++)
+                        {
+                            InjectionRecord rc = new InjectionRecord();
+                            var str = records[j].Split(' ');
+                            DateTime date = Convert.ToDateTime(str[0].ToString());
+                            string vaccine = str[1].ToString();
+                            rc.dateInjection = date;
+                            rc.vaccineName = vaccine;
+                            injectionRecords.Add(rc);
+                        }
+                    }
+                    else
+                    {
+                        InjectionRecord rc = new InjectionRecord();
+                        rc.vaccineName = "Không có nhá";
+                        injectionRecords.Add(rc);
+                    }
                     listAdress.Add(personAddress);
                     listHealthInformation.Add(healthInformation);
                     listQuarantinePerson.Add(quarantinePerson);
+                    listInjectionRecords.Add(injectionRecords);
                 }
                 using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
                 {
@@ -2314,6 +2342,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                         for (int i = 0; i < listQuarantinePerson.Count; i++)
                         {
+                     
                             DataProvider.ins.db.Addresses.Add(listAdress[i]);
                             DataProvider.ins.db.SaveChanges();
                             listQuarantinePerson[i].leaveDate = listQuarantinePerson[i].arrivedDate.AddDays(QAInformation.requiredDayToFinish);
@@ -2324,8 +2353,17 @@ namespace QuanLyKhuCachLy.ViewModel
                             listHealthInformation[i].quarantinePersonID = listQuarantinePerson[i].id;
                             DataProvider.ins.db.HealthInformations.Add(listHealthInformation[i]);
                             DataProvider.ins.db.SaveChanges();
-
-                            
+                            if(listInjectionRecords[i][0].vaccineName != "Không có nhá")
+                            {
+                                for (int j = 0; j < listInjectionRecords[i].Count; j++)
+                                {
+                                    listInjectionRecords[i][j].quarantinePersonID = listQuarantinePerson[i].id;
+                                    DataProvider.ins.db.InjectionRecords.Add(listInjectionRecords[i][j]);
+                                    DataProvider.ins.db.SaveChanges();
+                                }
+                                DataProvider.ins.db.SaveChanges();
+                            }
+                           
                         }
                         PeopleListView = DataProvider.ins.db.QuarantinePersons.ToArray();
                         QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
