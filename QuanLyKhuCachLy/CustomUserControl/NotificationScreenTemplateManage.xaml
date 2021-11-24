@@ -190,7 +190,7 @@
                         Grid.Column="0"
                         VerticalAlignment="Center"
                         FontSize="11"
-                        Content="Chỉnh sửa"
+                        Content="Chỉnh sửa/ Xem chi tiết"
                         Command="{Binding ShowPeopleList }"
                         Template="{StaticResource edit-button}" />
                     </Grid>

@@ -247,6 +247,9 @@
     <Compile Include="CustomUserControl\NotificationScreenWrapper.xaml.cs">
       <DependentUpon>NotificationScreenWrapper.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomUserControl\ProposeNotification.xaml.cs">
+      <DependentUpon>ProposeNotification.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomUserControl\QuarantinePersonInRoomFunctionMenu.xaml.cs">
       <DependentUpon>QuarantinePersonInRoomFunctionMenu.xaml</DependentUpon>
     </Compile>
@@ -604,6 +607,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomUserControl\NotificationScreenWrapper.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\ProposeNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
