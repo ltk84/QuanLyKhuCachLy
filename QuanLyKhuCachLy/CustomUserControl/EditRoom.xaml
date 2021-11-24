@@ -96,7 +96,7 @@
                         Nhóm đối tượng
                     </TextBlock>
                     <ComboBox
-                        DisplayMemberPath="level"
+                        DisplayMemberPath="description"
                         ItemsSource="{Binding RoomLevelList}"
                         Style="{StaticResource ComboBoxField}">
                         <ComboBox.SelectedItem>

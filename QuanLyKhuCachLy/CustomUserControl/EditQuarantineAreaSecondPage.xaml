@@ -44,7 +44,7 @@
                         FontSize="18"
                         FontWeight="Bold"
                         Foreground="#FF434A54"
-                        Text="Quy định mức độ" />
+                        Text="Quy định mức độ (nhóm đối tượng)" />
                     <Separator Margin="0,5,24,2">
                         <Separator.RenderTransform>
                             <ScaleTransform ScaleY="2" />

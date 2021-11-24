@@ -246,10 +246,10 @@
                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                     FontSize="16"
                     Foreground="#FF434A54">
-                    Mức độ
+                    Nhóm đối tượng
                 </TextBlock>
                 <ComboBox
-                    DisplayMemberPath="level"
+                    DisplayMemberPath="description"
                     ItemsSource="{Binding SeverityList}"
                     Style="{StaticResource ComboBoxField}">
                     <ComboBox.SelectedItem>
