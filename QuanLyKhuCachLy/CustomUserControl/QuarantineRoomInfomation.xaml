@@ -225,7 +225,7 @@
                     Grid.Row="3"
                     Grid.Column="0"
                     Style="{StaticResource list-key-text}"
-                    Text="Loại phòng:" />
+                    Text="Nhóm đối tượng:" />
 
                 <TextBlock
                     Grid.Row="3"

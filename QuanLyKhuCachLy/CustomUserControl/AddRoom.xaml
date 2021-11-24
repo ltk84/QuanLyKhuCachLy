@@ -110,7 +110,7 @@
                     </TextBlock>
                     <ComboBox
                         Name="RoomTypeInput"
-                        DisplayMemberPath="level"
+                        DisplayMemberPath="description"
                         ItemsSource="{Binding RoomLevelList}"
                         Style="{StaticResource ComboBoxField}">
                         <ComboBox.SelectedItem>

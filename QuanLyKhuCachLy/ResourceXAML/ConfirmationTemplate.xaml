@@ -82,4 +82,49 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    <Style
+        x:Key="ActionConfirmationButton"
+        BasedOn="{StaticResource ConfirmationButton}"
+        TargetType="Button">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FFcce6e2" />
+                <Setter Property="Foreground" Value="#AA1D9583" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Background" Value="#FF1D9583" />
+                <Setter Property="Foreground" Value="White" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style
+        x:Key="NotActionConfirmationButton"
+        BasedOn="{StaticResource ConfirmationButton}"
+        TargetType="Button">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="White" />
+                <Setter Property="Foreground" Value="#24000000" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Background" Value="#FFF27251" />
+                <Setter Property="Foreground" Value="White" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style
+        x:Key="CancelActionConfirmationButton"
+        BasedOn="{StaticResource ConfirmationButton}"
+        TargetType="Button">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FFcad6e8" />
+                <Setter Property="Foreground" Value="#DD434A54" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Background" Value="#FF434A54" />
+                <Setter Property="Foreground" Value="White" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>
