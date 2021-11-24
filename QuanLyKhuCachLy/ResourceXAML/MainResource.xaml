@@ -20,4 +20,5 @@
     <viewmodel:DeleteConfirmationViewModel x:Key="DeleteConfirmationVM" />
     <viewmodel:ArrangeRoomRecommendationViewModel x:Key="ArrangeRoomRecommendationVM" />
     <viewmodel:ActionConfirmationViewModel x:Key="ActionConfirmationVM" />
+    <viewmodel:ProposeNotificationViewModel x:Key="ProposeNotificationVM" />
 </ResourceDictionary>

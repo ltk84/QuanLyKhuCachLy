@@ -291,6 +291,8 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand Refresh { get; set; }
 
         public ICommand ToArrangeRoomRecommendation { get; set; }
+        public ICommand ToGuideNotificationRecommendation { get; set; }
+        public ICommand ToFinishNotificationRecommendation { get; set; }
 
         #endregion
 
@@ -341,6 +343,34 @@ namespace QuanLyKhuCachLy.ViewModel
                 ArrangeRoomRecommendation arrangeRoomRecommendation = new ArrangeRoomRecommendation();
                 
                 if (arrangeRoomRecommendation.ShowDialog() == true)
+                {
+                    Init();
+                }
+            });
+
+            ToGuideNotificationRecommendation = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                ProposeNotification proposeNotification = new ProposeNotification();
+                var proposeNotificationVM = proposeNotification.DataContext as ProposeNotificationViewModel;
+                proposeNotificationVM.Type = 1;
+                if (proposeNotification.ShowDialog() == true)
+                {
+                    Init();
+                }
+            });
+
+            ToFinishNotificationRecommendation = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                ProposeNotification proposeNotification = new ProposeNotification();
+                var proposeNotificationVM = proposeNotification.DataContext as ProposeNotificationViewModel;
+                proposeNotificationVM.Type = 2;
+                if (proposeNotification.ShowDialog() == true)
                 {
                     Init();
                 }
