@@ -2304,7 +2304,6 @@ namespace QuanLyKhuCachLy.ViewModel
                     listHealthInformation.Add(healthInformation);
                     listQuarantinePerson.Add(quarantinePerson);
                 }
-               
                 using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
                 {
                     try
@@ -2325,7 +2324,8 @@ namespace QuanLyKhuCachLy.ViewModel
                             listHealthInformation[i].quarantinePersonID = listQuarantinePerson[i].id;
                             DataProvider.ins.db.HealthInformations.Add(listHealthInformation[i]);
                             DataProvider.ins.db.SaveChanges();
-                          
+
+                            
                         }
                         PeopleListView = DataProvider.ins.db.QuarantinePersons.ToArray();
                         QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
@@ -2347,9 +2347,35 @@ namespace QuanLyKhuCachLy.ViewModel
                         transaction.Commit();
 
                         //MessageBox.Show("Đã thêm từ file excel");
+                        BatchUpdateSpreadsheetRequest content = new BatchUpdateSpreadsheetRequest();
+                        Request RequestBody = new Request()
+                        {
+                            DeleteDimension = new DeleteDimensionRequest()
+                            {
+                                Range = new DimensionRange()
+                                {
+                                    SheetId = 0,
+                                    Dimension = "ROWS",
+                                    StartIndex =1,
+                                    EndIndex = listQuarantinePerson.Count +1,
+                                }
+                            }
+                        };
+                        List<Request> requests = new List<Request>();
+                        requests.Add(RequestBody);
+                        content.Requests = requests;
+                        try
+                        {
+                            SpreadsheetsResource.BatchUpdateRequest Deletion = new SpreadsheetsResource.BatchUpdateRequest(service, content, spreadsheetId);
+                            Deletion.Execute();
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Error delete");
+                        };
 
                         SuccessDialog.ShowDialog();
-
+                        
                         //DashboardViewModel.ins.Init();
                     }
                     catch (DbUpdateException e)
@@ -2393,7 +2419,7 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 MessageBox.Show("No data found.");
             }
-
+            
         }
         void ExportExcel()
         {
@@ -2406,7 +2432,7 @@ namespace QuanLyKhuCachLy.ViewModel
             Microsoft.Office.Interop.Excel.Worksheet sheet = file.Worksheets[1];
             Microsoft.Office.Interop.Excel.Worksheet sheet2 = file.Worksheets[2];
             sheet2.Name = "DS ID";
-            sheet.Name = "Danh sách người cách ly";
+            sheet2.Name = "Danh sách người cách ly";
             sheet.Columns[1].ColumnWidth = 5;
             sheet.Columns[2].ColumnWidth = 25;
             sheet.Columns[3].ColumnWidth = 12;
