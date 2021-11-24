@@ -151,6 +151,7 @@
                             Width="24"
                             Height="24"
                             Margin="0,5,0,0"
+                            Command="{Binding PersonInRoomViewModel.RemoveAllPersonFromRoomCommand}"
                             Style="{StaticResource DataGridButtonDelete}">
                             <materialDesign:PackIcon
                                 Width="24"
@@ -161,6 +162,7 @@
                             Width="24"
                             Height="24"
                             Margin="0,5,0,0"
+                            Command="{Binding PersonInRoomViewModel.AddAllPersonToRoomUICommand}"
                             Style="{StaticResource DataGridButtonDelete}">
                             <materialDesign:PackIcon
                                 Width="24"
@@ -268,7 +270,7 @@
                         materialDesign:ButtonAssist.CornerRadius="8"
                         materialDesign:ShadowAssist.ShadowDepth="Depth0"
                         BorderBrush="{x:Null}"
-                        Command="{Binding PersonInRoomViewModel.CancelCommand}"
+                        Command="{Binding PersonInRoomViewModel.CancelUpdatePersonListCommand}"
                         CommandParameter="{Binding ElementName=UpdateList}"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"

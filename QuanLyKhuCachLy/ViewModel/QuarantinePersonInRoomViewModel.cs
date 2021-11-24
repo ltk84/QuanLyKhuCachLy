@@ -82,6 +82,8 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand RemovePersonFromRoomUI { get; set; }
         public ICommand CancelUpdatePersonListCommand { get; set; }
         public ICommand RemovePersonFromRoomCommand { get; set; }
+        public ICommand AddAllPersonToRoomUICommand { get; set; }
+        public ICommand RemoveAllPersonFromRoomCommand { get; set; }
 
         #endregion
 
@@ -189,9 +191,9 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-                BufferWindow bufferWindow = new BufferWindow();
-                bufferWindow.ShowDialog();
-                CompleteQuarantinePerson();
+                //BufferWindow bufferWindow = new BufferWindow();
+                //bufferWindow.ShowDialog();
+                //CompleteQuarantinePerson();
                 RollbackTransaction();
                 p.Close();
             });
@@ -207,9 +209,47 @@ namespace QuanLyKhuCachLy.ViewModel
                 bufferWindow.ShowDialog();
                 RemovePersonFromRoom();
             });
+
+            AddAllPersonToRoomUICommand = new RelayCommand<object>((p) =>
+            {
+                if (PersonNotRoomList.Count > 0) return true;
+                return false;
+            }, (p) =>
+            {
+                AddAllPersonToRoom();
+            });
+
+            RemoveAllPersonFromRoomCommand = new RelayCommand<Window>((p) =>
+            {
+                if (QuarantinePersonList.Count > 0) return true;
+                return false;
+            }, (p) =>
+            {
+                RemoveAllPersonFromRoom();
+            });
         }
 
         #region method
+
+        void AddAllPersonToRoom()
+        {
+            foreach (var p in PersonNotRoomList)
+            {
+                QuarantinePersonList.Add(p);
+            }
+
+            PersonNotRoomList.Clear();
+        }
+
+        void RemoveAllPersonFromRoom()
+        {
+            foreach (var p in QuarantinePersonList)
+            {
+                PersonNotRoomList.Add(p);
+            }
+
+            QuarantinePersonList.Clear();
+        }
 
         protected override void ChangeRoom()
         {
