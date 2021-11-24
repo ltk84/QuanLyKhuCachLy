@@ -120,6 +120,9 @@
     <Compile Include="Converter\DateTimeToStringConverter.cs" />
     <Compile Include="Converter\IntToStringConverter.cs" />
     <Compile Include="Converter\TestResultToBoolConverter.cs" />
+    <Compile Include="CustomUserControl\ActionConfirmation.xaml.cs">
+      <DependentUpon>ActionConfirmation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomUserControl\AddDestinationHistory.xaml.cs">
       <DependentUpon>AddDestinationHistory.xaml</DependentUpon>
     </Compile>
@@ -413,6 +416,7 @@
     <Compile Include="ValidationRules\OnlyNumber.cs" />
     <Compile Include="ValidationRules\RequiredField.cs" />
     <Compile Include="ValidationRules\RequiredFieldNonCommit.cs" />
+    <Compile Include="ViewModel\ActionConfirmationViewModel.cs" />
     <Compile Include="ViewModel\ArrangeRoomRecommendationViewModel.cs" />
     <Compile Include="ViewModel\AddressViewModel.cs" />
     <Compile Include="ViewModel\DashboardViewModel.cs" />
@@ -448,6 +452,10 @@
     <Compile Include="ViewModel\SeverityViewModel.cs" />
     <Compile Include="ViewModel\StaffViewModel.cs" />
     <Compile Include="ViewModel\TestingResultViewModel.cs" />
+    <Page Include="CustomUserControl\ActionConfirmation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomUserControl\AddDestinationHistory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

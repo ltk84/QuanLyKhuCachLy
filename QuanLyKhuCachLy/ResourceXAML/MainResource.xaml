@@ -19,4 +19,5 @@
     <viewmodel:TestingResultViewModel x:Key="TestingVM" />
     <viewmodel:DeleteConfirmationViewModel x:Key="DeleteConfirmationVM" />
     <viewmodel:ArrangeRoomRecommendationViewModel x:Key="ArrangeRoomRecommendationVM" />
+    <viewmodel:ActionConfirmationViewModel x:Key="ActionConfirmationVM" />
 </ResourceDictionary>

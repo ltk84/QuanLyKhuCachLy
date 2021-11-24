@@ -1,0 +1,80 @@
+﻿<Window
+    x:Class="QuanLyKhuCachLy.CustomUserControl.ActionConfirmation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="ActionConfirmation"
+    Width="720"
+    Height="400"
+    AllowsTransparency="True"
+    Background="Transparent"
+    DataContext="{StaticResource ActionConfirmationVM}"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Border Margin="10" Style="{StaticResource RecommendationField}">
+        <StackPanel Margin="40,0" VerticalAlignment="Center">
+            <materialDesign:PackIcon
+                Width="65"
+                Height="65"
+                Foreground="#434A54"
+                Kind="Information"
+                Style="{StaticResource ConfirmationIcon}" />
+            <TextBlock
+                Margin="0,20,0,0"
+                FontSize="34"
+                Foreground="#434A54"
+                Style="{StaticResource ConfirmationTitle}"
+                Text="{Binding Title}"
+                TextAlignment="Center"
+                TextWrapping="Wrap" />
+            <TextBlock
+                Margin="12,12,12,0"
+                FontSize="20"
+                Foreground="#434A54"
+                Style="{StaticResource ConfirmationSubtitle}"
+                Text="{Binding Content}"
+                TextAlignment="Center"
+                TextWrapping="Wrap" />
+            <StackPanel
+                Margin="0,32,0,0"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
+                <Button
+                    Width="170"
+                    Height="45"
+                    Margin="0"
+                    Command="{Binding CancelCommand}"
+                    CommandParameter="{Binding ElementName=ActionConfirmation}"
+                    FontSize="20"
+                    Style="{StaticResource CancelActionConfirmationButton}">
+                    <TextBlock Text="Hủy bỏ" />
+                </Button>
+                <Button
+                    Width="170"
+                    Height="45"
+                    Margin="24,0,0,0"
+                    Command="{Binding NotActionConfirmationCommand}"
+                    CommandParameter="{Binding ElementName=ActionConfirmation}"
+                    FontSize="20"
+                    Style="{StaticResource NotActionConfirmationButton}">
+                    <TextBlock Text="Không" />
+                </Button>
+                <Button
+                    Width="170"
+                    Height="45"
+                    Margin="24,0,0,0"
+                    Command="{Binding DoActionConfirmationCommand}"
+                    CommandParameter="{Binding ElementName=ActionConfirmation}"
+                    FontSize="20"
+                    Style="{StaticResource ActionConfirmationButton}">
+                    <TextBlock Text="Có" />
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</Window>
