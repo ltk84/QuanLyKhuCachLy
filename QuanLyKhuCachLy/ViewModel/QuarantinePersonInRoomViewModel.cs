@@ -1034,13 +1034,24 @@ namespace QuanLyKhuCachLy.ViewModel
 
         void RollbackTransaction()
         {
-            DataProvider.ins.db.ChangeTracker.Entries().Where(e => e.Entity != null).ToList().ForEach(e => e.State = EntityState.Detached);
+            DataProvider.ins.db.ChangeTracker.Entries().Where(e => e.Entity != null).ToList().ForEach(e => e.State = EntityState.Modified);
             QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == RoomID));
             InitPersonNotRoomList();
             if (SelectedItem != null) SelectedItem = QuarantinePersonList.Where(x => x.id == SelectedItem.id).FirstOrDefault();
         }
 
-        void InitPersonNotRoomList() => PersonNotRoomList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == null && x.completeQuarantine != true));
+        void InitPersonNotRoomList()
+        {
+            var CurrentRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == RoomID).FirstOrDefault();
+            if (CurrentRoom == null) return;
+
+            var RoomSeverity = DataProvider.ins.db.Severities.Where(x => x.id == CurrentRoom.levelID).FirstOrDefault();
+            if (RoomSeverity == null)
+                PersonNotRoomList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == null && x.completeQuarantine != true));
+            else
+                PersonNotRoomList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == null && x.completeQuarantine != true && x.levelID == RoomSeverity.id));
+
+        }
 
         void InitRemainRoomList() => RemainRoomList = new ObservableCollection<Model.QuarantineRoom>(DataProvider.ins.db.QuarantineRooms.Where(x => x.id != RoomID && x.QuarantinePersons.Count < x.capacity));
         #endregion
