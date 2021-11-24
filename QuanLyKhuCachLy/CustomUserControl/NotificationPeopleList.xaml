@@ -33,7 +33,7 @@
                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans">Những người được nhận thông báo mới nhất từ quản lý</TextBlock>
         </StackPanel>
 
-        <Grid Margin="90,0,90,65" Grid.Row="1">
+        <Grid Margin="70,0,70,65" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="70"/>
@@ -45,6 +45,7 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
@@ -63,7 +64,7 @@
                         </TextBlock>
                         <TextBox
                                     FontSize="10"
-                                    Width="176"
+                                    Width="150"
                                     Height="28.55"
                                     Margin="0,4,0,0"
                                     Padding="7,5,5,7"
@@ -95,16 +96,16 @@
                             FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                             FontSize="10"
                             Foreground="#FF434A54">
-                            Lọc theo
+                             Tình trạng
                         </TextBlock>
                         <ComboBox
                                     FontSize="10"
                             Padding="7,5,5,7"
-                            utility:ProtocolSettingsLayout.MVVMHasError="{Binding SexFieldHasError}"
-                            ItemsSource="{Binding FilterType1}"
+                            utility:ProtocolSettingsLayout.MVVMHasError="{Binding ExperationType1}"
+                            ItemsSource="{Binding ExperationType1}"
                             Style="{StaticResource ComboBoxField}">
                             <ComboBox.SelectedItem>
-                                        <Binding Path="SelectedFilterType1" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding Path="ExperationProperty1" UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules />
                                         </Binding>
                                     </ComboBox.SelectedItem>
@@ -114,7 +115,34 @@
                     <StackPanel
                         Grid.Row="0"
                         Grid.Column="2"
-                        Margin="24,0,0,0"
+                        Margin="12,0,0,0"
+                        VerticalAlignment="Bottom">
+
+                        <TextBlock
+                            Margin="5,0,0,5"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="10"
+                            Foreground="#FF434A54">
+                            Lọc theo
+                        </TextBlock>
+                        <ComboBox
+                                    FontSize="10"
+                            Padding="7,5,5,7"
+                            utility:ProtocolSettingsLayout.MVVMHasError="{Binding SexFieldHasError}"
+                            ItemsSource="{Binding FilterType1}"
+                            Style="{StaticResource ComboBoxField}">
+                            <ComboBox.SelectedItem>
+                                <Binding Path="SelectedFilterType1" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </ComboBox.SelectedItem>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel
+                        Grid.Row="0"
+                        Grid.Column="3"
+                        Margin="12,0,0,0"
                         VerticalAlignment="Bottom">
                         <TextBlock
                             Margin="5,0,0,5"
@@ -235,8 +263,8 @@
                 <TextBlock Margin="0,0,0,4" Foreground="#ff000000" FontSize="13.75" FontWeight="Bold">Danh sách người nhận thông báo</TextBlock>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="47*" />
-                        <ColumnDefinition Width="258*"/>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
@@ -255,7 +283,7 @@
                         </TextBlock>
                         <TextBox
                                     FontSize="10"
-                                    Width="176"
+                                    Width="160"
                                     Height="28.55"
                                     Margin="0,4,0,0"
                                     Padding="7,5,5,7"
@@ -278,8 +306,35 @@
 
                     <StackPanel
                         Grid.Row="0"
-                        Grid.Column="2"
+                        Grid.Column="1"
                         Margin="0,0,0,0"
+                        VerticalAlignment="Bottom">
+
+                        <TextBlock
+                            Margin="5,0,0,5"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="10"
+                            Foreground="#FF434A54">
+                            Tình trạng
+                        </TextBlock>
+                        <ComboBox
+                                    FontSize="10"
+                            Padding="7,5,5,7"
+                            utility:ProtocolSettingsLayout.MVVMHasError="{Binding SexFieldHasError}"
+                            ItemsSource="{Binding ExperationType2}"
+                            Style="{StaticResource ComboBoxField}">
+                            <ComboBox.SelectedItem>
+                                <Binding Path="ExperationProperty2" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </ComboBox.SelectedItem>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Margin="12,0,0,0"
                         VerticalAlignment="Bottom">
 
                         <TextBlock
@@ -303,10 +358,12 @@
                         </ComboBox>
                     </StackPanel>
 
+                    
+
                     <StackPanel
                         Grid.Row="0"
                         Grid.Column="3"
-                        Margin="24,0,0,0"
+                        Margin="12,0,0,0"
                         VerticalAlignment="Bottom">
                         <TextBlock
                             Margin="5,0,0,5"

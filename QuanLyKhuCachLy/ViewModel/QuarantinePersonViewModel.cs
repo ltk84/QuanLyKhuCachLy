@@ -29,6 +29,28 @@ namespace QuanLyKhuCachLy.ViewModel
         #region property
 
 
+
+        private string[] _ExperationType;
+        public string[] ExperationType
+        {
+            get => _ExperationType; set
+            {
+                _ExperationType = value; OnPropertyChanged();
+            }
+        }
+
+
+        private string _ExperationProperty;
+        public string ExperationProperty
+        {
+            get => _ExperationProperty; set
+            {
+                _ExperationProperty = value;
+                OnPropertyChanged();
+                ExperationPropertySelected();
+            }
+        }
+
         //Searching 
         private string _SearchKey;
         public string SearchKey
@@ -37,7 +59,7 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 _SearchKey = value;
                 OnPropertyChanged();
-                FilterListView();
+                SearchWithKey();
             }
         }
 
@@ -93,6 +115,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 _SelectedFilterProperty = value;
                 OnPropertyChanged();
                 SelectFilterProperty();
+                SearchKey = "";
             }
         }
 
@@ -861,6 +884,38 @@ namespace QuanLyKhuCachLy.ViewModel
                 HandleChangeTab(TabIndex, "previous", p);
             });
 
+
+            QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
+            RemainRoomList = new ObservableCollection<Model.QuarantineRoom>();
+            PeopleListView = QuarantinePersonList.ToArray();
+
+            ExperationType = new string[] { "Toàn bộ", "Người đang cách ly", "Hoàn thành cách ly" };
+            ExperationProperty = "Toàn bộ";
+            FilterType = new string[] { "Tất cả", "Giới tính", "Quốc tịch", "Phòng", "Nhóm đối tượng", "Ngày đi", "Ngày đến", "Ngày đến kì hạn xét nghiệm" };
+            SelectedFilterType = "Tất cả";
+            SelectedFilterProperty = "Chọn phương thức lọc";
+            getFilterProperty();
+
+            SeverityList = new ObservableCollection<Severity>(DataProvider.ins.db.Severities);
+
+            QAInformation = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
+
+            InjectionRecordViewModel = InjectionRecordViewModel.ins;
+            DestinationHistoryViewModel = DestinationHistoryViewModel.ins;
+            TestingResultViewModel = TestingResultViewModel.ins;
+
+            NationalityList = new ObservableCollection<string>();
+
+            ProvinceList = new ObservableCollection<string>();
+
+            DistrictList = new ObservableCollection<string>();
+
+            WardList = new ObservableCollection<string>();
+
+            InitNationList();
+
+            InitProvinceList();
+
             SexList = new ObservableCollection<string>()
             {
                 "Nam", "Nữ"
@@ -1392,21 +1447,46 @@ namespace QuanLyKhuCachLy.ViewModel
             TabInformation2 = Visibility.Hidden;
         }
 
-        // Searching
-        void FilterListView()
-        {
-            //SelectedFilterType = "Tất cả";
-            if (SearchKey == "")
-            {
-                PeopleListView = QuarantinePersonList.ToArray();
 
+
+        void ExperationPropertySelected()
+        {
+            var today = DateTime.Now.Date;
+            QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
+            if (ExperationProperty == "Người đang cách ly")
+            {
+                var tempPeopleArray = QuarantinePersonList.ToArray();
+                for (int i = 0; i< tempPeopleArray.Length; i++)
+                {
+                    if ((today - tempPeopleArray[i].leaveDate).TotalDays > 0) QuarantinePersonList.Remove(tempPeopleArray[i]);
+                }
+                
             }
 
+            else if (ExperationProperty == "Hoàn thành cách ly")
+            {
+                var tempPeopleArray = QuarantinePersonList.ToArray();
+                for (int i = 0; i < tempPeopleArray.Length; i++)
+                {
+                    if ((today - tempPeopleArray[i].leaveDate).TotalDays <= 0) QuarantinePersonList.Remove(tempPeopleArray[i]);
+                }
+            }
+            
+            PeopleListView = QuarantinePersonList.ToArray();
+        }
+
+        // Searching
+        void SearchWithKey()
+        {
+
+            
+            if (SearchKey == "" || SearchKey == null)
+            {
+            }
             else
             {
 
-
-                PeopleListView = QuarantinePersonList.ToArray();
+                SelectFilterProperty();
                 String[] Value = new string[PeopleListView.Length];
 
                 for (int i = 0; i < PeopleListView.Length; i++)
@@ -1415,7 +1495,9 @@ namespace QuanLyKhuCachLy.ViewModel
 
                 }
 
-                PeopleListView = PeopleListView.Where((val, index) => Value[index].Contains(SearchKey)).ToArray();
+                PeopleListView = PeopleListView.Where((val, index) => Value[index].ToUpper().Contains(SearchKey.ToUpper())).ToArray();
+                
+                
             }
         }
 
@@ -1423,13 +1505,13 @@ namespace QuanLyKhuCachLy.ViewModel
 
         void getFilterProperty()
         {
-            SelectedFilterProperty = "Tất cả";
+            SelectedFilterProperty = "";
+            SearchKey = "";
 
             //FilterProperty = DataProvider.ins.db.Staffs.Select(staff => staff.GetType().GetProperty(SelectedFilterType)).Distinct();
             if (SelectedFilterType == "Tất cả")
             {
-                SelectedFilterProperty = "Chọn phương thức lọc";
-                FilterProperty = new string[] { "Chọn phương thức lọc" };
+                FilterProperty = new string[] { };
             }
             else if (SelectedFilterType == "Giới tính")
             {
@@ -1438,68 +1520,144 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType == "Quốc tịch")
             {
-                FilterProperty = DataProvider.ins.db.QuarantinePersons.Select(person => person.nationality).ToArray();
+                FilterProperty = QuarantinePersonList.Select(person => person.nationality).ToArray();
                 FilterProperty = FilterProperty.Distinct().ToArray();
             }
             else if (SelectedFilterType == "Phòng")
             {
-                FilterProperty = DataProvider.ins.db.QuarantinePersons.Select(person => person.QuarantineRoom.displayName).ToArray();
+                FilterProperty = QuarantinePersonList.Select(person => person.QuarantineRoom?.displayName).ToArray();
                 FilterProperty = FilterProperty.Distinct().ToArray();
             }
             else if (SelectedFilterType == "Nhóm đối tượng")
             {
-                FilterProperty = DataProvider.ins.db.QuarantinePersons.Select(person => person.Severity.level).ToArray();
+                FilterProperty = QuarantinePersonList.Select(person => person.Severity?.level).ToArray();
                 FilterProperty = FilterProperty.Distinct().ToArray();
             }
             else if (SelectedFilterType == "Ngày đi")
             {
-                FilterProperty = DataProvider.ins.db.QuarantinePersons.Select(person => person.leaveDate.ToString()).ToArray();
+                FilterProperty = QuarantinePersonList.Select(person => person.leaveDate.ToString()).ToArray();
                 FilterProperty = FilterProperty.Distinct().ToArray();
             }
             else if (SelectedFilterType == "Ngày đến")
             {
-                FilterProperty = DataProvider.ins.db.QuarantinePersons.Select(person => person.arrivedDate.ToString()).ToArray();
+                FilterProperty = QuarantinePersonList.Select(person => person.arrivedDate.ToString()).ToArray();
                 FilterProperty = FilterProperty.Distinct().ToArray();
             }
+            else if (SelectedFilterType == "Ngày đến kì hạn xét nghiệm")
+            {
+                FilterProperty = new string[] { "Hôm qua", "Hôm nay", "Ngày mai" };
+            }
+            PeopleListView = QuarantinePersonList.ToArray();
 
-            PeopleListView = DataProvider.ins.db.QuarantinePersons.ToArray();
         }
+
+
+
+
+        // Hàm này filter người đền kì hạn xét nghiệm hôm nay, là người còn cách li, có ngầy xét nghiệm gần nhát >= số ngày tối thiểu, ngày cuối, hoặc chưa đc xét nghiệm.
+        void FilterPersonIsOnTestingDateToday(DateTime SelectedDate)
+        {
+            int maxQuarantineDay = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().requiredDayToFinish;
+            int testCycle = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().testCycle;
+            var tempPeopleList = QuarantinePersonList.ToArray();
+            var tempQuarantinePersonList = new ObservableCollection<QuarantinePerson>();
+            for (int i = 0; i < tempPeopleList.Length; i++)
+            {
+                var tempID = tempPeopleList[i].id;
+               var TestingResultList = new ObservableCollection<TestingResult>(DataProvider.ins.db.TestingResults.Where(x => x.quarantinePersonID == tempID));
+
+                // Nếu còn cách li
+                if ((SelectedDate - tempPeopleList[i].leaveDate.Date).TotalDays <= 0)
+                {
+                    // Ngày cuối cách ly
+                    if ((SelectedDate - tempPeopleList[i].leaveDate.Date).TotalDays == 0)
+                    {
+                       tempQuarantinePersonList.Add(tempPeopleList[i]);
+                    }
+                    // Chưa xét nghiệm lần nào
+                    else if (TestingResultList.ToArray().Length == 0)
+                    {
+                        if ((SelectedDate - tempPeopleList[i].arrivedDate.Date).TotalDays >= testCycle)
+                        {
+                            tempQuarantinePersonList.Add(tempPeopleList[i]);
+                        }
+
+
+                    }
+                    // Đã xét nghiệm
+                    else
+                    {
+                        DateTime max = TestingResultList[0].dateTesting;
+                        for ( int j = 1; j < TestingResultList.ToArray().Length; j++)
+                            if ((max - TestingResultList[j].dateTesting).TotalDays < 0) max = TestingResultList[j].dateTesting;
+
+                        if ((DateTime.Now.Date - max.Date).TotalDays >= testCycle)
+                        {
+                            tempQuarantinePersonList.Add(tempPeopleList[i]);
+                        }
+                    }
+                }
+            }
+
+            //if (SearchKey != "" && SearchKey != null)
+            PeopleListView = tempQuarantinePersonList.ToArray();
+        }
+
+     
 
         void SelectFilterProperty()
         {
-            if (SelectedFilterType == "Tất cả")
+            PeopleListView = QuarantinePersonList.ToArray();
+            if (SelectedFilterProperty == "" || SelectedFilterProperty == null || SelectedFilterProperty == "Tất cả") return;
+            if (SelectedFilterType == "Giới tính")
             {
-            }
-            else if (SelectedFilterType == "Giới tính")
-            {
-                PeopleListView = DataProvider.ins.db.QuarantinePersons.Where(x => x.sex == SelectedFilterProperty).ToArray();
+                PeopleListView = QuarantinePersonList.Where(x => x.sex == SelectedFilterProperty).ToArray();
             }
             else if (SelectedFilterType == "Quốc tịch")
             {
-                PeopleListView = DataProvider.ins.db.QuarantinePersons.Where(x => x.nationality == SelectedFilterProperty).ToArray();
+                PeopleListView = QuarantinePersonList.Where(x => x.nationality == SelectedFilterProperty).ToArray();
             }
             else if (SelectedFilterType == "Phòng")
             {
 
-                PeopleListView = DataProvider.ins.db.QuarantinePersons.Where(x => x.QuarantineRoom.displayName == SelectedFilterProperty).ToArray();
+                PeopleListView = QuarantinePersonList.Where(x => x.QuarantineRoom?.displayName == SelectedFilterProperty).ToArray();
             }
             else if (SelectedFilterType == "Nhóm đối tượng")
             {
 
-                PeopleListView = DataProvider.ins.db.QuarantinePersons.Where(x => x.Severity.level == SelectedFilterProperty).ToArray();
+                PeopleListView = QuarantinePersonList.Where(x => x.Severity?.level == SelectedFilterProperty).ToArray();
             }
             else if (SelectedFilterType == "Ngày đi")
             {
-                PeopleListView = DataProvider.ins.db.QuarantinePersons.Where(x => x.leaveDate.ToString() == SelectedFilterProperty).ToArray();
+                PeopleListView = QuarantinePersonList.Where(x => x.leaveDate.ToString() == SelectedFilterProperty).ToArray();
 
             }
             else if (SelectedFilterType == "Ngày đến")
             {
-                PeopleListView = DataProvider.ins.db.QuarantinePersons.Where(x => x.arrivedDate.ToString() == SelectedFilterProperty).ToArray();
+                PeopleListView = QuarantinePersonList.Where(x => x.arrivedDate.ToString() == SelectedFilterProperty).ToArray();
+
+            }
+            else if (SelectedFilterType == "Ngày đến kì hạn xét nghiệm")
+            {
+                if (SelectedFilterProperty == "Hôm nay")
+                {
+                    FilterPersonIsOnTestingDateToday(DateTime.Now.Date);
+                }
+                else if (SelectedFilterProperty == "Hôm qua")
+                {
+                    FilterPersonIsOnTestingDateToday(DateTime.Today.AddDays(-1).Date);
+
+                }
+                else if (SelectedFilterProperty == "Ngày mai")
+                {
+                    FilterPersonIsOnTestingDateToday(DateTime.Today.AddDays(1).Date);
+
+                }
+
 
             }
 
-
+            
         }
 
 

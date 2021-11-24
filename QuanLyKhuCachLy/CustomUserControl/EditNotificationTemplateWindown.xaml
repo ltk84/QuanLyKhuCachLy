@@ -8,8 +8,9 @@
         xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
         xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
         mc:Ignorable="d"
+        WindowStyle="None"
         DataContext="{StaticResource NotiVM}"
-        Title="AddNewNotificationTemplate" Height="485.753" Width="620">
+        Title="AddNewNotificationTemplate" Height="472.8" Width="620">
     <StackPanel Margin="20,20,20,20">
         <TextBlock
             HorizontalAlignment="Center"
@@ -32,7 +33,7 @@
                 <Binding Path="title" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <vr:RequiredField />
-                        <vr:NoSpecialChar />
+                        <!--<vr:NoSpecialChar />-->
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -55,8 +56,8 @@
             <TextBox.Text>
                 <Binding Path="content" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <vr:RequiredField />
-                        <vr:NoSpecialChar />
+                       <vr:RequiredField />
+                        <!--<vr:NoSpecialChar />-->
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -72,6 +73,7 @@
             </Grid.ColumnDefinitions>
 
             <Button
+                Command="{Binding CancelEditTemplate}"
                 Grid.Column="0"
                 Background="#ff434A54"
                 BorderBrush="#ff434A54"

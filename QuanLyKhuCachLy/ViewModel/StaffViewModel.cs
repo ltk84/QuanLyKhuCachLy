@@ -1256,7 +1256,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                 }
 
-                StaffListView = StaffListView.Where((val, index) => Value[index].Contains(SearchKey)).ToArray();
+                StaffListView = StaffListView.Where((val, index) => Value[index].ToUpper().Contains(SearchKey.ToUpper())).ToArray();
             }
         }
 

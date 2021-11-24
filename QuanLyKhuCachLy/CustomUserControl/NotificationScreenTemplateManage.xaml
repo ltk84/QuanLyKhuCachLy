@@ -14,15 +14,14 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="0"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <Button Margin="0,15,0,15" BorderBrush="Transparent" Background="Transparent" Command="{Binding ShowPeopleList}" HorizontalAlignment="Center"  Foreground="#FF3D3F66" FontSize="13" FontWeight="Bold" FontStyle="Italic"  Grid.Row="2" Content="{Binding textBtnTitle}"></Button>
-        
+                   
         <TextBlock
             Grid.Row="0"
             
@@ -68,39 +67,55 @@
 
             </StackPanel>
 
-            <Button
-                Grid.Column="1"
-                VerticalAlignment="Center"
-                FontSize="11"
-                Content="Quãn lý mẫu"
-                Command="{Binding SwitchTab }"
-                Template="{StaticResource add-button-no-background}" />
+            
         </Grid>
 
-            <Border Grid.Row="3" Background="Transparent" BorderBrush="#FF000000" BorderThickness="1" CornerRadius="8,8,8,8" Margin="0, 0,0,0" Padding="0,5,0,5">
-                <ScrollViewer
-            HorizontalScrollBarVisibility="Hidden">
-                    <ListView 
+
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="24"/>
+                    <ColumnDefinition Width="1*"/>
+                    
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Button
+                        Margin="0,0,0,12"
+                        Grid.Row="0"
+                        VerticalAlignment="Center"
+                        FontSize="11"
+                        Content="Quãn lý mẫu"
+                        Command="{Binding SwitchTab }"
+                        Template="{StaticResource edit-button}" />
+                    <Border Grid.Row="1" Background="Transparent" BorderBrush="#FF000000" BorderThickness="1" CornerRadius="8,8,8,8" Margin="0, 0,0,0" Padding="0,5,0,5">
+                        <ScrollViewer
+                            HorizontalScrollBarVisibility="Hidden">
+                            <ListView 
                         
                         ItemsSource="{Binding TemplateList}"
                         SelectedItem="{Binding selectedTemplate}"
                         Margin="0" Name="lvDataBinding" >
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                        <ListView.ItemTemplate
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+                                <ListView.ItemTemplate
                             >
-                            <DataTemplate>
-                                <Grid
+                                    <DataTemplate>
+                                        <Grid
                                     Margin="10,10,10,10"
                                     >
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*"/>
-                                        <ColumnDefinition Width="auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*"/>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock
                                 Grid.Column="0"
                                 FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                                 FontSize="12.39"
@@ -110,9 +125,9 @@
                                 Text="{Binding Path=name}"
                                 >
 
-                                    </TextBlock>
+                                            </TextBlock>
 
-                                    <Button
+                                            <Button
                                 Grid.Column="1"
                                 Margin="0,0,0,0"
                                 Width="64"
@@ -121,9 +136,9 @@
                                 Content="Chọn"
                                 FontSize="11"
                                 Style="{StaticResource AddObjectButton}">
-                                    </Button>
+                                            </Button>
 
-                                    <!--<Grid>
+                                            <!--<Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="auto" />
                                             <RowDefinition Height="auto" />
@@ -148,18 +163,90 @@
 
 
                                     </Grid>-->
-                                </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
 
-                </ScrollViewer>
-            </Border>
+                        </ScrollViewer>
+                    </Border>
+
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="1*"/>
+                            
+                        </Grid.ColumnDefinitions>
+                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="12,0,0,12" Grid.Column="1" Text="{Binding countReceiver}"/>
+                        <Button
+                        Margin="0,0,0,12"
+                        Grid.Column="0"
+                        VerticalAlignment="Center"
+                        FontSize="11"
+                        Content="Chỉnh sửa/ Xem chi tiết"
+                        Command="{Binding ShowPeopleList }"
+                        Template="{StaticResource edit-button}" />
+                    </Grid>
+                    
+
+                    <Border Grid.Row="1" Background="Transparent" BorderBrush="#FF000000" BorderThickness="1" CornerRadius="8,8,8,8" Margin="0, 0,0,4" Padding="0,0,0,0">
+                        <DataGrid
+                    Margin="0,0,0,0"
+                    materialDesign:DataGridAssist.CornerRadius="10"
+                    AutoGenerateColumns="False"
+                    CanUserAddRows="False"
+                    CanUserReorderColumns="False"
+                    CanUserResizeColumns="True"
+                    CanUserResizeRows="False"
+                    IsReadOnly="True"
+                    ItemsSource="{Binding PeopleListView2}"
+                    SelectedItem="{Binding SelectedItem2}"
+                    SelectionMode="Single"
+                    SelectionUnit="FullRow">
+                            <DataGrid.Columns>
+                                <materialDesign:DataGridTextColumn
+                            Binding="{Binding name}"
+                            FontSize="10"
+                            EditingElementStyle="{StaticResource EditingDataGridElement}"
+                            ElementStyle="{StaticResource DataGridElement}"
+                            Header="Tên"
+                            HeaderStyle="{StaticResource DataGridHeader}"
+                            MaxLength="30" />
+                                <materialDesign:DataGridTextColumn
+                            Binding="{Binding citizenID}"
+                            FontSize="10"
+                            EditingElementStyle="{StaticResource EditingDataGridElement}"
+                            ElementStyle="{StaticResource DataGridElement}"
+                            Header="CMND"
+                            HeaderStyle="{StaticResource DataGridHeader}"
+                            MaxLength="30" />
+                                <materialDesign:DataGridTextColumn
+                            Binding="{Binding roomID}"
+                            EditingElementStyle="{StaticResource EditingDataGridElement}"
+                            FontSize="10"
+                            ElementStyle="{StaticResource DataGridElement}"
+                            Header="Phòng"
+                            HeaderStyle="{StaticResource DataGridHeader}"
+                            MaxLength="30" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+
+                </Grid>
+                
+            </Grid>
 
             <Grid
             Grid.Row="4"
             
-            Margin="0,0,0,8">
+            Margin="0,15,0,8">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="auto"/>
@@ -184,23 +271,51 @@
             <Grid
             Grid.Row="5"
             >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
                 <TextBox
+                        Grid.Column="0"
                         materialDesign:HintAssist.Hint="Nhập nội dung thông báo"
                         utility:ProtocolSettingsLayout.MVVMHasError="{Binding Path=DisplayNameFieldHasError}"
                         Height="200"
+                        MaxLines="100"
                         Style="{StaticResource TextInputField}">
-                    <TextBox.Text>
-                        <Binding Path="message" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <!--<vr:RequiredField />-->
-                                <vr:NoSpecialChar />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
+                        <TextBox.Text>
+                            <Binding Path="message" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                               
+                                </Binding.ValidationRules>
+                            </Binding>
+                         </TextBox.Text>
                 </TextBox>
+
+
+                <StackPanel Grid.Column="1" Margin="24,0,0,0">
+                    <TextBlock
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16.52"
+                        FontWeight="Bold"
+                        Foreground="#FF363636"
+                        >Nội dung đầy đủ</TextBlock>
+
+                    <TextBlock
+                        TextWrapping="Wrap"
+                        Margin="0,8,0,0"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="12"
+                        FontWeight="Regular"
+                        Text="{Binding fullyMessage}"
+                        Foreground="#FF262626"/>
+                </StackPanel>
+                
+                
             </Grid>
         <Button
+            
             HorizontalAlignment="Right"
+            Command="{Binding SendNotification}"
             Grid.Row="6"
             Margin="0,10,0,0"
             Width="137"
