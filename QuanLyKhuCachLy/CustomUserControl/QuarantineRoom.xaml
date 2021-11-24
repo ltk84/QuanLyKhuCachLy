@@ -185,7 +185,7 @@
                     HeaderStyle="{StaticResource DataGridHeader}"
                     MaxLength="30" />
                 <materialDesign:DataGridTextColumn
-                    Binding="{Binding Severity.level}"
+                    Binding="{Binding Severity.description}"
                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                     ElementStyle="{StaticResource DataGridElement}"
                     Header="Nhóm đối tượng"

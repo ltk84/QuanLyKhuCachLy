@@ -6,7 +6,8 @@
     xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="ActionConfirmation"
+    Name="ActionConfirmationScreen"
+    Title="ActionConfirmationScreen"
     Width="720"
     Height="400"
     AllowsTransparency="True"
@@ -49,7 +50,7 @@
                     Height="45"
                     Margin="0"
                     Command="{Binding CancelCommand}"
-                    CommandParameter="{Binding ElementName=ActionConfirmation}"
+                    CommandParameter="{Binding ElementName=ActionConfirmationScreen}"
                     FontSize="20"
                     Style="{StaticResource CancelActionConfirmationButton}">
                     <TextBlock Text="Hủy bỏ" />
@@ -59,7 +60,7 @@
                     Height="45"
                     Margin="24,0,0,0"
                     Command="{Binding NotActionConfirmationCommand}"
-                    CommandParameter="{Binding ElementName=ActionConfirmation}"
+                    CommandParameter="{Binding ElementName=ActionConfirmationScreen}"
                     FontSize="20"
                     Style="{StaticResource NotActionConfirmationButton}">
                     <TextBlock Text="Không" />
@@ -69,7 +70,7 @@
                     Height="45"
                     Margin="24,0,0,0"
                     Command="{Binding DoActionConfirmationCommand}"
-                    CommandParameter="{Binding ElementName=ActionConfirmation}"
+                    CommandParameter="{Binding ElementName=ActionConfirmationScreen}"
                     FontSize="20"
                     Style="{StaticResource ActionConfirmationButton}">
                     <TextBlock Text="Có" />

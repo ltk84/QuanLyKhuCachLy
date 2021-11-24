@@ -24,6 +24,14 @@ namespace QuanLyKhuCachLy.ViewModel
             get { return _title; }
             set { _title = value; OnPropertyChanged(); }
         }
+
+        private bool _isYes;
+        public bool IsYes
+        {
+            get { return _isYes; }
+            set { _isYes = value; OnPropertyChanged(); }
+        }
+
         public ICommand CancelCommand { get; set; }
         public ICommand NotActionConfirmationCommand { get; set; }
         public ICommand DoActionConfirmationCommand { get; set; }
@@ -36,7 +44,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-                p.DialogResult = null;
+                p.DialogResult = false;
                 p.Close();
             });
             NotActionConfirmationCommand = new RelayCommand<Window>((p) =>
@@ -44,7 +52,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-                p.DialogResult = false;
+                IsYes = false;
+                p.DialogResult = true;
                 p.Close();
             });
             DoActionConfirmationCommand = new RelayCommand<Window>((p) =>
@@ -52,6 +61,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
+                IsYes = true;
                 p.DialogResult = true;
                 p.Close();
             });

@@ -778,8 +778,24 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     if (QuarantineRoom.levelID != RoomSelectedSeverity?.id)
                     {
+                        ActionConfirmation ConfirmScreen = new ActionConfirmation();
+                        var result = ConfirmScreen.ShowDialog();
+                        var vm = ConfirmScreen.DataContext as ActionConfirmationViewModel;
+                        if (result == true)
+                        {
+                            if (vm.IsYes)
+                            {
+                                foreach (var p in QuarantineRoom.QuarantinePersons)
+                                {
+                                    p.levelID = RoomSelectedSeverity?.id;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            return;
+                        }
 
-                        //return;
                     }
 
                     QuarantineRoom.levelID = RoomSelectedSeverity?.id;
