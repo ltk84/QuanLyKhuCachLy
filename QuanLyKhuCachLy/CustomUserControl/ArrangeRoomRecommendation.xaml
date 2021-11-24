@@ -8,8 +8,8 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Name="ArrangeRoomRecommendationWindow"
-    Width="1280"
-    Height="768"
+    Width="1150"
+    Height="730"
     AllowsTransparency="True"
     Background="Transparent"
     DataContext="{StaticResource ArrangeRoomRecommendationVM}"
@@ -25,7 +25,7 @@
     <Viewbox>
         <Border
             Width="1280"
-            Height="768"
+            Height="810"
             Margin="10"
             Style="{StaticResource RecommendationField}">
             <StackPanel>
@@ -329,46 +329,72 @@
                         </DataGrid>
                     </Grid>
                 </Grid>
-                <StackPanel
-                    Width="Auto"
-                    Margin="55,10,55,32"
-                    HorizontalAlignment="Right"
-                    Orientation="Horizontal">
+                <Grid Margin="55,10,55,32">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
 
-                    <Button
-                        Width="145"
-                        Height="37"
-                        Margin="0"
-                        materialDesign:ButtonAssist.CornerRadius="8"
-                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                        BorderBrush="{x:Null}"
-                        Command="{Binding CancelCommand}"
-                        CommandParameter="{Binding ElementName=ArrangeRoomRecommendationWindow}"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="16"
-                        FontWeight="Bold"
-                        Style="{StaticResource ButtonDarkTemplate}">
-                        <TextBlock Text="Hủy" />
-                    </Button>
-                    <Button
-                        Width="145"
-                        Height="37"
-                        Margin="24,0,0,0"
-                        VerticalAlignment="Center"
-                        materialDesign:ButtonAssist.CornerRadius="8"
-                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                        BorderBrush="{x:Null}"
-                        Command="{Binding ConfirmCommand}"
-                        CommandParameter="{Binding ElementName=ArrangeRoomRecommendationWindow}"
-                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                        FontSize="12"
-                        FontWeight="Bold"
-                        Style="{StaticResource ButtonAccentTemplate}">
-                        <TextBlock FontSize="16">
-                            Xác nhận
+                        <TextBlock
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="#FF434A54"
+                            TextWrapping="Wrap">
+                            Hướng dẫn
                         </TextBlock>
-                    </Button>
-                </StackPanel>
+                        <TextBlock
+                            Margin="0,0,24,0"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="16"
+                            Foreground="#FF434A54"
+                            TextWrapping="Wrap">
+                            Chọn phòng được đề xuất ở danh sách phòng được đề xuất để xem danh sách người được thêm vào. Có thể chuyển đổi qua lại bằng các nút mũi tên ở danh sách người được thêm vào và người chưa có phòng.
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel
+                        Grid.Column="1"
+                        Width="Auto"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Orientation="Horizontal">
+
+                        <Button
+                            Width="145"
+                            Height="37"
+                            Margin="0"
+                            materialDesign:ButtonAssist.CornerRadius="8"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                            BorderBrush="{x:Null}"
+                            Command="{Binding CancelCommand}"
+                            CommandParameter="{Binding ElementName=ArrangeRoomRecommendationWindow}"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Style="{StaticResource ButtonDarkTemplate}">
+                            <TextBlock Text="Hủy" />
+                        </Button>
+                        <Button
+                            Width="145"
+                            Height="37"
+                            Margin="24,0,0,0"
+                            VerticalAlignment="Center"
+                            materialDesign:ButtonAssist.CornerRadius="8"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                            BorderBrush="{x:Null}"
+                            Command="{Binding ConfirmCommand}"
+                            CommandParameter="{Binding ElementName=ArrangeRoomRecommendationWindow}"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="12"
+                            FontWeight="Bold"
+                            Style="{StaticResource ButtonAccentTemplate}">
+                            <TextBlock FontSize="16">
+                                Xác nhận
+                            </TextBlock>
+                        </Button>
+                    </StackPanel>
+                </Grid>
             </StackPanel>
         </Border>
     </Viewbox>
