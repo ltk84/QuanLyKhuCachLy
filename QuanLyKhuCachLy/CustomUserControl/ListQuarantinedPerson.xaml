@@ -25,9 +25,34 @@
             </TextBlock>
             <Button
                 Grid.Column="1"
-                Width="160"
+                Width="Auto"
+                Height="Auto"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Click="Button_Click"
+                Command="{Binding ToEditCommand}"
+                Style="{StaticResource MenuButton}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon
+                        Margin="0,0,8,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Kind="OpenInNew" />
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="11"
+                        FontWeight="Regular"
+                        Foreground="#FF000000"
+                        Text="Xem danh sách đăng ký" />
+                </StackPanel>
+            </Button>
+            <Button
+                Grid.Column="2"
+                Width="170"
                 Height="32"
-                Margin="0,0,0,0"
+                Margin="0,20,0,0"
                 Padding="0"
                 HorizontalAlignment="Right"
                 Content="Thêm người cách ly"
@@ -44,25 +69,6 @@
                     </ContextMenu>
                 </Button.ContextMenu>
             </Button>
-            <Button
-                Grid.Column="2"
-                Width="160"
-                Height="32"
-                Margin="10,10,0,0"
-                Padding="0"
-                HorizontalAlignment="Right"
-                Content="Xem danh sách đăng ký"
-                FontSize="12"
-                materialDesign:ButtonAssist.CornerRadius ="5"
-                materialDesign:ShadowAssist.ShadowDepth ="Depth0"
-                BorderBrush="{x:Null}"
-                Background="#FF1D9583"
-                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans" 
-                FontWeight="Bold"
-                Style="{StaticResource MaterialDesignRaisedButton}"
-                Click="Button_Click">
-               
-            </Button>
         </Grid>
 
 
@@ -70,15 +76,14 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="171.2" />
-                <ColumnDefinition Width="8.8"/>
+                <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
 
             <StackPanel
                 Grid.Row="0"
                 Grid.Column="0"
-                Margin="0,0,24,-0.4"
+                Margin="0,15,24,0"
                 VerticalAlignment="Bottom">
                 <TextBlock
                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
@@ -113,7 +118,7 @@
             <StackPanel
                 Grid.Row="0"
                 Grid.Column="1"
-                Margin="0,0,0,-0.4"
+                Margin="0,25,0,0"
                 VerticalAlignment="Bottom">
                 <StackPanel Margin="0,0,0,5" Orientation="Horizontal">
                     <materialDesign:PackIcon
@@ -144,8 +149,8 @@
             <StackPanel
                 Grid.Row="0"
                 Grid.Column="2"
-                Margin="24,0,0,-0.4"
-                VerticalAlignment="Bottom" Grid.ColumnSpan="2">
+                Margin="24,25,0,0"
+                VerticalAlignment="Bottom">
                 <TextBlock
                     Margin="5,0,0,5"
                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
@@ -225,6 +230,7 @@
                     MaxLength="30" />
                 <DataGridTemplateColumn
                     Width="*"
+                    CellStyle="{StaticResource DataGridCellElement}"
                     HeaderStyle="{StaticResource DataGridButtonHeader}"
                     IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>

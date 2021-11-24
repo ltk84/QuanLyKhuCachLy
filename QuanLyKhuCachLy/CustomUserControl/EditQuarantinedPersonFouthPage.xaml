@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="450"
+    d:DesignHeight="520"
     d:DesignWidth="800"
     DataContext="{StaticResource PersonVM}"
     mc:Ignorable="d">
@@ -104,6 +104,7 @@
                     <DataGridTemplateColumn
                         Width="Auto"
                         MinWidth="70"
+                        CellStyle="{StaticResource DataGridCellElement}"
                         Header=""
                         HeaderStyle="{StaticResource DataGridHeader}">
                         <DataGridTemplateColumn.CellTemplate>

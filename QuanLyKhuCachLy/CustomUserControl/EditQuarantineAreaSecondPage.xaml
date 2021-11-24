@@ -92,6 +92,7 @@
 
                         <DataGridTemplateColumn
                             Width="150"
+                            CellStyle="{StaticResource DataGridCellElement}"
                             HeaderStyle="{StaticResource DataGridButtonHeader}"
                             IsReadOnly="True">
                             <DataGridTemplateColumn.Header>

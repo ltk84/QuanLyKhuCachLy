@@ -11,7 +11,7 @@
     mc:Ignorable="d">
 
 
-    <StackPanel Margin="25,45,45,0">
+    <StackPanel Margin="25,45,45,25">
 
         <Grid Margin="0,0,0,17">
             <Grid.ColumnDefinitions>
@@ -301,7 +301,7 @@
         </Grid>
 
         <Border
-            Height="366"
+            Height="320"
             Margin="0,10,0,0"
             HorizontalAlignment="Left"
             Background="Transparent"

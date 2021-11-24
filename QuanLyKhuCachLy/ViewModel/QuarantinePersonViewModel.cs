@@ -1085,37 +1085,92 @@ namespace QuanLyKhuCachLy.ViewModel
                 catch (DbUpdateException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi db update";
+                    //string error = "Lỗi db update";
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
                 catch (DbEntityValidationException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi validation";
+                    //string error = "Lỗi validation";
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
                 catch (NotSupportedException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi db đéo support";
+                    //string error = "Lỗi db đéo support";
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
                 catch (ObjectDisposedException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi db object disposed";
+                    //string error = "Lỗi db object disposed";
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
                 catch (InvalidOperationException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi invalid operation";
+                    //string error = "Lỗi invalid operation";
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
             }
         }
@@ -1187,37 +1242,92 @@ namespace QuanLyKhuCachLy.ViewModel
                 catch (DbUpdateException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi db update";
+                    //string error = "Lỗi db update";
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
                 catch (DbEntityValidationException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi validation";
+                    //string error = "Lỗi validation";
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
                 catch (NotSupportedException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi db đéo support";
+                    //string error = "Lỗi db đéo support";
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
                 catch (ObjectDisposedException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi db object disposed";
+                    //string error = "Lỗi db object disposed";
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
                 catch (InvalidOperationException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi invalid operation";
+                    //string error = "Lỗi invalid operation";
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
             }
         }
@@ -1850,46 +1960,96 @@ namespace QuanLyKhuCachLy.ViewModel
                 catch (DbUpdateException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi db update";
+                    //string error = "Lỗi db update";
 
                     RollBackChange();
 
-                    MessageBox.Show(error);
 
-
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
                 catch (DbEntityValidationException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi validation";
+                    //string error = "Lỗi validation";
 
                     RollBackChange();
-
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
                 catch (NotSupportedException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi db đéo support";
                     RollBackChange();
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
                 catch (ObjectDisposedException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi db object disposed";
                     RollBackChange();
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
                 catch (InvalidOperationException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi invalid operation";
                     RollBackChange();
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
 
             }
@@ -1987,42 +2147,92 @@ namespace QuanLyKhuCachLy.ViewModel
                 catch (DbUpdateException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi db update";
                     RollBackChange();
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
                 catch (DbEntityValidationException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi validation";
                     RollBackChange();
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
                 catch (NotSupportedException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi db đéo support";
                     RollBackChange();
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
                 catch (ObjectDisposedException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi db object disposed";
                     RollBackChange();
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
                 catch (InvalidOperationException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi invalid operation";
                     RollBackChange();
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
             }
 
@@ -2049,42 +2259,92 @@ namespace QuanLyKhuCachLy.ViewModel
                 catch (DbUpdateException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi db update";
                     RollBackChange();
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
                 catch (DbEntityValidationException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi validation";
                     RollBackChange();
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
                 catch (NotSupportedException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi db đéo support";
                     RollBackChange();
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
                 catch (ObjectDisposedException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi db object disposed";
                     RollBackChange();
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
                 catch (InvalidOperationException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi invalid operation";
                     RollBackChange();
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
             }
         }
@@ -2411,48 +2671,110 @@ namespace QuanLyKhuCachLy.ViewModel
                     catch (DbUpdateException e)
                     {
                         transaction.Rollback();
-                        string error = "Lỗi db update";
                         RollBackChange();
 
-                        MessageBox.Show(error);
+                        Window ErrorDialog = new Window
+                        {
+                            AllowsTransparency = true,
+                            Background = Brushes.Transparent,
+                            Width = 600,
+                            Height = 400,
+                            ResizeMode = ResizeMode.NoResize,
+                            WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                            WindowStyle = WindowStyle.None,
+                            Content = new FailNotification()
+                        };
+                        ErrorDialog.ShowDialog();
                     }
                     catch (DbEntityValidationException e)
                     {
                         transaction.Rollback();
-                        string error = "Lỗi validation";
                         RollBackChange();
 
-                        MessageBox.Show(error);
+                        Window ErrorDialog = new Window
+                        {
+                            AllowsTransparency = true,
+                            Background = Brushes.Transparent,
+                            Width = 600,
+                            Height = 400,
+                            ResizeMode = ResizeMode.NoResize,
+                            WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                            WindowStyle = WindowStyle.None,
+                            Content = new FailNotification()
+                        };
+                        ErrorDialog.ShowDialog();
                     }
                     catch (NotSupportedException e)
                     {
                         transaction.Rollback();
-                        string error = "Lỗi db đéo support";
                         RollBackChange();
 
-                        MessageBox.Show(error);
+                        Window ErrorDialog = new Window
+                        {
+                            AllowsTransparency = true,
+                            Background = Brushes.Transparent,
+                            Width = 600,
+                            Height = 400,
+                            ResizeMode = ResizeMode.NoResize,
+                            WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                            WindowStyle = WindowStyle.None,
+                            Content = new FailNotification()
+                        };
+                        ErrorDialog.ShowDialog();
                     }
                     catch (ObjectDisposedException e)
                     {
                         transaction.Rollback();
-                        string error = "Lỗi db object disposed";
                         RollBackChange();
 
-                        MessageBox.Show(error);
+                        Window ErrorDialog = new Window
+                        {
+                            AllowsTransparency = true,
+                            Background = Brushes.Transparent,
+                            Width = 600,
+                            Height = 400,
+                            ResizeMode = ResizeMode.NoResize,
+                            WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                            WindowStyle = WindowStyle.None,
+                            Content = new FailNotification()
+                        };
+                        ErrorDialog.ShowDialog();
                     }
                     catch (InvalidOperationException e)
                     {
                         transaction.Rollback();
-                        string error = "Lỗi invalid operation";
                         RollBackChange();
 
-                        MessageBox.Show(error);
+                        Window ErrorDialog = new Window
+                        {
+                            AllowsTransparency = true,
+                            Background = Brushes.Transparent,
+                            Width = 600,
+                            Height = 400,
+                            ResizeMode = ResizeMode.NoResize,
+                            WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                            WindowStyle = WindowStyle.None,
+                            Content = new FailNotification()
+                        };
+                        ErrorDialog.ShowDialog();
                     }
                 }
             }
             else
             {
-                MessageBox.Show("No data found.");
+                //MessageBox.Show("No data found.");
+                Window ErrorDialog = new Window
+                {
+                    AllowsTransparency = true,
+                    Background = Brushes.Transparent,
+                    Width = 600,
+                    Height = 400,
+                    ResizeMode = ResizeMode.NoResize,
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                    WindowStyle = WindowStyle.None,
+                    Content = new FailNotification()
+                };
+                ErrorDialog.ShowDialog();
             }
 
         }

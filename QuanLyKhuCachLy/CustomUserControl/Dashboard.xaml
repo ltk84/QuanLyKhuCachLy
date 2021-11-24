@@ -12,6 +12,11 @@
     d:DesignWidth="800"
     DataContext="{StaticResource DashboardVM}"
     mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Refresh}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid Margin="25,45,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

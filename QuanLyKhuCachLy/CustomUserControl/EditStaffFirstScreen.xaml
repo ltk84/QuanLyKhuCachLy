@@ -8,8 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:utility="clr-namespace:QuanLyKhuCachLy.Utility"
     xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
-    Width="800"
-    Height="450"
+    Width="880"
+    Height="480"
     mc:Ignorable="d">
     <StackPanel Margin="0,0,0,0">
         <TextBlock
@@ -18,14 +18,14 @@
             FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
             FontSize="24"
             FontWeight="Bold">
-            Sửa thông tin nhân viên
+            Cập nhật thông tin nhân viên
         </TextBlock>
         <TextBlock
             Margin="0,2,0,0"
             HorizontalAlignment="Center"
             FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
             FontSize="16">
-            Vui lòng điền thông tin nhân viên
+            Vui lòng điền thông tin nhân viên.
         </TextBlock>
         <Grid Grid.Row="0" Margin="30,0,30,0">
             <Grid.ColumnDefinitions>

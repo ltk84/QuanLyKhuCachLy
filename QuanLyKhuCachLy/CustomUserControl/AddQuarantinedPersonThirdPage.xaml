@@ -8,7 +8,7 @@
     xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="450"
+    d:DesignHeight="520"
     d:DesignWidth="800"
     mc:Ignorable="d">
     <StackPanel Margin="0,0,0,0">
@@ -117,6 +117,7 @@
                         <DataGridTemplateColumn
                             Width="Auto"
                             MinWidth="70"
+                            CellStyle="{StaticResource DataGridCellElement}"
                             Header="Ngày tiêm"
                             HeaderStyle="{StaticResource DataGridHeader}">
                             <DataGridTemplateColumn.CellTemplate>
@@ -128,6 +129,7 @@
                         <DataGridTemplateColumn
                             Width="Auto"
                             MinWidth="70"
+                            CellStyle="{StaticResource DataGridCellElement}"
                             HeaderStyle="{StaticResource DataGridHeader}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -219,6 +221,7 @@
                         <DataGridTemplateColumn
                             Width="Auto"
                             MinWidth="120"
+                            CellStyle="{StaticResource DataGridCellElement}"
                             Header="Ngày xét nghiệm"
                             HeaderStyle="{StaticResource DataGridHeader}">
                             <DataGridTemplateColumn.CellTemplate>
@@ -230,6 +233,7 @@
                         <DataGridTemplateColumn
                             Width="Auto"
                             MinWidth="150"
+                            CellStyle="{StaticResource DataGridCellElement}"
                             Header="Kết quả"
                             HeaderStyle="{StaticResource DataGridHeader}">
                             <DataGridTemplateColumn.CellTemplate>
@@ -246,6 +250,7 @@
                         <DataGridTemplateColumn
                             Width="Auto"
                             MinWidth="70"
+                            CellStyle="{StaticResource DataGridCellElement}"
                             Header=""
                             HeaderStyle="{StaticResource DataGridHeader}">
                             <DataGridTemplateColumn.CellTemplate>

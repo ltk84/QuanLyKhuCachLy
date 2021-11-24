@@ -8,9 +8,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Name="EditQAScreen"
     Title="EditQuarantineAreaScreen"
-    Width="1225"
-    Height="800"
+    Width="1058"
+    Height="768"
+    AllowsTransparency="True"
+    Background="{x:Null}"
     DataContext="{StaticResource SettingVM}"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
     mc:Ignorable="d">
     <StackPanel>
         <Grid>

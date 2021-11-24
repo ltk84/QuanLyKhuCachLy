@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace QuanLyKhuCachLy.ViewModel
 {
@@ -552,7 +553,7 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             QuarantineArea = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
             QAAdress = QuarantineArea.Address;
-            QuarantineAreaAddress = $"{QuarantineArea.Address?.apartmentNumber} {QuarantineArea.Address?.streetName}, {QuarantineArea.Address.ward}, {QuarantineArea.Address.district}, {QuarantineArea.Address.province}";
+           
             SelectedProvince = QAAdress.province;
             SelectedDistrict = QAAdress.district;
             SelectedWard = QAAdress.ward;
@@ -561,6 +562,11 @@ namespace QuanLyKhuCachLy.ViewModel
             Manager = DataProvider.ins.db.Staffs.Where(staff => staff.id == QuarantineArea.managerID).FirstOrDefault();
             SelectedStaff = Manager;
             StaffList = new ObservableCollection<Staff>(DataProvider.ins.db.Staffs);
+
+           
+             
+                UpdateDisplayAddress(QuarantineArea.Address);
+                
         }
 
         void InitProvinceList()
@@ -619,44 +625,99 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     DataProvider.ins.db.SaveChanges();
 
-                    QuarantineAreaAddress = $"{QuarantineArea.Address?.apartmentNumber} {QuarantineArea.Address?.streetName}, {QuarantineArea.Address.ward}, {QuarantineArea.Address.district}, {QuarantineArea.Address.province}";
+                    UpdateDisplayAddress(QuarantineArea.Address);
 
                     transaction.Commit();
                 }
                 catch (DbUpdateException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi db update";
+                    //string error = "Lỗi db update";
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
                 catch (DbEntityValidationException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi validation";
+                    //string error = "Lỗi validation";
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
                 catch (NotSupportedException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi db đéo support";
+                    //string error = "Lỗi db đéo support";
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
                 catch (ObjectDisposedException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi db object disposed";
+                    //string error = "Lỗi db object disposed";
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
                 catch (InvalidOperationException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi invalid operation";
+                    //string error = "Lỗi invalid operation";
 
-                    MessageBox.Show(error);
+                    Window ErrorDialog = new Window
+                    {
+                        AllowsTransparency = true,
+                        Background = Brushes.Transparent,
+                        Width = 600,
+                        Height = 400,
+                        ResizeMode = ResizeMode.NoResize,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        WindowStyle = WindowStyle.None,
+                        Content = new FailNotification()
+                    };
+                    ErrorDialog.ShowDialog();
                 }
             }
         }
@@ -688,6 +749,36 @@ namespace QuanLyKhuCachLy.ViewModel
         //            break;
         //    }
         //}
+
+        void UpdateDisplayAddress(Address PersonAddress)
+        {
+            if (PersonAddress == null) return;
+            List<string> list = new List<string>()
+            {
+                PersonAddress.apartmentNumber,
+                PersonAddress.streetName,
+                PersonAddress.ward,
+                PersonAddress.district,
+                PersonAddress.province
+
+            };
+
+            QuarantineAreaAddress = string.Empty;
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (!string.IsNullOrWhiteSpace(list[i]))
+                {
+                    QuarantineAreaAddress += list[i];
+                }
+                if (i != list.Count - 1)
+                {
+                    if (i != 0)
+                        QuarantineAreaAddress += ", ";
+                    else QuarantineAreaAddress += "";
+                }
+            }
+        }
+
 
         #endregion
     }
