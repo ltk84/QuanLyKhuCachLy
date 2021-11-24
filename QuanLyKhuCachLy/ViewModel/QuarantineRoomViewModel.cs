@@ -775,6 +775,13 @@ namespace QuanLyKhuCachLy.ViewModel
                     Model.QuarantineRoom QuarantineRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == SelectedItem.id).FirstOrDefault();
                     QuarantineRoom.displayName = RoomDisplayName;
                     QuarantineRoom.capacity = RoomCapacity;
+
+                    if (QuarantineRoom.levelID != RoomSelectedSeverity?.id)
+                    {
+
+                        //return;
+                    }
+
                     QuarantineRoom.levelID = RoomSelectedSeverity?.id;
 
                     DataProvider.ins.db.SaveChanges();

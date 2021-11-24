@@ -1,5 +1,6 @@
 ﻿using QuanLyKhuCachLy.Model;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -49,6 +50,15 @@ namespace QuanLyKhuCachLy.ValidationRules
 
                     if (propertyType.Name == "Int32")
                     {
+                        if (propertyName == "RoomCapacity")
+                        {
+                            var SelectedItemVM = sourceItem.GetType().GetProperty("SelectedItem").GetValue(sourceItem);
+                            var PersonListCount = SelectedItemVM.GetType().GetProperty("QuarantinePersons").GetValue(SelectedItemVM);
+                            HashSet<QuarantinePerson> convertList = (HashSet<QuarantinePerson>)PersonListCount;
+                            if ((int)sourceValue < convertList.Count)
+                                return new ValidationResult(false, $"Giá trị bé hơn số người trong phòng ({convertList.Count} người)");
+                            else return ValidationResult.ValidResult;
+                        }
                         return Int32.Parse(sourceValue.ToString()) <= 0 ? new ValidationResult(false, $"Thông tin này là bắt buộc.") : ValidationResult.ValidResult;
                     }
                     else if (propertyType.Name == "String")
