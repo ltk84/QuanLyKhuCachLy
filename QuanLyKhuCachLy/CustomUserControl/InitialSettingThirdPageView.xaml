@@ -157,7 +157,7 @@
                 <StackPanel
                     Grid.Row="1"
                     Grid.Column="0"
-                    Margin="0,25,24,0">
+                    Margin="0,20,24,0">
                     <TextBlock
                         Margin="5,10,0,5"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
@@ -184,8 +184,7 @@
                 <StackPanel
                     Grid.Row="1"
                     Grid.Column="2"
-                    Margin="0,25,0,0"
-                    VerticalAlignment="Bottom">
+                    Margin="0,20,0,0">
                     <TextBlock
                         Margin="5,10,0,5"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
@@ -209,7 +208,7 @@
                 <StackPanel
                     Grid.Row="1"
                     Grid.Column="1"
-                    Margin="0,25,24,0">
+                    Margin="0,20,24,0">
                     <TextBlock
                         Margin="5,10,0,5"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
@@ -233,7 +232,7 @@
                 <StackPanel
                     Grid.Row="2"
                     Grid.Column="0"
-                    Margin="0,25,24,0">
+                    Margin="0,20,24,0">
                     <TextBlock
                         Margin="5,10,0,5"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
