@@ -7,7 +7,9 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:utility="clr-namespace:QuanLyKhuCachLy.Utility"
+    WindowStartupLocation="CenterScreen"
     Title="ProposeNotification"
+    
     Width="1100"
     Height="920"
     DataContext="{StaticResource ProposeNotificationVM}"
@@ -72,7 +74,7 @@
                         <TextBox.Text>
                             <Binding
                                 Mode="TwoWay"
-                                Path="SearchKey1"
+                                Path="SearchKey"
                                 UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules />
                             </Binding>
@@ -101,10 +103,10 @@
                         Padding="7,5,5,7"
                         utility:ProtocolSettingsLayout.MVVMHasError="{Binding SexFieldHasError}"
                         FontSize="10"
-                        ItemsSource="{Binding FilterType1}"
+                        ItemsSource="{Binding FilterType}"
                         Style="{StaticResource ComboBoxField}">
                         <ComboBox.SelectedItem>
-                            <Binding Path="SelectedFilterType1" UpdateSourceTrigger="PropertyChanged">
+                            <Binding Path="SelectedFilterType" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules />
                             </Binding>
                         </ComboBox.SelectedItem>
@@ -127,10 +129,10 @@
                         Padding="7,5,5,7"
                         utility:ProtocolSettingsLayout.MVVMHasError="{Binding SexFieldHasError}"
                         FontSize="10"
-                        ItemsSource="{Binding FilterProperty1}"
+                        ItemsSource="{Binding FilterProperty}"
                         Style="{StaticResource ComboBoxField}">
                         <ComboBox.SelectedItem>
-                            <Binding Path="SelectedFilterProperty1" UpdateSourceTrigger="PropertyChanged">
+                            <Binding Path="SelectedFilterProperty" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules />
                             </Binding>
                         </ComboBox.SelectedItem>
@@ -155,7 +157,7 @@
                     CanUserResizeColumns="False"
                     CanUserResizeRows="False"
                     IsReadOnly="True"
-                    ItemsSource="{Binding PeopleList}"
+                    ItemsSource="{Binding PeopleListView}"
                     SelectionMode="Single"
                     SelectionUnit="FullRow">
                     <DataGrid.Columns>
