@@ -30,7 +30,6 @@
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 Click="Button_Click"
-                Command="{Binding ToEditCommand}"
                 Style="{StaticResource MenuButton}">
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon

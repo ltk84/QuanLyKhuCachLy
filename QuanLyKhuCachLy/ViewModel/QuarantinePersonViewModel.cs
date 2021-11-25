@@ -1771,7 +1771,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     if (i != 0)
                         DisplayAddress += ", ";
-                    else DisplayAddress += "";
+                    else DisplayAddress += " ";
                 }
             }
         }
