@@ -280,5 +280,41 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Grid>
+            <Button
+                Grid.Column="2"
+                Width="160"
+                Height="32"
+                Margin="10,0,0,30"
+                Padding="0"
+                HorizontalAlignment="Left"
+                materialDesign:ButtonAssist.CornerRadius="5"
+                materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                Background="#FF1D9583"
+                BorderBrush="{x:Null}"
+                Content="Thêm kết quả xét nghiệm"
+                Command="{Binding ToAddTestingResutlFromExcel}"
+                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                FontSize="12"
+                FontWeight="Bold"
+                Style="{StaticResource MaterialDesignRaisedButton}" />
+            <Button
+                Grid.Column="2"
+                Width="160"
+                Height="32"
+                Margin="10,0,0,30"
+                Padding="0"
+                HorizontalAlignment="Right"
+                materialDesign:ButtonAssist.CornerRadius="5"
+                materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                Background="#FF1D9583"
+                BorderBrush="{x:Null}"
+                Content="Xuất danh sách"
+                Command="{Binding ToExportExcel}"
+                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                FontSize="12"
+                FontWeight="Bold"
+                Style="{StaticResource MaterialDesignRaisedButton}" />
+        </Grid>
     </StackPanel>
 </UserControl>
