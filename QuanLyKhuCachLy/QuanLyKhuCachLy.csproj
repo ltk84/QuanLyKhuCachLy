@@ -872,7 +872,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="QuanLyKhuCachLy_TemporaryKey.pfx" />
+    
     <Resource Include="Resources\fonts\NotoSans-Black.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

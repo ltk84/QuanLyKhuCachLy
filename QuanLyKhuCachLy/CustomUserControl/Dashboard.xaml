@@ -340,6 +340,7 @@
                                 Height="35"
                                 Margin="0,20,0,0"
                                 HorizontalAlignment="Right"
+                                Command="{Binding ToFinishNotificationRecommendation}"
                                 Content="Xem đề xuất gửi thông báo"
                                 FontSize="12"
                                 Style="{StaticResource DashboardButton}" />
