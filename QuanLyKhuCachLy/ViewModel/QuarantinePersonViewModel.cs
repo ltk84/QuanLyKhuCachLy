@@ -1368,6 +1368,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 List<Address> listAdress = new List<Address>();
                 List<QuarantinePerson> listQuarantinePerson = new List<QuarantinePerson>();
                 List<HealthInformation> listHealthInformation = new List<HealthInformation>();
+                List<List<InjectionRecord>> listInjectionRecords = new List<List<InjectionRecord>>();
                 Excel.Application xlApp = new Excel.Application();
                 Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(path);
                 Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
@@ -1385,7 +1386,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 xlRange.Cells[1, 10] == null || xlRange.Cells[1, 10].Value2 != "SĐT" ||
                 xlRange.Cells[1, 11] == null || xlRange.Cells[1, 11].Value2 != "Triệu chứng" ||
                 xlRange.Cells[1, 12] == null || xlRange.Cells[1, 12].Value2 != "Nhóm đối tượng" ||
-                xlRange.Cells[1, 13] == null || xlRange.Cells[1, 13].Value2 != "Ngày đến")
+                xlRange.Cells[1, 13] == null || xlRange.Cells[1, 13].Value2 != "Ngày đến"||
+                xlRange.Cells[1, 14] == null || xlRange.Cells[1, 14].Value2 != "Thông tin tiêm chủng")
                 {
                     //MessageBox.Show("Không đúng định dạng file");
                     return;
@@ -1395,6 +1397,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     Address personAddress = new Address();
                     QuarantinePerson quarantinePerson = new QuarantinePerson();
                     HealthInformation healthInformation = new HealthInformation();
+                    List<InjectionRecord> injectionRecords = new List<InjectionRecord>();
                     if (xlRange.Cells[i, 2] != null && xlRange.Cells[i, 2].Value2 != null)
                     {
                         quarantinePerson.name = xlRange.Cells[i, 2].Value2.ToString();
@@ -1500,9 +1503,40 @@ namespace QuanLyKhuCachLy.ViewModel
                         DateTime arrivedTime = DateTime.FromOADate(double.Parse(xlRange.Cells[i, 13].Value2.ToString()));
                         quarantinePerson.arrivedDate = arrivedTime;
                     }
+                    if (xlRange.Cells[i, 14] != null && xlRange.Cells[i, 14].Value2 != null)
+                    {
+
+                        var records = xlRange.Cells[i,14].Value2.ToString().Split(',');
+                        for (int j = 0; j < records.Length; j++)
+                        {
+                            InjectionRecord rc = new InjectionRecord();
+                            string[] str = records[j].Split(' ');
+                            if (str.Length == 2 )
+                            {
+                                DateTime date = Convert.ToDateTime(str[0].ToString());
+                                string vaccine = str[1].ToString();
+                                rc.dateInjection = date;
+                                rc.vaccineName = vaccine;
+                                injectionRecords.Add(rc);
+                            }
+                        }
+                        if (injectionRecords.Count() == 0)
+                        {
+                            InjectionRecord rc = new InjectionRecord();
+                            rc.vaccineName = "Không có nhá";
+                            injectionRecords.Add(rc);
+                        }
+                    }
+                    else
+                    {
+                        InjectionRecord rc = new InjectionRecord();
+                        rc.vaccineName = "Không có nhá";
+                        injectionRecords.Add(rc);
+                    }
                     listAdress.Add(personAddress);
                     listHealthInformation.Add(healthInformation);
                     listQuarantinePerson.Add(quarantinePerson);
+                    listInjectionRecords.Add(injectionRecords);
                 }
                 using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
                 {
@@ -1524,6 +1558,16 @@ namespace QuanLyKhuCachLy.ViewModel
                             listHealthInformation[i].quarantinePersonID = listQuarantinePerson[i].id;
                             DataProvider.ins.db.HealthInformations.Add(listHealthInformation[i]);
                             DataProvider.ins.db.SaveChanges();
+                            if (listInjectionRecords[i][0].vaccineName != "Không có nhá")
+                            {
+                                for (int j = 0; j < listInjectionRecords[i].Count; j++)
+                                {
+                                    listInjectionRecords[i][j].quarantinePersonID = listQuarantinePerson[i].id;
+                                    DataProvider.ins.db.InjectionRecords.Add(listInjectionRecords[i][j]);
+                                    DataProvider.ins.db.SaveChanges();
+                                }
+                                DataProvider.ins.db.SaveChanges();
+                            }
                         }
                         PeopleListView = DataProvider.ins.db.QuarantinePersons.ToArray();
                         QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
