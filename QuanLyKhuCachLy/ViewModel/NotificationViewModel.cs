@@ -1743,7 +1743,7 @@ namespace QuanLyKhuCachLy.ViewModel
         {
 
             var QAName = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().name;
-            string CombinedMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đền từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn";
+            string CombinedMessage = "Chào a/c " + person.name + ", đây là thông báo đền từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn";
             return CombinedMessage;
         }
 
@@ -1758,27 +1758,24 @@ namespace QuanLyKhuCachLy.ViewModel
 
         string TestingNotification(QuarantinePerson person)
         {
-            var DestinationRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == person.roomID).FirstOrDefault();
             var QAName = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().name;
-            string CombinedMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đền từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn";
+            string CombinedMessage = "Chào a/c " + person.name + ", đây là thông báo đền từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn";
             return CombinedMessage;
         }
 
 
         string StartIntroduction(QuarantinePerson person)
         {
-            var DestinationRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == person.roomID).FirstOrDefault();
             var QAName = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().name;
-            string CombinedMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đền từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn";
+            string CombinedMessage = "Chào a/c " + person.name + ", đây là thông báo đền từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn";
             return CombinedMessage;
         }
 
 
         string EndIntroduction(QuarantinePerson person)
         {
-            var DestinationRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == person.roomID).FirstOrDefault();
             var QAName = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().name;
-            string CombinedMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đền từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn";
+            string CombinedMessage = "Chào a/c " + person.name + ", đây là thông báo đền từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn";
             return CombinedMessage;
         }
 

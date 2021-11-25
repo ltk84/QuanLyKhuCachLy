@@ -5,6 +5,11 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
+using Twilio.Types;
 
 namespace QuanLyKhuCachLy.ViewModel
 {
@@ -72,6 +77,10 @@ namespace QuanLyKhuCachLy.ViewModel
                 SearchKey = "";
             }
         }
+        // message
+
+        
+
 
 
 
@@ -117,10 +126,10 @@ namespace QuanLyKhuCachLy.ViewModel
 
 
         private string _editableMessage;
-        public string editableMessage
+        public string EditableMessage
         {
             get { return _editableMessage; }
-            set { _editableMessage = value; OnPropertyChanged(); }
+            set { _editableMessage = value; OnPropertyChanged(); setFullMessgae(); }
         }
 
         private string _fullMessage;
@@ -131,13 +140,88 @@ namespace QuanLyKhuCachLy.ViewModel
         }
 
 
+        public ICommand SendNotification { get; set; }
+
+
+
         #endregion
 
         public ProposeNotificationViewModel()
         {
             Type = 1;
             InitData();
+
+            SendNotification = new RelayCommand<Window>((p) =>
+            {
+                if (EditableMessage == "" || PeopleList.ToArray().Length == 0) return false;
+                return true;
+            }, (p) =>
+            {
+                SendMessage();
+                p.DialogResult = false;
+                p.Close();
+            });
         }
+
+
+        #region sendNotification
+
+        void SendMessage()
+        {
+            var messageContent = "";
+            for (int i = 0; i < PeopleList.ToArray().Length; i++)
+            {
+                var QAName = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().name;
+                 messageContent = "Chào a/c " + PeopleList[i].name + ", đây là thông báo đền từ ban quản lý của khu cách ly " + QAName + ". " + EditableMessage + ". Xin cảm ơn.";
+               
+
+                if (PeopleList[i].phoneNumber != "" && PeopleList[i] != null)
+                {
+                    SendMessageWithTwillo(messageContent, fomatPhoneNumber(PeopleList[i].phoneNumber));
+
+                }
+
+            }
+
+            MessageBox.Show("Gửi thông báo thành công!");
+            // Reset nè
+            PeopleList = new ObservableCollection<QuarantinePerson>();
+            EditableMessage = "";
+            // Close form nè
+
+
+
+        }
+        void SendMessageWithTwillo(string messageContent, string phoneNumber)
+        {
+            try
+            {
+                var accountSid = "AC9cb120d0ee9f5196f765af6db11ce3dd";
+                var authToken = "17750dc00aa57d5f05d436cd9085652c";
+                TwilioClient.Init(accountSid, authToken);
+
+                var messageOptions = new CreateMessageOptions(
+                   new PhoneNumber(phoneNumber));
+                messageOptions.MessagingServiceSid = "MG9ba537e9324fff8eeac2f4eeb109d1f0";
+                messageOptions.Body = messageContent;
+
+                var message = MessageResource.Create(messageOptions);
+            }
+            catch
+            {
+                MessageBox.Show("Loi roi");
+            }
+        }
+
+
+        string fomatPhoneNumber(string phoneNumber)
+        {
+            phoneNumber = phoneNumber.Replace(" ", String.Empty);
+            phoneNumber = phoneNumber.Remove(0, 1);
+            phoneNumber = "+84" + phoneNumber;
+            return phoneNumber;
+        }
+        #endregion
 
 
 
@@ -324,6 +408,17 @@ namespace QuanLyKhuCachLy.ViewModel
 
         }
 
+
+        void setFullMessgae()
+        {
+            var QAName = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().name;
+
+           
+            
+                FullMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đến từ ban quản lý khu cách ly " + QAName + ". " + EditableMessage + ". Xin cảm ơn";
+            
+        }
+
         private void InitDataFilter()
         {
             FilterType = new string[] { "Tất cả", "Giới tính", "Quốc tịch", "Phòng", "Nhóm đối tượng", "Ngày đi", "Ngày đến" };
@@ -351,8 +446,14 @@ namespace QuanLyKhuCachLy.ViewModel
 
             PeopleListView = PeopleList.ToArray();
             InitDataFilter();
-            
+            // get the template
+            EditableMessage = DataProvider.ins.db.NotificationTemplates.Where(item => item.id == Type).FirstOrDefault().content;
+
+
         }
+
+
+        
 
         #endregion
     }

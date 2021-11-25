@@ -9,6 +9,7 @@
     xmlns:utility="clr-namespace:QuanLyKhuCachLy.Utility"
     WindowStartupLocation="CenterScreen"
     Title="ProposeNotification"
+    Name="ProposeNotificationWindow"
     
     Width="1100"
     Height="920"
@@ -260,6 +261,8 @@
                 HorizontalAlignment="Right"
                 Background="#ff1D9583"
                 BorderBrush="#ff1D9583"
+                CommandParameter="{Binding ElementName=ProposeNotificationWindow}"
+                Command="{Binding SendNotification}"
                 Content="Gửi thông báo"
                 FontSize="12" />
         </StackPanel>
