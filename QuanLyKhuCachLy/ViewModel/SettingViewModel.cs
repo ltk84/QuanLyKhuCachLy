@@ -240,7 +240,12 @@ namespace QuanLyKhuCachLy.ViewModel
                 return false;
             }, (o) =>
             {
-                DeleteEntity();
+
+                DeleteConfirmation confirmation = new DeleteConfirmation();
+                if (confirmation.ShowDialog() == true)
+                {
+                    DeleteEntity();
+                }
             });
 
 
@@ -264,6 +269,17 @@ namespace QuanLyKhuCachLy.ViewModel
 
         void DeleteEntity()
         {
+            Window SuccessDialog = new Window
+            {
+                AllowsTransparency = true,
+                Background = Brushes.Transparent,
+                Width = 600,
+                Height = 400,
+                ResizeMode = ResizeMode.NoResize,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                WindowStyle = WindowStyle.None,
+                Content = new SuccessNotification()
+            };
             switch (SelectedEntity)
             {
                 case "Tất cả":
@@ -271,12 +287,15 @@ namespace QuanLyKhuCachLy.ViewModel
                     break;
                 case "Phòng":
                     DeleteAllRecordInRoomList();
+                    SuccessDialog.ShowDialog();
                     break;
                 case "Người cách ly":
                     DeleteAllRecordInPersonList();
+                    SuccessDialog.ShowDialog();
                     break;
                 case "Nhân viên":
                     DeleteAllRecordInStaffList();
+                    SuccessDialog.ShowDialog();
                     break;
                 default:
                     break;
@@ -296,6 +315,20 @@ namespace QuanLyKhuCachLy.ViewModel
             DeleteAllRecordInStaffList();
             DeleteQuarantineAreaInformation();
             DeleteSeverityList();
+
+            Window SuccessDialog = new Window
+            {
+                AllowsTransparency = true,
+                Background = Brushes.Transparent,
+                Width = 600,
+                Height = 400,
+                ResizeMode = ResizeMode.NoResize,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                WindowStyle = WindowStyle.None,
+                Content = new SuccessNotification()
+            };
+            SuccessDialog.ShowDialog();
+
             RestartApplication();
         }
 

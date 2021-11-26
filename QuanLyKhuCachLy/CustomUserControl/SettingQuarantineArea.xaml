@@ -314,7 +314,33 @@
                     FontSize="14"
                     FontWeight="Regular"
                     Foreground="#FF363636"
-                    Text="Thực hiện xóa tất cả dữ liệu liên quan." />
+                    Text="Thực hiện xóa các dữ liệu liên quan có thể tùy chọn." />
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="14"
+                        FontWeight="Regular"
+                        Foreground="#FF363636"
+                        Text="Việc làm mới " />
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="14"
+                        FontWeight="Bold"
+                        Foreground="#FF363636"
+                        Text="tất cả " />
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="14"
+                        FontWeight="Regular"
+                        Foreground="#FF363636"
+                        Text="sẽ phải khởi động lại phần mềm." />
+                </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock
                         Grid.Row="0"

@@ -22,9 +22,10 @@
             <TextBlock Style="{StaticResource ConfirmationTitle}">
                 Bạn có chắc muốn xóa?
             </TextBlock>
-            <TextBlock Style="{StaticResource ConfirmationSubtitle}">
-                Sau khi xóa sẽ không thể hoàn tác
-            </TextBlock>
+            <TextBlock
+                Style="{StaticResource ConfirmationSubtitle}"
+                Text="{Binding Content}"
+                TextWrapping="Wrap" />
             <StackPanel
                 Margin="0,32,0,0"
                 HorizontalAlignment="Center"
