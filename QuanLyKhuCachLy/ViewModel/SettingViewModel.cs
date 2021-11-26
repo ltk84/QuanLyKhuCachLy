@@ -400,6 +400,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 default:
                     break;
             }
+            RefeshTab();
         }
 
         void RestartApplication()
