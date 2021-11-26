@@ -966,10 +966,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 catch (DbUpdateException e)
                 {
                     transaction.Rollback();
-<<<<<<< HEAD
 
-=======
->>>>>>> c32fa879168f949dfac031ff869b85e58c79546d
                     RollBackChange();
 
                     CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();

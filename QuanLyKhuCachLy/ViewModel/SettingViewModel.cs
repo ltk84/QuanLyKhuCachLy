@@ -6,9 +6,11 @@ using System.Collections.ObjectModel;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -25,6 +27,7 @@ namespace QuanLyKhuCachLy.ViewModel
             set { _QuarantineArea = value; }
         }
 
+        #region address
         private Address _QAAdress;
 
         public Address QAAdress
@@ -47,6 +50,8 @@ namespace QuanLyKhuCachLy.ViewModel
 
         private string _SelectedDistrict;
         public string SelectedDistrict { get => _SelectedDistrict; set { _SelectedDistrict = value; OnPropertyChanged(); InitWardList(); } }
+
+        #endregion
 
         private Model.Staff _Manager;
 
@@ -80,25 +85,34 @@ namespace QuanLyKhuCachLy.ViewModel
             set { _SelectedEntity = value; OnPropertyChanged(); }
         }
 
-        //#region UI
+        #region authentication
+        private string _username;
 
-        //private Visibility _Tab1;
-        //public Visibility Tab1 { get => _Tab1; set { _Tab1 = value; OnPropertyChanged(); } }
+        public string UserName
+        {
+            get { return _username; }
+            set { _username = value; OnPropertyChanged(); }
+        }
 
-        //private Visibility _Tab2;
-        //public Visibility Tab2 { get => _Tab2; set { _Tab2 = value; OnPropertyChanged(); } }
-        //public int TabIndex { get; set; }
+        private string _password;
 
-        //private String _TabPostion;
-        //public String TabPosition
-        //{
-        //    get => _TabPostion; set
-        //    {
-        //        _TabPostion = value; OnPropertyChanged();
-        //    }
-        //}
+        public string Password
+        {
+            get { return _password; }
+            set { _password = value; OnPropertyChanged(); }
+        }
 
-        //#endregion
+        private string _rePassword;
+
+        public string RePassword
+        {
+            get { return _rePassword; }
+            set { _rePassword = value; OnPropertyChanged(); }
+        }
+
+
+
+        #endregion
 
         #region command
         public ICommand ToEditCommand { get; set; }
@@ -108,6 +122,11 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand CancelCommand { get; set; }
         public ICommand RefeshCommand { get; set; }
         public ICommand DeleteEntityCommand { get; set; }
+        public ICommand PasswordChangedCommand { get; set; }
+        public ICommand RePasswordChangedCommand { get; set; }
+        public ICommand ChangePasswordCommand { get; set; }
+        public ICommand CloseEditAuthenCommand { get; set; }
+        public ICommand ToChangePasswordCommand { get; set; }
 
         #endregion
 
@@ -243,6 +262,49 @@ namespace QuanLyKhuCachLy.ViewModel
                 DeleteEntity();
             });
 
+            PasswordChangedCommand = new RelayCommand<PasswordBox>((p) =>
+            {
+                return true;
+            }, (o) =>
+            {
+                Password = o.Password;
+            });
+
+            RePasswordChangedCommand = new RelayCommand<PasswordBox>((p) =>
+            {
+                return true;
+            }, (o) =>
+            {
+                RePassword = o.Password;
+            });
+
+            CloseEditAuthenCommand = new RelayCommand<Window>((p) =>
+            {
+                return true;
+            }, (o) =>
+            {
+                o.Close();
+                ClearPassAndRePass();
+            });
+
+            ChangePasswordCommand = new RelayCommand<Window>((p) =>
+            {
+                return true;
+            }, (o) =>
+            {
+                ChangePassword(o);
+                ClearPassAndRePass();
+            });
+
+            ToChangePasswordCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (o) =>
+            {
+                EditAuthenticationAccount editAuthenticationScreen = new EditAuthenticationAccount();
+                editAuthenticationScreen.ShowDialog();
+            });
+
 
             ProvinceList = new ObservableCollection<string>();
             DistrictList = new ObservableCollection<string>();
@@ -261,6 +323,63 @@ namespace QuanLyKhuCachLy.ViewModel
         }
 
         #region method
+        void ClearPassAndRePass()
+        {
+            Password = String.Empty;
+            RePassword = String.Empty;
+        }
+
+        void ChangePassword(Window p)
+        {
+            var accountInDB = DataProvider.ins.db.Accounts.FirstOrDefault();
+            if (accountInDB == null) return;
+
+            if (UserName != accountInDB.username)
+            {
+                // Show dialog thông báo sai username
+                return;
+            }
+            else if (Password != RePassword)
+            {
+                // Show dialog thông báo password và repass khác nhau
+                return;
+            }
+            else if (Password.Length == 0 || RePassword.Length == 0)
+            {
+                // Show dialog thông báo password hoặc repass ko đc rỗng
+                return;
+            }
+            else if (Password.Length > 100)
+            {
+                // Show dialog password quá dài
+                return;
+            }
+
+            accountInDB.password = MD5Hash(Base64Encode(Password));
+            DataProvider.ins.db.SaveChanges();
+            p.Close();
+
+            // dialog success
+        }
+
+        string Base64Encode(string plainText)
+        {
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+            return System.Convert.ToBase64String(plainTextBytes);
+        }
+
+        string MD5Hash(string input)
+        {
+            StringBuilder hash = new StringBuilder();
+            MD5CryptoServiceProvider md5provider = new MD5CryptoServiceProvider();
+            byte[] bytes = md5provider.ComputeHash(new UTF8Encoding().GetBytes(input));
+
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                hash.Append(bytes[i].ToString("x2"));
+            }
+            return hash.ToString();
+        }
 
         void DeleteEntity()
         {
@@ -603,7 +722,7 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             QuarantineArea = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
             QAAdress = QuarantineArea.Address;
-           
+
             SelectedProvince = QAAdress.province;
             SelectedDistrict = QAAdress.district;
             SelectedWard = QAAdress.ward;
@@ -613,10 +732,14 @@ namespace QuanLyKhuCachLy.ViewModel
             SelectedStaff = Manager;
             StaffList = new ObservableCollection<Staff>(DataProvider.ins.db.Staffs);
 
-           
-             
-                UpdateDisplayAddress(QuarantineArea.Address);
-                
+            UpdateDisplayAddress(QuarantineArea.Address);
+
+            var account = DataProvider.ins.db.Accounts.FirstOrDefault();
+            if (account == null) return;
+            UserName = account.username;
+
+            Password = String.Empty;
+            RePassword = String.Empty;
         }
 
         void InitProvinceList()
