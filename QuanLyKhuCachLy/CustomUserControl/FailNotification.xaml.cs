@@ -18,17 +18,11 @@ namespace QuanLyKhuCachLy.CustomUserControl
     /// <summary>
     /// Interaction logic for FailNotification.xaml
     /// </summary>
-    public partial class FailNotification : UserControl
+    public partial class FailNotification : Window
     {
         public FailNotification()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var ThisWindow = Window.GetWindow(this);
-            ThisWindow.Close();
         }
     }
 }

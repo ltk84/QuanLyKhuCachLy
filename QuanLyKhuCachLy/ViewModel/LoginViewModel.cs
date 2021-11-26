@@ -1,4 +1,5 @@
-﻿using QuanLyKhuCachLy.Model;
+﻿using QuanLyKhuCachLy.CustomUserControl;
+using QuanLyKhuCachLy.Model;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
@@ -60,14 +61,22 @@ namespace QuanLyKhuCachLy.ViewModel
             // Trường hợp trường username bị để trống
             if (username == "")
             {
-                MessageBox.Show("Tên đăng nhập không được để trống!");
+                FailNotification ErrorDialog = new FailNotification();
+                var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                FailNotificationVM.Content = "Tên đăng nhập không được để trống";
+
+                ErrorDialog.ShowDialog();
                 return;
             }
 
             // Trường hợp trường username bị để trống
             if (password == "")
             {
-                MessageBox.Show("Mật khẩu không được để trống!");
+                FailNotification ErrorDialog = new FailNotification();
+                var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                FailNotificationVM.Content = "Mật khẩu không được để trống";
+
+                ErrorDialog.ShowDialog();
                 return;
             }
 
@@ -99,13 +108,25 @@ namespace QuanLyKhuCachLy.ViewModel
             // trường hợp tên đăng nhập chưa dược đặng ký
             if (!isExistUserName)
             {
-                MessageBox.Show("Tài khoản chưa được đăng ký!");
+                FailNotification ErrorDialog = new FailNotification();
+                var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                FailNotificationVM.Content = "Tài khoản chưa được đăng ký";
+
+                ErrorDialog.ShowDialog();
                 return;
             }
 
             // trường hợp sai mật khẩu
             if (!isCorrectPass)
-                MessageBox.Show("Mật khẩu bị sai!");
+            {
+
+                FailNotification ErrorDialog = new FailNotification();
+                var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                FailNotificationVM.Content = "Mật khẩu bị sai";
+
+                ErrorDialog.ShowDialog();
+                return;
+            }
         }
 
         /// <summary>
