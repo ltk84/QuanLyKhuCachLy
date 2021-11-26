@@ -1096,37 +1096,47 @@ namespace QuanLyKhuCachLy.ViewModel
                 catch (DbUpdateException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi db update";
 
-                    MessageBox.Show(error);
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi cơ sở dữ liệu cập nhật";
+                    ErrorDialog.ShowDialog();
                 }
                 catch (DbEntityValidationException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi validation";
 
-                    MessageBox.Show(error);
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi xác thực";
+                    ErrorDialog.ShowDialog();
                 }
                 catch (NotSupportedException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi db đéo support";
 
-                    MessageBox.Show(error);
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi database không hỗ trợ";
+                    ErrorDialog.ShowDialog();
                 }
                 catch (ObjectDisposedException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi db object disposed";
 
-                    MessageBox.Show(error);
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi đối tượng database bị hủy";
+                    ErrorDialog.ShowDialog();
                 }
                 catch (InvalidOperationException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi invalid operation";
 
-                    MessageBox.Show(error);
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi thao tác không hợp lệ";
+                    ErrorDialog.ShowDialog();
                 }
             }
         }
@@ -1658,7 +1668,11 @@ namespace QuanLyKhuCachLy.ViewModel
                         string[] arrListStr = xlRange.Cells[i, 5].Value2.ToString().Split(',');
                         if (arrListStr.Length < 3)
                         {
-                            MessageBox.Show(xlRange.Cells[i, 2].Value2.ToString() + " has error in address");
+                            CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                            var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                            FailNotificationVM.Content = xlRange.Cells[i, 2].Value2.ToString() + " has error in address";
+                            ErrorDialog.ShowDialog();
+                            //MessageBox.Show(xlRange.Cells[i, 2].Value2.ToString() + " has error in address");
                             return;
                         }
                         if (arrListStr.Length == 3)
@@ -2548,7 +2562,10 @@ namespace QuanLyKhuCachLy.ViewModel
                         string[] arrListStr = values[i][4].ToString().Split(',');
                         if(arrListStr.Length < 3)
                         {
-                            MessageBox.Show(values[i][1].ToString() + " has error in address");
+                            CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                            var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                            FailNotificationVM.Content = values[i][1].ToString() + " has error in address";
+                            ErrorDialog.ShowDialog();
                             return;
                         }
                         if (arrListStr.Length == 3)
@@ -2748,7 +2765,10 @@ namespace QuanLyKhuCachLy.ViewModel
                         }
                         catch
                         {
-                            MessageBox.Show("Error delete");
+                            CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                            var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                            FailNotificationVM.Content = "Thao tác xóa bị lỗi";
+                            ErrorDialog.ShowDialog();
                         };
 
                         SuccessDialog.ShowDialog();
@@ -2936,6 +2956,7 @@ namespace QuanLyKhuCachLy.ViewModel
         async Task AddTestingResutlFromExcelAsync(LoadingIndicator loadingIndicator, string path)
         {
             bool isSuccess = false;
+            string errorMessage = "";
             await Task.Run(() =>
             {
                 List<TestingResult> listTestingResults = new List<TestingResult>();
@@ -2949,7 +2970,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2 != "Kết quả" ||
                 xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2 != "Ngày xét nghiệm")
                 {
-                    MessageBox.Show("Không đúng định dạng file");
+                    errorMessage = "Không đúng định dạng file";
                     return;
                 }
                 for (int i = 2; i <= rowCount; i++)
@@ -2961,7 +2982,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     }
                     else
                     {
-                        MessageBox.Show("id error");
+                        errorMessage = "ID bị lỗi";
                         return;
                     }
                     if (xlRange.Cells[i, 2] != null && xlRange.Cells[i, 2].Value2 != null)
@@ -2971,7 +2992,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     }
                     else
                     {
-                        MessageBox.Show("result error");
+                        errorMessage = "Kết quả bị lỗi";
                         return;
                     }
                     if (xlRange.Cells[i, 3] != null && xlRange.Cells[i, 3].Value2 != null)
@@ -2981,7 +3002,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     }
                     else
                     {
-                        MessageBox.Show("date error");
+                        errorMessage = "Ngày bị lỗi";
                         return;
                     }
                     listTestingResults.Add(testingResult);
@@ -3044,6 +3065,10 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
                 var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                if (errorMessage != "" && errorMessage != null)
+                {
+                    FailNotificationVM.Content = errorMessage;
+                }
                 ErrorDialog.ShowDialog();
                
             }

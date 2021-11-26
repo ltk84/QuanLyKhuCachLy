@@ -1622,7 +1622,18 @@ namespace QuanLyKhuCachLy.ViewModel
 
             }
 
-            MessageBox.Show("Gửi thông báo thành công!");
+            Window SuccessDialog = new Window
+            {
+                AllowsTransparency = true,
+                Background = Brushes.Transparent,
+                Width = 600,
+                Height = 400,
+                ResizeMode = ResizeMode.NoResize,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                WindowStyle = WindowStyle.None,
+                Content = new SuccessNotification()
+            };
+            SuccessDialog.ShowDialog();
             // Reset nè
             PeopleList2 = new ObservableCollection<QuarantinePerson>();
 
@@ -1654,7 +1665,9 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-                MessageBox.Show("Loi roi");
+                CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                ErrorDialog.ShowDialog();
             }
         }
 

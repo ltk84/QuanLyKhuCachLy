@@ -1317,7 +1317,12 @@ namespace QuanLyKhuCachLy.ViewModel
                         string[] arrListStr = xlRange.Cells[i, 11].Value2.ToString().Split(',');
                         if (arrListStr.Length < 3)
                         {
-                            MessageBox.Show(xlRange.Cells[i, 2].Value2.ToString() + " has error in address");
+
+                            CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                            var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                            FailNotificationVM.Content = xlRange.Cells[i, 2].Value2.ToString() + " has error in address";
+                            ErrorDialog.ShowDialog();
+                            //MessageBox.Show(xlRange.Cells[i, 2].Value2.ToString() + " has error in address");
                             return;
                         }
                         if (arrListStr.Length == 3)
