@@ -406,7 +406,10 @@
                             </ContextMenu>
                         </Button.ContextMenu>
                     </Button>
-                    <Button Style="{StaticResource FastButton}">
+                    <Button
+                        Command="{Binding ToAddTestingResutlFromExcel}"
+                        DataContext="{StaticResource PersonVM}"
+                        Style="{StaticResource FastButton}">
                         <TextBlock
                             Margin="16,0,16,0"
                             VerticalAlignment="Bottom"
