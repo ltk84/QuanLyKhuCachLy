@@ -803,7 +803,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     if (i != 0)
                         DisplayAddress += ", ";
-                    else DisplayAddress += "";
+                    else DisplayAddress += " ";
                 }
             }
         }
@@ -879,10 +879,10 @@ namespace QuanLyKhuCachLy.ViewModel
                 catch (DbUpdateException e)
                 {
                     transaction.Rollback();
-                   
+
                     RollBackChange();
 
-                  
+
                     // string error = "Lỗi db update";
                     Window ErrorDialog = new Window
                     {
@@ -1009,7 +1009,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 catch (DbUpdateException e)
                 {
                     transaction.Rollback();
-                    
+
                     RollBackChange();
 
                     Window ErrorDialog = new Window

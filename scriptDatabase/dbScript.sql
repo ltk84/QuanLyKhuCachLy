@@ -1,12 +1,16 @@
 USE [master]
 GO
-/****** Object:  Database [QLKCL]    Script Date: 23-Nov-21 2:48:22 PM ******/
+/****** Object:  Database [QLKCL]    Script Date: 26-Nov-21 10:08:37 AM ******/
 CREATE DATABASE [QLKCL]
 GO
 
 USE [QLKCL]
 GO
-/****** Object:  Table [dbo].[Account]    Script Date: 23-Nov-21 2:48:23 PM ******/
+/****** Object:  Table [dbo].[Account]    Script Date: 26-Nov-21 10:08:38 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 CREATE TABLE [dbo].[Account](
 	[id] [int] IDENTITY(0,1) NOT NULL,
 	[username] [varchar](20) NULL,
@@ -17,7 +21,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Address]    Script Date: 23-Nov-21 2:48:23 PM ******/
+/****** Object:  Table [dbo].[Address]    Script Date: 26-Nov-21 10:08:38 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -35,7 +39,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DestinationHistory]    Script Date: 23-Nov-21 2:48:23 PM ******/
+/****** Object:  Table [dbo].[DestinationHistory]    Script Date: 26-Nov-21 10:08:38 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -51,7 +55,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DISTRICT]    Script Date: 23-Nov-21 2:48:23 PM ******/
+/****** Object:  Table [dbo].[DISTRICT]    Script Date: 26-Nov-21 10:08:38 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -66,7 +70,7 @@ CREATE TABLE [dbo].[DISTRICT](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[HealthInformation]    Script Date: 23-Nov-21 2:48:23 PM ******/
+/****** Object:  Table [dbo].[HealthInformation]    Script Date: 26-Nov-21 10:08:38 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -88,7 +92,7 @@ CREATE TABLE [dbo].[HealthInformation](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[InjectionRecord]    Script Date: 23-Nov-21 2:48:23 PM ******/
+/****** Object:  Table [dbo].[InjectionRecord]    Script Date: 26-Nov-21 10:08:38 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -104,7 +108,7 @@ CREATE TABLE [dbo].[InjectionRecord](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[NATION]    Script Date: 23-Nov-21 2:48:23 PM ******/
+/****** Object:  Table [dbo].[NATION]    Script Date: 26-Nov-21 10:08:38 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -118,7 +122,7 @@ CREATE TABLE [dbo].[NATION](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[NotificationTemplate]    Script Date: 23-Nov-21 2:48:23 PM ******/
+/****** Object:  Table [dbo].[NotificationTemplate]    Script Date: 26-Nov-21 10:08:38 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -133,7 +137,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PROVINCE]    Script Date: 23-Nov-21 2:48:23 PM ******/
+/****** Object:  Table [dbo].[PROVINCE]    Script Date: 26-Nov-21 10:08:38 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -147,7 +151,7 @@ CREATE TABLE [dbo].[PROVINCE](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[QuarantineArea]    Script Date: 23-Nov-21 2:48:23 PM ******/
+/****** Object:  Table [dbo].[QuarantineArea]    Script Date: 26-Nov-21 10:08:38 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -165,7 +169,7 @@ CREATE TABLE [dbo].[QuarantineArea](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[QuarantinePerson]    Script Date: 23-Nov-21 2:48:23 PM ******/
+/****** Object:  Table [dbo].[QuarantinePerson]    Script Date: 26-Nov-21 10:08:38 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -192,7 +196,7 @@ CREATE TABLE [dbo].[QuarantinePerson](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[QuarantineRoom]    Script Date: 23-Nov-21 2:48:23 PM ******/
+/****** Object:  Table [dbo].[QuarantineRoom]    Script Date: 26-Nov-21 10:08:38 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -208,7 +212,7 @@ CREATE TABLE [dbo].[QuarantineRoom](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Severity]    Script Date: 23-Nov-21 2:48:23 PM ******/
+/****** Object:  Table [dbo].[Severity]    Script Date: 26-Nov-21 10:08:38 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -223,7 +227,7 @@ CREATE TABLE [dbo].[Severity](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Staff]    Script Date: 23-Nov-21 2:48:23 PM ******/
+/****** Object:  Table [dbo].[Staff]    Script Date: 26-Nov-21 10:08:38 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -246,7 +250,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TestingResult]    Script Date: 23-Nov-21 2:48:23 PM ******/
+/****** Object:  Table [dbo].[TestingResult]    Script Date: 26-Nov-21 10:08:38 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -262,7 +266,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[WARD]    Script Date: 23-Nov-21 2:48:23 PM ******/
+/****** Object:  Table [dbo].[WARD]    Script Date: 26-Nov-21 10:08:38 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -658,6 +662,66 @@ GO
 INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (191, N'Tỉnh Hà Giang', N'Huyện Đồng Văn', N'Thị trấn Phó Bảng', N'', N'')
 GO
 INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (192, N'Tỉnh Hà Giang', N'Huyện Mèo Vạc', N'Xã Xín Cái', N'', N'')
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (193, N'Tỉnh Bắc Kạn', N'Huyện Ba Bể', N'Xã Bành Trạch', N'MBD', N'123')
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (194, N'Tỉnh Lào Cai', N'Huyện Bát Xát', N'Xã A Mú Sung', N'MBD', N'123')
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (195, N'Tỉnh Cao Bằng', N'Huyện Bảo Lạc', N'Xã Thượng Hà', N'MBD', N'60')
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (196, N'Tỉnh Cao Bằng', N'Huyện Hạ Lang', N'Xã Thắng Lợi', N'Cây Keo', N'61')
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (197, N'Tỉnh Cà Mau', N'Huyện U Minh', N'Xã Khánh Thuận', N'Cây Keo', N'62')
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (198, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'63 Cây Keo', NULL)
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (199, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'64 Cây Keo', NULL)
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (200, N'Tỉnh Hà Tĩnh', N'Huyện Vũ Quang', N'Xã Đức Giang', N'Cây Keo', N'65')
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (201, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'66 Cây Keo', NULL)
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (202, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'67 Cây Keo', NULL)
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (203, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'68 Cây Keo', NULL)
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (204, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'69 Cây Keo', NULL)
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (205, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'70 Cây Keo', NULL)
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (206, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'71 Cây Keo', NULL)
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (207, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'72 Cây Keo', NULL)
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (208, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'73 Cây Keo', NULL)
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (209, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'60 Cây Keo', NULL)
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (210, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'61 Cây Keo', NULL)
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (211, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'62 Cây Keo', NULL)
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (212, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'63 Cây Keo', NULL)
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (213, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'64 Cây Keo', NULL)
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (214, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'65 Cây Keo', NULL)
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (215, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'66 Cây Keo', NULL)
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (216, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'67 Cây Keo', NULL)
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (217, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'68 Cây Keo', NULL)
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (218, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'69 Cây Keo', NULL)
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (219, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'70 Cây Keo', NULL)
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (220, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'71 Cây Keo', NULL)
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (221, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'72 Cây Keo', NULL)
+GO
+INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (222, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'73 Cây Keo', NULL)
 GO
 SET IDENTITY_INSERT [dbo].[Address] OFF
 GO
@@ -2073,485 +2137,487 @@ INSERT [dbo].[DISTRICT] ([id], [name], [provinceID]) VALUES (973, N'Huyện Ng�
 GO
 SET IDENTITY_INSERT [dbo].[HealthInformation] ON 
 GO
-INSERT [dbo].[HealthInformation] ([id], [isFever], [isCough], [isSoreThroat], [isLossOfTatse], [isTired], [isShortnessOfBreath], [isOtherSymptoms], [isDisease], [quarantinePersonID]) VALUES (150, 0, 0, 0, 0, 0, 1, 0, 0, 151)
+INSERT [dbo].[HealthInformation] ([id], [isFever], [isCough], [isSoreThroat], [isLossOfTatse], [isTired], [isShortnessOfBreath], [isOtherSymptoms], [isDisease], [quarantinePersonID]) VALUES (0, 0, 1, 1, 0, 0, 0, 0, 0, 0)
 GO
-INSERT [dbo].[HealthInformation] ([id], [isFever], [isCough], [isSoreThroat], [isLossOfTatse], [isTired], [isShortnessOfBreath], [isOtherSymptoms], [isDisease], [quarantinePersonID]) VALUES (151, 0, 0, 0, 0, 0, 1, 0, 0, 152)
+INSERT [dbo].[HealthInformation] ([id], [isFever], [isCough], [isSoreThroat], [isLossOfTatse], [isTired], [isShortnessOfBreath], [isOtherSymptoms], [isDisease], [quarantinePersonID]) VALUES (1, 0, 0, 0, 0, 0, 1, 0, 0, 1)
 GO
-INSERT [dbo].[HealthInformation] ([id], [isFever], [isCough], [isSoreThroat], [isLossOfTatse], [isTired], [isShortnessOfBreath], [isOtherSymptoms], [isDisease], [quarantinePersonID]) VALUES (152, 0, 0, 0, 0, 0, 1, 0, 0, 153)
+INSERT [dbo].[HealthInformation] ([id], [isFever], [isCough], [isSoreThroat], [isLossOfTatse], [isTired], [isShortnessOfBreath], [isOtherSymptoms], [isDisease], [quarantinePersonID]) VALUES (2, 0, 0, 0, 0, 0, 1, 1, 0, 2)
 GO
-INSERT [dbo].[HealthInformation] ([id], [isFever], [isCough], [isSoreThroat], [isLossOfTatse], [isTired], [isShortnessOfBreath], [isOtherSymptoms], [isDisease], [quarantinePersonID]) VALUES (153, 0, 0, 0, 0, 0, 1, 0, 0, 154)
+INSERT [dbo].[HealthInformation] ([id], [isFever], [isCough], [isSoreThroat], [isLossOfTatse], [isTired], [isShortnessOfBreath], [isOtherSymptoms], [isDisease], [quarantinePersonID]) VALUES (3, 0, 0, 0, 0, 0, 1, 0, 0, 3)
 GO
-INSERT [dbo].[HealthInformation] ([id], [isFever], [isCough], [isSoreThroat], [isLossOfTatse], [isTired], [isShortnessOfBreath], [isOtherSymptoms], [isDisease], [quarantinePersonID]) VALUES (154, 0, 0, 0, 0, 0, 1, 0, 0, 155)
+INSERT [dbo].[HealthInformation] ([id], [isFever], [isCough], [isSoreThroat], [isLossOfTatse], [isTired], [isShortnessOfBreath], [isOtherSymptoms], [isDisease], [quarantinePersonID]) VALUES (4, 0, 0, 0, 0, 0, 1, 0, 0, 4)
 GO
-INSERT [dbo].[HealthInformation] ([id], [isFever], [isCough], [isSoreThroat], [isLossOfTatse], [isTired], [isShortnessOfBreath], [isOtherSymptoms], [isDisease], [quarantinePersonID]) VALUES (155, 0, 0, 0, 0, 0, 1, 0, 0, 156)
+INSERT [dbo].[HealthInformation] ([id], [isFever], [isCough], [isSoreThroat], [isLossOfTatse], [isTired], [isShortnessOfBreath], [isOtherSymptoms], [isDisease], [quarantinePersonID]) VALUES (5, 0, 0, 0, 0, 0, 1, 0, 0, 5)
 GO
-INSERT [dbo].[HealthInformation] ([id], [isFever], [isCough], [isSoreThroat], [isLossOfTatse], [isTired], [isShortnessOfBreath], [isOtherSymptoms], [isDisease], [quarantinePersonID]) VALUES (156, 0, 0, 0, 0, 0, 1, 0, 0, 157)
+INSERT [dbo].[HealthInformation] ([id], [isFever], [isCough], [isSoreThroat], [isLossOfTatse], [isTired], [isShortnessOfBreath], [isOtherSymptoms], [isDisease], [quarantinePersonID]) VALUES (6, 0, 0, 0, 0, 0, 1, 0, 0, 6)
 GO
-INSERT [dbo].[HealthInformation] ([id], [isFever], [isCough], [isSoreThroat], [isLossOfTatse], [isTired], [isShortnessOfBreath], [isOtherSymptoms], [isDisease], [quarantinePersonID]) VALUES (157, 0, 0, 0, 0, 0, 1, 0, 0, 158)
+INSERT [dbo].[HealthInformation] ([id], [isFever], [isCough], [isSoreThroat], [isLossOfTatse], [isTired], [isShortnessOfBreath], [isOtherSymptoms], [isDisease], [quarantinePersonID]) VALUES (7, 0, 0, 0, 0, 0, 1, 0, 0, 7)
 GO
-INSERT [dbo].[HealthInformation] ([id], [isFever], [isCough], [isSoreThroat], [isLossOfTatse], [isTired], [isShortnessOfBreath], [isOtherSymptoms], [isDisease], [quarantinePersonID]) VALUES (158, 0, 0, 0, 0, 0, 1, 0, 0, 159)
+INSERT [dbo].[HealthInformation] ([id], [isFever], [isCough], [isSoreThroat], [isLossOfTatse], [isTired], [isShortnessOfBreath], [isOtherSymptoms], [isDisease], [quarantinePersonID]) VALUES (8, 0, 0, 0, 0, 0, 1, 0, 0, 8)
 GO
-INSERT [dbo].[HealthInformation] ([id], [isFever], [isCough], [isSoreThroat], [isLossOfTatse], [isTired], [isShortnessOfBreath], [isOtherSymptoms], [isDisease], [quarantinePersonID]) VALUES (159, 0, 0, 0, 0, 0, 1, 0, 0, 160)
+INSERT [dbo].[HealthInformation] ([id], [isFever], [isCough], [isSoreThroat], [isLossOfTatse], [isTired], [isShortnessOfBreath], [isOtherSymptoms], [isDisease], [quarantinePersonID]) VALUES (9, 0, 0, 0, 0, 0, 1, 0, 0, 9)
 GO
-INSERT [dbo].[HealthInformation] ([id], [isFever], [isCough], [isSoreThroat], [isLossOfTatse], [isTired], [isShortnessOfBreath], [isOtherSymptoms], [isDisease], [quarantinePersonID]) VALUES (160, 0, 0, 0, 0, 0, 1, 0, 0, 161)
+INSERT [dbo].[HealthInformation] ([id], [isFever], [isCough], [isSoreThroat], [isLossOfTatse], [isTired], [isShortnessOfBreath], [isOtherSymptoms], [isDisease], [quarantinePersonID]) VALUES (10, 0, 0, 0, 0, 0, 1, 0, 0, 10)
 GO
-INSERT [dbo].[HealthInformation] ([id], [isFever], [isCough], [isSoreThroat], [isLossOfTatse], [isTired], [isShortnessOfBreath], [isOtherSymptoms], [isDisease], [quarantinePersonID]) VALUES (161, 0, 0, 0, 0, 0, 0, 0, 0, 165)
+INSERT [dbo].[HealthInformation] ([id], [isFever], [isCough], [isSoreThroat], [isLossOfTatse], [isTired], [isShortnessOfBreath], [isOtherSymptoms], [isDisease], [quarantinePersonID]) VALUES (11, 0, 0, 0, 0, 0, 1, 0, 0, 11)
 GO
-INSERT [dbo].[HealthInformation] ([id], [isFever], [isCough], [isSoreThroat], [isLossOfTatse], [isTired], [isShortnessOfBreath], [isOtherSymptoms], [isDisease], [quarantinePersonID]) VALUES (162, 0, 0, 0, 0, 0, 0, 0, 0, 166)
+INSERT [dbo].[HealthInformation] ([id], [isFever], [isCough], [isSoreThroat], [isLossOfTatse], [isTired], [isShortnessOfBreath], [isOtherSymptoms], [isDisease], [quarantinePersonID]) VALUES (12, 0, 0, 0, 0, 0, 1, 0, 0, 12)
+GO
+INSERT [dbo].[HealthInformation] ([id], [isFever], [isCough], [isSoreThroat], [isLossOfTatse], [isTired], [isShortnessOfBreath], [isOtherSymptoms], [isDisease], [quarantinePersonID]) VALUES (13, 0, 0, 0, 0, 0, 1, 0, 0, 13)
 GO
 SET IDENTITY_INSERT [dbo].[HealthInformation] OFF
 GO
 SET IDENTITY_INSERT [dbo].[NATION] ON 
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (1, N' CHND Trung Hoa')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (1, N'Ả Rập Saudi')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (2, N' Ấn Độ')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (2, N'Afghanistan')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (3, N' Hoa Kỳ')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (3, N'Ai Cập')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (4, N' Indonesia')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (4, N'Albania')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (5, N' Brazil')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (5, N'Algeria')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (6, N' Pakistan')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (6, N'Ấn Độ')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (7, N' Nigeria')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (7, N'Andorra')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (8, N' Bangladesh')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (8, N'Angola')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (9, N' Liên Bang Nga')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (9, N'Anguilla')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (10, N' Nhật Bản')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (10, N'Anh Quốc')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (11, N' Mexico')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (11, N'Antigua và Barbuda')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (12, N' Philippines')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (12, N'Áo')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (13, N' Ethiopia')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (13, N'Argentina')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (14, N' Việt Nam')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (14, N'Armenia')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (15, N' Ai Cập')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (15, N'Aruba')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (16, N' Đức')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (16, N'Azerbaijan')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (17, N' Thổ Nhĩ Kỳ')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (17, N'Ba Lan')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (18, N' Iran')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (18, N'Bahamas')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (19, N' CHDC Congo')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (19, N'Bahrain')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (20, N' Thái Lan')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (20, N'Bangladesh')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (21, N' Pháp')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (21, N'Barbados')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (22, N' Anh Quốc')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (22, N'Belarus')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (23, N' Ý')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (23, N'Belize')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (24, N' Myanmar')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (24, N'Benin')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (25, N' Hàn Quốc')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (25, N'Bermuda')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (26, N' Nam Phi')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (26, N'Bhutan')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (27, N' Tanzania')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (27, N'Bỉ')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (28, N' Tây Ban Nha')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (28, N'Bờ Biển Ngà')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (29, N' Colombia')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (29, N'Bồ Đào Nha')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (30, N' Ukraina')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (30, N'Bolivia')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (31, N' Kenya')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (31, N'Bosna và Hercegovina')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (32, N' Argentina')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (32, N'Botswana')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (33, N' Ba Lan')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (33, N'Brazil')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (34, N' Algeria')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (34, N'Brunei')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (35, N' Sudan')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (35, N'Bulgaria')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (36, N' Uganda')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (36, N'Burkina Faso')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (37, N' Canada')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (37, N'Burundi')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (38, N' Maroc')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (38, N'Các tiểu vương quốc Ả rập thống nhất (UEA)')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (39, N' Iraq')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (39, N'Cameroon')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (40, N' Afghanistan')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (40, N'Campuchia')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (41, N' Nepal')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (41, N'Canada')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (42, N' Peru')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (42, N'Cape Verde')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (43, N' Malaysia')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (43, N'CHDC Congo')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (44, N' Uzbekistan')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (44, N'CHDCND Triều Tiên')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (45, N' Venezuela')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (45, N'Chile')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (46, N' Ả Rập Saudi')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (46, N'CHND Trung Hoa')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (47, N' Yemen')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (47, N'Colombia')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (48, N' Ghana')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (48, N'Comoros')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (49, N' CHDCND Triều Tiên')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (49, N'Cộng hòa Congo')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (50, N' Mozambique')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (50, N'Cộng hòa Dominica')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (51, N' Trung Hoa Dân Quốc (Đài Loan)')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (51, N'Cộng hòa Macedonia')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (52, N' Madagascar')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (52, N'Cộng hòa Séc')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (53, N' Syria')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (53, N'Cộng hòa Trung Phi')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (54, N' Bờ Biển Ngà')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (54, N'Costa Rica')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (55, N' Úcn5')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (55, N'Croatia')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (56, N' Romania')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (56, N'Cuba')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (57, N' Sri Lanka')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (57, N'Curaçao')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (58, N' Cameroon')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (58, N'Đan Mạch')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (59, N' Angola')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (59, N'Đảo Man')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (60, N' Burkina Faso')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (60, N'Djibouti')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (61, N' Kazakhstan')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (61, N'Dominica')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (62, N' Chile')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (62, N'Đông Timor')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (63, N' Niger')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (63, N'Đức')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (64, N' Hà Lan')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (64, N'Ecuador')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (65, N' Malawi')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (65, N'El Salvador')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (66, N' Mali')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (66, N'Eritrea')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (67, N' Ecuador')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (67, N'Estonia')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (68, N' Campuchia')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (68, N'Ethiopia')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (69, N' Guatemala')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (69, N'Fiji')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (70, N' Zambia')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (70, N'Gabon')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (71, N' Senegal')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (71, N'Gambia')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (72, N' Zimbabwe')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (72, N'Ghana')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (73, N' Tchad')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (73, N'Gibraltar')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (74, N' Hy Lạp')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (74, N'Greenland')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (75, N' Cuba')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (75, N'Grenada')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (76, N' Bỉ')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (76, N'Gruzia')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (77, N' Bồ Đào Nha')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (77, N'Guam')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (78, N' Tunisia')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (78, N'Guatemala')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (79, N' Cộng hòa Séc')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (79, N'Guernsey')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (80, N' Bolivia')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (80, N'Guinea')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (81, N' Rwanda')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (81, N'Guinea Xích Đạo')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (82, N' Guinea')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (82, N'Guinea-Bissau')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (83, N' Haiti')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (83, N'Guyana')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (84, N' Hungary')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (84, N'Hà Lan')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (85, N' Belarus')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (85, N'Haiti')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (86, N' Thụy Điển')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (86, N'Hàn Quốc')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (87, N' Cộng hòa Dominica')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (87, N'Hoa Kỳ')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (88, N' Somalia')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (88, N'Honduras')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (89, N' Azerbaijan')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (89, N'Hồng Kông')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (90, N' Benin')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (90, N'Hungary')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (91, N' Burundi')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (91, N'Hy Lạp')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (92, N' Áo')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (92, N'Iceland')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (93, N' Các tiểu vương quốc Ả rập thống nhất (UEA)')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (93, N'Indonesia')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (94, N' Nam Sudan')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (94, N'Iran')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (95, N' Honduras')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (95, N'Iraq')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (96, N' Thụy Sĩ')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (96, N'Ireland')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (97, N' Israel')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (97, N'Israel')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (98, N' Bulgaria')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (98, N'Jamaica')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (99, N' Serbia')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (99, N'Jersey')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (100, N' Tajikistan')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (100, N'Jordan')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (101, N' Hồng Kông')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (101, N'Kazakhstan')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (102, N' Papua New Guinea')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (102, N'Kenya')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (103, N' Togo')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (103, N'Kiribati')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (104, N' Libya')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (104, N'Kuwait')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (105, N' Jordan')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (105, N'Kyrgyzstan')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (106, N' Paraguay')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (106, N'Lào')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (107, N' Lào')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (107, N'Latvia')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (108, N' El Salvador')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (108, N'Lesotho')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (109, N' Sierra Leone')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (109, N'Liban')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (110, N' Nicaragua')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (110, N'Liberia')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (111, N' Đan Mạch')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (111, N'Libya')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (112, N' Slovakia')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (112, N'Liechtenstein')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (113, N' Kyrgyzstan')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (113, N'Liên bang Micronesia')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (114, N' Phần Lan')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (114, N'Liên Bang Nga')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (115, N' Eritrea')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (115, N'Litva')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (116, N' Turkmenistan')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (116, N'Luxembourg')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (117, N' Singapore')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (117, N'Macau')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (118, N' Na Uy')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (118, N'Madagascar')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (119, N' Costa Rica')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (119, N'Malawi')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (120, N' Cộng hòa Trung Phi')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (120, N'Malaysia')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (121, N' Ireland')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (121, N'Maldives')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (122, N' Gruzia')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (122, N'Mali')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (123, N' Croatia')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (123, N'Malta')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (124, N' New Zealand')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (124, N'Maroc')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (125, N' Liban')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (125, N'Mauritania')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (126, N' Liberia')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (126, N'Mauritius')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (127, N' Vùng lãnh thổ Palestine')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (127, N'Mexico')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (128, N' Bosna và Hercegovina')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (128, N'Moldova')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (129, N' Cộng hòa Congo')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (129, N'Monaco')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (130, N' Puerto Rico')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (130, N'Mông Cổ')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (131, N' Moldova')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (131, N'Montenegro')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (132, N' Panama')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (132, N'Montserrat')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (133, N' Mauritania')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (133, N'Mozambique')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (134, N' Uruguay')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (134, N'Myanmar')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (135, N' Armenia')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (135, N'Na Uy')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (136, N' Litva')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (136, N'Nam Phi')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (137, N' Albania')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (137, N'Nam Sudan')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (138, N' Kuwait')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (138, N'Namibia')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (139, N' Mông Cổ')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (139, N'Nauru')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (140, N' Jamaica')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (140, N'Nepal')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (141, N' Oman')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (141, N'New Zealand')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (142, N' Latvia')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (142, N'Nhật Bản')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (143, N' Namibia')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (143, N'Nicaragua')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (144, N' Lesotho')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (144, N'Niger')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (145, N' Cộng hòa Macedonia')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (145, N'Nigeria')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (146, N' Slovenia')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (146, N'Niue')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (147, N' Botswana')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (147, N'Oman')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (148, N' Gambia')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (148, N'Pakistan')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (149, N' Qatar')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (149, N'Palau')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (150, N' Guinea-Bissau')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (150, N'Panama')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (151, N' Gabon')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (151, N'Papua New Guinea')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (152, N' Estonia')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (152, N'Paraguay')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (153, N' Trinidad và Tobago')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (153, N'Peru')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (154, N' Mauritius')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (154, N'Phần Lan')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (155, N' Bahrain')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (155, N'Pháp')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (156, N' Swaziland')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (156, N'Philippines')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (157, N' Đông Timor')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (157, N'Puerto Rico')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (158, N' Djibouti')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (158, N'Qatar')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (159, N' Fiji')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (159, N'Quần đảo Bắc Mariana')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (160, N' Síp')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (160, N'Quần đảo Cayman')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (161, N' Guyana')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (161, N'Quần đảo Cook')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (162, N' Comoros')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (162, N'Quần đảo Falkland')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (163, N' Guinea Xích Đạo')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (163, N'Quần đảo Faroe')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (164, N' Bhutan')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (164, N'Quần đảo Marshall')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (165, N' Montenegro')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (165, N'Quần đảo Pitcairn')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (166, N' Macau')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (166, N'Quần đảo Solomon')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (167, N' Tây Sahara')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (167, N'Quần đảo Turks và Caicos')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (168, N' Quần đảo Solomon')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (168, N'Quần đảo Virgin thuộc Anh')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (169, N' Suriname')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (169, N'Quần đảo Virgin thuộc Mỹ')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (170, N' Luxembourg')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (170, N'Romania')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (171, N' Cape Verde')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (171, N'Rwanda')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (172, N' Malta')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (172, N'Saint Helena, Ascension và Tristan da Cunha')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (173, N' Brunei')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (173, N'Saint Kitts và Nevis')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (174, N' Bahamas')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (174, N'Saint Lucia')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (175, N' Belize')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (175, N'Saint Vincent và Grenadines')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (176, N' Iceland')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (176, N'Samoa')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (177, N' Maldives')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (177, N'Samoa thuộc Mỹ')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (178, N' Barbados')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (178, N'San Marino')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (179, N' Vanuatu')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (179, N'São Tomé và Príncipe')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (180, N' Samoa')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (180, N'Senegal')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (181, N' Guam')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (181, N'Serbia')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (182, N' Saint Lucia')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (182, N'Seychelles')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (183, N' São Tomé và Príncipe')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (183, N'Sierra Leone')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (184, N' Curaçao')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (184, N'Singapore')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (185, N' Saint Vincent và Grenadines')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (185, N'Sint Maarten')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (186, N' Quần đảo Virgin thuộc Mỹ')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (186, N'Síp')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (187, N' Aruba')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (187, N'Slovakia')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (188, N' Grenada')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (188, N'Slovenia')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (189, N' Tonga')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (189, N'Somalia')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (190, N' Liên bang Micronesia')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (190, N'Sri Lanka')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (191, N' Kiribati')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (191, N'Sudan')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (192, N' Jersey')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (192, N'Suriname')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (193, N' Antigua và Barbuda')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (193, N'Swaziland')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (194, N' Seychelles')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (194, N'Syria')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (195, N' Andorra')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (195, N'Tajikistan')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (196, N' Đảo Man')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (196, N'Tanzania')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (197, N' Samoa thuộc Mỹ')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (197, N'Tây Ban Nha')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (198, N' Dominica')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (198, N'Tây Sahara')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (199, N' Bermuda')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (199, N'Tchad')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (200, N' Guernsey')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (200, N'Thái Lan')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (201, N' Quần đảo Bắc Mariana')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (201, N'Thổ Nhĩ Kỳ')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (202, N' Greenland')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (202, N'Thụy Điển')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (203, N' Quần đảo Cayman')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (203, N'Thụy Sĩ')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (204, N' Quần đảo Marshall')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (204, N'Togo')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (205, N' Saint Kitts và Nevis')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (205, N'Tokelau')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (206, N' Quần đảo Faroe')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (206, N'Tonga')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (207, N' Quần đảo Turks và Caicos')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (207, N'Trinidad và Tobago')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (208, N' Sint Maarten')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (208, N'Trung Hoa Dân Quốc (Đài Loan)')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (209, N' Liechtenstein')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (209, N'Tunisia')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (210, N' Monaco')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (210, N'Turkmenistan')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (211, N' San Marino')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (211, N'Tuvalu')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (212, N' Gibraltar')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (212, N'Úc')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (213, N' Quần đảo Virgin thuộc Anh')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (213, N'Uganda')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (214, N' Quần đảo Cook')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (214, N'Ukraina')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (215, N' Palau')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (215, N'Uruguay')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (216, N' Anguilla')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (216, N'Uzbekistan')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (217, N' Nauru')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (217, N'Vanuatu')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (218, N' Tuvalu')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (218, N'Vatican')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (219, N' Montserrat')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (219, N'Venezuela')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (220, N' Saint Helena, Ascension và Tristan da Cunha')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (220, N'Việt Nam')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (221, N' Quần đảo Falkland')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (221, N'Vùng lãnh thổ Palestine')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (222, N' Niue')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (222, N'Ý')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (223, N' Tokelau')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (223, N'Yemen')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (224, N' Vatican')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (224, N'Zambia')
 GO
-INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (225, N' Quần đảo Pitcairn')
+INSERT [dbo].[NATION] ([ID], [NAME]) VALUES (225, N'Zimbabwe')
 GO
 SET IDENTITY_INSERT [dbo].[NATION] OFF
 GO
@@ -2683,59 +2749,91 @@ INSERT [dbo].[PROVINCE] ([id], [name]) VALUES (96, N'Tỉnh Cà Mau')
 GO
 SET IDENTITY_INSERT [dbo].[QuarantineArea] ON 
 GO
-INSERT [dbo].[QuarantineArea] ([id], [name], [testCycle], [requiredDayToFinish], [addressID], [managerID]) VALUES (15, N'Montero', 202, 22, 174, 16)
+INSERT [dbo].[QuarantineArea] ([id], [name], [testCycle], [requiredDayToFinish], [addressID], [managerID]) VALUES (0, N'Quan 8', 2, 2, 193, 0)
 GO
 SET IDENTITY_INSERT [dbo].[QuarantineArea] OFF
 GO
 SET IDENTITY_INSERT [dbo].[QuarantinePerson] ON 
 GO
-INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (151, N'Trần Lê Thanh Tùng', CAST(N'2000-12-21' AS Date), N'Nam', N'79201016283', N'Việt Nam', N'84035725516', NULL, CAST(N'2021-11-14' AS Date), CAST(N'2021-11-16' AS Date), 9, 179, NULL, 1, N'123321              ')
+INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (0, N'Trương Kim Lâm', CAST(N'2001-08-04' AS Date), N'Nữ', N'79201017231', N'Việt Nam', N'84357255117', NULL, CAST(N'2021-11-14' AS Date), CAST(N'2021-11-16' AS Date), 12, 195, NULL, NULL, N'69')
 GO
-INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (152, N'Trương Kim Phục', CAST(N'1987-09-30' AS Date), N'Nam', N'79201027283', N'Việt Nam', N'84035725517', NULL, CAST(N'2021-11-14' AS Date), CAST(N'2021-11-16' AS Date), 9, 180, NULL, 1, NULL)
+INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (1, N'Dương Hiển Thế', CAST(N'2006-08-02' AS Date), N'Nam', N'79201017232', N'Việt Nam', N'84906012839', NULL, CAST(N'2021-11-14' AS Date), CAST(N'2021-11-16' AS Date), 12, 196, NULL, NULL, N'70')
 GO
-INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (153, N'Trương Kim Thế', CAST(N'1987-08-22' AS Date), N'Nam', N'79201087283', N'Việt Nam', N'84035725518', NULL, CAST(N'2021-11-15' AS Date), CAST(N'2021-11-17' AS Date), 8, 181, NULL, 1, NULL)
+INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (2, N'Huỳnh Trọng Phục', CAST(N'1999-10-11' AS Date), N'Nữ', N'79201017283', N'Việt Nam', N'84035725515', NULL, CAST(N'2021-11-14' AS Date), CAST(N'2021-11-16' AS Date), 12, 197, NULL, NULL, N'71')
 GO
-INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (154, N'Trần Lê Thanh Thế', CAST(N'1987-08-23' AS Date), N'Nam', N'79201029283', N'Việt Nam', N'84035725519', NULL, CAST(N'2021-11-15' AS Date), CAST(N'2021-11-17' AS Date), 8, 182, NULL, 1, NULL)
+INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (3, N'Trần Lê Thanh Tùng', CAST(N'2000-12-21' AS Date), N'Nam', N'79201016283', N'Việt Nam', N'84035725516', NULL, CAST(N'2021-11-14' AS Date), CAST(N'2021-11-16' AS Date), 12, 198, NULL, NULL, N'72')
 GO
-INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (155, N'Trương Thanh Phục', CAST(N'1987-08-24' AS Date), N'Nam', N'79201098283', N'Việt Nam', N'84035725520', NULL, CAST(N'2021-11-15' AS Date), CAST(N'2021-11-17' AS Date), 8, 183, NULL, NULL, NULL)
+INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (4, N'Trương Kim Phục', CAST(N'1987-09-30' AS Date), N'Nam', N'79201027283', N'Việt Nam', N'84035725517', NULL, CAST(N'2021-11-14' AS Date), CAST(N'2021-11-16' AS Date), 12, 199, NULL, NULL, N'73')
 GO
-INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (156, N'Huỳnh Trọng Lâm', CAST(N'1987-08-25' AS Date), N'Nam', N'79201018273', N'Việt Nam', N'84035725521', NULL, CAST(N'2021-11-15' AS Date), CAST(N'2021-11-17' AS Date), 8, 184, NULL, NULL, NULL)
+INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (5, N'Trương Kim Thế', CAST(N'1987-08-22' AS Date), N'Nam', N'79201087283', N'Việt Nam', N'84035725518', NULL, CAST(N'2021-11-15' AS Date), CAST(N'2021-11-17' AS Date), 11, 200, NULL, NULL, N'74')
 GO
-INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (157, N'Dương Hiển Tùng', CAST(N'1987-08-26' AS Date), N'Nam', N'79201090283', N'Việt Nam', N'84035725522', NULL, CAST(N'2021-11-15' AS Date), CAST(N'2021-11-17' AS Date), 8, 185, NULL, NULL, NULL)
+INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (6, N'Trần Lê Thanh Thế', CAST(N'1987-08-23' AS Date), N'Nam', N'79201029283', N'Việt Nam', N'84035725519', NULL, CAST(N'2021-11-15' AS Date), CAST(N'2021-11-17' AS Date), 11, 201, NULL, NULL, N'75')
 GO
-INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (158, N'Dương Lê Thanh Thế', CAST(N'1987-08-27' AS Date), N'Nam', N'79201017219', N'Việt Nam', N'84035725523', NULL, CAST(N'2021-11-16' AS Date), CAST(N'2021-11-18' AS Date), 7, 186, NULL, NULL, NULL)
+INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (7, N'Trương Thanh Phục', CAST(N'1987-08-24' AS Date), N'Nam', N'79201098283', N'Việt Nam', N'84035725520', NULL, CAST(N'2021-11-15' AS Date), CAST(N'2021-11-17' AS Date), 11, 202, NULL, NULL, N'76')
 GO
-INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (159, N'Huỳnh Trọng Thế', CAST(N'1987-08-28' AS Date), N'Nam', N'79201017220', N'Việt Nam', N'84035725524', NULL, CAST(N'2021-11-16' AS Date), CAST(N'2021-11-18' AS Date), 7, 187, NULL, NULL, NULL)
+INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (8, N'Huỳnh Trọng Lâm', CAST(N'1987-08-25' AS Date), N'Nam', N'79201018273', N'Việt Nam', N'84035725521', NULL, CAST(N'2021-11-15' AS Date), CAST(N'2021-11-17' AS Date), 11, 203, NULL, NULL, N'77')
 GO
-INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (160, N'Dương Hiển Trọng Phục', CAST(N'1987-08-29' AS Date), N'Nam', N'79201017592', N'Việt Nam', N'84035725525', NULL, CAST(N'2021-11-16' AS Date), CAST(N'2021-11-18' AS Date), 7, 188, NULL, NULL, NULL)
+INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (9, N'Dương Hiển Tùng', CAST(N'1987-08-26' AS Date), N'Nam', N'79201090283', N'Việt Nam', N'84035725522', NULL, CAST(N'2021-11-15' AS Date), CAST(N'2021-11-17' AS Date), 11, 204, NULL, NULL, N'78')
 GO
-INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (161, N'Trương Kim Tùng', CAST(N'1987-08-30' AS Date), N'Nam', N'', N'Việt Nam', N'84035725526', NULL, CAST(N'2021-11-17' AS Date), CAST(N'2021-11-19' AS Date), 6, 189, NULL, NULL, N'')
+INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (10, N'Dương Lê Thanh Thế', CAST(N'1987-08-27' AS Date), N'Nam', N'79201017219', N'Việt Nam', N'84035725523', NULL, CAST(N'2021-11-16' AS Date), CAST(N'2021-11-18' AS Date), 10, 205, NULL, NULL, N'79')
 GO
-INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (163, N'ALO', CAST(N'2021-02-02' AS Date), N'Nam', N'', N'Hoa Kỳ', N'123', NULL, CAST(N'2021-01-01' AS Date), CAST(N'2021-02-02' AS Date), 326, 189, NULL, NULL, N'')
+INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (11, N'Huỳnh Trọng Thế', CAST(N'1987-08-28' AS Date), N'Nam', N'79201017220', N'Việt Nam', N'84035725524', NULL, CAST(N'2021-11-16' AS Date), CAST(N'2021-11-18' AS Date), 10, 206, NULL, NULL, N'80')
 GO
-INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (164, N'Minh', CAST(N'2021-02-02' AS Date), N'Nam', N'', N'Ahihi', N'123', NULL, CAST(N'2021-01-01' AS Date), CAST(N'2021-02-02' AS Date), 326, 189, NULL, NULL, N'')
+INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (12, N'Dương Hiển Trọng Phục', CAST(N'1987-08-29' AS Date), N'Nam', N'79201017592', N'Việt Nam', N'84035725525', NULL, CAST(N'2021-11-16' AS Date), CAST(N'2021-11-18' AS Date), 10, 207, NULL, NULL, N'81')
 GO
-INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (165, N'VCL', CAST(N'2021-11-03' AS Date), N'Nam', N'1', N' Indonesia', N'123', NULL, CAST(N'2021-11-23' AS Date), CAST(N'2021-12-15' AS Date), 0, 191, NULL, NULL, N'                    ')
-GO
-INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (166, N'a', CAST(N'2021-11-11' AS Date), N'Nam', N'2', N' Ấn Độ', N'1', NULL, CAST(N'2021-11-23' AS Date), CAST(N'2021-12-15' AS Date), 0, 192, NULL, NULL, N'')
+INSERT [dbo].[QuarantinePerson] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [phoneNumber], [levelID], [arrivedDate], [leaveDate], [quarantineDays], [addressID], [roomID], [completeQuarantine], [healthInsuranceID]) VALUES (13, N'Trương Kim Tùng', CAST(N'1987-08-30' AS Date), N'Nam', N'79201018592', N'Việt Nam', N'84035725526', NULL, CAST(N'2021-11-17' AS Date), CAST(N'2021-11-19' AS Date), 9, 208, NULL, NULL, N'82')
 GO
 SET IDENTITY_INSERT [dbo].[QuarantinePerson] OFF
 GO
 SET IDENTITY_INSERT [dbo].[QuarantineRoom] ON 
 GO
-INSERT [dbo].[QuarantineRoom] ([id], [displayName], [capacity], [levelID]) VALUES (13, N'BVB', 20, NULL)
+INSERT [dbo].[QuarantineRoom] ([id], [displayName], [capacity], [levelID]) VALUES (0, N'A1', 12, 0)
+GO
+INSERT [dbo].[QuarantineRoom] ([id], [displayName], [capacity], [levelID]) VALUES (1, N'A2', 12, NULL)
+GO
+INSERT [dbo].[QuarantineRoom] ([id], [displayName], [capacity], [levelID]) VALUES (2, N'B1', 12, NULL)
+GO
+INSERT [dbo].[QuarantineRoom] ([id], [displayName], [capacity], [levelID]) VALUES (3, N'B2', 12, NULL)
 GO
 SET IDENTITY_INSERT [dbo].[QuarantineRoom] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Severity] ON 
 GO
-INSERT [dbo].[Severity] ([id], [description], [level]) VALUES (8, N'DEF', N'ABC                 ')
+INSERT [dbo].[Severity] ([id], [description], [level]) VALUES (0, N'F1', N'1                   ')
 GO
 SET IDENTITY_INSERT [dbo].[Severity] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Staff] ON 
 GO
-INSERT [dbo].[Staff] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [healthInsuranceID], [phoneNumber], [addressID], [jobTitle], [department]) VALUES (16, N'1', CAST(N'2021-11-16' AS Date), N'Nam', N'12', N'Việt Nam', N'123', N'1', 175, N'Stop', N'Me')
+INSERT [dbo].[Staff] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [healthInsuranceID], [phoneNumber], [addressID], [jobTitle], [department]) VALUES (0, N'Tunglete', CAST(N'2021-11-16' AS Date), N'Nam', N'123123123', N' Hoa Kỳ', N'123123123', N'123321', 194, N'Manager', N'Super Idol')
+GO
+INSERT [dbo].[Staff] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [healthInsuranceID], [phoneNumber], [addressID], [jobTitle], [department]) VALUES (1, N'Trương Kim Lâm', CAST(N'2001-08-04' AS Date), N'Nữ', N'79201017231', N'Việt Nam', N'69', N'84357255117', 209, N'Bảo vệ', N'Bảo vệ')
+GO
+INSERT [dbo].[Staff] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [healthInsuranceID], [phoneNumber], [addressID], [jobTitle], [department]) VALUES (2, N'Dương Hiển Thế', CAST(N'2006-08-02' AS Date), N'Nam', N'79201017232', N'Việt Nam', N'70', N'84906012839', 210, N'Kế toán', N'Tài chính')
+GO
+INSERT [dbo].[Staff] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [healthInsuranceID], [phoneNumber], [addressID], [jobTitle], [department]) VALUES (3, N'Huỳnh Trọng Phục', CAST(N'1999-10-11' AS Date), N'Nữ', N'79201017283', N'Việt Nam', N'71', N'84035725515', 211, N'Bác sĩ', N'Y tế')
+GO
+INSERT [dbo].[Staff] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [healthInsuranceID], [phoneNumber], [addressID], [jobTitle], [department]) VALUES (4, N'Trần Lê Thanh Tùng', CAST(N'2000-12-21' AS Date), N'Nam', N'79201016283', N'Việt Nam', N'72', N'84035725516', 212, N'Hậu cần', N'Kỹ thuật')
+GO
+INSERT [dbo].[Staff] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [healthInsuranceID], [phoneNumber], [addressID], [jobTitle], [department]) VALUES (5, N'Trương Kim Phục', CAST(N'1987-09-30' AS Date), N'Nam', N'79201027283', N'Việt Nam', N'73', N'84035725517', 213, N'Hậu cần', N'Kỹ thuật')
+GO
+INSERT [dbo].[Staff] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [healthInsuranceID], [phoneNumber], [addressID], [jobTitle], [department]) VALUES (6, N'Trương Kim Thế', CAST(N'1987-08-22' AS Date), N'Nam', N'79201087283', N'Việt Nam', N'74', N'84035725518', 214, N'Hậu cần', N'Kỹ thuật')
+GO
+INSERT [dbo].[Staff] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [healthInsuranceID], [phoneNumber], [addressID], [jobTitle], [department]) VALUES (7, N'Trần Lê Thanh Thế', CAST(N'1987-08-23' AS Date), N'Nam', N'79201029283', N'Việt Nam', N'75', N'84035725519', 215, N'Hậu cần', N'Kỹ thuật')
+GO
+INSERT [dbo].[Staff] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [healthInsuranceID], [phoneNumber], [addressID], [jobTitle], [department]) VALUES (8, N'Trương Thanh Phục', CAST(N'1987-08-24' AS Date), N'Nam', N'79201098283', N'Việt Nam', N'76', N'84035725520', 216, N'Hậu cần', N'Kỹ thuật')
+GO
+INSERT [dbo].[Staff] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [healthInsuranceID], [phoneNumber], [addressID], [jobTitle], [department]) VALUES (9, N'Huỳnh Trọng Lâm', CAST(N'1987-08-25' AS Date), N'Nam', N'79201018273', N'Việt Nam', N'77', N'84035725521', 217, N'Hậu cần', N'Kỹ thuật')
+GO
+INSERT [dbo].[Staff] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [healthInsuranceID], [phoneNumber], [addressID], [jobTitle], [department]) VALUES (10, N'Dương Hiển Tùng', CAST(N'1987-08-26' AS Date), N'Nam', N'79201090283', N'Việt Nam', N'78', N'84035725522', 218, N'Chuyên môn', N'Kỹ thuật')
+GO
+INSERT [dbo].[Staff] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [healthInsuranceID], [phoneNumber], [addressID], [jobTitle], [department]) VALUES (11, N'Dương Lê Thanh Thế', CAST(N'1987-08-27' AS Date), N'Nam', N'79201017219', N'Việt Nam', N'79', N'84035725523', 219, N'Chuyên môn', N'Kỹ thuật')
+GO
+INSERT [dbo].[Staff] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [healthInsuranceID], [phoneNumber], [addressID], [jobTitle], [department]) VALUES (12, N'Huỳnh Trọng Thế', CAST(N'1987-08-28' AS Date), N'Nam', N'79201017220', N'Việt Nam', N'80', N'84035725524', 220, N'Chuyên môn', N'Kỹ thuật')
+GO
+INSERT [dbo].[Staff] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [healthInsuranceID], [phoneNumber], [addressID], [jobTitle], [department]) VALUES (13, N'Dương Hiển Trọng Phục', CAST(N'1987-08-29' AS Date), N'Nam', N'79201017592', N'Việt Nam', N'81', N'84035725525', 221, N'Chuyên môn', N'Kỹ thuật')
+GO
+INSERT [dbo].[Staff] ([id], [name], [dateOfBirth], [sex], [citizenID], [nationality], [healthInsuranceID], [phoneNumber], [addressID], [jobTitle], [department]) VALUES (14, N'Trương Kim Tùng', CAST(N'1987-08-30' AS Date), N'Nam', N'79201018592', N'Việt Nam', N'82', N'84035725526', 222, N'Chuyên môn', N'Kỹ thuật')
 GO
 SET IDENTITY_INSERT [dbo].[Staff] OFF
 GO
@@ -23939,7 +24037,7 @@ INSERT [dbo].[WARD] ([id], [name], [districtID]) VALUES (10599, N'Xã Đất Mũ
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UQ_Quarantine_CitizenID]    Script Date: 23-Nov-21 2:48:23 PM ******/
+/****** Object:  Index [UQ_Quarantine_CitizenID]    Script Date: 26-Nov-21 10:08:38 AM ******/
 CREATE UNIQUE NONCLUSTERED INDEX [UQ_Quarantine_CitizenID] ON [dbo].[QuarantinePerson]
 (
 	[citizenID] ASC
@@ -23949,7 +24047,7 @@ WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNOR
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UQ_Quarantine_HealthInsurID]    Script Date: 23-Nov-21 2:48:23 PM ******/
+/****** Object:  Index [UQ_Quarantine_HealthInsurID]    Script Date: 26-Nov-21 10:08:38 AM ******/
 CREATE UNIQUE NONCLUSTERED INDEX [UQ_Quarantine_HealthInsurID] ON [dbo].[QuarantinePerson]
 (
 	[healthInsuranceID] ASC
@@ -23959,7 +24057,7 @@ WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNOR
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UQ_Staff_CitizenID]    Script Date: 23-Nov-21 2:48:23 PM ******/
+/****** Object:  Index [UQ_Staff_CitizenID]    Script Date: 26-Nov-21 10:08:38 AM ******/
 CREATE UNIQUE NONCLUSTERED INDEX [UQ_Staff_CitizenID] ON [dbo].[Staff]
 (
 	[citizenID] ASC
@@ -23969,7 +24067,7 @@ WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNOR
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UQ_Staff_HealthInsurID]    Script Date: 23-Nov-21 2:48:23 PM ******/
+/****** Object:  Index [UQ_Staff_HealthInsurID]    Script Date: 26-Nov-21 10:08:38 AM ******/
 CREATE UNIQUE NONCLUSTERED INDEX [UQ_Staff_HealthInsurID] ON [dbo].[Staff]
 (
 	[healthInsuranceID] ASC
