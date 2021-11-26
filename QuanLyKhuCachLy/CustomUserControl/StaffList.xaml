@@ -151,7 +151,7 @@
         </Grid>
 
         <DataGrid
-            Height="429"
+            Height="430"
             Margin="0,20,0.4,20"
             materialDesign:DataGridAssist.CornerRadius="10"
             AutoGenerateColumns="False"
@@ -239,22 +239,31 @@
         </DataGrid>
         <Grid>
             <Button
-                Grid.Column="2"
-                Width="160"
-                Height="32"
-                Margin="10,0,0,30"
-                Padding="0"
+                Width="Auto"
+                Height="Auto"
                 HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
                 materialDesign:ButtonAssist.CornerRadius="5"
-                materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                Background="#FF1D9583"
-                BorderBrush="{x:Null}"
-                Content="Xuất danh sách"
+                BorderBrush="#FF434a54"
                 Command="{Binding ToExportExcel}"
-                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                FontSize="12"
-                FontWeight="Bold"
-                Style="{StaticResource MaterialDesignRaisedButton}" />
+                Style="{StaticResource MenuButton}">
+                <StackPanel Margin="8,2" Orientation="Horizontal">
+                    <materialDesign:PackIcon
+                        Margin="0,0,8,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="#FF434a54"
+                        Kind="FileExcelOutline" />
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="12"
+                        FontWeight="Bold"
+                        Foreground="#FF434a54"
+                        Text="XUẤT DANH SÁCH" />
+                </StackPanel>
+            </Button>
         </Grid>
     </StackPanel>
 </UserControl>

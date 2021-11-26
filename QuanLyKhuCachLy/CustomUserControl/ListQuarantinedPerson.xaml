@@ -202,7 +202,7 @@
 
         <DataGrid
             x:Name="QuarantinedPersonTable"
-            Height="460"
+            Height="430"
             Margin="0,20,0,20"
             materialDesign:DataGridAssist.CornerRadius="10"
             AutoGenerateColumns="False"
@@ -280,41 +280,66 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Grid>
+        <Grid HorizontalAlignment="Right">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
             <Button
-                Grid.Column="2"
-                Width="160"
-                Height="32"
-                Margin="10,0,0,30"
-                Padding="0"
-                HorizontalAlignment="Left"
-                materialDesign:ButtonAssist.CornerRadius="5"
-                materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                Background="#FF1D9583"
-                BorderBrush="{x:Null}"
-                Content="Thêm kết quả xét nghiệm"
-                Command="{Binding ToAddTestingResutlFromExcel}"
-                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                FontSize="12"
-                FontWeight="Bold"
-                Style="{StaticResource MaterialDesignRaisedButton}" />
-            <Button
-                Grid.Column="2"
-                Width="160"
-                Height="32"
-                Margin="10,0,0,30"
-                Padding="0"
+                Grid.Column="0"
+                Width="Auto"
+                Height="Auto"
                 HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
                 materialDesign:ButtonAssist.CornerRadius="5"
-                materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                Background="#FF1D9583"
-                BorderBrush="{x:Null}"
-                Content="Xuất danh sách"
+                BorderBrush="#FF434a54"
+                Command="{Binding ToAddTestingResutlFromExcel}"
+                Style="{StaticResource MenuButton}">
+                <StackPanel Margin="8,2" Orientation="Horizontal">
+                    <materialDesign:PackIcon
+                        Margin="0,0,8,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="#FF434a54"
+                        Kind="Update" />
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="12"
+                        FontWeight="Bold"
+                        Foreground="#FF434a54"
+                        Text="CẬP NHẬT KẾT QUẢ XÉT NGHIỆM" />
+                </StackPanel>
+            </Button>
+            <Button
+                Grid.Column="1"
+                Width="Auto"
+                Height="Auto"
+                Margin="16,0,0,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                materialDesign:ButtonAssist.CornerRadius="5"
+                BorderBrush="#FF434a54"
                 Command="{Binding ToExportExcel}"
-                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                FontSize="12"
-                FontWeight="Bold"
-                Style="{StaticResource MaterialDesignRaisedButton}" />
+                Style="{StaticResource MenuButton}">
+                <StackPanel Margin="8,2" Orientation="Horizontal">
+                    <materialDesign:PackIcon
+                        Margin="0,0,8,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="#FF434a54"
+                        Kind="FileExcelOutline" />
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="12"
+                        FontWeight="Bold"
+                        Foreground="#FF434a54"
+                        Text="XUẤT DANH SÁCH" />
+                </StackPanel>
+            </Button>
         </Grid>
     </StackPanel>
 </UserControl>
