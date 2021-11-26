@@ -191,6 +191,9 @@
     <Compile Include="CustomUserControl\DestinationHistoryFunctionMenu.xaml.cs">
       <DependentUpon>DestinationHistoryFunctionMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomUserControl\EditAuthenticationAccount.xaml.cs">
+      <DependentUpon>EditAuthenticationAccount.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomUserControl\EditDestinationHistory.xaml.cs">
       <DependentUpon>EditDestinationHistory.xaml</DependentUpon>
     </Compile>
@@ -455,6 +458,7 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\DeleteConfirmationViewModel.cs" />
     <Compile Include="ViewModel\DestinationHistoryViewModel.cs" />
+    <Compile Include="ViewModel\FailNotificationViewModel.cs" />
     <Compile Include="ViewModel\InjectionRecordViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -531,6 +535,10 @@
     <Page Include="CustomUserControl\DestinationHistoryFunctionMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomUserControl\EditAuthenticationAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomUserControl\EditDestinationHistory.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -872,7 +880,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    
     <Resource Include="Resources\fonts\NotoSans-Black.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

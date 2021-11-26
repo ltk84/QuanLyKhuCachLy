@@ -236,18 +236,9 @@ namespace QuanLyKhuCachLy.ViewModel
                 }
                 catch
                 {
-                    Window FailDialog = new Window
-                    {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new FailNotification()
-                    };
-                    FailDialog.ShowDialog();
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    ErrorDialog.ShowDialog();
                 }
             });
 
