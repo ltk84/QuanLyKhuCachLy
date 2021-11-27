@@ -224,9 +224,9 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-                CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
-                var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
-                ErrorDialog.ShowDialog();
+                //CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                //var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                //ErrorDialog.ShowDialog();
             }
         }
 
