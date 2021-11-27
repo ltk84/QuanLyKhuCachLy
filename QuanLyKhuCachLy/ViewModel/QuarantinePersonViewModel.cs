@@ -2988,7 +2988,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (xlRange.Cells[i, 2] != null && xlRange.Cells[i, 2].Value2 != null)
                     {
                         testingResult.isPositive = (xlRange.Cells[i, 2].Value2.ToString() == "âm tính"
-                            || xlRange.Cells[i, 1].Value2.ToString() == "Âm tính") ? false : true;
+                            || xlRange.Cells[i, 2].Value2.ToString() == "Âm tính") ? false : true;
                     }
                     else
                     {
