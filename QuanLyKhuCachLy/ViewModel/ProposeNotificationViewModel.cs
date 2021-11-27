@@ -1,4 +1,5 @@
-﻿using QuanLyKhuCachLy.Model;
+﻿using QuanLyKhuCachLy.CustomUserControl;
+using QuanLyKhuCachLy.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 using Twilio.Types;
@@ -185,7 +187,18 @@ namespace QuanLyKhuCachLy.ViewModel
 
             }
 
-            MessageBox.Show("Gửi thông báo thành công!");
+            Window SuccessDialog = new Window
+            {
+                AllowsTransparency = true,
+                Background = Brushes.Transparent,
+                Width = 600,
+                Height = 400,
+                ResizeMode = ResizeMode.NoResize,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                WindowStyle = WindowStyle.None,
+                Content = new SuccessNotification()
+            };
+            SuccessDialog.ShowDialog();
             // Reset nè
             PeopleList = new ObservableCollection<QuarantinePerson>();
             EditableMessage = "";
@@ -211,7 +224,9 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-                MessageBox.Show("Loi roi");
+                CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                ErrorDialog.ShowDialog();
             }
         }
 

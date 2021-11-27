@@ -6,14 +6,13 @@
     xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="250"
-    Height="150"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    Width="200"
+    d:DesignHeight="160"
+    d:DesignWidth="200"
     mc:Ignorable="d">
-    <Viewbox Width="250" Height="150">
+    <Viewbox Width="200">
         <Border
-            Margin="20"
+            Margin="10"
             Padding="0,16,0,16"
             Style="{StaticResource RecommendationField}">
             <StackPanel>
@@ -33,9 +32,9 @@
                         </TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Command="{Binding ToInportFormGoogleSheet }" Style="{StaticResource MenuButton}">
+                <Button Command="{Binding ToInportFormGoogleSheet}" Style="{StaticResource MenuButton}">
                     <StackPanel Style="{StaticResource MenuStackPanel}">
-                        <materialDesign:PackIcon Kind="FileExcelOutline" Style="{StaticResource MenuIcon}" />
+                        <materialDesign:PackIcon Kind="Google" Style="{StaticResource MenuIcon}" />
                         <TextBlock Style="{StaticResource MenuText}">
                             Từ Google Sheet
                         </TextBlock>

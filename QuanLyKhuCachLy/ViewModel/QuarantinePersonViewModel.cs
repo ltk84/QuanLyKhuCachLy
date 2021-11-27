@@ -13,7 +13,6 @@ using Microsoft.Win32;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Windows.Media;
 using System.Threading.Tasks;
-
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Sheets.v4;
 using Google.Apis.Sheets.v4.Data;
@@ -772,7 +771,8 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand CompleteQuarantinePersonCommand { get; set; }
         public ICommand RefeshCommand { get; set; }
 
-
+        public ICommand ToExportExcel { get; set; }
+        public ICommand ToAddTestingResutlFromExcel { get; set; }
 
         #endregion
 
@@ -891,7 +891,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             ExperationType = new string[] { "Toàn bộ", "Người đang cách ly", "Hoàn thành cách ly" };
             ExperationProperty = "Toàn bộ";
-            FilterType = new string[] { "Tất cả", "Giới tính", "Quốc tịch", "Phòng", "Nhóm đối tượng", "Ngày đi", "Ngày đến", "Ngày đến kì hạn xét nghiệm" };
+            FilterType = new string[] { "Tất cả", "Giới tính", "Quốc tịch", "Phòng", "Nhóm đối tượng", "Ngày hoàn thành", "Ngày đến", "Đến kì hạn xét nghiệm" };
             SelectedFilterType = "Tất cả";
             SelectedFilterProperty = "Chọn phương thức lọc";
             getFilterProperty();
@@ -938,7 +938,21 @@ namespace QuanLyKhuCachLy.ViewModel
                 TabPosition = $"{TabIndex}/4";
             });
 
+            ToExportExcel = new RelayCommand<Window>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                ExportExcel();
+            });
 
+            ToAddTestingResutlFromExcel = new RelayCommand<Window>((p) =>
+            {
+                return true;
+            },  (p) =>
+            {
+                 AddTestingResutlFromExcel();
+            });
             ToInportFormGoogleSheet = new RelayCommand<Window>((p) =>
             {
                 return true;
@@ -1082,37 +1096,47 @@ namespace QuanLyKhuCachLy.ViewModel
                 catch (DbUpdateException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi db update";
 
-                    MessageBox.Show(error);
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi cơ sở dữ liệu cập nhật";
+                    ErrorDialog.ShowDialog();
                 }
                 catch (DbEntityValidationException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi validation";
 
-                    MessageBox.Show(error);
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi xác thực";
+                    ErrorDialog.ShowDialog();
                 }
                 catch (NotSupportedException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi db đéo support";
 
-                    MessageBox.Show(error);
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi database không hỗ trợ";
+                    ErrorDialog.ShowDialog();
                 }
                 catch (ObjectDisposedException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi db object disposed";
 
-                    MessageBox.Show(error);
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi đối tượng database bị hủy";
+                    ErrorDialog.ShowDialog();
                 }
                 catch (InvalidOperationException e)
                 {
                     transaction.Rollback();
-                    string error = "Lỗi invalid operation";
 
-                    MessageBox.Show(error);
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi thao tác không hợp lệ";
+                    ErrorDialog.ShowDialog();
                 }
             }
         }
@@ -1140,91 +1164,46 @@ namespace QuanLyKhuCachLy.ViewModel
                 catch (DbUpdateException e)
                 {
                     transaction.Rollback();
-                    //string error = "Lỗi db update";
 
-                    Window ErrorDialog = new Window
-                    {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new FailNotification()
-                    };
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi cơ sở dữ liệu cập nhật";
                     ErrorDialog.ShowDialog();
                 }
                 catch (DbEntityValidationException e)
                 {
                     transaction.Rollback();
-                    //string error = "Lỗi validation";
 
-                    Window ErrorDialog = new Window
-                    {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new FailNotification()
-                    };
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi xác thực";
                     ErrorDialog.ShowDialog();
                 }
                 catch (NotSupportedException e)
                 {
                     transaction.Rollback();
-                    //string error = "Lỗi db đéo support";
 
-                    Window ErrorDialog = new Window
-                    {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new FailNotification()
-                    };
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi database không hỗ trợ";
                     ErrorDialog.ShowDialog();
                 }
                 catch (ObjectDisposedException e)
                 {
                     transaction.Rollback();
-                    //string error = "Lỗi db object disposed";
 
-                    Window ErrorDialog = new Window
-                    {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new FailNotification()
-                    };
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi đối tượng database bị hủy";
                     ErrorDialog.ShowDialog();
                 }
                 catch (InvalidOperationException e)
                 {
                     transaction.Rollback();
-                    //string error = "Lỗi invalid operation";
 
-                    Window ErrorDialog = new Window
-                    {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new FailNotification()
-                    };
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi thao tác không hợp lệ";
                     ErrorDialog.ShowDialog();
                 }
             }
@@ -1244,7 +1223,7 @@ namespace QuanLyKhuCachLy.ViewModel
             RemainRoomList = new ObservableCollection<Model.QuarantineRoom>();
             PeopleListView = QuarantinePersonList.ToArray();
 
-            FilterType = new string[] { "Tất cả", "Giới tính", "Quốc tịch", "Phòng", "Nhóm đối tượng", "Ngày đi", "Ngày đến" };
+            FilterType = new string[] { "Tất cả", "Giới tính", "Quốc tịch", "Phòng", "Nhóm đối tượng", "Ngày hoàn thành", "Ngày đến", "Đến kì hạn xét nghiệm" };
             SelectedFilterType = "Tất cả";
             SelectedFilterProperty = "Chọn phương thức lọc";
             getFilterProperty();
@@ -1297,91 +1276,46 @@ namespace QuanLyKhuCachLy.ViewModel
                 catch (DbUpdateException e)
                 {
                     transaction.Rollback();
-                    //string error = "Lỗi db update";
 
-                    Window ErrorDialog = new Window
-                    {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new FailNotification()
-                    };
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi cơ sở dữ liệu cập nhật";
                     ErrorDialog.ShowDialog();
                 }
                 catch (DbEntityValidationException e)
                 {
                     transaction.Rollback();
-                    //string error = "Lỗi validation";
 
-                    Window ErrorDialog = new Window
-                    {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new FailNotification()
-                    };
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi xác thực";
                     ErrorDialog.ShowDialog();
                 }
                 catch (NotSupportedException e)
                 {
                     transaction.Rollback();
-                    //string error = "Lỗi db đéo support";
 
-                    Window ErrorDialog = new Window
-                    {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new FailNotification()
-                    };
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi database không hỗ trợ";
                     ErrorDialog.ShowDialog();
                 }
                 catch (ObjectDisposedException e)
                 {
                     transaction.Rollback();
-                    //string error = "Lỗi db object disposed";
 
-                    Window ErrorDialog = new Window
-                    {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new FailNotification()
-                    };
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi đối tượng database bị hủy";
                     ErrorDialog.ShowDialog();
                 }
                 catch (InvalidOperationException e)
                 {
                     transaction.Rollback();
-                    //string error = "Lỗi invalid operation";
 
-                    Window ErrorDialog = new Window
-                    {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new FailNotification()
-                    };
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi thao tác không hợp lệ";
                     ErrorDialog.ShowDialog();
                 }
             }
@@ -1533,7 +1467,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 FilterProperty = QuarantinePersonList.Select(person => person.Severity?.level).ToArray();
                 FilterProperty = FilterProperty.Distinct().ToArray();
             }
-            else if (SelectedFilterType == "Ngày đi")
+            else if (SelectedFilterType == "Ngày hoàn thành")
             {
                 FilterProperty = QuarantinePersonList.Select(person => person.leaveDate.ToString()).ToArray();
                 FilterProperty = FilterProperty.Distinct().ToArray();
@@ -1543,7 +1477,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 FilterProperty = QuarantinePersonList.Select(person => person.arrivedDate.ToString()).ToArray();
                 FilterProperty = FilterProperty.Distinct().ToArray();
             }
-            else if (SelectedFilterType == "Ngày đến kì hạn xét nghiệm")
+            else if (SelectedFilterType == "Đến kì hạn xét nghiệm")
             {
                 FilterProperty = new string[] { "Hôm qua", "Hôm nay", "Ngày mai" };
             }
@@ -1631,7 +1565,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                 PeopleListView = QuarantinePersonList.Where(x => x.Severity?.level == SelectedFilterProperty).ToArray();
             }
-            else if (SelectedFilterType == "Ngày đi")
+            else if (SelectedFilterType == "Ngày hoàn thành")
             {
                 PeopleListView = QuarantinePersonList.Where(x => x.leaveDate.ToString() == SelectedFilterProperty).ToArray();
 
@@ -1641,7 +1575,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 PeopleListView = QuarantinePersonList.Where(x => x.arrivedDate.ToString() == SelectedFilterProperty).ToArray();
 
             }
-            else if (SelectedFilterType == "Ngày đến kì hạn xét nghiệm")
+            else if (SelectedFilterType == "Đến kì hạn xét nghiệm")
             {
                 if (SelectedFilterProperty == "Hôm nay")
                 {
@@ -1690,6 +1624,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 List<Address> listAdress = new List<Address>();
                 List<QuarantinePerson> listQuarantinePerson = new List<QuarantinePerson>();
                 List<HealthInformation> listHealthInformation = new List<HealthInformation>();
+                List<List<InjectionRecord>> listInjectionRecords = new List<List<InjectionRecord>>();
                 Excel.Application xlApp = new Excel.Application();
                 Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(path);
                 Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
@@ -1707,7 +1642,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 xlRange.Cells[1, 10] == null || xlRange.Cells[1, 10].Value2 != "SĐT" ||
                 xlRange.Cells[1, 11] == null || xlRange.Cells[1, 11].Value2 != "Triệu chứng" ||
                 xlRange.Cells[1, 12] == null || xlRange.Cells[1, 12].Value2 != "Nhóm đối tượng" ||
-                xlRange.Cells[1, 13] == null || xlRange.Cells[1, 13].Value2 != "Ngày đến")
+                xlRange.Cells[1, 13] == null || xlRange.Cells[1, 13].Value2 != "Ngày đến"||
+                xlRange.Cells[1, 14] == null || xlRange.Cells[1, 14].Value2 != "Thông tin tiêm chủng")
                 {
                     //MessageBox.Show("Không đúng định dạng file");
                     return;
@@ -1717,6 +1653,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     Address personAddress = new Address();
                     QuarantinePerson quarantinePerson = new QuarantinePerson();
                     HealthInformation healthInformation = new HealthInformation();
+                    List<InjectionRecord> injectionRecords = new List<InjectionRecord>();
                     if (xlRange.Cells[i, 2] != null && xlRange.Cells[i, 2].Value2 != null)
                     {
                         quarantinePerson.name = xlRange.Cells[i, 2].Value2.ToString();
@@ -1733,10 +1670,28 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (xlRange.Cells[i, 5] != null && xlRange.Cells[i, 5].Value2 != null)
                     {
                         string[] arrListStr = xlRange.Cells[i, 5].Value2.ToString().Split(',');
-                        personAddress.district = arrListStr[2];
-                        personAddress.province = arrListStr[3];
-                        personAddress.ward = arrListStr[1];
-                        personAddress.streetName = arrListStr[0];
+                        if (arrListStr.Length < 3)
+                        {
+                            CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                            var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                            FailNotificationVM.Content = xlRange.Cells[i, 2].Value2.ToString() + " has error in address";
+                            ErrorDialog.ShowDialog();
+                            //MessageBox.Show(xlRange.Cells[i, 2].Value2.ToString() + " has error in address");
+                            return;
+                        }
+                        if (arrListStr.Length == 3)
+                        {
+                            personAddress.province = arrListStr[2];
+                            personAddress.district = arrListStr[1];
+                            personAddress.ward = arrListStr[0];
+                        }
+                        else
+                        {
+                            personAddress.province = arrListStr[3];
+                            personAddress.district = arrListStr[2];
+                            personAddress.ward = arrListStr[1];
+                            personAddress.streetName = arrListStr[0];
+                        }
                     }
                     if (xlRange.Cells[i, 7] != null && xlRange.Cells[i, 7].Value2 != null)
                     {
@@ -1808,9 +1763,40 @@ namespace QuanLyKhuCachLy.ViewModel
                         DateTime arrivedTime = DateTime.FromOADate(double.Parse(xlRange.Cells[i, 13].Value2.ToString()));
                         quarantinePerson.arrivedDate = arrivedTime;
                     }
+                    if (xlRange.Cells[i, 14] != null && xlRange.Cells[i, 14].Value2 != null)
+                    {
+
+                        var records = xlRange.Cells[i,14].Value2.ToString().Split(',');
+                        for (int j = 0; j < records.Length; j++)
+                        {
+                            InjectionRecord rc = new InjectionRecord();
+                            string[] str = records[j].Split(' ');
+                            if (str.Length == 2 )
+                            {
+                                DateTime date = Convert.ToDateTime(str[0].ToString());
+                                string vaccine = str[1].ToString();
+                                rc.dateInjection = date;
+                                rc.vaccineName = vaccine;
+                                injectionRecords.Add(rc);
+                            }
+                        }
+                        if (injectionRecords.Count() == 0)
+                        {
+                            InjectionRecord rc = new InjectionRecord();
+                            rc.vaccineName = "Không có nhá";
+                            injectionRecords.Add(rc);
+                        }
+                    }
+                    else
+                    {
+                        InjectionRecord rc = new InjectionRecord();
+                        rc.vaccineName = "Không có nhá";
+                        injectionRecords.Add(rc);
+                    }
                     listAdress.Add(personAddress);
                     listHealthInformation.Add(healthInformation);
                     listQuarantinePerson.Add(quarantinePerson);
+                    listInjectionRecords.Add(injectionRecords);
                 }
                 using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
                 {
@@ -1832,6 +1818,16 @@ namespace QuanLyKhuCachLy.ViewModel
                             listHealthInformation[i].quarantinePersonID = listQuarantinePerson[i].id;
                             DataProvider.ins.db.HealthInformations.Add(listHealthInformation[i]);
                             DataProvider.ins.db.SaveChanges();
+                            if (listInjectionRecords[i][0].vaccineName != "Không có nhá")
+                            {
+                                for (int j = 0; j < listInjectionRecords[i].Count; j++)
+                                {
+                                    listInjectionRecords[i][j].quarantinePersonID = listQuarantinePerson[i].id;
+                                    DataProvider.ins.db.InjectionRecords.Add(listInjectionRecords[i][j]);
+                                    DataProvider.ins.db.SaveChanges();
+                                }
+                                DataProvider.ins.db.SaveChanges();
+                            }
                         }
                         PeopleListView = DataProvider.ins.db.QuarantinePersons.ToArray();
                         QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
@@ -1894,18 +1890,8 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else
             {
-
-                Window ErrorDialog = new Window
-                {
-                    AllowsTransparency = true,
-                    Background = Brushes.Transparent,
-                    Width = 600,
-                    Height = 400,
-                    ResizeMode = ResizeMode.NoResize,
-                    WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                    WindowStyle = WindowStyle.None,
-                    Content = new FailNotification()
-                };
+                CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
                 ErrorDialog.ShowDialog();
             }
         }
@@ -1933,7 +1919,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     if (i != 0)
                         DisplayAddress += ", ";
-                    else DisplayAddress += "";
+                    else DisplayAddress += " ";
                 }
             }
         }
@@ -2122,41 +2108,21 @@ namespace QuanLyKhuCachLy.ViewModel
                 catch (DbUpdateException e)
                 {
                     transaction.Rollback();
-                    //string error = "Lỗi db update";
-
                     RollBackChange();
 
-
-                    Window ErrorDialog = new Window
-                    {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new FailNotification()
-                    };
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi cơ sở dữ liệu cập nhật";
                     ErrorDialog.ShowDialog();
                 }
                 catch (DbEntityValidationException e)
                 {
                     transaction.Rollback();
-                    //string error = "Lỗi validation";
-
                     RollBackChange();
-                    Window ErrorDialog = new Window
-                    {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new FailNotification()
-                    };
+
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi xác thực";
                     ErrorDialog.ShowDialog();
                 }
                 catch (NotSupportedException e)
@@ -2164,17 +2130,9 @@ namespace QuanLyKhuCachLy.ViewModel
                     transaction.Rollback();
                     RollBackChange();
 
-                    Window ErrorDialog = new Window
-                    {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new FailNotification()
-                    };
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi database không hỗ trợ";
                     ErrorDialog.ShowDialog();
                 }
                 catch (ObjectDisposedException e)
@@ -2182,17 +2140,9 @@ namespace QuanLyKhuCachLy.ViewModel
                     transaction.Rollback();
                     RollBackChange();
 
-                    Window ErrorDialog = new Window
-                    {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new FailNotification()
-                    };
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi đối tượng database bị hủy";
                     ErrorDialog.ShowDialog();
                 }
                 catch (InvalidOperationException e)
@@ -2200,17 +2150,9 @@ namespace QuanLyKhuCachLy.ViewModel
                     transaction.Rollback();
                     RollBackChange();
 
-                    Window ErrorDialog = new Window
-                    {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new FailNotification()
-                    };
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi thao tác không hợp lệ";
                     ErrorDialog.ShowDialog();
                 }
 
@@ -2311,17 +2253,9 @@ namespace QuanLyKhuCachLy.ViewModel
                     transaction.Rollback();
                     RollBackChange();
 
-                    Window ErrorDialog = new Window
-                    {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new FailNotification()
-                    };
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi cơ sở dữ liệu cập nhật";
                     ErrorDialog.ShowDialog();
                 }
                 catch (DbEntityValidationException e)
@@ -2329,17 +2263,9 @@ namespace QuanLyKhuCachLy.ViewModel
                     transaction.Rollback();
                     RollBackChange();
 
-                    Window ErrorDialog = new Window
-                    {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new FailNotification()
-                    };
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi xác thực";
                     ErrorDialog.ShowDialog();
                 }
                 catch (NotSupportedException e)
@@ -2347,17 +2273,9 @@ namespace QuanLyKhuCachLy.ViewModel
                     transaction.Rollback();
                     RollBackChange();
 
-                    Window ErrorDialog = new Window
-                    {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new FailNotification()
-                    };
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi database không hỗ trợ";
                     ErrorDialog.ShowDialog();
                 }
                 catch (ObjectDisposedException e)
@@ -2365,17 +2283,9 @@ namespace QuanLyKhuCachLy.ViewModel
                     transaction.Rollback();
                     RollBackChange();
 
-                    Window ErrorDialog = new Window
-                    {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new FailNotification()
-                    };
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi đối tượng database bị hủy";
                     ErrorDialog.ShowDialog();
                 }
                 catch (InvalidOperationException e)
@@ -2383,17 +2293,9 @@ namespace QuanLyKhuCachLy.ViewModel
                     transaction.Rollback();
                     RollBackChange();
 
-                    Window ErrorDialog = new Window
-                    {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new FailNotification()
-                    };
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi thao tác không hợp lệ";
                     ErrorDialog.ShowDialog();
                 }
             }
@@ -2423,17 +2325,9 @@ namespace QuanLyKhuCachLy.ViewModel
                     transaction.Rollback();
                     RollBackChange();
 
-                    Window ErrorDialog = new Window
-                    {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new FailNotification()
-                    };
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi cơ sở dữ liệu cập nhật";
                     ErrorDialog.ShowDialog();
                 }
                 catch (DbEntityValidationException e)
@@ -2441,17 +2335,9 @@ namespace QuanLyKhuCachLy.ViewModel
                     transaction.Rollback();
                     RollBackChange();
 
-                    Window ErrorDialog = new Window
-                    {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new FailNotification()
-                    };
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi xác thực";
                     ErrorDialog.ShowDialog();
                 }
                 catch (NotSupportedException e)
@@ -2459,17 +2345,9 @@ namespace QuanLyKhuCachLy.ViewModel
                     transaction.Rollback();
                     RollBackChange();
 
-                    Window ErrorDialog = new Window
-                    {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new FailNotification()
-                    };
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi database không hỗ trợ";
                     ErrorDialog.ShowDialog();
                 }
                 catch (ObjectDisposedException e)
@@ -2477,17 +2355,9 @@ namespace QuanLyKhuCachLy.ViewModel
                     transaction.Rollback();
                     RollBackChange();
 
-                    Window ErrorDialog = new Window
-                    {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new FailNotification()
-                    };
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi đối tượng database bị hủy";
                     ErrorDialog.ShowDialog();
                 }
                 catch (InvalidOperationException e)
@@ -2495,17 +2365,9 @@ namespace QuanLyKhuCachLy.ViewModel
                     transaction.Rollback();
                     RollBackChange();
 
-                    Window ErrorDialog = new Window
-                    {
-                        AllowsTransparency = true,
-                        Background = Brushes.Transparent,
-                        Width = 600,
-                        Height = 400,
-                        ResizeMode = ResizeMode.NoResize,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        WindowStyle = WindowStyle.None,
-                        Content = new FailNotification()
-                    };
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi thao tác không hợp lệ";
                     ErrorDialog.ShowDialog();
                 }
             }
@@ -2671,6 +2533,7 @@ namespace QuanLyKhuCachLy.ViewModel
             List<Address> listAdress = new List<Address>();
             List<QuarantinePerson> listQuarantinePerson = new List<QuarantinePerson>();
             List<HealthInformation> listHealthInformation = new List<HealthInformation>();
+            List<List<InjectionRecord>> listInjectionRecords = new List<List<InjectionRecord>>();
             int rowCount = values.Count();
             if (values != null && values.Count > 0)
             {
@@ -2678,6 +2541,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 for (int i = 1; i < rowCount; i++)
                 {
 
+                    List<InjectionRecord> injectionRecords = new List<InjectionRecord>();
                     Address personAddress = new Address();
                     QuarantinePerson quarantinePerson = new QuarantinePerson();
                     HealthInformation healthInformation = new HealthInformation();
@@ -2700,10 +2564,27 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (values[i][4] != null)
                     {
                         string[] arrListStr = values[i][4].ToString().Split(',');
-                        personAddress.district = arrListStr[2];
-                        personAddress.province = arrListStr[3];
-                        personAddress.ward = arrListStr[1];
-                        personAddress.streetName = arrListStr[0];
+                        if(arrListStr.Length < 3)
+                        {
+                            CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                            var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                            FailNotificationVM.Content = values[i][1].ToString() + " has error in address";
+                            ErrorDialog.ShowDialog();
+                            return;
+                        }
+                        if (arrListStr.Length == 3)
+                        {
+                            personAddress.province = arrListStr[2];
+                            personAddress.district = arrListStr[1];
+                            personAddress.ward = arrListStr[0];
+                        }
+                        else
+                        {
+                            personAddress.province = arrListStr[3];
+                            personAddress.district = arrListStr[2];
+                            personAddress.ward = arrListStr[1];
+                            personAddress.streetName = arrListStr[0];
+                        }
                     }
 
                     if (values[i][6] != null)
@@ -2778,9 +2659,36 @@ namespace QuanLyKhuCachLy.ViewModel
                         quarantinePerson.arrivedDate = arrivedTime;
 
                     }
+                    if (values[i][12] != null)
+                    {
+                        DateTime arrivedTime = Convert.ToDateTime(values[i][12].ToString());
+                        quarantinePerson.arrivedDate = arrivedTime;
+
+                    }
+                    if (values[i][13].ToString() != "Chưa tiêm")
+                    {
+                        var records = values[i][13].ToString().Split(',');
+                        for (int j= 0; j < records.Length; j++)
+                        {
+                            InjectionRecord rc = new InjectionRecord();
+                            var str = records[j].Split(' ');
+                            DateTime date = Convert.ToDateTime(str[0].ToString());
+                            string vaccine = str[1].ToString();
+                            rc.dateInjection = date;
+                            rc.vaccineName = vaccine;
+                            injectionRecords.Add(rc);
+                        }
+                    }
+                    else
+                    {
+                        InjectionRecord rc = new InjectionRecord();
+                        rc.vaccineName = "Không có nhá";
+                        injectionRecords.Add(rc);
+                    }
                     listAdress.Add(personAddress);
                     listHealthInformation.Add(healthInformation);
                     listQuarantinePerson.Add(quarantinePerson);
+                    listInjectionRecords.Add(injectionRecords);
                 }
 
                 using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
@@ -2793,6 +2701,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                         for (int i = 0; i < listQuarantinePerson.Count; i++)
                         {
+                     
                             DataProvider.ins.db.Addresses.Add(listAdress[i]);
                             DataProvider.ins.db.SaveChanges();
                             listQuarantinePerson[i].leaveDate = listQuarantinePerson[i].arrivedDate.AddDays(QAInformation.requiredDayToFinish);
@@ -2804,6 +2713,17 @@ namespace QuanLyKhuCachLy.ViewModel
                             DataProvider.ins.db.HealthInformations.Add(listHealthInformation[i]);
                             DataProvider.ins.db.SaveChanges();
 
+                            if(listInjectionRecords[i][0].vaccineName != "Không có nhá")
+                            {
+                                for (int j = 0; j < listInjectionRecords[i].Count; j++)
+                                {
+                                    listInjectionRecords[i][j].quarantinePersonID = listQuarantinePerson[i].id;
+                                    DataProvider.ins.db.InjectionRecords.Add(listInjectionRecords[i][j]);
+                                    DataProvider.ins.db.SaveChanges();
+                                }
+                                DataProvider.ins.db.SaveChanges();
+                            }
+                           
                         }
                         PeopleListView = DataProvider.ins.db.QuarantinePersons.ToArray();
                         QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
@@ -2825,6 +2745,35 @@ namespace QuanLyKhuCachLy.ViewModel
                         transaction.Commit();
 
                         //MessageBox.Show("Đã thêm từ file excel");
+                        BatchUpdateSpreadsheetRequest content = new BatchUpdateSpreadsheetRequest();
+                        Request RequestBody = new Request()
+                        {
+                            DeleteDimension = new DeleteDimensionRequest()
+                            {
+                                Range = new DimensionRange()
+                                {
+                                    SheetId = 0,
+                                    Dimension = "ROWS",
+                                    StartIndex =1,
+                                    EndIndex = listQuarantinePerson.Count +1,
+                                }
+                            }
+                        };
+                        List<Request> requests = new List<Request>();
+                        requests.Add(RequestBody);
+                        content.Requests = requests;
+                        try
+                        {
+                            SpreadsheetsResource.BatchUpdateRequest Deletion = new SpreadsheetsResource.BatchUpdateRequest(service, content, spreadsheetId);
+                            Deletion.Execute();
+                        }
+                        catch
+                        {
+                            CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                            var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                            FailNotificationVM.Content = "Thao tác xóa bị lỗi";
+                            ErrorDialog.ShowDialog();
+                        };
 
                         SuccessDialog.ShowDialog();
 
@@ -2835,17 +2784,9 @@ namespace QuanLyKhuCachLy.ViewModel
                         transaction.Rollback();
                         RollBackChange();
 
-                        Window ErrorDialog = new Window
-                        {
-                            AllowsTransparency = true,
-                            Background = Brushes.Transparent,
-                            Width = 600,
-                            Height = 400,
-                            ResizeMode = ResizeMode.NoResize,
-                            WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                            WindowStyle = WindowStyle.None,
-                            Content = new FailNotification()
-                        };
+                        CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                        var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                        FailNotificationVM.Content = "Lỗi cơ sở dữ liệu cập nhật";
                         ErrorDialog.ShowDialog();
                     }
                     catch (DbEntityValidationException e)
@@ -2853,17 +2794,9 @@ namespace QuanLyKhuCachLy.ViewModel
                         transaction.Rollback();
                         RollBackChange();
 
-                        Window ErrorDialog = new Window
-                        {
-                            AllowsTransparency = true,
-                            Background = Brushes.Transparent,
-                            Width = 600,
-                            Height = 400,
-                            ResizeMode = ResizeMode.NoResize,
-                            WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                            WindowStyle = WindowStyle.None,
-                            Content = new FailNotification()
-                        };
+                        CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                        var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                        FailNotificationVM.Content = "Lỗi xác thực";
                         ErrorDialog.ShowDialog();
                     }
                     catch (NotSupportedException e)
@@ -2871,17 +2804,9 @@ namespace QuanLyKhuCachLy.ViewModel
                         transaction.Rollback();
                         RollBackChange();
 
-                        Window ErrorDialog = new Window
-                        {
-                            AllowsTransparency = true,
-                            Background = Brushes.Transparent,
-                            Width = 600,
-                            Height = 400,
-                            ResizeMode = ResizeMode.NoResize,
-                            WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                            WindowStyle = WindowStyle.None,
-                            Content = new FailNotification()
-                        };
+                        CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                        var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                        FailNotificationVM.Content = "Lỗi database không hỗ trợ";
                         ErrorDialog.ShowDialog();
                     }
                     catch (ObjectDisposedException e)
@@ -2889,17 +2814,9 @@ namespace QuanLyKhuCachLy.ViewModel
                         transaction.Rollback();
                         RollBackChange();
 
-                        Window ErrorDialog = new Window
-                        {
-                            AllowsTransparency = true,
-                            Background = Brushes.Transparent,
-                            Width = 600,
-                            Height = 400,
-                            ResizeMode = ResizeMode.NoResize,
-                            WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                            WindowStyle = WindowStyle.None,
-                            Content = new FailNotification()
-                        };
+                        CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                        var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                        FailNotificationVM.Content = "Lỗi đối tượng database bị hủy";
                         ErrorDialog.ShowDialog();
                     }
                     catch (InvalidOperationException e)
@@ -2907,17 +2824,9 @@ namespace QuanLyKhuCachLy.ViewModel
                         transaction.Rollback();
                         RollBackChange();
 
-                        Window ErrorDialog = new Window
-                        {
-                            AllowsTransparency = true,
-                            Background = Brushes.Transparent,
-                            Width = 600,
-                            Height = 400,
-                            ResizeMode = ResizeMode.NoResize,
-                            WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                            WindowStyle = WindowStyle.None,
-                            Content = new FailNotification()
-                        };
+                        CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                        var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                        FailNotificationVM.Content = "Lỗi thao tác không hợp lệ";
                         ErrorDialog.ShowDialog();
                     }
                 }
@@ -2925,7 +2834,225 @@ namespace QuanLyKhuCachLy.ViewModel
             else
             {
                 //MessageBox.Show("No data found.");
-                Window ErrorDialog = new Window
+                CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                FailNotificationVM.Content = "Không tìm thấy dữ liệu";
+                ErrorDialog.ShowDialog();
+            }
+            
+        }
+        void ExportExcel()
+        {
+            int count = PeopleListView.Length;
+            Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
+            app.Visible = true;
+            app.WindowState = Microsoft.Office.Interop.Excel.XlWindowState.xlMaximized;
+            Microsoft.Office.Interop.Excel.Workbook file = app.Workbooks.Add(Microsoft.Office.Interop.Excel.XlWBATemplate.xlWBATWorksheet);
+            file.Sheets.Add();
+            Microsoft.Office.Interop.Excel.Worksheet sheet = file.Worksheets[1];
+            Microsoft.Office.Interop.Excel.Worksheet sheet2 = file.Worksheets[2];
+            sheet2.Name = "DS ID";
+            sheet2.Name = "Danh sách người cách ly";
+            sheet.Columns[1].ColumnWidth = 5;
+            sheet.Columns[2].ColumnWidth = 25;
+            sheet.Columns[3].ColumnWidth = 12;
+            sheet.Columns[4].ColumnWidth = 9;
+            sheet.Columns[5].ColumnWidth = 50;
+            sheet.Columns[6].ColumnWidth = 12;
+            sheet.Columns[7].ColumnWidth = 12;
+            sheet.Columns[8].ColumnWidth = 10;
+            sheet.Columns[9].ColumnWidth = 12;
+            sheet.Columns[10].ColumnWidth = 5;
+            sheet.Columns[11].ColumnWidth = 12;
+            sheet.Columns[12].ColumnWidth = 12;
+            sheet.Columns[13].ColumnWidth = 10;
+            sheet.Columns[14].ColumnWidth = 7;
+            sheet.Columns[15].ColumnWidth = 15;
+            sheet.Columns[16].ColumnWidth = 15;
+            sheet2.Columns[1].ColumnWidth = 10;
+            sheet2.Columns[2].ColumnWidth = 10;
+            sheet2.Columns[3].ColumnWidth = 15;
+            sheet2.Range["A1"].Value = "ID";
+            sheet2.Range["B1"].Value = "Kết quả";
+            sheet2.Range["C1"].Value = "Ngày xét nghiệm";
+            sheet.Range["A1"].Value = "STT";
+            sheet.Range["B1"].Value = "Họ và tên";
+            sheet.Range["C1"].Value = "Ngày sinh";
+            sheet.Range["D1"].Value = "Giới tính";
+            sheet.Range["E1"].Value = "Địa chỉ";
+            sheet.Range["F1"].Value = "MaBH";
+            sheet.Range["G1"].Value = "CMND/CCCD";
+            sheet.Range["H1"].Value = "Quốc tịch";
+            sheet.Range["I1"].Value = "SĐT";
+            sheet.Range["J1"].Value = "Nhóm đối tượng";
+            sheet.Range["K1"].Value = "Ngày đến";
+            sheet.Range["L1"].Value = "Ngày hoàn thành";
+            sheet.Range["M1"].Value = "Số ngày\ncách ly";
+            sheet.Range["N1"].Value = "Phòng";
+            sheet.Range["O1"].Value = "Đã hoàn thành\ncách ly";
+            sheet.Range["P1"].Value = "Số mũi vaccine\nđã tiêm";
+
+            for (int i = 2; i <= count+1; i++)
+            {
+                int addressID = PeopleListView[i - 2].addressID.Value;
+                Address address = DataProvider.ins.db.Addresses.Where(x => x.id == addressID).FirstOrDefault();
+                String personAddress = "";
+                if (address.apartmentNumber != null)
+                    personAddress += address.apartmentNumber.ToString();
+                if (address.streetName != null)
+                    personAddress += " " + address.streetName.ToString();
+                if (address.ward != null)
+                    personAddress += ", " + address.ward.ToString();
+                if (address.district != null)
+                    personAddress += ", " + address.district.ToString();
+                if (address.province != null)
+                    personAddress += ", " + address.province.ToString();
+                Severity severity = new Severity(); 
+                if (PeopleListView[i - 2].levelID != null)
+                {
+                    int severityID = PeopleListView[i - 2].levelID.Value;
+                    severity = DataProvider.ins.db.Severities.Where(x => x.id == severityID).FirstOrDefault();
+                }
+                int personId = PeopleListView[i - 2].id; ;
+                int countInjectionRecord = DataProvider.ins.db.InjectionRecords.Where(x => x.quarantinePersonID == personId).Count();
+                QuanLyKhuCachLy.Model.QuarantineRoom room = new Model.QuarantineRoom();
+                if (PeopleListView[i - 2].roomID != null)
+                {
+                    int roomID = PeopleListView[i - 2].roomID.Value;
+                    room = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == roomID).FirstOrDefault();
+                }
+                sheet.Range["A" + i.ToString()].Value = (i-1).ToString();
+                sheet.Range["B" + i.ToString()].Value = PeopleListView[i-2].name;
+                sheet.Range["C" + i.ToString()].Value = PeopleListView[i - 2].dateOfBirth;
+                sheet.Range["D" + i.ToString()].Value = PeopleListView[i - 2].sex;            
+                sheet.Range["E" + i.ToString()].Value = personAddress;
+                sheet.Range["F" + i.ToString()].Value = PeopleListView[i - 2].healthInsuranceID;
+                sheet.Range["G" + i.ToString()].Value = PeopleListView[i - 2].citizenID;
+                sheet.Range["H" + i.ToString()].Value = PeopleListView[i - 2].nationality;
+                sheet.Range["I" + i.ToString()].Value = PeopleListView[i - 2].phoneNumber;
+                sheet.Range["J" + i.ToString()].Value = severity.description != null ? severity.description : "";
+                sheet.Range["K" + i.ToString()].Value = PeopleListView[i - 2].arrivedDate;
+                sheet.Range["L" + i.ToString()].Value = PeopleListView[i - 2].leaveDate;
+                sheet.Range["M" + i.ToString()].Value = PeopleListView[i - 2].quarantineDays;
+                sheet.Range["N" + i.ToString()].Value = PeopleListView[i - 2].roomID != null?room.displayName:"";
+                sheet.Range["O" + i.ToString()].Value = PeopleListView[i - 2].completeQuarantine== true ? "X":"";
+                sheet.Range["P" + i.ToString()].Value = countInjectionRecord;
+                sheet2.Range["A" + i.ToString()].Value = PeopleListView[i - 2].id;
+            }
+        }
+
+        async void AddTestingResutlFromExcel()
+        {
+            string path = "";
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = false;
+            openFileDialog.Filter = "Excel files (*.xlsx;*.xlsm;*xls)|*.xlsx;*.xlsm;*xls|All files (*.*)|*.*";
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            if (openFileDialog.ShowDialog() == true)
+                path = openFileDialog.FileName;
+            else
+                return;
+            LoadingIndicator loadingIndicator = new LoadingIndicator();
+            Task task = AddTestingResutlFromExcelAsync(loadingIndicator, path);
+            loadingIndicator.ShowDialog();
+            await task;
+        }
+        async Task AddTestingResutlFromExcelAsync(LoadingIndicator loadingIndicator, string path)
+        {
+            bool isSuccess = false;
+            string errorMessage = "";
+            await Task.Run(() =>
+            {
+                List<TestingResult> listTestingResults = new List<TestingResult>();
+                Excel.Application xlApp = new Excel.Application();
+                Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(path);
+                Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
+                Excel.Range xlRange = xlWorksheet.UsedRange;
+                int rowCount = xlRange.Rows.Count;
+                int colCount = xlRange.Columns.Count;
+                if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2 != "ID" ||
+                xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2 != "Kết quả" ||
+                xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2 != "Ngày xét nghiệm")
+                {
+                    errorMessage = "Không đúng định dạng file";
+                    return;
+                }
+                for (int i = 2; i <= rowCount; i++)
+                {
+                    TestingResult testingResult = new TestingResult();
+                    if (xlRange.Cells[i, 1] != null && xlRange.Cells[i, 1].Value2 != null)
+                    {
+                        testingResult.quarantinePersonID = Int32.Parse(xlRange.Cells[i, 1].Value2.ToString());
+                    }
+                    else
+                    {
+                        errorMessage = "ID bị lỗi";
+                        return;
+                    }
+                    if (xlRange.Cells[i, 2] != null && xlRange.Cells[i, 2].Value2 != null)
+                    {
+                        testingResult.isPositive = (xlRange.Cells[i, 2].Value2.ToString() == "âm tính"
+                            || xlRange.Cells[i, 1].Value2.ToString() == "Âm tính") ? false : true;
+                    }
+                    else
+                    {
+                        errorMessage = "Kết quả bị lỗi";
+                        return;
+                    }
+                    if (xlRange.Cells[i, 3] != null && xlRange.Cells[i, 3].Value2 != null)
+                    {
+                        DateTime date = DateTime.FromOADate(double.Parse(xlRange.Cells[i, 3].Value2.ToString()));
+                        testingResult.dateTesting = date;
+                    }
+                    else
+                    {
+                        errorMessage = "Ngày bị lỗi";
+                        return;
+                    }
+                    listTestingResults.Add(testingResult);
+                }
+                using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        for (int i=0;i<listTestingResults.Count;i++)
+                        {
+                            DataProvider.ins.db.TestingResults.Add(listTestingResults[i]);
+                        }
+                        DataProvider.ins.db.SaveChanges();
+                        transaction.Commit();
+                        //MessageBox.Show("Đã thêm từ file excel");
+                        isSuccess = true;
+
+                        //DashboardViewModel.ins.Init();
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (DbEntityValidationException e)
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (NotSupportedException e)
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (ObjectDisposedException e)
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (InvalidOperationException e)
+                    {
+                        transaction.Rollback();
+                    }
+                }
+            });
+            loadingIndicator.Close();
+            if (isSuccess)
+            {
+
+                Window SuccessDialog = new Window
                 {
                     AllowsTransparency = true,
                     Background = Brushes.Transparent,
@@ -2934,11 +3061,21 @@ namespace QuanLyKhuCachLy.ViewModel
                     ResizeMode = ResizeMode.NoResize,
                     WindowStartupLocation = WindowStartupLocation.CenterScreen,
                     WindowStyle = WindowStyle.None,
-                    Content = new FailNotification()
+                    Content = new SuccessNotification()
                 };
-                ErrorDialog.ShowDialog();
+                SuccessDialog.ShowDialog();
             }
-
+            else
+            {
+                CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                if (errorMessage != "" && errorMessage != null)
+                {
+                    FailNotificationVM.Content = errorMessage;
+                }
+                ErrorDialog.ShowDialog();
+               
+            }
         }
         #endregion
     }

@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace QuanLyKhuCachLy.CustomUserControl
 {
     /// <summary>
-    /// Interaction logic for FailNotification.xaml
+    /// Interaction logic for EditAuthenticationAccount.xaml
     /// </summary>
-    public partial class FailNotification : Window
+    public partial class EditAuthenticationAccount : Window
     {
-        public FailNotification()
+        public EditAuthenticationAccount()
         {
             InitializeComponent();
         }
