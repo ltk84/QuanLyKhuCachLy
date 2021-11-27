@@ -162,7 +162,7 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 setListHasReceiveMessage();
                 SendMessage();
-                p.DialogResult = false;
+                p.DialogResult = true;
                 p.Close();
             });
         }
