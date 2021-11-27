@@ -3,6 +3,7 @@ using QuanLyKhuCachLy.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -159,6 +160,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
+                setListHasReceiveMessage();
                 SendMessage();
                 p.DialogResult = false;
                 p.Close();
@@ -444,12 +446,14 @@ namespace QuanLyKhuCachLy.ViewModel
 
         private void InitData()
         {
+            string[] hasReceivedMessageList = getListHasReceivedMessage();
             if (Type == 1)
             {
                 NotificationName = "Hướng dẫn cách ly";
 
                 ObservableCollection<QuarantinePerson> tempPeopleList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
                 PeopleList = new ObservableCollection<QuarantinePerson>(tempPeopleList.Where(person => person.arrivedDate == DateTime.Now.Date));
+                
             }
             else if (Type == 2)
             {
@@ -457,6 +461,15 @@ namespace QuanLyKhuCachLy.ViewModel
 
                 ObservableCollection<QuarantinePerson> tempPeopleList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
                 PeopleList = new ObservableCollection<QuarantinePerson>(tempPeopleList.Where(person => person.leaveDate == DateTime.Now.Date));
+            }
+
+               for (int i = 0; i< PeopleList.Count; i++)
+            {
+                if (hasReceivedMessageList.ToList().Contains(PeopleList[i].id.ToString()))
+                {
+                    PeopleList.Remove(PeopleList[i]);
+                    i--;
+                }
             }
 
             PeopleListView = PeopleList.ToArray();
@@ -468,7 +481,62 @@ namespace QuanLyKhuCachLy.ViewModel
         }
 
 
-        
+        private void setListHasReceiveMessage()
+        {
+            string[] hasReceivedList = getListHasReceivedMessage();
+            string[] receivedList = PeopleListView.Select(person => person.id.ToString()).ToArray();
+            var allReceivedList = new string[hasReceivedList.Length + receivedList.Length];
+            hasReceivedList.CopyTo(allReceivedList, 0);
+            receivedList.CopyTo(allReceivedList, hasReceivedList.Length);
+            string line1 = DateTime.Now.Date.ToString();
+            string line2 = string.Join(" ", allReceivedList);
+
+            string fullPath = Path.Combine(Environment.CurrentDirectory, "receivedList.txt");
+
+            if (File.Exists(fullPath))
+            {
+                // File đã tồn tại - nối thêm nội dung
+                File.AppendAllText(fullPath, "");
+            }
+            else
+            {
+                // tạo mới vì chưa tồn tại file
+                File.WriteAllText(fullPath, "");
+            }
+
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(fullPath))
+            {
+                file.WriteLine(line1);
+                file.WriteLine(line2);
+            }
+
+
+        }
+
+        // Hàm trả về mảng chứa id những người đã nhận thông báo hôm nay
+        private string[] getListHasReceivedMessage()
+        {
+            string filePath = Path.Combine(Environment.CurrentDirectory, "receivedList.txt");
+
+            string[] lines;
+
+            if (System.IO.File.Exists(filePath))
+            {
+                lines = System.IO.File.ReadAllLines(filePath);
+                if (lines.Length == 2)
+                {
+                    if (lines[0] == DateTime.Now.Date.ToString())
+                    {
+                        string[] hasReceiveList = lines[1].Split(' ');
+                        return hasReceiveList;
+                    }
+                }
+            }
+            return new string[] { };
+        }
+
+
+
 
         #endregion
     }

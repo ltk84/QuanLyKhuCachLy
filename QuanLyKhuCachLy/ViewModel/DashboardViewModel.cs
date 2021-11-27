@@ -5,6 +5,7 @@ using QuanLyKhuCachLy.CustomUserControl;
 using QuanLyKhuCachLy.Model;
 using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -559,6 +560,29 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             return count;
         }
+        
+
+        // Hàm trả về mảng chứa id những người đã nhận thông báo hôm nay
+        private string[] getListHasReceivedMessage()
+        {
+            string filePath = Path.Combine(Environment.CurrentDirectory, "receivedList.txt");
+
+            string[] lines;
+
+            if (System.IO.File.Exists(filePath))
+            {
+                lines = System.IO.File.ReadAllLines(filePath);
+                if (lines.Length == 2)
+                {
+                    if (lines[0] == DateTime.Now.Date.ToString())
+                    {
+                        string[] hasReceiveList = lines[1].Split(' ');
+                        return hasReceiveList;
+                    }
+                }
+            }
+            return new string[] { };
+        }
 
         private int CountNewQuarantinePersonStatistic()
         {
@@ -566,7 +590,10 @@ namespace QuanLyKhuCachLy.ViewModel
             DateTime date = DateTime.Now.Date;
             try
             {
-                count = DataProvider.ins.db.QuarantinePersons.Where(person => person.arrivedDate == date).Count();
+                string[] hasReceivedMessageList = getListHasReceivedMessage();
+                count = DataProvider.ins.db.QuarantinePersons.Where(person => person.arrivedDate == date && !hasReceivedMessageList.ToList().Contains(person.id.ToString())).Count();
+
+                
             }
             catch
             {
@@ -596,7 +623,9 @@ namespace QuanLyKhuCachLy.ViewModel
             DateTime date = DateTime.Now.Date;
             try
             {
-                count = DataProvider.ins.db.QuarantinePersons.Where(person => person.leaveDate == date).Count();
+                string[] hasReceivedMessageList = getListHasReceivedMessage();
+                count = DataProvider.ins.db.QuarantinePersons.Where(person => person.leaveDate == date && hasReceivedMessageList.ToList().Contains(person.id.ToString())).Count();
+
             }
             catch
             {

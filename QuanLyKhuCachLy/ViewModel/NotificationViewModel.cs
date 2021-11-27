@@ -1196,17 +1196,15 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 var tempID = tempPeopleList[i].id;
                 var TestingResultList = new ObservableCollection<TestingResult>(DataProvider.ins.db.TestingResults.Where(x => x.quarantinePersonID == tempID));
+                DateTime max = TestingResultList[0].dateTesting;
+
 
                 // Nếu còn cách li
                 if ((SelectedDate - tempPeopleList[i].leaveDate.Date).TotalDays <= 0)
                 {
-                    // Ngày cuối cách ly
-                    if ((SelectedDate - tempPeopleList[i].leaveDate.Date).TotalDays == 0)
-                    {
-                        tempQuarantinePersonList.Add(tempPeopleList[i]);
-                    }
+
                     // Chưa xét nghiệm lần nào
-                    else if (TestingResultList.ToArray().Length == 0)
+                    if (TestingResultList.ToArray().Length == 0)
                     {
                         if ((SelectedDate - tempPeopleList[i].arrivedDate.Date).TotalDays >= testCycle)
                         {
@@ -1216,9 +1214,8 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     }
                     // Đã xét nghiệm
-                    else
+                    else if (TestingResultList.ToArray().Length != 0)
                     {
-                        DateTime max = TestingResultList[0].dateTesting;
                         for (int j = 1; j < TestingResultList.ToArray().Length; j++)
                             if ((max - TestingResultList[j].dateTesting).TotalDays < 0) max = TestingResultList[j].dateTesting;
 
@@ -1227,6 +1224,13 @@ namespace QuanLyKhuCachLy.ViewModel
                             tempQuarantinePersonList.Add(tempPeopleList[i]);
                         }
                     }
+                    // Ngày cuối cách ly và chưa xét nghiệm hôm đó :3
+                    else if ((SelectedDate - tempPeopleList[i].leaveDate.Date).TotalDays == 0 && max.Date.ToString() != SelectedDate.Date.ToString())
+                    {
+                        tempQuarantinePersonList.Add(tempPeopleList[i]);
+                    }
+
+
                 }
             }
 
@@ -1245,17 +1249,15 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 var tempID = tempPeopleList[i].id;
                 var TestingResultList = new ObservableCollection<TestingResult>(DataProvider.ins.db.TestingResults.Where(x => x.quarantinePersonID == tempID));
+                DateTime max = TestingResultList[0].dateTesting;
+
 
                 // Nếu còn cách li
                 if ((SelectedDate - tempPeopleList[i].leaveDate.Date).TotalDays <= 0)
                 {
-                    // Ngày cuối cách ly
-                    if ((SelectedDate - tempPeopleList[i].leaveDate.Date).TotalDays == 0)
-                    {
-                        tempQuarantinePersonList.Add(tempPeopleList[i]);
-                    }
+
                     // Chưa xét nghiệm lần nào
-                    else if (TestingResultList.ToArray().Length == 0)
+                    if (TestingResultList.ToArray().Length == 0)
                     {
                         if ((SelectedDate - tempPeopleList[i].arrivedDate.Date).TotalDays >= testCycle)
                         {
@@ -1265,9 +1267,8 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     }
                     // Đã xét nghiệm
-                    else
+                    else if (TestingResultList.ToArray().Length != 0)
                     {
-                        DateTime max = TestingResultList[0].dateTesting;
                         for (int j = 1; j < TestingResultList.ToArray().Length; j++)
                             if ((max - TestingResultList[j].dateTesting).TotalDays < 0) max = TestingResultList[j].dateTesting;
 
@@ -1276,6 +1277,13 @@ namespace QuanLyKhuCachLy.ViewModel
                             tempQuarantinePersonList.Add(tempPeopleList[i]);
                         }
                     }
+                    // Ngày cuối cách ly và chưa xét nghiệm hôm đó :3
+                    else if ((SelectedDate - tempPeopleList[i].leaveDate.Date).TotalDays == 0 && max.Date.ToString() != SelectedDate.Date.ToString())
+                    {
+                        tempQuarantinePersonList.Add(tempPeopleList[i]);
+                    }
+
+
                 }
             }
 
