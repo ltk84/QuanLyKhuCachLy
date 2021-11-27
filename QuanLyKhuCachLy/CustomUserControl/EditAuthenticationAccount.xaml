@@ -7,11 +7,13 @@
     xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Name="ChangePassScreen"
     Title="EditAuthenticationAccount"
     Width="410"
     Height="440"
     AllowsTransparency="True"
     Background="{x:Null}"
+    DataContext="{StaticResource SettingVM}"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
@@ -57,10 +59,10 @@
                     FontSize="14"
                     Foreground="#FF434A54"
                     Style="{StaticResource MaterialDesignFilledTextBox}"
-                    Text="{Binding username}"
+                    Text="{Binding UserName}"
                     TextWrapping="Wrap" />
                 <PasswordBox
-                    x:Name="floatingPasswordBox"
+                    x:Name="passwordBox"
                     Margin="65,20,65,0"
                     Padding="16,8,16,8"
                     VerticalAlignment="Top"
@@ -76,11 +78,12 @@
                     Style="{StaticResource MaterialDesignFilledPasswordBox}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="PasswordChanged">
-                            <i:InvokeCommandAction Command="{Binding passwordChangedCommand}" CommandParameter="{Binding ElementName=floatingPasswordBox}" />
+                            <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" CommandParameter="{Binding ElementName=passwordBox}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </PasswordBox>
                 <PasswordBox
+                    x:Name="rePasswordBox"
                     Margin="65,20,65,0"
                     Padding="16,8,16,8"
                     VerticalAlignment="Top"
@@ -96,7 +99,7 @@
                     Style="{StaticResource MaterialDesignFilledPasswordBox}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="PasswordChanged">
-                            <i:InvokeCommandAction Command="{Binding passwordChangedCommand}" CommandParameter="{Binding ElementName=floatingPasswordBox}" />
+                            <i:InvokeCommandAction Command="{Binding RePasswordChangedCommand}" CommandParameter="{Binding ElementName=rePasswordBox}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </PasswordBox>
@@ -112,8 +115,8 @@
                             materialDesign:ButtonAssist.CornerRadius="8"
                             materialDesign:ShadowAssist.ShadowDepth="Depth0"
                             BorderBrush="{x:Null}"
-                            Command="{Binding closeCommand}"
-                            CommandParameter="{Binding ElementName=AuthScreen}"
+                            Command="{Binding CloseEditAuthenCommand}"
+                            CommandParameter="{Binding ElementName=ChangePassScreen}"
                             FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                             FontSize="12"
                             FontWeight="Bold"
@@ -128,8 +131,8 @@
                             materialDesign:ButtonAssist.CornerRadius="8"
                             materialDesign:ShadowAssist.ShadowDepth="Depth0"
                             BorderBrush="{x:Null}"
-                            Command="{Binding loginCommand}"
-                            CommandParameter="{Binding ElementName=AuthScreen}"
+                            Command="{Binding ChangePasswordCommand}"
+                            CommandParameter="{Binding ElementName=ChangePassScreen}"
                             FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                             FontSize="12"
                             FontWeight="Bold"

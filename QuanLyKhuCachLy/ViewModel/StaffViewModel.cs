@@ -803,7 +803,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     if (i != 0)
                         DisplayAddress += ", ";
-                    else DisplayAddress += "";
+                    else DisplayAddress += " ";
                 }
             }
         }
@@ -966,6 +966,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 catch (DbUpdateException e)
                 {
                     transaction.Rollback();
+
                     RollBackChange();
 
                     CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
