@@ -212,7 +212,12 @@ namespace QuanLyKhuCachLy.ViewModel
 
             AddAllPersonToRoomUICommand = new RelayCommand<object>((p) =>
             {
-                if (PersonNotRoomList.Count > 0) return true;
+                var CurrentRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == RoomID).FirstOrDefault();
+                if (CurrentRoom == null) return false;
+
+                var RoomCapacity = CurrentRoom.capacity;
+
+                if (PersonNotRoomList.Count > 0 && RoomCapacity > QuarantinePersonList.Count) return true;
                 return false;
             }, (p) =>
             {
@@ -233,12 +238,39 @@ namespace QuanLyKhuCachLy.ViewModel
 
         void AddAllPersonToRoom()
         {
-            foreach (var p in PersonNotRoomList)
+            var CurrentRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == RoomID).FirstOrDefault();
+            if (CurrentRoom == null) return;
+
+            var RoomCapacity = CurrentRoom.capacity;
+            var PersonInRoomCount = QuarantinePersonList.Count;
+
+            var diff = RoomCapacity - PersonInRoomCount;
+
+            if (diff > PersonNotRoomList.Count)
             {
-                QuarantinePersonList.Add(p);
+                foreach (var p in PersonNotRoomList)
+                {
+                    QuarantinePersonList.Add(p);
+                }
+
+                PersonNotRoomList.Clear();
+            }
+            else
+            {
+                for (int i = 0; i < RoomCapacity - PersonInRoomCount; i++)
+                {
+                    QuarantinePersonList.Add(PersonNotRoomList[i]);
+                }
+
+                for (int i = 0; i < RoomCapacity - PersonInRoomCount; i++)
+                {
+                    if (PersonNotRoomList.Count > 0)
+                        PersonNotRoomList.Remove(PersonNotRoomList.First());
+                }
             }
 
-            PersonNotRoomList.Clear();
+            SortNotRoomPersonList();
+            SortPersonList();
         }
 
         void RemoveAllPersonFromRoom()
@@ -249,6 +281,9 @@ namespace QuanLyKhuCachLy.ViewModel
             }
 
             QuarantinePersonList.Clear();
+
+            SortNotRoomPersonList();
+            SortPersonList();
         }
 
         protected override void ChangeRoom()
@@ -541,11 +576,15 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             QuarantinePersonList.Add(NotRoomSelectedItem);
             PersonNotRoomList.Remove(NotRoomSelectedItem);
+
+            SortPersonList();
         }
         void RemoveFromRoomUI()
         {
             PersonNotRoomList.Add(SelectedItem);
             QuarantinePersonList.Remove(SelectedItem);
+
+            SortNotRoomPersonList();
         }
 
         protected override void CompleteQuarantinePerson()
@@ -814,6 +853,11 @@ namespace QuanLyKhuCachLy.ViewModel
         }
 
         void InitRemainRoomList() => RemainRoomList = new ObservableCollection<Model.QuarantineRoom>(DataProvider.ins.db.QuarantineRooms.Where(x => x.id != RoomID && x.QuarantinePersons.Count < x.capacity));
+
+        void SortPersonList() => QuarantinePersonList = new ObservableCollection<QuarantinePerson>(QuarantinePersonList.OrderBy(x => x.id));
+
+        void SortNotRoomPersonList() => PersonNotRoomList = new ObservableCollection<QuarantinePerson>(PersonNotRoomList.OrderBy(x => x.id));
+
         #endregion
     }
 }
