@@ -301,7 +301,7 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Foreground="#FF434a54"
-                        Kind="Update" />
+                        Kind="Needle" />
                     <TextBlock
                         Grid.Column="1"
                         VerticalAlignment="Center"
