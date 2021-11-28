@@ -342,21 +342,39 @@ namespace QuanLyKhuCachLy.ViewModel
             if (UserName != accountInDB.username)
             {
                 // Show dialog thông báo sai username
+                FailNotification ErrorDialog = new FailNotification();
+                var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                FailNotificationVM.Content = "Sai tên tài khoản";
+
+                ErrorDialog.ShowDialog();
                 return;
             }
             else if (Password != RePassword)
             {
                 // Show dialog thông báo password và repass khác nhau
+                FailNotification ErrorDialog = new FailNotification();
+                var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                FailNotificationVM.Content = "Mật khẩu nhập lại không trùng khớp";
+
+                ErrorDialog.ShowDialog();
                 return;
             }
             else if (Password.Length == 0 || RePassword.Length == 0)
             {
                 // Show dialog thông báo password hoặc repass ko đc rỗng
+                FailNotification ErrorDialog = new FailNotification();
+                var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                FailNotificationVM.Content = "Mật khẩu đang được để trống";
+                ErrorDialog.ShowDialog();
                 return;
             }
             else if (Password.Length > 100)
             {
                 // Show dialog password quá dài
+                FailNotification ErrorDialog = new FailNotification();
+                var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                FailNotificationVM.Content = "Password quá dài (> 100 ký tự)";
+                ErrorDialog.ShowDialog();
                 return;
             }
 
@@ -365,6 +383,18 @@ namespace QuanLyKhuCachLy.ViewModel
             p.Close();
 
             // dialog success
+            Window SuccessDialog = new Window
+            {
+                AllowsTransparency = true,
+                Background = Brushes.Transparent,
+                Width = 600,
+                Height = 400,
+                ResizeMode = ResizeMode.NoResize,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                WindowStyle = WindowStyle.None,
+                Content = new SuccessNotification()
+            };
+            SuccessDialog.ShowDialog();
         }
 
         string Base64Encode(string plainText)

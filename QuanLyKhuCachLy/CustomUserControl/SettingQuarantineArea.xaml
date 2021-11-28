@@ -79,7 +79,7 @@
                         FontSize="11"
                         FontWeight="Regular"
                         Foreground="#FF000000"
-                        Text="Tài khoản xác thực" />
+                        Text="Đổi mật khẩu xác thực" />
                 </StackPanel>
             </Button>
 
