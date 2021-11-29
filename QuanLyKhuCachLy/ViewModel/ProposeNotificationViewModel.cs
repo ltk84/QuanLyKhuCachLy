@@ -144,6 +144,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
 
         public ICommand SendNotification { get; set; }
+        public ICommand CancelCommand { get; set; }
 
 
 
@@ -162,6 +163,16 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 setListHasReceiveMessage();
                 SendMessage();
+                p.DialogResult = true;
+                p.Close();
+            });
+
+            CancelCommand = new RelayCommand<Window>((p) =>
+            {
+               
+                return true;
+            }, (p) =>
+            {
                 p.DialogResult = true;
                 p.Close();
             });
