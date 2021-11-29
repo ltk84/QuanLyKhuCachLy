@@ -439,6 +439,17 @@ namespace QuanLyKhuCachLy.ViewModel
         }
 
 
+        private ObservableCollection<QuarantinePerson> _ChoiceList;
+        public ObservableCollection<QuarantinePerson> ChoiceList
+        {
+            get => _ChoiceList; set
+            {
+                _ChoiceList = value;
+                OnPropertyChanged();
+            }
+        }
+
+
 
 
 
@@ -622,11 +633,12 @@ namespace QuanLyKhuCachLy.ViewModel
             PeopleListView1 = PeopleList1.ToArray();
             PeopleList2 = new ObservableCollection<QuarantinePerson>();
             PeopleListView2 = PeopleList2.ToArray();
+            ChoiceList = new ObservableCollection<QuarantinePerson>();
 
             MainTab = Visibility.Hidden;
             ManagerTemplateTab = Visibility.Visible;
 
-            countReceiver = "Danh sách nhận thông báo có " + PeopleList2.ToArray().Length + " người.";
+            countReceiver = "Danh sách nhận thông báo có " + ChoiceList.ToArray().Length + " người.";
 
             message = title = content = "";
             textBtnTitle = PeopleList2.ToArray().Length > 0 ? "Xem danh sách người nhận thông báo (" + PeopleList2.ToArray().Length + ')' : "Chọn danh sách người nhận thông báo";
@@ -697,10 +709,12 @@ namespace QuanLyKhuCachLy.ViewModel
             }, (p) =>
             {
                 //Close();
+                ChoiceList = PeopleList2;
                 receiverList.Close();
-                textBtnTitle = PeopleList2.ToArray().Length > 0 ? "Xem danh sách người nhận thông báo (" + PeopleList2.ToArray().Length + ')' : "Chọn danh sách người nhận thông báo";
+                textBtnTitle = "Danh sách nhận thông báo có " + ChoiceList.ToArray().Length + " người.";
 
-
+                PeopleList2 = new ObservableCollection<QuarantinePerson>();
+                PeopleList1 = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
                 InitFilter();
             });
 
@@ -730,6 +744,11 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
+                PeopleList2 = new ObservableCollection<QuarantinePerson>(ChoiceList);
+                PeopleListView2 = PeopleList2.ToArray();
+                PeopleList1 = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
+                PeopleListView2.ToList().ForEach(RemoveItemFormList1);
+                PeopleListView1 = PeopleList1.ToArray();
                 receiverList = new NotificationPeopleList();
                 receiverList.ShowDialog();
             });
@@ -859,7 +878,7 @@ namespace QuanLyKhuCachLy.ViewModel
             PeopleListView1 = PeopleList1.ToArray();
             PeopleListView2 = PeopleList2.ToArray();
 
-            countReceiver = "Danh sách nhận thông báo có " + PeopleListView2.ToArray().Length + " người.";
+            countReceiver = "Danh sách nhận thông báo có " + PeopleList2.ToArray().Length + " người.";
             ExperationType1 = new string[] { "Toàn bộ", "Người đang cách ly", "Hoàn thành cách ly" };
             ExperationProperty1 = "Toàn bộ";
             ExperationType2 = new string[] { "Toàn bộ", "Người đang cách ly", "Hoàn thành cách ly" };
@@ -1003,12 +1022,12 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType1 == "Phòng")
             {
-                FilterProperty1 = PeopleList1.Select(person => person.QuarantineRoom.displayName).ToArray();
+                FilterProperty1 = PeopleList1.Select(person => person.QuarantineRoom?.displayName).ToArray();
                 FilterProperty1 = FilterProperty1.Distinct().ToArray();
             }
             else if (SelectedFilterType1 == "Nhóm đối tượng")
             {
-                FilterProperty1 = PeopleList1.Select(person => person.Severity.level).ToArray();
+                FilterProperty1 = PeopleList1.Select(person => person.Severity?.level).ToArray();
                 FilterProperty1 = FilterProperty1.Distinct().ToArray();
             }
             else if (SelectedFilterType1 == "Ngày đi")
@@ -1053,12 +1072,12 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType2 == "Phòng")
             {
-                FilterProperty2 = PeopleList2.Select(person => person.QuarantineRoom.displayName).ToArray();
+                FilterProperty2 = PeopleList2.Select(person => person.QuarantineRoom?.displayName).ToArray();
                 FilterProperty2 = FilterProperty2.Distinct().ToArray();
             }
             else if (SelectedFilterType2 == "Nhóm đối tượng")
             {
-                FilterProperty2 = PeopleList2.Select(person => person.Severity.level).ToArray();
+                FilterProperty2 = PeopleList2.Select(person => person.Severity?.level).ToArray();
                 FilterProperty2 = FilterProperty2.Distinct().ToArray();
             }
             else if (SelectedFilterType2 == "Ngày đi")
@@ -1612,32 +1631,32 @@ namespace QuanLyKhuCachLy.ViewModel
             bool isSuccess = false;
             await Task.Run(() =>
             {
-                for (int i = 0; i < PeopleList2.ToArray().Length; i++)
+                for (int i = 0; i < ChoiceList.Count; i++)
                 {
                     var messageContent = "";
                     if (selectedTemplate == null)
                     {
-                        messageContent = SendMessageToPerson(PeopleList2[i]);
+                        messageContent = SendMessageToPerson(ChoiceList[i]);
                     }
                     else
                     {
                         if (selectedTemplate.id == 1)
                         {
-                            messageContent = StartIntroduction(PeopleList2[i]);
+                            messageContent = StartIntroduction(ChoiceList[i]);
                         }
                         else if (selectedTemplate.id == 2)
                         {
-                            messageContent = EndIntroduction(PeopleList2[i]);
+                            messageContent = EndIntroduction(ChoiceList[i]);
                         }
                         else if (selectedTemplate.id == 3)
                         {
-                            messageContent = TestingNotification(PeopleList2[i]);
+                            messageContent = TestingNotification(ChoiceList[i]);
                         }
                         else if (selectedTemplate.id == 4)
                         {
-                            messageContent = ChangeRoomNotification(PeopleList2[i]);
+                            messageContent = ChangeRoomNotification(ChoiceList[i]);
                         }
-                        else messageContent = SendMessageToPerson(PeopleList2[i]);
+                        else messageContent = SendMessageToPerson(ChoiceList[i]);
 
 
 
@@ -1647,16 +1666,16 @@ namespace QuanLyKhuCachLy.ViewModel
                     }
 
 
-                    if (PeopleList2[i].phoneNumber != "" && PeopleList2[i] != null)
+                    if (ChoiceList[i].phoneNumber != "" && ChoiceList[i] != null)
                     {
-                        sendMessageWithTwillo(messageContent, fomatPhoneNumber(PeopleList2[i].phoneNumber));
+                        sendMessageWithTwillo(messageContent, fomatPhoneNumber(ChoiceList[i].phoneNumber));
                     }
 
                 }
 
                 isSuccess = true;
                 // Reset nè
-                PeopleList2 = new ObservableCollection<QuarantinePerson>();
+                ChoiceList = new ObservableCollection<QuarantinePerson>();
             });
             loadingIndicator.Close();
             if (isSuccess)

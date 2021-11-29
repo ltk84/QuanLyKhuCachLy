@@ -136,7 +136,7 @@
                         FontSize="12.39"
                         FontWeight="Regular"
                         Foreground="#ff434A54"
-                        Text="{Binding countReceiver}"
+                        Text="{Binding textBtnTitle}"
                         TextWrapping="Wrap" />
                 </StackPanel>
             </Grid>
@@ -340,8 +340,7 @@
                             CanUserResizeColumns="True"
                             CanUserResizeRows="False"
                             IsReadOnly="True"
-                            ItemsSource="{Binding PeopleListView2}"
-                            SelectedItem="{Binding SelectedItem2}"
+                            ItemsSource="{Binding ChoiceList}"
                             SelectionMode="Single"
                             SelectionUnit="FullRow">
                             <DataGrid.Columns>
