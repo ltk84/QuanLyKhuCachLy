@@ -8,8 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:utility="clr-namespace:QuanLyKhuCachLy.Utility"
     Title="Chọn danh sách người cách ly"
-    Height="850"
     Width="950"
+    Height="850"
     AllowsTransparency="True"
     Background="{x:Null}"
     DataContext="{StaticResource NotiVM}"
@@ -119,7 +119,6 @@
                                 </TextBlock>
                                 <ComboBox
                                     Padding="10,8,8,10"
-                                    utility:ProtocolSettingsLayout.MVVMHasError="{Binding ExperationType1}"
                                     ItemsSource="{Binding ExperationType1}"
                                     Style="{StaticResource ComboBoxField}">
                                     <ComboBox.SelectedItem>
@@ -145,7 +144,6 @@
                                 </TextBlock>
                                 <ComboBox
                                     Padding="10,8,8,10"
-                                    utility:ProtocolSettingsLayout.MVVMHasError="{Binding SexFieldHasError}"
                                     ItemsSource="{Binding FilterType1}"
                                     Style="{StaticResource ComboBoxField}">
                                     <ComboBox.SelectedItem>
@@ -170,7 +168,6 @@
                                 </TextBlock>
                                 <ComboBox
                                     Padding="10,8,8,10"
-                                    utility:ProtocolSettingsLayout.MVVMHasError="{Binding SexFieldHasError}"
                                     ItemsSource="{Binding FilterProperty1}"
                                     Style="{StaticResource ComboBoxField}">
                                     <ComboBox.SelectedItem>
@@ -369,7 +366,6 @@
                                 </TextBlock>
                                 <ComboBox
                                     Padding="10,8,8,10"
-                                    utility:ProtocolSettingsLayout.MVVMHasError="{Binding SexFieldHasError}"
                                     ItemsSource="{Binding ExperationType2}"
                                     Style="{StaticResource ComboBoxField}">
                                     <ComboBox.SelectedItem>
@@ -395,7 +391,6 @@
                                 </TextBlock>
                                 <ComboBox
                                     Padding="10,8,8,10"
-                                    utility:ProtocolSettingsLayout.MVVMHasError="{Binding SexFieldHasError}"
                                     ItemsSource="{Binding FilterType2}"
                                     Style="{StaticResource ComboBoxField}">
                                     <ComboBox.SelectedItem>
@@ -422,7 +417,6 @@
                                 </TextBlock>
                                 <ComboBox
                                     Padding="10,8,8,10"
-                                    utility:ProtocolSettingsLayout.MVVMHasError="{Binding SexFieldHasError}"
                                     ItemsSource="{Binding FilterProperty2}"
                                     Style="{StaticResource ComboBoxField}">
                                     <ComboBox.SelectedItem>
@@ -531,7 +525,7 @@
                             Foreground="#ff363636"
                             Text="{Binding countReceiver}" />
 
-                        <Grid Margin="0,10,0,0">
+                        <Grid Margin="0,5,0,0">
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
