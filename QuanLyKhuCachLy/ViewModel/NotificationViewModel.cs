@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -1591,67 +1592,12 @@ namespace QuanLyKhuCachLy.ViewModel
         }
 
 
-        void SendMessage()
+        async void SendMessage()
         {
-            for (int i = 0; i < PeopleList2.ToArray().Length; i++)
-            {
-                var messageContent = "";
-                if (selectedTemplate == null)
-                {
-                    messageContent = SendMessageToPerson(PeopleList2[i]);
-                }
-                else
-                {
-                    if (selectedTemplate.id == 1)
-                    {
-                        messageContent = StartIntroduction(PeopleList2[i]);
-                    }
-                    else if (selectedTemplate.id == 2)
-                    {
-                        messageContent = EndIntroduction(PeopleList2[i]);
-                    }
-                    else if (selectedTemplate.id == 3)
-                    {
-                        messageContent = TestingNotification(PeopleList2[i]);
-                    }
-                    else if (selectedTemplate.id == 4)
-                    {
-                        messageContent = ChangeRoomNotification(PeopleList2[i]);
-                    }
-                    else messageContent = SendMessageToPerson(PeopleList2[i]);
-
-
-
-
-
-
-                }
-
-
-                if (PeopleList2[i].phoneNumber != "" && PeopleList2[i] != null)
-                {
-                    sendMessageWithTwillo(messageContent, fomatPhoneNumber(PeopleList2[i].phoneNumber));
-
-                }
-
-            }
-
-            Window SuccessDialog = new Window
-            {
-                AllowsTransparency = true,
-                Background = Brushes.Transparent,
-                Width = 600,
-                Height = 400,
-                ResizeMode = ResizeMode.NoResize,
-                WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                WindowStyle = WindowStyle.None,
-                Content = new SuccessNotification()
-            };
-            SuccessDialog.ShowDialog();
-            // Reset nè
-            PeopleList2 = new ObservableCollection<QuarantinePerson>();
-
-
+            LoadingIndicator loadingIndicator = new LoadingIndicator();
+            Task task = ExecuteSendMessage(loadingIndicator);
+            loadingIndicator.ShowDialog();
+            await task;
         }
 
         string fomatPhoneNumber(string phoneNumber)
@@ -1660,6 +1606,80 @@ namespace QuanLyKhuCachLy.ViewModel
             phoneNumber = phoneNumber.Remove(0, 1);
             phoneNumber = "+84" + phoneNumber;
             return phoneNumber;
+        }
+        async Task ExecuteSendMessage(LoadingIndicator loadingIndicator)
+        {
+            bool isSuccess = false;
+            await Task.Run(() =>
+            {
+                for (int i = 0; i < PeopleList2.ToArray().Length; i++)
+                {
+                    var messageContent = "";
+                    if (selectedTemplate == null)
+                    {
+                        messageContent = SendMessageToPerson(PeopleList2[i]);
+                    }
+                    else
+                    {
+                        if (selectedTemplate.id == 1)
+                        {
+                            messageContent = StartIntroduction(PeopleList2[i]);
+                        }
+                        else if (selectedTemplate.id == 2)
+                        {
+                            messageContent = EndIntroduction(PeopleList2[i]);
+                        }
+                        else if (selectedTemplate.id == 3)
+                        {
+                            messageContent = TestingNotification(PeopleList2[i]);
+                        }
+                        else if (selectedTemplate.id == 4)
+                        {
+                            messageContent = ChangeRoomNotification(PeopleList2[i]);
+                        }
+                        else messageContent = SendMessageToPerson(PeopleList2[i]);
+
+
+
+
+
+
+                    }
+
+
+                    if (PeopleList2[i].phoneNumber != "" && PeopleList2[i] != null)
+                    {
+                        sendMessageWithTwillo(messageContent, fomatPhoneNumber(PeopleList2[i].phoneNumber));
+                    }
+
+                }
+
+                isSuccess = true;
+                // Reset nè
+                PeopleList2 = new ObservableCollection<QuarantinePerson>();
+            });
+            loadingIndicator.Close();
+            if (isSuccess)
+            {
+                Window SuccessDialog = new Window
+                {
+                    AllowsTransparency = true,
+                    Background = Brushes.Transparent,
+                    Width = 600,
+                    Height = 400,
+                    ResizeMode = ResizeMode.NoResize,
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                    WindowStyle = WindowStyle.None,
+                    Content = new SuccessNotification()
+                };
+                SuccessDialog.ShowDialog();
+            }
+            else
+            {
+                CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                ErrorDialog.ShowDialog();
+            }
         }
 
         void sendMessageWithTwillo(string messageContent, string phoneNumber)

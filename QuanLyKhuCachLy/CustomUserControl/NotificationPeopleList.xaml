@@ -232,7 +232,7 @@
                                         HeaderStyle="{StaticResource DataGridHeader}"
                                         MaxLength="30" />
                                     <materialDesign:DataGridTextColumn
-                                        Binding="{Binding roomID}"
+                                        Binding="{Binding QuarantineRoom.displayName}"
                                         EditingElementStyle="{StaticResource EditingDataGridElement}"
                                         ElementStyle="{StaticResource DataGridElement}"
                                         Header="Phòng"
@@ -493,7 +493,7 @@
                                         HeaderStyle="{StaticResource DataGridHeader}"
                                         MaxLength="30" />
                                     <materialDesign:DataGridTextColumn
-                                        Binding="{Binding roomID}"
+                                        Binding="{Binding QuarantineRoom.displayName}"
                                         EditingElementStyle="{StaticResource EditingDataGridElement}"
                                         ElementStyle="{StaticResource DataGridElement}"
                                         Header="Phòng"
