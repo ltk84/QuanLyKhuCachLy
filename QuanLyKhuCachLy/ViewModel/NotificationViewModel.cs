@@ -624,7 +624,7 @@ namespace QuanLyKhuCachLy.ViewModel
             MainTab = Visibility.Hidden;
             ManagerTemplateTab = Visibility.Visible;
 
-            countReceiver = "Danh sách nhận thông báo có " + PeopleList2.ToArray().Length + " người";
+            countReceiver = "Danh sách nhận thông báo có " + PeopleList2.ToArray().Length + " người.";
 
             message = title = content = "";
             textBtnTitle = PeopleList2.ToArray().Length > 0 ? "Xem danh sách người nhận thông báo (" + PeopleList2.ToArray().Length + ')' : "Chọn danh sách người nhận thông báo";
@@ -852,7 +852,7 @@ namespace QuanLyKhuCachLy.ViewModel
             PeopleListView1 = PeopleList1.ToArray();
             PeopleListView2 = PeopleList2.ToArray();
 
-            countReceiver = "Danh sách nhận thông báo có " + PeopleListView2.ToArray().Length + " người";
+            countReceiver = "Danh sách nhận thông báo có " + PeopleListView2.ToArray().Length + " người.";
             ExperationType1 = new string[] { "Toàn bộ", "Người đang cách ly", "Hoàn thành cách ly" };
             ExperationProperty1 = "Toàn bộ";
             ExperationType2 = new string[] { "Toàn bộ", "Người đang cách ly", "Hoàn thành cách ly" };
@@ -1571,16 +1571,16 @@ namespace QuanLyKhuCachLy.ViewModel
 
             if (selectedTemplate == null)
             {
-                fullyMessage = "Chao a/c " + "{Tên người nhận}" + ", day la thong bao den tu ban quan ly cua khu cach ly " + QAName + ". " + message + "Xin cam on";
+                fullyMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đến từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn!";
             }
             else
             {
-                if (selectedTemplate.id == 1) fullyMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đền từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn";
-                else if (selectedTemplate.id == 2) fullyMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đền từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn";
-                else if (selectedTemplate.id == 3) fullyMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đền từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn";
-                else if (selectedTemplate.id == 4) fullyMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đền từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Bạn sẽ được chuyển tới phòng " + "{Ten phong}" + " với sức chứa " + "{Suc chua}" + " nguoi" + "Xin cảm ơn";
+                if (selectedTemplate.id == 1) fullyMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đến từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn!";
+                else if (selectedTemplate.id == 2) fullyMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đến từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn!";
+                else if (selectedTemplate.id == 3) fullyMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đến từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn!";
+                else if (selectedTemplate.id == 4) fullyMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đến từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Bạn sẽ được chuyển tới phòng " + "{Ten phong}" + " với sức chứa " + "{Suc chua}" + " nguoi" + ". Xin cảm ơn!";
 
-                else fullyMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đền từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn";
+                else fullyMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đến từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn!";
             }
         }
 

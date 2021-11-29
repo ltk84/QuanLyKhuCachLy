@@ -223,14 +223,27 @@ namespace QuanLyKhuCachLy.ViewModel
                 // Chạy hàm khởi tạo (cập nhật lại các biến binding lên view)
                 UpdateInfo();
             }
+            else
+            {
+                UpdateInfo();
+            }
         }
 
         // Cứ mỗi thao tác được thực thi sẽ phải chạy lại hàm này
         private void UpdateInfo()
         {
-            PersonsToAddToSelectedRoom = _QuarantinePersonsToAddByRoom[SelectedAvailableRoom];
-            SelectedRoomDisplayName = $"phòng {SelectedAvailableRoom.displayName}";
-            SelectedRoomAvailableCapacity = $"{PersonsToAddToSelectedRoom.Count()}/{SelectedAvailableRoom.capacity - SelectedAvailableRoom.QuarantinePersons.Count()}";
+            if (SelectedAvailableRoom != null)
+            {
+                PersonsToAddToSelectedRoom = _QuarantinePersonsToAddByRoom[SelectedAvailableRoom];
+                SelectedRoomDisplayName = $"phòng {SelectedAvailableRoom.displayName}";
+                SelectedRoomAvailableCapacity = $"{PersonsToAddToSelectedRoom.Count()}/{SelectedAvailableRoom.capacity - SelectedAvailableRoom.QuarantinePersons.Count()}";
+            } 
+            else
+            {
+                PersonsToAddToSelectedRoom = null;
+                SelectedRoomDisplayName = "(hết phòng)";
+                SelectedRoomAvailableCapacity = "0/0";
+            }
         }
 
         // Khởi tạo theo đề xuất
