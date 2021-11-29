@@ -605,6 +605,7 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand SaveNotificationTemplate { get; set; }
         public ICommand CancelAddTemplate { get; set; }
         public ICommand CancelEditTemplate { get; set; }
+        public ICommand CancelEditPeopleList { get; set; }
 
 
         #endregion
@@ -818,8 +819,13 @@ namespace QuanLyKhuCachLy.ViewModel
 
             });
 
-
-
+            CancelEditPeopleList = new RelayCommand<Window>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                p.Close();
+            });
 
         }
 
