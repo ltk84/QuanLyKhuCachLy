@@ -28,11 +28,11 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Address](
 	[id] [int] IDENTITY(0,1) NOT NULL,
-	[province] [nvarchar](20) NOT NULL,
-	[district] [nvarchar](20) NOT NULL,
-	[ward] [nvarchar](20) NOT NULL,
-	[streetName] [nvarchar](20) NULL,
-	[apartmentNumber] [nvarchar](20) NULL,
+	[province] [nvarchar](50) NOT NULL,
+	[district] [nvarchar](50) NOT NULL,
+	[ward] [nvarchar](50) NOT NULL,
+	[streetName] [nvarchar](50) NULL,
+	[apartmentNumber] [nvarchar](50) NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
