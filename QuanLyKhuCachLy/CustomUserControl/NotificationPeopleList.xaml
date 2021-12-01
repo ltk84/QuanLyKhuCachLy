@@ -250,7 +250,7 @@
                                         Binding="{Binding Severity.description}"
                                         EditingElementStyle="{StaticResource EditingDataGridElement}"
                                         ElementStyle="{StaticResource DataGridElement}"
-                                        Header="Mức độ"
+                                        Header="Nhóm đối tượng"
                                         HeaderStyle="{StaticResource DataGridHeader}"
                                         MaxLength="30" />
 
@@ -511,7 +511,7 @@
                                         Binding="{Binding Severity.description}"
                                         EditingElementStyle="{StaticResource EditingDataGridElement}"
                                         ElementStyle="{StaticResource DataGridElement}"
-                                        Header="Mức độ"
+                                        Header="Nhóm đối tượng"
                                         HeaderStyle="{StaticResource DataGridHeader}"
                                         MaxLength="30" />
                                 </DataGrid.Columns>

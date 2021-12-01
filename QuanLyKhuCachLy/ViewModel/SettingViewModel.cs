@@ -966,7 +966,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     if (i != 0)
                         QuarantineAreaAddress += ", ";
-                    else QuarantineAreaAddress += "";
+                    else QuarantineAreaAddress += " ";
                 }
             }
         }

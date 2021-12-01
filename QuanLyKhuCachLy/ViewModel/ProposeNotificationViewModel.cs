@@ -443,7 +443,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
            
             
-                FullMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đến từ ban quản lý khu cách ly " + QAName + ". " + EditableMessage + ". Xin cảm ơn";
+                FullMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đến từ ban quản lý khu cách ly " + QAName + ". " + EditableMessage + ". Xin cảm ơn.";
             
         }
 

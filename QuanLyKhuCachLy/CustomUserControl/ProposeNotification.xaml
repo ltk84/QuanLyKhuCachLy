@@ -9,8 +9,8 @@
     xmlns:utility="clr-namespace:QuanLyKhuCachLy.Utility"
     Name="ProposeNotificationWindow"
     Title="ProposeNotification"
-    Width="1024"
-    Height="890"
+    Width="980"
+    Height="800"
     AllowsTransparency="True"
     Background="{x:Null}"
     DataContext="{StaticResource ProposeNotificationVM}"
@@ -31,10 +31,12 @@
                 <StackPanel
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
-                    Margin="40,10,40,40">
+                    Margin="55,10,55,40">
                     <TextBlock
+                        Margin="0,36,0,0"
                         HorizontalAlignment="Center"
-                        FontSize="30"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="32"
                         FontWeight="Bold">
                         Đề xuất gửi thông báo
                     </TextBlock>
@@ -151,7 +153,7 @@
                         Background="Transparent"
                         CornerRadius="5">
                         <DataGrid
-                            Height="400"
+                            Height="300"
                             Margin="0,0,0,0"
                             materialDesign:DataGridAssist.CornerRadius="10"
                             AutoGenerateColumns="False"
@@ -217,7 +219,7 @@
                             Grid.Column="0"
                             VerticalAlignment="Bottom"
                             FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                            FontSize="16.52"
+                            FontSize="20"
                             FontWeight="Bold"
                             Foreground="#FF363636">
                             Nội dung mẫu
@@ -226,7 +228,7 @@
                             Grid.Column="2"
                             VerticalAlignment="Bottom"
                             FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                            FontSize="16.52"
+                            FontSize="20"
                             FontWeight="Bold"
                             Foreground="#FF363636">
                             Nội dung đầy đủ
@@ -243,6 +245,7 @@
                             Grid.Column="0"
                             Height="200"
                             materialDesign:HintAssist.Hint="Nhập nội dung thông báo"
+                            FontSize="16"
                             MaxLines="100"
                             Style="{StaticResource TextInputField}">
                             <TextBox.Text>
@@ -256,7 +259,7 @@
                         <TextBlock
                             Grid.Column="2"
                             FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                            FontSize="12"
+                            FontSize="16"
                             FontWeight="Regular"
                             Foreground="#FF262626"
                             Text="{Binding FullMessage}"
