@@ -227,12 +227,16 @@
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <Grid Margin="24,10,24,10">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="auto" />
+                                            </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="auto" />
                                                 <ColumnDefinition Width="1*" />
                                                 <ColumnDefinition Width="auto" />
                                             </Grid.ColumnDefinitions>
                                             <materialDesign:PackIcon
+                                                Grid.Row="0"
                                                 Grid.Column="0"
                                                 Height="16"
                                                 Margin="0,0,18,0"
@@ -240,6 +244,7 @@
                                                 Foreground="#ff363636"
                                                 Kind="Bell" />
                                             <TextBlock
+                                                Grid.Row="0"
                                                 Grid.Column="1"
                                                 Margin="0,0,18,0"
                                                 VerticalAlignment="Center"
@@ -248,7 +253,17 @@
                                                 FontWeight="Regular"
                                                 Foreground="#ff363636"
                                                 Text="{Binding Path=name}" />
-                                            <Button
+                                            <TextBlock
+                                                Grid.Row="0"
+                                                Grid.Column="2"
+                                                VerticalAlignment="Center"
+                                                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                                                FontSize="11"
+                                                FontWeight="Regular"
+                                                Foreground="#ff363636"
+                                                Opacity="0.24"
+                                                Text="Nhấp để chọn" />
+                                            <!--<Button
                                                 Grid.Column="2"
                                                 Width="75"
                                                 Height="24"
@@ -261,7 +276,7 @@
                                                 FontWeight="Bold"
                                                 Style="{StaticResource ButtonAccentTemplate}">
                                                 <TextBlock Text="Chọn" />
-                                            </Button>
+                                            </Button>-->
                                             <!--<Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="auto" />
