@@ -181,42 +181,61 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #region sendNotification
 
-        void SendMessage()
+        async void SendMessage()
         {
-            var messageContent = "";
-            for (int i = 0; i < PeopleList.ToArray().Length; i++)
+            LoadingIndicator loadingIndicator = new LoadingIndicator();
+            Task task = ExecuteSendMessage(loadingIndicator);
+            loadingIndicator.ShowDialog();
+            await task;
+        }
+        async Task ExecuteSendMessage(LoadingIndicator loadingIndicator)
+        {
+            bool isSuccess = false;
+            await Task.Run(() =>
             {
-                var QAName = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().name;
-                 messageContent = "Chào a/c " + PeopleList[i].name + ", đây là thông báo đền từ ban quản lý của khu cách ly " + QAName + ". " + EditableMessage + ". Xin cảm ơn.";
-               
 
-                if (PeopleList[i].phoneNumber != "" && PeopleList[i] != null)
+                var messageContent = "";
+                for (int i = 0; i < PeopleList.ToArray().Length; i++)
                 {
-                    SendMessageWithTwillo(messageContent, fomatPhoneNumber(PeopleList[i].phoneNumber));
+                    var QAName = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().name;
+                    messageContent = "Chào a/c " + PeopleList[i].name + ", đây là thông báo đền từ ban quản lý của khu cách ly " + QAName + ". " + EditableMessage + ". Xin cảm ơn.";
+
+
+                    if (PeopleList[i].phoneNumber != "" && PeopleList[i] != null)
+                    {
+                        SendMessageWithTwillo(messageContent, fomatPhoneNumber(PeopleList[i].phoneNumber));
+
+                    }
 
                 }
-
-            }
-
-            Window SuccessDialog = new Window
+                isSuccess = true;
+                // Reset nè
+                PeopleList = new ObservableCollection<QuarantinePerson>();
+                EditableMessage = "";
+                // Close form nè
+            });
+            loadingIndicator.Close();
+            if (isSuccess)
             {
-                AllowsTransparency = true,
-                Background = Brushes.Transparent,
-                Width = 600,
-                Height = 400,
-                ResizeMode = ResizeMode.NoResize,
-                WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                WindowStyle = WindowStyle.None,
-                Content = new SuccessNotification()
-            };
-            SuccessDialog.ShowDialog();
-            // Reset nè
-            PeopleList = new ObservableCollection<QuarantinePerson>();
-            EditableMessage = "";
-            // Close form nè
-
-
-
+                Window SuccessDialog = new Window
+                {
+                    AllowsTransparency = true,
+                    Background = Brushes.Transparent,
+                    Width = 600,
+                    Height = 400,
+                    ResizeMode = ResizeMode.NoResize,
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                    WindowStyle = WindowStyle.None,
+                    Content = new SuccessNotification()
+                };
+                SuccessDialog.ShowDialog();
+            }
+            else
+            {
+                CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                ErrorDialog.ShowDialog();
+            }
         }
         void SendMessageWithTwillo(string messageContent, string phoneNumber)
         {
