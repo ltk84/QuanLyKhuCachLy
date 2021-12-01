@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="QLKCLModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="QLKCLModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="id" />
@@ -18,11 +18,11 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="province" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="district" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="ward" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="streetName" Type="nvarchar" MaxLength="20" />
-          <Property Name="apartmentNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="province" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="district" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ward" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="streetName" Type="nvarchar" MaxLength="50" />
+          <Property Name="apartmentNumber" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="DestinationHistory">
           <Key>
@@ -168,7 +168,7 @@
           <Property Name="name" Type="nvarchar" MaxLength="255" />
           <Property Name="districtID" Type="int" />
         </EntityType>
-        <Association Name="FK__Destinati__addre__3F466844">
+        <Association Name="FK__Destinati__addre__412EB0B6">
           <End Role="Address" Type="Self.Address" Multiplicity="1" />
           <End Role="DestinationHistory" Type="Self.DestinationHistory" Multiplicity="*" />
           <ReferentialConstraint>
@@ -363,7 +363,7 @@
           <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TestingResult" EntityType="Self.TestingResult" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WARD" EntityType="Self.WARD" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Destinati__addre__3F466844" Association="Self.FK__Destinati__addre__3F466844">
+          <AssociationSet Name="FK__Destinati__addre__412EB0B6" Association="Self.FK__Destinati__addre__412EB0B6">
             <End Role="Address" EntitySet="Address" />
             <End Role="DestinationHistory" EntitySet="DestinationHistory" />
           </AssociationSet>
@@ -420,8 +420,7 @@
             <End Role="WARD" EntitySet="WARD" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QLKCLModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -438,11 +437,11 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="province" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="district" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ward" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="streetName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="apartmentNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="province" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="district" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ward" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="streetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="apartmentNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DestinationHistories" Relationship="Self.FK__Destinati__addre__3F466844" FromRole="Address" ToRole="DestinationHistory" />
           <NavigationProperty Name="QuarantineAreas" Relationship="Self.FK__Quarantin__addre__3A81B327" FromRole="Address" ToRole="QuarantineArea" />
           <NavigationProperty Name="QuarantinePersons" Relationship="Self.FK__Quarantin__addre__3C69FB99" FromRole="Address" ToRole="QuarantinePerson" />
