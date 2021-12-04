@@ -43,7 +43,10 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Margin="0,15,0,0">
+                <StackPanel
+                    Grid.Row="0"
+                    Margin="0,15,0,0"
+                    FocusManager.FocusedElement="{Binding ElementName=RoomNameInput}">
                     <TextBlock
                         Margin="5,0,0,5"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
@@ -52,11 +55,12 @@
                         Tên
                     </TextBlock>
                     <TextBox
-                        x:Name="RoomNameInput"
+                        Name="RoomNameInput"
                         materialDesign:HintAssist.Hint="Nhập tên phòng"
                         utility:ProtocolSettingsLayout.MVVMHasError="{Binding Path=DisplayNameFieldHasError}"
                         MaxLength="30"
-                        Style="{StaticResource TextInputField}">
+                        Style="{StaticResource TextInputField}"
+                        TabIndex="0">
                         <TextBox.Text>
                             <Binding
                                 NotifyOnValidationError="True"
@@ -86,7 +90,8 @@
                         utility:ProtocolSettingsLayout.MVVMHasError="{Binding CapacityFieldHasError}"
                         MaxLength="9"
                         PreviewTextInput="TextBox_PreviewTextInput"
-                        Style="{StaticResource TextInputField}">
+                        Style="{StaticResource TextInputField}"
+                        TabIndex="1">
                         <TextBox.Text>
                             <Binding Path="RoomCapacity" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.Converter>
@@ -112,7 +117,8 @@
                         Name="RoomTypeInput"
                         DisplayMemberPath="description"
                         ItemsSource="{Binding RoomLevelList}"
-                        Style="{StaticResource ComboBoxField}">
+                        Style="{StaticResource ComboBoxField}"
+                        TabIndex="2">
                         <ComboBox.SelectedItem>
                             <Binding Path="RoomSelectedSeverity" UpdateSourceTrigger="PropertyChanged" />
                         </ComboBox.SelectedItem>
@@ -135,6 +141,7 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         FontWeight="Bold"
+                        IsCancel="True"
                         Style="{StaticResource ButtonDarkTemplate}">
                         <TextBlock Text="Hủy bỏ" />
                     </Button>
@@ -150,7 +157,8 @@
                         CommandParameter="{Binding ElementName=AddRoomManualScreen}"
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="12"
-                        FontWeight="Bold">
+                        FontWeight="Bold"
+                        IsDefault="True">
                         <Button.Style>
                             <Style BasedOn="{StaticResource ButtonAccentTemplate}" TargetType="Button">
                                 <Style.Triggers>

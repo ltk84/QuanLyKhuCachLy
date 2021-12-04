@@ -70,7 +70,8 @@
                     materialDesign:HintAssist.Hint="Nhập họ và tên"
                     utility:ProtocolSettingsLayout.MVVMHasError="{Binding NameFieldHasError}"
                     MaxLength="30"
-                    Style="{StaticResource TextInputField}">
+                    Style="{StaticResource TextInputField}"
+                    TabIndex="0">
                     <TextBox.Text>
                         <Binding Path="QPName" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>

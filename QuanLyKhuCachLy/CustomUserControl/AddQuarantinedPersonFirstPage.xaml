@@ -69,7 +69,8 @@
                     materialDesign:HintAssist.Hint="Nhập họ và tên"
                     utility:ProtocolSettingsLayout.MVVMHasError="{Binding NameFieldHasError}"
                     MaxLength="30"
-                    Style="{StaticResource TextInputField}">
+                    Style="{StaticResource TextInputField}"
+                    TabIndex="0">
                     <TextBox.Text>
                         <Binding Path="QPName" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
@@ -100,7 +101,8 @@
                 <ComboBox
                     utility:ProtocolSettingsLayout.MVVMHasError="{Binding SexFieldHasError}"
                     ItemsSource="{Binding SexList}"
-                    Style="{StaticResource ComboBoxField}">
+                    Style="{StaticResource ComboBoxField}"
+                    TabIndex="1">
                     <ComboBox.SelectedItem>
                         <Binding Path="QPSelectedSex" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
@@ -121,7 +123,10 @@
                     Foreground="#FF434A54">
                     Ngày sinh
                 </TextBlock>
-                <DatePicker materialDesign:HintAssist.Hint="Nhập ngày sinh" Style="{StaticResource DatePickerField}">
+                <DatePicker
+                    materialDesign:HintAssist.Hint="Nhập ngày sinh"
+                    Style="{StaticResource DatePickerField}"
+                    TabIndex="2">
                     <DatePicker.SelectedDate>
                         <Binding
                             Mode="OneWayToSource"
@@ -153,7 +158,8 @@
                     materialDesign:HintAssist.Hint="Nhập số căn cước công dân"
                     MaxLength="20"
                     PreviewTextInput="TextBox_PreviewTextInput"
-                    Style="{StaticResource TextInputField}">
+                    Style="{StaticResource TextInputField}"
+                    TabIndex="3">
                     <TextBox.Text>
                         <Binding Path="QPCitizenID" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
@@ -177,7 +183,8 @@
                 <ComboBox
                     utility:ProtocolSettingsLayout.MVVMHasError="{Binding NationalityFieldHasError}"
                     ItemsSource="{Binding NationalityList}"
-                    Style="{StaticResource ComboBoxField}">
+                    Style="{StaticResource ComboBoxField}"
+                    TabIndex="4">
                     <ComboBox.SelectedItem>
                         <Binding Path="QPSelectedNationality" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
@@ -202,7 +209,8 @@
                     materialDesign:HintAssist.Hint="Nhập số điện thoại"
                     MaxLength="20"
                     PreviewTextInput="TextBox_PreviewTextInput"
-                    Style="{StaticResource TextInputField}">
+                    Style="{StaticResource TextInputField}"
+                    TabIndex="5">
                     <TextBox.Text>
                         <Binding Path="QPPhoneNumber" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
@@ -227,7 +235,8 @@
                 <TextBox
                     materialDesign:HintAssist.Hint="Nhập mã bảo hiểm y tế"
                     MaxLength="20"
-                    Style="{StaticResource TextInputField}">
+                    Style="{StaticResource TextInputField}"
+                    TabIndex="6">
                     <TextBox.Text>
                         <Binding Path="QPHealthInsuranceID" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
@@ -251,7 +260,8 @@
                 <ComboBox
                     DisplayMemberPath="description"
                     ItemsSource="{Binding SeverityList}"
-                    Style="{StaticResource ComboBoxField}">
+                    Style="{StaticResource ComboBoxField}"
+                    TabIndex="7">
                     <ComboBox.SelectedItem>
                         <Binding Path="QPSelectedLevel" UpdateSourceTrigger="PropertyChanged" />
                     </ComboBox.SelectedItem>
