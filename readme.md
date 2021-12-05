@@ -155,19 +155,19 @@ Feel free to dive in! [Open an issue](https://github.com/ltk84/QuanLyKhuCachLy/i
 2. Create your Feature Branch.
 
 ```sh
-	git checkout -b feature/super-feature
+git checkout -b feature/super-feature
 ```
 
 3. Commit your Changes.
 
 ```sh
-	git commit -m "Add super feature"
+git commit -m "Add super feature"
 ```
 
 4. Push to the Branch.
 
 ```sh
-	git push origin feature/super-feature
+git push origin feature/super-feature
 ```
 
 5. Open a Pull Request.
