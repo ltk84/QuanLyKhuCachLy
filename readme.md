@@ -136,10 +136,10 @@ Please make sure that your computer has these installed before continuing to the
 <p align="center">
  <img src="./info/ui/add-room-manually.png" alt="Add Room Manually UI"></a>
 <i>Add Room Manually UI</i>
+</p>
 
 <br/>
 
-</p>
 <p align="center">
  <img src="./info/ui/edit-room.png" alt="Edit Room UI"></a>
 <i>Edit Room UI</i>
@@ -193,24 +193,28 @@ Please make sure that your computer has these installed before continuing to the
 <p align="center">
  <img src="./info/ui/add-person-manually-1.png" alt="Add Person Manually UI"></a>
 <i>Add Person Manually UI</i>
+</p>
 
 <br/>
 
 <p align="center">
  <img src="./info/ui/add-person-manually-2.png" alt="Add Person Manually 2 UI"></a>
 <i>Add Person Manually 2 UI</i>
+</p>
 
 <br/>
 
 <p align="center">
  <img src="./info/ui/add-person-manually-3.png" alt="Add Person Manually 3 UI"></a>
 <i>Add Person Manually 3 UI</i>
+</p>
 
 <br/>
 
 <p align="center">
  <img src="./info/ui/add-person-manually-4.png" alt="Add Person Manually 4 UI"></a>
 <i>Add Person Manually 4 UI</i>
+</p>
 
 <br/>
 
@@ -236,6 +240,7 @@ Please make sure that your computer has these installed before continuing to the
 <p align="center">
  <img src="./info/ui/execute-successfully.png" alt="Execute Successfully UI"></a>
 <i>Execute Successfully UI</i>
+</p>
 
 <br/>
 
@@ -247,6 +252,7 @@ Please make sure that your computer has these installed before continuing to the
 <p align="center">
  <img src="./info/ui/statistics.png" alt="Statistics UI"></a>
 <i>Statistics UI</i>
+</p>
 
 <br/>
 
@@ -259,24 +265,28 @@ Please make sure that your computer has these installed before continuing to the
 <p align="center">
  <img src="./info/ui/notification.png" alt="Notification UI"></a>
 <i>Notification UI</i>
+</p>
 
 <br/>
 
 <p align="center">
  <img src="./info/ui/template-management.png" alt="Notification Template Management UI"></a>
 <i>Notification Template Management UI</i>
+</p>
 
 <br/>
 
 <p align="center">
  <img src="./info/ui/add-template.png" alt="Add Notification Template UI"></a>
 <i>Add Notification Template UI</i>
+</p>
 
 <br/>
 
 <p align="center">
  <img src="./info/ui/notification-person-list.png" alt="Notification Person List UI"></a>
 <i>Notification Person List UI</i>
+</p>
 
 <br/>
 
@@ -289,12 +299,14 @@ The actions such as arranging rooms for new quarantine persons, sending a notifi
 <p align="center">
  <img src="./info/ui/recommendation.png" alt="Recommendation On Dashboard UI"></a>
 <i>Recommendation On Dashboard UI</i>
+</p>
 
 <br/>
 
 <p align="center">
  <img src="./info/ui/arrange-room-recommendation.png" alt="Arrange Room Recommendation UI"></a>
 <i>Arrange Room Recommendation UI</i>
+</p>
 
 <br/>
 
@@ -306,24 +318,28 @@ In addition to the user being able to set up the quarantine information, the use
 <p align="center">
  <img src="./info/ui/setting.png" alt="Quarantine Area Information UI"></a>
 <i>Quarantine Area Information UI</i>
+</p>
 
 <br/>
 
 <p align="center">
  <img src="./info/ui/setting-2.png" alt="Clear Data UI"></a>
 <i>Clear Data UI</i>
+</p>
 
 <br/>
 
 <p align="center">
  <img src="./info/ui/confirmation.png" alt="Delete Confirmation UI"></a>
 <i>Delete Confirmation UI</i>
+</p>
 
 <br/>
 
 <p align="center">
  <img src="./info/ui/edit-quarantine-area-information.png" alt="Edit Quarantine Area Information UI"></a>
 <i>Edit Quarantine Area Information UI</i>
+</p>
 
 <br/>
 
