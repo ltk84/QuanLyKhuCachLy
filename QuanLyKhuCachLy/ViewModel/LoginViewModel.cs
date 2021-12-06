@@ -27,10 +27,13 @@ namespace QuanLyKhuCachLy.ViewModel
         public LoginViewModel()
         {
             isLogin = false;
-            username = "tunglete";
-            password = "tunglete";
 
-            loginCommand = new RelayCommand<AuthenticationScreen>((p) => { return true; }, (p) =>
+            loginCommand = new RelayCommand<AuthenticationScreen>((p) =>
+            {
+                if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
+                    return true;
+                return false;
+            }, (p) =>
             {
                 login(p);
             });

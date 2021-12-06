@@ -512,6 +512,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
         "Release"
@@ -536,6 +544,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
     }
@@ -1385,20 +1401,20 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:QLKCL"
+        "ProductName" = "8:QuanLyKhuCachLy"
         "ProductCode" = "8:{128D18D8-A931-4A5F-B1A4-D2924E9A9877}"
-        "PackageCode" = "8:{1C2AB9DB-A500-4F2A-942B-2D9390699223}"
+        "PackageCode" = "8:{1BD35084-AFDD-4080-9F20-62A27EAB0C5F}"
         "UpgradeCode" = "8:{A00224F2-4B5C-40AF-82A7-C68FECC6A99F}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:FALSE"
+        "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
         "ProductVersion" = "8:1.0.0"
-        "Manufacturer" = "8:Default Company Name"
+        "Manufacturer" = "8:ItZoo"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:QLKCLs"
+        "Title" = "8:QuanLyKhuCachLy"
         "Subject" = "8:"
         "ARPCONTACT" = "8:ItZoo"
         "Keywords" = "8:"
@@ -1509,7 +1525,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_D6752CB94CC145C1B7B567A57A9ECD4F"
             {
-            "Name" = "8:QLKCL"
+            "Name" = "8:Quan Ly Khu Cach Ly"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"

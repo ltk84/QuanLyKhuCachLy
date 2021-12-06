@@ -47,6 +47,7 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         FontWeight="Bold"
+                        IsCancel="True"
                         Style="{StaticResource ButtonDarkTemplate}">
                         <TextBlock Text="Hủy bỏ" />
                     </Button>

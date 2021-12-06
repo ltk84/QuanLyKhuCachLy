@@ -53,7 +53,8 @@
                         materialDesign:HintAssist.Hint="Nhập tên phòng"
                         utility:ProtocolSettingsLayout.MVVMHasError="{Binding Path=DisplayNameFieldHasError}"
                         MaxLength="30"
-                        Style="{StaticResource TextInputField}">
+                        Style="{StaticResource TextInputField}"
+                        TabIndex="0">
                         <TextBox.Text>
                             <Binding Path="RoomDisplayName" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
@@ -76,7 +77,8 @@
                         materialDesign:HintAssist.Hint="Nhập sức chứa"
                         utility:ProtocolSettingsLayout.MVVMHasError="{Binding CapacityFieldHasError}"
                         MaxLength="9"
-                        Style="{StaticResource TextInputField}">
+                        Style="{StaticResource TextInputField}"
+                        TabIndex="1">
                         <TextBox.Text>
                             <Binding Path="RoomCapacity" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
@@ -98,7 +100,8 @@
                     <ComboBox
                         DisplayMemberPath="description"
                         ItemsSource="{Binding RoomLevelList}"
-                        Style="{StaticResource ComboBoxField}">
+                        Style="{StaticResource ComboBoxField}"
+                        TabIndex="2">
                         <ComboBox.SelectedItem>
                             <Binding Path="RoomSelectedSeverity" UpdateSourceTrigger="PropertyChanged" />
                         </ComboBox.SelectedItem>
@@ -121,6 +124,7 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         FontWeight="Bold"
+                        IsCancel="True"
                         Style="{StaticResource ButtonDarkTemplate}">
                         <TextBlock Text="Hủy bỏ" />
                     </Button>
@@ -137,6 +141,7 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="12"
                         FontWeight="Bold"
+                        IsDefault="True"
                         Style="{StaticResource ButtonAccentTemplate}">
                         <TextBlock FontSize="16">
                             Lưu
