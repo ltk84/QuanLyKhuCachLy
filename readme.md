@@ -57,6 +57,12 @@
 
 ## Introduction
 
+The quarantine area management system helps the operator to receive the quarantine area and helps the management process take place quickly and conveniently, satisfying the constraints of the quarantine business.
+
+The quarantine area manages a large number of quarantined persons, rooms, and staff, along with facilities, information on test results, and the quarantined person's medical condition. The basic jobs that the quarantine area needs to manage are: managing information about the quarantine area, managing rooms, managing quarantined persons, managing staff, and reporting/statistics.
+
+The quarantine area regularly receives a large number of quarantined people as well as processes a large amount of information. So we provide some features that help improve the jobs, such as updating the quarantined person list from excel, google sheets (information will be gathered from online forms that quarantined person input). We also provide an auto-recommend feature to suggest users execute the necessary actions based on existing data in the quarantine area. We also allow sending notifications to quarantined persons as well as managing notifications templates for the purpose of reusing. For more details, please see the [features](#features) section.
+
 ## Getting Started
 
 ### Prerequisites
@@ -115,7 +121,7 @@ Please make sure that your computer has these installed before continuing to the
 
 ### Room Management
 * Users can manage rooms with add (excel, manually)/edit/delete/clear/mark as completed room(s); search for/filter rooms; export room list.
-* Users can also manage room’s quarantine persons.
+* Users can also manage the room’s quarantined persons.
 
 <br/>
 
@@ -164,8 +170,8 @@ Please make sure that your computer has these installed before continuing to the
 <br/>
 
 ### Person Management
-* Users can manage persons with add (excel, from google sheets, muanually)/edit/delete/mark as completed peron(s); search for/filter persons; export peron list. 
-* Users can also change room for specific peron and update testing result based on excel.
+* Users can manage persons with add (excel, from google sheets, manually)/edit/delete/mark as completed for the person(s); search for/filter persons; export person list. 
+* Users can also change room for a specific person and update testing results based on excel.
 
 <br/>
 
@@ -257,7 +263,7 @@ Please make sure that your computer has these installed before continuing to the
 <br/>
 
 ### Notification
-* Users can send notification messages to quarantine person’s phone numbers. 
+* Users can send notification messages to quarantined person’s phone numbers. 
 * Users can manage (add/edit/delete) notification templates and customize the list of people who will receive the message.
 
 <br/>
@@ -292,7 +298,7 @@ Please make sure that your computer has these installed before continuing to the
 
 ### Recommendation
 The system will automatically generate recommended actions based on the quarantine area’s data for users to execute.
-The actions such as arranging rooms for new quarantine persons, sending a notification for new quarantine persons, or for those who are complete.
+The actions such as arranging rooms for new quarantined persons, sending a notification for new quarantined persons, or for those who are complete.
 
 <br/>
 
