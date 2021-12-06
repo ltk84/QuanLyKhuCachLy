@@ -641,7 +641,7 @@ namespace QuanLyKhuCachLy.ViewModel
             countReceiver = "Danh sách nhận thông báo có " + ChoiceList.ToArray().Length + " người.";
 
             message = title = content = "";
-            textBtnTitle = PeopleList2.ToArray().Length > 0 ? "Xem danh sách người nhận thông báo (" + PeopleList2.ToArray().Length + ')' : "Chọn danh sách người nhận thông báo";
+            textBtnTitle = "Danh sách nhận thông báo có " + ChoiceList.ToArray().Length + " người.";
 
 
             // Filter init
