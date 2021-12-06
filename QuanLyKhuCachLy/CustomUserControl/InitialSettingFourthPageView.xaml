@@ -1,0 +1,260 @@
+﻿<UserControl
+    x:Class="QuanLyKhuCachLy.CustomUserControl.InitialSettingFourthPageView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utility="clr-namespace:QuanLyKhuCachLy.Utility"
+    xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
+    d:DesignHeight="740"
+    d:DesignWidth="1225"
+    DataContext="{StaticResource QAVM}"
+    mc:Ignorable="d">
+    <StackPanel Margin="0,0,0,0">
+        <TextBlock
+            Margin="0,32,0,0"
+            HorizontalAlignment="Center"
+            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+            FontSize="32"
+            FontWeight="Bold">
+            Cập nhật thông tin người quản lý
+        </TextBlock>
+        <TextBlock
+            Margin="0,2,0,0"
+            HorizontalAlignment="Center"
+            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+            FontSize="18">
+            Vui lòng điền thông tin người quản lý khu cách ly.
+        </TextBlock>
+        <Grid Margin="80,15,80,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="0,5,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="A" />
+                    <ColumnDefinition SharedSizeGroup="A" />
+                    <ColumnDefinition SharedSizeGroup="A" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Grid.Column="0">
+                    <TextBlock
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="18"
+                        FontWeight="Bold"
+                        Foreground="#FF434A54">
+                        Công việc
+                    </TextBlock>
+                    <Separator Margin="0,5,24,2">
+                        <Separator.RenderTransform>
+                            <ScaleTransform ScaleY="2" />
+                        </Separator.RenderTransform>
+                    </Separator>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1" Margin="0,20,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="A" />
+                    <ColumnDefinition SharedSizeGroup="A" />
+                    <ColumnDefinition SharedSizeGroup="A" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="0,0,24,0">
+                    <TextBlock
+                        Margin="5,0,0,5"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        Foreground="#FF434A54">
+                        Chức vụ (*)
+                    </TextBlock>
+                    <TextBox
+                        materialDesign:HintAssist.Hint="Nhập tên chức vụ"
+                        utility:ProtocolSettingsLayout.MVVMHasError="{Binding MJobTitleFieldHasError}"
+                        MaxLength="30"
+                        Style="{StaticResource TextInputField}">
+                        <TextBox.Text>
+                            <Binding Path="ManagerJobTitle" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vr:RequiredField />
+                                    <vr:NoSpecialChar />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="0,0,24,0">
+                    <TextBlock
+                        Margin="5,0,0,5"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        Foreground="#FF434A54">
+                        Phòng ban (*)
+                    </TextBlock>
+                    <TextBox
+                        materialDesign:HintAssist.Hint="Nhập tên phòng ban"
+                        utility:ProtocolSettingsLayout.MVVMHasError="{Binding MDepartmentFieldHasError}"
+                        MaxLength="30"
+                        Style="{StaticResource TextInputField}">
+                        <TextBox.Text>
+                            <Binding Path="ManagerDepartment" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vr:RequiredField />
+                                    <vr:NoSpecialChar />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="2" Margin="0,25,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="A" />
+                    <ColumnDefinition SharedSizeGroup="A" />
+                    <ColumnDefinition SharedSizeGroup="A" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Grid.Column="0">
+                    <TextBlock
+                        Margin="0,10,0,0"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="18"
+                        FontWeight="Bold"
+                        Foreground="#FF434A54">
+                        Địa chỉ
+                    </TextBlock>
+                    <Separator Margin="0,5,24,2">
+                        <Separator.RenderTransform>
+                            <ScaleTransform ScaleY="2" />
+                        </Separator.RenderTransform>
+                    </Separator>
+                </StackPanel>
+                <StackPanel
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="0,20,24,0">
+                    <TextBlock
+                        Margin="5,0,0,5"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        Foreground="#FF434A54">
+                        Tỉnh/Thành phố (*)
+                    </TextBlock>
+                    <ComboBox
+                        utility:ProtocolSettingsLayout.MVVMHasError="{Binding MProvinceFieldHasError}"
+                        ItemsSource="{Binding ManagerProvinceList}"
+                        Style="{StaticResource ComboBoxField}">
+                        <ComboBox.SelectedItem>
+                            <Binding Path="ManagerSelectedProvince" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vr:RequiredField />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </ComboBox.SelectedItem>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="0,20,24,0">
+                    <TextBlock
+                        Margin="5,0,0,5"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        Foreground="#FF434A54">
+                        Quận/Huyện (*)
+                    </TextBlock>
+                    <ComboBox
+                        utility:ProtocolSettingsLayout.MVVMHasError="{Binding MDistrictFieldHasError}"
+                        ItemsSource="{Binding ManagerDistrictList}"
+                        Style="{StaticResource ComboBoxField}">
+                        <ComboBox.SelectedItem>
+                            <Binding Path="ManagerSelectedDistrict" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vr:RequiredField />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </ComboBox.SelectedItem>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Margin="0,20,0,0">
+                    <TextBlock
+                        Margin="5,0,0,5"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        Foreground="#FF434A54">
+                        Phường/Xã (*)
+                    </TextBlock>
+                    <ComboBox
+                        utility:ProtocolSettingsLayout.MVVMHasError="{Binding MWardFieldHasError}"
+                        ItemsSource="{Binding ManagerWardList}"
+                        Style="{StaticResource ComboBoxField}">
+                        <ComboBox.SelectedItem>
+                            <Binding Path="ManagerSelectedWard" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vr:RequiredField />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </ComboBox.SelectedItem>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Margin="0,20,24,0">
+                    <TextBlock
+                        Margin="5,0,0,5"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        Foreground="#FF434A54">
+                        Đường
+                    </TextBlock>
+                    <TextBox
+                        materialDesign:HintAssist.Hint="Nhập tên đường"
+                        MaxLength="20"
+                        Style="{StaticResource TextInputField}"
+                        Text="{Binding ManagerStreetName}" />
+                </StackPanel>
+                <StackPanel
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Margin="0,20,24,0">
+                    <TextBlock
+                        Margin="5,0,0,5"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        Foreground="#FF434A54">
+                        Số (*)
+                    </TextBlock>
+                    <TextBox
+                        materialDesign:HintAssist.Hint="Nhập số địa chỉ"
+                        MaxLength="20"
+                        Style="{StaticResource TextInputField}"
+                        Text="{Binding ManagerApartmentNumber, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </StackPanel>
+</UserControl>

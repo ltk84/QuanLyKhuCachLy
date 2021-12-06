@@ -1,0 +1,126 @@
+﻿<Window
+    x:Class="QuanLyKhuCachLy.InitialSettingScreen"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:control="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Name="InitScreen"
+    Title="Thiết lập khu cách ly"
+    MinWidth="1024"
+    MinHeight="768"
+    Background="#FF3D4466"
+    DataContext="{StaticResource ResourceKey=QAVM}"
+    Icon="logo.ico"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Maximized"
+    mc:Ignorable="d">
+    <Viewbox
+        Margin="0,0,0,60"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center">
+        <StackPanel>
+            <Image
+                Width="605"
+                Height="96"
+                Margin="60,40"
+                HorizontalAlignment="Center"
+                Source="/Resources/logo/logo.png" />
+            <Border
+                Width="1225"
+                Height="755"
+                Margin="0,0,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="White"
+                CornerRadius="15">
+                <StackPanel>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="660" />
+                        </Grid.RowDefinitions>
+                        <control:InitialSettingFirstPageView Panel.ZIndex="-1" Visibility="{Binding Tab1}" />
+                        <control:InitialSettingSecondPageView Visibility="{Binding Tab2}" />
+                        <control:InitialSettingThirdPageView Panel.ZIndex="1" Visibility="{Binding Tab3}" />
+                        <control:InitialSettingFourthPageView Panel.ZIndex="1" Visibility="{Binding Tab4}" />
+                    </Grid>
+                    <Grid
+                        Grid.Row="3"
+                        Margin="80,32,80,0"
+                        VerticalAlignment="Bottom">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition SharedSizeGroup="A" />
+                            <ColumnDefinition SharedSizeGroup="A" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel
+                            Grid.Column="2"
+                            Margin="0"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+                            <Button
+                                Width="145"
+                                Height="37"
+                                Margin="0"
+                                materialDesign:ButtonAssist.CornerRadius="8"
+                                materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                                BorderBrush="{x:Null}"
+                                Command="{Binding PreviousTabCommand}"
+                                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                                FontSize="16"
+                                FontWeight="Bold"
+                                Style="{StaticResource ButtonDarkTemplate}">
+                                <TextBlock Text="Trở lại" />
+                            </Button>
+                            <Button
+                                Width="145"
+                                Height="37"
+                                Margin="24,0,0,0"
+                                VerticalAlignment="Center"
+                                materialDesign:ButtonAssist.CornerRadius="8"
+                                materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                                BorderBrush="{x:Null}"
+                                CommandParameter="{Binding ElementName=InitScreen}"
+                                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                                FontSize="12"
+                                FontWeight="Bold">
+                                <Button.Style>
+                                    <Style BasedOn="{StaticResource ButtonAccentTemplate}" TargetType="{x:Type Button}">
+                                        <Setter Property="Command" Value="{Binding NextTabCommand}" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=TabIndicator, Path=Text}" Value="4/4">
+                                                <Setter Property="Command" Value="{Binding SetUpCommand}" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <TextBlock FontSize="16">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Text" Value="Tiếp theo" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=TabIndicator, Path=Text}" Value="4/4">
+                                                    <Setter Property="Text" Value="Xác nhận" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Button>
+                            <TextBlock
+                                x:Name="TabIndicator"
+                                Margin="25,0,0,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                                FontSize="16"
+                                FontWeight="Bold"
+                                Foreground="#FF434A54"
+                                Text="{Binding TabPosition}" />
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Viewbox>
+</Window>

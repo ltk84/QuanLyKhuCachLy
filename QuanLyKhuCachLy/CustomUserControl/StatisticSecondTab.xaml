@@ -1,0 +1,146 @@
+﻿<UserControl
+    x:Class="QuanLyKhuCachLy.CustomUserControl.StatisticSecondTab"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:System="clr-namespace:System;assembly=mscorlib"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="900"
+    d:DesignWidth="850"
+    DataContext="{StaticResource ReportVM}"
+    mc:Ignorable="d">
+    <Grid Margin="0,24,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="32,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="4*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock
+                Grid.Column="0"
+                VerticalAlignment="Top"
+                FontWeight="Bold">
+                Đối tượng:
+            </TextBlock>
+            <ComboBox
+                Grid.Column="1"
+                Margin="12,0,0,0"
+                VerticalAlignment="Top"
+                ItemsSource="{Binding QuarantineAreaReportObjects}"
+                SelectedItem="{Binding SelectedQuarantineAreaReportObjects}"
+                Style="{StaticResource UnderlineComboBox}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
+
+        </Grid>
+        <Grid
+            Grid.Row="0"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Margin="32,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="10*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel
+                Grid.Row="0"
+                Grid.Column="1"
+                HorizontalAlignment="Left"
+                Orientation="Horizontal" />
+
+        </Grid>
+        <StackPanel
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Margin="32,24,0,0"
+            Orientation="Horizontal">
+            <TextBlock
+                Width="100"
+                FontSize="20"
+                FontWeight="Bold">
+                Báo cáo
+            </TextBlock>
+            <Button
+                Width="120"
+                Height="Auto"
+                VerticalAlignment="Center"
+                Command="{Binding PrintCommand, Mode=OneWay}"
+                CommandParameter="{Binding ElementName=SecondReportChart, Mode=OneWay}"
+                Style="{StaticResource MenuButton}">
+                <StackPanel Style="{StaticResource MenuStackPanel}">
+                    <materialDesign:PackIcon
+                        Width="18"
+                        Height="18"
+                        Kind="Export"
+                        Style="{StaticResource MenuIcon}" />
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        FontSize="14"
+                        Style="{StaticResource MenuText}">
+                        Xuất
+                    </TextBlock>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+        <Grid
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            Height="400"
+            Margin="32,24,0,0"
+            VerticalAlignment="Top">
+            <lvc:PieChart
+                x:Name="SecondReportChart"
+                Margin="0,15"
+                InnerRadius="100"
+                LegendLocation="Right"
+                Series="{Binding SecondSeriesCollection}" />
+        </Grid>
+        <StackPanel
+            Grid.Row="2"
+            Grid.Column="2"
+            Margin="24,0,32,5">
+            <TextBlock
+                Grid.Column="0"
+                VerticalAlignment="Top"
+                FontSize="16"
+                FontWeight="Bold">
+                Hướng dẫn
+            </TextBlock>
+            <TextBlock
+                Grid.Column="0"
+                VerticalAlignment="Top"
+                FontSize="14"
+                TextWrapping="Wrap">
+                Rê chuột vào cột để xem chi tiết.
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,119 @@
+﻿<Window
+    x:Class="QuanLyKhuCachLy.CustomUserControl.AddQuarantinedPerson"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:control="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Name="AddQuarantinedPersonScreen"
+    d:DesignHeight="530"
+    d:DesignWidth="850"
+    AllowsTransparency="True"
+    Background="{x:Null}"
+    DataContext="{StaticResource ResourceKey=PersonVM}"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Viewbox>
+        <Border Margin="10" Style="{StaticResource RecommendationField}">
+            <StackPanel Margin="32,0,32,32">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="450" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <control:AddQuarantinedPersonFirstPage Panel.ZIndex="-1" Visibility="{Binding Tab1}" />
+                    <control:AddQuarantinedPersonSecondPage Visibility="{Binding Tab2}" />
+                    <control:AddQuarantinedPersonThirdPage Panel.ZIndex="1" Visibility="{Binding Tab3}" />
+                    <control:AddQuarantinedPersonFouthPage Panel.ZIndex="1" Visibility="{Binding Tab4}" />
+
+                </Grid>
+                <StackPanel
+                    Width="Auto"
+                    Margin="0,25,0,0"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+                    <Button
+                        Width="145"
+                        Height="37"
+                        Margin="0"
+                        materialDesign:ButtonAssist.CornerRadius="8"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                        BorderBrush="{x:Null}"
+                        Command="{Binding CancelCommand}"
+                        CommandParameter="{Binding ElementName=AddQuarantinedPersonScreen}"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        IsCancel="True"
+                        Style="{StaticResource ButtonDarkTemplate}">
+                        <TextBlock Text="Hủy bỏ" />
+                    </Button>
+                    <Button
+                        Width="145"
+                        Height="37"
+                        Margin="24,0,0,0"
+                        materialDesign:ButtonAssist.CornerRadius="8"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                        BorderBrush="{x:Null}"
+                        Command="{Binding PreviousTabCommand}"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Style="{StaticResource ButtonDarkTemplate}"
+                        Visibility="{Binding ButtonReturn}">
+                        <TextBlock Text="Trở lại" />
+                    </Button>
+                    <Button
+                        Width="145"
+                        Height="37"
+                        Margin="24,0,0,0"
+                        VerticalAlignment="Center"
+                        materialDesign:ButtonAssist.CornerRadius="8"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                        BorderBrush="{x:Null}"
+                        CommandParameter="{Binding ElementName=AddQuarantinedPersonScreen}"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="12"
+                        FontWeight="Bold"
+                        Visibility="Visible">
+                        <Button.Style>
+                            <Style BasedOn="{StaticResource ButtonAccentTemplate}" TargetType="{x:Type Button}">
+                                <Setter Property="Command" Value="{Binding NextTabCommand}" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=TabIndicator, Path=Text}" Value="4/4">
+                                        <Setter Property="Command" Value="{Binding AddCommand}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <TextBlock FontSize="16">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Text" Value="Tiếp theo" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=TabIndicator, Path=Text}" Value="4/4">
+                                            <Setter Property="Text" Value="Thêm" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Button>
+                    <TextBlock
+                        x:Name="TabIndicator"
+                        Margin="25,0,0,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#FF434A54"
+                        Text="{Binding TabPosition}" />
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Viewbox>
+</Window>

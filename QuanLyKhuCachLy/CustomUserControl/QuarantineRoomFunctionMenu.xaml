@@ -1,0 +1,67 @@
+﻿<UserControl
+    x:Class="QuanLyKhuCachLy.CustomUserControl.QuarantineRoomFunctionMenu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Name="RoomCM"
+    Width="250"
+    Height="300"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <Viewbox Width="250" Height="300">
+        <Border
+            Margin="20"
+            Padding="0,16,0,16"
+            Style="{StaticResource RecommendationField}">
+            <StackPanel DataContext="{StaticResource RoomVM}">
+                <Button
+                    Command="{Binding ToViewCommand}"
+                    CommandParameter="{Binding ElementName=RoomCM}"
+                    Style="{StaticResource MenuButton}">
+                    <StackPanel Style="{StaticResource MenuStackPanel}">
+                        <materialDesign:PackIcon Kind="AccountDetailsOutline" Style="{StaticResource MenuIcon}" />
+                        <TextBlock Style="{StaticResource MenuText}">
+                            Xem thông tin
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding ToEditCommand}" Style="{StaticResource MenuButton}">
+                    <StackPanel Style="{StaticResource MenuStackPanel}">
+                        <materialDesign:PackIcon Kind="PencilOutline" Style="{StaticResource MenuIcon}" />
+                        <TextBlock Style="{StaticResource MenuText}">
+                            Chỉnh sửa
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding DeleteRoomCommand}" Style="{StaticResource MenuButton}">
+                    <StackPanel Style="{StaticResource MenuStackPanel}">
+                        <materialDesign:PackIcon Kind="DeleteOutline" Style="{StaticResource MenuIcon}" />
+                        <TextBlock Style="{StaticResource MenuText}">
+                            Xóa
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding CompleteQuarantineCommand}" Style="{StaticResource MenuButton}">
+                    <StackPanel Style="{StaticResource MenuStackPanel}">
+                        <materialDesign:PackIcon Kind="CheckboxOutline" Style="{StaticResource MenuIcon}" />
+                        <TextBlock Style="{StaticResource MenuText}">
+                            Hoàn thành cách ly
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding ClearCommand}" Style="{StaticResource MenuButton}">
+                    <StackPanel Style="{StaticResource MenuStackPanel}">
+                        <materialDesign:PackIcon Kind="Broom" Style="{StaticResource MenuIcon}" />
+                        <TextBlock Style="{StaticResource MenuText}">
+                            Làm trống
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Border>
+    </Viewbox>
+</UserControl>

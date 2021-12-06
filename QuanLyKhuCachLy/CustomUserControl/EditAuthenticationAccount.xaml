@@ -1,0 +1,148 @@
+﻿<Window
+    x:Class="QuanLyKhuCachLy.CustomUserControl.EditAuthenticationAccount"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Name="ChangePassScreen"
+    Title="EditAuthenticationAccount"
+    Width="470"
+    Height="500"
+    AllowsTransparency="True"
+    Background="{x:Null}"
+    DataContext="{StaticResource SettingVM}"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Viewbox>
+        <Border
+            Width="410"
+            Height="440"
+            Margin="10"
+            Style="{StaticResource RecommendationField}">
+            <StackPanel
+                Width="402"
+                Margin="0,0,0,0"
+                HorizontalAlignment="Center">
+                <Image
+                    Width="40"
+                    Height="40"
+                    Margin="0,45,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    RenderTransformOrigin="0.5,0.5"
+                    Source="/Resources/icons/auth.png" />
+                <TextBlock
+                    Margin="0,8"
+                    HorizontalAlignment="Center"
+                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Foreground="#FF434A54">
+                    <Run Text="Đổi mật khẩu" />
+                </TextBlock>
+                <TextBox
+                    MaxWidth="400"
+                    Margin="65,8,65,0"
+                    Padding="16,8,12,8"
+                    VerticalAlignment="Top"
+                    materialDesign:HintAssist.Foreground="#FF434a54"
+                    materialDesign:HintAssist.Hint="Tên tài khoản"
+                    materialDesign:TextFieldAssist.LeadingIcon="Person"
+                    materialDesign:TextFieldAssist.TextFieldCornerRadius="10,10,0,0"
+                    materialDesign:TextFieldAssist.UnderlineBrush="#FF3D4466"
+                    CaretBrush="#FF434A54"
+                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                    FontSize="14"
+                    Foreground="#FF434A54"
+                    IsReadOnly="True"
+                    Style="{StaticResource MaterialDesignFilledTextBox}"
+                    Text="{Binding UserName}"
+                    TextWrapping="Wrap" />
+                <PasswordBox
+                    x:Name="passwordBox"
+                    Margin="65,20,65,0"
+                    Padding="16,8,16,8"
+                    VerticalAlignment="Top"
+                    materialDesign:HintAssist.Foreground="#FF434a54"
+                    materialDesign:HintAssist.Hint="Mật khẩu mới"
+                    materialDesign:TextFieldAssist.LeadingIcon="Password"
+                    materialDesign:TextFieldAssist.TextFieldCornerRadius="10,10,0,0"
+                    materialDesign:TextFieldAssist.UnderlineBrush="#FF3D4466"
+                    CaretBrush="#FF434A54"
+                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                    FontSize="14"
+                    Foreground="#FF434A54"
+                    Style="{StaticResource MaterialDesignFilledPasswordBox}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PasswordChanged">
+                            <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" CommandParameter="{Binding ElementName=passwordBox}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </PasswordBox>
+                <PasswordBox
+                    x:Name="rePasswordBox"
+                    Margin="65,20,65,0"
+                    Padding="16,8,16,8"
+                    VerticalAlignment="Top"
+                    materialDesign:HintAssist.Foreground="#FF434a54"
+                    materialDesign:HintAssist.Hint="Nhập lại mật khẩu mới"
+                    materialDesign:TextFieldAssist.LeadingIcon="Password"
+                    materialDesign:TextFieldAssist.TextFieldCornerRadius="10,10,0,0"
+                    materialDesign:TextFieldAssist.UnderlineBrush="#FF3D4466"
+                    CaretBrush="#FF434A54"
+                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                    FontSize="14"
+                    Foreground="#FF434A54"
+                    Style="{StaticResource MaterialDesignFilledPasswordBox}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PasswordChanged">
+                            <i:InvokeCommandAction Command="{Binding RePasswordChangedCommand}" CommandParameter="{Binding ElementName=rePasswordBox}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </PasswordBox>
+                <Grid Margin="65,32,64.6,0">
+                    <StackPanel
+                        Width="272"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                        <Button
+                            Width="124"
+                            Margin="0"
+                            materialDesign:ButtonAssist.CornerRadius="8"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                            BorderBrush="{x:Null}"
+                            Command="{Binding CloseEditAuthenCommand}"
+                            CommandParameter="{Binding ElementName=ChangePassScreen}"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="12"
+                            FontWeight="Bold"
+                            Style="{StaticResource ButtonDarkTemplate}">
+                            <TextBlock Text="Hủy bỏ" />
+                        </Button>
+                        <Button
+                            Width="124"
+                            Height="32"
+                            Margin="24,0,0,0"
+                            VerticalAlignment="Center"
+                            materialDesign:ButtonAssist.CornerRadius="8"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                            BorderBrush="{x:Null}"
+                            Command="{Binding ChangePasswordCommand}"
+                            CommandParameter="{Binding ElementName=ChangePassScreen}"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="12"
+                            FontWeight="Bold"
+                            Style="{StaticResource ButtonAccentTemplate}">
+                            <TextBlock Text="Xác nhận" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Border>
+    </Viewbox>
+</Window>

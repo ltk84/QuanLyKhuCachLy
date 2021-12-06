@@ -1,0 +1,298 @@
+﻿<Window
+    x:Class="QuanLyKhuCachLy.MainScreen"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Name="MainWindow"
+    Title="Quản lý Khu cách ly"
+    MinWidth="1000"
+    MinHeight="680"
+    DataContext="{StaticResource MainVM}"
+    Icon="logo.ico"
+    WindowState="Maximized"
+    mc:Ignorable="d">
+    <Viewbox Stretch="UniformToFill" StretchDirection="Both">
+        <Grid
+            Width="1273"
+            Height="1111"
+            HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" HorizontalAlignment="Left">
+                <Canvas>
+                    <StackPanel Height="Auto">
+                        <Border
+                            Width="276"
+                            HorizontalAlignment="Left"
+                            Background="#FF3D4466"
+                            CornerRadius="0,0,10,0">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=IsOnDashboard}" Value="True">
+                                            <Setter Property="Height" Value="132" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=IsOnRoom}" Value="True">
+                                            <Setter Property="Height" Value="203.2" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=IsOnPerson}" Value="True">
+                                            <Setter Property="Height" Value="274.4" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=IsOnStaff}" Value="True">
+                                            <Setter Property="Height" Value="345.6" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=IsOnStat}" Value="True">
+                                            <Setter Property="Height" Value="416.8" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=IsOnNotify}" Value="True">
+                                            <Setter Property="Height" Value="488" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=IsOnSetting}" Value="True">
+                                            <Setter Property="Height" Value="558.2" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                        <Border
+                            Width="276"
+                            Height="43.5"
+                            HorizontalAlignment="Left"
+                            Background="White" />
+                        <Border
+                            Width="276"
+                            Height="848"
+                            HorizontalAlignment="Left"
+                            Background="#FF3D4466"
+                            CornerRadius="0,10,0,0" />
+                    </StackPanel>
+                </Canvas>
+                <Canvas>
+                    <Border
+                        Width="100"
+                        Height="848"
+                        HorizontalAlignment="Left"
+                        Background="#FF3D4466" />
+                </Canvas>
+                <Image
+                    Width="180"
+                    Height="82"
+                    Margin="8,24.5,24.5,24.5"
+                    HorizontalAlignment="Center"
+                    Source="/Resources/logo/logo_2.png" />
+                <RadioButton
+                    x:Name="btnDashboard"
+                    Command="{Binding ToDashboardCommand}"
+                    IsChecked="{Binding IsOnDashboard}"
+                    Style="{StaticResource SectionButton}">
+                    <StackPanel Width="236" Orientation="Horizontal">
+                        <Image Height="28">
+                            <Image.Style>
+                                <Style TargetType="Image">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=IsOnDashboard}" Value="True">
+                                            <Setter Property="Source" Value="/Resources/icons/dashboard_selected.png" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=IsOnDashboard}" Value="False">
+                                            <Setter Property="Source" Value="/Resources/icons/dashboard.png" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <TextBlock
+                            materialDesign:HintAssist.IsFloating="{Binding IsOnDashboard}"
+                            Style="{StaticResource TextStyleSectionButton}"
+                            Text="Bảng điều khiển" />
+                        <Border Width="61" Background="Transparent" />
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton
+                    x:Name="btnRoom"
+                    Margin="24,24,0,0"
+                    Command="{Binding ToRoomCommand}"
+                    IsChecked="{Binding IsOnRoom}"
+                    Style="{StaticResource SectionButton}">
+                    <StackPanel Width="236" Orientation="Horizontal">
+                        <Image Height="28">
+                            <Image.Style>
+                                <Style TargetType="Image">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=IsOnRoom}" Value="True">
+                                            <Setter Property="Source" Value="/Resources/icons/room_selected.png" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=IsOnRoom}" Value="False">
+                                            <Setter Property="Source" Value="/Resources/icons/room.png" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <TextBlock
+                            materialDesign:HintAssist.IsFloating="{Binding IsOnRoom}"
+                            Style="{StaticResource TextStyleSectionButton}"
+                            Text="Phòng" />
+                        <Border Width="61" Background="Transparent" />
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton
+                    x:Name="btnPerson"
+                    Margin="24,24,0,0"
+                    Command="{Binding ToPersonCommand}"
+                    IsChecked="{Binding IsOnPerson}"
+                    Style="{StaticResource SectionButton}">
+                    <StackPanel Width="236" Orientation="Horizontal">
+                        <Image Height="28">
+                            <Image.Style>
+                                <Style TargetType="Image">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=IsOnPerson}" Value="True">
+                                            <Setter Property="Source" Value="/Resources/icons/person_selected.png" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=IsOnPerson}" Value="False">
+                                            <Setter Property="Source" Value="/Resources/icons/person.png" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <TextBlock
+                            materialDesign:HintAssist.IsFloating="{Binding IsOnPerson}"
+                            Style="{StaticResource TextStyleSectionButton}"
+                            Text="Người cách ly" />
+                        <Border Width="61" Background="Transparent" />
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton
+                    x:Name="btnStaff"
+                    Margin="24,24,0,0"
+                    Command="{Binding ToStaffCommand}"
+                    IsChecked="{Binding IsOnStaff}"
+                    Style="{StaticResource SectionButton}">
+                    <StackPanel Width="236" Orientation="Horizontal">
+                        <Image Height="28">
+                            <Image.Style>
+                                <Style TargetType="Image">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=IsOnStaff}" Value="True">
+                                            <Setter Property="Source" Value="/Resources/icons/staff_selected.png" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=IsOnStaff}" Value="False">
+                                            <Setter Property="Source" Value="/Resources/icons/staff.png" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <TextBlock
+                            materialDesign:HintAssist.IsFloating="{Binding IsOnStaff}"
+                            Style="{StaticResource TextStyleSectionButton}"
+                            Text="Nhân viên" />
+                        <Border Width="61" Background="Transparent" />
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton
+                    x:Name="btnStat"
+                    Margin="24,24,0,0"
+                    Command="{Binding ToStatCommand}"
+                    IsChecked="{Binding IsOnStat}"
+                    Style="{StaticResource SectionButton}">
+                    <StackPanel Width="236" Orientation="Horizontal">
+                        <Image Height="28">
+                            <Image.Style>
+                                <Style TargetType="Image">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=IsOnStat}" Value="True">
+                                            <Setter Property="Source" Value="/Resources/icons/stat_selected.png" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=IsOnStat}" Value="False">
+                                            <Setter Property="Source" Value="/Resources/icons/stat.png" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <TextBlock
+                            materialDesign:HintAssist.IsFloating="{Binding IsOnStat}"
+                            Style="{StaticResource TextStyleSectionButton}"
+                            Text="Thống kê" />
+                        <Border Width="61" Background="Transparent" />
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton
+                    x:Name="btnNotify"
+                    Margin="24,24,0,0"
+                    Command="{Binding ToNotifyCommand}"
+                    IsChecked="{Binding IsOnNotify}"
+                    Style="{StaticResource SectionButton}">
+                    <StackPanel Width="236" Orientation="Horizontal">
+                        <Image Height="28">
+                            <Image.Style>
+                                <Style TargetType="Image">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=IsOnNotify}" Value="True">
+                                            <Setter Property="Source" Value="/Resources/icons/notify_selected.png" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=IsOnNotify}" Value="False">
+                                            <Setter Property="Source" Value="/Resources/icons/notify.png" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <TextBlock
+                            materialDesign:HintAssist.IsFloating="{Binding IsOnNotify}"
+                            Style="{StaticResource TextStyleSectionButton}"
+                            Text="Thông báo" />
+                        <Border Width="61" Background="Transparent" />
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton
+                    x:Name="btnSetting"
+                    Margin="24,24,0,0"
+                    Command="{Binding ToSettingCommand}"
+                    IsChecked="{Binding IsOnSetting}"
+                    Style="{StaticResource SectionButton}">
+                    <StackPanel Width="236" Orientation="Horizontal">
+                        <Image Height="28">
+                            <Image.Style>
+                                <Style TargetType="Image">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=IsOnSetting}" Value="True">
+                                            <Setter Property="Source" Value="/Resources/icons/setting_selected.png" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=IsOnSetting}" Value="False">
+                                            <Setter Property="Source" Value="/Resources/icons/setting.png" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <TextBlock
+                            materialDesign:HintAssist.IsFloating="{Binding IsOnSetting}"
+                            Style="{StaticResource TextStyleSectionButton}"
+                            Text="Cài đặt" />
+                        <Border Width="61" Background="Transparent" />
+                    </StackPanel>
+                </RadioButton>
+            </StackPanel>
+            <ContentControl
+                Grid.Column="1"
+                Margin="16,0,0,0"
+                Content="{Binding CurrentView}" />
+        </Grid>
+    </Viewbox>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName=MainWindow}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+</Window>

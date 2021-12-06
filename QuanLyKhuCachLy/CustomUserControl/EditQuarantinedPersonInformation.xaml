@@ -1,0 +1,118 @@
+﻿<Window
+    x:Class="QuanLyKhuCachLy.CustomUserControl.EditQuarantinedPersonInformation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:control="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Name="EditQuarantinedPersonScreen"
+    d:DesignHeight="530"
+    d:DesignWidth="850"
+    AllowsTransparency="True"
+    Background="{x:Null}"
+    DataContext="{StaticResource ResourceKey=PersonVM}"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Viewbox>
+        <Border Margin="10" Style="{StaticResource RecommendationField}">
+            <StackPanel Margin="32,0,32,32">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="450" />
+                    </Grid.RowDefinitions>
+                    <control:EditQuarantinedPersonInformationFisrtPage Panel.ZIndex="-1" Visibility="{Binding TabEdit1}" />
+                    <control:EditQuarantinedPersonInformationSecondPage Visibility="{Binding TabEdit2}" />
+                    <control:EditQuarantinedPersonInformationThirdPage Panel.ZIndex="1" Visibility="{Binding TabEdit3}" />
+                    <control:EditQuarantinedPersonFouthPage Panel.ZIndex="1" Visibility="{Binding TabEdit4}" />
+
+                </Grid>
+                <StackPanel
+                    Width="Auto"
+                    Margin="0,25,0,0"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+                    <Button
+                        Width="145"
+                        Height="37"
+                        Margin="0"
+                        materialDesign:ButtonAssist.CornerRadius="8"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                        BorderBrush="{x:Null}"
+                        Command="{Binding CancelCommand}"
+                        CommandParameter="{Binding ElementName=EditQuarantinedPersonScreen}"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        IsCancel="True"
+                        Style="{StaticResource ButtonDarkTemplate}">
+                        <TextBlock Text="Hủy bỏ" />
+                    </Button>
+                    <Button
+                        Width="145"
+                        Height="37"
+                        Margin="24,0,0,0"
+                        materialDesign:ButtonAssist.CornerRadius="8"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                        BorderBrush="{x:Null}"
+                        Command="{Binding PreviousTabEditCommand}"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Style="{StaticResource ButtonDarkTemplate}"
+                        Visibility="{Binding ButtonEditReturn}">
+                        <TextBlock Text="Trở lại" />
+                    </Button>
+                    <Button
+                        Width="145"
+                        Height="37"
+                        Margin="24,0,0,0"
+                        VerticalAlignment="Center"
+                        materialDesign:ButtonAssist.CornerRadius="8"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                        BorderBrush="{x:Null}"
+                        CommandParameter="{Binding ElementName=EditQuarantinedPersonScreen}"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="12"
+                        FontWeight="Bold"
+                        Visibility="Visible">
+                        <Button.Style>
+                            <Style BasedOn="{StaticResource ButtonAccentTemplate}" TargetType="{x:Type Button}">
+                                <Setter Property="Command" Value="{Binding NextTabEditCommand}" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=TabEditIndicator, Path=Text}" Value="4/4">
+                                        <Setter Property="Command" Value="{Binding EditCommand}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <TextBlock FontSize="16">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Text" Value="Tiếp theo" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=TabEditIndicator, Path=Text}" Value="4/4">
+                                            <Setter Property="Text" Value="Chỉnh sửa" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Button>
+                    <TextBlock
+                        x:Name="TabEditIndicator"
+                        Margin="25,0,0,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#FF434A54"
+                        Text="{Binding TabEditPosition}" />
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Viewbox>
+</Window>

@@ -1,0 +1,186 @@
+﻿<UserControl
+    x:Class="QuanLyKhuCachLy.CustomUserControl.QuarantinePersonInRoomInformationFirstPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="500"
+    d:DesignWidth="700"
+    mc:Ignorable="d">
+
+    <StackPanel>
+        <Grid Margin="0,10,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Style="{StaticResource list-key-text}"
+                Text="Tên:" />
+
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="1"
+                Style="{StaticResource list-value-text}"
+                Text="{Binding PersonInRoomViewModel.SelectedItem.name}" />
+
+
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                Style="{StaticResource list-key-text}"
+                Text="Giới tính:" />
+
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="1"
+                Style="{StaticResource list-value-text}"
+                Text="{Binding PersonInRoomViewModel.SelectedItem.sex}" />
+
+
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="0"
+                Style="{StaticResource list-key-text}"
+                Text="Quốc tịch:" />
+
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="1"
+                Style="{StaticResource list-value-text}"
+                Text="{Binding PersonInRoomViewModel.SelectedItem.nationality}" />
+
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="0"
+                Style="{StaticResource list-key-text}"
+                Text="CMND/CCCD:" />
+
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="1"
+                Style="{StaticResource list-value-text}"
+                Text="{Binding PersonInRoomViewModel.SelectedItem.citizenID}" />
+
+            <TextBlock
+                Grid.Row="4"
+                Grid.Column="0"
+                Style="{StaticResource list-key-text}"
+                Text="Số điện thoại:" />
+
+            <TextBlock
+                Grid.Row="4"
+                Grid.Column="1"
+                Style="{StaticResource list-value-text}"
+                Text="{Binding PersonInRoomViewModel.SelectedItem.phoneNumber}" />
+
+            <TextBlock
+                Grid.Row="5"
+                Grid.Column="0"
+                Style="{StaticResource list-key-text}"
+                Text="Mã số BHYT:" />
+
+            <TextBlock
+                Grid.Row="5"
+                Grid.Column="1"
+                Style="{StaticResource list-value-text}"
+                Text="{Binding PersonInRoomViewModel.SelectedItem.healthInsuranceID}" />
+
+            <TextBlock
+                Grid.Row="6"
+                Grid.Column="0"
+                VerticalAlignment="Top"
+                Style="{StaticResource list-key-text}"
+                Text="Địa chỉ:" />
+
+            <TextBlock
+                Grid.Row="6"
+                Grid.Column="1"
+                Style="{StaticResource list-value-text}"
+                Text="{Binding PersonInRoomViewModel.DisplayAddress}" />
+        </Grid>
+        <Separator Margin="0,20,0,20" Background="#1E434A54" />
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Style="{StaticResource list-key-text}"
+                Text="Triệu chứng:" />
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="1"
+                Style="{StaticResource list-value-text}"
+                Text="{Binding PersonInRoomViewModel.DisplayHealthInfor}" />
+
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                Style="{StaticResource list-key-text}"
+                Text="Nhóm đối tượng:" />
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="1"
+                Style="{StaticResource list-value-text}"
+                Text="{Binding PersonInRoomViewModel.SelectedItem.Severity.description}" />
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="0"
+                Style="{StaticResource list-key-text}"
+                Text="Ngày cách ly:" />
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="1"
+                Style="{StaticResource list-value-text}"
+                Text="{Binding PersonInRoomViewModel.SelectedItem.arrivedDate, StringFormat=dd-MM-yyyy}" />
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="0"
+                Style="{StaticResource list-key-text}"
+                Text="Dự kiến hoàn thành cách ly:" />
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="1"
+                Style="{StaticResource list-value-text}"
+                Text="{Binding PersonInRoomViewModel.SelectedItem.leaveDate, StringFormat=dd-MM-yyyy}" />
+            <TextBlock
+                Grid.Row="4"
+                Grid.Column="0"
+                Style="{StaticResource list-key-text}"
+                Text="Phòng:" />
+            <TextBlock
+                Grid.Row="4"
+                Grid.Column="1"
+                Style="{StaticResource list-value-text}"
+                Text="{Binding PersonInRoomViewModel.Room.displayName}" />
+        </Grid>
+    </StackPanel>
+</UserControl>

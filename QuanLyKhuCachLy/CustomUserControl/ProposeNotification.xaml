@@ -1,0 +1,320 @@
+﻿<Window
+    x:Class="QuanLyKhuCachLy.CustomUserControl.ProposeNotification"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utility="clr-namespace:QuanLyKhuCachLy.Utility"
+    Name="ProposeNotificationWindow"
+    Title="ProposeNotification"
+    Width="980"
+    Height="800"
+    AllowsTransparency="True"
+    Background="{x:Null}"
+    DataContext="{StaticResource ProposeNotificationVM}"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Viewbox>
+        <Border
+            Width="1080"
+            Margin="10"
+            Style="{StaticResource RecommendationField}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="5*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="55,10,55,40">
+                    <TextBlock
+                        Margin="0,36,0,0"
+                        HorizontalAlignment="Center"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="32"
+                        FontWeight="Bold">
+                        Đề xuất gửi thông báo
+                    </TextBlock>
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        FontSize="20"
+                        Text="{Binding NotificationName}" />
+                    <TextBlock
+                        Margin="0,0,0,4"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Foreground="#ff000000">
+                        DANH SÁCH NHẬN THÔNG BÁO
+                    </TextBlock>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+
+
+                        <StackPanel
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="0,0,24,0"
+                            VerticalAlignment="Bottom">
+                            <TextBlock
+                                Margin="0,0,0,5"
+                                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                                FontSize="16"
+                                Foreground="#FF434A54">
+                                Nhập bất kì để tìm kiếm
+                            </TextBlock>
+                            <TextBox
+                                Width="300"
+                                Height="42"
+                                Padding="10,8,8,10"
+                                HorizontalAlignment="Left"
+                                materialDesign:HintAssist.Hint="Tên, CMND,...."
+                                FontSize="16"
+                                MaxLength="20"
+                                Style="{StaticResource TextInputField}">
+                                <TextBox.Text>
+                                    <Binding
+                                        Mode="TwoWay"
+                                        Path="SearchKey"
+                                        UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules />
+                                    </Binding>
+                                </TextBox.Text>
+
+                            </TextBox>
+                        </StackPanel>
+
+
+
+
+                        <StackPanel
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Margin="12,0,0,0"
+                            VerticalAlignment="Bottom">
+
+                            <TextBlock
+                                Margin="5,0,0,5"
+                                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                                FontSize="16"
+                                Foreground="#FF434A54">
+                                Lọc theo
+                            </TextBlock>
+                            <ComboBox
+                                Padding="10,8,8,10"
+                                ItemsSource="{Binding FilterType}"
+                                Style="{StaticResource ComboBoxField}">
+                                <ComboBox.SelectedItem>
+                                    <Binding Path="SelectedFilterType" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules />
+                                    </Binding>
+                                </ComboBox.SelectedItem>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <StackPanel
+                            Grid.Row="0"
+                            Grid.Column="3"
+                            Margin="12,0,0,0"
+                            VerticalAlignment="Bottom">
+                            <TextBlock
+                                Margin="5,0,0,5"
+                                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                                FontSize="16"
+                                Foreground="#FF434A54">
+                                Bộ lọc
+                            </TextBlock>
+                            <ComboBox
+                                Padding="10,8,8,10"
+                                ItemsSource="{Binding FilterProperty}"
+                                Style="{StaticResource ComboBoxField}">
+                                <ComboBox.SelectedItem>
+                                    <Binding Path="SelectedFilterProperty" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules />
+                                    </Binding>
+                                </ComboBox.SelectedItem>
+                            </ComboBox>
+                        </StackPanel>
+
+                    </Grid>
+                    <Border
+                        Margin="0,8,0,24"
+                        Padding="0,0,0,0"
+                        Background="Transparent"
+                        CornerRadius="5">
+                        <DataGrid
+                            Height="300"
+                            Margin="0,0,0,0"
+                            materialDesign:DataGridAssist.CornerRadius="10"
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            CanUserReorderColumns="False"
+                            CanUserResizeColumns="False"
+                            CanUserResizeRows="False"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding PeopleListView}"
+                            SelectionMode="Single"
+                            SelectionUnit="FullRow">
+                            <DataGrid.Columns>
+                                <materialDesign:DataGridTextColumn
+                                    Binding="{Binding name}"
+                                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                                    ElementStyle="{StaticResource DataGridElement}"
+                                    Header="Tên"
+                                    HeaderStyle="{StaticResource DataGridHeader}"
+                                    MaxLength="30" />
+                                <materialDesign:DataGridTextColumn
+                                    Binding="{Binding citizenID}"
+                                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                                    ElementStyle="{StaticResource DataGridElement}"
+                                    Header="CMND"
+                                    HeaderStyle="{StaticResource DataGridHeader}"
+                                    MaxLength="30" />
+                                <materialDesign:DataGridTextColumn
+                                    Binding="{Binding QuarantineRoom.displayName}"
+                                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                                    ElementStyle="{StaticResource DataGridElement}"
+                                    Header="Phòng"
+                                    HeaderStyle="{StaticResource DataGridHeader}"
+                                    MaxLength="30" />
+
+                                <materialDesign:DataGridTextColumn
+                                    Binding="{Binding arrivedDate, StringFormat=dd-MM-yyyy}"
+                                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                                    ElementStyle="{StaticResource DataGridElement}"
+                                    Header="Ngày đến"
+                                    HeaderStyle="{StaticResource DataGridHeader}"
+                                    MaxLength="30" />
+                                <materialDesign:DataGridTextColumn
+                                    Binding="{Binding Severity.description}"
+                                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                                    ElementStyle="{StaticResource DataGridElement}"
+                                    Header="Mức độ"
+                                    HeaderStyle="{StaticResource DataGridHeader}"
+                                    MaxLength="30" />
+
+
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                    <Grid Margin="0,0,0,8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="24" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock
+                            Grid.Column="0"
+                            VerticalAlignment="Bottom"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Foreground="#FF363636">
+                            Nội dung mẫu
+                        </TextBlock>
+                        <TextBlock
+                            Grid.Column="2"
+                            VerticalAlignment="Bottom"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Foreground="#FF363636">
+                            Nội dung đầy đủ
+                        </TextBlock>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="24" />
+                            <ColumnDefinition Width="4*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox
+                            Grid.Column="0"
+                            Height="200"
+                            materialDesign:HintAssist.Hint="Nhập nội dung thông báo"
+                            FontSize="16"
+                            MaxLines="100"
+                            Style="{StaticResource TextInputField}">
+                            <TextBox.Text>
+                                <Binding Path="EditableMessage" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+
+
+                        <TextBlock
+                            Grid.Column="2"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="16"
+                            FontWeight="Regular"
+                            Foreground="#FF262626"
+                            Text="{Binding FullMessage}"
+                            TextWrapping="Wrap" />
+
+
+                    </Grid>
+                    <Grid Margin="0,24,0,0">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel
+                            Grid.Column="1"
+                            Width="Auto"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Orientation="Horizontal">
+                            <Button
+                                Width="145"
+                                Height="37"
+                                Margin="0"
+                                materialDesign:ButtonAssist.CornerRadius="8"
+                                materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                                BorderBrush="{x:Null}"
+                                Command="{Binding CancelCommand}"
+                                CommandParameter="{Binding ElementName=ProposeNotificationWindow}"
+                                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                                FontSize="16"
+                                FontWeight="Bold"
+                                Style="{StaticResource ButtonDarkTemplate}">
+                                <TextBlock Text="Hủy bỏ" />
+                            </Button>
+                            <Button
+                                Width="200"
+                                Height="37"
+                                Margin="16,0,0,0"
+                                VerticalAlignment="Center"
+                                materialDesign:ButtonAssist.CornerRadius="8"
+                                materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                                BorderBrush="{x:Null}"
+                                Command="{Binding SendNotification}"
+                                CommandParameter="{Binding ElementName=ProposeNotificationWindow}"
+                                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                                FontSize="16"
+                                FontWeight="Bold"
+                                Style="{StaticResource ButtonAccentTemplate}">
+                                <TextBlock Text="Gửi thông báo" />
+                            </Button>
+
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Viewbox>
+</Window>

@@ -1,0 +1,154 @@
+﻿<Window
+    x:Class="QuanLyKhuCachLy.CustomUserControl.EditRoom"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utility="clr-namespace:QuanLyKhuCachLy.Utility"
+    xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
+    Name="EditRoomScreen"
+    Width="575"
+    Height="575"
+    AllowsTransparency="True"
+    Background="{x:Null}"
+    DataContext="{StaticResource RoomVM}"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Border Margin="15" Style="{StaticResource RecommendationField}">
+        <StackPanel>
+            <TextBlock
+                Margin="0,36,0,0"
+                HorizontalAlignment="Center"
+                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                FontSize="32"
+                FontWeight="Bold">
+                Sửa thông tin phòng
+            </TextBlock>
+            <TextBlock
+                Margin="0,2,0,0"
+                HorizontalAlignment="Center"
+                FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                FontSize="18">
+                Thay đổi các thông tin bên dưới để sửa phòng
+            </TextBlock>
+            <Grid Margin="120,15,120,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Margin="0,15,0,0">
+                    <TextBlock
+                        Margin="5,0,0,5"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        Foreground="#FF434A54">
+                        Tên
+                    </TextBlock>
+                    <TextBox
+                        materialDesign:HintAssist.Hint="Nhập tên phòng"
+                        utility:ProtocolSettingsLayout.MVVMHasError="{Binding Path=DisplayNameFieldHasError}"
+                        MaxLength="30"
+                        Style="{StaticResource TextInputField}"
+                        TabIndex="0">
+                        <TextBox.Text>
+                            <Binding Path="RoomDisplayName" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vr:RequiredField />
+                                    <vr:NoSpecialChar />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Margin="0,15,0,0">
+                    <TextBlock
+                        Margin="5,0,0,5"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        Foreground="#FF434A54">
+                        Sức chứa
+                    </TextBlock>
+                    <TextBox
+                        materialDesign:HintAssist.Hint="Nhập sức chứa"
+                        utility:ProtocolSettingsLayout.MVVMHasError="{Binding CapacityFieldHasError}"
+                        MaxLength="9"
+                        Style="{StaticResource TextInputField}"
+                        TabIndex="1">
+                        <TextBox.Text>
+                            <Binding Path="RoomCapacity" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vr:RequiredField />
+                                    <vr:NumberField Min="1" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Margin="0,15,0,0">
+                    <TextBlock
+                        Margin="5,0,0,5"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        Foreground="#FF434A54">
+                        Nhóm đối tượng
+                    </TextBlock>
+                    <ComboBox
+                        DisplayMemberPath="description"
+                        ItemsSource="{Binding RoomLevelList}"
+                        Style="{StaticResource ComboBoxField}"
+                        TabIndex="2">
+                        <ComboBox.SelectedItem>
+                            <Binding Path="RoomSelectedSeverity" UpdateSourceTrigger="PropertyChanged" />
+                        </ComboBox.SelectedItem>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel
+                    Grid.Row="3"
+                    Margin="0,32,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Button
+                        Width="145"
+                        Height="37"
+                        Margin="0"
+                        materialDesign:ButtonAssist.CornerRadius="8"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                        BorderBrush="{x:Null}"
+                        Command="{Binding CancelCommand}"
+                        CommandParameter="{Binding ElementName=EditRoomScreen}"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        IsCancel="True"
+                        Style="{StaticResource ButtonDarkTemplate}">
+                        <TextBlock Text="Hủy bỏ" />
+                    </Button>
+                    <Button
+                        Width="145"
+                        Height="37"
+                        Margin="12,0,0,0"
+                        VerticalAlignment="Center"
+                        materialDesign:ButtonAssist.CornerRadius="8"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                        BorderBrush="{x:Null}"
+                        Command="{Binding EditRoomCommand}"
+                        CommandParameter="{Binding ElementName=EditRoomScreen}"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="12"
+                        FontWeight="Bold"
+                        IsDefault="True"
+                        Style="{StaticResource ButtonAccentTemplate}">
+                        <TextBlock FontSize="16">
+                            Lưu
+                        </TextBlock>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </Border>
+</Window>

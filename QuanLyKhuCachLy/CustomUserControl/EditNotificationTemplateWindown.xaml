@@ -1,0 +1,117 @@
+﻿<Window
+    x:Class="QuanLyKhuCachLy.CustomUserControl.EditNotificationTemplateWindown"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utility="clr-namespace:QuanLyKhuCachLy.Utility"
+    xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
+    Width="520"
+    Height="510"
+    AllowsTransparency="True"
+    Background="{x:Null}"
+    DataContext="{StaticResource NotiVM}"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Viewbox>
+        <Border
+            Width="520"
+            Height="Auto"
+            Margin="10"
+            Style="{StaticResource RecommendationField}">
+            <StackPanel Margin="60,45,60,45">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    FontSize="25"
+                    FontWeight="Bold">
+                    Chỉnh sửa mẫu thông báo
+                </TextBlock>
+                <TextBlock
+                    Margin="5,10,0,5"
+                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                    FontSize="16"
+                    Foreground="#FF434A54">
+                    Tên
+                </TextBlock>
+                <TextBox
+                    materialDesign:HintAssist.Hint="Nhập tên mẫu thông báo"
+                    MaxLength="100"
+                    Style="{StaticResource TextInputField}">
+                    <TextBox.Text>
+                        <Binding Path="title" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <vr:RequiredField />
+                                <!--<vr:NoSpecialChar />-->
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+
+
+                <TextBlock
+                    Margin="5,20,0,5"
+                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                    FontSize="16"
+                    Foreground="#FF434A54">
+                    Nội dung
+                </TextBlock>
+                <TextBox
+                    Height="200"
+                    materialDesign:HintAssist.Hint="Nhập nội dung thông báo"
+                    Style="{StaticResource TextInputField}">
+                    <TextBox.Text>
+                        <Binding Path="content" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <vr:RequiredField />
+                                <!--<vr:NoSpecialChar />-->
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Grid Margin="0,24,0,0" HorizontalAlignment="Right">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Grid.Column="0"
+                        Width="145"
+                        Height="37"
+                        Margin="0"
+                        materialDesign:ButtonAssist.CornerRadius="8"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                        BorderBrush="{x:Null}"
+                        Command="{Binding CancelEditTemplate}"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Style="{StaticResource ButtonDarkTemplate}">
+                        <TextBlock Text="Hủy bỏ" />
+                    </Button>
+                    <Button
+                        Grid.Column="1"
+                        Width="145"
+                        Height="37"
+                        Margin="16,0,0,0"
+                        VerticalAlignment="Center"
+                        materialDesign:ButtonAssist.CornerRadius="8"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                        BorderBrush="{x:Null}"
+                        Command="{Binding SaveNotificationTemplate}"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Style="{StaticResource ButtonAccentTemplate}">
+                        <TextBlock Text="Lưu" />
+                    </Button>
+                </Grid>
+
+            </StackPanel>
+        </Border>
+    </Viewbox>
+</Window>

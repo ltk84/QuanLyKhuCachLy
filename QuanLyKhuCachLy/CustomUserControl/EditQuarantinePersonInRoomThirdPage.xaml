@@ -1,0 +1,278 @@
+﻿<UserControl
+    x:Class="QuanLyKhuCachLy.CustomUserControl.EditQuarantinePersonInRoomThirdPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:convert="clr-namespace:QuanLyKhuCachLy.Converter"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="520"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <StackPanel Margin="0,0,0,0">
+        <TextBlock
+            Margin="0,32,0,0"
+            HorizontalAlignment="Center"
+            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+            FontSize="24"
+            FontWeight="Bold">
+            Thông tin người cách ly
+        </TextBlock>
+        <TextBlock
+            Margin="0,2,0,0"
+            HorizontalAlignment="Center"
+            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+            FontSize="16">
+            Thay đổi thông tin để thực hiện chỉnh sửa
+        </TextBlock>
+        <Grid Margin="30,20,30,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition SharedSizeGroup="A" />
+                <ColumnDefinition SharedSizeGroup="A" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Grid.Column="0">
+                <Grid Margin="0,0,15,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition SharedSizeGroup="A" />
+                        <ColumnDefinition SharedSizeGroup="A" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="0,0,0,0"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#FF434A54"><Run Text="Thông tin tiêm chủng" /></TextBlock>
+                    <Button
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="155,-10,0,10"
+                        VerticalAlignment="Bottom"
+                        Background="Transparent"
+                        Command="{Binding PersonInRoomViewModel.InjectionRecordViewModel.AddOnUICommand}"
+                        Foreground="Transparent"
+                        Template="{StaticResource plus-button}" />
+                </Grid>
+                <Separator Margin="0,0,15,0">
+                    <Separator.RenderTransform>
+                        <ScaleTransform ScaleY="1" />
+                    </Separator.RenderTransform>
+                </Separator>
+            </StackPanel>
+            <Grid
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="0,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="A" />
+                    <ColumnDefinition SharedSizeGroup="A" />
+                    <ColumnDefinition SharedSizeGroup="A" />
+                    <ColumnDefinition SharedSizeGroup="A" />
+                </Grid.ColumnDefinitions>
+                <DataGrid
+                    x:Name="vaccinationInformation"
+                    Grid.ColumnSpan="4"
+                    Height="280"
+                    Margin="0,15,15,0"
+                    materialDesign:DataGridAssist.CornerRadius="10"
+                    AutoGenerateColumns="False"
+                    CanUserAddRows="False"
+                    CanUserReorderColumns="False"
+                    CanUserResizeColumns="True"
+                    CanUserResizeRows="False"
+                    ItemsSource="{Binding PersonInRoomViewModel.InjectionRecordViewModel.InjectionRecordList}"
+                    LoadingRow="vaccinationInformation_LoadingRow"
+                    SelectedItem="{Binding PersonInRoomViewModel.InjectionRecordViewModel.SelectedItem}">
+
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                            Width="Auto"
+                            MinWidth="70"
+                            Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=Header}"
+                            EditingElementStyle="{StaticResource EditingDataGridElement}"
+                            ElementStyle="{StaticResource DataGridElement}"
+                            Header="Lần"
+                            HeaderStyle="{StaticResource DataGridHeader}"
+                            IsReadOnly="True" />
+                        <DataGridTextColumn
+                            Width="Auto"
+                            MinWidth="90"
+                            Binding="{Binding vaccineName, UpdateSourceTrigger=PropertyChanged}"
+                            EditingElementStyle="{StaticResource EditingDataGridElement}"
+                            ElementStyle="{StaticResource DataGridElement}"
+                            Header="Tên"
+                            HeaderStyle="{StaticResource DataGridHeader}" />
+                        <DataGridTemplateColumn
+                            Width="Auto"
+                            MinWidth="70"
+                            CellStyle="{StaticResource DataGridCellElement}"
+                            Header="Ngày tiêm"
+                            HeaderStyle="{StaticResource DataGridHeader}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <DatePicker materialDesign:HintAssist.Hint="Chọn tiêm" SelectedDate="{Binding dateInjection, StringFormat=dd-MM-yyyy, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn
+                            Width="Auto"
+                            MinWidth="60"
+                            CellStyle="{StaticResource DataGridCellElement}"
+                            Header=" "
+                            HeaderStyle="{StaticResource DataGridHeader}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button
+                                        HorizontalAlignment="Right"
+                                        Command="{Binding PersonInRoomViewModel.InjectionRecordViewModel.DeleteOnUICommand}"
+                                        DataContext="{StaticResource RoomVM}"
+                                        Style="{StaticResource DataGridButtonDelete}">
+                                        <materialDesign:PackIcon
+                                            Width="16"
+                                            Height="16"
+                                            Kind="Delete" />
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+            <StackPanel Grid.Row="0" Grid.Column="1">
+                <Grid Margin="0,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition SharedSizeGroup="A" />
+                        <ColumnDefinition SharedSizeGroup="A" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="15,0,0,0"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#FF434A54"><Run Text="Kết quả xét nghiệm" /></TextBlock>
+                    <Button
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="165,-10,0,10"
+                        VerticalAlignment="Bottom"
+                        Command="{Binding PersonInRoomViewModel.TestingResultViewModel.AddOnUICommand}"
+                        Template="{StaticResource plus-button}" />
+                </Grid>
+                <Separator Margin="15,0,0,0">
+                    <Separator.RenderTransform>
+                        <ScaleTransform ScaleY="1" />
+                    </Separator.RenderTransform>
+                </Separator>
+            </StackPanel>
+            <Grid
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="0,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="A" />
+                    <ColumnDefinition SharedSizeGroup="A" />
+                    <ColumnDefinition SharedSizeGroup="A" />
+                </Grid.ColumnDefinitions>
+                <DataGrid
+                    x:Name="travelHistory"
+                    Grid.ColumnSpan="4"
+                    Height="280"
+                    Margin="15,15,0,0"
+                    materialDesign:DataGridAssist.CornerRadius="10"
+                    AutoGenerateColumns="False"
+                    CanUserAddRows="False"
+                    CanUserReorderColumns="False"
+                    CanUserResizeColumns="True"
+                    CanUserResizeRows="False"
+                    ItemsSource="{Binding PersonInRoomViewModel.TestingResultViewModel.TestingResultList}"
+                    LoadingRow="vaccinationInformation_LoadingRow"
+                    SelectedItem="{Binding PersonInRoomViewModel.TestingResultViewModel.SelectedItem}">
+                    <DataGrid.Resources>
+                        <convert:TestResultToBoolConverter x:Key="convert" />
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                            Width="Auto"
+                            MinWidth="70"
+                            Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=Header}"
+                            EditingElementStyle="{StaticResource EditingDataGridElement}"
+                            ElementStyle="{StaticResource DataGridElement}"
+                            Header="Lần"
+                            HeaderStyle="{StaticResource DataGridHeader}"
+                            IsReadOnly="True" />
+                        <DataGridTemplateColumn
+                            Width="Auto"
+                            MinWidth="120"
+                            CellStyle="{StaticResource DataGridCellElement}"
+                            Header="Ngày xét nghiệm"
+                            HeaderStyle="{StaticResource DataGridHeader}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <DatePicker materialDesign:HintAssist.Hint="Chọn ngày xét nghiệm" SelectedDate="{Binding dateTesting, StringFormat=dd-MM-yyyy, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn
+                            Width="Auto"
+                            MinWidth="150"
+                            CellStyle="{StaticResource DataGridCellElement}"
+                            Header="Kết quả"
+                            HeaderStyle="{StaticResource DataGridHeader}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox
+                                        DisplayMemberPath="Key"
+                                        ItemsSource="{Binding PersonInRoomViewModel.TestingResultViewModel.ResultList, Source={StaticResource RoomVM}}"
+                                        SelectedValue="{Binding isPositive, UpdateSourceTrigger=PropertyChanged}"
+                                        SelectedValuePath="Value"
+                                        Style="{StaticResource ComboBoxField}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn
+                            Width="Auto"
+                            MinWidth="70"
+                            CellStyle="{StaticResource DataGridCellElement}"
+                            Header=""
+                            HeaderStyle="{StaticResource DataGridHeader}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button
+                                        HorizontalAlignment="Right"
+                                        Command="{Binding PersonInRoomViewModel.TestingResultViewModel.DeleteOnUICommand}"
+                                        DataContext="{StaticResource RoomVM}"
+                                        Style="{StaticResource DataGridButtonDelete}">
+                                        <materialDesign:PackIcon
+                                            Width="16"
+                                            Height="16"
+                                            Kind="Delete" />
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Grid>
+    </StackPanel>
+</UserControl>

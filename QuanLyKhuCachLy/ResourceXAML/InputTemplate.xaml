@@ -1,0 +1,100 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <Style
+        x:Key="TextInputField"
+        BasedOn="{StaticResource MaterialDesignOutlinedTextBox}"
+        TargetType="TextBox">
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="16,12,12,14" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="materialDesign:HintAssist.Background" Value="Transparent" />
+        <Setter Property="materialDesign:HintAssist.Foreground" Value="#FF434a54" />
+        <Setter Property="materialDesign:HintAssist.IsFloating" Value="False" />
+        <Setter Property="materialDesign:TextFieldAssist.HasOutlinedTextField" Value="True" />
+        <Setter Property="materialDesign:TextFieldAssist.TextFieldCornerRadius" Value="5,5,5,5" />
+        <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="#FF434a54" />
+        <Setter Property="FontFamily" Value="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans" />
+        <Setter Property="BorderBrush" Value="#00000000" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="materialDesign:ValidationAssist.HorizontalAlignment" Value="Right" />
+        <Setter Property="materialDesign:ValidationAssist.Background" Value="Transparent" />
+        <Setter Property="materialDesign:ValidationAssist.FontSize" Value="14" />
+        <Setter Property="materialDesign:TextFieldAssist.CharacterCounterVisibility" Value="Hidden" />
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="False">
+                <Setter Property="materialDesign:ValidationAssist.Suppress" Value="True" />
+                <Setter Property="Margin" Value="0" />
+            </Trigger>
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="Margin" Value="0,0,0,10" />
+            </Trigger>
+
+        </Style.Triggers>
+    </Style>
+    <Style
+        x:Key="CalendarStyle"
+        BasedOn="{StaticResource MaterialDesignCalendarPortraitForeground}"
+        TargetType="Calendar">
+        <Setter Property="materialDesign:CalendarAssist.HeaderBackground" Value="#FF3D4466" />
+        <Setter Property="materialDesign:CalendarAssist.HeaderForeground" Value="White" />
+    </Style>
+    <Style
+        x:Key="DatePickerField"
+        BasedOn="{StaticResource MaterialDesignOutlinedDatePicker}"
+        TargetType="DatePicker">
+        <Setter Property="DisplayDateEnd" Value="{x:Static sys:DateTime.Today}" />
+        <Setter Property="CalendarStyle" Value="{StaticResource CalendarStyle}" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="16,12,12,14" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="materialDesign:HintAssist.Background" Value="Transparent" />
+        <Setter Property="materialDesign:HintAssist.Foreground" Value="#FF434a54" />
+        <Setter Property="materialDesign:HintAssist.IsFloating" Value="False" />
+        <Setter Property="materialDesign:TextFieldAssist.HasOutlinedTextField" Value="True" />
+        <Setter Property="materialDesign:TextFieldAssist.TextFieldCornerRadius" Value="5,5,5,5" />
+        <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="#FF434a54" />
+        <Setter Property="FontFamily" Value="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans" />
+        <Setter Property="BorderBrush" Value="#00000000" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="materialDesign:ValidationAssist.HorizontalAlignment" Value="Right" />
+        <Setter Property="materialDesign:ValidationAssist.Background" Value="Transparent" />
+        <Setter Property="materialDesign:ValidationAssist.FontSize" Value="14" />
+        <Setter Property="materialDesign:TextFieldAssist.CharacterCounterVisibility" Value="Hidden" />
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="False">
+                <Setter Property="materialDesign:ValidationAssist.Suppress" Value="True" />
+            </Trigger>
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="Margin" Value="0,0,0,10" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style
+        x:Key="ComboBoxField"
+        BasedOn="{StaticResource MaterialDesignOutlinedComboBox}"
+        TargetType="ComboBox">
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="materialDesign:HintAssist.Hint" Value="Nhấp vào để chọn" />
+        <Setter Property="materialDesign:HintAssist.IsFloating" Value="False" />
+        <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="#ff434a54" />
+        <Setter Property="FontFamily" Value="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="materialDesign:ValidationAssist.HorizontalAlignment" Value="Right" />
+        <Setter Property="materialDesign:ValidationAssist.Background" Value="Transparent" />
+        <Setter Property="materialDesign:ValidationAssist.FontSize" Value="14" />
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="False">
+                <Setter Property="materialDesign:ValidationAssist.Suppress" Value="True" />
+            </Trigger>
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="Margin" Value="0,0,0,10" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,250 @@
+﻿<UserControl
+    x:Class="QuanLyKhuCachLy.CustomUserControl.QuarantineRoom"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utility="clr-namespace:QuanLyKhuCachLy.Utility"
+    d:DesignHeight="450"
+    d:DesignWidth="750"
+    mc:Ignorable="d">
+    <StackPanel Width="Auto" Margin="25,45,45,0">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Style="{StaticResource DashboardTitle}">
+                DANH SÁCH PHÒNG
+            </TextBlock>
+            <Button
+                Grid.Column="1"
+                Width="170"
+                Height="32"
+                Margin="0,20,0,0"
+                HorizontalAlignment="Right"
+                Content="Thêm phòng"
+                FontSize="12"
+                PreviewMouseDown="Button_PreviewMouseDown"
+                Style="{StaticResource DashboardButton}">
+                <Button.ContextMenu>
+                    <ContextMenu>
+                        <ContextMenu.Template>
+                            <ControlTemplate>
+                                <local:AddRoomFunctionMenu />
+                            </ControlTemplate>
+                        </ContextMenu.Template>
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
+        </Grid>
+
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+
+
+            <StackPanel
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="0,15,24,0"
+                VerticalAlignment="Bottom">
+                <TextBlock
+                    Margin="0,0,0,0"
+                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                    FontSize="16"
+                    Foreground="#FF434A54">
+                    Nhập bất kì để tìm kiếm
+                </TextBlock>
+                <TextBox
+                    Width="300"
+                    Height="40"
+                    Margin="0,8,0,0"
+                    Padding="10,8,8,10"
+                    HorizontalAlignment="Left"
+                    materialDesign:HintAssist.Hint="Tên, CMND,...."
+                    materialDesign:TextFieldAssist.HasTrailingIcon="True"
+                    materialDesign:TextFieldAssist.TrailingIcon="Search"
+                    MaxLength="20"
+                    Style="{StaticResource TextInputField}">
+                    <TextBox.Text>
+                        <Binding
+                            Mode="TwoWay"
+                            Path="SearchKey"
+                            UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules />
+                        </Binding>
+                    </TextBox.Text>
+
+                </TextBox>
+            </StackPanel>
+
+
+            <StackPanel
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="0,25,0,0"
+                VerticalAlignment="Bottom">
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal">
+                    <materialDesign:PackIcon
+                        VerticalAlignment="Center"
+                        Foreground="#FF434A54"
+                        Kind="FilterOutline" />
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        Foreground="#FF434A54">
+                        Lọc theo
+                    </TextBlock>
+                </StackPanel>
+                <ComboBox
+                    Padding="10,8,8,10"
+                    ItemsSource="{Binding FilterType}"
+                    Style="{StaticResource ComboBoxField}">
+
+                    <ComboBox.SelectedItem>
+                        <Binding Path="SelectedFilterType" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules />
+                        </Binding>
+                    </ComboBox.SelectedItem>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel
+                Grid.Row="0"
+                Grid.Column="2"
+                Margin="24,25,0,0"
+                VerticalAlignment="Bottom">
+                <TextBlock
+                    Margin="5,0,0,5"
+                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                    FontSize="16"
+                    Foreground="#FF434A54">
+                    Bộ lọc
+                </TextBlock>
+                <ComboBox
+                    Padding="10,8,8,10"
+                    ItemsSource="{Binding FilterProperty}"
+                    Style="{StaticResource ComboBoxField}">
+
+                    <ComboBox.SelectedItem>
+                        <Binding Path="SelectedFilterProperty" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules />
+                        </Binding>
+                    </ComboBox.SelectedItem>
+                </ComboBox>
+            </StackPanel>
+
+        </Grid>
+
+        <DataGrid
+            Height="430"
+            Margin="0,20,0,20"
+            materialDesign:DataGridAssist.CornerRadius="10"
+            AutoGenerateColumns="False"
+            CanUserAddRows="False"
+            CanUserReorderColumns="False"
+            CanUserResizeColumns="True"
+            CanUserResizeRows="False"
+            IsReadOnly="True"
+            ItemsSource="{Binding RoomListView}"
+            LoadingRow="DataGrid_LoadingRow"
+            SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+            SelectionMode="Single"
+            SelectionUnit="FullRow">
+            <DataGrid.Columns>
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=Header}"
+                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                    ElementStyle="{StaticResource DataGridElement}"
+                    Header="STT"
+                    HeaderStyle="{StaticResource DataGridHeader}"
+                    MaxLength="10" />
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding displayName}"
+                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                    ElementStyle="{StaticResource DataGridElement}"
+                    Header="Tên"
+                    HeaderStyle="{StaticResource DataGridHeader}"
+                    MaxLength="30" />
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding capacity}"
+                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                    ElementStyle="{StaticResource DataGridElement}"
+                    Header="Sức chứa"
+                    HeaderStyle="{StaticResource DataGridHeader}"
+                    MaxLength="30" />
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding Severity.description}"
+                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                    ElementStyle="{StaticResource DataGridElement}"
+                    Header="Nhóm đối tượng"
+                    HeaderStyle="{StaticResource DataGridHeader}"
+                    MaxLength="30" />
+                <DataGridTemplateColumn
+                    Width="*"
+                    HeaderStyle="{StaticResource DataGridButtonHeader}"
+                    IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button HorizontalAlignment="Right" Style="{StaticResource DataGridButton}">
+                                <materialDesign:PackIcon
+                                    Width="16"
+                                    Height="16"
+                                    Kind="DotsHorizontal" />
+                                <Button.ContextMenu>
+                                    <ContextMenu>
+                                        <ContextMenu.Template>
+                                            <ControlTemplate>
+                                                <local:QuarantineRoomFunctionMenu />
+                                            </ControlTemplate>
+                                        </ContextMenu.Template>
+                                    </ContextMenu>
+                                </Button.ContextMenu>
+
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid>
+            <Button
+                Width="Auto"
+                Height="Auto"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                materialDesign:ButtonAssist.CornerRadius="5"
+                BorderBrush="#FF434a54"
+                Command="{Binding ToExportExcel}"
+                Style="{StaticResource MenuButton}">
+                <StackPanel Margin="8,2" Orientation="Horizontal">
+                    <materialDesign:PackIcon
+                        Margin="0,0,8,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="#FF434a54"
+                        Kind="FileExcelOutline" />
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="12"
+                        FontWeight="Bold"
+                        Foreground="#FF434a54"
+                        Text="XUẤT DANH SÁCH" />
+                </StackPanel>
+            </Button>
+        </Grid>
+    </StackPanel>
+</UserControl>

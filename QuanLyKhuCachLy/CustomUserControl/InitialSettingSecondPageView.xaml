@@ -1,0 +1,184 @@
+﻿<UserControl
+    x:Class="QuanLyKhuCachLy.CustomUserControl.InitialSettingSecondPageView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vr="clr-namespace:QuanLyKhuCachLy.ValidationRules"
+    d:DesignHeight="740"
+    d:DesignWidth="1225"
+    mc:Ignorable="d">
+    <StackPanel Margin="0,0,0,0">
+        <TextBlock
+            Margin="0,32,0,0"
+            HorizontalAlignment="Center"
+            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+            FontSize="32"
+            FontWeight="Bold">
+            Thiết lập thông tin khu cách ly
+        </TextBlock>
+        <TextBlock
+            Margin="0,2,0,0"
+            HorizontalAlignment="Center"
+            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+            FontSize="18">
+            Cơ sở dữ liệu khu cách ly chưa được khởi tạo, vui lòng điền thông tin bên dưới để khởi tạo.
+        </TextBlock>
+        <Grid Margin="80,15,80,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="553.6" />
+                <ColumnDefinition Width="Auto" MinWidth="924.8" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Margin="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0">
+                    <TextBlock
+                        Margin="0,0,0,0"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="18"
+                        FontWeight="Bold"
+                        Foreground="#FF434A54"
+                        Text="Quy định mức độ (nhóm đối tượng)" />
+                    <Separator Margin="0,5,24,2">
+                        <Separator.RenderTransform>
+                            <ScaleTransform ScaleY="2" />
+                        </Separator.RenderTransform>
+                    </Separator>
+                </StackPanel>
+                <DataGrid
+                    Grid.Row="1"
+                    Height="460"
+                    Margin="0,20,23,0"
+                    materialDesign:DataGridAssist.CornerRadius="10"
+                    AutoGenerateColumns="False"
+                    CanUserAddRows="False"
+                    CanUserReorderColumns="False"
+                    CanUserResizeColumns="False"
+                    CanUserResizeRows="False"
+                    DataContext="{StaticResource SeverityVM}"
+                    ItemsSource="{Binding ListSeverity}"
+                    SelectedItem="{Binding SelectedItem}">
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="CellEditEnding">
+                            <i:InvokeCommandAction Command="{Binding EditSeverityCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                    <DataGrid.Columns>
+                        <materialDesign:DataGridTextColumn
+                            Width="150"
+                            Binding="{Binding level, UpdateSourceTrigger=PropertyChanged}"
+                            EditingElementStyle="{StaticResource EditingDataGridElement}"
+                            ElementStyle="{StaticResource DataGridElement}"
+                            Header="Mức độ"
+                            HeaderStyle="{StaticResource DataGridHeader}"
+                            MaxLength="10" />
+
+                        <materialDesign:DataGridTextColumn
+                            Width="250"
+                            Binding="{Binding description, UpdateSourceTrigger=PropertyChanged}"
+                            EditingElementStyle="{StaticResource EditingDataGridElement}"
+                            ElementStyle="{StaticResource DataGridElement}"
+                            Header="Mô tả"
+                            HeaderStyle="{StaticResource DataGridHeader}"
+                            MaxLength="30" />
+
+                        <DataGridTemplateColumn
+                            Width="150"
+                            CellStyle="{StaticResource DataGridCellElement}"
+                            HeaderStyle="{StaticResource DataGridButtonHeader}"
+                            IsReadOnly="True">
+                            <DataGridTemplateColumn.Header>
+                                <Button
+                                    HorizontalAlignment="Right"
+                                    Command="{Binding AddSeverityCommand}"
+                                    DataContext="{StaticResource SeverityVM}">
+                                    <materialDesign:PackIcon
+                                        Width="16"
+                                        Height="16"
+                                        Kind="Add" />
+                                    <Button.Style>
+                                        <Style BasedOn="{StaticResource MaterialDesignIconButton}" TargetType="{x:Type Button}">
+                                            <Setter Property="Width" Value="18" />
+                                            <Setter Property="Height" Value="18" />
+                                            <Setter Property="Foreground" Value="#FF363636" />
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button
+                                        HorizontalAlignment="Right"
+                                        Command="{Binding RemoveSeverityCommand}"
+                                        CommandParameter="{Binding}"
+                                        DataContext="{StaticResource SeverityVM}"
+                                        Style="{StaticResource DataGridButtonDelete}">
+                                        <materialDesign:PackIcon
+                                            Width="16"
+                                            Height="16"
+                                            Kind="Delete" />
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+            <Grid
+                Grid.Column="1"
+                Width="511"
+                Height="141.6"
+                Margin="0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0">
+                    <TextBlock
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="18"
+                        FontWeight="Bold"
+                        Foreground="#FF434A54"
+                        TextWrapping="Wrap">
+                        Hướng dẫn
+                    </TextBlock>
+                    <TextBlock
+                        Margin="0,0,24,0"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        Foreground="#FF434A54"
+                        TextWrapping="Wrap">
+                        Nhấn nút hình chữ thập ở bên phải ngoài cùng của dòng đầu tiên để thêm một dòng vào danh sách bên trái (tương ứng với một mức độ).
+                    </TextBlock>
+                    <TextBlock
+                        Margin="0,0,24,0"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        Foreground="#FF434A54"
+                        TextWrapping="Wrap">
+                        Nhấn đúp vào ô trong bảng bên trái để chỉnh sửa mức độ.
+                    </TextBlock>
+                    <TextBlock
+                        Margin="0,0,24,0"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        Foreground="#FF434A54"
+                        TextWrapping="Wrap">
+                        Ví dụ: Mức độ = 1, mô tả = F1; Mức độ = 2, mô tả = F0.
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </StackPanel>
+</UserControl>

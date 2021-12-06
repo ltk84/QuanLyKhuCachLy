@@ -1,8 +1,11 @@
-﻿<Application x:Class="QuanLyKhuCachLy.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:QuanLyKhuCachLy"
-             StartupUri="MainWindow.xaml">
+﻿<Application
+    x:Class="QuanLyKhuCachLy.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:userControl="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:viewModel="clr-namespace:QuanLyKhuCachLy.ViewModel"
+    ShutdownMode="OnMainWindowClose"
+    StartupUri="MainScreen.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -10,8 +13,54 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
-                <ResourceDictionary Source="/ResourceXAML/MainResource.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/Generic.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/MaterialDesignLightTheme.xaml" />
+                <ResourceDictionary Source="/ResourceXAML/MainResource.xaml" />
+                <ResourceDictionary Source="/ResourceXAML/SectionButtonTemplate.xaml" />
+                <ResourceDictionary Source="/ResourceXAML/DashboardContentTemplate.xaml" />
+                <ResourceDictionary Source="/ResourceXAML/InputTemplate.xaml" />
+                <ResourceDictionary Source="/ResourceXAML/ListInfomationTemplate.xaml" />
+                <ResourceDictionary Source="/ResourceXAML/ModifiActionTemplate.xaml" />
+                <ResourceDictionary Source="/ResourceXAML/TableTemplate.xaml" />
+                <ResourceDictionary Source="/ResourceXAML/TabControlTemplate.xaml" />
+
+
+                <ResourceDictionary Source="/ResourceXAML/DataGridTemplate.xaml" />
+                <ResourceDictionary Source="/ResourceXAML/FunctionMenuTemplate.xaml" />
+                <ResourceDictionary Source="/ResourceXAML/ConfirmationTemplate.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <Style TargetType="ComboBoxItem">
+                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+            </Style>
+
+            <DataTemplate DataType="{x:Type viewModel:DashboardViewModel}">
+                <userControl:Dashboard />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:StaffViewModel}">
+                <userControl:StaffWrapperTab />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:QuarantineRoomViewModel}">
+                <userControl:QuarantineRoomWrapperTab />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:QuarantinePersonViewModel}">
+                <userControl:QuarantinePersonWrapperTab />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:ReportViewModel}">
+                <userControl:StatisticWrapper />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:NotificationViewModel}">
+                <userControl:NotificationScreenWrapper />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:SettingViewModel}">
+                <userControl:SettingQuarantineArea />
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

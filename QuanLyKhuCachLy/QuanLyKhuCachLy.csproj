@@ -16,6 +16,22 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\PC\Downloads\ALO\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -37,14 +53,78 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dragablz, Version=0.0.3.223, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dragablz.0.0.3.223\lib\net45\Dragablz.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FontAwesome.WPF, Version=4.7.0.37774, Culture=neutral, PublicKeyToken=0758b07a11a4f466, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.WPF.4.7.0.9\lib\net40\FontAwesome.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.55.0\lib\net45\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.55.0\lib\net461\Google.Apis.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.55.0\lib\net461\Google.Apis.Auth.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Core.1.55.0\lib\net45\Google.Apis.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.55.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Sheets.v4, Version=1.55.0.2371, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Sheets.v4.1.55.0.2371\lib\net45\Google.Apis.Sheets.v4.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=2.0.3.2, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.2.0.3\lib\net452\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignExtensions, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c5ebccebe084d64f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignExtensions.3.3.0\lib\net45\MaterialDesignExtensions.dll</HintPath>
     </Reference>
     <Reference Include="MaterialDesignThemes.Wpf, Version=4.2.1.2, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.4.2.1\lib\net452\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=1.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.1.1.2\lib\net451\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.1.2\lib\net451\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.1.2\lib\net451\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -53,6 +133,9 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Twilio, Version=5.68.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Twilio.5.68.1\lib\net451\Twilio.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -63,21 +146,702 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converter\DateTimeToStringConverter.cs" />
+    <Compile Include="Converter\IntToStringConverter.cs" />
+    <Compile Include="Converter\TestResultToBoolConverter.cs" />
+    <Compile Include="CustomUserControl\ActionConfirmation.xaml.cs">
+      <DependentUpon>ActionConfirmation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\AddDestinationHistory.xaml.cs">
+      <DependentUpon>AddDestinationHistory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\AddDestinationHistoryPersonInRoom.xaml.cs">
+      <DependentUpon>AddDestinationHistoryPersonInRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\AddNewNotificationTemplate.xaml.cs">
+      <DependentUpon>AddNewNotificationTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\AddPersonFunctionMenu.xaml.cs">
+      <DependentUpon>AddPersonFunctionMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\AddQuarantinedPersonFouthPage.xaml.cs">
+      <DependentUpon>AddQuarantinedPersonFouthPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\AddRoomFunctionMenu.xaml.cs">
+      <DependentUpon>AddRoomFunctionMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\AddStaffFirstScreen.xaml.cs">
+      <DependentUpon>AddStaffFirstScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\AddStaffFunctionMenu.xaml.cs">
+      <DependentUpon>AddStaffFunctionMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\AddStaffScreen.xaml.cs">
+      <DependentUpon>AddStaffScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\AddStaffSecondScreen.xaml.cs">
+      <DependentUpon>AddStaffSecondScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\ArrangeRoomRecommendation.xaml.cs">
+      <DependentUpon>ArrangeRoomRecommendation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\BufferWindow.xaml.cs">
+      <DependentUpon>BufferWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\DestinationHistoryFunctionMenu.xaml.cs">
+      <DependentUpon>DestinationHistoryFunctionMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditAuthenticationAccount.xaml.cs">
+      <DependentUpon>EditAuthenticationAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditDestinationHistory.xaml.cs">
+      <DependentUpon>EditDestinationHistory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditDestinationHistoryPersonInRoom.xaml.cs">
+      <DependentUpon>EditDestinationHistoryPersonInRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditNotificationTemplateWindown.xaml.cs">
+      <DependentUpon>EditNotificationTemplateWindown.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditQuarantineArea.xaml.cs">
+      <DependentUpon>EditQuarantineArea.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditQuarantineAreaFirstPage.xaml.cs">
+      <DependentUpon>EditQuarantineAreaFirstPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditQuarantineAreaSecondPage.xaml.cs">
+      <DependentUpon>EditQuarantineAreaSecondPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditQuarantinedPersonFouthPage.xaml.cs">
+      <DependentUpon>EditQuarantinedPersonFouthPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditQuarantinedPersonInformation.xaml.cs">
+      <DependentUpon>EditQuarantinedPersonInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditQuarantinedPersonInformationFisrtPage.xaml.cs">
+      <DependentUpon>EditQuarantinedPersonInformationFisrtPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditQuarantinedPersonInformationSecondPage.xaml.cs">
+      <DependentUpon>EditQuarantinedPersonInformationSecondPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditQuarantinedPersonInformationThirdPage.xaml.cs">
+      <DependentUpon>EditQuarantinedPersonInformationThirdPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditQuarantinePersonInRoom.xaml.cs">
+      <DependentUpon>EditQuarantinePersonInRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditQuarantinePersonInRoomFirstPage.xaml.cs">
+      <DependentUpon>EditQuarantinePersonInRoomFirstPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditQuarantinePersonInRoomFourthPage.xaml.cs">
+      <DependentUpon>EditQuarantinePersonInRoomFourthPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditQuarantinePersonInRoomSecondPage.xaml.cs">
+      <DependentUpon>EditQuarantinePersonInRoomSecondPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditQuarantinePersonInRoomThirdPage.xaml.cs">
+      <DependentUpon>EditQuarantinePersonInRoomThirdPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditStaffFirstScreen.xaml.cs">
+      <DependentUpon>EditStaffFirstScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditStaffScreen.xaml.cs">
+      <DependentUpon>EditStaffScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditStaffSecondScreen.xaml.cs">
+      <DependentUpon>EditStaffSecondScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\FailNotification.xaml.cs">
+      <DependentUpon>FailNotification.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\LoadingIndicator.xaml.cs">
+      <DependentUpon>LoadingIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\NotificationPeopleList.xaml.cs">
+      <DependentUpon>NotificationPeopleList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\NotificationScreen.xaml.cs">
+      <DependentUpon>NotificationScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\NotificationScreenTemplateManage.xaml.cs">
+      <DependentUpon>NotificationScreenTemplateManage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\NotificationScreenWrapper.xaml.cs">
+      <DependentUpon>NotificationScreenWrapper.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\ProposeNotification.xaml.cs">
+      <DependentUpon>ProposeNotification.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\QuarantinePersonInRoomFunctionMenu.xaml.cs">
+      <DependentUpon>QuarantinePersonInRoomFunctionMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\QuarantinePersonInRoomInformation.xaml.cs">
+      <DependentUpon>QuarantinePersonInRoomInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\QuarantinePersonInRoomInformationFirstPage.xaml.cs">
+      <DependentUpon>QuarantinePersonInRoomInformationFirstPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\QuarantinePersonInRoomInformationSecondPage.xaml.cs">
+      <DependentUpon>QuarantinePersonInRoomInformationSecondPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\QuarantinePersonWrapperTab.xaml.cs">
+      <DependentUpon>QuarantinePersonWrapperTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\QuarantineRoomFunctionMenu.xaml.cs">
+      <DependentUpon>QuarantineRoomFunctionMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\QuarantineRoomWrapperTab.xaml.cs">
+      <DependentUpon>QuarantineRoomWrapperTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\SettingQuarantineArea.xaml.cs">
+      <DependentUpon>SettingQuarantineArea.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\StatisticFirstTab.xaml.cs">
+      <DependentUpon>StatisticFirstTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\StatisticSecondTab.xaml.cs">
+      <DependentUpon>StatisticSecondTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\StatisticThirdTab.xaml.cs">
+      <DependentUpon>StatisticThirdTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\StatisticWrapper.xaml.cs">
+      <DependentUpon>StatisticWrapper.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\StaffFunctionMenu.xaml.cs">
+      <DependentUpon>StaffFunctionMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\SuccessNotification.xaml.cs">
+      <DependentUpon>SuccessNotification.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\UpdatePersonListOfRoom.xaml.cs">
+      <DependentUpon>UpdatePersonListOfRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InitialSettingScreen.xaml.cs">
+      <DependentUpon>InitialSettingScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Account.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Address.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DataProvider.cs" />
+    <Compile Include="MainScreen.xaml.cs">
+      <DependentUpon>MainScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\QuarantineRoomInfomation.xaml.cs">
+      <DependentUpon>QuarantineRoomInfomation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\AddQuarantinedPerson.xaml.cs">
+      <DependentUpon>AddQuarantinedPerson.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\AddQuarantinedPersonFirstPage.xaml.cs">
+      <DependentUpon>AddQuarantinedPersonFirstPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\AddQuarantinedPersonSecondPage.xaml.cs">
+      <DependentUpon>AddQuarantinedPersonSecondPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\AddQuarantinedPersonThirdPage.xaml.cs">
+      <DependentUpon>AddQuarantinedPersonThirdPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\ListQuarantinedPerson.xaml.cs">
+      <DependentUpon>ListQuarantinedPerson.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\QuarantinedPersonInformation.xaml.cs">
+      <DependentUpon>QuarantinedPersonInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\QuarantinedPersonInformationFirstPage.xaml.cs">
+      <DependentUpon>QuarantinedPersonInformationFirstPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\QuarantinedPersonInformationSecondPage.xaml.cs">
+      <DependentUpon>QuarantinedPersonInformationSecondPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\StaffDetailInfomation.xaml.cs">
+      <DependentUpon>StaffDetailInfomation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\StaffList.xaml.cs">
+      <DependentUpon>StaffList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\AddRoom.xaml.cs">
+      <DependentUpon>AddRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\DeleteConfirmation.xaml.cs">
+      <DependentUpon>DeleteConfirmation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\EditRoom.xaml.cs">
+      <DependentUpon>EditRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\InitialSettingSecondPageView.xaml.cs">
+      <DependentUpon>InitialSettingSecondPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\StaffWrapperTab.xaml.cs">
+      <DependentUpon>StaffWrapperTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DestinationHistory.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DISTRICT.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\HealthInformation.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\InjectionRecord.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\NATION.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\NotificationTemplate.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PROVINCE.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\QuarantineArea.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\QuarantinePerson.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\QuarantineRoom.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Severity.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Staff.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TestingResult.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\WARD.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\ProtocolSettingsLayout.cs" />
+    <Compile Include="ValidationRules\DateFormat.cs" />
+    <Compile Include="CustomUserControl\QuarantinePersonFunctionMenu.xaml.cs">
+      <DependentUpon>QuarantinePersonFunctionMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\QuarantineRoom.xaml.cs">
+      <DependentUpon>QuarantineRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ValidationRules\NoSpecialChar.cs" />
+    <Compile Include="ValidationRules\NumberField.cs" />
+    <Compile Include="ValidationRules\OnlyNumber.cs" />
+    <Compile Include="ValidationRules\RequiredField.cs" />
+    <Compile Include="ValidationRules\RequiredFieldNonCommit.cs" />
+    <Compile Include="ViewModel\ActionConfirmationViewModel.cs" />
+    <Compile Include="ViewModel\ArrangeRoomRecommendationViewModel.cs" />
+    <Compile Include="ViewModel\AddressViewModel.cs" />
+    <Compile Include="ViewModel\DashboardViewModel.cs" />
+    <Compile Include="CustomUserControl\Dashboard.xaml.cs">
+      <DependentUpon>Dashboard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\DeleteConfirmationViewModel.cs" />
+    <Compile Include="ViewModel\DestinationHistoryViewModel.cs" />
+    <Compile Include="ViewModel\FailNotificationViewModel.cs" />
+    <Compile Include="ViewModel\InjectionRecordViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Page Include="MainWindow.xaml">
+    <Compile Include="ViewModel\NationViewModel.cs" />
+    <Compile Include="ViewModel\NotificationViewModel.cs" />
+    <Compile Include="ViewModel\ProposeNotificationViewModel.cs" />
+    <Compile Include="ViewModel\QuarantineAreaInformationViewModel.cs" />
+    <Compile Include="AuthenticationScreen.xaml.cs">
+      <DependentUpon>AuthenticationScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\InitialSettingFirstPageView.xaml.cs">
+      <DependentUpon>InitialSettingFirstPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\InitialSettingThirdPageView.xaml.cs">
+      <DependentUpon>InitialSettingThirdPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\InitialSettingFourthPageView.xaml.cs">
+      <DependentUpon>InitialSettingFourthPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\QuarantinePersonInRoomViewModel.cs" />
+    <Compile Include="ViewModel\QuarantinePersonViewModel.cs" />
+    <Compile Include="ViewModel\QuarantineRoomViewModel.cs" />
+    <Compile Include="ViewModel\ReportViewModel.cs" />
+    <Compile Include="ViewModel\SettingViewModel.cs" />
+    <Compile Include="ViewModel\SeverityViewModel.cs" />
+    <Compile Include="ViewModel\StaffViewModel.cs" />
+    <Compile Include="ViewModel\TestingResultViewModel.cs" />
+    <Page Include="CustomUserControl\ActionConfirmation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\AddDestinationHistory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\AddDestinationHistoryPersonInRoom.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomUserControl\AddNewNotificationTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\AddPersonFunctionMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\AddQuarantinedPersonFouthPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\AddRoomFunctionMenu.xaml" />
+    <Page Include="CustomUserControl\AddStaffFirstScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\AddStaffFunctionMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\AddStaffScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\AddStaffSecondScreen.xaml" />
+    <Page Include="CustomUserControl\ArrangeRoomRecommendation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\BufferWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\DestinationHistoryFunctionMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomUserControl\EditAuthenticationAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\EditDestinationHistory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomUserControl\EditDestinationHistoryPersonInRoom.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomUserControl\EditNotificationTemplateWindown.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\EditQuarantineArea.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\EditQuarantineAreaFirstPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\EditQuarantineAreaSecondPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\EditQuarantinedPersonFouthPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\EditQuarantinedPersonInformation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\EditQuarantinedPersonInformationFisrtPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\EditQuarantinedPersonInformationSecondPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\EditQuarantinedPersonInformationThirdPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\EditQuarantinePersonInRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\EditQuarantinePersonInRoomFirstPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\EditQuarantinePersonInRoomFourthPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomUserControl\EditQuarantinePersonInRoomSecondPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\EditQuarantinePersonInRoomThirdPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\EditStaffFirstScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\EditStaffScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\EditStaffSecondScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\FailNotification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\LoadingIndicator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\NotificationPeopleList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\NotificationScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\NotificationScreenTemplateManage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\NotificationScreenWrapper.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\ProposeNotification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\QuarantinePersonInRoomFunctionMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\QuarantinePersonInRoomInformation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\QuarantinePersonInRoomInformationFirstPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\SettingQuarantineArea.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\StatisticFirstTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\StatisticSecondTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\StatisticThirdTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\StatisticWrapper.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\StaffFunctionMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\SuccessNotification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\QuarantinePersonInRoomInformationSecondPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\QuarantinePersonWrapperTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\QuarantineRoomFunctionMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\QuarantineRoomWrapperTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\UpdatePersonListOfRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InitialSettingScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Page Include="ResourceXAML\ConfirmationTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceXAML\DashboardContentTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceXAML\DataGridTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceXAML\FunctionMenuTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceXAML\InputTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceXAML\ListInfomationTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ResourceXAML\MainResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AuthenticationScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceXAML\ModifiActionTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceXAML\SectionButtonTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceXAML\TabControlTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceXAML\TableTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\AddQuarantinedPerson.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\AddQuarantinedPersonFirstPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\AddQuarantinedPersonSecondPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\AddQuarantinedPersonThirdPage.xaml">
+    </Page>
+    <Page Include="CustomUserControl\AddRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\Dashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\DeleteConfirmation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\EditRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\InitialSettingFirstPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\InitialSettingSecondPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\InitialSettingThirdPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\QuarantineRoomInfomation.xaml">
+    </Page>
+    <Page Include="CustomUserControl\ListQuarantinedPerson.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\QuarantinedPersonInformation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\QuarantinedPersonInformationFirstPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\QuarantinedPersonInformationSecondPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\StaffDetailInfomation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\StaffList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\InitialSettingFourthPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\StaffWrapperTab.xaml" />
+    <Page Include="CustomUserControl\QuarantinePersonFunctionMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\QuarantineRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -100,17 +864,149 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="credentials.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <EntityDeploy Include="Model\DataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\DataModel.edmx.diagram">
+      <DependentUpon>DataModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Resources\fonts\NotoSans-Black.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\fonts\NotoSans-BlackItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\fonts\NotoSans-Bold.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\fonts\NotoSans-BoldItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\fonts\NotoSans-Italic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\fonts\NotoSans-Regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\fonts\Baloo-Regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
+    <Resource Include="Resources\icons\complete-icon.png" />
+    <Resource Include="Resources\icons\delete-white-icon.png" />
+    <Resource Include="Resources\icons\empty-icon.png" />
+    <Resource Include="Resources\icons\add-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons\auth.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\logo\logo_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons\dashboard.png" />
+    <Resource Include="Resources\icons\dashboard_selected.png" />
+    <Resource Include="Resources\icons\person.png" />
+    <Resource Include="Resources\icons\room.png" />
+    <Resource Include="Resources\icons\staff.png" />
+    <Resource Include="Resources\icons\stat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons\notify.png" />
+    <Resource Include="Resources\icons\delete-icon.png" />
+    <Resource Include="Resources\icons\edit-icon.png" />
+    <Resource Include="Resources\icons\plus-icon.png" />
+    <Resource Include="Resources\icons\tick-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons\notify_selected.png" />
+    <Resource Include="Resources\icons\person_selected.png" />
+    <Resource Include="Resources\icons\room_selected.png" />
+    <Resource Include="Resources\icons\staff_selected.png" />
+    <Resource Include="Resources\icons\stat_selected.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons\setting.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\icons\setting_selected.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>9</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\logo\logo.png" />
+    <Resource Include="logo.ico" />
+    <Content Include="Model\DataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DataModel.edmx</DependentUpon>
+      <LastGenOutput>DataModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\DataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DataModel.edmx</DependentUpon>
+      <LastGenOutput>DataModel.cs</LastGenOutput>
+    </Content>
+    <Resource Include="Resources\logo\logo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.2.1\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.2.1\build\MaterialDesignThemes.targets')" />

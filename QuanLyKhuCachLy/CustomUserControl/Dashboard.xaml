@@ -1,0 +1,436 @@
+﻿<UserControl
+    x:Class="QuanLyKhuCachLy.CustomUserControl.Dashboard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="950"
+    d:DesignWidth="800"
+    DataContext="{StaticResource DashboardVM}"
+    mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Refresh}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid Margin="25,45,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="36*" />
+                <ColumnDefinition Width="8*" />
+                <ColumnDefinition Width="32*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Style="{StaticResource DashboardTitle}">
+                THỐNG KÊ CHUNG
+            </TextBlock>
+            <Button
+                Grid.Row="0"
+                Grid.Column="1"
+                Width="Auto"
+                Height="Auto"
+                Margin="0,0,-20,0"
+                HorizontalAlignment="Right"
+                Command="{Binding Refresh}"
+                Style="{StaticResource MenuButton}">
+                <materialDesign:PackIcon Kind="Sync" Style="{StaticResource MenuIcon}" />
+            </Button>
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="0,16,0,0"
+                Style="{StaticResource DashboardContent}">
+                Số người hiện đang cách ly:
+            </TextBlock>
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="1"
+                HorizontalAlignment="Right"
+                FontWeight="Bold"
+                Style="{StaticResource DashboardContent}"
+                Text="{Binding QuarantinePersonCount}" />
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="0,8,0,0"
+                Style="{StaticResource DashboardContent}">
+                Số người cách ly mới trong hôm nay:
+            </TextBlock>
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="1"
+                HorizontalAlignment="Right"
+                FontWeight="Bold"
+                Style="{StaticResource DashboardContent}"
+                Text="{Binding NewQuarantinePersonCount}" />
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="0"
+                Margin="0,8,0,0"
+                Style="{StaticResource DashboardContent}">
+                Số người dự kiến hoàn thành cách ly trong hôm nay:
+            </TextBlock>
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="1"
+                HorizontalAlignment="Right"
+                FontWeight="Bold"
+                Style="{StaticResource DashboardContent}"
+                Text="{Binding QPFinishCount}" />
+            <TextBlock
+                Grid.Row="4"
+                Grid.Column="0"
+                Margin="0,8,0,0"
+                Style="{StaticResource DashboardContent}">
+                Số người cách ly chưa có phòng:
+            </TextBlock>
+            <TextBlock
+                Grid.Row="4"
+                Grid.Column="1"
+                HorizontalAlignment="Right"
+                FontWeight="Bold"
+                Style="{StaticResource DashboardContent}"
+                Text="{Binding QPWithNoRoomCount}" />
+            <TextBlock
+                Grid.Row="7"
+                Grid.Column="0"
+                Margin="0,8,0,0"
+                Style="{StaticResource DashboardContent}">
+                Số giường trống:
+            </TextBlock>
+            <TextBlock
+                Grid.Row="7"
+                Grid.Column="1"
+                HorizontalAlignment="Right"
+                FontWeight="Bold"
+                Style="{StaticResource DashboardContent}"
+                Text="{Binding AvailableCapacity}" />
+            <Grid Grid.Row="0" Grid.Column="2">
+                <Button
+                    Width="168"
+                    Height="Auto"
+                    VerticalAlignment="Top"
+                    Command="{Binding DataContext.ToStatCommand, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=Window}}"
+                    Style="{StaticResource MenuButton}">
+                    <StackPanel Style="{StaticResource MenuStackPanel}">
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            FontSize="14"
+                            Style="{StaticResource MenuText}">
+                            Xem thống kê
+                        </TextBlock>
+                        <materialDesign:PackIcon
+                            Width="18"
+                            Height="18"
+                            Margin="4,0,0,0"
+                            Kind="NavigateNext"
+                            Style="{StaticResource MenuIcon}" />
+                    </StackPanel>
+                </Button>
+                <ComboBox
+                    Margin="12,0,32,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    ItemsSource="{Binding DashboardChartObjects}"
+                    SelectedItem="{Binding SelectedDashboardChartObject}"
+                    Style="{StaticResource UnderlineComboBox}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+            </Grid>
+            <Grid
+                Grid.Row="1"
+                Grid.RowSpan="3"
+                Grid.Column="2"
+                VerticalAlignment="Top"
+                Visibility="{Binding FirstChartVisibility}">
+                <lvc:CartesianChart
+                    x:Name="FirstReportChart"
+                    Margin="32,32,32,-200"
+                    LegendLocation="Bottom"
+                    Series="{Binding FirstSeriesCollection}">
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis Title="Thời gian" Labels="{Binding FirstLabels}" />
+                    </lvc:CartesianChart.AxisX>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis Title="Người" LabelFormatter="{Binding FirstChartFormatter}" />
+                    </lvc:CartesianChart.AxisY>
+                </lvc:CartesianChart>
+            </Grid>
+            <Grid
+                Grid.Row="1"
+                Grid.RowSpan="3"
+                Grid.Column="2"
+                VerticalAlignment="Top"
+                Visibility="{Binding SecondChartVisibility}">
+                <lvc:PieChart
+                    x:Name="SecondReportChart"
+                    Margin="32,0,32,-200"
+                    InnerRadius="45"
+                    LegendLocation="Bottom"
+                    Series="{Binding SecondSeriesCollection}" />
+            </Grid>
+
+            <Grid
+                Grid.Row="1"
+                Grid.RowSpan="3"
+                Grid.Column="2"
+                VerticalAlignment="Top"
+                Visibility="{Binding ThirdChartVisibility}">
+
+                <lvc:CartesianChart
+                    x:Name="ThirdReportChart"
+                    Margin="32,32,32,-200"
+                    LegendLocation="Bottom"
+                    Series="{Binding ThirdSeriesCollection}">
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis Title="Thời gian" Labels="{Binding ThirdLabels}" />
+                    </lvc:CartesianChart.AxisX>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis Title="Mẫu" LabelFormatter="{Binding ThirdChartFormatter}" />
+                    </lvc:CartesianChart.AxisY>
+                </lvc:CartesianChart>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1" Margin="0,45,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="12,0,0,5"
+                FontSize="24"
+                Style="{StaticResource DashboardTitle}">
+                Đề xuất
+            </TextBlock>
+            <ScrollViewer
+                Grid.Row="1"
+                Grid.Column="0"
+                Height="360"
+                VerticalAlignment="Top"
+                VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="10">
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=NonRecommendationField, Path=Visibility}" Value="Visible">
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=NonRecommendationField, Path=Visibility}" Value="Collapsed">
+                                    <DataTrigger.Setters>
+                                        <Setter Property="VerticalAlignment" Value="Top" />
+                                    </DataTrigger.Setters>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                    <StackPanel x:Name="NonRecommendationField" Visibility="{Binding NoneRecommendationVisibility}">
+                        <materialDesign:PackIcon
+                            Width="45"
+                            Height="45"
+                            HorizontalAlignment="Center"
+                            Foreground="#FF363636"
+                            Kind="FileOutline" />
+                        <TextBlock
+                            Margin="0,10,0,0"
+                            HorizontalAlignment="Center"
+                            FontSize="20"
+                            Style="{StaticResource DashboardTitle}">
+                            Trống
+                        </TextBlock>
+                        <TextBlock
+                            Margin="0,5,0,0"
+                            HorizontalAlignment="Center"
+                            FontSize="14"
+                            Style="{StaticResource DashboardContent}">
+                            Hiện tại không có thao tác nào được đề xuất.
+                        </TextBlock>
+                    </StackPanel>
+                    <Border Style="{StaticResource RecommendationField}" Visibility="{Binding FirstRecommendationVisibility}">
+                        <StackPanel Margin="40,25">
+                            <TextBlock
+                                FontSize="20"
+                                Style="{StaticResource DashboardTitle}"
+                                Text="{Binding FirstRecommendationTitle}" />
+                            <TextBlock
+                                Margin="0,5,0,0"
+                                FontSize="14"
+                                Style="{StaticResource DashboardContent}"
+                                Text="{Binding FirstRecommendationContent}" />
+                            <Button
+                                Width="218"
+                                Height="35"
+                                Margin="0,20,0,0"
+                                HorizontalAlignment="Right"
+                                Command="{Binding ToArrangeRoomRecommendation}"
+                                Content="Xem đề xuất sắp xếp phòng"
+                                FontSize="12"
+                                Style="{StaticResource DashboardButton}" />
+                        </StackPanel>
+                    </Border>
+                    <Border
+                        Margin="0,25,0,0"
+                        Style="{StaticResource RecommendationField}"
+                        Visibility="{Binding SecondRecommendationVisibility}">
+                        <StackPanel Margin="40,25">
+                            <TextBlock
+                                FontSize="20"
+                                Style="{StaticResource DashboardTitle}"
+                                Text="{Binding SecondRecommendationTitle}" />
+                            <TextBlock
+                                Margin="0,5,0,0"
+                                FontSize="14"
+                                Style="{StaticResource DashboardContent}"
+                                Text="{Binding SecondRecommendationContent}" />
+                            <Button
+                                Width="218"
+                                Height="35"
+                                Margin="0,20,0,0"
+                                HorizontalAlignment="Right"
+                                Command="{Binding ToGuideNotificationRecommendation}"
+                                Content="Xem đề xuất gửi thông báo"
+                                FontSize="12"
+                                Style="{StaticResource DashboardButton}" />
+                        </StackPanel>
+                    </Border>
+                    <Border
+                        Margin="0,25,0,0"
+                        Style="{StaticResource RecommendationField}"
+                        Visibility="{Binding ThirdRecommendationVisibility}">
+                        <StackPanel Margin="40,25">
+                            <TextBlock
+                                FontSize="20"
+                                Style="{StaticResource DashboardTitle}"
+                                Text="{Binding ThirdRecommendationTitle}" />
+                            <TextBlock
+                                Margin="0,5,0,0"
+                                FontSize="14"
+                                Style="{StaticResource DashboardContent}"
+                                Text="{Binding ThirdRecommendationContent}" />
+                            <Button
+                                Width="218"
+                                Height="35"
+                                Margin="0,20,0,0"
+                                HorizontalAlignment="Right"
+                                Command="{Binding ToFinishNotificationRecommendation}"
+                                Content="Xem đề xuất gửi thông báo"
+                                FontSize="12"
+                                Style="{StaticResource DashboardButton}" />
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+            <Border
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="24,10,32,0"
+                HorizontalAlignment="Right"
+                Background="#FFFAAC2D"
+                Style="{StaticResource RecommendationField}">
+                <StackPanel>
+                    <TextBlock
+                        Margin="0,15,0,0"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource DashboardHeader}">
+                        THAO TÁC NHANH
+                    </TextBlock>
+                    <Button
+                        DataContext="{StaticResource PersonVM}"
+                        PreviewMouseDown="Button_PreviewMouseDown"
+                        Style="{StaticResource FastButton}">
+                        <TextBlock
+                            Margin="16,0,16,0"
+                            VerticalAlignment="Bottom"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="14"
+                            FontWeight="Bold">
+                            Thêm người cách ly
+                        </TextBlock>
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <ContextMenu.Template>
+                                    <ControlTemplate>
+                                        <local:AddPersonFunctionMenu />
+                                    </ControlTemplate>
+                                </ContextMenu.Template>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+                    <Button
+                        DataContext="{StaticResource RoomVM}"
+                        PreviewMouseDown="Button_PreviewMouseDown1"
+                        Style="{StaticResource FastButton}">
+                        <TextBlock
+                            Margin="16,0,16,0"
+                            VerticalAlignment="Bottom"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="14"
+                            FontWeight="Bold">
+                            Thêm phòng
+                        </TextBlock>
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <ContextMenu.Template>
+                                    <ControlTemplate>
+                                        <local:AddRoomFunctionMenu />
+                                    </ControlTemplate>
+                                </ContextMenu.Template>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+                    <Button
+                        Command="{Binding ToAddTestingResutlFromExcel}"
+                        DataContext="{StaticResource PersonVM}"
+                        Style="{StaticResource FastButton}">
+                        <TextBlock
+                            Margin="16,0,16,0"
+                            VerticalAlignment="Bottom"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="14"
+                            FontWeight="Bold">
+                            Cập nhật xét nghiệm
+                        </TextBlock>
+                    </Button>
+                    <Button Style="{StaticResource FastButton}">
+                        <TextBlock
+                            Margin="16,0,16,0"
+                            VerticalAlignment="Bottom"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="14"
+                            FontWeight="Bold">
+                            Xử lý đổi phòng
+                        </TextBlock>
+                    </Button>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

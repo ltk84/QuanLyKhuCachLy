@@ -1,0 +1,134 @@
+﻿<UserControl
+    x:Class="QuanLyKhuCachLy.CustomUserControl.AddQuarantinedPersonFouthPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="520"
+    d:DesignWidth="800"
+    DataContext="{StaticResource PersonVM}"
+    mc:Ignorable="d">
+    <StackPanel>
+        <TextBlock
+            Margin="0,32,0,0"
+            HorizontalAlignment="Center"
+            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+            FontSize="24"
+            FontWeight="Bold">
+            Thêm người cách ly
+        </TextBlock>
+        <TextBlock
+            Margin="0,2,0,0"
+            HorizontalAlignment="Center"
+            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+            FontSize="16">
+            Vui lòng điền thông tin người cách ly
+        </TextBlock>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition SharedSizeGroup="A" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="A" />
+                    <ColumnDefinition SharedSizeGroup="A" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Grid.Column="0">
+                    <TextBlock
+                        Margin="30,5,0,0"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#FF434A54">
+                        Lịch sử di chuyển
+                    </TextBlock>
+                    <Separator Margin="30,5,0,2">
+                        <Separator.RenderTransform>
+                            <ScaleTransform ScaleY="1" />
+                        </Separator.RenderTransform>
+                    </Separator>
+                </StackPanel>
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="0,0,30,10"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Background="Transparent"
+                    Command="{Binding DestinationHistoryViewModel.ToAddCommand}"
+                    Foreground="Transparent"
+                    Template="{StaticResource plus-button}" />
+            </Grid>
+            <DataGrid
+                x:Name="travelHistory"
+                Grid.Row="1"
+                Grid.Column="0"
+                Height="280"
+                Margin="30,15,30,0"
+                materialDesign:DataGridAssist.CornerRadius="10"
+                AutoGenerateColumns="False"
+                CanUserAddRows="False"
+                CanUserReorderColumns="False"
+                CanUserResizeColumns="True"
+                CanUserResizeRows="False"
+                ItemsSource="{Binding DestinationHistoryViewModel.DestinationHistoryList}"
+                SelectedItem="{Binding DestinationHistoryViewModel.SelectedItem}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="70"
+                        Binding="{Binding dateArrive, StringFormat=dd-MM-yyyy}"
+                        EditingElementStyle="{StaticResource EditingDataGridElement}"
+                        ElementStyle="{StaticResource DataGridElement}"
+                        Header="Ngày"
+                        HeaderStyle="{StaticResource DataGridHeader}"
+                        IsReadOnly="True" />
+
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="250"
+                        Binding="{Binding displayAddress}"
+                        EditingElementStyle="{StaticResource EditingDataGridElement}"
+                        ElementStyle="{StaticResource DataGridElement}"
+                        Header="Địa điểm"
+                        HeaderStyle="{StaticResource DataGridHeader}" />
+                    <DataGridTemplateColumn
+                        Width="Auto"
+                        MinWidth="70"
+                        CellStyle="{StaticResource DataGridCellElement}"
+                        Header=""
+                        HeaderStyle="{StaticResource DataGridHeader}">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button HorizontalAlignment="Right" Style="{StaticResource DataGridButton}">
+                                    <materialDesign:PackIcon
+                                        Width="16"
+                                        Height="16"
+                                        Kind="DotsHorizontal" />
+                                    <Button.ContextMenu>
+                                        <ContextMenu>
+                                            <ContextMenu.Template>
+                                                <ControlTemplate>
+                                                    <!--<local:DestinationHistoryFunctionMenu />-->
+                                                </ControlTemplate>
+                                            </ContextMenu.Template>
+                                        </ContextMenu>
+                                    </Button.ContextMenu>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </StackPanel>
+</UserControl>

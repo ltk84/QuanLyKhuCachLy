@@ -1,0 +1,401 @@
+﻿<Window
+    x:Class="QuanLyKhuCachLy.CustomUserControl.ArrangeRoomRecommendation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Name="ArrangeRoomRecommendationWindow"
+    Width="1150"
+    Height="730"
+    AllowsTransparency="True"
+    Background="Transparent"
+    DataContext="{StaticResource ArrangeRoomRecommendationVM}"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding RefreshCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Viewbox>
+        <Border
+            Width="1280"
+            Height="810"
+            Margin="10"
+            Style="{StaticResource RecommendationField}">
+            <StackPanel>
+                <TextBlock
+                    Margin="0,36,0,0"
+                    HorizontalAlignment="Center"
+                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                    FontSize="32"
+                    FontWeight="Bold">
+                    Sắp xếp phòng cho người cách ly
+                </TextBlock>
+                <TextBlock
+                    Margin="0,2,0,0"
+                    HorizontalAlignment="Center"
+                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                    FontSize="18">
+                    Những người cách ly chưa có phòng đã được tự động đề xuất thêm vào các phòng còn trống
+                </TextBlock>
+                <Grid Margin="55,25,55,0" VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="2" Margin="15,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock
+                            Grid.Row="0"
+                            VerticalAlignment="Center"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="#FF434A54"><Run Text="Danh sách phòng được đề xuất" /></TextBlock>
+                        <DataGrid
+                            Grid.Row="1"
+                            Height="225"
+                            Margin="0,5,0,32"
+                            materialDesign:DataGridAssist.CornerRadius="10"
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            CanUserReorderColumns="False"
+                            CanUserResizeColumns="True"
+                            CanUserResizeRows="False"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding AvailableRooms}"
+                            SelectedItem="{Binding SelectedAvailableRoom}"
+                            SelectionMode="Single"
+                            SelectionUnit="FullRow">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding UpdatePersonsToAddToRoomCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <DataGrid.Columns>
+                                <materialDesign:DataGridTextColumn
+                                    Width="Auto"
+                                    Binding="{Binding displayName}"
+                                    ElementStyle="{StaticResource DataGridElement}"
+                                    Header="Tên"
+                                    HeaderStyle="{StaticResource DataGridHeader}"
+                                    IsReadOnly="True" />
+                                <materialDesign:DataGridTextColumn
+                                    Width="Auto"
+                                    Binding="{Binding capacity}"
+                                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                                    ElementStyle="{StaticResource DataGridElement}"
+                                    Header="Sức chứa"
+                                    HeaderStyle="{StaticResource DataGridHeader}" />
+                                <materialDesign:DataGridTextColumn
+                                    Width="Auto"
+                                    Binding="{Binding Severity.description}"
+                                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                                    ElementStyle="{StaticResource DataGridElement}"
+                                    Header="Nhóm đối tượng"
+                                    HeaderStyle="{StaticResource DataGridHeader}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <TextBlock
+                            Grid.Row="2"
+                            VerticalAlignment="Center"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="#FF434A54"><Run Text="Danh sách người chưa có phòng" /></TextBlock>
+                        <DataGrid
+                            Grid.Row="3"
+                            Height="225"
+                            Margin="0,5,0,20"
+                            materialDesign:DataGridAssist.CornerRadius="10"
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            CanUserReorderColumns="False"
+                            CanUserResizeColumns="True"
+                            CanUserResizeRows="False"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding PersonsWithNoRoom}"
+                            SelectedItem="{Binding SelectedPersonWithNoRoom}"
+                            SelectionMode="Single"
+                            SelectionUnit="FullRow">
+
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn
+                                    Width="Auto"
+                                    CellStyle="{StaticResource DataGridCellElement}"
+                                    Header=""
+                                    HeaderStyle="{StaticResource DataGridHeader}">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button
+                                                Width="20"
+                                                Height="20"
+                                                HorizontalAlignment="Right"
+                                                Command="{Binding AddPersonToRoomCommand, Source={StaticResource ArrangeRoomRecommendationVM}}"
+                                                Style="{StaticResource DataGridButtonDelete}">
+                                                <materialDesign:PackIcon
+                                                    Width="20"
+                                                    Height="20"
+                                                    Kind="ArrowLeftBoldBox" />
+                                            </Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <materialDesign:DataGridTextColumn
+                                    Width="Auto"
+                                    Binding="{Binding name}"
+                                    ElementStyle="{StaticResource DataGridElement}"
+                                    Header="Họ và tên"
+                                    HeaderStyle="{StaticResource DataGridHeader}"
+                                    IsReadOnly="True" />
+                                <materialDesign:DataGridTextColumn
+                                    Width="Auto"
+                                    Binding="{Binding dateOfBirth, StringFormat=dd-MM-yyyy}"
+                                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                                    ElementStyle="{StaticResource DataGridElement}"
+                                    Header="Ngày sinh"
+                                    HeaderStyle="{StaticResource DataGridHeader}" />
+                                <materialDesign:DataGridTextColumn
+                                    Width="Auto"
+                                    Binding="{Binding Severity.description}"
+                                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                                    ElementStyle="{StaticResource DataGridElement}"
+                                    Header="Nhóm đối tượng"
+                                    HeaderStyle="{StaticResource DataGridHeader}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                    <StackPanel
+                        Grid.Column="1"
+                        Margin="0,0,0,100"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom">
+                        <TextBlock
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="10"
+                            Foreground="#FF434A54"
+                            TextWrapping="Wrap">
+                            Tất cả
+                        </TextBlock>
+                        <Button
+                            Width="24"
+                            Height="24"
+                            Margin="0,5,0,0"
+                            Command="{Binding AddAllPersonToRoomCommand, Source={StaticResource ArrangeRoomRecommendationVM}}"
+                            Style="{StaticResource DataGridButtonDelete}">
+                            <materialDesign:PackIcon
+                                Width="24"
+                                Height="24"
+                                Kind="ArrowLeftBoldBox" />
+                        </Button>
+                        <Button
+                            Width="24"
+                            Height="24"
+                            Margin="0,5,0,0"
+                            Command="{Binding RemoveAllPersonFromRoomCommand, Source={StaticResource ArrangeRoomRecommendationVM}}"
+                            Style="{StaticResource DataGridButtonDelete}">
+                            <materialDesign:PackIcon
+                                Width="24"
+                                Height="24"
+                                Kind="ArrowRightBoldBox" />
+                        </Button>
+                    </StackPanel>
+                    <Grid
+                        Grid.Column="0"
+                        Margin="0,0,15,0"
+                        VerticalAlignment="Top">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Margin="0,0,5,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                                    FontSize="18"
+                                    FontWeight="Bold"
+                                    Foreground="#FF434A54"
+                                    Text="Danh sách người sẽ được thêm vào " />
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                                    FontSize="18"
+                                    FontWeight="Bold"
+                                    Foreground="#FFFAAC2D"
+                                    Text="{Binding SelectedRoomDisplayName}" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                <TextBlock
+                                    Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                                    FontSize="14"
+                                    FontWeight="Regular"
+                                    Foreground="#FF434A54"
+                                    Text="Số người: " />
+                                <TextBlock
+                                    Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                                    FontSize="14"
+                                    FontWeight="Regular"
+                                    Foreground="#FF434A54"
+                                    Text="{Binding SelectedRoomAvailableCapacity}" />
+                            </StackPanel>
+                        </Grid>
+                        <DataGrid
+                            Grid.Row="1"
+                            Height="512"
+                            Margin="0,5,0,20"
+                            materialDesign:DataGridAssist.CornerRadius="10"
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            CanUserReorderColumns="False"
+                            CanUserResizeColumns="True"
+                            CanUserResizeRows="False"
+                            HorizontalScrollBarVisibility="Visible"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding PersonsToAddToSelectedRoom}"
+                            SelectedItem="{Binding SelectedPersonToAddToRoom}"
+                            SelectionMode="Single"
+                            SelectionUnit="FullRow"
+                            VerticalScrollBarVisibility="Visible">
+                            <DataGrid.Columns>
+                                <materialDesign:DataGridTextColumn
+                                    Width="Auto"
+                                    Binding="{Binding Path=name}"
+                                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                                    ElementStyle="{StaticResource DataGridElement}"
+                                    Header="Họ và tên"
+                                    HeaderStyle="{StaticResource DataGridHeader}"
+                                    MaxLength="30" />
+                                <materialDesign:DataGridTextColumn
+                                    Width="Auto"
+                                    Binding="{Binding Path=dateOfBirth, StringFormat=dd-MM-yyyy}"
+                                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                                    ElementStyle="{StaticResource DataGridElement}"
+                                    Header="Ngày sinh"
+                                    HeaderStyle="{StaticResource DataGridHeader}"
+                                    MaxLength="30" />
+                                <materialDesign:DataGridTextColumn
+                                    Width="Auto"
+                                    Binding="{Binding Path=Severity.description}"
+                                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                                    ElementStyle="{StaticResource DataGridElement}"
+                                    Header="Nhóm đối tượng"
+                                    HeaderStyle="{StaticResource DataGridHeader}"
+                                    MaxLength="30" />
+
+                                <DataGridTemplateColumn
+                                    Width="Auto"
+                                    CellStyle="{StaticResource DataGridCellElement}"
+                                    Header=""
+                                    HeaderStyle="{StaticResource DataGridHeader}">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button
+                                                Width="20"
+                                                Height="20"
+                                                HorizontalAlignment="Right"
+                                                Command="{Binding RemovePersonFromRoomCommand, Source={StaticResource ArrangeRoomRecommendationVM}}"
+                                                Style="{StaticResource DataGridButtonDelete}">
+                                                <materialDesign:PackIcon
+                                                    Width="20"
+                                                    Height="20"
+                                                    Kind="ArrowRightBoldBox" />
+                                            </Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Grid>
+                <Grid Margin="55,10,55,32">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+
+                        <TextBlock
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="#FF434A54"
+                            TextWrapping="Wrap">
+                            Hướng dẫn
+                        </TextBlock>
+                        <TextBlock
+                            Margin="0,0,24,0"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="16"
+                            Foreground="#FF434A54"
+                            TextWrapping="Wrap">
+                            Chọn phòng được đề xuất ở danh sách phòng được đề xuất để xem danh sách người được thêm vào. Có thể chuyển đổi qua lại bằng các nút mũi tên ở danh sách người được thêm vào và người chưa có phòng.
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel
+                        Grid.Column="1"
+                        Width="Auto"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Orientation="Horizontal">
+
+                        <Button
+                            Width="145"
+                            Height="37"
+                            Margin="0"
+                            materialDesign:ButtonAssist.CornerRadius="8"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                            BorderBrush="{x:Null}"
+                            Command="{Binding CancelCommand}"
+                            CommandParameter="{Binding ElementName=ArrangeRoomRecommendationWindow}"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Style="{StaticResource ButtonDarkTemplate}">
+                            <TextBlock Text="Hủy" />
+                        </Button>
+                        <Button
+                            Width="145"
+                            Height="37"
+                            Margin="24,0,0,0"
+                            VerticalAlignment="Center"
+                            materialDesign:ButtonAssist.CornerRadius="8"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                            BorderBrush="{x:Null}"
+                            Command="{Binding ConfirmCommand}"
+                            CommandParameter="{Binding ElementName=ArrangeRoomRecommendationWindow}"
+                            FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                            FontSize="12"
+                            FontWeight="Bold"
+                            Style="{StaticResource ButtonAccentTemplate}">
+                            <TextBlock FontSize="16">
+                                Xác nhận
+                            </TextBlock>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Border>
+    </Viewbox>
+</Window>

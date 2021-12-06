@@ -1,0 +1,18 @@
+﻿<UserControl
+    x:Class="QuanLyKhuCachLy.CustomUserControl.NotificationScreenWrapper"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:control="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="705"
+    d:DesignWidth="757"
+    DataContext="{StaticResource NotiVM}"
+    mc:Ignorable="d">
+
+    <Grid>
+        <control:NotificationScreen Visibility="{Binding MainTab}" />
+        <control:NotificationScreenTemplateManage Visibility="{Binding ManagerTemplateTab}" />
+    </Grid>
+</UserControl>
