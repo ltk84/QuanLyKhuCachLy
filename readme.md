@@ -389,13 +389,17 @@ This project is contributed by **IT's Zoo team** consisting of 4 members:
 - Huỳnh Trọng Phục *(Phuc-HuynhTrong)*: 19522030@gm.uit.edu.vn
 - Trương Kim Lâm *(ltk84)*: 19521743@gm.uit.edu.vn
 
-<!-- <br/>
+<br/>
+
 <h4 align="center">
 <a href="https://github.com/ltk84/QuanLyKhuCachLy/graphs/contributors">
 <img src="https://contrib.rocks/image?repo=ltk84/QuanLyKhuCachLy" />
 </a>
 
-*Made with [contrib.rocks](https://contrib.rocks).* </h4> -->
+*Made with [contrib.rocks](https://contrib.rocks).* </h4>
+
+<br/>
+
 
 ## Contributing
 
