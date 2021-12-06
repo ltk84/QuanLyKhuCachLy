@@ -1401,9 +1401,9 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:QuanLyKhuCachLy"
+        "ProductName" = "8:Quarantine Area Management"
         "ProductCode" = "8:{128D18D8-A931-4A5F-B1A4-D2924E9A9877}"
-        "PackageCode" = "8:{1BD35084-AFDD-4080-9F20-62A27EAB0C5F}"
+        "PackageCode" = "8:{1C0CA26F-AF50-4F07-906C-0CB1F1440ADF}"
         "UpgradeCode" = "8:{A00224F2-4B5C-40AF-82A7-C68FECC6A99F}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -1414,7 +1414,7 @@
         "Manufacturer" = "8:ItZoo"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:QuanLyKhuCachLy"
+        "Title" = "8:Quarantine Area Management"
         "Subject" = "8:"
         "ARPCONTACT" = "8:ItZoo"
         "Keywords" = "8:"
@@ -1525,7 +1525,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_D6752CB94CC145C1B7B567A57A9ECD4F"
             {
-            "Name" = "8:Quan Ly Khu Cach Ly"
+            "Name" = "8:QLKCL"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
