@@ -222,8 +222,8 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             try
             {
-                var accountSid = "AC9cb120d0ee9f5196f765af6db11ce3dd";
-                var authToken = "17750dc00aa57d5f05d436cd9085652c";
+                string accountSid = "AC7539332c00efcc9cdad8d5f1a343f2e7";
+                string authToken = "b2b2931dc286ffa76ae61358143c25e4";
                 TwilioClient.Init(accountSid, authToken);
 
                 var messageOptions = new CreateMessageOptions(
