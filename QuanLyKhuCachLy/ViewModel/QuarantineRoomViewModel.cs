@@ -90,6 +90,7 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 _RoomListView = value;
                 OnPropertyChanged();
+                updateAvailableSlot();
             }
         }
 
@@ -288,6 +289,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }, (p) =>
             {
                 AddRoomFromExcel();
+                updateAvailableSlot();
             });
             ToEditCommand = new RelayCommand<Window>((p) =>
             {
@@ -298,6 +300,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 EditRoom EditScreen = new EditRoom();
                 SetSelectedItemToProperty();
                 EditScreen.ShowDialog();
+                updateAvailableSlot();
+
             });
 
             ToViewCommand = new RelayCommand<object>((p) =>
@@ -308,6 +312,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 BufferWindow bufferWindow = new BufferWindow();
                 bufferWindow.ShowDialog();
                 ToDetailRoomTab();
+                
             });
 
             ToMainCommand = new RelayCommand<object>((p) =>
@@ -316,6 +321,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }, (p) =>
             {
                 BackToListRoomTab();
+                updateAvailableSlot();
             });
 
             AddRoomManualCommand = new RelayCommand<Window>((p) =>
@@ -401,6 +407,16 @@ namespace QuanLyKhuCachLy.ViewModel
         }
 
         #region method
+        
+        void updateAvailableSlot()
+        {
+            for (int i=0; i< RoomListView.Length; i++)
+            {
+                int id = RoomListView[i].id;
+                RoomListView[i].available = RoomListView[i].capacity - DataProvider.ins.db.QuarantinePersons.Where(person => person.roomID == id).ToArray().Length;
+            }
+        }
+
 
         void RefeshTab()
         {
