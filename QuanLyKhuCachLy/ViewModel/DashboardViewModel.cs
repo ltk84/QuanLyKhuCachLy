@@ -281,6 +281,34 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #endregion
 
+        #region Fourth Recommendation
+
+        private Visibility _FourthRecommendationVisibility;
+
+        public Visibility FourthRecommendationVisibility
+        {
+            get { return _FourthRecommendationVisibility; }
+            set { _FourthRecommendationVisibility = value; OnPropertyChanged(); }
+        }
+
+        private string _FourthRecommendationTitle;
+
+        public string FourthRecommendationTitle
+        {
+            get { return _FourthRecommendationTitle; }
+            set { _FourthRecommendationTitle = value; OnPropertyChanged(); }
+        }
+
+        private string _FourthRecommendationContent;
+
+        public string FourthRecommendationContent
+        {
+            get { return _FourthRecommendationContent; }
+            set { _FourthRecommendationContent = value; OnPropertyChanged(); }
+        }
+
+        #endregion
+
         #endregion
 
 
@@ -294,6 +322,7 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand ToArrangeRoomRecommendation { get; set; }
         public ICommand ToGuideNotificationRecommendation { get; set; }
         public ICommand ToFinishNotificationRecommendation { get; set; }
+        public ICommand ToCompleteQuarantineRecommendation { get; set; }
 
         #endregion
 
@@ -326,8 +355,9 @@ namespace QuanLyKhuCachLy.ViewModel
             DefineFirstRecommendation();
             DefineSecondRecommendation();
             DefineThirdRecommendation();
+            DefineFourthRecommendation();
 
-            if (FirstRecommendationVisibility == Visibility.Collapsed && SecondRecommendationVisibility == Visibility.Collapsed && ThirdRecommendationVisibility == Visibility.Collapsed)
+            if (FirstRecommendationVisibility == Visibility.Collapsed && SecondRecommendationVisibility == Visibility.Collapsed && ThirdRecommendationVisibility == Visibility.Collapsed && FourthRecommendationVisibility == Visibility.Collapsed)
             {
                 NoneRecommendationVisibility = Visibility.Visible;
             }
@@ -372,6 +402,19 @@ namespace QuanLyKhuCachLy.ViewModel
                 var proposeNotificationVM = proposeNotification.DataContext as ProposeNotificationViewModel;
                 proposeNotificationVM.Type = 2;
                 if (proposeNotification.ShowDialog() == true)
+                {
+                    Init();
+                }
+            });
+
+            ToCompleteQuarantineRecommendation = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                CompleteQuarantineRecommendation completeQuarantineecommendation = new CompleteQuarantineRecommendation();
+
+                if (completeQuarantineecommendation.ShowDialog() == true)
                 {
                     Init();
                 }
@@ -545,6 +588,25 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #endregion
 
+        #region Fourth Recommendation
+
+        private void DefineFourthRecommendation()
+        {
+            int FinishQuarantinePersonStillInRoomCount = CountFinishQuarantinePersonStillInRoom();
+            if (FinishQuarantinePersonStillInRoomCount != 0)
+            {
+                FourthRecommendationVisibility = Visibility.Visible;
+                FourthRecommendationTitle = "CHUYỂN NGƯỜI HOÀN THÀNH CÁCH LY RA KHỎI PHÒNG";
+                FourthRecommendationContent = $"Có {FinishQuarantinePersonStillInRoomCount} người đã hoàn thành cách ly.";
+            }
+            else
+            {
+                FourthRecommendationVisibility = Visibility.Collapsed;
+            }
+        }
+
+        #endregion
+
         #region General Statistic
 
         private int CountQuarantinePersonStatistic()
@@ -626,6 +688,22 @@ namespace QuanLyKhuCachLy.ViewModel
                 string[] hasReceivedMessageList = getListHasReceivedMessage();
                 count = DataProvider.ins.db.QuarantinePersons.Where(person => person.leaveDate == date && hasReceivedMessageList.ToList().Contains(person.id.ToString())).Count();
 
+            }
+            catch
+            {
+                //MessageBox.Show("Xảy ra lỗi khi thực thi đếm người hoàn thành cách ly");
+            }
+            return count;
+        }
+
+        private int CountFinishQuarantinePersonStillInRoom()
+        {
+            int count = 0;
+            DateTime date = DateTime.Now.Date;
+            try
+            {
+                ObservableCollection<Model.QuarantinePerson> QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
+                count = QuarantinePersonList.Where(person => person.roomID != null && person.leaveDate <= date).Count();
             }
             catch
             {
