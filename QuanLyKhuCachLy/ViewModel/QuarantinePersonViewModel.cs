@@ -1028,7 +1028,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-                
+                GetFormatExcel();
             });
 
 
@@ -2903,7 +2903,7 @@ namespace QuanLyKhuCachLy.ViewModel
             Microsoft.Office.Interop.Excel.Worksheet sheet = file.Worksheets[1];
             Microsoft.Office.Interop.Excel.Worksheet sheet2 = file.Worksheets[2];
             sheet2.Name = "DS ID";
-            sheet2.Name = "Danh sách người cách ly";
+            sheet.Name = "Danh sách người cách ly";
             sheet.Columns[1].ColumnWidth = 5;
             sheet.Columns[2].ColumnWidth = 25;
             sheet.Columns[3].ColumnWidth = 12;
@@ -3127,6 +3127,44 @@ namespace QuanLyKhuCachLy.ViewModel
                 ErrorDialog.ShowDialog();
 
             }
+        }
+        void GetFormatExcel()
+        {
+            Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
+            app.Visible = true;
+            app.WindowState = Microsoft.Office.Interop.Excel.XlWindowState.xlMaximized;
+            Microsoft.Office.Interop.Excel.Workbook file = app.Workbooks.Add(Microsoft.Office.Interop.Excel.XlWBATemplate.xlWBATWorksheet);
+            file.Sheets.Add();
+            Microsoft.Office.Interop.Excel.Worksheet sheet = file.Worksheets[1];
+            sheet.Name = "Danh sách người cách ly";
+            sheet.Columns[1].ColumnWidth = 5;
+            sheet.Columns[2].ColumnWidth = 25;
+            sheet.Columns[3].ColumnWidth = 12;
+            sheet.Columns[4].ColumnWidth = 9;
+            sheet.Columns[5].ColumnWidth = 30;
+            sheet.Columns[6].ColumnWidth = 30;
+            sheet.Columns[7].ColumnWidth = 12;
+            sheet.Columns[8].ColumnWidth = 10;
+            sheet.Columns[9].ColumnWidth = 12;
+            sheet.Columns[10].ColumnWidth = 10;
+            sheet.Columns[11].ColumnWidth = 12;
+            sheet.Columns[12].ColumnWidth = 12;
+            sheet.Columns[13].ColumnWidth = 10;
+            sheet.Columns[14].ColumnWidth = 20;
+            sheet.Range["A1"].Value = "STT";
+            sheet.Range["B1"].Value = "Họ và tên";
+            sheet.Range["C1"].Value = "Ngày sinh";
+            sheet.Range["D1"].Value = "Giới tính";
+            sheet.Range["E1"].Value = "Địa chỉ thường trú";
+            sheet.Range["F1"].Value = "Địa chỉ tạm trú";
+            sheet.Range["G1"].Value = "CMND/CCCD";
+            sheet.Range["H1"].Value = "Mã bảo hiểm";
+            sheet.Range["I1"].Value = "Quốc tịch";
+            sheet.Range["J1"].Value = "SĐT";
+            sheet.Range["K1"].Value = "Triệu chứng";
+            sheet.Range["L1"].Value = "Nhóm đối tượng";
+            sheet.Range["M1"].Value = "Ngày đến";
+            sheet.Range["N1"].Value = "Thông tin tiêm chủng";
         }
         #endregion
     }
