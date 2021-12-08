@@ -70,6 +70,8 @@ namespace QuanLyKhuCachLy.ViewModel
             get => _PeopleListView; set
             {
                 _PeopleListView = value; OnPropertyChanged();
+                updateQuarantineStatus();
+
             }
         }
 
@@ -820,7 +822,6 @@ namespace QuanLyKhuCachLy.ViewModel
             NationalityList = new ObservableCollection<string>();
 
             ProvinceList = new ObservableCollection<string>();
-
             DistrictList = new ObservableCollection<string>();
 
             WardList = new ObservableCollection<string>();
@@ -1075,6 +1076,14 @@ namespace QuanLyKhuCachLy.ViewModel
 
         #region method
 
+        public void updateQuarantineStatus()
+        {
+            for (int i =0 ; i < PeopleListView.Length; i++)
+            {
+                PeopleListView[i].quarantineStatus = (PeopleListView[i].leaveDate.Date - DateTime.Now.Date).TotalDays < 0 ? "Đã hoàn thành" : "Đang cách ly";
+            }
+        }
+
         public void UpdateQuarantineDaysForPerson()
         {
             using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
@@ -1215,6 +1224,11 @@ namespace QuanLyKhuCachLy.ViewModel
             SelectedItem = null;
             InitBasic();
         }
+
+
+
+
+
 
         void InitBasic()
         {

@@ -252,6 +252,13 @@
                     Header="Nhóm đối tượng"
                     HeaderStyle="{StaticResource DataGridHeader}"
                     MaxLength="30" />
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding quarantineStatus}"
+                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                    ElementStyle="{StaticResource DataGridElement}"
+                    Header="Trạng thái"
+                    HeaderStyle="{StaticResource DataGridHeader}"
+                    MaxLength="30" />
                 <DataGridTemplateColumn
                     Width="*"
                     CellStyle="{StaticResource DataGridCellElement}"

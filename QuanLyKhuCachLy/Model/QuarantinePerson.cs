@@ -24,6 +24,20 @@ namespace QuanLyKhuCachLy.Model
             this.TestingResults = new HashSet<TestingResult>();
         }
 
+
+        private string _quarantineStatus;
+        public string quarantineStatus
+        {
+            get => _quarantineStatus; set
+            {
+                _quarantineStatus = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+
+
         public int id { get; set; }
 
         private string _name;
