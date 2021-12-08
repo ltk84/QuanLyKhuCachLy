@@ -3074,7 +3074,9 @@ namespace QuanLyKhuCachLy.ViewModel
                     {
                         for (int i = 0; i < listTestingResults.Count; i++)
                         {
-                            DataProvider.ins.db.TestingResults.Add(listTestingResults[i]);
+                            bool checkID = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == listTestingResults[i].quarantinePersonID).Count() == 1 ? true : false;
+                            if(checkID)
+                                DataProvider.ins.db.TestingResults.Add(listTestingResults[i]);
                         }
                         DataProvider.ins.db.SaveChanges();
                         transaction.Commit();
