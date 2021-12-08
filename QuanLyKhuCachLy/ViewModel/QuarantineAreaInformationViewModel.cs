@@ -380,7 +380,6 @@ namespace QuanLyKhuCachLy.ViewModel
             InitQAProvinceList();
             InitManagerProvinceList();
             InitNationList();
-
         }
 
         #region Methods
@@ -547,6 +546,8 @@ namespace QuanLyKhuCachLy.ViewModel
                         testCycle = QATestCycle,
                         requiredDayToFinish = QARequiredDayToFinish,
                         managerID = Manager.id,
+                        googleFormURL = "",
+                        googleSheetURL = "",
                     };
 
                     DataProvider.ins.db.QuarantineAreas.Add(QuarantineArea);

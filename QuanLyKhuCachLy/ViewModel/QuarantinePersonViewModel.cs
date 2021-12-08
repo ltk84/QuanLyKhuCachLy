@@ -885,7 +885,7 @@ namespace QuanLyKhuCachLy.ViewModel
             });
 
 
-            QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
+            InitPersonList();
             RemainRoomList = new ObservableCollection<Model.QuarantineRoom>();
             PeopleListView = QuarantinePersonList.ToArray();
 
@@ -949,10 +949,10 @@ namespace QuanLyKhuCachLy.ViewModel
             ToAddTestingResutlFromExcel = new RelayCommand<Window>((p) =>
             {
                 return true;
-            },  (p) =>
-            {
-                 AddTestingResutlFromExcel();
-            });
+            }, (p) =>
+           {
+               AddTestingResutlFromExcel();
+           });
             ToInportFormGoogleSheet = new RelayCommand<Window>((p) =>
             {
                 return true;
@@ -1218,8 +1218,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         void InitBasic()
         {
-
-            QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
+            InitPersonList();
             RemainRoomList = new ObservableCollection<Model.QuarantineRoom>();
             PeopleListView = QuarantinePersonList.ToArray();
 
@@ -1231,6 +1230,11 @@ namespace QuanLyKhuCachLy.ViewModel
             SeverityList = new ObservableCollection<Severity>(DataProvider.ins.db.Severities);
 
             QAInformation = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
+        }
+
+        void InitPersonList()
+        {
+            QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
         }
 
         void SetDefaultUI()
@@ -1267,9 +1271,14 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (Person == null) return;
 
                     Person.roomID = null;
-                    Person.completeQuarantine = true;
+                    if (Person.arrivedDate > DateTime.Today) { throw new InvalidOperationException(); }
+                    Person.leaveDate = DateTime.Today;
 
                     DataProvider.ins.db.SaveChanges();
+
+                    SelectedItem = Person;
+
+                    PeopleListView = QuarantinePersonList.ToArray();
 
                     transaction.Commit();
                 }
@@ -1386,15 +1395,15 @@ namespace QuanLyKhuCachLy.ViewModel
         void ExperationPropertySelected()
         {
             var today = DateTime.Now.Date;
-            QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
+            InitPersonList();
             if (ExperationProperty == "Người đang cách ly")
             {
                 var tempPeopleArray = QuarantinePersonList.ToArray();
-                for (int i = 0; i< tempPeopleArray.Length; i++)
+                for (int i = 0; i < tempPeopleArray.Length; i++)
                 {
                     if ((today - tempPeopleArray[i].leaveDate).TotalDays > 0) QuarantinePersonList.Remove(tempPeopleArray[i]);
                 }
-                
+
             }
 
             else if (ExperationProperty == "Hoàn thành cách ly")
@@ -1405,7 +1414,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     if ((today - tempPeopleArray[i].leaveDate).TotalDays <= 0) QuarantinePersonList.Remove(tempPeopleArray[i]);
                 }
             }
-            
+
             PeopleListView = QuarantinePersonList.ToArray();
         }
 
@@ -1413,7 +1422,7 @@ namespace QuanLyKhuCachLy.ViewModel
         void SearchWithKey()
         {
 
-            
+
             if (SearchKey == "" || SearchKey == null)
             {
             }
@@ -1430,8 +1439,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 }
 
                 PeopleListView = PeopleListView.Where((val, index) => Value[index].ToUpper().Contains(SearchKey.ToUpper())).ToArray();
-                
-                
+
+
             }
         }
 
@@ -1498,14 +1507,14 @@ namespace QuanLyKhuCachLy.ViewModel
             for (int i = 0; i < tempPeopleList.Length; i++)
             {
                 var tempID = tempPeopleList[i].id;
-               var TestingResultList = new ObservableCollection<TestingResult>(DataProvider.ins.db.TestingResults.Where(x => x.quarantinePersonID == tempID));
+                var TestingResultList = new ObservableCollection<TestingResult>(DataProvider.ins.db.TestingResults.Where(x => x.quarantinePersonID == tempID));
                 DateTime max = TestingResultList[0].dateTesting;
 
 
                 // Nếu còn cách li
                 if ((SelectedDate - tempPeopleList[i].leaveDate.Date).TotalDays <= 0)
                 {
-                    
+
                     // Chưa xét nghiệm lần nào
                     if (TestingResultList.ToArray().Length == 0)
                     {
@@ -1519,7 +1528,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     // Đã xét nghiệm
                     else if (TestingResultList.ToArray().Length != 0)
                     {
-                        for ( int j = 1; j < TestingResultList.ToArray().Length; j++)
+                        for (int j = 1; j < TestingResultList.ToArray().Length; j++)
                             if ((max - TestingResultList[j].dateTesting).TotalDays < 0) max = TestingResultList[j].dateTesting;
 
                         if ((DateTime.Now.Date - max.Date).TotalDays >= testCycle)
@@ -1532,8 +1541,8 @@ namespace QuanLyKhuCachLy.ViewModel
                     {
                         tempQuarantinePersonList.Add(tempPeopleList[i]);
                     }
-                    
-                    
+
+
                 }
             }
 
@@ -1541,7 +1550,7 @@ namespace QuanLyKhuCachLy.ViewModel
             PeopleListView = tempQuarantinePersonList.ToArray();
         }
 
-     
+
 
         void SelectFilterProperty()
         {
@@ -1595,7 +1604,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             }
 
-            
+
         }
 
 
@@ -1642,7 +1651,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 xlRange.Cells[1, 10] == null || xlRange.Cells[1, 10].Value2 != "SĐT" ||
                 xlRange.Cells[1, 11] == null || xlRange.Cells[1, 11].Value2 != "Triệu chứng" ||
                 xlRange.Cells[1, 12] == null || xlRange.Cells[1, 12].Value2 != "Nhóm đối tượng" ||
-                xlRange.Cells[1, 13] == null || xlRange.Cells[1, 13].Value2 != "Ngày đến"||
+                xlRange.Cells[1, 13] == null || xlRange.Cells[1, 13].Value2 != "Ngày đến" ||
                 xlRange.Cells[1, 14] == null || xlRange.Cells[1, 14].Value2 != "Thông tin tiêm chủng")
                 {
                     //MessageBox.Show("Không đúng định dạng file");
@@ -1766,12 +1775,12 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (xlRange.Cells[i, 14] != null && xlRange.Cells[i, 14].Value2 != null)
                     {
 
-                        var records = xlRange.Cells[i,14].Value2.ToString().Split(',');
+                        var records = xlRange.Cells[i, 14].Value2.ToString().Split(',');
                         for (int j = 0; j < records.Length; j++)
                         {
                             InjectionRecord rc = new InjectionRecord();
                             string[] str = records[j].Split(' ');
-                            if (str.Length == 2 )
+                            if (str.Length == 2)
                             {
                                 DateTime date = Convert.ToDateTime(str[0].ToString());
                                 string vaccine = str[1].ToString();
@@ -1830,7 +1839,7 @@ namespace QuanLyKhuCachLy.ViewModel
                             }
                         }
                         PeopleListView = DataProvider.ins.db.QuarantinePersons.ToArray();
-                        QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
+                        InitPersonList();
 
 
                         DataProvider.ins.db.SaveChanges();
@@ -2242,7 +2251,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     transaction.Commit();
 
-                    QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
+                    InitPersonList();
                     PeopleListView = QuarantinePersonList.ToArray();
 
                     SelectedItem = Person;
@@ -2376,7 +2385,7 @@ namespace QuanLyKhuCachLy.ViewModel
         void RollBackChange()
         {
             DataProvider.ins.db.ChangeTracker.Entries().Where(ex => ex.Entity != null).ToList().ForEach(ex => ex.State = EntityState.Detached);
-            QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
+            InitPersonList();
             if (SelectedItem != null) SelectedItem = QuarantinePersonList.Where(x => x.id == SelectedItem.id).FirstOrDefault();
         }
 
@@ -2564,7 +2573,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (values[i][4] != null)
                     {
                         string[] arrListStr = values[i][4].ToString().Split(',');
-                        if(arrListStr.Length < 3)
+                        if (arrListStr.Length < 3)
                         {
                             CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
                             var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
@@ -2668,7 +2677,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (values[i][13].ToString() != "Chưa tiêm")
                     {
                         var records = values[i][13].ToString().Split(',');
-                        for (int j= 0; j < records.Length; j++)
+                        for (int j = 0; j < records.Length; j++)
                         {
                             InjectionRecord rc = new InjectionRecord();
                             var str = records[j].Split(' ');
@@ -2701,7 +2710,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                         for (int i = 0; i < listQuarantinePerson.Count; i++)
                         {
-                     
+
                             DataProvider.ins.db.Addresses.Add(listAdress[i]);
                             DataProvider.ins.db.SaveChanges();
                             listQuarantinePerson[i].leaveDate = listQuarantinePerson[i].arrivedDate.AddDays(QAInformation.requiredDayToFinish);
@@ -2713,7 +2722,7 @@ namespace QuanLyKhuCachLy.ViewModel
                             DataProvider.ins.db.HealthInformations.Add(listHealthInformation[i]);
                             DataProvider.ins.db.SaveChanges();
 
-                            if(listInjectionRecords[i][0].vaccineName != "Không có nhá")
+                            if (listInjectionRecords[i][0].vaccineName != "Không có nhá")
                             {
                                 for (int j = 0; j < listInjectionRecords[i].Count; j++)
                                 {
@@ -2723,10 +2732,10 @@ namespace QuanLyKhuCachLy.ViewModel
                                 }
                                 DataProvider.ins.db.SaveChanges();
                             }
-                           
+
                         }
                         PeopleListView = DataProvider.ins.db.QuarantinePersons.ToArray();
-                        QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
+                        InitPersonList();
                         Window SuccessDialog = new Window
                         {
                             AllowsTransparency = true,
@@ -2754,8 +2763,8 @@ namespace QuanLyKhuCachLy.ViewModel
                                 {
                                     SheetId = 0,
                                     Dimension = "ROWS",
-                                    StartIndex =1,
-                                    EndIndex = listQuarantinePerson.Count +1,
+                                    StartIndex = 1,
+                                    EndIndex = listQuarantinePerson.Count + 1,
                                 }
                             }
                         };
@@ -2839,7 +2848,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 FailNotificationVM.Content = "Không tìm thấy dữ liệu";
                 ErrorDialog.ShowDialog();
             }
-            
+
         }
         void ExportExcel()
         {
@@ -2892,7 +2901,7 @@ namespace QuanLyKhuCachLy.ViewModel
             sheet.Range["O1"].Value = "Đã hoàn thành\ncách ly";
             sheet.Range["P1"].Value = "Số mũi vaccine\nđã tiêm";
 
-            for (int i = 2; i <= count+1; i++)
+            for (int i = 2; i <= count + 1; i++)
             {
                 int addressID = PeopleListView[i - 2].addressID.Value;
                 Address address = DataProvider.ins.db.Addresses.Where(x => x.id == addressID).FirstOrDefault();
@@ -2907,7 +2916,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     personAddress += ", " + address.district.ToString();
                 if (address.province != null)
                     personAddress += ", " + address.province.ToString();
-                Severity severity = new Severity(); 
+                Severity severity = new Severity();
                 if (PeopleListView[i - 2].levelID != null)
                 {
                     int severityID = PeopleListView[i - 2].levelID.Value;
@@ -2921,10 +2930,10 @@ namespace QuanLyKhuCachLy.ViewModel
                     int roomID = PeopleListView[i - 2].roomID.Value;
                     room = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == roomID).FirstOrDefault();
                 }
-                sheet.Range["A" + i.ToString()].Value = (i-1).ToString();
-                sheet.Range["B" + i.ToString()].Value = PeopleListView[i-2].name;
+                sheet.Range["A" + i.ToString()].Value = (i - 1).ToString();
+                sheet.Range["B" + i.ToString()].Value = PeopleListView[i - 2].name;
                 sheet.Range["C" + i.ToString()].Value = PeopleListView[i - 2].dateOfBirth;
-                sheet.Range["D" + i.ToString()].Value = PeopleListView[i - 2].sex;            
+                sheet.Range["D" + i.ToString()].Value = PeopleListView[i - 2].sex;
                 sheet.Range["E" + i.ToString()].Value = personAddress;
                 sheet.Range["F" + i.ToString()].Value = PeopleListView[i - 2].healthInsuranceID;
                 sheet.Range["G" + i.ToString()].Value = PeopleListView[i - 2].citizenID;
@@ -2934,8 +2943,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 sheet.Range["K" + i.ToString()].Value = PeopleListView[i - 2].arrivedDate;
                 sheet.Range["L" + i.ToString()].Value = PeopleListView[i - 2].leaveDate;
                 sheet.Range["M" + i.ToString()].Value = PeopleListView[i - 2].quarantineDays;
-                sheet.Range["N" + i.ToString()].Value = PeopleListView[i - 2].roomID != null?room.displayName:"";
-                sheet.Range["O" + i.ToString()].Value = PeopleListView[i - 2].completeQuarantine== true ? "X":"";
+                sheet.Range["N" + i.ToString()].Value = PeopleListView[i - 2].roomID != null ? room.displayName : "";
+                sheet.Range["O" + i.ToString()].Value = PeopleListView[i - 2].completeQuarantine == true ? "X" : "";
                 sheet.Range["P" + i.ToString()].Value = countInjectionRecord;
                 sheet2.Range["A" + i.ToString()].Value = PeopleListView[i - 2].id;
             }
@@ -3015,7 +3024,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     try
                     {
-                        for (int i=0;i<listTestingResults.Count;i++)
+                        for (int i = 0; i < listTestingResults.Count; i++)
                         {
                             DataProvider.ins.db.TestingResults.Add(listTestingResults[i]);
                         }
@@ -3074,7 +3083,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     FailNotificationVM.Content = errorMessage;
                 }
                 ErrorDialog.ShowDialog();
-               
+
             }
         }
         #endregion
