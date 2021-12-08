@@ -436,7 +436,9 @@ namespace QuanLyKhuCachLy.ViewModel
                     InjectionRecordViewModel.ins.IRQuarantinePersonID = SelectedItem.id;
                     DestinationHistoryViewModel.ins.PersonID = SelectedItem.id;
                     TestingResultViewModel.ins.PersonID = SelectedItem.id;
-                    RemainRoomList = new ObservableCollection<Model.QuarantineRoom>(DataProvider.ins.db.QuarantineRooms.Where(x => x.id != SelectedItem.roomID && x.QuarantinePersons.Count < x.capacity));
+                    RemainRoomList = SelectedItem.Severity == null ?
+                        new ObservableCollection<Model.QuarantineRoom>(DataProvider.ins.db.QuarantineRooms.Where(x => x.id != SelectedItem.roomID && x.QuarantinePersons.Count < x.capacity && x.Severity == null)) :
+                    new ObservableCollection<Model.QuarantineRoom>(DataProvider.ins.db.QuarantineRooms.Where(x => x.id != SelectedItem.roomID && x.QuarantinePersons.Count < x.capacity && x.Severity.id == SelectedItem.Severity.id));
                 }
             }
         }
@@ -770,6 +772,7 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand PreviousTabEditCommand { get; set; }
         public ICommand CompleteQuarantinePersonCommand { get; set; }
         public ICommand RefeshCommand { get; set; }
+        public ICommand ChangeRoomCommand { get; set; }
 
         public ICommand ToExportExcel { get; set; }
         public ICommand ToAddTestingResutlFromExcel { get; set; }
@@ -1071,6 +1074,15 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 RefeshTab();
             });
+
+            ChangeRoomCommand = new RelayCommand<Window>((p) =>
+            {
+                if (SelectedItem != null && SelectedItem.roomID != null)
+                    return true;
+                return false;
+            }, (p) =>
+            {
+            });
         }
 
         #region method
@@ -1158,6 +1170,8 @@ namespace QuanLyKhuCachLy.ViewModel
                     DataProvider.ins.db.SaveChanges();
 
                     NewRoomSelected = null;
+
+                    PeopleListView = QuarantinePersonList.ToArray();
 
                     transaction.Commit();
                 }
