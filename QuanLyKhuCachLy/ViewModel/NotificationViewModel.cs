@@ -404,6 +404,7 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 _PeopleListView1 = value;
                 OnPropertyChanged();
+                updateQuarantineStatus1();
             }
         }
 
@@ -414,6 +415,7 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 _PeopleListView2 = value;
                 OnPropertyChanged();
+                updateQuarantineStatus2();
             }
         }
 
@@ -850,6 +852,25 @@ namespace QuanLyKhuCachLy.ViewModel
         }
 
         #region methodSelectPeopleWindown
+
+        public void updateQuarantineStatus1()
+        {
+            for (int i = 0; i < PeopleListView1.Length; i++)
+            {
+                PeopleListView1[i].quarantineStatus = (PeopleListView1[i].leaveDate.Date - DateTime.Now.Date).TotalDays < 0 ? "Đã hoàn thành" : "Đang cách ly";
+            }
+        }
+
+
+        public void updateQuarantineStatus2()
+        {
+            for (int i = 0; i < PeopleListView2.Length; i++)
+            {
+                PeopleListView2[i].quarantineStatus = (PeopleListView2[i].leaveDate.Date - DateTime.Now.Date).TotalDays < 0 ? "Đã hoàn thành" : "Đang cách ly";
+            }
+        }
+
+
         void RemoveItemFormList1(QuarantinePerson temp)
         {
             PeopleList1.Remove(temp);
@@ -1385,7 +1406,7 @@ namespace QuanLyKhuCachLy.ViewModel
         }
 
         #endregion
-
+         
 
         #region methodAddEdit
 
