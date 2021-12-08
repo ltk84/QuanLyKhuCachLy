@@ -777,6 +777,9 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand ToExportExcel { get; set; }
         public ICommand ToAddTestingResutlFromExcel { get; set; }
 
+        public ICommand ToViewListInGoogleSheet { get; set; }
+        public ICommand ToGetFormatExcel { get; set; }
+
         #endregion
 
         #region change room 
@@ -1001,6 +1004,31 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 TabIndexInformation = 1;
                 BackToPersonList();
+            });
+
+            ToViewListInGoogleSheet = new RelayCommand<Window>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                string linkSheet = "";
+                linkSheet = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().googleSheetURL;
+                if (linkSheet == "" || linkSheet == null)
+                {
+                    System.Diagnostics.Process.Start("https://docs.google.com/spreadsheets/d/1R6zuZB_xFuzWrCnl4j0JLZ3da5HtprRrmjeQ3LdxW44/edit");
+                }
+                else
+                {
+                    System.Diagnostics.Process.Start(linkSheet);
+                }
+            });
+
+            ToGetFormatExcel = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                
             });
 
 
