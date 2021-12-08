@@ -31,7 +31,7 @@
                 Height="Auto"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
-                Command="{Binding }"
+                Command="{Binding ToGetFormatExcel}"
                 Style="{StaticResource MenuButton}">
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon
