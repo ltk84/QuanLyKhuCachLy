@@ -20,6 +20,8 @@ namespace QuanLyKhuCachLy.Model
         public int requiredDayToFinish { get; set; }
         public int addressID { get; set; }
         public Nullable<int> managerID { get; set; }
+        public string googleSheetURL { get; set; }
+        public string googleFormURL { get; set; }
 
         public virtual Address Address { get; set; }
         public virtual Staff Staff { get; set; }

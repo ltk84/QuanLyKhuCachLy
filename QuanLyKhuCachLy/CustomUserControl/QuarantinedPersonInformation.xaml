@@ -63,6 +63,7 @@
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 Click="Button_Click"
+                Command="{Binding CompleteQuarantinePersonCommand}"
                 Style="{StaticResource MenuButton}">
                 <StackPanel Orientation="Horizontal">
                     <Image

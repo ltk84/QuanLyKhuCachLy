@@ -785,7 +785,9 @@ namespace QuanLyKhuCachLy.ViewModel
         void Init()
         {
             QuarantineArea = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
-            QAAdress = QuarantineArea.Address;
+            QAAdress = QuarantineArea?.Address;
+
+            if (QAAdress == null) return;
 
             SelectedProvince = QAAdress.province;
             SelectedDistrict = QAAdress.district;

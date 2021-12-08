@@ -38,6 +38,7 @@
                     Margin="0"
                     Command="{Binding CancelCommand}"
                     CommandParameter="{Binding ElementName=FailNotificationDialog}"
+                    IsDefault="True"
                     Style="{StaticResource ConfirmationButton}">
                     <TextBlock Text="Đóng" />
                 </Button>

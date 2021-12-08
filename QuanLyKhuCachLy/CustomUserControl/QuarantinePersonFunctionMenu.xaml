@@ -51,7 +51,10 @@
                         </TextBlock>
                     </StackPanel>
                 </Button>
-                <Button PreviewMouseDown="Button_PreviewMouseDown" Style="{StaticResource MenuButton}">
+                <Button
+                    Command="{Binding ChangeRoomCommand}"
+                    PreviewMouseDown="Button_PreviewMouseDown"
+                    Style="{StaticResource MenuButton}">
                     <StackPanel Style="{StaticResource MenuStackPanel}">
                         <materialDesign:PackIcon Kind="Sync" Style="{StaticResource MenuIcon}" />
                         <TextBlock Style="{StaticResource MenuText}">
