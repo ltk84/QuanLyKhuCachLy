@@ -2555,7 +2555,14 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             string[] Scopes = { SheetsService.Scope.Spreadsheets };
             string ApplicationName = "QLKCL";
+            string linkSheet = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().googleSheetURL;
+            var ctrc = linkSheet.Split('/');
+            
             String spreadsheetId = "1R6zuZB_xFuzWrCnl4j0JLZ3da5HtprRrmjeQ3LdxW44";
+            if (ctrc[ctrc.Length - 2] != "" && ctrc[ctrc.Length - 2] != null)
+            {
+                spreadsheetId = ctrc[ctrc.Length - 2];
+            }
             String range = "Sheet1";
             string credentialPath = Path.Combine(Environment.CurrentDirectory, ".credentials", ApplicationName);
             UserCredential credential;
@@ -2702,7 +2709,6 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (values[i][11] != null)
                     {
                         quarantinePerson.levelID = Int32.Parse(values[i][11].ToString());
-
                     }
                     if (values[i][12] != null)
                     {
