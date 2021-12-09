@@ -35,14 +35,14 @@
                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                     FontSize="32"
                     FontWeight="Bold">
-                    Sắp xếp phòng cho người cách ly
+                    Chuyển người hoàn thành cách ly ra khỏi phòng
                 </TextBlock>
                 <TextBlock
                     Margin="0,2,0,0"
                     HorizontalAlignment="Center"
                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                     FontSize="18">
-                    Những người cách ly chưa có phòng đã được tự động đề xuất thêm vào các phòng còn trống
+                    Những người đủ điều kiện hoàn thành cách ly sẽ được đánh dấu hoàn thành cách ly và chuyển ra khỏi phòng
                 </TextBlock>
                 <Grid Margin="55,25,55,0" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
@@ -68,14 +68,7 @@
                                     FontSize="18"
                                     FontWeight="Bold"
                                     Foreground="#FF434A54"
-                                    Text="Danh sách người sẽ được thêm vào " />
-                                <TextBlock
-                                    VerticalAlignment="Center"
-                                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                                    FontSize="18"
-                                    FontWeight="Bold"
-                                    Foreground="#FFFAAC2D"
-                                    Text="{Binding SelectedRoomDisplayName}" />
+                                    Text="Danh sách người sẽ được chuyển ra khỏi phòng " />
                             </StackPanel>
                             <StackPanel Grid.Column="1" Orientation="Horizontal">
                                 <TextBlock
@@ -93,7 +86,7 @@
                                     FontSize="14"
                                     FontWeight="Regular"
                                     Foreground="#FF434A54"
-                                    Text="{Binding SelectedRoomAvailableCapacity}" />
+                                    Text="{Binding CompleteQuarantinePersonsToResetRoom.Count}" />
                             </StackPanel>
                         </Grid>
                         <DataGrid
@@ -107,8 +100,8 @@
                             CanUserResizeColumns="True"
                             CanUserResizeRows="False"
                             IsReadOnly="True"
-                            ItemsSource="{Binding PersonsWithNoRoom}"
-                            SelectedItem="{Binding SelectedPersonWithNoRoom}"
+                            ItemsSource="{Binding CompleteQuarantinePersonsToResetRoom}"
+                            SelectedItem="{Binding SelectedCompleteQuarantinePersonsToResetRoom}"
                             SelectionMode="Single"
                             SelectionUnit="FullRow">
 
@@ -124,7 +117,7 @@
                                                 Width="20"
                                                 Height="20"
                                                 HorizontalAlignment="Right"
-                                                Command="{Binding AddPersonToRoomCommand, Source={StaticResource ArrangeRoomRecommendationVM}}"
+                                                Command="{Binding RemovePersonFromResetRoomListCommand, Source={StaticResource CompleteQuarantineRecommendationVM}}"
                                                 Style="{StaticResource DataGridButtonDelete}">
                                                 <materialDesign:PackIcon
                                                     Width="20"
@@ -150,10 +143,10 @@
                                     HeaderStyle="{StaticResource DataGridHeader}" />
                                 <materialDesign:DataGridTextColumn
                                     Width="Auto"
-                                    Binding="{Binding Severity.description}"
+                                    Binding="{Binding QuarantineRoom.displayName}"
                                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                                     ElementStyle="{StaticResource DataGridElement}"
-                                    Header="Nhóm đối tượng"
+                                    Header="Phòng"
                                     HeaderStyle="{StaticResource DataGridHeader}" />
                             </DataGrid.Columns>
                         </DataGrid>
@@ -173,7 +166,7 @@
                             Width="24"
                             Height="24"
                             Margin="0,5,0,0"
-                            Command="{Binding AddAllPersonToRoomCommand, Source={StaticResource ArrangeRoomRecommendationVM}}"
+                            Command="{Binding RemoveAllPersonFromResetRoomListCommand, Source={StaticResource CompleteQuarantineRecommendationVM}}"
                             Style="{StaticResource DataGridButtonDelete}">
                             <materialDesign:PackIcon
                                 Width="24"
@@ -184,7 +177,7 @@
                             Width="24"
                             Height="24"
                             Margin="0,5,0,0"
-                            Command="{Binding RemoveAllPersonFromRoomCommand, Source={StaticResource ArrangeRoomRecommendationVM}}"
+                            Command="{Binding AddAllPersonToResetRoomListCommand, Source={StaticResource CompleteQuarantineRecommendationVM}}"
                             Style="{StaticResource DataGridButtonDelete}">
                             <materialDesign:PackIcon
                                 Width="24"
@@ -212,14 +205,7 @@
                                     FontSize="18"
                                     FontWeight="Bold"
                                     Foreground="#FF434A54"
-                                    Text="Danh sách người sẽ được thêm vào " />
-                                <TextBlock
-                                    VerticalAlignment="Center"
-                                    FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
-                                    FontSize="18"
-                                    FontWeight="Bold"
-                                    Foreground="#FFFAAC2D"
-                                    Text="{Binding SelectedRoomDisplayName}" />
+                                    Text="Danh sách người hoàn thành cách ly" />
                             </StackPanel>
                             <StackPanel Grid.Column="1" Orientation="Horizontal">
                                 <TextBlock
@@ -237,7 +223,7 @@
                                     FontSize="14"
                                     FontWeight="Regular"
                                     Foreground="#FF434A54"
-                                    Text="{Binding SelectedRoomAvailableCapacity}" />
+                                    Text="{Binding CompleteQuarantinePersons.Count}" />
                             </StackPanel>
                         </Grid>
                         <DataGrid
@@ -276,10 +262,10 @@
                                     MaxLength="30" />
                                 <materialDesign:DataGridTextColumn
                                     Width="Auto"
-                                    Binding="{Binding Path=Severity.description}"
+                                    Binding="{Binding Path=QuarantineRoom.displayName}"
                                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                                     ElementStyle="{StaticResource DataGridElement}"
-                                    Header="Nhóm đối tượng"
+                                    Header="Phòng"
                                     HeaderStyle="{StaticResource DataGridHeader}"
                                     MaxLength="30" />
 
@@ -294,7 +280,7 @@
                                                 Width="20"
                                                 Height="20"
                                                 HorizontalAlignment="Right"
-                                                Command="{Binding RemovePersonFromRoomCommand, Source={StaticResource ArrangeRoomRecommendationVM}}"
+                                                Command="{Binding AddPersonToResetRoomListCommand, Source={StaticResource CompleteQuarantineRecommendationVM}}"
                                                 Style="{StaticResource DataGridButtonDelete}">
                                                 <materialDesign:PackIcon
                                                     Width="20"
@@ -329,7 +315,7 @@
                             FontSize="16"
                             Foreground="#FF434A54"
                             TextWrapping="Wrap">
-                            Chọn phòng được đề xuất ở danh sách phòng được đề xuất để xem danh sách người được thêm vào. Có thể chuyển đổi qua lại bằng các nút mũi tên ở danh sách người được thêm vào và người chưa có phòng.
+                            Những người ở danh sách bên phải sẽ được thực hiện đánh dấu hoàn thành cách ly và chuyển ra khỏi phòng. Hệ thống sẽ tự động chọn lọc danh sách người sẽ được chuyển vào bảng ở bên phải.
                         </TextBlock>
                     </StackPanel>
                     <StackPanel
@@ -347,7 +333,7 @@
                             materialDesign:ShadowAssist.ShadowDepth="Depth0"
                             BorderBrush="{x:Null}"
                             Command="{Binding CancelCommand}"
-                            CommandParameter="{Binding ElementName=ArrangeRoomRecommendationWindow}"
+                            CommandParameter="{Binding ElementName=CompleteQuarantineRecommendationWindow}"
                             FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                             FontSize="16"
                             FontWeight="Bold"
@@ -363,7 +349,7 @@
                             materialDesign:ShadowAssist.ShadowDepth="Depth0"
                             BorderBrush="{x:Null}"
                             Command="{Binding ConfirmCommand}"
-                            CommandParameter="{Binding ElementName=ArrangeRoomRecommendationWindow}"
+                            CommandParameter="{Binding ElementName=CompleteQuarantineRecommendationWindow}"
                             FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                             FontSize="12"
                             FontWeight="Bold"
