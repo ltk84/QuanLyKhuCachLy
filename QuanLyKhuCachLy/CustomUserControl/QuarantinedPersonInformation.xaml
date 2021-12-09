@@ -83,7 +83,6 @@
                         FontWeight="Regular"
                         Foreground="#FF000000"
                         Text="Hoàn thành cách ly" />
-
                 </StackPanel>
             </Button>
 
