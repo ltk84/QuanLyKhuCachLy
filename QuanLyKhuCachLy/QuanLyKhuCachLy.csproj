@@ -188,6 +188,9 @@
     <Compile Include="CustomUserControl\BufferWindow.xaml.cs">
       <DependentUpon>BufferWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomUserControl\ChangeCompleteDate.xaml.cs">
+      <DependentUpon>ChangeCompleteDate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomUserControl\DestinationHistoryFunctionMenu.xaml.cs">
       <DependentUpon>DestinationHistoryFunctionMenu.xaml</DependentUpon>
     </Compile>
@@ -529,6 +532,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomUserControl\BufferWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\ChangeCompleteDate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
