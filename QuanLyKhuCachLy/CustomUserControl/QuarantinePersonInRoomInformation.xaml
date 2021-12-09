@@ -91,12 +91,13 @@
                 Height="Auto"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
+                Command="{Binding PersonInRoomViewModel.ToChangeCompleteDateCommand}"
                 Style="{StaticResource MenuButton}">
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon
-                        Margin="0,0,15,0"
                         Width="18"
                         Height="16"
+                        Margin="0,0,15,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Kind="DateRange"

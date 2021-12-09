@@ -232,9 +232,34 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 RemoveAllPersonFromRoom();
             });
+
+            ToChangeCompleteDateCommand = new RelayCommand<Window>((p) =>
+            {
+                if (SelectedItem != null)
+                    return true;
+                return false;
+            }, (p) =>
+            {
+                ChangeCompleteDate changeCDDialog = new ChangeCompleteDate();
+                changeCDDialog.DataContext = this;
+                ConstraintDate = QPArrivedDate;
+
+                changeCDDialog.ShowDialog();
+            });
         }
 
         #region method
+
+        protected override void ChangeCompleteDate(Window p)
+        {
+            base.ChangeCompleteDate(p);
+
+            RemovePersonFromRoom();
+
+            SortPersonList();
+
+            Parent.BackToRoomInformation();
+        }
 
         void AddAllPersonToRoom()
         {

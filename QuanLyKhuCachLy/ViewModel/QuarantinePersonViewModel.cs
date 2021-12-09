@@ -602,6 +602,16 @@ namespace QuanLyKhuCachLy.ViewModel
         #endregion
 
         #region validation
+
+        private DateTime _ConstraintDate;
+
+        public DateTime ConstraintDate
+        {
+            get { return _ConstraintDate; }
+            set { _ConstraintDate = value; OnPropertyChanged(); }
+        }
+
+
         private bool _NameFieldHasError;
         public bool NameFieldHasError
         {
@@ -773,6 +783,9 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand CompleteQuarantinePersonCommand { get; set; }
         public ICommand RefeshCommand { get; set; }
         public ICommand ChangeRoomCommand { get; set; }
+        public ICommand ToChangeCompleteDateCommand { get; set; }
+        public ICommand CloseChangeCompleteDateCommand { get; set; }
+        public ICommand ChangeCompleteDateCommand { get; set; }
 
         public ICommand ToExportExcel { get; set; }
         public ICommand ToAddTestingResutlFromExcel { get; set; }
@@ -1077,15 +1090,129 @@ namespace QuanLyKhuCachLy.ViewModel
 
             ChangeRoomCommand = new RelayCommand<Window>((p) =>
             {
-                if (SelectedItem != null && SelectedItem.roomID != null)
+                if (SelectedItem != null && SelectedItem.leaveDate > DateTime.Today)
                     return true;
                 return false;
             }, (p) =>
             {
             });
+
+            ToChangeCompleteDateCommand = new RelayCommand<Window>((p) =>
+            {
+                if (SelectedItem != null)
+                    return true;
+                return false;
+            }, (p) =>
+            {
+                ChangeCompleteDate changeCDDialog = new ChangeCompleteDate();
+                changeCDDialog.DataContext = this;
+                ConstraintDate = QPArrivedDate;
+
+                changeCDDialog.ShowDialog();
+            });
+
+            CloseChangeCompleteDateCommand = new RelayCommand<Window>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                p.Close();
+            });
+
+            ChangeCompleteDateCommand = new RelayCommand<Window>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                ChangeCompleteDate(p);
+            });
         }
 
         #region method
+
+        protected virtual void ChangeCompleteDate(Window p)
+        {
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    if (QPLeaveDate <= DateTime.Today && SelectedItem.roomID != null)
+                    {
+                        ActionConfirmation actionConfirmation = new ActionConfirmation();
+                        var vm = actionConfirmation.DataContext as ActionConfirmationViewModel;
+                        vm.Title = "Thay đổi thời gian dự kiến hoàn thành";
+                        vm.Content = "Ban có muốn xóa người cách ly ra khỏi phòng";
+                        var result = actionConfirmation.ShowDialog();
+                        if (result == true)
+                        {
+                            if (vm.IsYes)
+                            {
+                                SelectedItem.roomID = null;
+                            }
+
+                            SelectedItem.leaveDate = QPLeaveDate;
+                        }
+
+                        else return;
+                    }
+                    else
+                    {
+                        SelectedItem.leaveDate = QPLeaveDate;
+                    }
+
+                    p.Close();
+
+                    DataProvider.ins.db.SaveChanges();
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi cơ sở dữ liệu cập nhật";
+                    ErrorDialog.ShowDialog();
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi xác thực";
+                    ErrorDialog.ShowDialog();
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi database không hỗ trợ";
+                    ErrorDialog.ShowDialog();
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi đối tượng database bị hủy";
+                    ErrorDialog.ShowDialog();
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi thao tác không hợp lệ";
+                    ErrorDialog.ShowDialog();
+                }
+            }
+        }
 
         public void UpdateQuarantineDaysForPerson()
         {
@@ -1457,7 +1584,6 @@ namespace QuanLyKhuCachLy.ViewModel
 
             }
         }
-
 
 
         void getFilterProperty()
@@ -2006,6 +2132,8 @@ namespace QuanLyKhuCachLy.ViewModel
             QPPhoneNumber = Person.phoneNumber;
             QPHealthInsuranceID = Person.healthInsuranceID;
             QPSelectedLevel = PersonSeverity;
+            QPArrivedDate = Person.arrivedDate;
+            QPLeaveDate = Person.leaveDate;
 
             //SelectedItem.name = Person.name;
             //SelectedItem.sex = Person.sex;
@@ -2045,6 +2173,8 @@ namespace QuanLyKhuCachLy.ViewModel
             IsSoreThroat = false;
             IsTired = false;
             QPSelectedLevel = null;
+            QPLeaveDate = DateTime.MinValue;
+            QPArrivedDate = DateTime.MinValue;
 
             InjectionRecordViewModel.ins.ClearInjectionRecordList();
             TestingResultViewModel.ins.ClearTestingResultList();
