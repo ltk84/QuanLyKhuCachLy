@@ -652,7 +652,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             SendNotification = new RelayCommand<object>((p) =>
             {
-                if (message == "" || PeopleList2.ToArray().Length == 0) return false;
+                if (message == "" || ChoiceList.ToArray().Length == 0) return false;
                 return true;
             }, (p) =>
             {
@@ -1726,17 +1726,18 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             try
             {
-                var accountSid = "AC9cb120d0ee9f5196f765af6db11ce3dd";
+                var accountSid = "AC7539332c00efcc9cdad8d5f1a343f2e7";
                 var authToken = "0a8aed860e052232416fccfb8b86380";
-                authToken = authToken + "1";
+                authToken += "1";
                 TwilioClient.Init(accountSid, authToken);
 
-                var messageOptions = new CreateMessageOptions(
-                   new PhoneNumber(phoneNumber));
-                messageOptions.MessagingServiceSid = "MG9ba537e9324fff8eeac2f4eeb109d1f0";
-                messageOptions.Body = messageContent;
+                var message = MessageResource.Create(
+               body: messageContent,
+                from: new Twilio.Types.PhoneNumber("+17622007798"),
+                to: new Twilio.Types.PhoneNumber(phoneNumber)
+            );
 
-                var message = MessageResource.Create(messageOptions);
+
             }
             catch
             {

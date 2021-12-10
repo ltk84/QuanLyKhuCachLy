@@ -241,17 +241,20 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             try
             {
-                var accountSid = "AC9cb120d0ee9f5196f765af6db11ce3dd";
+                var accountSid = "AC7539332c00efcc9cdad8d5f1a343f2e7";
                 var authToken = "0a8aed860e052232416fccfb8b86380";
                 authToken += "1";
                 TwilioClient.Init(accountSid, authToken);
 
-                var messageOptions = new CreateMessageOptions(
-                   new PhoneNumber(phoneNumber));
-                messageOptions.MessagingServiceSid = "MG9ba537e9324fff8eeac2f4eeb109d1f0";
-                messageOptions.Body = messageContent;
 
-                var message = MessageResource.Create(messageOptions);
+
+                var message = MessageResource.Create(
+               body: messageContent,
+                from: new Twilio.Types.PhoneNumber("+17622007798"),
+                to: new Twilio.Types.PhoneNumber(phoneNumber)
+            );
+
+                 
             }
             catch
             {
