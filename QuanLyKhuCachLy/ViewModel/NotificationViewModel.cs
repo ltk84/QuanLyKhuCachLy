@@ -404,6 +404,7 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 _PeopleListView1 = value;
                 OnPropertyChanged();
+                updateQuarantineStatus1();
             }
         }
 
@@ -414,6 +415,7 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 _PeopleListView2 = value;
                 OnPropertyChanged();
+                updateQuarantineStatus2();
             }
         }
 
@@ -650,7 +652,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             SendNotification = new RelayCommand<object>((p) =>
             {
-                if (message == "" || PeopleList2.ToArray().Length == 0) return false;
+                if (message == "" || ChoiceList.ToArray().Length == 0) return false;
                 return true;
             }, (p) =>
             {
@@ -850,6 +852,25 @@ namespace QuanLyKhuCachLy.ViewModel
         }
 
         #region methodSelectPeopleWindown
+
+        public void updateQuarantineStatus1()
+        {
+            for (int i = 0; i < PeopleListView1.Length; i++)
+            {
+                PeopleListView1[i].quarantineStatus = (PeopleListView1[i].leaveDate.Date - DateTime.Now.Date).TotalDays < 0 ? "Đã hoàn thành" : "Đang cách ly";
+            }
+        }
+
+
+        public void updateQuarantineStatus2()
+        {
+            for (int i = 0; i < PeopleListView2.Length; i++)
+            {
+                PeopleListView2[i].quarantineStatus = (PeopleListView2[i].leaveDate.Date - DateTime.Now.Date).TotalDays < 0 ? "Đã hoàn thành" : "Đang cách ly";
+            }
+        }
+
+
         void RemoveItemFormList1(QuarantinePerson temp)
         {
             PeopleList1.Remove(temp);
@@ -1032,12 +1053,12 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType1 == "Ngày đi")
             {
-                FilterProperty1 = PeopleList1.Select(person => person.leaveDate.ToString()).ToArray();
+                FilterProperty1 = PeopleList1.Select(person => person.leaveDate.ToString("dd'/'MM'/'yyyy")).ToArray();
                 FilterProperty1 = FilterProperty1.Distinct().ToArray();
             }
             else if (SelectedFilterType1 == "Ngày đến")
             {
-                FilterProperty1 = PeopleList1.Select(person => person.arrivedDate.ToString()).ToArray();
+                FilterProperty1 = PeopleList1.Select(person => person.arrivedDate.ToString("dd'/'MM'/'yyyy")).ToArray();
                 FilterProperty1 = FilterProperty1.Distinct().ToArray();
             }
             else if (SelectedFilterType1 == "Ngày đến kì hạn xét nghiệm")
@@ -1082,12 +1103,12 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType2 == "Ngày đi")
             {
-                FilterProperty2 = PeopleList2.Select(person => person.leaveDate.ToString()).ToArray();
+                FilterProperty2 = PeopleList2.Select(person => person.leaveDate.ToString("dd'/'MM'/'yyyy")).ToArray();
                 FilterProperty2 = FilterProperty2.Distinct().ToArray();
             }
             else if (SelectedFilterType2 == "Ngày đến")
             {
-                FilterProperty2 = PeopleList2.Select(person => person.arrivedDate.ToString()).ToArray();
+                FilterProperty2 = PeopleList2.Select(person => person.arrivedDate.ToString("dd'/'MM'/'yyyy")).ToArray();
                 FilterProperty2 = FilterProperty2.Distinct().ToArray();
             }
             else if (SelectedFilterType2 == "Ngày đến kì hạn xét nghiệm")
@@ -1124,12 +1145,12 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType1 == "Ngày đi")
             {
-                PeopleListView1 = PeopleList1.Where(x => x.leaveDate.ToString() == SelectedFilterProperty1).ToArray();
+                PeopleListView1 = PeopleList1.Where(x => x.leaveDate.ToString("dd'/'MM'/'yyyy") == SelectedFilterProperty1).ToArray();
 
             }
             else if (SelectedFilterType1 == "Ngày đến")
             {
-                PeopleListView1 = PeopleList1.Where(x => x.arrivedDate.ToString() == SelectedFilterProperty1).ToArray();
+                PeopleListView1 = PeopleList1.Where(x => x.arrivedDate.ToString("dd'/'MM'/'yyyy") == SelectedFilterProperty1).ToArray();
             }
             else if (SelectedFilterType1 == "Ngày đến kì hạn xét nghiệm")
             {
@@ -1181,12 +1202,12 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType2 == "Ngày đi")
             {
-                PeopleListView2 = PeopleList2.Where(x => x.leaveDate.ToString() == SelectedFilterProperty2).ToArray();
+                PeopleListView2 = PeopleList2.Where(x => x.leaveDate.ToString("dd'/'MM'/'yyyy") == SelectedFilterProperty2).ToArray();
 
             }
             else if (SelectedFilterType2 == "Ngày đến")
             {
-                PeopleListView2 = PeopleList2.Where(x => x.arrivedDate.ToString() == SelectedFilterProperty2).ToArray();
+                PeopleListView2 = PeopleList2.Where(x => x.arrivedDate.ToString("dd'/'MM'/'yyyy") == SelectedFilterProperty2).ToArray();
 
             }
             else if (SelectedFilterType2 == "Ngày đến kì hạn xét nghiệm")
@@ -1385,7 +1406,7 @@ namespace QuanLyKhuCachLy.ViewModel
         }
 
         #endregion
-
+         
 
         #region methodAddEdit
 
@@ -1705,16 +1726,18 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             try
             {
-                var accountSid = "AC9cb120d0ee9f5196f765af6db11ce3dd";
-                var authToken = "17750dc00aa57d5f05d436cd9085652c";
+                var accountSid = "AC7539332c00efcc9cdad8d5f1a343f2e7";
+                var authToken = "0a8aed860e052232416fccfb8b86380";
+                authToken += "1";
                 TwilioClient.Init(accountSid, authToken);
 
-                var messageOptions = new CreateMessageOptions(
-                   new PhoneNumber(phoneNumber));
-                messageOptions.MessagingServiceSid = "MG9ba537e9324fff8eeac2f4eeb109d1f0";
-                messageOptions.Body = messageContent;
+                var message = MessageResource.Create(
+               body: messageContent,
+                from: new Twilio.Types.PhoneNumber("+17622007798"),
+                to: new Twilio.Types.PhoneNumber(phoneNumber)
+            );
 
-                var message = MessageResource.Create(messageOptions);
+
             }
             catch
             {

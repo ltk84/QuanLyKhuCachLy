@@ -224,7 +224,6 @@
 
 
 
-
         <DataGrid
             x:Name="QuarantinedPersonTable"
             Height="430"
@@ -256,13 +255,13 @@
                     Header="Họ và tên"
                     HeaderStyle="{StaticResource DataGridHeader}"
                     MaxLength="30" />
-                <materialDesign:DataGridTextColumn
+                <!--<materialDesign:DataGridTextColumn
                     Binding="{Binding dateOfBirth, StringFormat=dd-MM-yyyy}"
                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                     ElementStyle="{StaticResource DataGridElement}"
                     Header="Ngày sinh"
                     HeaderStyle="{StaticResource DataGridHeader}"
-                    MaxLength="30" />
+                    MaxLength="30" />-->
                 <materialDesign:DataGridTextColumn
                     Binding="{Binding QuarantineRoom.displayName}"
                     EditingElementStyle="{StaticResource EditingDataGridElement}"
@@ -275,6 +274,13 @@
                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                     ElementStyle="{StaticResource DataGridElement}"
                     Header="Nhóm đối tượng"
+                    HeaderStyle="{StaticResource DataGridHeader}"
+                    MaxLength="30" />
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding quarantineStatus}"
+                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                    ElementStyle="{StaticResource DataGridElement}"
+                    Header="Trạng thái"
                     HeaderStyle="{StaticResource DataGridHeader}"
                     MaxLength="30" />
                 <DataGridTemplateColumn
@@ -305,6 +311,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+
         <Grid HorizontalAlignment="Right">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
