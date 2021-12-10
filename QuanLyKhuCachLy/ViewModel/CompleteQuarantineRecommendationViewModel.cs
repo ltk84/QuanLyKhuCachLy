@@ -73,7 +73,7 @@ namespace QuanLyKhuCachLy.ViewModel
             });
             ConfirmCommand = new RelayCommand<Window>((p) =>
             {
-                if (SelectedCompleteQuarantinePersonsToResetRoom == null)
+                if (CompleteQuarantinePersonsToResetRoom == null || CompleteQuarantinePersonsToResetRoom.Count() == 0)
                     return false;
                 else
                     return true;
@@ -84,25 +84,19 @@ namespace QuanLyKhuCachLy.ViewModel
                 p.Close();
             });
             AddPersonToResetRoomListCommand = new RelayCommand<object>((p) => {
-                if (SelectedCompleteQuarantinePersons == null)
-                    return false;
-                else
-                    return true;
+                return true;
             }, (p) =>
             {
                 AddPersonToResetRoomList(SelectedCompleteQuarantinePersons);
             });
             RemovePersonFromResetRoomListCommand = new RelayCommand<object>((p) => {
-                if (SelectedCompleteQuarantinePersonsToResetRoom == null)
-                    return false;
-                else
-                    return true;
+                return true;
             }, (p) =>
             {
                 RemovePersonFromResetRoomList(SelectedCompleteQuarantinePersonsToResetRoom);
             });
             AddAllPersonToResetRoomListCommand = new RelayCommand<object>((p) => {
-                if (CompleteQuarantinePersons == null)
+                if (CompleteQuarantinePersons == null || CompleteQuarantinePersons.Count() == 0)
                     return false;
                 else
                     return true;
@@ -111,7 +105,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 AddManyPersonToResetRoomList();
             });
             RemoveAllPersonFromResetRoomListCommand = new RelayCommand<object>((p) => {
-                if (CompleteQuarantinePersonsToResetRoom == null)
+                if (CompleteQuarantinePersonsToResetRoom == null || CompleteQuarantinePersonsToResetRoom.Count() == 0)
                     return false;
                 else
                     return true;

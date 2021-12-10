@@ -101,7 +101,7 @@
                 Grid.Column="0"
                 Margin="0,8,0,0"
                 Style="{StaticResource DashboardContent}">
-                Số người cách ly chưa có phòng:
+                Số người cách ly mới chưa có phòng:
             </TextBlock>
             <TextBlock
                 Grid.Row="4"

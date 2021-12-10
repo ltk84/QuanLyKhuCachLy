@@ -670,7 +670,7 @@ namespace QuanLyKhuCachLy.ViewModel
             try
             {
                 ObservableCollection<Model.QuarantinePerson> QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
-                count = QuarantinePersonList.Where(person => person.roomID == null).Count();
+                count = QuarantinePersonList.Where(person => person.roomID == null && person.leaveDate > DateTime.Today).Count();
             }
             catch
             {

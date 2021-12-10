@@ -238,8 +238,8 @@
                             CanUserResizeRows="False"
                             HorizontalScrollBarVisibility="Visible"
                             IsReadOnly="True"
-                            ItemsSource="{Binding PersonsToAddToSelectedRoom}"
-                            SelectedItem="{Binding SelectedPersonToAddToRoom}"
+                            ItemsSource="{Binding CompleteQuarantinePersons}"
+                            SelectedItem="{Binding SelectedCompleteQuarantinePersons}"
                             SelectionMode="Single"
                             SelectionUnit="FullRow"
                             VerticalScrollBarVisibility="Visible">
