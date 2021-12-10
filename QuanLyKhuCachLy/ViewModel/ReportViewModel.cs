@@ -175,32 +175,14 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand SelectionChangedCommand { get; set; }
         public ICommand PrintCommand { get; set; }
         public ICommand ExportCommand { get; set; }
-        
+        public ICommand RefeshCommand { get; set; }
+
 
         #endregion
 
-        public ReportViewModel() {
-            Init();
-        }
-
-        #region Method
-
-        #region Fundamental Function
-
-        private void Init()
+        public ReportViewModel()
         {
-            EndDate = DateTime.Now.Date;
-            BeginDate = DateTime.Now.Date;
-
-            QuarantinePersonReportObjects = new ObservableCollection<string>() { "Người cách ly", "Nhóm đối tượng" };
-            SelectedQuarantinePersonReportObjects = QuarantinePersonReportObjects[0];
-            QuarantineAreaReportObjects = new ObservableCollection<string>() { "Sức chứa", "Phòng", "Mức độ phòng", "Nhân viên" };
-            SelectedQuarantineAreaReportObjects = QuarantineAreaReportObjects[0];
-            TestingReportObjects = new ObservableCollection<string>() { "Xét nghiệm" };
-            SelectedTestingReportObjects = TestingReportObjects[0];
-
-            QuarantinePersonFormatter = value => value.ToString("N0") + " người";
-            TestingFormatter = value => value.ToString("N0") + " mẫu";
+            Init();
 
             SelectionChangedCommand = new RelayCommand<object>((p) =>
             {
@@ -241,6 +223,34 @@ namespace QuanLyKhuCachLy.ViewModel
                     ErrorDialog.ShowDialog();
                 }
             });
+
+            RefeshCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (v) =>
+            {
+                Init();
+            });
+        }
+
+        #region Method
+
+        #region Fundamental Function
+
+        private void Init()
+        {
+            EndDate = DateTime.Now.Date;
+            BeginDate = DateTime.Now.Date;
+
+            QuarantinePersonReportObjects = new ObservableCollection<string>() { "Người cách ly", "Nhóm đối tượng" };
+            SelectedQuarantinePersonReportObjects = QuarantinePersonReportObjects[0];
+            QuarantineAreaReportObjects = new ObservableCollection<string>() { "Sức chứa", "Phòng", "Mức độ phòng", "Nhân viên" };
+            SelectedQuarantineAreaReportObjects = QuarantineAreaReportObjects[0];
+            TestingReportObjects = new ObservableCollection<string>() { "Xét nghiệm" };
+            SelectedTestingReportObjects = TestingReportObjects[0];
+
+            QuarantinePersonFormatter = value => value.ToString("N0") + " người";
+            TestingFormatter = value => value.ToString("N0") + " mẫu";
 
             ToFirstTab();
         }
@@ -360,7 +370,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-               // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng người cách ly!");
+                // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng người cách ly!");
             }
 
             return count;
@@ -376,7 +386,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-               // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng người cách ly mới!");
+                // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng người cách ly mới!");
             }
 
             return count;
@@ -394,7 +404,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-               // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng người hoàn thành cách ly!");
+                // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng người hoàn thành cách ly!");
             }
 
             return count;
@@ -450,7 +460,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 if (severity != null)
                 {
                     count = DataProvider.ins.db.QuarantinePersons.Where(person => (person.leaveDate > date) && (person.arrivedDate <= date) && (person.levelID == severity.id)).Count();
-                } 
+                }
                 else
                 {
                     ObservableCollection<Model.QuarantinePerson> QuarantinePersonList = new ObservableCollection<Model.QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
@@ -459,7 +469,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-               // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng người cách ly mới!");
+                // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng người cách ly mới!");
             }
 
             return count;
@@ -493,7 +503,7 @@ namespace QuanLyKhuCachLy.ViewModel
                         DataLabels = OccupiedCapacity != 0
                     },
                 };
-            } 
+            }
             else
             {
                 SecondSeriesCollection = new SeriesCollection
@@ -580,7 +590,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-               // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng phòng đã đầy!");
+                // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng phòng đã đầy!");
             }
             return count;
         }
@@ -594,7 +604,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-               // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng phòng trống!");
+                // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng phòng trống!");
             }
             return count;
         }
@@ -661,7 +671,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-               // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng phòng theo mức độ!");
+                // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng phòng theo mức độ!");
             }
 
             return count;
@@ -710,7 +720,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-               // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng  nhân viên theo phòng ban!");
+                // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng  nhân viên theo phòng ban!");
             }
             return count;
         }
@@ -755,7 +765,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-               // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng xét nghiệm dương tính!");
+                // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng xét nghiệm dương tính!");
             }
             return count;
         }
@@ -769,7 +779,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
-               // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng xét nghiệm âm tính!");
+                // MessageBox.Show("Đã có lỗi xảy ra khi xử lý đếm số lượng xét nghiệm âm tính!");
             }
             return count;
         }
