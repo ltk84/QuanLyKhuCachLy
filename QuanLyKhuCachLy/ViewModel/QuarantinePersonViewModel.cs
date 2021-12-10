@@ -1406,7 +1406,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 var tempPeopleArray = QuarantinePersonList.ToArray();
                 for (int i = 0; i< tempPeopleArray.Length; i++)
                 {
-                    if ((today - tempPeopleArray[i].leaveDate).TotalDays > 0) QuarantinePersonList.Remove(tempPeopleArray[i]);
+                    if ((today - tempPeopleArray[i].leaveDate.Date).TotalDays > 0) QuarantinePersonList.Remove(tempPeopleArray[i]);
                 }
                 
             }
@@ -1416,7 +1416,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 var tempPeopleArray = QuarantinePersonList.ToArray();
                 for (int i = 0; i < tempPeopleArray.Length; i++)
                 {
-                    if ((today - tempPeopleArray[i].leaveDate).TotalDays <= 0) QuarantinePersonList.Remove(tempPeopleArray[i]);
+                    if ((today - tempPeopleArray[i].leaveDate.Date).TotalDays <= 0) QuarantinePersonList.Remove(tempPeopleArray[i]);
                 }
             }
             
@@ -1483,12 +1483,12 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType == "Ngày hoàn thành")
             {
-                FilterProperty = QuarantinePersonList.Select(person => person.leaveDate.ToString()).ToArray();
+                FilterProperty = QuarantinePersonList.Select(person => person.leaveDate.Date.ToString("dd'/'MM'/'yyyy")).ToArray();
                 FilterProperty = FilterProperty.Distinct().ToArray();
             }
             else if (SelectedFilterType == "Ngày đến")
             {
-                FilterProperty = QuarantinePersonList.Select(person => person.arrivedDate.ToString()).ToArray();
+                FilterProperty = QuarantinePersonList.Select(person => person.arrivedDate.Date.ToString("dd'/'MM'/'yyyy")).ToArray();
                 FilterProperty = FilterProperty.Distinct().ToArray();
             }
             else if (SelectedFilterType == "Đến kì hạn xét nghiệm")
@@ -1581,12 +1581,12 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType == "Ngày hoàn thành")
             {
-                PeopleListView = QuarantinePersonList.Where(x => x.leaveDate.ToString() == SelectedFilterProperty).ToArray();
+                PeopleListView = QuarantinePersonList.Where(x => x.leaveDate.ToString("dd'/'MM'/'yyyy") == SelectedFilterProperty).ToArray();
 
             }
             else if (SelectedFilterType == "Ngày đến")
             {
-                PeopleListView = QuarantinePersonList.Where(x => x.arrivedDate.ToString() == SelectedFilterProperty).ToArray();
+                PeopleListView = QuarantinePersonList.Where(x => x.arrivedDate.ToString("dd'/'MM'/'yyyy") == SelectedFilterProperty).ToArray();
 
             }
             else if (SelectedFilterType == "Đến kì hạn xét nghiệm")
@@ -1824,7 +1824,7 @@ namespace QuanLyKhuCachLy.ViewModel
                         {
                             DataProvider.ins.db.Addresses.Add(listAdress[i]);
                             DataProvider.ins.db.SaveChanges();
-                            listQuarantinePerson[i].leaveDate = listQuarantinePerson[i].arrivedDate.AddDays(QAInformation.requiredDayToFinish);
+                            listQuarantinePerson[i].leaveDate = listQuarantinePerson[i].arrivedDate.AddDays(QAInformation.requiredDayToFinish).Date;
                             listQuarantinePerson[i].addressID = listAdress[i].id;
                             DataProvider.ins.db.QuarantinePersons.Add(listQuarantinePerson[i]);
                             DataProvider.ins.db.SaveChanges();
@@ -2718,7 +2718,7 @@ namespace QuanLyKhuCachLy.ViewModel
                      
                             DataProvider.ins.db.Addresses.Add(listAdress[i]);
                             DataProvider.ins.db.SaveChanges();
-                            listQuarantinePerson[i].leaveDate = listQuarantinePerson[i].arrivedDate.AddDays(QAInformation.requiredDayToFinish);
+                            listQuarantinePerson[i].leaveDate = listQuarantinePerson[i].arrivedDate.AddDays(QAInformation.requiredDayToFinish).Date;
                             listQuarantinePerson[i].addressID = listAdress[i].id;
                             DataProvider.ins.db.QuarantinePersons.Add(listQuarantinePerson[i]);
                             DataProvider.ins.db.SaveChanges();

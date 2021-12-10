@@ -1053,12 +1053,12 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType1 == "Ngày đi")
             {
-                FilterProperty1 = PeopleList1.Select(person => person.leaveDate.ToString()).ToArray();
+                FilterProperty1 = PeopleList1.Select(person => person.leaveDate.ToString("dd'/'MM'/'yyyy")).ToArray();
                 FilterProperty1 = FilterProperty1.Distinct().ToArray();
             }
             else if (SelectedFilterType1 == "Ngày đến")
             {
-                FilterProperty1 = PeopleList1.Select(person => person.arrivedDate.ToString()).ToArray();
+                FilterProperty1 = PeopleList1.Select(person => person.arrivedDate.ToString("dd'/'MM'/'yyyy")).ToArray();
                 FilterProperty1 = FilterProperty1.Distinct().ToArray();
             }
             else if (SelectedFilterType1 == "Ngày đến kì hạn xét nghiệm")
@@ -1103,12 +1103,12 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType2 == "Ngày đi")
             {
-                FilterProperty2 = PeopleList2.Select(person => person.leaveDate.ToString()).ToArray();
+                FilterProperty2 = PeopleList2.Select(person => person.leaveDate.ToString("dd'/'MM'/'yyyy")).ToArray();
                 FilterProperty2 = FilterProperty2.Distinct().ToArray();
             }
             else if (SelectedFilterType2 == "Ngày đến")
             {
-                FilterProperty2 = PeopleList2.Select(person => person.arrivedDate.ToString()).ToArray();
+                FilterProperty2 = PeopleList2.Select(person => person.arrivedDate.ToString("dd'/'MM'/'yyyy")).ToArray();
                 FilterProperty2 = FilterProperty2.Distinct().ToArray();
             }
             else if (SelectedFilterType2 == "Ngày đến kì hạn xét nghiệm")
@@ -1145,12 +1145,12 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType1 == "Ngày đi")
             {
-                PeopleListView1 = PeopleList1.Where(x => x.leaveDate.ToString() == SelectedFilterProperty1).ToArray();
+                PeopleListView1 = PeopleList1.Where(x => x.leaveDate.ToString("dd'/'MM'/'yyyy") == SelectedFilterProperty1).ToArray();
 
             }
             else if (SelectedFilterType1 == "Ngày đến")
             {
-                PeopleListView1 = PeopleList1.Where(x => x.arrivedDate.ToString() == SelectedFilterProperty1).ToArray();
+                PeopleListView1 = PeopleList1.Where(x => x.arrivedDate.ToString("dd'/'MM'/'yyyy") == SelectedFilterProperty1).ToArray();
             }
             else if (SelectedFilterType1 == "Ngày đến kì hạn xét nghiệm")
             {
@@ -1202,12 +1202,12 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType2 == "Ngày đi")
             {
-                PeopleListView2 = PeopleList2.Where(x => x.leaveDate.ToString() == SelectedFilterProperty2).ToArray();
+                PeopleListView2 = PeopleList2.Where(x => x.leaveDate.ToString("dd'/'MM'/'yyyy") == SelectedFilterProperty2).ToArray();
 
             }
             else if (SelectedFilterType2 == "Ngày đến")
             {
-                PeopleListView2 = PeopleList2.Where(x => x.arrivedDate.ToString() == SelectedFilterProperty2).ToArray();
+                PeopleListView2 = PeopleList2.Where(x => x.arrivedDate.ToString("dd'/'MM'/'yyyy") == SelectedFilterProperty2).ToArray();
 
             }
             else if (SelectedFilterType2 == "Ngày đến kì hạn xét nghiệm")
@@ -1727,7 +1727,8 @@ namespace QuanLyKhuCachLy.ViewModel
             try
             {
                 var accountSid = "AC9cb120d0ee9f5196f765af6db11ce3dd";
-                var authToken = "17750dc00aa57d5f05d436cd9085652c";
+                var authToken = "0a8aed860e052232416fccfb8b86380";
+                authToken = authToken + "1";
                 TwilioClient.Init(accountSid, authToken);
 
                 var messageOptions = new CreateMessageOptions(
