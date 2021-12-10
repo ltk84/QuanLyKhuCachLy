@@ -261,6 +261,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         public ICommand ToExportExcel { get; set; }
 
+        public ICommand ToGetFormatExcel { get; set; }
         #endregion
 
 
@@ -389,7 +390,14 @@ namespace QuanLyKhuCachLy.ViewModel
                 bufferWindow.ShowDialog();
                 ClearPersonList();
             });
-
+            ToGetFormatExcel = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }
+            , (p) =>
+            {
+                GetFormatExcel();
+            });
             RefeshCommand = new RelayCommand<object>((p) =>
             {
                 return true;
@@ -927,6 +935,22 @@ namespace QuanLyKhuCachLy.ViewModel
                 sheet.Range["D" + i.ToString()].Value = (RoomListView[i - 2].capacity - countInRoom).ToString();
                 sheet.Range["E" + i.ToString()].Value = RoomListView[i - 2].levelID != null?severity.description:"";
             }
+        }
+        void GetFormatExcel()
+        {
+            Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
+            app.Visible = true;
+            app.WindowState = Microsoft.Office.Interop.Excel.XlWindowState.xlMaximized;
+            Microsoft.Office.Interop.Excel.Workbook file = app.Workbooks.Add(Microsoft.Office.Interop.Excel.XlWBATemplate.xlWBATWorksheet);
+            Microsoft.Office.Interop.Excel.Worksheet sheet = file.Worksheets[1];
+            sheet.Columns[1].ColumnWidth = 5;
+            sheet.Columns[2].ColumnWidth = 15;
+            sheet.Columns[3].ColumnWidth = 10;
+            sheet.Columns[4].ColumnWidth = 10;
+            sheet.Range["A1"].Value = "STT";
+            sheet.Range["B1"].Value = "Tên";
+            sheet.Range["C1"].Value = "Sức chứa";
+            sheet.Range["D1"].Value = "Nhóm đối tượng";
         }
         #endregion
     }

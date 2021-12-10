@@ -76,7 +76,7 @@ Please make sure that your computer has these installed before continuing to the
 
 ### Installation
 
-1. Download [QLKCLInstallation.zip]() file.
+1. Download [QLKCLInstallation.zip](https://github.com/ltk84/QuanLyKhuCachLy/releases/download/v1.0.0/QLKCLInstallation.zip) file.
 2. Extract the zip file.
 3. Run **createdb.bat** file in **InitDB** folder.
 4. Run **QLKCLSetup.msi** file in root folder to install.

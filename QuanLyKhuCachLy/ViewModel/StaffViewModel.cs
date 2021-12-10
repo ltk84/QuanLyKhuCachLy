@@ -380,6 +380,8 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand CancelAddStaffTabCommand { get; set; }
         public ICommand RefeshCommand { get; set; }
         public ICommand ToExportExcel { get; set; }
+
+        public ICommand ToGetFormatExcel { get; set; }
         #endregion
 
         #region validation
@@ -570,6 +572,16 @@ namespace QuanLyKhuCachLy.ViewModel
                 addStaffScreen = new AddStaffScreen();
                 addStaffScreen.ShowDialog();
                 ClearData();
+
+            });
+
+            ToGetFormatExcel = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+
+                GetFormatExcel();
 
             });
 
@@ -1498,6 +1510,36 @@ namespace QuanLyKhuCachLy.ViewModel
                 sheet.Range["J" + i.ToString()].Value = StaffListView[i - 2].jobTitle;
                 sheet.Range["K" + i.ToString()].Value = StaffListView[i - 2].department;
             }
+        }
+        void GetFormatExcel()
+        {
+            Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
+            app.Visible = true;
+            app.WindowState = Microsoft.Office.Interop.Excel.XlWindowState.xlMaximized;
+            Microsoft.Office.Interop.Excel.Workbook file = app.Workbooks.Add(Microsoft.Office.Interop.Excel.XlWBATemplate.xlWBATWorksheet);
+            Microsoft.Office.Interop.Excel.Worksheet sheet = file.Worksheets[1];
+            sheet.Columns[1].ColumnWidth = 5;
+            sheet.Columns[2].ColumnWidth = 25;
+            sheet.Columns[3].ColumnWidth = 12;
+            sheet.Columns[4].ColumnWidth = 9;
+            sheet.Columns[5].ColumnWidth = 12;
+            sheet.Columns[6].ColumnWidth = 12;
+            sheet.Columns[7].ColumnWidth = 12;
+            sheet.Columns[8].ColumnWidth = 10;
+            sheet.Columns[9].ColumnWidth = 12;
+            sheet.Columns[10].ColumnWidth = 12;
+            sheet.Columns[11].ColumnWidth = 50;
+            sheet.Range["A1"].Value = "STT";
+            sheet.Range["B1"].Value = "Họ và tên";
+            sheet.Range["C1"].Value = "Ngày sinh";
+            sheet.Range["D1"].Value = "Giới tính";
+            sheet.Range["E1"].Value = "CMND/CCCD";
+            sheet.Range["F1"].Value = "Quốc tịch";
+            sheet.Range["G1"].Value = "SĐT";
+            sheet.Range["H1"].Value = "MaBH";
+            sheet.Range["I1"].Value = "Chức vụ";
+            sheet.Range["J1"].Value = "Phòng ban";
+            sheet.Range["K1"].Value = "Địa chỉ";
         }
         #endregion
     }

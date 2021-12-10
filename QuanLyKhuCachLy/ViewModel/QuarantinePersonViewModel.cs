@@ -790,6 +790,9 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand ToExportExcel { get; set; }
         public ICommand ToAddTestingResutlFromExcel { get; set; }
 
+        public ICommand ToViewListInGoogleSheet { get; set; }
+        public ICommand ToGetFormatExcel { get; set; }
+
         #endregion
 
         #region change room 
@@ -1025,6 +1028,31 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 TabIndexInformation = 1;
                 BackToPersonList();
+            });
+
+            ToViewListInGoogleSheet = new RelayCommand<Window>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                string linkSheet = "";
+                linkSheet = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().googleSheetURL;
+                if (linkSheet == "" || linkSheet == null)
+                {
+                    System.Diagnostics.Process.Start("https://docs.google.com/spreadsheets/d/1R6zuZB_xFuzWrCnl4j0JLZ3da5HtprRrmjeQ3LdxW44/edit");
+                }
+                else
+                {
+                    System.Diagnostics.Process.Start(linkSheet);
+                }
+            });
+
+            ToGetFormatExcel = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                GetFormatExcel();
             });
 
 
@@ -1790,9 +1818,11 @@ namespace QuanLyKhuCachLy.ViewModel
                 Excel.Application xlApp = new Excel.Application();
                 Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(path);
                 Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
+                Excel._Worksheet xlWorksheet2 = xlWorkbook.Sheets[2];
                 Excel.Range xlRange = xlWorksheet.UsedRange;
+                Excel.Range xlRange2 = xlWorksheet2.UsedRange;
                 int rowCount = xlRange.Rows.Count;
-                int colCount = xlRange.Columns.Count;
+                int rowCount2 = xlRange2.Rows.Count;
                 if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2 != "STT" ||
                 xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2 != "Họ và tên" ||
                 xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2 != "Ngày sinh" ||
@@ -1960,6 +1990,59 @@ namespace QuanLyKhuCachLy.ViewModel
                     listQuarantinePerson.Add(quarantinePerson);
                     listInjectionRecords.Add(injectionRecords);
                 }
+                List<DestinationHistory> ListDestinationHistories = new List<DestinationHistory>();
+                List<Address> ListAddressDestinations = new List<Address>();
+                List<string> listCmnd = new List<string>();
+                if(xlRange2.Cells[1, 1] != null && xlRange2.Cells[1, 1].Value2 == "STT" &&
+                xlRange2.Cells[1, 2] != null && xlRange2.Cells[1, 2].Value2 == "CMND/CCCD" &&
+                xlRange2.Cells[1, 3] != null && xlRange2.Cells[1, 3].Value2 == "Ngày" &&
+                xlRange2.Cells[1, 4] != null && xlRange2.Cells[1, 4].Value2 == "Địa điểm")
+                {
+                    for (int i = 2; i <= rowCount2; i++)
+                    {
+                        DestinationHistory destination = new DestinationHistory();
+                        Address address = new Address();
+                        if (xlRange2.Cells[i, 2] != null && xlRange2.Cells[i, 2].Value2 != null)
+                        { 
+                           
+                        }
+                        else return;
+                        if (xlRange2.Cells[i, 3] != null && xlRange2.Cells[i, 3].Value2 != null)
+                        {
+                            DateTime date = DateTime.FromOADate(double.Parse(xlRange2.Cells[i, 3].Value2.ToString()));
+                            destination.dateArrive = date;
+                        }
+                        if(xlRange2.Cells[i, 4] != null && xlRange2.Cells[i, 4].Value2 != null)
+                        {
+                            string[] arrListStr = xlRange2.Cells[i, 4].Value2.ToString().Split(',');
+                            if (arrListStr.Length < 3)
+                            {
+                                CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                                var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                                FailNotificationVM.Content = xlRange2.Cells[i, 2].Value2.ToString() + " destination has error in address";
+                                ErrorDialog.ShowDialog();
+                                //MessageBox.Show(xlRange.Cells[i, 2].Value2.ToString() + " has error in address");
+                                return;
+                            }
+                            if (arrListStr.Length == 3)
+                            {
+                                address.province = arrListStr[2];
+                                address.district = arrListStr[1];
+                                address.ward = arrListStr[0];
+                            }
+                            else
+                            {
+                                address.province = arrListStr[3];
+                                address.district = arrListStr[2];
+                                address.ward = arrListStr[1];
+                                address.streetName = arrListStr[0];
+                            }
+                        }
+                        ListAddressDestinations.Add(address);
+                        ListDestinationHistories.Add(destination);
+                        listCmnd.Add(xlRange2.Cells[i, 2].Value2.ToString());
+                    }
+                }
                 using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
                 {
                     try
@@ -1990,6 +2073,22 @@ namespace QuanLyKhuCachLy.ViewModel
                                 }
                                 DataProvider.ins.db.SaveChanges();
                             }
+                        }
+                        for (int i =  0; i < ListDestinationHistories.Count; i++)
+                        {
+
+                            string cmnd = listCmnd[i];
+                                bool checkID = DataProvider.ins.db.QuarantinePersons.Where(x => x.citizenID == cmnd).Count() == 1 ? true : false;
+                                if (checkID)
+                                {
+                                    ListDestinationHistories[i].quarantinePersonID = DataProvider.ins.db.QuarantinePersons.Where(x => x.citizenID == cmnd).FirstOrDefault().id;
+                                }
+                                DataProvider.ins.db.Addresses.Add(ListAddressDestinations[i]);
+                                DataProvider.ins.db.SaveChanges();
+                                ListDestinationHistories[i].addressID = ListAddressDestinations[i].id;
+                                DataProvider.ins.db.DestinationHistories.Add(ListDestinationHistories[i]);
+                                DataProvider.ins.db.SaveChanges();
+                            
                         }
                         PeopleListView = DataProvider.ins.db.QuarantinePersons.ToArray();
                         InitPersonList();
@@ -2670,7 +2769,14 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             string[] Scopes = { SheetsService.Scope.Spreadsheets };
             string ApplicationName = "QLKCL";
+            string linkSheet = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().googleSheetURL;
+            var ctrc = linkSheet.Split('/');
+            
             String spreadsheetId = "1R6zuZB_xFuzWrCnl4j0JLZ3da5HtprRrmjeQ3LdxW44";
+            if (ctrc[ctrc.Length - 2] != "" && ctrc[ctrc.Length - 2] != null)
+            {
+                spreadsheetId = ctrc[ctrc.Length - 2];
+            }
             String range = "Sheet1";
             string credentialPath = Path.Combine(Environment.CurrentDirectory, ".credentials", ApplicationName);
             UserCredential credential;
@@ -2817,7 +2923,6 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (values[i][11] != null)
                     {
                         quarantinePerson.levelID = Int32.Parse(values[i][11].ToString());
-
                     }
                     if (values[i][12] != null)
                     {
@@ -3018,7 +3123,7 @@ namespace QuanLyKhuCachLy.ViewModel
             Microsoft.Office.Interop.Excel.Worksheet sheet = file.Worksheets[1];
             Microsoft.Office.Interop.Excel.Worksheet sheet2 = file.Worksheets[2];
             sheet2.Name = "DS ID";
-            sheet2.Name = "Danh sách người cách ly";
+            sheet.Name = "Danh sách người cách ly";
             sheet.Columns[1].ColumnWidth = 5;
             sheet.Columns[2].ColumnWidth = 25;
             sheet.Columns[3].ColumnWidth = 12;
@@ -3183,8 +3288,11 @@ namespace QuanLyKhuCachLy.ViewModel
                     {
                         for (int i = 0; i < listTestingResults.Count; i++)
                         {
-                            DataProvider.ins.db.TestingResults.Add(listTestingResults[i]);
-                            UpdateLeaveDateAfterAddTestResult(listTestingResults[i], isExecute);
+                            bool checkID = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == listTestingResults[i].quarantinePersonID).Count() == 1 ? true : false;
+                            if (checkID) {
+                                DataProvider.ins.db.TestingResults.Add(listTestingResults[i]);
+                                UpdateLeaveDateAfterAddTestResult(listTestingResults[i], isExecute);
+                            }
                         }
                         DataProvider.ins.db.SaveChanges();
                         transaction.Commit();
@@ -3266,6 +3374,58 @@ namespace QuanLyKhuCachLy.ViewModel
                 }
 
             }
+        }
+        void GetFormatExcel()
+        {
+            Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
+            app.Visible = true;
+            app.WindowState = Microsoft.Office.Interop.Excel.XlWindowState.xlMaximized;
+            Microsoft.Office.Interop.Excel.Workbook file = app.Workbooks.Add(Microsoft.Office.Interop.Excel.XlWBATemplate.xlWBATWorksheet);
+            file.Sheets.Add();
+            Microsoft.Office.Interop.Excel.Worksheet sheet = file.Worksheets[1];
+            Microsoft.Office.Interop.Excel.Worksheet sheet1 = file.Worksheets[2];
+            sheet.Name = "Danh sách người cách ly";
+            sheet1.Name = "Lịch sử di chuyển";
+            sheet.Columns[1].ColumnWidth = 5;
+            sheet.Columns[2].ColumnWidth = 25;
+            sheet.Columns[3].ColumnWidth = 12;
+            sheet.Columns[4].ColumnWidth = 9;
+            sheet.Columns[5].ColumnWidth = 30;
+            sheet.Columns[6].ColumnWidth = 30;
+            sheet.Columns[7].ColumnWidth = 12;
+            sheet.Columns[8].ColumnWidth = 10;
+            sheet.Columns[9].ColumnWidth = 12;
+            sheet.Columns[10].ColumnWidth = 10;
+            sheet.Columns[11].ColumnWidth = 12;
+            sheet.Columns[12].ColumnWidth = 12;
+            sheet.Columns[13].ColumnWidth = 10;
+            sheet.Columns[14].ColumnWidth = 20;
+            sheet.Columns[15].ColumnWidth = 50;
+            sheet.Range["A1"].Value = "STT";
+            sheet.Range["B1"].Value = "Họ và tên";
+            sheet.Range["C1"].Value = "Ngày sinh";
+            sheet.Range["D1"].Value = "Giới tính";
+            sheet.Range["E1"].Value = "Địa chỉ thường trú";
+            sheet.Range["F1"].Value = "Địa chỉ tạm trú";
+            sheet.Range["G1"].Value = "CMND/CCCD";
+            sheet.Range["H1"].Value = "Mã bảo hiểm";
+            sheet.Range["I1"].Value = "Quốc tịch";
+            sheet.Range["J1"].Value = "SĐT";
+            sheet.Range["K1"].Value = "Triệu chứng";
+            sheet.Range["L1"].Value = "Nhóm đối tượng";
+            sheet.Range["M1"].Value = "Ngày đến";
+            sheet.Range["N1"].Value = "Thông tin tiêm chủng";
+            sheet.Range["O2"].Value = "Lưu ý:Các dữ liệu về địa điểm sau dấu ',' không có khoảng trống,";
+            sheet.Range["O3"].Value = "các từ chỉ địa phương ghi hoa chữ đầu.";
+            sheet.Range["O4"].Value = "VD: Thôn A,Xã B,Huyện C,Tỉnh D";
+            sheet.Range["O6"].Value = "CMND/CCCD, Mã BH, Triệu chứng, nhóm đối tượng,";
+            sheet.Range["O7"].Value = "Thông tin tiêm chủng và di chuyển có thể để trống.";
+            sheet.Range["O9"].Value = "Xóa lưu ý này trước khi thêm.";
+            sheet1.Range["A1"].Value = "STT";
+            sheet1.Range["B1"].Value = "CMND/CCCD";
+            sheet1.Range["C1"].Value = "Ngày";
+            sheet1.Range["D1"].Value = "Địa điểm";
+
         }
         #endregion
     }
