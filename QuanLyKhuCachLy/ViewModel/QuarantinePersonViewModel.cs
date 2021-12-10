@@ -1101,7 +1101,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             ChangeRoomCommand = new RelayCommand<Window>((p) =>
             {
-                if (SelectedItem != null && SelectedItem.leaveDate > DateTime.Today)
+                if (SelectedItem != null && SelectedItem.roomID != null && SelectedItem.leaveDate > DateTime.Today)
                     return true;
                 return false;
             }, (p) =>
@@ -1174,6 +1174,8 @@ namespace QuanLyKhuCachLy.ViewModel
                     p.Close();
 
                     DataProvider.ins.db.SaveChanges();
+
+                    PeopleListView = QuarantinePersonList.ToArray();
 
                     transaction.Commit();
                 }
@@ -1422,9 +1424,9 @@ namespace QuanLyKhuCachLy.ViewModel
                     var Person = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == SelectedItem.id).FirstOrDefault();
                     if (Person == null) return;
 
-                    Person.roomID = null;
                     if (Person.arrivedDate > DateTime.Today) { throw new InvalidOperationException(); }
-                    Person.leaveDate = DateTime.Today;
+                    if (Person.leaveDate > DateTime.Today) Person.leaveDate = DateTime.Today;
+                    Person.roomID = null;
 
                     DataProvider.ins.db.SaveChanges();
 

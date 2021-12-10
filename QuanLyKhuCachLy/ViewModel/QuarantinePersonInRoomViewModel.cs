@@ -621,9 +621,9 @@ namespace QuanLyKhuCachLy.ViewModel
                     var Person = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == SelectedItem.id).FirstOrDefault();
                     if (Person == null) return;
 
-                    Person.roomID = null;
                     if (Person.arrivedDate > DateTime.Today) { throw new InvalidOperationException(); }
-                    Person.leaveDate = DateTime.Today;
+                    if (Person.leaveDate > DateTime.Today) Person.leaveDate = DateTime.Today;
+                    Person.roomID = null;
 
                     RemoveFromRoomUI();
 
