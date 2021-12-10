@@ -32,6 +32,15 @@ namespace QuanLyKhuCachLy.ViewModel
             set { _isYes = value; OnPropertyChanged(); }
         }
 
+        private bool _isThreeButton;
+
+        public bool IsThreeButton
+        {
+            get { return _isThreeButton; }
+            set { _isThreeButton = value; }
+        }
+
+
         public ICommand CancelCommand { get; set; }
         public ICommand NotActionConfirmationCommand { get; set; }
         public ICommand DoActionConfirmationCommand { get; set; }
@@ -39,6 +48,7 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             Title = "Thay đổi mức độ nhóm đối tượng";
             Content = "Bạn có muốn thay đổi nhóm đối tượng của những người trong phòng theo giá trị vừa thay đổi của phòng?";
+            IsThreeButton = true;
             CancelCommand = new RelayCommand<Window>((p) =>
             {
                 return true;

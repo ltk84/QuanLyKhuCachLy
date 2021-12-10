@@ -52,7 +52,8 @@
                     Command="{Binding CancelCommand}"
                     CommandParameter="{Binding ElementName=ActionConfirmationScreen}"
                     FontSize="20"
-                    Style="{StaticResource CancelActionConfirmationButton}">
+                    Style="{StaticResource CancelActionConfirmationButton}"
+                    Visibility="{Binding IsThreeButton}">
                     <TextBlock Text="Hủy bỏ" />
                 </Button>
                 <Button

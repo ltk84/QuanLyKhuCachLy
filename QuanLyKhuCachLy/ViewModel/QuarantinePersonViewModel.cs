@@ -3171,6 +3171,7 @@ namespace QuanLyKhuCachLy.ViewModel
                         for (int i = 0; i < listTestingResults.Count; i++)
                         {
                             DataProvider.ins.db.TestingResults.Add(listTestingResults[i]);
+                            UpdateLeaveDateAfterAddTestResult(listTestingResults[i]);
                         }
                         DataProvider.ins.db.SaveChanges();
                         transaction.Commit();
@@ -3228,6 +3229,41 @@ namespace QuanLyKhuCachLy.ViewModel
                 }
                 ErrorDialog.ShowDialog();
 
+            }
+
+            RefeshTab();
+        }
+
+        void UpdateLeaveDateAfterAddTestResult(TestingResult testing)
+        {
+            if (!testing.isPositive) return;
+
+            var Person = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == testing.quarantinePersonID).FirstOrDefault();
+            if (Person == null) return;
+
+            var QA = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
+            if (QA == null) return;
+
+            ActionConfirmation confirmDialog = new ActionConfirmation();
+            var vm = confirmDialog.DataContext as ActionConfirmationViewModel;
+            vm.IsThreeButton = false;
+            vm.Title = $"Gia hạn thời gian dự kiến hoàn thành cách ly thêm {QA.requiredDayToFinish} ngày";
+            vm.Content = "Bạn có muốn thay đổi thời gian dự kiến hoàn thành cách ly của người có kết quả xét nghiệm dương tính";
+
+            var ShouldBeAddDate = testing.dateTesting.AddDays(QA.requiredDayToFinish);
+            if (ShouldBeAddDate > Person.leaveDate)
+            {
+                var result = confirmDialog.ShowDialog();
+
+                if (result == true)
+                {
+                    if (vm.IsYes)
+                    {
+                        Person.leaveDate = ShouldBeAddDate;
+                    }
+                }
+
+                confirmDialog.Close();
             }
         }
         #endregion
