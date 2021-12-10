@@ -346,6 +346,31 @@
                                 Style="{StaticResource DashboardButton}" />
                         </StackPanel>
                     </Border>
+                    <Border
+                        Margin="0,25,0,0"
+                        Style="{StaticResource RecommendationField}"
+                        Visibility="{Binding FourthRecommendationVisibility}">
+                        <StackPanel Margin="40,25">
+                            <TextBlock
+                                FontSize="20"
+                                Style="{StaticResource DashboardTitle}"
+                                Text="{Binding FourthRecommendationTitle}" />
+                            <TextBlock
+                                Margin="0,5,0,0"
+                                FontSize="14"
+                                Style="{StaticResource DashboardContent}"
+                                Text="{Binding FourthRecommendationContent}" />
+                            <Button
+                                Width="236"
+                                Height="35"
+                                Margin="0,20,0,0"
+                                HorizontalAlignment="Right"
+                                Command="{Binding ToCompleteQuarantineRecommendation}"
+                                Content="Xem đề xuất hoàn thành cách ly"
+                                FontSize="12"
+                                Style="{StaticResource DashboardButton}" />
+                        </StackPanel>
+                    </Border>
                 </StackPanel>
             </ScrollViewer>
             <Border

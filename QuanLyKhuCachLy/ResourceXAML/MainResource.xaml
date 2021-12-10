@@ -19,6 +19,7 @@
     <viewmodel:TestingResultViewModel x:Key="TestingVM" />
     <viewmodel:DeleteConfirmationViewModel x:Key="DeleteConfirmationVM" />
     <viewmodel:ArrangeRoomRecommendationViewModel x:Key="ArrangeRoomRecommendationVM" />
+    <viewmodel:CompleteQuarantineRecommendationViewModel x:Key="CompleteQuarantineRecommendationVM" />
     <viewmodel:ActionConfirmationViewModel x:Key="ActionConfirmationVM" />
     <viewmodel:ProposeNotificationViewModel x:Key="ProposeNotificationVM" />
     <viewmodel:FailNotificationViewModel x:Key="FailNotificationVM" />
