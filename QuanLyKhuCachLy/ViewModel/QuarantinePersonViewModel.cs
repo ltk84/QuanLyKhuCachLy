@@ -1259,7 +1259,7 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             for (int i =0 ; i < PeopleListView.Length; i++)
             {
-                PeopleListView[i].quarantineStatus = (PeopleListView[i].leaveDate.Date - DateTime.Now.Date).TotalDays < 0 ? "Đã hoàn thành" : "Đang cách ly";
+                PeopleListView[i].quarantineStatus = (PeopleListView[i].leaveDate.Date - DateTime.Now.Date).TotalDays <= 0 ? "Đã hoàn thành" : "Đang cách ly";
             }
         }
 
@@ -3301,7 +3301,8 @@ namespace QuanLyKhuCachLy.ViewModel
                     {
                         for (int i = 0; i < listTestingResults.Count; i++)
                         {
-                            bool checkID = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == listTestingResults[i].quarantinePersonID).Count() == 1 ? true : false;
+                            int personID = listTestingResults[i].quarantinePersonID;
+                            bool checkID = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == personID).Count() == 1 ? true : false;
                             if (checkID) {
                                 DataProvider.ins.db.TestingResults.Add(listTestingResults[i]);
                                 UpdateLeaveDateAfterAddTestResult(listTestingResults[i], isExecute);

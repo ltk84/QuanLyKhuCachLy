@@ -596,7 +596,7 @@ namespace QuanLyKhuCachLy.ViewModel
             if (FinishQuarantinePersonStillInRoomCount != 0)
             {
                 FourthRecommendationVisibility = Visibility.Visible;
-                FourthRecommendationTitle = "CHUYỂN NGƯỜI HOÀN THÀNH CÁCH LY RA KHỎI PHÒNG";
+                FourthRecommendationTitle = "CHUYỂN NGƯỜI HOÀN THÀNH RA KHỎI PHÒNG";
                 FourthRecommendationContent = $"Có {FinishQuarantinePersonStillInRoomCount} người đã hoàn thành cách ly.";
             }
             else
