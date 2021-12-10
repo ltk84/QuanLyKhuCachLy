@@ -51,10 +51,20 @@
                     Margin="0"
                     Command="{Binding CancelCommand}"
                     CommandParameter="{Binding ElementName=ActionConfirmationScreen}"
-                    FontSize="20"
-                    Style="{StaticResource CancelActionConfirmationButton}"
-                    Visibility="{Binding IsThreeButton}">
+                    FontSize="20">
                     <TextBlock Text="Hủy bỏ" />
+                    <Button.Style>
+                        <Style BasedOn="{StaticResource CancelActionConfirmationButton}" TargetType="Button">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsThreeButton}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsThreeButton}" Value="False">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
                 </Button>
                 <Button
                     Width="170"

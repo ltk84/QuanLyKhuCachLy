@@ -967,7 +967,18 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
            {
-               AddTestingResutlFromExcel();
+               var QA = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
+               if (QA == null) return;
+
+               ActionConfirmation confirmDialog = new ActionConfirmation();
+               var vm = confirmDialog.DataContext as ActionConfirmationViewModel;
+               vm.IsThreeButton = false;
+               vm.Title = $"Gia hạn thời gian dự kiến hoàn thành cách ly thêm {QA.requiredDayToFinish} ngày";
+               vm.Content = "Bạn có muốn thay đổi thời gian dự kiến hoàn thành cách ly của người có kết quả xét nghiệm dương tính?";
+
+               bool result = (bool)confirmDialog.ShowDialog();
+
+               AddTestingResutlFromExcel(result);
            });
             ToInportFormGoogleSheet = new RelayCommand<Window>((p) =>
             {
@@ -3094,7 +3105,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
-        async void AddTestingResutlFromExcel()
+        async void AddTestingResutlFromExcel(bool isExecute)
         {
             string path = "";
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -3106,11 +3117,11 @@ namespace QuanLyKhuCachLy.ViewModel
             else
                 return;
             LoadingIndicator loadingIndicator = new LoadingIndicator();
-            Task task = AddTestingResutlFromExcelAsync(loadingIndicator, path);
+            Task task = AddTestingResutlFromExcelAsync(loadingIndicator, path, isExecute);
             loadingIndicator.ShowDialog();
             await task;
         }
-        async Task AddTestingResutlFromExcelAsync(LoadingIndicator loadingIndicator, string path)
+        async Task AddTestingResutlFromExcelAsync(LoadingIndicator loadingIndicator, string path, bool isExecute)
         {
             bool isSuccess = false;
             string errorMessage = "";
@@ -3171,7 +3182,7 @@ namespace QuanLyKhuCachLy.ViewModel
                         for (int i = 0; i < listTestingResults.Count; i++)
                         {
                             DataProvider.ins.db.TestingResults.Add(listTestingResults[i]);
-                            UpdateLeaveDateAfterAddTestResult(listTestingResults[i]);
+                            UpdateLeaveDateAfterAddTestResult(listTestingResults[i], isExecute);
                         }
                         DataProvider.ins.db.SaveChanges();
                         transaction.Commit();
@@ -3234,7 +3245,7 @@ namespace QuanLyKhuCachLy.ViewModel
             RefeshTab();
         }
 
-        void UpdateLeaveDateAfterAddTestResult(TestingResult testing)
+        void UpdateLeaveDateAfterAddTestResult(TestingResult testing, bool isExecute)
         {
             if (!testing.isPositive) return;
 
@@ -3244,26 +3255,14 @@ namespace QuanLyKhuCachLy.ViewModel
             var QA = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
             if (QA == null) return;
 
-            ActionConfirmation confirmDialog = new ActionConfirmation();
-            var vm = confirmDialog.DataContext as ActionConfirmationViewModel;
-            vm.IsThreeButton = false;
-            vm.Title = $"Gia hạn thời gian dự kiến hoàn thành cách ly thêm {QA.requiredDayToFinish} ngày";
-            vm.Content = "Bạn có muốn thay đổi thời gian dự kiến hoàn thành cách ly của người có kết quả xét nghiệm dương tính";
-
             var ShouldBeAddDate = testing.dateTesting.AddDays(QA.requiredDayToFinish);
             if (ShouldBeAddDate > Person.leaveDate)
             {
-                var result = confirmDialog.ShowDialog();
-
-                if (result == true)
+                if (isExecute)
                 {
-                    if (vm.IsYes)
-                    {
-                        Person.leaveDate = ShouldBeAddDate;
-                    }
+                    Person.leaveDate = ShouldBeAddDate;
                 }
 
-                confirmDialog.Close();
             }
         }
         #endregion

@@ -37,9 +37,12 @@ namespace QuanLyKhuCachLy.ViewModel
         public bool IsThreeButton
         {
             get { return _isThreeButton; }
-            set { _isThreeButton = value; }
+            set
+            {
+                _isThreeButton = value;
+                OnPropertyChanged();
+            }
         }
-
 
         public ICommand CancelCommand { get; set; }
         public ICommand NotActionConfirmationCommand { get; set; }
