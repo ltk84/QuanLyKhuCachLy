@@ -458,6 +458,65 @@ namespace QuanLyKhuCachLy.ViewModel
             System.Windows.Application.Current.Shutdown();
         }
 
+        void DeleteAllRecordInAddrerssList()
+        {
+            using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    DataProvider.ins.db.Addresses.RemoveRange(DataProvider.ins.db.Addresses);
+                    DataProvider.ins.db.SaveChanges();
+
+                    transaction.Commit();
+                }
+                catch (DbUpdateException e)
+                {
+                    transaction.Rollback();
+
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi cơ sở dữ liệu cập nhật";
+                    ErrorDialog.ShowDialog();
+                }
+                catch (DbEntityValidationException e)
+                {
+                    transaction.Rollback();
+
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi xác thực";
+                    ErrorDialog.ShowDialog();
+                }
+                catch (NotSupportedException e)
+                {
+                    transaction.Rollback();
+
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi database không hỗ trợ";
+                    ErrorDialog.ShowDialog();
+                }
+                catch (ObjectDisposedException e)
+                {
+                    transaction.Rollback();
+
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi đối tượng database bị hủy";
+                    ErrorDialog.ShowDialog();
+                }
+                catch (InvalidOperationException e)
+                {
+                    transaction.Rollback();
+
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    FailNotificationVM.Content = "Lỗi thao tác không hợp lệ";
+                    ErrorDialog.ShowDialog();
+                }
+            }
+        }
+
         void DeleteAll()
         {
             DeleteAllRecordInRoomList();
@@ -465,6 +524,7 @@ namespace QuanLyKhuCachLy.ViewModel
             DeleteAllRecordInStaffList();
             DeleteQuarantineAreaInformation();
             DeleteSeverityList();
+            DeleteAllRecordInAddrerssList();
 
             Window SuccessDialog = new Window
             {
