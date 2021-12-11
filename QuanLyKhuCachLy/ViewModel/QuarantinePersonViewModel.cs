@@ -3533,6 +3533,10 @@ namespace QuanLyKhuCachLy.ViewModel
             sheet1.Range["A1"].Value = "STT trong DS";
             sheet1.Range["B1"].Value = "Ngày";
             sheet1.Range["C1"].Value = "Địa điểm";
+            sheet1.Range["D2"].Value = "Lưu ý:Các dữ liệu về địa điểm sau dấu ',' không có khoảng trống,";
+            sheet1.Range["D3"].Value = "các từ chỉ địa phương ghi hoa chữ đầu.";
+            sheet1.Range["D4"].Value = "VD: Thôn A,Xã B,Huyện C,Tỉnh D";
+            sheet1.Range["D6"].Value = "Xóa lưu ý này trước khi thêm.";
         }
         #endregion
     }

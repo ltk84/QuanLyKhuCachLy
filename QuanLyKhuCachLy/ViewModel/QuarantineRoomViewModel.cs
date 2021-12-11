@@ -984,6 +984,8 @@ namespace QuanLyKhuCachLy.ViewModel
             sheet.Range["B1"].Value = "Tên";
             sheet.Range["C1"].Value = "Sức chứa";
             sheet.Range["D1"].Value = "Nhóm đối tượng";
+            sheet.Range["E2"].Value = "Lưu ý: Nhóm đối tượng có thể để trống";
+            sheet.Range["E3"].Value = "Xóa lưu ý trước khi thêm";
         }
         #endregion
     }
