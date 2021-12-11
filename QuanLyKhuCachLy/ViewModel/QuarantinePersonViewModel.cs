@@ -3340,6 +3340,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 Excel.Application xlApp = new Excel.Application();
                 Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(path);
                 Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
+                
                 Excel.Range xlRange = xlWorksheet.UsedRange;
                 int rowCount = xlRange.Rows.Count;
                 int colCount = xlRange.Columns.Count;
@@ -3347,9 +3348,31 @@ namespace QuanLyKhuCachLy.ViewModel
                 xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2 != "Kết quả" ||
                 xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2 != "Ngày xét nghiệm")
                 {
-                    errorMessage = "Không đúng định dạng file";
-                    xlWorkbook.Close();
-                    return;
+                    if (xlWorkbook.Sheets.Count > 1)
+                    {
+                        Excel._Worksheet xlWorksheet2 = xlWorkbook.Sheets[2];
+                        Excel.Range xlRange2 = xlWorksheet2.UsedRange;
+                       
+                        if (xlRange2.Cells[1, 1] == null || xlRange2.Cells[1, 1].Value2 != "ID" ||
+                        xlRange2.Cells[1, 2] == null || xlRange2.Cells[1, 2].Value2 != "Kết quả" ||
+                        xlRange2.Cells[1, 3] == null || xlRange2.Cells[1, 3].Value2 != "Ngày xét nghiệm")
+                        {
+                            errorMessage = "Không đúng định dạng file";
+                            xlWorkbook.Close();
+                            return;
+                        }
+                        else
+                        {
+                            xlRange = xlWorksheet2.UsedRange;
+                        }
+                    }
+                    else
+                    {
+                        errorMessage = "Không đúng định dạng file";
+                        xlWorkbook.Close();
+                        return;
+                    }
+                   
                 }
                 for (int i = 2; i <= rowCount; i++)
                 {
@@ -3416,7 +3439,8 @@ namespace QuanLyKhuCachLy.ViewModel
                     {
                         for (int i = 0; i < listTestingResults.Count; i++)
                         {
-                            bool checkID = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == listTestingResults[i].quarantinePersonID).Count() == 1 ? true : false;
+                            int personID = listTestingResults[i].quarantinePersonID;
+                            bool checkID = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == personID).Count() == 1 ? true : false;
                             if (checkID) {
                                 DataProvider.ins.db.TestingResults.Add(listTestingResults[i]);
                                 UpdateLeaveDateAfterAddTestResult(listTestingResults[i], isExecute);
