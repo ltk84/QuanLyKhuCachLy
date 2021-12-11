@@ -570,6 +570,7 @@ namespace QuanLyKhuCachLy.ViewModel
         async Task ExecuteAddRoomFromExcel(LoadingIndicator loadingIndicator, string path)
         {
             bool isSuccess = false;
+            string error = "";
             await Task.Run(() =>
             {
                 List<Model.QuarantineRoom> listRoom = new List<Model.QuarantineRoom>();
@@ -585,6 +586,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2 != "Nhóm đối tượng")
                 {
                     xlWorkbook.Close();
+                    error = "Không đúng định dạng file";
                     return;
                 }
                 for (int i = 2; i <= rowCount; i++)
@@ -594,6 +596,12 @@ namespace QuanLyKhuCachLy.ViewModel
                     {
                         room.displayName = xlRange.Cells[i, 2].Value2.ToString();
                     }
+                    else
+                    {
+                        xlWorkbook.Close();
+                        error = "Tên để trống";
+                        return;
+                    }
                     if (xlRange.Cells[i, 3] != null && xlRange.Cells[i, 3].Value2 != null)
                     {
                         int t;
@@ -602,11 +610,19 @@ namespace QuanLyKhuCachLy.ViewModel
                             room.capacity = Int32.Parse(xlRange.Cells[i, 3].Value2.ToString());
                         }
                         else {
+                            error = "Phòng " + xlRange.Cells[i, 2].Value2.ToString() + " sức chứa không là số";
                             xlWorkbook.Close();
                             return;
                         };
                         
                     }
+                    else
+                    {
+                        error = "Phòng " + xlRange.Cells[i, 2].Value2.ToString() + " sức chứa trống";
+                        xlWorkbook.Close();
+                        return;
+                    }
+                
                     if (xlRange.Cells[i, 4] != null && xlRange.Cells[i, 4].Value2 != null)
                     {
                         string description = xlRange.Cells[i, 4].Value2.ToString();
@@ -679,6 +695,10 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
                 var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                if (error != "" && error != null)
+                {
+                    FailNotificationVM.Content = error;
+                }
                 ErrorDialog.ShowDialog();
             }
         }

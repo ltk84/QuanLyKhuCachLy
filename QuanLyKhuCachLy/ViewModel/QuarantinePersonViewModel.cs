@@ -3078,7 +3078,14 @@ namespace QuanLyKhuCachLy.ViewModel
                     }
                     if (values[i][11] != null)
                     {
-                        quarantinePerson.levelID = Int32.Parse(values[i][11].ToString());
+                        string description = values[i][11].ToString();
+                        int levelId;
+                        bool checkLevel = DataProvider.ins.db.Severities.Where(x => x.description == description).Count() >= 1 ? true : false;
+                        if (checkLevel)
+                        {
+                            levelId = DataProvider.ins.db.Severities.Where(x => x.description == description).FirstOrDefault().id;
+                            quarantinePerson.levelID = levelId;
+                        }
                     }
                     if (values[i][12] != null)
                     {
