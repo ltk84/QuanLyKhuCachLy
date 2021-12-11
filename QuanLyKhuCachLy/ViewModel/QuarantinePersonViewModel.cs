@@ -1822,6 +1822,7 @@ namespace QuanLyKhuCachLy.ViewModel
         async Task ExecuteAddPersonFromExcel(LoadingIndicator loadingIndicator, string path)
         {
             bool isSuccess = false;
+            string error = "";
             await Task.Run(() =>
             {
                 List<Address> listAdress = new List<Address>();
@@ -1832,12 +1833,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 Excel.Application xlApp = new Excel.Application();
                 Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(path);
                 Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
-                Excel._Worksheet xlWorksheet2 = xlWorkbook.Sheets[2];
                 Excel.Range xlRange = xlWorksheet.UsedRange;
-                Excel.Range xlRange2 = xlWorksheet2.UsedRange;
-                int rowCount = xlRange.Rows.Count;
-                int rowCount2 = xlRange2.Rows.Count;
-                
+                int rowCount = xlRange.Rows.Count;             
                 if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2 != "STT" ||
                 xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2 != "Họ và tên" ||
                 xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2 != "Ngày sinh" ||
@@ -1853,6 +1850,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 xlRange.Cells[1, 14] == null || xlRange.Cells[1, 14].Value2 != "Thông tin tiêm chủng")
                 {
                     xlWorkbook.Close();
+                    error = "Không đúng định dạng file";
                     return;
                 }
                 
@@ -1872,12 +1870,25 @@ namespace QuanLyKhuCachLy.ViewModel
                         else
                         {
                             xlWorkbook.Close();
+                            error = "Số thứ tự không phải là số";
                             return;
                         } 
+                    }
+                    else
+                    {
+                        xlWorkbook.Close();
+                        error = "Số thứ tự để trống";
+                        return;
                     }
                     if (xlRange.Cells[i, 2] != null && xlRange.Cells[i, 2].Value2 != null)
                     {
                         quarantinePerson.name = xlRange.Cells[i, 2].Value2.ToString();
+                    }
+                    else
+                    {
+                        error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " tên để trống";
+                        xlWorkbook.Close();
+                        return;
                     }
                     if (xlRange.Cells[i, 3] != null && xlRange.Cells[i, 3].Value2 != null)
                     {
@@ -1890,25 +1901,34 @@ namespace QuanLyKhuCachLy.ViewModel
                         }
                         else
                         {
+                            
+                            error = "STT " + xlRange.Cells[i, 1].Value2.ToString() +" sai ngày sinh";
                             xlWorkbook.Close();
                             return;
                         }
                     }
+                    else
+                    {
+                        error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " ngày sinh để trống";
+                        xlWorkbook.Close();
+                        return;
+                    }
                     if (xlRange.Cells[i, 4] != null && xlRange.Cells[i, 4].Value2 != null)
                     {
                         string sex = xlRange.Cells[i, 4].Value2.ToString().ToLower();
-                        quarantinePerson.sex = (sex == "nữ"?"Nữ":"Nam");
+                        quarantinePerson.sex = (sex == "nữ" ? "Nữ" : "Nam");
+                    }
+                    else {
+                        error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " giới tính để trống";
+                        xlWorkbook.Close();
+                        return;
                     }
                     if (xlRange.Cells[i, 5] != null && xlRange.Cells[i, 5].Value2 != null)
                     {
                         string[] arrListStr = xlRange.Cells[i, 5].Value2.ToString().Split(',');
                         if (arrListStr.Length < 3)
                         {
-                            CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
-                            var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
-                            FailNotificationVM.Content = xlRange.Cells[i, 2].Value2.ToString() + " has error in address";
-                            ErrorDialog.ShowDialog();
-                            //MessageBox.Show(xlRange.Cells[i, 2].Value2.ToString() + " has error in address");
+                            error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " sai địa chỉ";
                             xlWorkbook.Close();
                             return;                      
                         }
@@ -1926,6 +1946,12 @@ namespace QuanLyKhuCachLy.ViewModel
                             personAddress.streetName = arrListStr[0];
                         }
                     }
+                    else
+                    {
+                        error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " địa chỉ để trống";
+                        xlWorkbook.Close();
+                        return;
+                    }
                     if (xlRange.Cells[i, 7] != null && xlRange.Cells[i, 7].Value2 != null)
                     {
                         quarantinePerson.citizenID = xlRange.Cells[i, 7].Value2.ToString();
@@ -1937,6 +1963,12 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (xlRange.Cells[i, 9] != null && xlRange.Cells[i, 9].Value2 != null)
                     {
                         quarantinePerson.nationality = xlRange.Cells[i, 9].Value2.ToString();
+                    }
+                    else
+                    {
+                        error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " quốc tịch để trống";
+                        xlWorkbook.Close();
+                        return;
                     }
                     if (xlRange.Cells[i, 10] != null && xlRange.Cells[i, 10].Value2 != null)
                     {
@@ -2008,6 +2040,7 @@ namespace QuanLyKhuCachLy.ViewModel
                         }
                         else
                         {
+                            error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " sai ngày tháng đến";
                             xlWorkbook.Close();
                             return;
                         }
@@ -2030,6 +2063,7 @@ namespace QuanLyKhuCachLy.ViewModel
                                 }
                                 else
                                 {
+                                    error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " sai ngày tháng tiêm chủng";
                                     xlWorkbook.Close();
                                     return;
                                 }
@@ -2060,74 +2094,90 @@ namespace QuanLyKhuCachLy.ViewModel
                 List<DestinationHistory> ListDestinationHistories = new List<DestinationHistory>();
                 List<Address> ListAddressDestinations = new List<Address>();
                 List<int> listSTTSheet2 = new List<int>();
-                if(xlRange2.Cells[1, 1] != null && xlRange2.Cells[1, 1].Value2 == "STT trong DS" &&
+                if (xlWorkbook.Sheets.Count >=1)
+                {
+                    Excel._Worksheet xlWorksheet2 = xlWorkbook.Sheets[2];
+                    Excel.Range xlRange2 = xlWorksheet2.UsedRange;
+                    int rowCount2 = xlRange2.Rows.Count;
+                    if (xlRange2.Cells[1, 1] != null && xlRange2.Cells[1, 1].Value2 == "STT trong DS" &&
                 xlRange2.Cells[1, 2] != null && xlRange2.Cells[1, 2].Value2 == "Ngày" &&
                 xlRange2.Cells[1, 3] != null && xlRange2.Cells[1, 3].Value2 == "Địa điểm")
-                {
-                    for (int i = 2; i <= rowCount2; i++)
                     {
-                        DestinationHistory destination = new DestinationHistory();
-                        Address address = new Address();
-                        if (xlRange2.Cells[i, 1] != null && xlRange2.Cells[i, 1].Value2 != null)
+                        for (int i = 2; i <= rowCount2; i++)
                         {
-                            bool checkSTT = false;
-                            for(int index = 1; index <= rowCount; index++)
+                            DestinationHistory destination = new DestinationHistory();
+                            Address address = new Address();
+                            if (xlRange2.Cells[i, 1] != null && xlRange2.Cells[i, 1].Value2 != null)
                             {
-                                if (xlRange2.Cells[i, 1].Value2.ToString() == xlRange.Cells[index, 1].Value2.ToString())
+                                bool checkSTT = false;
+                                for (int index = 1; index <= rowCount; index++)
                                 {
-                                    checkSTT = true;
-                                    break;
-                                }
-                            }
-                            if(checkSTT)
-                            {
-                                if (xlRange2.Cells[i, 2] != null && xlRange2.Cells[i, 2].Value2 != null)
-                                {
-                                    DateTime dateTime;
-                                    double date;
-                                    if (double.TryParse(xlRange2.Cells[i, 2].Value2.ToString(), out date))
+                                    if (xlRange2.Cells[i, 1].Value2.ToString() == xlRange.Cells[index, 1].Value2.ToString())
                                     {
-                                        dateTime = DateTime.FromOADate(double.Parse(xlRange2.Cells[i, 2].Value2.ToString()));
-                                        destination.dateArrive = dateTime;
+                                        checkSTT = true;
+                                        break;
+                                    }
+                                }
+                                if (checkSTT)
+                                {
+                                    if (xlRange2.Cells[i, 2] != null && xlRange2.Cells[i, 2].Value2 != null)
+                                    {
+                                        DateTime dateTime;
+                                        double date;
+                                        if (double.TryParse(xlRange2.Cells[i, 2].Value2.ToString(), out date))
+                                        {
+                                            dateTime = DateTime.FromOADate(double.Parse(xlRange2.Cells[i, 2].Value2.ToString()));
+                                            destination.dateArrive = dateTime;
+                                        }
+                                        else
+                                        {
+                                            error = "STT " + xlRange2.Cells[i, 1].Value2.ToString() + " sai ngày tháng di chuyển";
+                                            xlWorkbook.Close();
+                                            return;
+                                        }
                                     }
                                     else
                                     {
+                                        error = "STT " + xlRange2.Cells[i, 1].Value2.ToString() + " không có ngày di chuyển";
                                         xlWorkbook.Close();
                                         return;
                                     }
-                                }
-                                if (xlRange2.Cells[i, 3] != null && xlRange2.Cells[i, 3].Value2 != null)
-                                {
-                                    string[] arrListStr = xlRange2.Cells[i, 3].Value2.ToString().Split(',');
-                                    if (arrListStr.Length < 3)
+                                    if (xlRange2.Cells[i, 3] != null && xlRange2.Cells[i, 3].Value2 != null)
                                     {
-                                        CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
-                                        var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
-                                        FailNotificationVM.Content = xlRange2.Cells[i, 2].Value2.ToString() + " destination has error in address";
-                                        ErrorDialog.ShowDialog();
-                                        //MessageBox.Show(xlRange.Cells[i, 2].Value2.ToString() + " has error in address");
-                                        return;
-                                    }
-                                    if (arrListStr.Length == 3)
-                                    {
-                                        address.province = arrListStr[2];
-                                        address.district = arrListStr[1];
-                                        address.ward = arrListStr[0];
+                                        string[] arrListStr = xlRange2.Cells[i, 3].Value2.ToString().Split(',');
+                                        if (arrListStr.Length < 3)
+                                        {
+                                            error = "STT " + xlRange2.Cells[i, 1].Value2.ToString() + " sai địa chỉ di chuyển";
+                                            xlWorkbook.Close();
+                                            return;
+                                        }
+                                        if (arrListStr.Length == 3)
+                                        {
+                                            address.province = arrListStr[2];
+                                            address.district = arrListStr[1];
+                                            address.ward = arrListStr[0];
+                                        }
+                                        else
+                                        {
+                                            address.province = arrListStr[3];
+                                            address.district = arrListStr[2];
+                                            address.ward = arrListStr[1];
+                                            address.streetName = arrListStr[0];
+                                        }
                                     }
                                     else
                                     {
-                                        address.province = arrListStr[3];
-                                        address.district = arrListStr[2];
-                                        address.ward = arrListStr[1];
-                                        address.streetName = arrListStr[0];
+                                        error = "STT " + xlRange2.Cells[i, 1].Value2.ToString() + " không có địa điểm đến";
+                                        xlWorkbook.Close();
+                                        return;
                                     }
+                                    ListAddressDestinations.Add(address);
+                                    ListDestinationHistories.Add(destination);
+                                    listSTTSheet2.Add(Int32.Parse(xlRange2.Cells[i, 1].Value2.ToString()));
                                 }
-                                ListAddressDestinations.Add(address);
-                                ListDestinationHistories.Add(destination);
-                                listSTTSheet2.Add(Int32.Parse(xlRange2.Cells[i, 1].Value2.ToString()));
                             }
+
                         }
-                       
                     }
                 }
                 xlWorkbook.Close();
@@ -2242,9 +2292,13 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else
             {
-                
+
                 CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
                 var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                if (error != "" && error != null)
+                {
+                    FailNotificationVM.Content = error;
+                }
                 ErrorDialog.ShowDialog();
             }
         }
