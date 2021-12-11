@@ -3348,6 +3348,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2 != "Ngày xét nghiệm")
                 {
                     errorMessage = "Không đúng định dạng file";
+                    xlWorkbook.Close();
                     return;
                 }
                 for (int i = 2; i <= rowCount; i++)
@@ -3355,10 +3356,21 @@ namespace QuanLyKhuCachLy.ViewModel
                     TestingResult testingResult = new TestingResult();
                     if (xlRange.Cells[i, 1] != null && xlRange.Cells[i, 1].Value2 != null)
                     {
-                        testingResult.quarantinePersonID = Int32.Parse(xlRange.Cells[i, 1].Value2.ToString());
+                        int t;
+                        if (Int32.TryParse(xlRange.Cells[i, 1].Value2.ToString(),out  t))
+                        {
+                            testingResult.quarantinePersonID = Int32.Parse(xlRange.Cells[i, 1].Value2.ToString());
+                        }
+                        else
+                        {
+                            errorMessage = "ID bị lỗi";
+                            xlWorkbook.Close();
+                            return;
+                        }
                     }
                     else
                     {
+                        xlWorkbook.Close();
                         errorMessage = "ID bị lỗi";
                         return;
                     }
@@ -3369,21 +3381,35 @@ namespace QuanLyKhuCachLy.ViewModel
                     }
                     else
                     {
+                        xlWorkbook.Close();
                         errorMessage = "Kết quả bị lỗi";
                         return;
                     }
                     if (xlRange.Cells[i, 3] != null && xlRange.Cells[i, 3].Value2 != null)
                     {
-                        DateTime date = DateTime.FromOADate(double.Parse(xlRange.Cells[i, 3].Value2.ToString()));
-                        testingResult.dateTesting = date;
+                        DateTime dateTime;
+                        double date;
+                        if (double.TryParse(xlRange.Cells[i, 3].Value2.ToString(), out date))
+                        {
+                            dateTime = DateTime.FromOADate(double.Parse(xlRange.Cells[i, 3].Value2.ToString()));
+                            testingResult.dateTesting = dateTime;
+                        }
+                        else
+                        {
+                            xlWorkbook.Close();
+                            errorMessage = "Ngày bị lỗi";
+                            return;
+                        }
                     }
                     else
                     {
+                        xlWorkbook.Close();
                         errorMessage = "Ngày bị lỗi";
                         return;
                     }
                     listTestingResults.Add(testingResult);
                 }
+                xlWorkbook.Close();
                 using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
                 {
                     try
