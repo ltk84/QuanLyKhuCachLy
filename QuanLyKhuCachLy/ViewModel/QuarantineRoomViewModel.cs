@@ -582,7 +582,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2 != "STT" ||
                 xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2 != "Tên" ||
                 xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2 != "Sức chứa" ||
-                xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2 != "Nhóm đối tượng" || colCount != 4)
+                xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2 != "Nhóm đối tượng")
                 {
                     //MessageBox.Show("Không đúng định dạng file");
                     return;
@@ -596,14 +596,31 @@ namespace QuanLyKhuCachLy.ViewModel
                     }
                     if (xlRange.Cells[i, 3] != null && xlRange.Cells[i, 3].Value2 != null)
                     {
-                        room.capacity = Int32.Parse(xlRange.Cells[i, 3].Value2.ToString());
+                        int t;
+                        if (Int32.TryParse(xlRange.Cells[i, 3].Value2.ToString(), out t))
+                        {
+                            room.capacity = Int32.Parse(xlRange.Cells[i, 3].Value2.ToString());
+                        }
+                        else {
+                            xlWorkbook.Close();
+                            return;
+                        };
+                        
                     }
                     if (xlRange.Cells[i, 4] != null && xlRange.Cells[i, 4].Value2 != null)
                     {
-                        room.levelID = Int32.Parse(xlRange.Cells[i, 4].Value2.ToString());
+                        string description = xlRange.Cells[i, 4].Value2.ToString();
+                        int levelId;
+                        bool checkLevel = DataProvider.ins.db.Severities.Where(x => x.description == description).Count() >= 1 ? true : false;
+                        if (checkLevel)
+                        {
+                            levelId = DataProvider.ins.db.Severities.Where(x => x.description == description).FirstOrDefault().id;
+                            room.levelID = levelId;
+                        }
                     }
                     listRoom.Add(room);
                 }
+                xlWorkbook.Close();
                 using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
                 {
                     try

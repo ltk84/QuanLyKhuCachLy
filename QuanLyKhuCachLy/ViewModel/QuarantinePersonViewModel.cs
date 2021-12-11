@@ -1869,7 +1869,11 @@ namespace QuanLyKhuCachLy.ViewModel
                         {
                             ListSTTSheet1.Add(Int32.Parse(xlRange.Cells[i, 1].Value2.ToString()));
                         }
-                        else return;
+                        else
+                        {
+                            xlWorkbook.Close();
+                            return;
+                        } 
                     }
                     if (xlRange.Cells[i, 2] != null && xlRange.Cells[i, 2].Value2 != null)
                     {
@@ -1905,7 +1909,8 @@ namespace QuanLyKhuCachLy.ViewModel
                             FailNotificationVM.Content = xlRange.Cells[i, 2].Value2.ToString() + " has error in address";
                             ErrorDialog.ShowDialog();
                             //MessageBox.Show(xlRange.Cells[i, 2].Value2.ToString() + " has error in address");
-                            return;
+                            xlWorkbook.Close();
+                            return;                      
                         }
                         if (arrListStr.Length == 3)
                         {
@@ -2025,6 +2030,7 @@ namespace QuanLyKhuCachLy.ViewModel
                                 }
                                 else
                                 {
+                                    xlWorkbook.Close();
                                     return;
                                 }
                                 string vaccine = str[1].ToString();
