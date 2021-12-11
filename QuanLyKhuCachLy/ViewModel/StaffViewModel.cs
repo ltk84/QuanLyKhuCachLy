@@ -1305,7 +1305,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 xlRange.Cells[1, 10] == null || xlRange.Cells[1, 10].Value2 != "Phòng ban" ||
                 xlRange.Cells[1, 11] == null || xlRange.Cells[1, 11].Value2 != "Địa chỉ")
                 {
-                    //MessageBox.Show("Không đúng định dạng file");
+                    xlWorkbook.Close();
                     return;
                 }
                 for (int i = 2; i <= rowCount; i++)
@@ -1318,12 +1318,23 @@ namespace QuanLyKhuCachLy.ViewModel
                     }
                     if (xlRange.Cells[i, 3] != null && xlRange.Cells[i, 3].Value2 != null)
                     {
-                        DateTime birth = DateTime.FromOADate(double.Parse(xlRange.Cells[i, 3].Value2.ToString()));
-                        staff.dateOfBirth = birth;
+                        DateTime birth;
+                        double date;
+                        if (double.TryParse(xlRange.Cells[i, 3].Value2.ToString(), out date))
+                        {
+                            birth = DateTime.FromOADate(double.Parse(xlRange.Cells[i, 3].Value2.ToString()));
+                            staff.dateOfBirth = birth;
+                        }
+                        else
+                        {
+                            xlWorkbook.Close();
+                            return;
+                        }
                     }
                     if (xlRange.Cells[i, 4] != null && xlRange.Cells[i, 4].Value2 != null)
                     {
-                        staff.sex = xlRange.Cells[i, 4].Value2.ToString();
+                        string sex = xlRange.Cells[i, 4].Value2.ToString().ToLower();
+                        staff.sex = (sex == "nữ" ? "Nữ" : "Nam");
                     }
                     if (xlRange.Cells[i, 11] != null && xlRange.Cells[i, 11].Value2 != null)
                     {
@@ -1336,6 +1347,7 @@ namespace QuanLyKhuCachLy.ViewModel
                             FailNotificationVM.Content = xlRange.Cells[i, 2].Value2.ToString() + " has error in address";
                             ErrorDialog.ShowDialog();
                             //MessageBox.Show(xlRange.Cells[i, 2].Value2.ToString() + " has error in address");
+                            xlWorkbook.Close();
                             return;
                         }
                         if (arrListStr.Length == 3)
@@ -1379,6 +1391,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     listStaff.Add(staff);
                     listStaffAddress.Add(address);
                 }
+                xlWorkbook.Close();
                 using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
                 {
                     try
@@ -1529,6 +1542,7 @@ namespace QuanLyKhuCachLy.ViewModel
             sheet.Columns[9].ColumnWidth = 12;
             sheet.Columns[10].ColumnWidth = 12;
             sheet.Columns[11].ColumnWidth = 50;
+            sheet.Columns[12].ColumnWidth = 30;
             sheet.Range["A1"].Value = "STT";
             sheet.Range["B1"].Value = "Họ và tên";
             sheet.Range["C1"].Value = "Ngày sinh";
@@ -1540,6 +1554,15 @@ namespace QuanLyKhuCachLy.ViewModel
             sheet.Range["I1"].Value = "Chức vụ";
             sheet.Range["J1"].Value = "Phòng ban";
             sheet.Range["K1"].Value = "Địa chỉ";
+
+            sheet.Range["L2"].Value = "Lưu ý:";
+            sheet.Range["L3"].Value = "Các dữ liệu về địa điểm sau dấu ',' không có khoảng trống,";
+            sheet.Range["L4"].Value = "các từ chỉ địa phương ghi hoa chữ đầu.";
+            sheet.Range["L5"].Value = "VD: Thôn A,Xã B,Huyện C,Tỉnh D";
+            sheet.Range["L6"].Value = "MaBH có thể để trống";
+            sheet.Range["L7"].Value = "Giới tính chỉ có thể là Nam/Nữ";         
+
+            sheet.Range["L8"].Value = "Xóa lưu ý trước khi thêm";
         }
         #endregion
     }

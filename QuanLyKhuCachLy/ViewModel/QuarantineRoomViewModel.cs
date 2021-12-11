@@ -584,7 +584,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2 != "Sức chứa" ||
                 xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2 != "Nhóm đối tượng")
                 {
-                    //MessageBox.Show("Không đúng định dạng file");
+                    xlWorkbook.Close();
                     return;
                 }
                 for (int i = 2; i <= rowCount; i++)
