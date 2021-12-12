@@ -1919,6 +1919,12 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (xlRange.Cells[i, 4] != null && xlRange.Cells[i, 4].Value2 != null)
                     {
                         string sex = xlRange.Cells[i, 4].Value2.ToString().ToLower();
+                        if(sex != "nam" || sex != "nữ")
+                        {
+                            error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " giới tính không đúng (chỉ là Nam/Nữ)";
+                            xlWorkbook.Close();
+                            return;
+                        }
                         quarantinePerson.sex = (sex == "nữ" ? "Nữ" : "Nam");
                     }
                     else
