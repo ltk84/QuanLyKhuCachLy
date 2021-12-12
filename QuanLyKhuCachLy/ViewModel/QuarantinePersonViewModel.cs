@@ -1837,7 +1837,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(path);
                 Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
                 Excel.Range xlRange = xlWorksheet.UsedRange;
-                int rowCount = xlRange.Rows.Count;             
+                int rowCount = xlRange.Rows.Count;
                 if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2 != "STT" ||
                 xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2 != "Họ và tên" ||
                 xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2 != "Ngày sinh" ||
@@ -1856,7 +1856,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     error = "Không đúng định dạng file";
                     return;
                 }
-                
+
                 for (int i = 2; i <= rowCount; i++)
                 {
                     Address personAddress = new Address();
@@ -1875,7 +1875,7 @@ namespace QuanLyKhuCachLy.ViewModel
                             xlWorkbook.Close();
                             error = "Số thứ tự không phải là số";
                             return;
-                        } 
+                        }
                     }
                     else
                     {
@@ -1897,15 +1897,15 @@ namespace QuanLyKhuCachLy.ViewModel
                     {
                         DateTime birth;
                         double date;
-                        if (double.TryParse(xlRange.Cells[i, 3].Value2.ToString(),out date))
+                        if (double.TryParse(xlRange.Cells[i, 3].Value2.ToString(), out date))
                         {
                             birth = DateTime.FromOADate(double.Parse(xlRange.Cells[i, 3].Value2.ToString()));
                             quarantinePerson.dateOfBirth = birth;
                         }
                         else
                         {
-                            
-                            error = "STT " + xlRange.Cells[i, 1].Value2.ToString() +" sai ngày sinh";
+
+                            error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " sai ngày sinh";
                             xlWorkbook.Close();
                             return;
                         }
@@ -1921,7 +1921,8 @@ namespace QuanLyKhuCachLy.ViewModel
                         string sex = xlRange.Cells[i, 4].Value2.ToString().ToLower();
                         quarantinePerson.sex = (sex == "nữ" ? "Nữ" : "Nam");
                     }
-                    else {
+                    else
+                    {
                         error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " giới tính để trống";
                         xlWorkbook.Close();
                         return;
@@ -1933,7 +1934,7 @@ namespace QuanLyKhuCachLy.ViewModel
                         {
                             error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " sai địa chỉ";
                             xlWorkbook.Close();
-                            return;                      
+                            return;
                         }
                         if (arrListStr.Length == 3)
                         {
@@ -2026,7 +2027,7 @@ namespace QuanLyKhuCachLy.ViewModel
                         string description = xlRange.Cells[i, 12].Value2.ToString();
                         int levelId;
                         bool checkLevel = DataProvider.ins.db.Severities.Where(x => x.description == description).Count() >= 1 ? true : false;
-                        if(checkLevel)
+                        if (checkLevel)
                         {
                             levelId = DataProvider.ins.db.Severities.Where(x => x.description == description).FirstOrDefault().id;
                             quarantinePerson.levelID = levelId;
@@ -2059,7 +2060,7 @@ namespace QuanLyKhuCachLy.ViewModel
                             if (str.Length >= 2)
                             {
                                 DateTime dateTime;
-                                if (DateTime.TryParse(str[0].ToString(),out dateTime))
+                                if (DateTime.TryParse(str[0].ToString(), out dateTime))
                                 {
                                     dateTime = Convert.ToDateTime(str[0].ToString());
                                     quarantinePerson.arrivedDate = dateTime;
@@ -2097,7 +2098,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 List<DestinationHistory> ListDestinationHistories = new List<DestinationHistory>();
                 List<Address> ListAddressDestinations = new List<Address>();
                 List<int> listSTTSheet2 = new List<int>();
-                if (xlWorkbook.Sheets.Count >=1)
+                if (xlWorkbook.Sheets.Count >= 1)
                 {
                     Excel._Worksheet xlWorksheet2 = xlWorkbook.Sheets[2];
                     Excel.Range xlRange2 = xlWorksheet2.UsedRange;
@@ -2205,9 +2206,9 @@ namespace QuanLyKhuCachLy.ViewModel
                             listHealthInformation[i].quarantinePersonID = listQuarantinePerson[i].id;
                             DataProvider.ins.db.HealthInformations.Add(listHealthInformation[i]);
                             DataProvider.ins.db.SaveChanges();
-                            for(int j= 0; j< listSTTSheet2.Count; j++)
+                            for (int j = 0; j < listSTTSheet2.Count; j++)
                             {
-                                if(ListSTTSheet1[i] == listSTTSheet2[j])
+                                if (ListSTTSheet1[i] == listSTTSheet2[j])
                                 {
                                     ListIdPerson.Add(listQuarantinePerson[i].id);
                                 }
@@ -2227,12 +2228,12 @@ namespace QuanLyKhuCachLy.ViewModel
                         {
 
                             ListDestinationHistories[i].quarantinePersonID = ListIdPerson[i];
-                                DataProvider.ins.db.Addresses.Add(ListAddressDestinations[i]);
-                                DataProvider.ins.db.SaveChanges();
-                                ListDestinationHistories[i].addressID = ListAddressDestinations[i].id;
-                                DataProvider.ins.db.DestinationHistories.Add(ListDestinationHistories[i]);
-                                DataProvider.ins.db.SaveChanges();
-                            
+                            DataProvider.ins.db.Addresses.Add(ListAddressDestinations[i]);
+                            DataProvider.ins.db.SaveChanges();
+                            ListDestinationHistories[i].addressID = ListAddressDestinations[i].id;
+                            DataProvider.ins.db.DestinationHistories.Add(ListDestinationHistories[i]);
+                            DataProvider.ins.db.SaveChanges();
+
                         }
                         PeopleListView = DataProvider.ins.db.QuarantinePersons.ToArray();
                         InitPersonList();
