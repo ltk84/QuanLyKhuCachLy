@@ -2158,8 +2158,7 @@ INSERT [dbo].[NotificationTemplate] ([id], [name], [content]) VALUES (1, N'Hư�
 GO
 INSERT [dbo].[NotificationTemplate] ([id], [name], [content]) VALUES (2, N'Hoàn thành cách ly', N'Xin chúc mừng, bạn sắp hết thời gian cách ly tập trung. Vui lòng chuẩn bị sẵn sàng tư trang, bạn sẽ được hoàn thành cách ly vào lúc Xh ngày XXXXXX')
 GO
-INSERT [dbo].[NotificationTemplate] ([id], [name], [content]) VALUES (3, N'Thông báo chuyển phòng
-', N'Ngày XXXXXX, là ngày đến lượt bạn tham gia xét nghiệm covid định kỳ, vui lòng đến phòng XXX vào lúc XXX và làm theo hướng dẫn của nhân viên y tế để thực hiện việc xét nghiệm')
+INSERT [dbo].[NotificationTemplate] ([id], [name], [content]) VALUES (3, N'Thông báo chuyển phòng', N'Ngày XXXXXX, là ngày đến lượt bạn tham gia xét nghiệm covid định kỳ, vui lòng đến phòng XXX vào lúc XXX và làm theo hướng dẫn của nhân viên y tế để thực hiện việc xét nghiệm')
 GO
 INSERT [dbo].[NotificationTemplate] ([id], [name], [content]) VALUES (4, N'Thông báo xét nghiệm', N'Hiện tại, bạn đang nằm trong danh sách đối tượng cần phải chuyển phòng. Vui lòng chuẩn bị sẵn sàng tư trang trước Xh ngày XXXXXXX để thuận tiện cho công tác đổi phòng theo hướng dẫn của nhân viên')
 GO
