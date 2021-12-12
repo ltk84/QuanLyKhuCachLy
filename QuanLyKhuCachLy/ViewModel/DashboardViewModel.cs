@@ -686,7 +686,7 @@ namespace QuanLyKhuCachLy.ViewModel
             try
             {
                 string[] hasReceivedMessageList = getListHasReceivedMessage();
-                count = DataProvider.ins.db.QuarantinePersons.Where(person => person.leaveDate == date && hasReceivedMessageList.ToList().Contains(person.id.ToString())).Count();
+                count = DataProvider.ins.db.QuarantinePersons.Where(person => person.leaveDate == date && !hasReceivedMessageList.ToList().Contains(person.id.ToString())).Count();
 
             }
             catch
