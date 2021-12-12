@@ -217,7 +217,7 @@
             <StackPanel>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="450" />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
                     <local:QuarantinedPersonInformationFirstPage Panel.ZIndex="-1" Visibility="{Binding TabInformation1}" />
                     <local:QuarantinedPersonInformationSecondPage Visibility="{Binding TabInformation2}" />
