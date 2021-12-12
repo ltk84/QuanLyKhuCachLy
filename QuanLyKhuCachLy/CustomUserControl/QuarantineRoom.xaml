@@ -206,7 +206,7 @@
                     Binding="{Binding available}"
                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                     ElementStyle="{StaticResource DataGridElement}"
-                    Header="Còn trống"
+                    Header="Số người"
                     HeaderStyle="{StaticResource DataGridHeader}"
                     MaxLength="30" />
                 <materialDesign:DataGridTextColumn
