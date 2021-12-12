@@ -1,5 +1,6 @@
 ﻿using QuanLyKhuCachLy.CustomUserControl;
 using QuanLyKhuCachLy.Model;
+using QuanLyKhuCachLy.Utility;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -865,7 +866,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         void RollbackTransaction()
         {
-            DataProvider.ins.db.ChangeTracker.Entries().Where(e => e.Entity != null).ToList().ForEach(e => e.State = EntityState.Modified);
+            DBUtilityTracker.Rollback();
             QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == RoomID));
             InitPersonNotRoomList();
             if (SelectedItem != null) SelectedItem = QuarantinePersonList.Where(x => x.id == SelectedItem.id).FirstOrDefault();

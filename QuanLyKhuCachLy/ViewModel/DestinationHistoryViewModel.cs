@@ -7,7 +7,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using QuanLyKhuCachLy.CustomUserControl;
-
+using QuanLyKhuCachLy.Utility;
 
 namespace QuanLyKhuCachLy.ViewModel
 {
@@ -483,7 +483,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         public void RollbackTransaction(int PersonID)
         {
-            DataProvider.ins.db.ChangeTracker.Entries().Where(e => e.Entity != null).ToList().ForEach(e => e.State = EntityState.Detached);
+            DBUtilityTracker.Rollback();
             DestinationHistoryList = new ObservableCollection<DestinationHistory>(DataProvider.ins.db.DestinationHistories.Where(x => x.quarantinePersonID == PersonID));
             ClearAddressList();
             foreach (var dh in DestinationHistoryList)

@@ -20,6 +20,7 @@ using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using System.Threading;
 using System.Data.Entity;
+using QuanLyKhuCachLy.Utility;
 
 namespace QuanLyKhuCachLy.ViewModel
 {
@@ -1257,7 +1258,7 @@ namespace QuanLyKhuCachLy.ViewModel
         }
         public void updateQuarantineStatus()
         {
-            for (int i =0 ; i < PeopleListView.Length; i++)
+            for (int i = 0; i < PeopleListView.Length; i++)
             {
                 PeopleListView[i].quarantineStatus = (PeopleListView[i].leaveDate.Date - DateTime.Now.Date).TotalDays <= 0 ? "Đã hoàn thành" : "Đang cách ly";
             }
@@ -2006,7 +2007,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 List<DestinationHistory> ListDestinationHistories = new List<DestinationHistory>();
                 List<Address> ListAddressDestinations = new List<Address>();
                 List<string> listCmnd = new List<string>();
-                if(xlRange2.Cells[1, 1] != null && xlRange2.Cells[1, 1].Value2 == "STT" &&
+                if (xlRange2.Cells[1, 1] != null && xlRange2.Cells[1, 1].Value2 == "STT" &&
                 xlRange2.Cells[1, 2] != null && xlRange2.Cells[1, 2].Value2 == "CMND/CCCD" &&
                 xlRange2.Cells[1, 3] != null && xlRange2.Cells[1, 3].Value2 == "Ngày" &&
                 xlRange2.Cells[1, 4] != null && xlRange2.Cells[1, 4].Value2 == "Địa điểm")
@@ -2016,8 +2017,8 @@ namespace QuanLyKhuCachLy.ViewModel
                         DestinationHistory destination = new DestinationHistory();
                         Address address = new Address();
                         if (xlRange2.Cells[i, 2] != null && xlRange2.Cells[i, 2].Value2 != null)
-                        { 
-                           
+                        {
+
                         }
                         else return;
                         if (xlRange2.Cells[i, 3] != null && xlRange2.Cells[i, 3].Value2 != null)
@@ -2025,7 +2026,7 @@ namespace QuanLyKhuCachLy.ViewModel
                             DateTime date = DateTime.FromOADate(double.Parse(xlRange2.Cells[i, 3].Value2.ToString()));
                             destination.dateArrive = date;
                         }
-                        if(xlRange2.Cells[i, 4] != null && xlRange2.Cells[i, 4].Value2 != null)
+                        if (xlRange2.Cells[i, 4] != null && xlRange2.Cells[i, 4].Value2 != null)
                         {
                             string[] arrListStr = xlRange2.Cells[i, 4].Value2.ToString().Split(',');
                             if (arrListStr.Length < 3)
@@ -2087,21 +2088,21 @@ namespace QuanLyKhuCachLy.ViewModel
                                 DataProvider.ins.db.SaveChanges();
                             }
                         }
-                        for (int i =  0; i < ListDestinationHistories.Count; i++)
+                        for (int i = 0; i < ListDestinationHistories.Count; i++)
                         {
 
                             string cmnd = listCmnd[i];
-                                bool checkID = DataProvider.ins.db.QuarantinePersons.Where(x => x.citizenID == cmnd).Count() == 1 ? true : false;
-                                if (checkID)
-                                {
-                                    ListDestinationHistories[i].quarantinePersonID = DataProvider.ins.db.QuarantinePersons.Where(x => x.citizenID == cmnd).FirstOrDefault().id;
-                                }
-                                DataProvider.ins.db.Addresses.Add(ListAddressDestinations[i]);
-                                DataProvider.ins.db.SaveChanges();
-                                ListDestinationHistories[i].addressID = ListAddressDestinations[i].id;
-                                DataProvider.ins.db.DestinationHistories.Add(ListDestinationHistories[i]);
-                                DataProvider.ins.db.SaveChanges();
-                            
+                            bool checkID = DataProvider.ins.db.QuarantinePersons.Where(x => x.citizenID == cmnd).Count() == 1 ? true : false;
+                            if (checkID)
+                            {
+                                ListDestinationHistories[i].quarantinePersonID = DataProvider.ins.db.QuarantinePersons.Where(x => x.citizenID == cmnd).FirstOrDefault().id;
+                            }
+                            DataProvider.ins.db.Addresses.Add(ListAddressDestinations[i]);
+                            DataProvider.ins.db.SaveChanges();
+                            ListDestinationHistories[i].addressID = ListAddressDestinations[i].id;
+                            DataProvider.ins.db.DestinationHistories.Add(ListDestinationHistories[i]);
+                            DataProvider.ins.db.SaveChanges();
+
                         }
                         PeopleListView = DataProvider.ins.db.QuarantinePersons.ToArray();
                         InitPersonList();
@@ -2590,9 +2591,9 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (Person == null) return;
 
                     DataProvider.ins.db.QuarantinePersons.Remove(Person);
-                    DataProvider.ins.db.SaveChanges();
-
                     QuarantinePersonList.Remove(Person);
+
+                    DataProvider.ins.db.SaveChanges();
 
                     PeopleListView = QuarantinePersonList.ToArray();
 
@@ -2653,7 +2654,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         void RollBackChange()
         {
-            DataProvider.ins.db.ChangeTracker.Entries().Where(ex => ex.Entity != null).ToList().ForEach(ex => ex.State = EntityState.Detached);
+            DBUtilityTracker.Rollback();
             InitPersonList();
             if (SelectedItem != null) SelectedItem = QuarantinePersonList.Where(x => x.id == SelectedItem.id).FirstOrDefault();
         }
@@ -2784,7 +2785,7 @@ namespace QuanLyKhuCachLy.ViewModel
             string ApplicationName = "QLKCL";
             string linkSheet = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().googleSheetURL;
             var ctrc = linkSheet.Split('/');
-            
+
             String spreadsheetId = "1R6zuZB_xFuzWrCnl4j0JLZ3da5HtprRrmjeQ3LdxW44";
             if (ctrc[ctrc.Length - 2] != "" && ctrc[ctrc.Length - 2] != null)
             {
@@ -3303,7 +3304,8 @@ namespace QuanLyKhuCachLy.ViewModel
                         {
                             int personID = listTestingResults[i].quarantinePersonID;
                             bool checkID = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == personID).Count() == 1 ? true : false;
-                            if (checkID) {
+                            if (checkID)
+                            {
                                 DataProvider.ins.db.TestingResults.Add(listTestingResults[i]);
                                 UpdateLeaveDateAfterAddTestResult(listTestingResults[i], isExecute);
                             }

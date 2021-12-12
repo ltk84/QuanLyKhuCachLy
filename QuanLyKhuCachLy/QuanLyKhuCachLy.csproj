@@ -441,6 +441,7 @@
     <Compile Include="Model\WARD.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utility\DBUtilityTracker.cs" />
     <Compile Include="Utility\ProtocolSettingsLayout.cs" />
     <Compile Include="ValidationRules\DateFormat.cs" />
     <Compile Include="CustomUserControl\QuarantinePersonFunctionMenu.xaml.cs">
