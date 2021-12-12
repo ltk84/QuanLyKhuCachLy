@@ -44,8 +44,8 @@ namespace QuanLyKhuCachLy.Model
         }
 
 
-        private int _available;
-        public int available
+        private string _available;
+        public string available
         {
             get => _available; set
             {

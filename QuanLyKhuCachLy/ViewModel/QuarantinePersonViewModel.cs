@@ -1702,7 +1702,8 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 var tempID = tempPeopleList[i].id;
                 var TestingResultList = new ObservableCollection<TestingResult>(DataProvider.ins.db.TestingResults.Where(x => x.quarantinePersonID == tempID));
-                DateTime max = TestingResultList[0].dateTesting;
+
+                DateTime max = TestingResultList.Count == 0 ? DateTime.Today : TestingResultList[0].dateTesting;
 
 
                 // Nếu còn cách li
@@ -1720,7 +1721,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     }
                     // Đã xét nghiệm
-                    else if (TestingResultList.ToArray().Length != 0)
+                    else if (TestingResultList.ToArray().Length > 0)
                     {
                         for (int j = 1; j < TestingResultList.ToArray().Length; j++)
                             if ((max - TestingResultList[j].dateTesting).TotalDays < 0) max = TestingResultList[j].dateTesting;

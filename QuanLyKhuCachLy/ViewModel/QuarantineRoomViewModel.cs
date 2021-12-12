@@ -421,7 +421,7 @@ namespace QuanLyKhuCachLy.ViewModel
             for (int i=0; i< RoomListView.Length; i++)
             {
                 int id = RoomListView[i].id;
-                RoomListView[i].available = RoomListView[i].capacity - DataProvider.ins.db.QuarantinePersons.Where(person => person.roomID == id).ToArray().Length;
+                RoomListView[i].available = (RoomListView[i].capacity - DataProvider.ins.db.QuarantinePersons.Where(person => person.roomID == id).ToArray().Length).ToString() + "/" + RoomListView[i].capacity.ToString();
             }
         }
 
