@@ -8,8 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Name="ActionConfirmationScreen"
     Title="ActionConfirmationScreen"
-    Width="720"
-    Height="400"
+    Width="620"
+    Height="350"
     AllowsTransparency="True"
     Background="Transparent"
     DataContext="{StaticResource ActionConfirmationVM}"
@@ -17,65 +17,82 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
-    <Border Margin="10" Style="{StaticResource RecommendationField}">
-        <StackPanel Margin="40,0" VerticalAlignment="Center">
-            <materialDesign:PackIcon
-                Width="65"
-                Height="65"
-                Foreground="#434A54"
-                Kind="Information"
-                Style="{StaticResource ConfirmationIcon}" />
-            <TextBlock
-                Margin="0,20,0,0"
-                FontSize="34"
-                Foreground="#434A54"
-                Style="{StaticResource ConfirmationTitle}"
-                Text="{Binding Title}"
-                TextAlignment="Center"
-                TextWrapping="Wrap" />
-            <TextBlock
-                Margin="12,12,12,0"
-                FontSize="20"
-                Foreground="#434A54"
-                Style="{StaticResource ConfirmationSubtitle}"
-                Text="{Binding Content}"
-                TextAlignment="Center"
-                TextWrapping="Wrap" />
-            <StackPanel
-                Margin="0,32,0,0"
-                HorizontalAlignment="Center"
-                Orientation="Horizontal">
-                <Button
-                    Width="170"
-                    Height="45"
-                    Margin="0"
-                    Command="{Binding CancelCommand}"
-                    CommandParameter="{Binding ElementName=ActionConfirmationScreen}"
+    <Viewbox>
+        <Border
+            Width="720"
+            Height="400"
+            Margin="10"
+            Style="{StaticResource RecommendationField}">
+            <StackPanel Margin="40,0" VerticalAlignment="Center">
+                <materialDesign:PackIcon
+                    Width="65"
+                    Height="65"
+                    Foreground="#434A54"
+                    Kind="Information"
+                    Style="{StaticResource ConfirmationIcon}" />
+                <TextBlock
+                    Margin="0,20,0,0"
+                    FontSize="34"
+                    Foreground="#434A54"
+                    Style="{StaticResource ConfirmationTitle}"
+                    Text="{Binding Title}"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap" />
+                <TextBlock
+                    Margin="12,12,12,0"
                     FontSize="20"
-                    Style="{StaticResource CancelActionConfirmationButton}">
-                    <TextBlock Text="Hủy bỏ" />
-                </Button>
-                <Button
-                    Width="170"
-                    Height="45"
-                    Margin="24,0,0,0"
-                    Command="{Binding NotActionConfirmationCommand}"
-                    CommandParameter="{Binding ElementName=ActionConfirmationScreen}"
-                    FontSize="20"
-                    Style="{StaticResource NotActionConfirmationButton}">
-                    <TextBlock Text="Không" />
-                </Button>
-                <Button
-                    Width="170"
-                    Height="45"
-                    Margin="24,0,0,0"
-                    Command="{Binding DoActionConfirmationCommand}"
-                    CommandParameter="{Binding ElementName=ActionConfirmationScreen}"
-                    FontSize="20"
-                    Style="{StaticResource ActionConfirmationButton}">
-                    <TextBlock Text="Có" />
-                </Button>
+                    Foreground="#434A54"
+                    Style="{StaticResource ConfirmationSubtitle}"
+                    Text="{Binding Content}"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap" />
+                <StackPanel
+                    Margin="0,32,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Button
+                        Width="170"
+                        Height="45"
+                        Margin="0"
+                        Command="{Binding CancelCommand}"
+                        CommandParameter="{Binding ElementName=ActionConfirmationScreen}"
+                        FontSize="20">
+                        <TextBlock Text="Hủy bỏ" />
+                        <Button.Style>
+                            <Style BasedOn="{StaticResource CancelActionConfirmationButton}" TargetType="Button">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsThreeButton}" Value="True">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsThreeButton}" Value="False">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button
+                        Width="170"
+                        Height="45"
+                        Margin="24,0,0,0"
+                        Command="{Binding NotActionConfirmationCommand}"
+                        CommandParameter="{Binding ElementName=ActionConfirmationScreen}"
+                        FontSize="20"
+                        Style="{StaticResource NotActionConfirmationButton}">
+                        <TextBlock Text="Không" />
+                    </Button>
+                    <Button
+                        Width="170"
+                        Height="45"
+                        Margin="24,0,0,0"
+                        Command="{Binding DoActionConfirmationCommand}"
+                        CommandParameter="{Binding ElementName=ActionConfirmationScreen}"
+                        FontSize="20"
+                        Style="{StaticResource ActionConfirmationButton}">
+                        <TextBlock Text="Có" />
+                    </Button>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
-    </Border>
+        </Border>
+    </Viewbox>
 </Window>

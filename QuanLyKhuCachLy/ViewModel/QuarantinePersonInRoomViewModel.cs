@@ -1,5 +1,6 @@
 ﻿using QuanLyKhuCachLy.CustomUserControl;
 using QuanLyKhuCachLy.Model;
+using QuanLyKhuCachLy.Utility;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -232,9 +233,34 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 RemoveAllPersonFromRoom();
             });
+
+            ToChangeCompleteDateCommand = new RelayCommand<Window>((p) =>
+            {
+                if (SelectedItem != null)
+                    return true;
+                return false;
+            }, (p) =>
+            {
+                ChangeCompleteDate changeCDDialog = new ChangeCompleteDate();
+                changeCDDialog.DataContext = this;
+                ConstraintDate = QPArrivedDate;
+
+                changeCDDialog.ShowDialog();
+            });
         }
 
         #region method
+
+        protected override void ChangeCompleteDate(Window p)
+        {
+            base.ChangeCompleteDate(p);
+
+            RemovePersonFromRoom();
+
+            SortPersonList();
+
+            Parent.BackToRoomInformation();
+        }
 
         void AddAllPersonToRoom()
         {
@@ -596,14 +622,17 @@ namespace QuanLyKhuCachLy.ViewModel
                     var Person = DataProvider.ins.db.QuarantinePersons.Where(x => x.id == SelectedItem.id).FirstOrDefault();
                     if (Person == null) return;
 
+                    if (Person.arrivedDate > DateTime.Today) { throw new InvalidOperationException(); }
+                    if (Person.leaveDate > DateTime.Today) Person.leaveDate = DateTime.Today;
                     Person.roomID = null;
-                    Person.completeQuarantine = true;
 
                     RemoveFromRoomUI();
 
                     PersonNotRoomList = new ObservableCollection<QuarantinePerson>(PersonNotRoomList.OrderBy(x => x.id));
 
                     DataProvider.ins.db.SaveChanges();
+
+                    Parent.BackToRoomInformation();
 
                     transaction.Commit();
                 }
@@ -669,7 +698,11 @@ namespace QuanLyKhuCachLy.ViewModel
                     foreach (var p in QuarantinePersonList)
                     {
                         p.roomID = null;
-                        p.completeQuarantine = true;
+                        if (p.arrivedDate > DateTime.Today)
+                        {
+                            throw new InvalidOperationException();
+                        }
+                        p.leaveDate = DateTime.Today;
                     }
 
                     QuarantinePersonList.Clear();
@@ -833,7 +866,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         void RollbackTransaction()
         {
-            DataProvider.ins.db.ChangeTracker.Entries().Where(e => e.Entity != null).ToList().ForEach(e => e.State = EntityState.Modified);
+            DBUtilityTracker.Rollback();
             QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == RoomID));
             InitPersonNotRoomList();
             if (SelectedItem != null) SelectedItem = QuarantinePersonList.Where(x => x.id == SelectedItem.id).FirstOrDefault();
@@ -846,9 +879,9 @@ namespace QuanLyKhuCachLy.ViewModel
 
             var RoomSeverity = DataProvider.ins.db.Severities.Where(x => x.id == CurrentRoom.levelID).FirstOrDefault();
             if (RoomSeverity == null)
-                PersonNotRoomList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == null && x.completeQuarantine != true));
+                PersonNotRoomList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == null && x.leaveDate > DateTime.Today));
             else
-                PersonNotRoomList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == null && x.completeQuarantine != true && x.levelID == RoomSeverity.id));
+                PersonNotRoomList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == null && x.leaveDate > DateTime.Today && x.levelID == RoomSeverity.id));
 
         }
 

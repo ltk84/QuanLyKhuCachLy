@@ -404,6 +404,7 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 _PeopleListView1 = value;
                 OnPropertyChanged();
+                updateQuarantineStatus1();
             }
         }
 
@@ -414,6 +415,7 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 _PeopleListView2 = value;
                 OnPropertyChanged();
+                updateQuarantineStatus2();
             }
         }
 
@@ -650,7 +652,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             SendNotification = new RelayCommand<object>((p) =>
             {
-                if (message == "" || PeopleList2.ToArray().Length == 0) return false;
+                if (message == "" || ChoiceList.ToArray().Length == 0) return false;
                 return true;
             }, (p) =>
             {
@@ -749,8 +751,10 @@ namespace QuanLyKhuCachLy.ViewModel
                 PeopleList1 = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
                 PeopleListView2.ToList().ForEach(RemoveItemFormList1);
                 PeopleListView1 = PeopleList1.ToArray();
+                countReceiver = "Danh sách nhận thông báo có " + PeopleList2.ToArray().Length + " người.";
                 receiverList = new NotificationPeopleList();
                 receiverList.ShowDialog();
+
             });
 
 
@@ -850,6 +854,25 @@ namespace QuanLyKhuCachLy.ViewModel
         }
 
         #region methodSelectPeopleWindown
+
+        public void updateQuarantineStatus1()
+        {
+            for (int i = 0; i < PeopleListView1.Length; i++)
+            {
+                PeopleListView1[i].quarantineStatus = (PeopleListView1[i].leaveDate.Date - DateTime.Now.Date).TotalDays < 0 ? "Đã hoàn thành" : "Đang cách ly";
+            }
+        }
+
+
+        public void updateQuarantineStatus2()
+        {
+            for (int i = 0; i < PeopleListView2.Length; i++)
+            {
+                PeopleListView2[i].quarantineStatus = (PeopleListView2[i].leaveDate.Date - DateTime.Now.Date).TotalDays < 0 ? "Đã hoàn thành" : "Đang cách ly";
+            }
+        }
+
+
         void RemoveItemFormList1(QuarantinePerson temp)
         {
             PeopleList1.Remove(temp);
@@ -889,27 +912,23 @@ namespace QuanLyKhuCachLy.ViewModel
         // Searching
         void SearchList1()
         {
-            //SelectedFilterType = "Tất cả";
-            if (SearchKey1 == "")
+            if (SearchKey1 == "" || SearchKey1 == null)
             {
-                PeopleListView1 = PeopleList1.ToArray();
-
             }
-
             else
             {
 
+                SelectFilterProperty1();
+                String[] Value = new string[PeopleListView1.Length];
 
-                var temp = PeopleList1.ToArray();
-                String[] Value = new string[temp.Length];
-
-                for (int i = 0; i < PeopleList1.ToArray().Length; i++)
+                for (int i = 0; i < PeopleListView1.Length; i++)
                 {
-                    Value[i] = temp[i].name?.ToString() + "@@" + temp[i].citizenID?.ToString() + "@@" + temp[i].id.ToString() + "@@" + temp[i].healthInsuranceID?.ToString() + "@@" + temp[i]?.phoneNumber.ToString() + "@@" + temp[i].QuarantineRoom?.displayName.ToString();
+                    Value[i] = PeopleListView1[i].name?.ToString() + "@@" + PeopleListView1[i].citizenID?.ToString() + "@@" + PeopleListView1[i].id.ToString() + "@@" + PeopleListView1[i].healthInsuranceID?.ToString() + "@@" + PeopleListView1[i]?.phoneNumber.ToString() + "@@" + PeopleListView1[i].QuarantineRoom?.displayName.ToString();
 
                 }
 
-                PeopleListView1 = temp.Where((val, index) => Value[index].ToUpper().Contains(SearchKey1.ToUpper())).ToArray();
+                PeopleListView1 = PeopleListView1.Where((val, index) => Value[index].ToUpper().Contains(SearchKey1.ToUpper())).ToArray();
+
 
             }
         }
@@ -973,27 +992,23 @@ namespace QuanLyKhuCachLy.ViewModel
 
         void SearchList2()
         {
-            //SelectedFilterType = "Tất cả";
-            if (SearchKey2 == "")
+            if (SearchKey2 == "" || SearchKey2 == null)
             {
-                PeopleListView2 = PeopleList2.ToArray();
-
             }
-
             else
             {
 
+                SelectFilterProperty2();
+                String[] Value = new string[PeopleListView2.Length];
 
-                var temp = PeopleList2.ToArray();
-                String[] Value = new string[temp.Length];
-
-                for (int i = 0; i < PeopleList2.ToArray().Length; i++)
+                for (int i = 0; i < PeopleListView2.Length; i++)
                 {
-                    Value[i] = temp[i].name?.ToString() + "@@" + temp[i].citizenID?.ToString() + "@@" + temp[i].id.ToString() + "@@" + temp[i].healthInsuranceID?.ToString() + "@@" + temp[i]?.phoneNumber.ToString() + "@@" + temp[i].QuarantineRoom?.displayName.ToString();
+                    Value[i] = PeopleListView2[i].name?.ToString() + "@@" + PeopleListView2[i].citizenID?.ToString() + "@@" + PeopleListView2[i].id.ToString() + "@@" + PeopleListView2[i].healthInsuranceID?.ToString() + "@@" + PeopleListView2[i]?.phoneNumber.ToString() + "@@" + PeopleListView2[i].QuarantineRoom?.displayName.ToString();
 
                 }
 
-                PeopleListView2 = temp.Where((val, index) => Value[index].ToUpper().Contains(SearchKey2.ToUpper())).ToArray();
+                PeopleListView2 = PeopleListView2.Where((val, index) => Value[index].ToUpper().Contains(SearchKey2.ToUpper())).ToArray();
+
 
             }
         }
@@ -1002,13 +1017,13 @@ namespace QuanLyKhuCachLy.ViewModel
 
         void getFilterProperty1()
         {
-            SelectedFilterProperty1 = "Tất cả";
+            SelectedFilterProperty1 = "";
+            SearchKey1 = "";
 
             //FilterProperty = DataProvider.ins.db.Staffs.Select(staff => staff.GetType().GetProperty(SelectedFilterType)).Distinct();
             if (SelectedFilterType1 == "Tất cả")
             {
-                SelectedFilterProperty1 = "Chọn phương thức lọc";
-                FilterProperty1 = new string[] { "Chọn phương thức lọc" };
+                FilterProperty1 = new string[] { };
             }
             else if (SelectedFilterType1 == "Giới tính")
             {
@@ -1030,21 +1045,20 @@ namespace QuanLyKhuCachLy.ViewModel
                 FilterProperty1 = PeopleList1.Select(person => person.Severity?.level).ToArray();
                 FilterProperty1 = FilterProperty1.Distinct().ToArray();
             }
-            else if (SelectedFilterType1 == "Ngày đi")
+            else if (SelectedFilterType1 == "Ngày hoàn thành")
             {
-                FilterProperty1 = PeopleList1.Select(person => person.leaveDate.ToString()).ToArray();
+                FilterProperty1 = PeopleList1.Select(person => person.leaveDate.Date.ToString("dd'/'MM'/'yyyy")).ToArray();
                 FilterProperty1 = FilterProperty1.Distinct().ToArray();
             }
             else if (SelectedFilterType1 == "Ngày đến")
             {
-                FilterProperty1 = PeopleList1.Select(person => person.arrivedDate.ToString()).ToArray();
+                FilterProperty1 = PeopleList1.Select(person => person.arrivedDate.Date.ToString("dd'/'MM'/'yyyy")).ToArray();
                 FilterProperty1 = FilterProperty1.Distinct().ToArray();
             }
-            else if (SelectedFilterType1 == "Ngày đến kì hạn xét nghiệm")
+            else if (SelectedFilterType1 == "Đến kì hạn xét nghiệm")
             {
                 FilterProperty1 = new string[] { "Hôm qua", "Hôm nay", "Ngày mai" };
             }
-
             PeopleListView1 = PeopleList1.ToArray();
         }
 
@@ -1052,13 +1066,13 @@ namespace QuanLyKhuCachLy.ViewModel
 
         void getFilterProperty2()
         {
-            SelectedFilterProperty2 = "Tất cả";
+            SelectedFilterProperty2 = "";
+            SearchKey2 = "";
 
             //FilterProperty = DataProvider.ins.db.Staffs.Select(staff => staff.GetType().GetProperty(SelectedFilterType)).Distinct();
             if (SelectedFilterType2 == "Tất cả")
             {
-                SelectedFilterProperty2 = "Chọn phương thức lọc";
-                FilterProperty2 = new string[] { "Chọn phương thức lọc" };
+                FilterProperty2 = new string[] { };
             }
             else if (SelectedFilterType2 == "Giới tính")
             {
@@ -1080,31 +1094,28 @@ namespace QuanLyKhuCachLy.ViewModel
                 FilterProperty2 = PeopleList2.Select(person => person.Severity?.level).ToArray();
                 FilterProperty2 = FilterProperty2.Distinct().ToArray();
             }
-            else if (SelectedFilterType2 == "Ngày đi")
+            else if (SelectedFilterType2 == "Ngày hoàn thành")
             {
-                FilterProperty2 = PeopleList2.Select(person => person.leaveDate.ToString()).ToArray();
+                FilterProperty2 = PeopleList2.Select(person => person.leaveDate.Date.ToString("dd'/'MM'/'yyyy")).ToArray();
                 FilterProperty2 = FilterProperty2.Distinct().ToArray();
             }
             else if (SelectedFilterType2 == "Ngày đến")
             {
-                FilterProperty2 = PeopleList2.Select(person => person.arrivedDate.ToString()).ToArray();
+                FilterProperty2 = PeopleList2.Select(person => person.arrivedDate.Date.ToString("dd'/'MM'/'yyyy")).ToArray();
                 FilterProperty2 = FilterProperty2.Distinct().ToArray();
             }
-            else if (SelectedFilterType2 == "Ngày đến kì hạn xét nghiệm")
+            else if (SelectedFilterType2 == "Đến kì hạn xét nghiệm")
             {
                 FilterProperty2 = new string[] { "Hôm qua", "Hôm nay", "Ngày mai" };
             }
-
-
             PeopleListView2 = PeopleList2.ToArray();
         }
 
         void SelectFilterProperty1()
         {
-            if (SelectedFilterType1 == "Tất cả")
-            {
-            }
-            else if (SelectedFilterType1 == "Giới tính")
+            PeopleListView1 = PeopleList1.ToArray();
+            if (SelectedFilterProperty1 == "" || SelectedFilterProperty1 == null || SelectedFilterProperty1 == "Tất cả") return;
+            if (SelectedFilterType1 == "Giới tính")
             {
                 PeopleListView1 = PeopleList1.Where(x => x.sex == SelectedFilterProperty1).ToArray();
             }
@@ -1124,12 +1135,12 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType1 == "Ngày đi")
             {
-                PeopleListView1 = PeopleList1.Where(x => x.leaveDate.ToString() == SelectedFilterProperty1).ToArray();
+                PeopleListView1 = PeopleList1.Where(x => x.leaveDate.ToString("dd'/'MM'/'yyyy") == SelectedFilterProperty1).ToArray();
 
             }
             else if (SelectedFilterType1 == "Ngày đến")
             {
-                PeopleListView1 = PeopleList1.Where(x => x.arrivedDate.ToString() == SelectedFilterProperty1).ToArray();
+                PeopleListView1 = PeopleList1.Where(x => x.arrivedDate.ToString("dd'/'MM'/'yyyy") == SelectedFilterProperty1).ToArray();
             }
             else if (SelectedFilterType1 == "Ngày đến kì hạn xét nghiệm")
             {
@@ -1158,10 +1169,10 @@ namespace QuanLyKhuCachLy.ViewModel
 
         void SelectFilterProperty2()
         {
-            if (SelectedFilterType2 == "Tất cả")
-            {
-            }
-            else if (SelectedFilterType2 == "Giới tính")
+            PeopleListView2 = PeopleList2.ToArray();
+            if (SelectedFilterProperty2 == "" || SelectedFilterProperty2 == null || SelectedFilterProperty2 == "Tất cả") return;
+
+            if (SelectedFilterType2 == "Giới tính")
             {
                 PeopleListView2 = PeopleList2.Where(x => x.sex == SelectedFilterProperty2).ToArray();
             }
@@ -1181,12 +1192,12 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType2 == "Ngày đi")
             {
-                PeopleListView2 = PeopleList2.Where(x => x.leaveDate.ToString() == SelectedFilterProperty2).ToArray();
+                PeopleListView2 = PeopleList2.Where(x => x.leaveDate.ToString("dd'/'MM'/'yyyy") == SelectedFilterProperty2).ToArray();
 
             }
             else if (SelectedFilterType2 == "Ngày đến")
             {
-                PeopleListView2 = PeopleList2.Where(x => x.arrivedDate.ToString() == SelectedFilterProperty2).ToArray();
+                PeopleListView2 = PeopleList2.Where(x => x.arrivedDate.ToString("dd'/'MM'/'yyyy") == SelectedFilterProperty2).ToArray();
 
             }
             else if (SelectedFilterType2 == "Ngày đến kì hạn xét nghiệm")
@@ -1214,6 +1225,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         void FilterPersonIsOnTestingDateToday1(DateTime SelectedDate)
         {
+
             int maxQuarantineDay = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().requiredDayToFinish;
             int testCycle = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().testCycle;
             var tempPeopleList = PeopleList1.ToArray();
@@ -1222,7 +1234,8 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 var tempID = tempPeopleList[i].id;
                 var TestingResultList = new ObservableCollection<TestingResult>(DataProvider.ins.db.TestingResults.Where(x => x.quarantinePersonID == tempID));
-                DateTime max = TestingResultList[0].dateTesting;
+
+                DateTime max = TestingResultList.Count == 0 ? DateTime.Today : TestingResultList[0].dateTesting;
 
 
                 // Nếu còn cách li
@@ -1240,7 +1253,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     }
                     // Đã xét nghiệm
-                    else if (TestingResultList.ToArray().Length != 0)
+                    else if (TestingResultList.ToArray().Length > 0)
                     {
                         for (int j = 1; j < TestingResultList.ToArray().Length; j++)
                             if ((max - TestingResultList[j].dateTesting).TotalDays < 0) max = TestingResultList[j].dateTesting;
@@ -1260,22 +1273,24 @@ namespace QuanLyKhuCachLy.ViewModel
                 }
             }
 
-            //if (SearchKey1 != "" && SearchKey1 != null)
-                PeopleListView1 = tempQuarantinePersonList.ToArray();
+            //if (SearchKey != "" && SearchKey != null)
+            PeopleListView1 = tempQuarantinePersonList.ToArray();
         }
 
 
         void FilterPersonIsOnTestingDateToday2(DateTime SelectedDate)
         {
+
             int maxQuarantineDay = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().requiredDayToFinish;
             int testCycle = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().testCycle;
-            var tempPeopleList = PeopleList1.ToArray();
+            var tempPeopleList = PeopleList2.ToArray();
             var tempQuarantinePersonList = new ObservableCollection<QuarantinePerson>();
             for (int i = 0; i < tempPeopleList.Length; i++)
             {
                 var tempID = tempPeopleList[i].id;
                 var TestingResultList = new ObservableCollection<TestingResult>(DataProvider.ins.db.TestingResults.Where(x => x.quarantinePersonID == tempID));
-                DateTime max = TestingResultList[0].dateTesting;
+
+                DateTime max = TestingResultList.Count == 0 ? DateTime.Today : TestingResultList[0].dateTesting;
 
 
                 // Nếu còn cách li
@@ -1293,7 +1308,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     }
                     // Đã xét nghiệm
-                    else if (TestingResultList.ToArray().Length != 0)
+                    else if (TestingResultList.ToArray().Length > 0)
                     {
                         for (int j = 1; j < TestingResultList.ToArray().Length; j++)
                             if ((max - TestingResultList[j].dateTesting).TotalDays < 0) max = TestingResultList[j].dateTesting;
@@ -1313,8 +1328,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 }
             }
 
-            //if (SearchKey1 != "" && SearchKey1 != null)
-                PeopleListView1 = tempQuarantinePersonList.ToArray();
+            //if (SearchKey != "" && SearchKey != null)
+            PeopleListView2 = tempQuarantinePersonList.ToArray();
         }
 
 
@@ -1385,7 +1400,7 @@ namespace QuanLyKhuCachLy.ViewModel
         }
 
         #endregion
-
+         
 
         #region methodAddEdit
 
@@ -1705,16 +1720,18 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             try
             {
-                var accountSid = "AC9cb120d0ee9f5196f765af6db11ce3dd";
-                var authToken = "17750dc00aa57d5f05d436cd9085652c";
+                var accountSid = "AC7539332c00efcc9cdad8d5f1a343f2e7";
+                var authToken = "0a8aed860e052232416fccfb8b86380";
+                authToken += "1";
                 TwilioClient.Init(accountSid, authToken);
 
-                var messageOptions = new CreateMessageOptions(
-                   new PhoneNumber(phoneNumber));
-                messageOptions.MessagingServiceSid = "MG9ba537e9324fff8eeac2f4eeb109d1f0";
-                messageOptions.Body = messageContent;
+                var message = MessageResource.Create(
+                    body: messageContent,
+                    from: new Twilio.Types.PhoneNumber("+17622007798"),
+                    to: new Twilio.Types.PhoneNumber(phoneNumber)
+                );
 
-                var message = MessageResource.Create(messageOptions);
+
             }
             catch
             {

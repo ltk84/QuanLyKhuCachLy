@@ -52,6 +52,7 @@
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
             <Button
@@ -59,10 +60,10 @@
                 Grid.Column="1"
                 Width="Auto"
                 Height="Auto"
-                Margin="0,0,25,0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 Click="Button_Click"
+                Command="{Binding CompleteQuarantinePersonCommand}"
                 Style="{StaticResource MenuButton}">
                 <StackPanel Orientation="Horizontal">
                     <Image
@@ -82,16 +83,42 @@
                         FontWeight="Regular"
                         Foreground="#FF000000"
                         Text="Hoàn thành cách ly" />
-
                 </StackPanel>
             </Button>
-
             <Button
                 Grid.Row="0"
                 Grid.Column="2"
                 Width="Auto"
                 Height="Auto"
-                Margin="0,0,25,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Command="{Binding ToChangeCompleteDateCommand}"
+                Style="{StaticResource MenuButton}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon
+                        Width="18"
+                        Height="16"
+                        Margin="0,0,15,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Kind="DateRange"
+                        RenderTransformOrigin="0.5,0.5" />
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="11"
+                        FontWeight="Regular"
+                        Foreground="#FF000000"
+                        Text="Thay đổi ngày hoàn thành" />
+                </StackPanel>
+            </Button>
+
+            <Button
+                Grid.Row="0"
+                Grid.Column="3"
+                Width="Auto"
+                Height="Auto"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 Click="Button_Click"
@@ -120,7 +147,7 @@
             </Button>
             <Button
                 Grid.Row="0"
-                Grid.Column="3"
+                Grid.Column="4"
                 Width="Auto"
                 Height="Auto"
                 HorizontalAlignment="Right"

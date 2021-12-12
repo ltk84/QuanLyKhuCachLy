@@ -43,6 +43,17 @@ namespace QuanLyKhuCachLy.Model
             }
         }
 
+
+        private string _available;
+        public string available
+        {
+            get => _available; set
+            {
+                _available = value;
+                OnPropertyChanged();
+            }
+        }
+
         private Nullable<int> _levelID;
         public Nullable<int> levelID
         {

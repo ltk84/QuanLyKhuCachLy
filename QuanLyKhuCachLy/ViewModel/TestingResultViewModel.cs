@@ -1,4 +1,5 @@
 ﻿using QuanLyKhuCachLy.Model;
+using QuanLyKhuCachLy.Utility;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -195,7 +196,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         public void RollbackTransaction(int PersonID)
         {
-            DataProvider.ins.db.ChangeTracker.Entries().Where(e => e.Entity != null).ToList().ForEach(e => e.State = EntityState.Detached);
+            DBUtilityTracker.Rollback();
             TestingResultList = new ObservableCollection<TestingResult>(DataProvider.ins.db.TestingResults.Where(x => x.quarantinePersonID == PersonID));
         }
 

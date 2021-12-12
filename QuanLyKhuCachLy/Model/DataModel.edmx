@@ -97,6 +97,8 @@
           <Property Name="requiredDayToFinish" Type="int" Nullable="false" />
           <Property Name="addressID" Type="int" Nullable="false" />
           <Property Name="managerID" Type="int" />
+          <Property Name="googleSheetURL" Type="nvarchar(max)" />
+          <Property Name="googleFormURL" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="QuarantinePerson">
           <Key>
@@ -529,6 +531,8 @@
           <Property Name="managerID" Type="Int32" />
           <NavigationProperty Name="Address" Relationship="Self.FK__Quarantin__addre__3A81B327" FromRole="QuarantineArea" ToRole="Address" />
           <NavigationProperty Name="Staff" Relationship="Self.FK_QuarantineArea_managerID" FromRole="QuarantineArea" ToRole="Staff" />
+          <Property Name="googleSheetURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="googleFormURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="QuarantinePerson">
           <Key>
@@ -967,6 +971,8 @@
           <EntitySetMapping Name="QuarantineAreas">
             <EntityTypeMapping TypeName="QLKCLModel.QuarantineArea">
               <MappingFragment StoreEntitySet="QuarantineArea">
+                <ScalarProperty Name="googleFormURL" ColumnName="googleFormURL" />
+                <ScalarProperty Name="googleSheetURL" ColumnName="googleSheetURL" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="testCycle" ColumnName="testCycle" />

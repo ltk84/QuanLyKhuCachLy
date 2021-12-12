@@ -95,6 +95,7 @@
                 CanUserReorderColumns="False"
                 CanUserResizeColumns="True"
                 CanUserResizeRows="False"
+                IsReadOnly="True"
                 ItemsSource="{Binding TestingResultViewModel.TestingResultList}"
                 LoadingRow="vaccineInfo_LoadingRow"
                 SelectedItem="{Binding TestingResultViewModel.SelectedItem}">

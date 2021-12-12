@@ -90,6 +90,7 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 _RoomListView = value;
                 OnPropertyChanged();
+                updateAvailableSlot();
             }
         }
 
@@ -261,6 +262,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         public ICommand ToExportExcel { get; set; }
 
+        public ICommand ToGetFormatExcel { get; set; }
         #endregion
 
 
@@ -288,6 +290,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }, (p) =>
             {
                 AddRoomFromExcel();
+                updateAvailableSlot();
             });
             ToEditCommand = new RelayCommand<Window>((p) =>
             {
@@ -298,6 +301,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 EditRoom EditScreen = new EditRoom();
                 SetSelectedItemToProperty();
                 EditScreen.ShowDialog();
+                updateAvailableSlot();
+
             });
 
             ToViewCommand = new RelayCommand<object>((p) =>
@@ -308,6 +313,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 BufferWindow bufferWindow = new BufferWindow();
                 bufferWindow.ShowDialog();
                 ToDetailRoomTab();
+                
             });
 
             ToMainCommand = new RelayCommand<object>((p) =>
@@ -316,6 +322,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }, (p) =>
             {
                 BackToListRoomTab();
+                updateAvailableSlot();
             });
 
             AddRoomManualCommand = new RelayCommand<Window>((p) =>
@@ -389,7 +396,14 @@ namespace QuanLyKhuCachLy.ViewModel
                 bufferWindow.ShowDialog();
                 ClearPersonList();
             });
-
+            ToGetFormatExcel = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }
+            , (p) =>
+            {
+                GetFormatExcel();
+            });
             RefeshCommand = new RelayCommand<object>((p) =>
             {
                 return true;
@@ -401,6 +415,16 @@ namespace QuanLyKhuCachLy.ViewModel
         }
 
         #region method
+        
+        void updateAvailableSlot()
+        {
+            for (int i=0; i< RoomListView.Length; i++)
+            {
+                int id = RoomListView[i].id;
+                RoomListView[i].available = DataProvider.ins.db.QuarantinePersons.Where(person => person.roomID == id).ToArray().Length.ToString() + "/" + RoomListView[i].capacity.ToString();
+            }
+        }
+
 
         void RefeshTab()
         {
@@ -546,6 +570,7 @@ namespace QuanLyKhuCachLy.ViewModel
         async Task ExecuteAddRoomFromExcel(LoadingIndicator loadingIndicator, string path)
         {
             bool isSuccess = false;
+            string error = "";
             await Task.Run(() =>
             {
                 List<Model.QuarantineRoom> listRoom = new List<Model.QuarantineRoom>();
@@ -558,9 +583,10 @@ namespace QuanLyKhuCachLy.ViewModel
                 if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2 != "STT" ||
                 xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2 != "Tên" ||
                 xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2 != "Sức chứa" ||
-                xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2 != "Nhóm đối tượng" || colCount != 4)
+                xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2 != "Nhóm đối tượng")
                 {
-                    //MessageBox.Show("Không đúng định dạng file");
+                    xlWorkbook.Close();
+                    error = "Không đúng định dạng file";
                     return;
                 }
                 for (int i = 2; i <= rowCount; i++)
@@ -570,16 +596,47 @@ namespace QuanLyKhuCachLy.ViewModel
                     {
                         room.displayName = xlRange.Cells[i, 2].Value2.ToString();
                     }
+                    else
+                    {
+                        xlWorkbook.Close();
+                        error = "Tên để trống";
+                        return;
+                    }
                     if (xlRange.Cells[i, 3] != null && xlRange.Cells[i, 3].Value2 != null)
                     {
-                        room.capacity = Int32.Parse(xlRange.Cells[i, 3].Value2.ToString());
+                        int t;
+                        if (Int32.TryParse(xlRange.Cells[i, 3].Value2.ToString(), out t))
+                        {
+                            room.capacity = Int32.Parse(xlRange.Cells[i, 3].Value2.ToString());
+                        }
+                        else {
+                            error = "Phòng " + xlRange.Cells[i, 2].Value2.ToString() + " sức chứa không là số";
+                            xlWorkbook.Close();
+                            return;
+                        };
+                        
                     }
+                    else
+                    {
+                        error = "Phòng " + xlRange.Cells[i, 2].Value2.ToString() + " sức chứa trống";
+                        xlWorkbook.Close();
+                        return;
+                    }
+                
                     if (xlRange.Cells[i, 4] != null && xlRange.Cells[i, 4].Value2 != null)
                     {
-                        room.levelID = Int32.Parse(xlRange.Cells[i, 4].Value2.ToString());
+                        string description = xlRange.Cells[i, 4].Value2.ToString();
+                        int levelId;
+                        bool checkLevel = DataProvider.ins.db.Severities.Where(x => x.description == description).Count() >= 1 ? true : false;
+                        if (checkLevel)
+                        {
+                            levelId = DataProvider.ins.db.Severities.Where(x => x.description == description).FirstOrDefault().id;
+                            room.levelID = levelId;
+                        }
                     }
                     listRoom.Add(room);
                 }
+                xlWorkbook.Close();
                 using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
                 {
                     try
@@ -638,6 +695,10 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
                 var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                if (error != "" && error != null)
+                {
+                    FailNotificationVM.Content = error;
+                }
                 ErrorDialog.ShowDialog();
             }
         }
@@ -927,6 +988,24 @@ namespace QuanLyKhuCachLy.ViewModel
                 sheet.Range["D" + i.ToString()].Value = (RoomListView[i - 2].capacity - countInRoom).ToString();
                 sheet.Range["E" + i.ToString()].Value = RoomListView[i - 2].levelID != null?severity.description:"";
             }
+        }
+        void GetFormatExcel()
+        {
+            Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
+            app.Visible = true;
+            app.WindowState = Microsoft.Office.Interop.Excel.XlWindowState.xlMaximized;
+            Microsoft.Office.Interop.Excel.Workbook file = app.Workbooks.Add(Microsoft.Office.Interop.Excel.XlWBATemplate.xlWBATWorksheet);
+            Microsoft.Office.Interop.Excel.Worksheet sheet = file.Worksheets[1];
+            sheet.Columns[1].ColumnWidth = 5;
+            sheet.Columns[2].ColumnWidth = 15;
+            sheet.Columns[3].ColumnWidth = 10;
+            sheet.Columns[4].ColumnWidth = 10;
+            sheet.Range["A1"].Value = "STT";
+            sheet.Range["B1"].Value = "Tên";
+            sheet.Range["C1"].Value = "Sức chứa";
+            sheet.Range["D1"].Value = "Nhóm đối tượng";
+            sheet.Range["E2"].Value = "Lưu ý: Nhóm đối tượng có thể để trống";
+            sheet.Range["E3"].Value = "Xóa lưu ý trước khi thêm";
         }
         #endregion
     }

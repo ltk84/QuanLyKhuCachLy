@@ -11,6 +11,11 @@
     Height="Auto"
     DataContext="{StaticResource ReportVM}"
     mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding RefeshCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid Width="Auto" Margin="25,25,45,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

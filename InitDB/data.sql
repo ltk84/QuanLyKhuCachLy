@@ -1,12 +1,11 @@
 USE [master]
 GO
-/****** Object:  Database [QLKCL]    Script Date: 26-Nov-21 10:42:47 AM ******/
+/****** Object:  Database [QLKCL]    Script Date: 10-Dec-21 2:34:47 PM ******/
 CREATE DATABASE [QLKCL]
 GO
-
 USE [QLKCL]
 GO
-/****** Object:  Table [dbo].[Account]    Script Date: 26-Nov-21 10:42:48 AM ******/
+/****** Object:  Table [dbo].[Account]    Script Date: 10-Dec-21 2:34:47 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -21,7 +20,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Address]    Script Date: 26-Nov-21 10:42:48 AM ******/
+/****** Object:  Table [dbo].[Address]    Script Date: 10-Dec-21 2:34:47 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -39,7 +38,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DestinationHistory]    Script Date: 26-Nov-21 10:42:48 AM ******/
+/****** Object:  Table [dbo].[DestinationHistory]    Script Date: 10-Dec-21 2:34:47 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -55,7 +54,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DISTRICT]    Script Date: 26-Nov-21 10:42:48 AM ******/
+/****** Object:  Table [dbo].[DISTRICT]    Script Date: 10-Dec-21 2:34:47 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -70,7 +69,7 @@ CREATE TABLE [dbo].[DISTRICT](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[HealthInformation]    Script Date: 26-Nov-21 10:42:48 AM ******/
+/****** Object:  Table [dbo].[HealthInformation]    Script Date: 10-Dec-21 2:34:47 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -92,7 +91,7 @@ CREATE TABLE [dbo].[HealthInformation](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[InjectionRecord]    Script Date: 26-Nov-21 10:42:48 AM ******/
+/****** Object:  Table [dbo].[InjectionRecord]    Script Date: 10-Dec-21 2:34:47 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -108,7 +107,7 @@ CREATE TABLE [dbo].[InjectionRecord](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[NATION]    Script Date: 26-Nov-21 10:42:48 AM ******/
+/****** Object:  Table [dbo].[NATION]    Script Date: 10-Dec-21 2:34:47 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -122,7 +121,7 @@ CREATE TABLE [dbo].[NATION](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[NotificationTemplate]    Script Date: 26-Nov-21 10:42:48 AM ******/
+/****** Object:  Table [dbo].[NotificationTemplate]    Script Date: 10-Dec-21 2:34:47 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -137,7 +136,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PROVINCE]    Script Date: 26-Nov-21 10:42:48 AM ******/
+/****** Object:  Table [dbo].[PROVINCE]    Script Date: 10-Dec-21 2:34:47 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -151,7 +150,7 @@ CREATE TABLE [dbo].[PROVINCE](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[QuarantineArea]    Script Date: 26-Nov-21 10:42:48 AM ******/
+/****** Object:  Table [dbo].[QuarantineArea]    Script Date: 10-Dec-21 2:34:47 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -163,13 +162,15 @@ CREATE TABLE [dbo].[QuarantineArea](
 	[requiredDayToFinish] [int] NOT NULL,
 	[addressID] [int] NOT NULL,
 	[managerID] [int] NULL,
+	[googleSheetURL] [nvarchar](max) NULL,
+	[googleFormURL] [nvarchar](max) NULL,
  CONSTRAINT [PK__Quaranti__3213E83F8BF8378F] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[QuarantinePerson]    Script Date: 26-Nov-21 10:42:48 AM ******/
+/****** Object:  Table [dbo].[QuarantinePerson]    Script Date: 10-Dec-21 2:34:47 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -196,7 +197,7 @@ CREATE TABLE [dbo].[QuarantinePerson](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[QuarantineRoom]    Script Date: 26-Nov-21 10:42:48 AM ******/
+/****** Object:  Table [dbo].[QuarantineRoom]    Script Date: 10-Dec-21 2:34:47 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -212,7 +213,7 @@ CREATE TABLE [dbo].[QuarantineRoom](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Severity]    Script Date: 26-Nov-21 10:42:48 AM ******/
+/****** Object:  Table [dbo].[Severity]    Script Date: 10-Dec-21 2:34:47 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -227,7 +228,7 @@ CREATE TABLE [dbo].[Severity](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Staff]    Script Date: 26-Nov-21 10:42:48 AM ******/
+/****** Object:  Table [dbo].[Staff]    Script Date: 10-Dec-21 2:34:47 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -250,7 +251,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TestingResult]    Script Date: 26-Nov-21 10:42:48 AM ******/
+/****** Object:  Table [dbo].[TestingResult]    Script Date: 10-Dec-21 2:34:47 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -266,7 +267,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[WARD]    Script Date: 26-Nov-21 10:42:48 AM ******/
+/****** Object:  Table [dbo].[WARD]    Script Date: 10-Dec-21 2:34:47 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -283,447 +284,9 @@ CREATE TABLE [dbo].[WARD](
 GO
 SET IDENTITY_INSERT [dbo].[Account] ON 
 GO
-INSERT [dbo].[Account] ([id], [username], [password]) VALUES (0, N'tunglete', N'a052015c462d64835f6dd40eecffabf4')
+INSERT [dbo].[Account] ([id], [username], [password]) VALUES (0, N'admin', N'db69fc039dcbd2962cb4d28f5891aae1')
 GO
 SET IDENTITY_INSERT [dbo].[Account] OFF
-GO
-SET IDENTITY_INSERT [dbo].[Address] ON 
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (3, N'Hồ Chí Minh', N'Quận 1', N'Phú Thạnh', N'123', N'123')
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (4, N'Hồ Chí Minh', N'Quận 1', N'Phú Thạnh', NULL, NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (5, N'Hồ Chí Minh', N'Quận 1', N'Phú Thạnh', N'123', N'123')
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (6, N'Hồ Chí Minh', N'Quận 1', N'Phú Thạnh', N'123', N'123')
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (7, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'60 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (8, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'61 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (9, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'62 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (10, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'63 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (11, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'64 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (12, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'65 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (13, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'66 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (14, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'67 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (15, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'68 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (16, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'69 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (17, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'70 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (18, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'71 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (19, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'72 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (20, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'73 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (21, N'Hồ Chí Minh', N'Quận 1', N'Phú Thọ Hòa', N'123', N'123')
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (22, N'Hồ Chí Minh', N'Quận 1', N'Phú Thạnh', NULL, NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (23, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'60 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (24, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'61 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (25, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'62 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (26, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'63 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (27, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'64 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (28, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'65 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (29, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'66 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (30, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'67 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (31, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'68 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (32, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'69 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (33, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'70 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (34, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'71 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (35, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'72 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (36, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'73 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (37, N'Hồ Chí Minh', N'Quận 1', N'Phú Thạnh', NULL, NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (38, N'Hồ Chí Minh', N'Quận 1', N'Phú Thạnh', NULL, NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (39, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'60 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (40, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'61 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (41, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'62 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (42, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'63 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (43, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'64 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (44, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'65 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (45, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'66 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (46, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'67 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (47, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'68 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (48, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'69 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (49, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'70 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (50, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'71 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (51, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'72 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (52, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'73 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (53, N'Hồ Chí Minh', N'Quận 1', N'Phú Thạnh', NULL, NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (54, N'Hồ Chí Minh', N'Quận 1', N'Phú Thọ Hòa', NULL, NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (55, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'60 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (56, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'61 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (57, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'62 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (58, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'63 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (59, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'64 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (60, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'65 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (61, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'66 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (62, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'67 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (63, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'68 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (64, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'69 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (65, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'70 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (66, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'71 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (67, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'72 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (68, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'73 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (69, N'Hồ Chí Minh', N'Quận 1', N'Phú Thạnh', NULL, NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (70, N'Hồ Chí Minh', N'Quận 1', N'Phú Thạnh', NULL, NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (71, N'Hồ Chí Minh', N'Quận 1', N'Phú Thạnh', NULL, NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (72, N'Hồ Chí Minh', N'Quận 1', N'Phú Thạnh', NULL, NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (73, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'60 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (74, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'61 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (75, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'62 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (76, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'63 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (77, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'64 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (78, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'65 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (79, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'66 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (80, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'67 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (81, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'68 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (82, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'69 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (83, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'70 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (84, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'71 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (85, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'72 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (86, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'73 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (88, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'60 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (89, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'61 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (90, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'62 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (91, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'63 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (92, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'64 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (93, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'65 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (94, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'66 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (95, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'67 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (96, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'68 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (97, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'69 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (98, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'70 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (99, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'71 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (100, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'72 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (101, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'73 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (102, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'60 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (103, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'61 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (104, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'62 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (105, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'63 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (106, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'64 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (107, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'65 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (108, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'66 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (109, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'67 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (110, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'68 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (111, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'69 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (112, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'70 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (113, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'71 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (114, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'72 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (115, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'73 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (116, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'60 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (117, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'61 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (118, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'62 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (119, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'63 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (120, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'64 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (121, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'65 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (122, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'66 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (123, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'67 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (124, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'68 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (125, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'69 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (126, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'70 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (127, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'71 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (128, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'72 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (129, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'73 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (130, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'60 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (131, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'61 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (132, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'62 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (133, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'63 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (134, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'64 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (135, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'65 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (136, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'66 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (137, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'67 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (138, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'68 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (139, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'69 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (140, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'70 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (141, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'71 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (142, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'72 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (143, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'73 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (144, N'Hồ Chí Minh', N'Quận 1', N'Phú Thạnh', NULL, NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (145, N'Hồ Chí Minh', N'Quận 1', N'Phú Thạnh', NULL, NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (146, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'60 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (147, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'61 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (148, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'62 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (149, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'63 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (150, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'64 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (151, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'65 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (152, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'66 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (153, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'67 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (154, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'68 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (155, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'69 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (156, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'70 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (157, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'71 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (158, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'72 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (159, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'73 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (162, N'Hồ Chí Minh', N'Quận 1', N'Phú Thạnh', NULL, NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (163, N'Bình Dương', N'Quận 1', N'Phú Thạnh', NULL, NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (164, N'Hồ Chí Minh', N'Quận 1', N'Phú Thạnh', NULL, NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (165, N'Hồ Chí Minh', N'Quận 1', N'Phú Thạnh', NULL, NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (166, N'Hồ Chí Minh', N'Quận 1', N'Phú Thạnh', N'123', N'123')
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (167, N'Hồ Chí Minh', N'Quận 1', N'Phú Thạnh', NULL, NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (168, N'Hồ Chí Minh', N'Quận 1', N'Phú Thạnh', NULL, NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (169, N'Hồ Chí Minh', N'Quận 1', N'Phú Thạnh', NULL, NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (170, N'Hồ Chí Minh', N'Quận 1', N'Phú Thạnh', NULL, NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (171, N'Hồ Chí Minh', N'Quận 1', N'Phú Thạnh', NULL, NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (172, N'Hồ Chí Minh', N'Quận 1', N'Phú Thạnh', NULL, NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (173, N'Hồ Chí Minh', N'Quận 1', N'Phú Thạnh', NULL, NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (174, N'Hồ Chí Minh', N'Quận 1', N'Phú Thạnh', N'12132', N'12345')
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (175, N'Thành phố Hà Nội', N'Quận Hoàn Kiếm', N'Phường Đồng Xuân', N'MBD', N'1')
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (176, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'60 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (177, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'61 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (178, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'62 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (179, N'Tỉnh Hải Dương', N'Huyện Kim Thành', N'Xã Lai Vu', N'63 Cây Keo', N'123')
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (180, N'Tỉnh Hà Giang', N'Huyện Đồng Văn', N'Thị trấn Đồng Văn', N'64 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (181, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'65 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (182, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'66 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (183, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'67 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (184, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'68 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (185, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'69 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (186, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'70 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (187, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'71 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (188, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'72 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (189, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'73 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (190, N'Thành phố Hà Nội', N'Quận Tây Hồ', N'Phường Tứ Liên', N'123', N'123')
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (191, N'Tỉnh Hà Giang', N'Huyện Đồng Văn', N'Thị trấn Phó Bảng', N'', N'')
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (192, N'Tỉnh Hà Giang', N'Huyện Mèo Vạc', N'Xã Xín Cái', N'', N'')
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (193, N'Tỉnh Bắc Kạn', N'Huyện Ba Bể', N'Xã Bành Trạch', N'MBD', N'123')
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (194, N'Tỉnh Lào Cai', N'Huyện Bát Xát', N'Xã A Mú Sung', N'MBD', N'123')
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (195, N'Tỉnh Cao Bằng', N'Huyện Bảo Lạc', N'Xã Thượng Hà', N'MBD', N'60')
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (196, N'Tỉnh Cao Bằng', N'Huyện Hạ Lang', N'Xã Thắng Lợi', N'Cây Keo', N'61')
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (197, N'Tỉnh Cà Mau', N'Huyện U Minh', N'Xã Khánh Thuận', N'Cây Keo', N'62')
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (198, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'63 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (199, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'64 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (200, N'Tỉnh Hà Tĩnh', N'Huyện Vũ Quang', N'Xã Đức Giang', N'Cây Keo', N'65')
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (201, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'66 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (202, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'67 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (203, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'68 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (204, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'69 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (205, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'70 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (206, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'71 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (207, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'72 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (208, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'73 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (209, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'60 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (210, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'61 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (211, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'62 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (212, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'63 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (213, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'64 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (214, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'65 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (215, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'66 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (216, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'67 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (217, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'68 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (218, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'69 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (219, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'70 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (220, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'71 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (221, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'72 Cây Keo', NULL)
-GO
-INSERT [dbo].[Address] ([id], [province], [district], [ward], [streetName], [apartmentNumber]) VALUES (222, N' Hồ Chí Minh', N' Tân Phú', N' Hiệp Tân', N'73 Cây Keo', NULL)
-GO
-SET IDENTITY_INSERT [dbo].[Address] OFF
 GO
 INSERT [dbo].[DISTRICT] ([id], [name], [provinceID]) VALUES (1, N'Quận Ba Đình', 1)
 GO
@@ -2595,8 +2158,7 @@ INSERT [dbo].[NotificationTemplate] ([id], [name], [content]) VALUES (1, N'Hư�
 GO
 INSERT [dbo].[NotificationTemplate] ([id], [name], [content]) VALUES (2, N'Hoàn thành cách ly', N'Xin chúc mừng, bạn sắp hết thời gian cách ly tập trung. Vui lòng chuẩn bị sẵn sàng tư trang, bạn sẽ được hoàn thành cách ly vào lúc Xh ngày XXXXXX')
 GO
-INSERT [dbo].[NotificationTemplate] ([id], [name], [content]) VALUES (3, N'Thông báo chuyển phòng
-', N'Ngày XXXXXX, là ngày đến lượt bạn tham gia xét nghiệm covid định kỳ, vui lòng đến phòng XXX vào lúc XXX và làm theo hướng dẫn của nhân viên y tế để thực hiện việc xét nghiệm')
+INSERT [dbo].[NotificationTemplate] ([id], [name], [content]) VALUES (3, N'Thông báo chuyển phòng', N'Ngày XXXXXX, là ngày đến lượt bạn tham gia xét nghiệm covid định kỳ, vui lòng đến phòng XXX vào lúc XXX và làm theo hướng dẫn của nhân viên y tế để thực hiện việc xét nghiệm')
 GO
 INSERT [dbo].[NotificationTemplate] ([id], [name], [content]) VALUES (4, N'Thông báo xét nghiệm', N'Hiện tại, bạn đang nằm trong danh sách đối tượng cần phải chuyển phòng. Vui lòng chuẩn bị sẵn sàng tư trang trước Xh ngày XXXXXXX để thuận tiện cho công tác đổi phòng theo hướng dẫn của nhân viên')
 GO
@@ -23928,7 +23490,7 @@ INSERT [dbo].[WARD] ([id], [name], [districtID]) VALUES (10599, N'Xã Đất Mũ
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UQ_Quarantine_CitizenID]    Script Date: 26-Nov-21 10:42:48 AM ******/
+/****** Object:  Index [UQ_Quarantine_CitizenID]    Script Date: 10-Dec-21 2:34:48 PM ******/
 CREATE UNIQUE NONCLUSTERED INDEX [UQ_Quarantine_CitizenID] ON [dbo].[QuarantinePerson]
 (
 	[citizenID] ASC
@@ -23938,7 +23500,7 @@ WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNOR
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UQ_Quarantine_HealthInsurID]    Script Date: 26-Nov-21 10:42:48 AM ******/
+/****** Object:  Index [UQ_Quarantine_HealthInsurID]    Script Date: 10-Dec-21 2:34:48 PM ******/
 CREATE UNIQUE NONCLUSTERED INDEX [UQ_Quarantine_HealthInsurID] ON [dbo].[QuarantinePerson]
 (
 	[healthInsuranceID] ASC
@@ -23948,7 +23510,7 @@ WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNOR
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UQ_Staff_CitizenID]    Script Date: 26-Nov-21 10:42:48 AM ******/
+/****** Object:  Index [UQ_Staff_CitizenID]    Script Date: 10-Dec-21 2:34:48 PM ******/
 CREATE UNIQUE NONCLUSTERED INDEX [UQ_Staff_CitizenID] ON [dbo].[Staff]
 (
 	[citizenID] ASC
@@ -23958,7 +23520,7 @@ WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNOR
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UQ_Staff_HealthInsurID]    Script Date: 26-Nov-21 10:42:48 AM ******/
+/****** Object:  Index [UQ_Staff_HealthInsurID]    Script Date: 10-Dec-21 2:34:48 PM ******/
 CREATE UNIQUE NONCLUSTERED INDEX [UQ_Staff_HealthInsurID] ON [dbo].[Staff]
 (
 	[healthInsuranceID] ASC

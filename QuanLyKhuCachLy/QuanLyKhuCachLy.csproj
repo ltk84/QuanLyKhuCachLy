@@ -188,6 +188,12 @@
     <Compile Include="CustomUserControl\BufferWindow.xaml.cs">
       <DependentUpon>BufferWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomUserControl\ChangeCompleteDate.xaml.cs">
+      <DependentUpon>ChangeCompleteDate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\CompleteQuarantineRecommendation.xaml.cs">
+      <DependentUpon>CompleteQuarantineRecommendation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomUserControl\DestinationHistoryFunctionMenu.xaml.cs">
       <DependentUpon>DestinationHistoryFunctionMenu.xaml</DependentUpon>
     </Compile>
@@ -435,6 +441,7 @@
     <Compile Include="Model\WARD.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utility\DBUtilityTracker.cs" />
     <Compile Include="Utility\ProtocolSettingsLayout.cs" />
     <Compile Include="ValidationRules\DateFormat.cs" />
     <Compile Include="CustomUserControl\QuarantinePersonFunctionMenu.xaml.cs">
@@ -451,6 +458,7 @@
     <Compile Include="ViewModel\ActionConfirmationViewModel.cs" />
     <Compile Include="ViewModel\ArrangeRoomRecommendationViewModel.cs" />
     <Compile Include="ViewModel\AddressViewModel.cs" />
+    <Compile Include="ViewModel\CompleteQuarantineRecommendationViewModel.cs" />
     <Compile Include="ViewModel\DashboardViewModel.cs" />
     <Compile Include="CustomUserControl\Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
@@ -529,6 +537,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomUserControl\BufferWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\ChangeCompleteDate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\CompleteQuarantineRecommendation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
