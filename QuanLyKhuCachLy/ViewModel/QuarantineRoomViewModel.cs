@@ -570,6 +570,7 @@ namespace QuanLyKhuCachLy.ViewModel
         async Task ExecuteAddRoomFromExcel(LoadingIndicator loadingIndicator, string path)
         {
             bool isSuccess = false;
+            string error = "";
             await Task.Run(() =>
             {
                 List<Model.QuarantineRoom> listRoom = new List<Model.QuarantineRoom>();
@@ -582,9 +583,10 @@ namespace QuanLyKhuCachLy.ViewModel
                 if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2 != "STT" ||
                 xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2 != "Tên" ||
                 xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2 != "Sức chứa" ||
-                xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2 != "Nhóm đối tượng" || colCount != 4)
+                xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2 != "Nhóm đối tượng")
                 {
-                    //MessageBox.Show("Không đúng định dạng file");
+                    xlWorkbook.Close();
+                    error = "Không đúng định dạng file";
                     return;
                 }
                 for (int i = 2; i <= rowCount; i++)
@@ -594,16 +596,47 @@ namespace QuanLyKhuCachLy.ViewModel
                     {
                         room.displayName = xlRange.Cells[i, 2].Value2.ToString();
                     }
+                    else
+                    {
+                        xlWorkbook.Close();
+                        error = "Tên để trống";
+                        return;
+                    }
                     if (xlRange.Cells[i, 3] != null && xlRange.Cells[i, 3].Value2 != null)
                     {
-                        room.capacity = Int32.Parse(xlRange.Cells[i, 3].Value2.ToString());
+                        int t;
+                        if (Int32.TryParse(xlRange.Cells[i, 3].Value2.ToString(), out t))
+                        {
+                            room.capacity = Int32.Parse(xlRange.Cells[i, 3].Value2.ToString());
+                        }
+                        else {
+                            error = "Phòng " + xlRange.Cells[i, 2].Value2.ToString() + " sức chứa không là số";
+                            xlWorkbook.Close();
+                            return;
+                        };
+                        
                     }
+                    else
+                    {
+                        error = "Phòng " + xlRange.Cells[i, 2].Value2.ToString() + " sức chứa trống";
+                        xlWorkbook.Close();
+                        return;
+                    }
+                
                     if (xlRange.Cells[i, 4] != null && xlRange.Cells[i, 4].Value2 != null)
                     {
-                        room.levelID = Int32.Parse(xlRange.Cells[i, 4].Value2.ToString());
+                        string description = xlRange.Cells[i, 4].Value2.ToString();
+                        int levelId;
+                        bool checkLevel = DataProvider.ins.db.Severities.Where(x => x.description == description).Count() >= 1 ? true : false;
+                        if (checkLevel)
+                        {
+                            levelId = DataProvider.ins.db.Severities.Where(x => x.description == description).FirstOrDefault().id;
+                            room.levelID = levelId;
+                        }
                     }
                     listRoom.Add(room);
                 }
+                xlWorkbook.Close();
                 using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
                 {
                     try
@@ -662,6 +695,10 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
                 var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                if (error != "" && error != null)
+                {
+                    FailNotificationVM.Content = error;
+                }
                 ErrorDialog.ShowDialog();
             }
         }
@@ -967,6 +1004,8 @@ namespace QuanLyKhuCachLy.ViewModel
             sheet.Range["B1"].Value = "Tên";
             sheet.Range["C1"].Value = "Sức chứa";
             sheet.Range["D1"].Value = "Nhóm đối tượng";
+            sheet.Range["E2"].Value = "Lưu ý: Nhóm đối tượng có thể để trống";
+            sheet.Range["E3"].Value = "Xóa lưu ý trước khi thêm";
         }
         #endregion
     }
