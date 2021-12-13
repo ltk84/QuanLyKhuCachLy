@@ -300,82 +300,77 @@
 
         </Grid>
 
-        <Border
+        <DataGrid
             Height="320"
             Margin="0,10,0,0"
-            HorizontalAlignment="Left"
-            Background="Transparent"
-            CornerRadius="8,8,3,3">
-            <DataGrid
-                Margin="0,0,0,0"
-                materialDesign:DataGridAssist.CornerRadius="10"
-                AutoGenerateColumns="False"
-                CanUserAddRows="False"
-                CanUserReorderColumns="False"
-                CanUserResizeColumns="True"
-                CanUserResizeRows="False"
-                IsReadOnly="True"
-                ItemsSource="{Binding PersonInRoomViewModel.QuarantinePersonList}"
-                LoadingRow="DataGrid_LoadingRow"
-                SelectedItem="{Binding PersonInRoomViewModel.SelectedItem}"
-                SelectionMode="Single"
-                SelectionUnit="FullRow">
-                <DataGrid.Columns>
-                    <materialDesign:DataGridTextColumn
-                        Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=Header}"
-                        EditingElementStyle="{StaticResource EditingDataGridElement}"
-                        ElementStyle="{StaticResource DataGridElement}"
-                        Header="Số thứ tự"
-                        HeaderStyle="{StaticResource DataGridHeader}"
-                        MaxLength="10" />
-                    <materialDesign:DataGridTextColumn
-                        Binding="{Binding name}"
-                        EditingElementStyle="{StaticResource EditingDataGridElement}"
-                        ElementStyle="{StaticResource DataGridElement}"
-                        Header="Tên"
-                        HeaderStyle="{StaticResource DataGridHeader}"
-                        MaxLength="30" />
-                    <materialDesign:DataGridTextColumn
-                        Binding="{Binding dateOfBirth, StringFormat=dd-MM-yyyy}"
-                        EditingElementStyle="{StaticResource EditingDataGridElement}"
-                        ElementStyle="{StaticResource DataGridElement}"
-                        Header="Ngày sinh"
-                        HeaderStyle="{StaticResource DataGridHeader}"
-                        MaxLength="30" />
-                    <materialDesign:DataGridTextColumn
-                        Binding="{Binding Severity.description}"
-                        EditingElementStyle="{StaticResource EditingDataGridElement}"
-                        ElementStyle="{StaticResource DataGridElement}"
-                        Header="Nhóm đối tượng"
-                        HeaderStyle="{StaticResource DataGridHeader}"
-                        MaxLength="30" />
-                    <DataGridTemplateColumn
-                        Width="*"
-                        HeaderStyle="{StaticResource DataGridButtonHeader}"
-                        IsReadOnly="True">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button HorizontalAlignment="Right" Style="{StaticResource DataGridButton}">
-                                    <materialDesign:PackIcon
-                                        Width="16"
-                                        Height="16"
-                                        Kind="DotsHorizontal" />
-                                    <Button.ContextMenu>
-                                        <ContextMenu>
-                                            <ContextMenu.Template>
-                                                <ControlTemplate>
-                                                    <local:QuarantinePersonInRoomFunctionMenu />
-                                                </ControlTemplate>
-                                            </ContextMenu.Template>
-                                        </ContextMenu>
-                                    </Button.ContextMenu>
-                                </Button>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Border>
+            materialDesign:DataGridAssist.CornerRadius="10"
+            AutoGenerateColumns="False"
+            CanUserAddRows="False"
+            CanUserReorderColumns="False"
+            CanUserResizeColumns="True"
+            CanUserResizeRows="False"
+            IsReadOnly="True"
+            ItemsSource="{Binding PersonInRoomViewModel.QuarantinePersonList}"
+            LoadingRow="DataGrid_LoadingRow"
+            SelectedItem="{Binding PersonInRoomViewModel.SelectedItem}"
+            SelectionMode="Single"
+            SelectionUnit="FullRow">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn
+                    Width="Auto"
+                    CanUserResize="False"
+                    HeaderStyle="{StaticResource DataGridButtonHeader}"
+                    IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button HorizontalAlignment="Right" Style="{StaticResource DataGridButton}">
+                                <materialDesign:PackIcon
+                                    Width="16"
+                                    Height="16"
+                                    Kind="DotsHorizontal" />
+                                <Button.ContextMenu>
+                                    <ContextMenu>
+                                        <ContextMenu.Template>
+                                            <ControlTemplate>
+                                                <local:QuarantinePersonInRoomFunctionMenu />
+                                            </ControlTemplate>
+                                        </ContextMenu.Template>
+                                    </ContextMenu>
+                                </Button.ContextMenu>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=Header}"
+                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                    ElementStyle="{StaticResource DataGridElement}"
+                    Header="STT"
+                    HeaderStyle="{StaticResource DataGridHeader}"
+                    MaxLength="10" />
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding name}"
+                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                    ElementStyle="{StaticResource DataGridElement}"
+                    Header="Tên"
+                    HeaderStyle="{StaticResource DataGridHeader}"
+                    MaxLength="30" />
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding dateOfBirth, StringFormat=dd-MM-yyyy}"
+                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                    ElementStyle="{StaticResource DataGridElement}"
+                    Header="Ngày sinh"
+                    HeaderStyle="{StaticResource DataGridHeader}"
+                    MaxLength="30" />
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding Severity.description}"
+                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                    ElementStyle="{StaticResource DataGridElement}"
+                    Header="Nhóm đối tượng"
+                    HeaderStyle="{StaticResource DataGridHeader}"
+                    MaxLength="30" />
+            </DataGrid.Columns>
+        </DataGrid>
 
 
     </StackPanel>

@@ -241,6 +241,33 @@
             SelectionMode="Single"
             SelectionUnit="FullRow">
             <DataGrid.Columns>
+                <DataGridTemplateColumn
+                    Width="Auto"
+                    CanUserResize="False"
+                    HeaderStyle="{StaticResource DataGridButtonHeader}"
+                    IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+
+                            <Button HorizontalAlignment="Right" Style="{StaticResource DataGridButton}">
+                                <materialDesign:PackIcon
+                                    Width="16"
+                                    Height="16"
+                                    Kind="DotsHorizontal" />
+                                <Button.ContextMenu>
+                                    <ContextMenu>
+                                        <ContextMenu.Template>
+                                            <ControlTemplate>
+                                                <local:QuarantinePersonFunctionMenu />
+                                            </ControlTemplate>
+                                        </ContextMenu.Template>
+                                    </ContextMenu>
+                                </Button.ContextMenu>
+
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <materialDesign:DataGridTextColumn
                     Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=Header}"
                     EditingElementStyle="{StaticResource EditingDataGridElement}"
@@ -283,32 +310,6 @@
                     Header="Trạng thái"
                     HeaderStyle="{StaticResource DataGridHeader}"
                     MaxLength="30" />
-                <DataGridTemplateColumn
-                    Width="*"
-                    CellStyle="{StaticResource DataGridCellElement}"
-                    HeaderStyle="{StaticResource DataGridButtonHeader}"
-                    IsReadOnly="True">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button HorizontalAlignment="Right" Style="{StaticResource DataGridButton}">
-                                <materialDesign:PackIcon
-                                    Width="16"
-                                    Height="16"
-                                    Kind="DotsHorizontal" />
-                                <Button.ContextMenu>
-                                    <ContextMenu>
-                                        <ContextMenu.Template>
-                                            <ControlTemplate>
-                                                <local:QuarantinePersonFunctionMenu />
-                                            </ControlTemplate>
-                                        </ContextMenu.Template>
-                                    </ContextMenu>
-                                </Button.ContextMenu>
-
-                            </Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 
