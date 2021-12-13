@@ -2017,7 +2017,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     }
                     if (xlRange.Cells[i, 11] != null && xlRange.Cells[i, 11].Value2 != null)
                     {
-                        string health = xlRange.Cells[i, 11].Value2.ToString();
+                        string health = xlRange.Cells[i, 11].Value2.ToString().ToLower();
                         if (health.Contains("sốt") || health.Contains("Sốt"))
                         {
                             healthInformation.isFever = true;
@@ -2106,7 +2106,7 @@ namespace QuanLyKhuCachLy.ViewModel
                                 if (DateTime.TryParse(str[0].ToString(), out dateTime))
                                 {
                                     dateTime = Convert.ToDateTime(str[0].ToString());
-                                    quarantinePerson.arrivedDate = dateTime;
+                                    rc.dateInjection = dateTime;
                                 }
                                 else
                                 {
@@ -3029,7 +3029,7 @@ namespace QuanLyKhuCachLy.ViewModel
                                 {
                                     CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
                                     var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
-                                    FailNotificationVM.Content = values[i][1].ToString() + " has error in birthday";
+                                    FailNotificationVM.Content = values[i][1].ToString() + " ngày sinh bị lỗi \n Lưu ý: chỉnh định dạng ngày tháng của máy thành (MM/dd/yyyy)";
                                     ErrorDialog.ShowDialog();
                                     return;
                                 }
@@ -3084,7 +3084,7 @@ namespace QuanLyKhuCachLy.ViewModel
                             }
                             if (values[i][10] != null)
                             {
-                                string health = values[i][10].ToString();
+                                string health = values[i][10].ToString().ToLower();
 
                                 if (health.Contains("sốt") || health.Contains("Sốt"))
                                 {
@@ -3145,22 +3145,45 @@ namespace QuanLyKhuCachLy.ViewModel
 
                             }
                             if (values[i][12] != null)
-                            {
-                                DateTime arrivedTime = Convert.ToDateTime(values[i][12].ToString());
-                                quarantinePerson.arrivedDate = arrivedTime;
+                            {                             
+                                try
+                                {
+                                    DateTime arrivedTime = Convert.ToDateTime(values[i][12].ToString());
+                                    quarantinePerson.arrivedDate = arrivedTime;
+                                }
+                                catch
+                                {
+                                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                                    FailNotificationVM.Content = values[i][1].ToString() + " bị lỗi \n Lưu ý: chỉnh định dạng ngày tháng của máy thành (MM/dd/yyyy)";
+                                    ErrorDialog.ShowDialog();
+                                    return;
+                                }
                             }
                             if (values[i][13].ToString() != "Chưa tiêm")
                             {
-                                var records = values[i][13].ToString().Split(',');
-                                for (int j = 0; j < records.Length; j++)
+                      
+                                try
                                 {
-                                    InjectionRecord rc = new InjectionRecord();
-                                    var str = records[j].Split(' ');
-                                    DateTime date = Convert.ToDateTime(str[0].ToString());
-                                    string vaccine = str[1].ToString();
-                                    rc.dateInjection = date;
-                                    rc.vaccineName = vaccine;
-                                    injectionRecords.Add(rc);
+                                    var records = values[i][13].ToString().Split(',');
+                                    for (int j = 0; j < records.Length; j++)
+                                    {
+                                        InjectionRecord rc = new InjectionRecord();
+                                        var str = records[j].Split(' ');
+                                        DateTime date = Convert.ToDateTime(str[0].ToString());
+                                        string vaccine = str[1].ToString();
+                                        rc.dateInjection = date;
+                                        rc.vaccineName = vaccine;
+                                        injectionRecords.Add(rc);
+                                    }
+                                }
+                                catch
+                                {
+                                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                                    FailNotificationVM.Content = values[i][1].ToString() + " bị lỗi \n Lưu ý: chỉnh định dạng ngày tháng của máy thành (MM/dd/yyyy)";
+                                    ErrorDialog.ShowDialog();
+                                    return;
                                 }
                             }
                             else
