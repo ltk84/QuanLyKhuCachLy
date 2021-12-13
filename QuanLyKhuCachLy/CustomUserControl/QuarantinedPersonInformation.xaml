@@ -46,7 +46,7 @@
             </Button>
         </Grid>
 
-        <Grid Margin="0,10,0,10">
+        <Grid Margin="0,10,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="auto" />
