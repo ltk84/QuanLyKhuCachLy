@@ -3419,6 +3419,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 sheet.Range["P" + i.ToString()].Value = countInjectionRecord;
                 sheet2.Range["A" + i.ToString()].Value = PeopleListView[i - 2].id;
             }
+            file.Close();
         }
 
         async void AddTestingResutlFromExcel(bool isExecute)
@@ -3700,6 +3701,7 @@ namespace QuanLyKhuCachLy.ViewModel
             sheet1.Range["D3"].Value = "các từ chỉ địa phương ghi hoa chữ đầu.";
             sheet1.Range["D4"].Value = "VD: Thôn A,Xã B,Huyện C,Tỉnh D";
             sheet1.Range["D6"].Value = "Xóa lưu ý này trước khi thêm.";
+            file.Close();
         }
         #endregion
     }

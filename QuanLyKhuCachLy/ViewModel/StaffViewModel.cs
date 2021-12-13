@@ -1615,6 +1615,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 sheet.Range["J" + i.ToString()].Value = StaffListView[i - 2].jobTitle;
                 sheet.Range["K" + i.ToString()].Value = StaffListView[i - 2].department;
             }
+            file.Close();
         }
         void GetFormatExcel()
         {
@@ -1655,6 +1656,7 @@ namespace QuanLyKhuCachLy.ViewModel
             sheet.Range["L7"].Value = "Giới tính chỉ có thể là Nam/Nữ";         
 
             sheet.Range["L8"].Value = "Xóa lưu ý trước khi thêm";
+            file.Close();
         }
         #endregion
     }

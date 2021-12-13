@@ -1037,6 +1037,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 sheet.Range["D" + i.ToString()].Value = (RoomListView[i - 2].capacity - countInRoom).ToString();
                 sheet.Range["E" + i.ToString()].Value = RoomListView[i - 2].levelID != null?severity.description:"";
             }
+            file.Close();
         }
         void GetFormatExcel()
         {
@@ -1055,6 +1056,7 @@ namespace QuanLyKhuCachLy.ViewModel
             sheet.Range["D1"].Value = "Nhóm đối tượng";
             sheet.Range["E2"].Value = "Lưu ý: Nhóm đối tượng có thể để trống";
             sheet.Range["E3"].Value = "Xóa lưu ý trước khi thêm";
+            file.Close();
         }
         #endregion
     }
