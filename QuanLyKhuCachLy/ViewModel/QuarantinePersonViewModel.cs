@@ -1835,6 +1835,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 List<int> ListSTTSheet1 = new List<int>();
                 Excel.Application xlApp = new Excel.Application();
                 Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(path);
+                xlWorkbook.RefreshAll();
                 Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
                 Excel.Range xlRange = xlWorksheet.UsedRange;
                 int rowCount = xlRange.Rows.Count;

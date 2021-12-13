@@ -1290,6 +1290,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 List<Staff> listStaff = new List<Staff>();
                 Excel.Application xlApp = new Excel.Application();
                 Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(path);
+                xlWorkbook.RefreshAll();
                 Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
                 Excel.Range xlRange = xlWorksheet.UsedRange;
                 int rowCount = xlRange.Rows.Count;
@@ -1318,6 +1319,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (xlRange.Cells[i, 1] != null && xlRange.Cells[i, 1].Value2 != null)
                     {
                         int t;
+                        
                         if (Int32.TryParse(xlRange.Cells[i, 1].Value2.ToString(), out t))
                         {
                             if (t < 0)
