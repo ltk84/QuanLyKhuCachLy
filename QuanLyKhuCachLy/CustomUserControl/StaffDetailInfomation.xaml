@@ -161,6 +161,7 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
             <TextBlock
@@ -175,77 +176,89 @@
                 Style="{StaticResource list-value-text}"
                 Text="{Binding SelectedItem.name}" />
 
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                Style="{StaticResource list-key-text}"
+                Text="Ngày sinh:" />
 
             <TextBlock
                 Grid.Row="1"
+                Grid.Column="1"
+                Style="{StaticResource list-value-text}"
+                Text="{Binding SelectedItem.dateOfBirth, StringFormat=dd-MM-yyyy}" />
+
+
+            <TextBlock
+                Grid.Row="2"
                 Grid.Column="0"
                 Style="{StaticResource list-key-text}"
                 Text="Giới tính:" />
 
             <TextBlock
-                Grid.Row="1"
+                Grid.Row="2"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
                 Text="{Binding SelectedSex}" />
 
 
             <TextBlock
-                Grid.Row="2"
+                Grid.Row="3"
                 Grid.Column="0"
                 Style="{StaticResource list-key-text}"
                 Text="Quốc tịch:" />
 
             <TextBlock
-                Grid.Row="2"
+                Grid.Row="3"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
                 Text="{Binding SelectedItem.nationality}" />
 
             <TextBlock
-                Grid.Row="3"
+                Grid.Row="4"
                 Grid.Column="0"
                 Style="{StaticResource list-key-text}"
                 Text="CMND/CCCD:" />
 
             <TextBlock
-                Grid.Row="3"
+                Grid.Row="4"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
                 Text="{Binding SelectedItem.citizenID}" />
 
             <TextBlock
-                Grid.Row="4"
+                Grid.Row="5"
                 Grid.Column="0"
                 Style="{StaticResource list-key-text}"
                 Text="Số điện thoại:" />
 
             <TextBlock
-                Grid.Row="4"
+                Grid.Row="5"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
                 Text="{Binding SelectedItem.phoneNumber}" />
 
             <TextBlock
-                Grid.Row="5"
+                Grid.Row="6"
                 Grid.Column="0"
                 Style="{StaticResource list-key-text}"
                 Text="Mã số BHYT:" />
 
             <TextBlock
-                Grid.Row="5"
+                Grid.Row="6"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
                 Text="{Binding SelectedItem.healthInsuranceID}" />
 
             <TextBlock
-                Grid.Row="6"
+                Grid.Row="7"
                 Grid.Column="0"
                 VerticalAlignment="Top"
                 Style="{StaticResource list-key-text}"
                 Text="Địa chỉ:" />
 
             <TextBlock
-                Grid.Row="6"
+                Grid.Row="7"
                 Grid.Column="1"
                 Style="{StaticResource list-value-text}"
                 Text="{Binding DisplayAddress}" />
