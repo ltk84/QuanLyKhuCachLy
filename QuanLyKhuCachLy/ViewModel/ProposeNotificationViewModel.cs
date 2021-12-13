@@ -212,7 +212,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 for (int i = 0; i < PeopleList.ToArray().Length; i++)
                 {
                     var QAName = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().name;
-                    messageContent = "Chào a/c " + PeopleList[i].name + ", đây là thông báo đền từ ban quản lý của khu cách ly " + QAName + ". " + EditableMessage + ". Xin cảm ơn.";
+                    messageContent = "Chào a/c " + PeopleList[i].name + ", đây là thông báo đến từ ban quản lý của khu cách ly " + QAName + ". " + EditableMessage + " Xin cảm ơn.";
 
 
                     if (PeopleList[i].phoneNumber != "" && PeopleList[i] != null)
@@ -486,7 +486,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
            
             
-                FullMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đến từ ban quản lý khu cách ly " + QAName + ". " + EditableMessage + ". Xin cảm ơn.";
+                FullMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đến từ ban quản lý khu cách ly " + QAName + ". " + EditableMessage + " Xin cảm ơn.";
             
         }
 

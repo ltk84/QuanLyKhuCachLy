@@ -2154,13 +2154,13 @@ SET IDENTITY_INSERT [dbo].[NATION] OFF
 GO
 SET IDENTITY_INSERT [dbo].[NotificationTemplate] ON 
 GO
-INSERT [dbo].[NotificationTemplate] ([id], [name], [content]) VALUES (1, N'Hướng dẫn cách ly', N'Hiện khu cách ly đang tiếp nhận cách ly tập trung với bạn, vui lòng cập nhật thông tin cá nhân của bạn tại link: . Sau đó làm theo hướng dẫn của nhân viên')
+INSERT [dbo].[NotificationTemplate] ([id], [name], [content]) VALUES (1, N'Hướng dẫn cách ly', N'Anh/chị hiện đang được khu cách ly tiếp nhận cách ly tập trung. Anh/chị vui lòng tự bảo quản đồ dùng cá nhân và tuân thủ theo các yêu cầu cũng như quy định của khu cách ly.')
 GO
-INSERT [dbo].[NotificationTemplate] ([id], [name], [content]) VALUES (2, N'Hoàn thành cách ly', N'Xin chúc mừng, bạn sắp hết thời gian cách ly tập trung. Vui lòng chuẩn bị sẵn sàng tư trang, bạn sẽ được hoàn thành cách ly vào lúc Xh ngày XXXXXX')
+INSERT [dbo].[NotificationTemplate] ([id], [name], [content]) VALUES (2, N'Hoàn thành cách ly', N'Anh/chị sắp hết thời gian cách ly tập trung. Vui lòng chuẩn bị sẵn sàng tư trang, anh/chị sẽ được hoàn thành cách ly vào lúc {H} giờ ngày {DD/MM/YYYY}.')
 GO
-INSERT [dbo].[NotificationTemplate] ([id], [name], [content]) VALUES (3, N'Thông báo chuyển phòng', N'Ngày XXXXXX, là ngày đến lượt bạn tham gia xét nghiệm covid định kỳ, vui lòng đến phòng XXX vào lúc XXX và làm theo hướng dẫn của nhân viên y tế để thực hiện việc xét nghiệm')
+INSERT [dbo].[NotificationTemplate] ([id], [name], [content]) VALUES (3, N'Thông báo xét nghiệm', N'Ngày {DD/MM/YYYY} là ngày đến lượt bạn tham gia xét nghiệm covid định kỳ, vui lòng đến phòng {X} vào lúc {HH:MM} và làm theo hướng dẫn của nhân viên y tế để được thực hiện việc xét nghiệm.')
 GO
-INSERT [dbo].[NotificationTemplate] ([id], [name], [content]) VALUES (4, N'Thông báo xét nghiệm', N'Hiện tại, bạn đang nằm trong danh sách đối tượng cần phải chuyển phòng. Vui lòng chuẩn bị sẵn sàng tư trang trước Xh ngày XXXXXXX để thuận tiện cho công tác đổi phòng theo hướng dẫn của nhân viên')
+INSERT [dbo].[NotificationTemplate] ([id], [name], [content]) VALUES (4, N'Thông báo chuyển phòng', N'Hiện tại, anh/chị đang nằm trong danh sách đối tượng cần phải chuyển phòng. Vui lòng chuẩn bị sẵn sàng tư trang trước {H} giờ ngày {DD/MM/YYYY} để thuận tiện cho công tác chuyển phòng dưới sự hướng dẫn của nhân viên.')
 GO
 SET IDENTITY_INSERT [dbo].[NotificationTemplate] OFF
 GO
