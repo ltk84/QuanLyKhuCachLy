@@ -589,9 +589,46 @@ namespace QuanLyKhuCachLy.ViewModel
                     error = "Không đúng định dạng file";
                     return;
                 }
+
+                List<int> listSTT = new List<int>();
                 for (int i = 2; i <= rowCount; i++)
                 {
                     Model.QuarantineRoom room = new Model.QuarantineRoom();
+                    if (xlRange.Cells[i, 1] != null && xlRange.Cells[i, 1].Value2 != null)
+                    {
+                        int t;
+                        if(Int32.TryParse(xlRange.Cells[i, 1].Value2.ToString(), out t))
+                        {
+                            if(t < 0)
+                            {
+                                xlWorkbook.Close();
+                                error = "STT để bé hơn 0";
+                                return;
+                            }
+                            else
+                            {
+                                if(listSTT.Contains(t))
+                                {
+                                    xlWorkbook.Close();
+                                    error = "STT " + t.ToString() + " bị trùng";
+                                    return;
+                                }
+                                listSTT.Add(t);
+                            }
+                        }
+                        else
+                        {
+                            xlWorkbook.Close();
+                            error = "STT không là số";
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        xlWorkbook.Close();
+                        error = "STT để trống";
+                        return;
+                    }
                     if (xlRange.Cells[i, 2] != null && xlRange.Cells[i, 2].Value2 != null)
                     {
                         room.displayName = xlRange.Cells[i, 2].Value2.ToString();
@@ -608,6 +645,12 @@ namespace QuanLyKhuCachLy.ViewModel
                         if (Int32.TryParse(xlRange.Cells[i, 3].Value2.ToString(), out t))
                         {
                             room.capacity = Int32.Parse(xlRange.Cells[i, 3].Value2.ToString());
+                            if(t < 0)
+                            {
+                                error = "Phòng " + xlRange.Cells[i, 2].Value2.ToString() + " sức chứa bé hơn 0";
+                                xlWorkbook.Close();
+                                return;
+                            }
                         }
                         else {
                             error = "Phòng " + xlRange.Cells[i, 2].Value2.ToString() + " sức chứa không là số";
@@ -632,6 +675,12 @@ namespace QuanLyKhuCachLy.ViewModel
                         {
                             levelId = DataProvider.ins.db.Severities.Where(x => x.description == description).FirstOrDefault().id;
                             room.levelID = levelId;
+                        }
+                        else
+                        {
+                            error = "Phòng " + xlRange.Cells[i, 2].Value2.ToString() + " loại phòng không đúng";
+                            xlWorkbook.Close();
+                            return;
                         }
                     }
                     listRoom.Add(room);
