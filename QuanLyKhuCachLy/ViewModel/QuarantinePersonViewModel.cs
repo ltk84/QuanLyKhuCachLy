@@ -3451,18 +3451,18 @@ namespace QuanLyKhuCachLy.ViewModel
                 Excel.Range xlRange = xlWorksheet.UsedRange;
                 int rowCount = xlRange.Rows.Count;
                 int colCount = xlRange.Columns.Count;
-                if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2.ToString() != "ID" ||
-                xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2.ToString() != "Kết quả" ||
-                xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2.ToString() != "Ngày xét nghiệm")
+                if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2.ToString().Trim().ToLower() != "id" ||
+                xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2.ToString().Trim().ToLower() != "kết quả" ||
+                xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2.ToString().Trim().ToLower() != "ngày xét nghiệm")
                 {
                     if (xlWorkbook.Sheets.Count > 1)
                     {
                         Excel._Worksheet xlWorksheet2 = xlWorkbook.Sheets[2];
                         Excel.Range xlRange2 = xlWorksheet2.UsedRange;
                        
-                        if (xlRange2.Cells[1, 1] == null || xlRange2.Cells[1, 1].Value2.ToString() != "ID" ||
-                        xlRange2.Cells[1, 2] == null || xlRange2.Cells[1, 2].Value2.ToString() != "Kết quả" ||
-                        xlRange2.Cells[1, 3] == null || xlRange2.Cells[1, 3].Value2.ToString() != "Ngày xét nghiệm")
+                        if (xlRange2.Cells[1, 1] == null || xlRange2.Cells[1, 1].Value2.ToString().Trim().ToLower() != "id" ||
+                        xlRange2.Cells[1, 2] == null || xlRange2.Cells[1, 2].Value2.ToString().Trim().ToLower() != "kết quả" ||
+                        xlRange2.Cells[1, 3] == null || xlRange2.Cells[1, 3].Value2.ToString().Trim().ToLower() != "ngày xét nghiệm")
                         {
                             errorMessage = "Không đúng định dạng file";
                             xlWorkbook.Close();
