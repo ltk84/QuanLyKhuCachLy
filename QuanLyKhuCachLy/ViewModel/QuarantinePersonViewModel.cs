@@ -3564,7 +3564,6 @@ namespace QuanLyKhuCachLy.ViewModel
                         transaction.Commit();
                         //MessageBox.Show("Đã thêm từ file excel");
                         isSuccess = true;
-
                         //DashboardViewModel.ins.Init();
                     }
                     catch (DbUpdateException e)

@@ -1310,6 +1310,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     error = "Không đúng định dạng file";
                     return;
                 }
+                List<int> listSTT = new List<int>();
                 for (int i = 2; i <= rowCount; i++)
                 {
                     Staff staff = new Staff();
@@ -1319,11 +1320,27 @@ namespace QuanLyKhuCachLy.ViewModel
                         int t;
                         if (Int32.TryParse(xlRange.Cells[i, 1].Value2.ToString(), out t))
                         {
+                            if (t < 0)
+                            {
+                                xlWorkbook.Close();
+                                error = "STT để bé hơn 0";
+                                return;
+                            }
+                            else
+                            {
+                                if (listSTT.Contains(t))
+                                {
+                                    xlWorkbook.Close();
+                                    error = "STT " + t.ToString() + " bị trùng";
+                                    return;
+                                }
+                                listSTT.Add(t);
+                            }
                         }
                         else
                         {
                             xlWorkbook.Close();
-                            error = "Số thứ tự không phải là số";
+                            error = "STT không là số";
                             return;
                         }
                     }
