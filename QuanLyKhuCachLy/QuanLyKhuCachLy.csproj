@@ -188,6 +188,9 @@
     <Compile Include="CustomUserControl\BufferWindow.xaml.cs">
       <DependentUpon>BufferWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomUserControl\CannotSendPeopleList.xaml.cs">
+      <DependentUpon>CannotSendPeopleList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomUserControl\ChangeCompleteDate.xaml.cs">
       <DependentUpon>ChangeCompleteDate.xaml</DependentUpon>
     </Compile>
@@ -458,6 +461,7 @@
     <Compile Include="ViewModel\ActionConfirmationViewModel.cs" />
     <Compile Include="ViewModel\ArrangeRoomRecommendationViewModel.cs" />
     <Compile Include="ViewModel\AddressViewModel.cs" />
+    <Compile Include="ViewModel\CannotSendPeopleViewModel.cs" />
     <Compile Include="ViewModel\CompleteQuarantineRecommendationViewModel.cs" />
     <Compile Include="ViewModel\DashboardViewModel.cs" />
     <Compile Include="CustomUserControl\Dashboard.xaml.cs">
@@ -537,6 +541,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomUserControl\BufferWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\CannotSendPeopleList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

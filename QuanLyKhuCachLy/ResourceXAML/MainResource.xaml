@@ -23,4 +23,5 @@
     <viewmodel:ActionConfirmationViewModel x:Key="ActionConfirmationVM" />
     <viewmodel:ProposeNotificationViewModel x:Key="ProposeNotificationVM" />
     <viewmodel:FailNotificationViewModel x:Key="FailNotificationVM" />
+    <viewmodel:CannotSendPeopleViewModel x:Key="UnsendListVM" />
 </ResourceDictionary>

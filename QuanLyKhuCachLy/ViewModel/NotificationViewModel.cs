@@ -1,6 +1,7 @@
 ﻿using QuanLyKhuCachLy.CustomUserControl;
 using QuanLyKhuCachLy.Model;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
@@ -17,6 +18,13 @@ namespace QuanLyKhuCachLy.ViewModel
 {
     public class NotificationViewModel : BaseViewModel
     {
+
+        private List<Model.QuarantinePerson> _unsendPeopleList;
+        public List<Model.QuarantinePerson> UnsendList
+        {
+            get { return _unsendPeopleList; }
+            set { _unsendPeopleList = value; OnPropertyChanged(); }
+        }
 
         private String _fullyMessage;
         public string fullyMessage
@@ -630,6 +638,7 @@ namespace QuanLyKhuCachLy.ViewModel
         {
 
             fullyMessage = "";
+            UnsendList = new List<QuarantinePerson>();
             TemplateList = new ObservableCollection<NotificationTemplate>(DataProvider.ins.db.NotificationTemplates);
             PeopleList1 = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
             PeopleListView1 = PeopleList1.ToArray();
@@ -656,7 +665,16 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-                SendMessage();
+                try
+                {
+
+
+                    SendMessage();
+                }
+                catch
+                {
+
+                }
             });
 
 
@@ -1685,7 +1703,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     if (ChoiceList[i].phoneNumber != "" && ChoiceList[i] != null)
                     {
-                        sendMessageWithTwillo(messageContent, fomatPhoneNumber(ChoiceList[i].phoneNumber));
+                        sendMessageWithTwillo(messageContent, fomatPhoneNumber(ChoiceList[i].phoneNumber), ChoiceList[i]);
                     }
 
                 }
@@ -1695,7 +1713,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 ChoiceList = new ObservableCollection<QuarantinePerson>();
             });
             loadingIndicator.Close();
-            if (isSuccess)
+            if (UnsendList.Count == 0)
             {
                 Window SuccessDialog = new Window
                 {
@@ -1712,13 +1730,15 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else
             {
-                CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
-                var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
-                ErrorDialog.ShowDialog();
+                CannotSendPeopleList unsendPeopleList = new CannotSendPeopleList();
+                var Vm = unsendPeopleList.DataContext as CannotSendPeopleViewModel;
+                Vm.PeopleList = UnsendList;
+                unsendPeopleList.ShowDialog();
+                UnsendList.Clear();
             }
         }
 
-        void sendMessageWithTwillo(string messageContent, string phoneNumber)
+        void sendMessageWithTwillo(string messageContent, string phoneNumber, QuarantinePerson current)
         {
             try
             {
@@ -1737,6 +1757,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
+                UnsendList.Add(current);
                 //CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
                 //var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
                 //ErrorDialog.ShowDialog();
