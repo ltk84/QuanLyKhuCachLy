@@ -313,7 +313,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 BufferWindow bufferWindow = new BufferWindow();
                 bufferWindow.ShowDialog();
                 ToDetailRoomTab();
-                
+
             });
 
             ToMainCommand = new RelayCommand<object>((p) =>
@@ -415,10 +415,10 @@ namespace QuanLyKhuCachLy.ViewModel
         }
 
         #region method
-        
+
         void updateAvailableSlot()
         {
-            for (int i=0; i< RoomListView.Length; i++)
+            for (int i = 0; i < RoomListView.Length; i++)
             {
                 int id = RoomListView[i].id;
                 RoomListView[i].available = DataProvider.ins.db.QuarantinePersons.Where(person => person.roomID == id).ToArray().Length.ToString() + "/" + RoomListView[i].capacity.ToString();
@@ -598,9 +598,9 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (xlRange.Cells[i, 1] != null && xlRange.Cells[i, 1].Value2 != null)
                     {
                         int t;
-                        if(Int32.TryParse(xlRange.Cells[i, 1].Value2.ToString(), out t))
+                        if (Int32.TryParse(xlRange.Cells[i, 1].Value2.ToString(), out t))
                         {
-                            if(t <= 0)
+                            if (t <= 0)
                             {
                                 xlWorkbook.Close();
                                 error = "STT để bé hơn 1";
@@ -608,7 +608,7 @@ namespace QuanLyKhuCachLy.ViewModel
                             }
                             else
                             {
-                                if(listSTT.Contains(t))
+                                if (listSTT.Contains(t))
                                 {
                                     xlWorkbook.Close();
                                     error = "STT " + t.ToString() + " bị trùng";
@@ -646,19 +646,20 @@ namespace QuanLyKhuCachLy.ViewModel
                         if (Int32.TryParse(xlRange.Cells[i, 3].Value2.ToString(), out t))
                         {
                             room.capacity = Int32.Parse(xlRange.Cells[i, 3].Value2.ToString());
-                            if(t <= 0)
+                            if (t <= 0)
                             {
                                 error = "Phòng " + xlRange.Cells[i, 2].Value2.ToString() + " sức chứa bé hơn 0";
                                 xlWorkbook.Close();
                                 return;
                             }
                         }
-                        else {
+                        else
+                        {
                             error = "Phòng " + xlRange.Cells[i, 2].Value2.ToString() + " sức chứa không là số";
                             xlWorkbook.Close();
                             return;
                         };
-                        
+
                     }
                     else
                     {
@@ -666,7 +667,7 @@ namespace QuanLyKhuCachLy.ViewModel
                         xlWorkbook.Close();
                         return;
                     }
-                
+
                     if (xlRange.Cells[i, 4] != null && xlRange.Cells[i, 4].Value2 != null)
                     {
                         string description = xlRange.Cells[i, 4].Value2.ToString();
@@ -1021,7 +1022,7 @@ namespace QuanLyKhuCachLy.ViewModel
             sheet.Range["C1"].Value = "Sức chứa";
             sheet.Range["D1"].Value = "Còn trống";
             sheet.Range["E1"].Value = "Nhóm đối tượng";
-           
+
             for (int i = 2; i <= count + 1; i++)
             {
                 int roomID = RoomListView[i - 2].id;
@@ -1036,7 +1037,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 sheet.Range["B" + i.ToString()].Value = RoomListView[i - 2].displayName;
                 sheet.Range["C" + i.ToString()].Value = RoomListView[i - 2].capacity;
                 sheet.Range["D" + i.ToString()].Value = (RoomListView[i - 2].capacity - countInRoom).ToString();
-                sheet.Range["E" + i.ToString()].Value = RoomListView[i - 2].levelID != null?severity.description:"";
+                sheet.Range["E" + i.ToString()].Value = RoomListView[i - 2].levelID != null ? severity.description : "";
             }
             file.Close();
         }
