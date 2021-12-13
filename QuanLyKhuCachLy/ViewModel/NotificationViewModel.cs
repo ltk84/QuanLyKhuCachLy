@@ -1,6 +1,7 @@
 ﻿using QuanLyKhuCachLy.CustomUserControl;
 using QuanLyKhuCachLy.Model;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
@@ -17,6 +18,13 @@ namespace QuanLyKhuCachLy.ViewModel
 {
     public class NotificationViewModel : BaseViewModel
     {
+
+        private List<Model.QuarantinePerson> _unsendPeopleList;
+        public List<Model.QuarantinePerson> UnsendList
+        {
+            get { return _unsendPeopleList; }
+            set { _unsendPeopleList = value; OnPropertyChanged(); }
+        }
 
         private String _fullyMessage;
         public string fullyMessage
@@ -630,6 +638,7 @@ namespace QuanLyKhuCachLy.ViewModel
         {
 
             fullyMessage = "";
+            UnsendList = new List<QuarantinePerson>();
             TemplateList = new ObservableCollection<NotificationTemplate>(DataProvider.ins.db.NotificationTemplates);
             PeopleList1 = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons);
             PeopleListView1 = PeopleList1.ToArray();
@@ -656,7 +665,17 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-                SendMessage();
+                try
+                {
+
+
+                    SendMessage();
+                }
+                catch
+                {
+
+                }
+                textBtnTitle = "Danh sách nhận thông báo có " + ChoiceList.ToArray().Length + " người.";
             });
 
 
@@ -912,13 +931,14 @@ namespace QuanLyKhuCachLy.ViewModel
         // Searching
         void SearchList1()
         {
+            SelectFilterProperty1();
+
             if (SearchKey1 == "" || SearchKey1 == null)
             {
             }
             else
             {
 
-                SelectFilterProperty1();
                 String[] Value = new string[PeopleListView1.Length];
 
                 for (int i = 0; i < PeopleListView1.Length; i++)
@@ -992,13 +1012,14 @@ namespace QuanLyKhuCachLy.ViewModel
 
         void SearchList2()
         {
+            SelectFilterProperty2();
+
             if (SearchKey2 == "" || SearchKey2 == null)
             {
             }
             else
             {
 
-                SelectFilterProperty2();
                 String[] Value = new string[PeopleListView2.Length];
 
                 for (int i = 0; i < PeopleListView2.Length; i++)
@@ -1619,7 +1640,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 if (selectedTemplate.id == 1) fullyMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đến từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn!";
                 else if (selectedTemplate.id == 2) fullyMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đến từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn!";
                 else if (selectedTemplate.id == 3) fullyMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đến từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn!";
-                else if (selectedTemplate.id == 4) fullyMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đến từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Bạn sẽ được chuyển tới phòng " + "{Ten phong}" + " với sức chứa " + "{Suc chua}" + " nguoi" + ". Xin cảm ơn!";
+                else if (selectedTemplate.id == 4) fullyMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đến từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn!";
 
                 else fullyMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đến từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn!";
             }
@@ -1683,7 +1704,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     if (ChoiceList[i].phoneNumber != "" && ChoiceList[i] != null)
                     {
-                        sendMessageWithTwillo(messageContent, fomatPhoneNumber(ChoiceList[i].phoneNumber));
+                        sendMessageWithTwillo(messageContent, fomatPhoneNumber(ChoiceList[i].phoneNumber), ChoiceList[i]);
                     }
 
                 }
@@ -1693,7 +1714,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 ChoiceList = new ObservableCollection<QuarantinePerson>();
             });
             loadingIndicator.Close();
-            if (isSuccess)
+            if (UnsendList.Count == 0)
             {
                 Window SuccessDialog = new Window
                 {
@@ -1710,13 +1731,15 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else
             {
-                CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
-                var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
-                ErrorDialog.ShowDialog();
+                CannotSendPeopleList unsendPeopleList = new CannotSendPeopleList();
+                var Vm = unsendPeopleList.DataContext as CannotSendPeopleViewModel;
+                Vm.PeopleList = UnsendList;
+                unsendPeopleList.ShowDialog();
+                UnsendList.Clear();
             }
         }
 
-        void sendMessageWithTwillo(string messageContent, string phoneNumber)
+        void sendMessageWithTwillo(string messageContent, string phoneNumber, QuarantinePerson current)
         {
             try
             {
@@ -1735,6 +1758,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             catch
             {
+                UnsendList.Add(current);
                 //CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
                 //var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
                 //ErrorDialog.ShowDialog();
@@ -1754,7 +1778,7 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             var DestinationRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == person.roomID).FirstOrDefault();
             var QAName = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().name;
-            string CombinedMessage = "Chào a/c " + person.name + ", đây là thông báo đền từ ban quản lý của khu cách ly " + QAName + ". " + message + "Bạn sẽ được chuyễn đến phòng " + DestinationRoom?.displayName + " với sức chứa " + DestinationRoom?.capacity + " người" + ". Xin cảm ơn";
+            string CombinedMessage = "Chào a/c " + person.name + ", đây là thông báo đền từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn";
             return CombinedMessage;
         }
 
