@@ -2034,7 +2034,7 @@ namespace QuanLyKhuCachLy.ViewModel
                             healthInformation.isSoreThroat = true;
                         }
                         else healthInformation.isSoreThroat = false;
-                        if (health.Contains("mất vị giác") || health.Contains("Mất vị giác"))
+                        if (health.Contains("mất vị giác") || health.Contains("mất mùi vị"))
                         {
                             healthInformation.isLossOfTatse = true;
                         }
@@ -3112,7 +3112,7 @@ namespace QuanLyKhuCachLy.ViewModel
                                     healthInformation.isSoreThroat = true;
                                 }
                                 else healthInformation.isSoreThroat = false;
-                                if (health.Contains("mất vị giác") || health.Contains("Mất vị giác"))
+                                if (health.Contains("mất vị giác") || health.Contains("mất mùi vị"))
                                 {
                                     healthInformation.isLossOfTatse = true;
                                 }
