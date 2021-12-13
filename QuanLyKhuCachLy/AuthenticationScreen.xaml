@@ -73,8 +73,7 @@
                         FontSize="14"
                         Foreground="#FF434A54"
                         Style="{StaticResource MaterialDesignFilledTextBox}"
-                        Text="{Binding username}"
-                        TextWrapping="Wrap" />
+                        Text="{Binding username}" />
                     <PasswordBox
                         x:Name="floatingPasswordBox"
                         Margin="65,20,65,0"
