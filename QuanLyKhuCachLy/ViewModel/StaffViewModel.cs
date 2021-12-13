@@ -198,6 +198,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 _SelectedFilterProperty = value;
                 OnPropertyChanged();
                 SelectFilterProperty();
+                SearchKey = "";
             }
         }
 
@@ -1134,40 +1135,38 @@ namespace QuanLyKhuCachLy.ViewModel
 
         void FilterListView()
         {
-            SelectedFilterType = "Tất cả";
-            if (SearchKey == "")
+            SelectFilterProperty();
+
+            if (SearchKey == "" || SearchKey == null)
             {
-                StaffListView = StaffList.ToArray();
-
             }
-
             else
             {
 
 
-                StaffListView = StaffList.ToArray();
                 String[] Value = new string[StaffListView.Length];
 
                 for (int i = 0; i < StaffListView.Length; i++)
                 {
-                    Value[i] = StaffListView[i].name.ToString() + "@@" + StaffListView[i].citizenID.ToString() + "@@" + StaffListView[i].id.ToString() + "@@" + StaffListView[i].department.ToString() + "@@" + StaffListView[i].jobTitle.ToString();
+                    Value[i] = StaffListView[i].name?.ToString() + "@@" + StaffListView[i].citizenID?.ToString() + "@@" + StaffListView[i].id.ToString() + "@@" + StaffListView[i].healthInsuranceID?.ToString() + "@@" + StaffListView[i]?.phoneNumber.ToString() ;
 
                 }
 
                 StaffListView = StaffListView.Where((val, index) => Value[index].ToUpper().Contains(SearchKey.ToUpper())).ToArray();
+
+
             }
         }
 
 
         void getFilterProperty()
         {
-            SelectedFilterProperty = "Tất cả";
-
+            SelectedFilterProperty = "";
+            SearchKey = "";
             //FilterProperty = DataProvider.ins.db.Staffs.Select(staff => staff.GetType().GetProperty(SelectedFilterType)).Distinct();
             if (SelectedFilterType == "Tất cả")
             {
-                SelectedFilterProperty = "Chọn phương thức lọc";
-                FilterProperty = new string[] { "Chọn phương thức lọc" };
+                FilterProperty = new string[] { };
             }
             else if (SelectedFilterType == "Giới tính")
             {
@@ -1176,45 +1175,47 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType == "Quốc tịch")
             {
-                FilterProperty = DataProvider.ins.db.Staffs.Select(staff => staff.nationality).ToArray();
+                FilterProperty = StaffList.Select(person => person.nationality).ToArray();
                 FilterProperty = FilterProperty.Distinct().ToArray();
             }
             else if (SelectedFilterType == "Chức vụ")
             {
-                FilterProperty = DataProvider.ins.db.Staffs.Select(staff => staff.jobTitle).ToArray();
+                FilterProperty = StaffList.Select(staff => staff.jobTitle).ToArray();
                 FilterProperty = FilterProperty.Distinct().ToArray();
             }
             else if (SelectedFilterType == "Bộ phận")
             {
-                FilterProperty = DataProvider.ins.db.Staffs.Select(staff => staff.department).ToArray();
+                FilterProperty = StaffList.Select(staff => staff.department).ToArray();
                 FilterProperty = FilterProperty.Distinct().ToArray();
             }
 
-            StaffListView = DataProvider.ins.db.Staffs.ToArray();
+            StaffListView = StaffList.ToArray();
         }
 
         void SelectFilterProperty()
         {
+            StaffListView = StaffList.ToArray();
+            if (SelectedFilterProperty == "" || SelectedFilterProperty == null || SelectedFilterProperty == "Tất cả") return;
             if (SelectedFilterType == "Tất cả")
             {
             }
             else if (SelectedFilterType == "Giới tính")
             {
-                StaffListView = DataProvider.ins.db.Staffs.Where(x => x.sex == SelectedFilterProperty).ToArray();
+                StaffListView = StaffList.Where(x => x.sex == SelectedFilterProperty).ToArray();
             }
             else if (SelectedFilterType == "Quốc tịch")
             {
-                StaffListView = DataProvider.ins.db.Staffs.Where(x => x.nationality == SelectedFilterProperty).ToArray();
+                StaffListView = StaffList.Where(x => x.nationality == SelectedFilterProperty).ToArray();
             }
             else if (SelectedFilterType == "Chức vụ")
             {
 
-                StaffListView = DataProvider.ins.db.Staffs.Where(x => x.jobTitle == SelectedFilterProperty).ToArray();
+                StaffListView = StaffList.Where(x => x.jobTitle == SelectedFilterProperty).ToArray();
             }
             else if (SelectedFilterType == "Bộ phận")
             {
 
-                StaffListView = DataProvider.ins.db.Staffs.Where(x => x.department == SelectedFilterProperty).ToArray();
+                StaffListView = StaffList.Where(x => x.department == SelectedFilterProperty).ToArray();
             }
 
 

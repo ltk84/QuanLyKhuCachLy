@@ -482,24 +482,26 @@ namespace QuanLyKhuCachLy.ViewModel
         // hàm gọi khi thay đổi SearchKey, thay đổi giá trị của RoomListView.
         void SearchListRoom()
         {
-            SelectedFilterType = "Tất cả";
-            if (SearchKey == "")
-            {
-                RoomListView = RoomList.ToArray();
-            }
+            SelectFilterProperty();
 
+            if (SearchKey == "" || SearchKey == null)
+            {
+            }
             else
             {
-                RoomListView = RoomList.ToArray();
+
+
                 String[] Value = new string[RoomListView.Length];
 
                 for (int i = 0; i < RoomListView.Length; i++)
                 {
-                    Value[i] = RoomListView[i].displayName.ToString() + "@@" + RoomListView[i].Severity?.description.ToString() + "@@" + RoomListView[i].capacity.ToString();
+                    Value[i] = RoomListView[i].displayName?.ToString() + "@@" + RoomListView[i].capacity.ToString() + "@@" + RoomListView[i].id.ToString() ;
 
                 }
 
                 RoomListView = RoomListView.Where((val, index) => Value[index].ToUpper().Contains(SearchKey.ToUpper())).ToArray();
+
+
             }
         }
 
@@ -507,8 +509,8 @@ namespace QuanLyKhuCachLy.ViewModel
         // Hàm cho filter
         void getFilterProperty()
         {
-            SelectedFilterProperty = "Tất cả";
-
+            SelectedFilterProperty = "";
+            SearchKey = "";
             //FilterProperty = DataProvider.ins.db.Staffs.Select(staff => staff.GetType().GetProperty(SelectedFilterType)).Distinct();
             if (SelectedFilterType == "Tất cả")
             {
@@ -517,31 +519,34 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType == "Nhóm đối tượng")
             {
-                FilterProperty = DataProvider.ins.db.QuarantineRooms.Select(room => room.Severity.description).ToArray();
+                FilterProperty = RoomList.Select(room => room.Severity.description).ToArray();
                 FilterProperty = FilterProperty.Distinct().ToArray();
             }
             else if (SelectedFilterType == "Sức chứa")
             {
-                FilterProperty = DataProvider.ins.db.QuarantineRooms.Select(room => room.capacity.ToString()).ToArray();
+                FilterProperty = RoomList.Select(room => room.capacity.ToString()).ToArray();
                 FilterProperty = FilterProperty.Distinct().ToArray();
             }
 
 
-            RoomListView = DataProvider.ins.db.QuarantineRooms.ToArray();
+            RoomListView = RoomList.ToArray();
         }
 
         void SelectFilterProperty()
         {
+            RoomListView = RoomList.ToArray();
+            if (SelectedFilterProperty == "" || SelectedFilterProperty == null || SelectedFilterProperty == "Tất cả") return;
+
             if (SelectedFilterType == "Tất cả")
             {
             }
             else if (SelectedFilterType == "Nhóm đối tượng")
             {
-                RoomListView = DataProvider.ins.db.QuarantineRooms.Where(x => x.Severity.description == SelectedFilterProperty).ToArray();
+                RoomListView = RoomList.Where(x => x.Severity.description == SelectedFilterProperty).ToArray();
             }
             else if (SelectedFilterType == "Sức chứa")
             {
-                RoomListView = DataProvider.ins.db.QuarantineRooms.Where(x => x.capacity.ToString() == SelectedFilterProperty).ToArray();
+                RoomListView = RoomList.Where(x => x.capacity.ToString() == SelectedFilterProperty).ToArray();
             }
 
         }
