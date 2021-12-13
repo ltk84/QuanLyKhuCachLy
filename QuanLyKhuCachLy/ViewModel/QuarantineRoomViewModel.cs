@@ -576,6 +576,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 List<Model.QuarantineRoom> listRoom = new List<Model.QuarantineRoom>();
                 Excel.Application xlApp = new Excel.Application();
                 Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(path);
+                xlWorkbook.RefreshAll();
                 Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
                 Excel.Range xlRange = xlWorksheet.UsedRange;
                 int rowCount = xlRange.Rows.Count;
