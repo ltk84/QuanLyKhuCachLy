@@ -2056,9 +2056,9 @@ namespace QuanLyKhuCachLy.ViewModel
                         else healthInformation.isOtherSymptoms = false;
                         if (health.Contains("có bệnh nền") || health.Contains("Có bệnh nền"))
                         {
-                            healthInformation.isFever = true;
+                            healthInformation.isDisease = true;
                         }
-                        else healthInformation.isFever = false;
+                        else healthInformation.isDisease = false;
                     }
                     if (xlRange.Cells[i, 12] != null && xlRange.Cells[i, 12].Value2 != null)
                     {
@@ -2971,6 +2971,7 @@ namespace QuanLyKhuCachLy.ViewModel
         }
         async System.Threading.Tasks.Task ImportFileFromGoogleSheetAsync()
         {
+            string error = "";
             try
             {
                 string[] Scopes = { SheetsService.Scope.Spreadsheets };
@@ -3133,9 +3134,9 @@ namespace QuanLyKhuCachLy.ViewModel
                                 else healthInformation.isOtherSymptoms = false;
                                 if (health.Contains("có bệnh nền") || health.Contains("Có bệnh nền"))
                                 {
-                                    healthInformation.isFever = true;
+                                    healthInformation.isDisease = true;
                                 }
-                                else healthInformation.isFever = false;
+                                else healthInformation.isDisease = false;
                             }
                             if (values[i][11] != null)
                             {
