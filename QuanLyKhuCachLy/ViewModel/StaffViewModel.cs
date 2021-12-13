@@ -1412,16 +1412,16 @@ namespace QuanLyKhuCachLy.ViewModel
                         }
                         if (arrListStr.Length == 3)
                         {
-                            address.province = arrListStr[2];
-                            address.district = arrListStr[1];
-                            address.ward = arrListStr[0];
+                            address.province = arrListStr[2].Trim();
+                            address.district = arrListStr[1].Trim();
+                            address.ward = arrListStr[0].Trim();
                         }
                         else
                         {
-                            address.province = arrListStr[3];
-                            address.district = arrListStr[2];
-                            address.ward = arrListStr[1];
-                            address.streetName = arrListStr[0];
+                            address.province = arrListStr[3].Trim();
+                            address.district = arrListStr[2].Trim();
+                            address.ward = arrListStr[1].Trim();
+                            address.streetName = arrListStr[0].Trim();
                         }
                     }
                     else
@@ -1673,9 +1673,9 @@ namespace QuanLyKhuCachLy.ViewModel
             sheet.Range["K1"].Value = "Địa chỉ";
 
             sheet.Range["L2"].Value = "Lưu ý:";
-            sheet.Range["L3"].Value = "Các dữ liệu về địa điểm sau dấu ',' không có khoảng trống,";
+            sheet.Range["L3"].Value = "Các thảnh phần của điệm điểm cách nhau bởi dấu ',' ";
             sheet.Range["L4"].Value = "các từ chỉ địa phương ghi hoa chữ đầu.";
-            sheet.Range["L5"].Value = "VD: Thôn A,Xã B,Huyện C,Tỉnh D";
+            sheet.Range["L5"].Value = "VD: Thôn A, Xã B, Huyện C, Tỉnh D";
             sheet.Range["L6"].Value = "MaBH có thể để trống";
             sheet.Range["L7"].Value = "Giới tính chỉ có thể là Nam/Nữ";
 

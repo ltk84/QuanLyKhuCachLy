@@ -1960,16 +1960,16 @@ namespace QuanLyKhuCachLy.ViewModel
                         }
                         if (arrListStr.Length == 3)
                         {
-                            personAddress.province = arrListStr[2];
-                            personAddress.district = arrListStr[1];
-                            personAddress.ward = arrListStr[0];
+                            personAddress.province = arrListStr[2].Trim();
+                            personAddress.district = arrListStr[1].Trim();
+                            personAddress.ward = arrListStr[0].Trim();
                         }
                         else
                         {
-                            personAddress.province = arrListStr[3];
-                            personAddress.district = arrListStr[2];
-                            personAddress.ward = arrListStr[1];
-                            personAddress.streetName = arrListStr[0];
+                            personAddress.province = arrListStr[3].Trim();
+                            personAddress.district = arrListStr[2].Trim();
+                            personAddress.ward = arrListStr[1].Trim();
+                            personAddress.streetName = arrListStr[0].Trim();
                         }
                     }
                     else
@@ -2100,13 +2100,13 @@ namespace QuanLyKhuCachLy.ViewModel
                         for (int j = 0; j < records.Length; j++)
                         {
                             InjectionRecord rc = new InjectionRecord();
-                            string[] str = records[j].Split(' ');
+                            string[] str = records[j].Trim().Split(' ');
                             if (str.Length >= 2)
                             {
                                 DateTime dateTime;
-                                if (DateTime.TryParse(str[0].ToString(), out dateTime))
+                                if (DateTime.TryParse(str[0].ToString().Trim(), out dateTime))
                                 {
-                                    dateTime = Convert.ToDateTime(str[0].ToString());
+                                    dateTime = Convert.ToDateTime(str[0].ToString().Trim());
                                     rc.dateInjection = dateTime;
                                 }
                                 else
@@ -2115,10 +2115,16 @@ namespace QuanLyKhuCachLy.ViewModel
                                     xlWorkbook.Close();
                                     return;
                                 }
-                                string vaccine = str[1].ToString();
+                                string vaccine = str[1].ToString().Trim();
                                 rc.dateInjection = dateTime;
                                 rc.vaccineName = vaccine;
                                 injectionRecords.Add(rc);
+                            }
+                            else
+                            {
+                                error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " sai thông tin tiêm chủng";
+                                xlWorkbook.Close();
+                                return;
                             }
                         }
                         if (injectionRecords.Count() == 0)
@@ -2202,16 +2208,16 @@ namespace QuanLyKhuCachLy.ViewModel
                                         }
                                         if (arrListStr.Length == 3)
                                         {
-                                            address.province = arrListStr[2];
-                                            address.district = arrListStr[1];
-                                            address.ward = arrListStr[0];
+                                            address.province = arrListStr[2].Trim();
+                                            address.district = arrListStr[1].Trim();
+                                            address.ward = arrListStr[0].Trim();
                                         }
                                         else
                                         {
-                                            address.province = arrListStr[3];
-                                            address.district = arrListStr[2];
-                                            address.ward = arrListStr[1];
-                                            address.streetName = arrListStr[0];
+                                            address.province = arrListStr[3].Trim();
+                                            address.district = arrListStr[2].Trim();
+                                            address.ward = arrListStr[1].Trim();
+                                            address.streetName = arrListStr[0].Trim();
                                         }
                                     }
                                     else
@@ -3064,16 +3070,16 @@ namespace QuanLyKhuCachLy.ViewModel
                                 }
                                 if (arrListStr.Length == 3)
                                 {
-                                    personAddress.province = arrListStr[2];
-                                    personAddress.district = arrListStr[1];
-                                    personAddress.ward = arrListStr[0];
+                                    personAddress.province = arrListStr[2].Trim();
+                                    personAddress.district = arrListStr[1].Trim();
+                                    personAddress.ward = arrListStr[0].Trim();
                                 }
                                 else
                                 {
-                                    personAddress.province = arrListStr[3];
-                                    personAddress.district = arrListStr[2];
-                                    personAddress.ward = arrListStr[1];
-                                    personAddress.streetName = arrListStr[0];
+                                    personAddress.province = arrListStr[3].Trim();
+                                    personAddress.district = arrListStr[2].Trim();
+                                    personAddress.ward = arrListStr[1].Trim();
+                                    personAddress.streetName = arrListStr[0].Trim();
                                 }
                             }
 
@@ -3748,20 +3754,22 @@ namespace QuanLyKhuCachLy.ViewModel
             sheet.Range["L1"].Value = "Nhóm đối tượng";
             sheet.Range["M1"].Value = "Ngày đến";
             sheet.Range["N1"].Value = "Thông tin tiêm chủng";
-            sheet.Range["O2"].Value = "Lưu ý:Các dữ liệu về địa điểm sau dấu ',' không có khoảng trống,";
+            sheet.Range["O2"].Value = "Lưu ý:Các thành phần của điệm điểm cách nhau bởi dấu ','";
             sheet.Range["O3"].Value = "các từ chỉ địa phương ghi hoa chữ đầu.";
             sheet.Range["O4"].Value = "VD: Thôn A,Xã B,Huyện C,Tỉnh D";
             sheet.Range["O6"].Value = "CMND/CCCD, Mã BH, Triệu chứng, nhóm đối tượng,";
             sheet.Range["O7"].Value = "Thông tin tiêm chủng và di chuyển có thể để trống.";
             sheet.Range["O9"].Value = "Giới tính chỉ có thể là Nam/Nữ";
             sheet.Range["O10"].Value = "Với mỗi lần tiêm chủng, ghi theo cú pháp 'ngày vaccine' ";
-            sheet.Range["O11"].Value = "Các lần tiêm cách nhau bởi dấu ',' không có khoảng trống ở giữa ";
+            sheet.Range["O11"].Value = "Các lần tiêm cách nhau bởi dấu ','";
             sheet.Range["O12"].Value = "Vd: 1/1/2021 Astra,2/4/2021 Astra ";
-            sheet.Range["O14"].Value = "Xóa lưu ý này trước khi thêm.";
+            sheet.Range["O13"].Value = "Thêm lịch sử di chuyển ở sheet thứ 2";
+            sheet.Range["O15"].Value = "Xóa lưu ý này trước khi thêm.";
+
             sheet1.Range["A1"].Value = "STT trong DS";
             sheet1.Range["B1"].Value = "Ngày";
             sheet1.Range["C1"].Value = "Địa điểm";
-            sheet1.Range["D2"].Value = "Lưu ý:Các dữ liệu về địa điểm sau dấu ',' không có khoảng trống,";
+            sheet1.Range["D2"].Value = "Lưu ý:Các thảnh phần của điệm điểm cách nhau bởi dấu ','";
             sheet1.Range["D3"].Value = "các từ chỉ địa phương ghi hoa chữ đầu.";
             sheet1.Range["D4"].Value = "VD: Thôn A,Xã B,Huyện C,Tỉnh D";
             sheet1.Range["D6"].Value = "Xóa lưu ý này trước khi thêm.";
