@@ -156,12 +156,13 @@
                     materialDesign:HintAssist.Hint="Nhập số CCCD"
                     utility:ProtocolSettingsLayout.MVVMHasError="{Binding CitizenIDFieldHasError}"
                     MaxLength="20"
+                    PreviewTextInput="TextBox_PreviewTextInput"
                     Style="{StaticResource TextInputField}">
                     <TextBox.Text>
                         <Binding Path="CitizenID" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <vr:RequiredField />
-                                <vr:NoSpecialChar />
+                                <vr:OnlyNumber />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -207,12 +208,14 @@
                     materialDesign:HintAssist.Hint="Nhập số điện thoại"
                     utility:ProtocolSettingsLayout.MVVMHasError="{Binding PhoneNumberFieldHasError}"
                     MaxLength="20"
+                    PreviewTextInput="TextBox_PreviewTextInput"
                     Style="{StaticResource TextInputField}">
                     <TextBox.Text>
                         <Binding Path="PhoneNumber" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <vr:RequiredField />
                                 <vr:NoSpecialChar />
+                                <vr:OnlyNumber />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
