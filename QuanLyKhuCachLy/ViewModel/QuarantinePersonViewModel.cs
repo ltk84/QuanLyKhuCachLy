@@ -1997,7 +1997,23 @@ namespace QuanLyKhuCachLy.ViewModel
                     }
                     if (xlRange.Cells[i, 10] != null && xlRange.Cells[i, 10].Value2 != null)
                     {
-                        quarantinePerson.phoneNumber = xlRange.Cells[i, 10].Value2.ToString();
+                        int t;
+                        if(Int32.TryParse(xlRange.Cells[i, 10].Value2.ToString(),out t))
+                        {
+                            quarantinePerson.phoneNumber = xlRange.Cells[i, 10].Value2.ToString();
+                        }
+                        else
+                        {
+                            error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " số điện thoại không đúng";
+                            xlWorkbook.Close();
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " không có số điện thoại";
+                        xlWorkbook.Close();
+                        return;
                     }
                     if (xlRange.Cells[i, 11] != null && xlRange.Cells[i, 11].Value2 != null)
                     {
@@ -2066,7 +2082,7 @@ namespace QuanLyKhuCachLy.ViewModel
                         double date;
                         if (double.TryParse(xlRange.Cells[i, 13].Value2.ToString(), out date))
                         {
-                            dateTime = DateTime.FromOADate(double.Parse(xlRange.Cells[i, 3].Value2.ToString()));
+                            dateTime = DateTime.FromOADate(double.Parse(xlRange.Cells[i, 13].Value2.ToString()));
                             quarantinePerson.arrivedDate = dateTime;
                         }
                         else
@@ -3132,7 +3148,6 @@ namespace QuanLyKhuCachLy.ViewModel
                             {
                                 DateTime arrivedTime = Convert.ToDateTime(values[i][12].ToString());
                                 quarantinePerson.arrivedDate = arrivedTime;
-
                             }
                             if (values[i][13].ToString() != "Chưa tiêm")
                             {
