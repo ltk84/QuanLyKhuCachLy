@@ -1618,7 +1618,7 @@ namespace QuanLyKhuCachLy.ViewModel
         // Searching
         void SearchWithKey()
         {
-
+            SelectFilterProperty();
 
             if (SearchKey == "" || SearchKey == null)
             {
@@ -1626,7 +1626,7 @@ namespace QuanLyKhuCachLy.ViewModel
             else
             {
 
-                SelectFilterProperty();
+                
                 String[] Value = new string[PeopleListView.Length];
 
                 for (int i = 0; i < PeopleListView.Length; i++)

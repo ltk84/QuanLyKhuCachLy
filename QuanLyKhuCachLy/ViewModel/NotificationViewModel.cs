@@ -912,13 +912,14 @@ namespace QuanLyKhuCachLy.ViewModel
         // Searching
         void SearchList1()
         {
+            SelectFilterProperty1();
+
             if (SearchKey1 == "" || SearchKey1 == null)
             {
             }
             else
             {
 
-                SelectFilterProperty1();
                 String[] Value = new string[PeopleListView1.Length];
 
                 for (int i = 0; i < PeopleListView1.Length; i++)
@@ -992,13 +993,14 @@ namespace QuanLyKhuCachLy.ViewModel
 
         void SearchList2()
         {
+            SelectFilterProperty2();
+
             if (SearchKey2 == "" || SearchKey2 == null)
             {
             }
             else
             {
 
-                SelectFilterProperty2();
                 String[] Value = new string[PeopleListView2.Length];
 
                 for (int i = 0; i < PeopleListView2.Length; i++)
