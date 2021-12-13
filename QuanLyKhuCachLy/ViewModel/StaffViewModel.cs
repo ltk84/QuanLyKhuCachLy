@@ -1459,7 +1459,14 @@ namespace QuanLyKhuCachLy.ViewModel
                         int t;
                         if (Int32.TryParse(xlRange.Cells[i, 7].Value2.ToString(), out t))
                         {
-                            staff.phoneNumber = xlRange.Cells[i, 7].Value2.ToString();
+                            if(xlRange.Cells[i, 7].Value2.ToString()[0] == '0')
+                            {
+                                staff.phoneNumber = xlRange.Cells[i, 7].Value2.ToString();
+                            }
+                            else
+                            {
+                                staff.phoneNumber = "0"+xlRange.Cells[i, 7].Value2.ToString();
+                            }
                         }
                         else
                         {

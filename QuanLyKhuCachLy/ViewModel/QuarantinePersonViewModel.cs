@@ -1988,7 +1988,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     }
                     if (xlRange.Cells[i, 9] != null && xlRange.Cells[i, 9].Value2 != null)
                     {
-                        quarantinePerson.nationality = xlRange.Cells[i, 9].Value2.ToString();
+                        quarantinePerson.nationality = xlRange.Cells[i, 9].Value2.ToString().Trim();
                     }
                     else
                     {
@@ -2001,7 +2001,15 @@ namespace QuanLyKhuCachLy.ViewModel
                         int t;
                         if (Int32.TryParse(xlRange.Cells[i, 10].Value2.ToString(), out t))
                         {
-                            quarantinePerson.phoneNumber = xlRange.Cells[i, 10].Value2.ToString();
+                            if(xlRange.Cells[i, 10].Value2.ToString()[0] == '0')
+                            {
+                                quarantinePerson.phoneNumber = xlRange.Cells[i, 10].Value2.ToString();
+                            }
+                            else
+                            {
+                                quarantinePerson.phoneNumber = "0" + xlRange.Cells[i, 10].Value2.ToString();
+                            }
+                           
                         }
                         else
                         {
@@ -2982,13 +2990,18 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 string[] Scopes = { SheetsService.Scope.Spreadsheets };
                 string ApplicationName = "QLKCL";
-                string linkSheet = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().googleSheetURL.ToString();
+                string linkSheet = "https://docs.google.com/spreadsheets/d/1R6zuZB_xFuzWrCnl4j0JLZ3da5HtprRrmjeQ3LdxW44/edit#gid=0";
+                try
+                {
+                    linkSheet = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().googleSheetURL.ToString();
+                }
+                catch { }
                 var ctrc = linkSheet.Split('/');
 
                 String spreadsheetId = "1R6zuZB_xFuzWrCnl4j0JLZ3da5HtprRrmjeQ3LdxW44";
                 if (ctrc.Length >= 2 && ctrc[ctrc.Length - 2] != "" && ctrc[ctrc.Length - 2] != null)
                 {
-                    spreadsheetId = ctrc[ctrc.Length - 2];
+                    spreadsheetId = ctrc[ctrc.Length - 2].ToString();
                 }
                 String range = "Sheet1";
                 string credentialPath = Path.Combine(Environment.CurrentDirectory, ".credentials", ApplicationName);
@@ -3059,7 +3072,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                             if (values[i][4] != null)
                             {
-                                string[] arrListStr = values[i][4].ToString().Split(',');
+                                string[] arrListStr = values[i][4].ToString().Trim().Split(',');
                                 if (arrListStr.Length < 3)
                                 {
                                     CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
@@ -3076,9 +3089,9 @@ namespace QuanLyKhuCachLy.ViewModel
                                 }
                                 else
                                 {
-                                    personAddress.province = arrListStr[3].Trim();
-                                    personAddress.district = arrListStr[2].Trim();
-                                    personAddress.ward = arrListStr[1].Trim();
+                                    personAddress.province =arrListStr[3].Trim();
+                                    personAddress.district =  arrListStr[2].Trim();
+                                    personAddress.ward =arrListStr[1].Trim();
                                     personAddress.streetName = arrListStr[0].Trim();
                                 }
                             }
@@ -3093,11 +3106,11 @@ namespace QuanLyKhuCachLy.ViewModel
                             }
                             if (values[i][8] != null)
                             {
-                                quarantinePerson.nationality = values[i][8].ToString();
+                                quarantinePerson.nationality = values[i][8].ToString().Trim();
                             }
                             if (values[i][9] != null)
                             {
-                                quarantinePerson.phoneNumber = values[i][9].ToString();
+                                quarantinePerson.phoneNumber = "0" + values[i][9].ToString().Trim();
                             }
                             if (values[i][10] != null)
                             {
