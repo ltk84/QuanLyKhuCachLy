@@ -63,7 +63,7 @@
                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                     FontSize="16"
                     Foreground="#FF434A54">
-                    Tỉnh/Thành phố (*)
+                    Tỉnh/Thành phố
                 </TextBlock>
                 <ComboBox
                     utility:ProtocolSettingsLayout.MVVMHasError="{Binding ProvinceFieldHasError}"
@@ -88,7 +88,7 @@
                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                     FontSize="16"
                     Foreground="#FF434A54">
-                    Quận/Huyện (*)
+                    Quận/Huyện
                 </TextBlock>
                 <ComboBox
                     utility:ProtocolSettingsLayout.MVVMHasError="{Binding DistrictFieldHasError}"
@@ -113,7 +113,7 @@
                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                     FontSize="16"
                     Foreground="#FF434A54">
-                    Phường/Xã (*)
+                    Phường/Xã
                 </TextBlock>
                 <ComboBox
                     utility:ProtocolSettingsLayout.MVVMHasError="{Binding WardFieldHasError}"
@@ -154,7 +154,7 @@
                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                     FontSize="16"
                     Foreground="#FF434A54">
-                    Số (*)
+                    Số
                 </TextBlock>
                 <TextBox
                     materialDesign:HintAssist.Hint="Nhập số địa chỉ"

@@ -63,7 +63,7 @@
                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                     FontSize="16"
                     Foreground="#FF434A54">
-                    Họ và tên (*)
+                    Họ và tên
                 </TextBlock>
                 <TextBox
                     materialDesign:HintAssist.Hint="Nhập họ và tên"
