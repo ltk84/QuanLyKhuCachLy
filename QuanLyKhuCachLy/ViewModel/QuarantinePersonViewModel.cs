@@ -2298,27 +2298,36 @@ namespace QuanLyKhuCachLy.ViewModel
                     {
                         transaction.Rollback();
                         RollBackChange();
-
+                        error = "Lỗi cơ sở dữ liệu cập nhật";
                     }
                     catch (DbEntityValidationException e)
                     {
                         transaction.Rollback();
                         RollBackChange();
+
+
+                        error = "Lỗi xác thực";
+
                     }
                     catch (NotSupportedException e)
                     {
                         transaction.Rollback();
                         RollBackChange();
+                        error = "Lỗi database không hỗ trợ";
+
                     }
                     catch (ObjectDisposedException e)
                     {
                         transaction.Rollback();
                         RollBackChange();
+                        error = "Lỗi đối tượng database bị hủy";
                     }
                     catch (InvalidOperationException e)
                     {
                         transaction.Rollback();
                         RollBackChange();
+                        error = "Lỗi thao tác không hợp lệ";
+
                     }
                 }
             });
@@ -3609,22 +3618,37 @@ namespace QuanLyKhuCachLy.ViewModel
                     catch (DbUpdateException e)
                     {
                         transaction.Rollback();
+                        RollBackChange();
+                        errorMessage = "Lỗi cơ sở dữ liệu cập nhật";
                     }
                     catch (DbEntityValidationException e)
                     {
                         transaction.Rollback();
+                        RollBackChange();
+
+
+                        errorMessage = "Lỗi xác thực";
+
                     }
                     catch (NotSupportedException e)
                     {
                         transaction.Rollback();
+                        RollBackChange();
+                        errorMessage = "Lỗi database không hỗ trợ";
+
                     }
                     catch (ObjectDisposedException e)
                     {
                         transaction.Rollback();
+                        RollBackChange();
+                        errorMessage = "Lỗi đối tượng database bị hủy";
                     }
                     catch (InvalidOperationException e)
                     {
                         transaction.Rollback();
+                        RollBackChange();
+                        errorMessage = "Lỗi thao tác không hợp lệ";
+
                     }
                 }
             });
