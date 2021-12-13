@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:utility="clr-namespace:QuanLyKhuCachLy.Utility"
         DataContext="{StaticResource UnsendListVM}"
-    mc:Ignorable="d" Height="641.19" Width="994">
+    mc:Ignorable="d" Height="693.99" Width="994">
     <StackPanel Width="Auto" Margin="25,45,45,0">
 
         <TextBlock
@@ -53,6 +53,7 @@
             CanUserResizeRows="False"
             IsReadOnly="True"
             ItemsSource="{Binding PeopleList}"
+            LoadingRow="QuarantinedPersonTable_LoadingRow"
             SelectionMode="Single"
             SelectionUnit="FullRow">
             <DataGrid.Columns>
