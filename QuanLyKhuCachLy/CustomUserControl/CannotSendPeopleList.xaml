@@ -1,0 +1,171 @@
+﻿<Window x:Class="QuanLyKhuCachLy.CustomUserControl.CannotSendPeopleList"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:QuanLyKhuCachLy.CustomUserControl"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Name="CannotSendPeopleListWindow"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utility="clr-namespace:QuanLyKhuCachLy.Utility"
+        DataContext="{StaticResource UnsendListVM}"
+    mc:Ignorable="d" Height="641.19" Width="994">
+    <StackPanel Width="Auto" Margin="25,45,45,0">
+
+        <TextBlock
+                TextAlignment="Center"
+                Grid.Row="0"
+                Grid.Column="0"
+                Style="{StaticResource DashboardTitle}">
+                GỬI KHÔNG THÀNH CÔNG
+        </TextBlock>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock
+                FontWeight="Normal"
+                Margin="0,24,0,0"
+                Grid.Row="0"
+                Grid.Column="0"
+                FontSize="18"
+                Style="{StaticResource DashboardTitle}">
+                Danh sách người nhận thông báo không thành công
+            </TextBlock>
+
+
+
+        </Grid>
+
+
+
+        <DataGrid
+            x:Name="QuarantinedPersonTable"
+            Height="430"
+            Margin="0,20,0,20"
+            materialDesign:DataGridAssist.CornerRadius="10"
+            AutoGenerateColumns="False"
+            CanUserAddRows="False"
+            CanUserReorderColumns="False"
+            CanUserResizeColumns="True"
+            CanUserResizeRows="False"
+            IsReadOnly="True"
+            ItemsSource="{Binding PeopleList}"
+            SelectionMode="Single"
+            SelectionUnit="FullRow">
+            <DataGrid.Columns>
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=Header}"
+                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                    ElementStyle="{StaticResource DataGridElement}"
+                    Header="STT"
+                    HeaderStyle="{StaticResource DataGridHeader}"
+                    MaxLength="10" />
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding name}"
+                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                    ElementStyle="{StaticResource DataGridElement}"
+                    Header="Họ và tên"
+                    HeaderStyle="{StaticResource DataGridHeader}"
+                    MaxLength="30" />
+                <!--<materialDesign:DataGridTextColumn
+                    Binding="{Binding dateOfBirth, StringFormat=dd-MM-yyyy}"
+                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                    ElementStyle="{StaticResource DataGridElement}"
+                    Header="Ngày sinh"
+                    HeaderStyle="{StaticResource DataGridHeader}"
+                    MaxLength="30" />-->
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding QuarantineRoom.displayName}"
+                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                    ElementStyle="{StaticResource DataGridElement}"
+                    Header="Phòng"
+                    HeaderStyle="{StaticResource DataGridHeader}"
+                    MaxLength="30" />
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding Severity.description}"
+                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                    ElementStyle="{StaticResource DataGridElement}"
+                    Header="Nhóm đối tượng"
+                    HeaderStyle="{StaticResource DataGridHeader}"
+                    MaxLength="30" />
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding quarantineStatus}"
+                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                    ElementStyle="{StaticResource DataGridElement}"
+                    Header="Trạng thái"
+                    HeaderStyle="{StaticResource DataGridHeader}"
+                    MaxLength="30" />
+                <DataGridTemplateColumn
+                    Width="*"
+                    CellStyle="{StaticResource DataGridCellElement}"
+                    HeaderStyle="{StaticResource DataGridButtonHeader}"
+                    IsReadOnly="True">
+                    
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Grid HorizontalAlignment="Right">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Column="0"
+                Width="Auto"
+                Height="Auto"
+                Margin="16,0,0,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                materialDesign:ButtonAssist.CornerRadius="5"
+                BorderBrush="#FF434a54"
+                Command="{Binding CancelCommand}"
+                CommandParameter="{Binding ElementName=CannotSendPeopleListWindow}"
+                Style="{StaticResource MenuButton}">
+                <StackPanel Margin="8,2" Orientation="Horizontal">
+                    
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="12"
+                        FontWeight="Bold"
+                        Foreground="#FF434a54"
+                        Text="BỎ QUA" />
+                </StackPanel>
+            </Button>
+            <Button
+                Grid.Column="1"
+                Width="Auto"
+                Height="Auto"
+                Margin="16,0,0,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                materialDesign:ButtonAssist.CornerRadius="5"
+                BorderBrush="#FF434a54"
+                Command="{Binding ToExportExcel}"
+                CommandParameter="{Binding ElementName=CannotSendPeopleListWindow}"
+                Style="{StaticResource MenuButton}">
+                <StackPanel Margin="8,2" Orientation="Horizontal">
+                    <materialDesign:PackIcon
+                        Margin="0,0,8,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="#FF434a54"
+                        Kind="FileExcelOutline" />
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
+                        FontSize="12"
+                        FontWeight="Bold"
+                        Foreground="#FF434a54"
+                        Text="XUẤT DANH SÁCH" />
+                </StackPanel>
+            </Button>
+        </Grid>
+    </StackPanel>
+</Window>

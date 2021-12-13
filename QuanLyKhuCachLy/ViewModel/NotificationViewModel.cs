@@ -675,6 +675,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
 
                 }
+                textBtnTitle = "Danh sách nhận thông báo có " + ChoiceList.ToArray().Length + " người.";
             });
 
 
@@ -1639,7 +1640,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 if (selectedTemplate.id == 1) fullyMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đến từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn!";
                 else if (selectedTemplate.id == 2) fullyMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đến từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn!";
                 else if (selectedTemplate.id == 3) fullyMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đến từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn!";
-                else if (selectedTemplate.id == 4) fullyMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đến từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Bạn sẽ được chuyển tới phòng " + "{Ten phong}" + " với sức chứa " + "{Suc chua}" + " nguoi" + ". Xin cảm ơn!";
+                else if (selectedTemplate.id == 4) fullyMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đến từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn!";
 
                 else fullyMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đến từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn!";
             }
@@ -1777,7 +1778,7 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             var DestinationRoom = DataProvider.ins.db.QuarantineRooms.Where(x => x.id == person.roomID).FirstOrDefault();
             var QAName = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().name;
-            string CombinedMessage = "Chào a/c " + person.name + ", đây là thông báo đền từ ban quản lý của khu cách ly " + QAName + ". " + message + "Bạn sẽ được chuyễn đến phòng " + DestinationRoom?.displayName + " với sức chứa " + DestinationRoom?.capacity + " người" + ". Xin cảm ơn";
+            string CombinedMessage = "Chào a/c " + person.name + ", đây là thông báo đền từ ban quản lý của khu cách ly " + QAName + ". " + message + ". Xin cảm ơn";
             return CombinedMessage;
         }
 
