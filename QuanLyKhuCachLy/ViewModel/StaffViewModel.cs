@@ -1128,7 +1128,7 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             DataProvider.ins.db.ChangeTracker.Entries().Where(ex => ex.Entity != null).ToList().ForEach(ex => ex.State = EntityState.Detached);
             StaffList = new ObservableCollection<Staff>(DataProvider.ins.db.Staffs);
-            if (SelectedItem != null) SelectedItem = StaffList.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+            SelectedItem = null;
         }
 
 
@@ -1319,7 +1319,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (xlRange.Cells[i, 1] != null && xlRange.Cells[i, 1].Value2 != null)
                     {
                         int t;
-                        
+
                         if (Int32.TryParse(xlRange.Cells[i, 1].Value2.ToString(), out t))
                         {
                             if (t <= 0)
@@ -1387,7 +1387,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (xlRange.Cells[i, 4] != null && xlRange.Cells[i, 4].Value2 != null)
                     {
                         string sex = xlRange.Cells[i, 4].Value2.ToString().ToLower();
-                        if(sex != "nam" && sex != "nữ")
+                        if (sex != "nam" && sex != "nữ")
                         {
                             error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " giới tính không đúng (chỉ là Nam/Nữ)";
                             xlWorkbook.Close();
@@ -1457,7 +1457,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (xlRange.Cells[i, 7] != null && xlRange.Cells[i, 7].Value2 != null)
                     {
                         int t;
-                        if(Int32.TryParse(xlRange.Cells[i, 7].Value2.ToString(),out t))
+                        if (Int32.TryParse(xlRange.Cells[i, 7].Value2.ToString(), out t))
                         {
                             staff.phoneNumber = xlRange.Cells[i, 7].Value2.ToString();
                         }
@@ -1467,7 +1467,7 @@ namespace QuanLyKhuCachLy.ViewModel
                             xlWorkbook.Close();
                             return;
                         }
-                       
+
                     }
                     else
                     {
@@ -1519,36 +1519,36 @@ namespace QuanLyKhuCachLy.ViewModel
                     {
                         transaction.Rollback();
                         RollBackChange();
-                        error = "Lỗi cơ sở dữ liệu cập nhật";                
+                        error = "Lỗi cơ sở dữ liệu cập nhật";
                     }
                     catch (DbEntityValidationException e)
                     {
                         transaction.Rollback();
                         RollBackChange();
 
-                        
-                       error = "Lỗi xác thực";
-                        
+
+                        error = "Lỗi xác thực";
+
                     }
                     catch (NotSupportedException e)
                     {
                         transaction.Rollback();
                         RollBackChange();
                         error = "Lỗi database không hỗ trợ";
- 
+
                     }
                     catch (ObjectDisposedException e)
                     {
                         transaction.Rollback();
                         RollBackChange();
-                        error = "Lỗi đối tượng database bị hủy";                      
+                        error = "Lỗi đối tượng database bị hủy";
                     }
                     catch (InvalidOperationException e)
                     {
                         transaction.Rollback();
                         RollBackChange();
                         error = "Lỗi thao tác không hợp lệ";
-                        
+
                     }
                 }
                 StaffListView = new ObservableCollection<Model.Staff>(DataProvider.ins.db.Staffs).ToArray();
@@ -1677,7 +1677,7 @@ namespace QuanLyKhuCachLy.ViewModel
             sheet.Range["L4"].Value = "các từ chỉ địa phương ghi hoa chữ đầu.";
             sheet.Range["L5"].Value = "VD: Thôn A,Xã B,Huyện C,Tỉnh D";
             sheet.Range["L6"].Value = "MaBH có thể để trống";
-            sheet.Range["L7"].Value = "Giới tính chỉ có thể là Nam/Nữ";         
+            sheet.Range["L7"].Value = "Giới tính chỉ có thể là Nam/Nữ";
 
             sheet.Range["L8"].Value = "Xóa lưu ý trước khi thêm";
             file.Close();

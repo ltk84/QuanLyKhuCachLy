@@ -1935,7 +1935,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (xlRange.Cells[i, 4] != null && xlRange.Cells[i, 4].Value2 != null)
                     {
                         string sex = xlRange.Cells[i, 4].Value2.ToString().ToLower();
-                        if(sex != "nam" && sex != "nữ")
+                        if (sex != "nam" && sex != "nữ")
                         {
                             error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " giới tính không đúng (chỉ là Nam/Nữ)";
                             xlWorkbook.Close();
@@ -1999,7 +1999,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (xlRange.Cells[i, 10] != null && xlRange.Cells[i, 10].Value2 != null)
                     {
                         int t;
-                        if(Int32.TryParse(xlRange.Cells[i, 10].Value2.ToString(),out t))
+                        if (Int32.TryParse(xlRange.Cells[i, 10].Value2.ToString(), out t))
                         {
                             quarantinePerson.phoneNumber = xlRange.Cells[i, 10].Value2.ToString();
                         }
@@ -2138,7 +2138,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     listHealthInformation.Add(healthInformation);
                     listQuarantinePerson.Add(quarantinePerson);
                     listInjectionRecords.Add(injectionRecords);
-                    
+
                 }
                 List<DestinationHistory> ListDestinationHistories = new List<DestinationHistory>();
                 List<Address> ListAddressDestinations = new List<Address>();
@@ -2846,7 +2846,7 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             DBUtilityTracker.Rollback();
             InitPersonList();
-            if (SelectedItem != null) SelectedItem = QuarantinePersonList.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+            SelectedItem = null;
         }
 
         void HandleChangeTab(int index, string action, Window p)
@@ -3156,7 +3156,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                             }
                             if (values[i][12] != null)
-                            {                             
+                            {
                                 try
                                 {
                                     DateTime arrivedTime = Convert.ToDateTime(values[i][12].ToString());
@@ -3173,7 +3173,7 @@ namespace QuanLyKhuCachLy.ViewModel
                             }
                             if (values[i][13].ToString() != "Chưa tiêm")
                             {
-                      
+
                                 try
                                 {
                                     var records = values[i][13].ToString().Split(',');
@@ -3497,7 +3497,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 Excel.Application xlApp = new Excel.Application();
                 Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(path);
                 Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
-                
+
                 Excel.Range xlRange = xlWorksheet.UsedRange;
                 int rowCount = xlRange.Rows.Count;
                 int colCount = xlRange.Columns.Count;
@@ -3509,7 +3509,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     {
                         Excel._Worksheet xlWorksheet2 = xlWorkbook.Sheets[2];
                         Excel.Range xlRange2 = xlWorksheet2.UsedRange;
-                       
+
                         if (xlRange2.Cells[1, 1] == null || xlRange2.Cells[1, 1].Value2.ToString().Trim().ToLower() != "id" ||
                         xlRange2.Cells[1, 2] == null || xlRange2.Cells[1, 2].Value2.ToString().Trim().ToLower() != "kết quả" ||
                         xlRange2.Cells[1, 3] == null || xlRange2.Cells[1, 3].Value2.ToString().Trim().ToLower() != "ngày xét nghiệm")
@@ -3529,7 +3529,7 @@ namespace QuanLyKhuCachLy.ViewModel
                         xlWorkbook.Close();
                         return;
                     }
-                   
+
                 }
                 for (int i = 2; i <= rowCount; i++)
                 {
@@ -3537,7 +3537,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (xlRange.Cells[i, 1] != null && xlRange.Cells[i, 1].Value2 != null)
                     {
                         int t;
-                        if (Int32.TryParse(xlRange.Cells[i, 1].Value2.ToString(),out  t))
+                        if (Int32.TryParse(xlRange.Cells[i, 1].Value2.ToString(), out t))
                         {
                             testingResult.quarantinePersonID = Int32.Parse(xlRange.Cells[i, 1].Value2.ToString());
                         }
@@ -3557,7 +3557,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (xlRange.Cells[i, 2] != null && xlRange.Cells[i, 2].Value2 != null)
                     {
                         string temptResult = xlRange.Cells[i, 2].Value2.ToString().ToLower();
-                        if(temptResult != "âm tính" && temptResult != "dương tính")
+                        if (temptResult != "âm tính" && temptResult != "dương tính")
                         {
                             xlWorkbook.Close();
                             errorMessage = "Kết quả bị lỗi";
