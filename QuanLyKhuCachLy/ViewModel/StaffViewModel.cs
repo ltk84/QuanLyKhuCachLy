@@ -1322,10 +1322,10 @@ namespace QuanLyKhuCachLy.ViewModel
                         
                         if (Int32.TryParse(xlRange.Cells[i, 1].Value2.ToString(), out t))
                         {
-                            if (t < 0)
+                            if (t <= 0)
                             {
                                 xlWorkbook.Close();
-                                error = "STT để bé hơn 0";
+                                error = "STT để bé hơn 1";
                                 return;
                             }
                             else
@@ -1456,7 +1456,24 @@ namespace QuanLyKhuCachLy.ViewModel
                     }
                     if (xlRange.Cells[i, 7] != null && xlRange.Cells[i, 7].Value2 != null)
                     {
-                        staff.phoneNumber = xlRange.Cells[i, 7].Value2.ToString();
+                        int t;
+                        if(Int32.TryParse(xlRange.Cells[i, 7].Value2.ToString(),out t))
+                        {
+                            staff.phoneNumber = xlRange.Cells[i, 7].Value2.ToString();
+                        }
+                        else
+                        {
+                            error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " lỗi số điện thoại";
+                            xlWorkbook.Close();
+                            return;
+                        }
+                       
+                    }
+                    else
+                    {
+                        error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " số điện thoại trống";
+                        xlWorkbook.Close();
+                        return;
                     }
                     if (xlRange.Cells[i, 9] != null && xlRange.Cells[i, 9].Value2 != null)
                     {
