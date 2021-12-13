@@ -9,7 +9,7 @@
     Name="EditQAScreen"
     Title="EditQuarantineAreaScreen"
     Width="1200"
-    Height="768"
+    Height="700"
     AllowsTransparency="True"
     Background="{x:Null}"
     DataContext="{StaticResource SettingVM}"
