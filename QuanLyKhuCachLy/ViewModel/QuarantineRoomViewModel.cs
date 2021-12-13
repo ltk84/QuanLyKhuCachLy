@@ -600,10 +600,10 @@ namespace QuanLyKhuCachLy.ViewModel
                         int t;
                         if(Int32.TryParse(xlRange.Cells[i, 1].Value2.ToString(), out t))
                         {
-                            if(t < 0)
+                            if(t <= 0)
                             {
                                 xlWorkbook.Close();
-                                error = "STT để bé hơn 0";
+                                error = "STT để bé hơn 1";
                                 return;
                             }
                             else

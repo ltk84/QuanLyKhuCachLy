@@ -1520,30 +1520,50 @@ namespace QuanLyKhuCachLy.ViewModel
                         transaction.Rollback();
                         RollBackChange();
 
+                        CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                        var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                        FailNotificationVM.Content = "Lỗi cơ sở dữ liệu cập nhật";
+                        ErrorDialog.ShowDialog();
                     }
                     catch (DbEntityValidationException e)
                     {
                         transaction.Rollback();
                         RollBackChange();
 
+                        CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                        var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                        FailNotificationVM.Content = "Lỗi xác thực";
+                        ErrorDialog.ShowDialog();
                     }
                     catch (NotSupportedException e)
                     {
                         transaction.Rollback();
                         RollBackChange();
 
+                        CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                        var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                        FailNotificationVM.Content = "Lỗi database không hỗ trợ";
+                        ErrorDialog.ShowDialog();
                     }
                     catch (ObjectDisposedException e)
                     {
                         transaction.Rollback();
                         RollBackChange();
 
+                        CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                        var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                        FailNotificationVM.Content = "Lỗi đối tượng database bị hủy";
+                        ErrorDialog.ShowDialog();
                     }
                     catch (InvalidOperationException e)
                     {
                         transaction.Rollback();
                         RollBackChange();
 
+                        CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                        var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                        FailNotificationVM.Content = "Lỗi thao tác không hợp lệ";
+                        ErrorDialog.ShowDialog();
                     }
                 }
                 StaffListView = new ObservableCollection<Model.Staff>(DataProvider.ins.db.Staffs).ToArray();
