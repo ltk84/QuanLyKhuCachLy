@@ -1838,25 +1838,25 @@ namespace QuanLyKhuCachLy.ViewModel
                 Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
                 Excel.Range xlRange = xlWorksheet.UsedRange;
                 int rowCount = xlRange.Rows.Count;
-                if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2.ToString() != "STT" ||
-                xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2.ToString() != "Họ và tên" ||
-                xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2.ToString() != "Ngày sinh" ||
-                xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2.ToString() != "Giới tính" ||
-                xlRange.Cells[1, 5] == null || xlRange.Cells[1, 5].Value2.ToString() != "Địa chỉ thường trú" ||
-                xlRange.Cells[1, 7] == null || xlRange.Cells[1, 7].Value2.ToString() != "CMND/CCCD" ||
-                xlRange.Cells[1, 8] == null || xlRange.Cells[1, 8].Value2.ToString() != "Mã bảo hiểm" ||
-                xlRange.Cells[1, 9] == null || xlRange.Cells[1, 9].Value2.ToString() != "Quốc tịch" ||
-                xlRange.Cells[1, 10] == null || xlRange.Cells[1, 10].Value2.ToString() != "SĐT" ||
-                xlRange.Cells[1, 11] == null || xlRange.Cells[1, 11].Value2.ToString() != "Triệu chứng" ||
-                xlRange.Cells[1, 12] == null || xlRange.Cells[1, 12].Value2.ToString() != "Nhóm đối tượng" ||
-                xlRange.Cells[1, 13] == null || xlRange.Cells[1, 13].Value2.ToString() != "Ngày đến" ||
-                xlRange.Cells[1, 14] == null || xlRange.Cells[1, 14].Value2.ToString() != "Thông tin tiêm chủng")
+                if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2.ToString().Trim().ToLower() != "stt" ||
+                xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2.ToString().Trim().ToLower() != "họ và tên" ||
+                xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2.ToString().Trim().ToLower() != "ngày sinh" ||
+                xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2.ToString().Trim().ToLower() != "giới tính" ||
+                xlRange.Cells[1, 5] == null || xlRange.Cells[1, 5].Value2.ToString().Trim().ToLower() != "địa chỉ thường trú" ||
+                xlRange.Cells[1, 7] == null || xlRange.Cells[1, 7].Value2.ToString().Trim().ToLower() != "cmnd/cccd" ||
+                xlRange.Cells[1, 8] == null || xlRange.Cells[1, 8].Value2.ToString().Trim().ToLower() != "mã bảo hiểm" ||
+                xlRange.Cells[1, 9] == null || xlRange.Cells[1, 9].Value2.ToString().Trim().ToLower() != "quốc tịch" ||
+                xlRange.Cells[1, 10] == null || xlRange.Cells[1, 10].Value2.ToString().Trim().ToLower() != "sđt" ||
+                xlRange.Cells[1, 11] == null || xlRange.Cells[1, 11].Value2.ToString().Trim().ToLower() != "triệu chứng" ||
+                xlRange.Cells[1, 12] == null || xlRange.Cells[1, 12].Value2.ToString().Trim().ToLower() != "nhóm đối tượng" ||
+                xlRange.Cells[1, 13] == null || xlRange.Cells[1, 13].Value2.ToString().Trim().ToLower() != "ngày đến" ||
+                xlRange.Cells[1, 14] == null || xlRange.Cells[1, 14].Value2.ToString().Trim().ToLower() != "thông tin tiêm chủng")
                 {
                     xlWorkbook.Close();
                     error = "Không đúng định dạng file";
                     return;
                 }
-
+                List<int> listSTT = new List<int>();
                 for (int i = 2; i <= rowCount; i++)
                 {
                     Address personAddress = new Address();
@@ -1868,12 +1868,28 @@ namespace QuanLyKhuCachLy.ViewModel
                         int t;
                         if (Int32.TryParse(xlRange.Cells[i, 1].Value2.ToString(), out t))
                         {
-                            ListSTTSheet1.Add(Int32.Parse(xlRange.Cells[i, 1].Value2.ToString()));
+                            if (t < 0)
+                            {
+                                xlWorkbook.Close();
+                                error = "STT để bé hơn 0";
+                                return;
+                            }
+                            else
+                            {
+                                if (listSTT.Contains(t))
+                                {
+                                    xlWorkbook.Close();
+                                    error = "STT " + t.ToString() + " bị trùng";
+                                    return;
+                                }
+                                listSTT.Add(t);
+                            }
+                            ListSTTSheet1.Add(t);
                         }
                         else
                         {
                             xlWorkbook.Close();
-                            error = "Số thứ tự không phải là số";
+                            error = "STT không là số";
                             return;
                         }
                     }
@@ -1904,7 +1920,6 @@ namespace QuanLyKhuCachLy.ViewModel
                         }
                         else
                         {
-
                             error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " sai ngày sinh";
                             xlWorkbook.Close();
                             return;
@@ -2038,6 +2053,12 @@ namespace QuanLyKhuCachLy.ViewModel
                             levelId = DataProvider.ins.db.Severities.Where(x => x.description == description).FirstOrDefault().id;
                             quarantinePerson.levelID = levelId;
                         }
+                        else
+                        {
+                            error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " nhóm đối tượng không đúng";
+                            xlWorkbook.Close();
+                            return;
+                        }
                     }
                     if (xlRange.Cells[i, 13] != null && xlRange.Cells[i, 13].Value2 != null)
                     {
@@ -2100,6 +2121,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     listHealthInformation.Add(healthInformation);
                     listQuarantinePerson.Add(quarantinePerson);
                     listInjectionRecords.Add(injectionRecords);
+                    
                 }
                 List<DestinationHistory> ListDestinationHistories = new List<DestinationHistory>();
                 List<Address> ListAddressDestinations = new List<Address>();
@@ -2109,9 +2131,9 @@ namespace QuanLyKhuCachLy.ViewModel
                     Excel._Worksheet xlWorksheet2 = xlWorkbook.Sheets[2];
                     Excel.Range xlRange2 = xlWorksheet2.UsedRange;
                     int rowCount2 = xlRange2.Rows.Count;
-                    if (xlRange2.Cells[1, 1] != null && xlRange2.Cells[1, 1].Value2 == "STT trong DS" &&
-                xlRange2.Cells[1, 2] != null && xlRange2.Cells[1, 2].Value2 == "Ngày" &&
-                xlRange2.Cells[1, 3] != null && xlRange2.Cells[1, 3].Value2 == "Địa điểm")
+                    if (xlRange2.Cells[1, 1] != null && xlRange2.Cells[1, 1].Value2.ToString().Trim().ToLower() == "stt trong ds" &&
+                xlRange2.Cells[1, 2] != null && xlRange2.Cells[1, 2].Value2.ToString().Trim().ToLower() == "ngày" &&
+                xlRange2.Cells[1, 3] != null && xlRange2.Cells[1, 3].Value2.ToString().Trim().ToLower() == "địa điểm")
                     {
                         for (int i = 2; i <= rowCount2; i++)
                         {

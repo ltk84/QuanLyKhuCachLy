@@ -1294,17 +1294,17 @@ namespace QuanLyKhuCachLy.ViewModel
                 Excel.Range xlRange = xlWorksheet.UsedRange;
                 int rowCount = xlRange.Rows.Count;
                 int colCount = xlRange.Columns.Count;
-                if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2.ToString() != "STT" ||
-                xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2.ToString() != "Họ và tên" ||
-                xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2.ToString() != "Ngày sinh" ||
-                xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2.ToString() != "Giới tính" ||
-                xlRange.Cells[1, 5] == null || xlRange.Cells[1, 5].Value2.ToString() != "CMND/CCCD" ||
-                xlRange.Cells[1, 6] == null || xlRange.Cells[1, 6].Value2.ToString() != "Quốc tịch" ||
-                xlRange.Cells[1, 7] == null || xlRange.Cells[1, 7].Value2.ToString() != "SĐT" ||
-                xlRange.Cells[1, 8] == null || xlRange.Cells[1, 8].Value2.ToString() != "MaBH" ||
-                xlRange.Cells[1, 9] == null || xlRange.Cells[1, 9].Value2.ToString() != "Chức vụ" ||
-                xlRange.Cells[1, 10] == null || xlRange.Cells[1, 10].Value2.ToString() != "Phòng ban" ||
-                xlRange.Cells[1, 11] == null || xlRange.Cells[1, 11].Value2.ToString() != "Địa chỉ")
+                if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2.ToString().Trim().ToLower() != "stt" ||
+                xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2.ToString().Trim().ToLower() != "họ và tên" ||
+                xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2.ToString().Trim().ToLower() != "ngày sinh" ||
+                xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2.ToString().Trim().ToLower() != "giới tính" ||
+                xlRange.Cells[1, 5] == null || xlRange.Cells[1, 5].Value2.ToString().Trim().ToLower() != "cmnd/cccd" ||
+                xlRange.Cells[1, 6] == null || xlRange.Cells[1, 6].Value2.ToString().Trim().ToLower() != "quốc tịch" ||
+                xlRange.Cells[1, 7] == null || xlRange.Cells[1, 7].Value2.ToString().Trim().ToLower() != "sđt" ||
+                xlRange.Cells[1, 8] == null || xlRange.Cells[1, 8].Value2.ToString().Trim().ToLower() != "mabh" ||
+                xlRange.Cells[1, 9] == null || xlRange.Cells[1, 9].Value2.ToString().Trim().ToLower() != "chức vụ" ||
+                xlRange.Cells[1, 10] == null || xlRange.Cells[1, 10].Value2.ToString().Trim().ToLower() != "phòng ban" ||
+                xlRange.Cells[1, 11] == null || xlRange.Cells[1, 11].Value2.ToString().Trim().ToLower() != "địa chỉ")
                 {
                     xlWorkbook.Close();
                     error = "Không đúng định dạng file";

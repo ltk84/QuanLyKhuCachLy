@@ -580,10 +580,10 @@ namespace QuanLyKhuCachLy.ViewModel
                 Excel.Range xlRange = xlWorksheet.UsedRange;
                 int rowCount = xlRange.Rows.Count;
                 int colCount = xlRange.Columns.Count;
-                if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2.ToString() != "STT" ||
-                xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2.ToString() != "Tên" ||
-                xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2.ToString() != "Sức chứa" ||
-                xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2.ToString() != "Nhóm đối tượng")
+                if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2.ToString().Trim().ToLower() != "stt" ||
+                xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2.ToString().Trim().ToLower() != "tên" ||
+                xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2.ToString().Trim().ToLower() != "sức chứa" ||
+                xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2.ToString().Trim().ToLower() != "nhóm đối tượng")
                 {
                     xlWorkbook.Close();
                     error = "Không đúng định dạng file";
@@ -645,7 +645,7 @@ namespace QuanLyKhuCachLy.ViewModel
                         if (Int32.TryParse(xlRange.Cells[i, 3].Value2.ToString(), out t))
                         {
                             room.capacity = Int32.Parse(xlRange.Cells[i, 3].Value2.ToString());
-                            if(t < 0)
+                            if(t <= 0)
                             {
                                 error = "Phòng " + xlRange.Cells[i, 2].Value2.ToString() + " sức chứa bé hơn 0";
                                 xlWorkbook.Close();
