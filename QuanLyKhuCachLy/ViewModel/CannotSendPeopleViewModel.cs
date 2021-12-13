@@ -41,9 +41,6 @@ namespace QuanLyKhuCachLy.ViewModel
             }, (p) =>
             {
 
-                // Thực thi xuất rồi close
-                p.Close();
-
             });
 
         }
