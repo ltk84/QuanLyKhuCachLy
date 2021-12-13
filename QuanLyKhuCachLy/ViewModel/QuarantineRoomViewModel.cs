@@ -580,10 +580,10 @@ namespace QuanLyKhuCachLy.ViewModel
                 Excel.Range xlRange = xlWorksheet.UsedRange;
                 int rowCount = xlRange.Rows.Count;
                 int colCount = xlRange.Columns.Count;
-                if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2 != "STT" ||
-                xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2 != "Tên" ||
-                xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2 != "Sức chứa" ||
-                xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2 != "Nhóm đối tượng")
+                if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2.ToString() != "STT" ||
+                xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2.ToString() != "Tên" ||
+                xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2.ToString() != "Sức chứa" ||
+                xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2.ToString() != "Nhóm đối tượng")
                 {
                     xlWorkbook.Close();
                     error = "Không đúng định dạng file";

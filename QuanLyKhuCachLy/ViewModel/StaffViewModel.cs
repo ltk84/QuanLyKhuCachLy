@@ -1294,17 +1294,17 @@ namespace QuanLyKhuCachLy.ViewModel
                 Excel.Range xlRange = xlWorksheet.UsedRange;
                 int rowCount = xlRange.Rows.Count;
                 int colCount = xlRange.Columns.Count;
-                if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2 != "STT" ||
-                xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2 != "Họ và tên" ||
-                xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2 != "Ngày sinh" ||
-                xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2 != "Giới tính" ||
-                xlRange.Cells[1, 5] == null || xlRange.Cells[1, 5].Value2 != "CMND/CCCD" ||
-                xlRange.Cells[1, 6] == null || xlRange.Cells[1, 6].Value2 != "Quốc tịch" ||
-                xlRange.Cells[1, 7] == null || xlRange.Cells[1, 7].Value2 != "SĐT" ||
-                xlRange.Cells[1, 8] == null || xlRange.Cells[1, 8].Value2 != "MaBH" ||
-                xlRange.Cells[1, 9] == null || xlRange.Cells[1, 9].Value2 != "Chức vụ" ||
-                xlRange.Cells[1, 10] == null || xlRange.Cells[1, 10].Value2 != "Phòng ban" ||
-                xlRange.Cells[1, 11] == null || xlRange.Cells[1, 11].Value2 != "Địa chỉ")
+                if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2.ToString() != "STT" ||
+                xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2.ToString() != "Họ và tên" ||
+                xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2.ToString() != "Ngày sinh" ||
+                xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2.ToString() != "Giới tính" ||
+                xlRange.Cells[1, 5] == null || xlRange.Cells[1, 5].Value2.ToString() != "CMND/CCCD" ||
+                xlRange.Cells[1, 6] == null || xlRange.Cells[1, 6].Value2.ToString() != "Quốc tịch" ||
+                xlRange.Cells[1, 7] == null || xlRange.Cells[1, 7].Value2.ToString() != "SĐT" ||
+                xlRange.Cells[1, 8] == null || xlRange.Cells[1, 8].Value2.ToString() != "MaBH" ||
+                xlRange.Cells[1, 9] == null || xlRange.Cells[1, 9].Value2.ToString() != "Chức vụ" ||
+                xlRange.Cells[1, 10] == null || xlRange.Cells[1, 10].Value2.ToString() != "Phòng ban" ||
+                xlRange.Cells[1, 11] == null || xlRange.Cells[1, 11].Value2.ToString() != "Địa chỉ")
                 {
                     xlWorkbook.Close();
                     error = "Không đúng định dạng file";
@@ -1368,6 +1368,12 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (xlRange.Cells[i, 4] != null && xlRange.Cells[i, 4].Value2 != null)
                     {
                         string sex = xlRange.Cells[i, 4].Value2.ToString().ToLower();
+                        if(sex != "nam" && sex != "nữ")
+                        {
+                            error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " giới tính không đúng (chỉ là Nam/Nữ)";
+                            xlWorkbook.Close();
+                            return;
+                        }
                         staff.sex = (sex == "nữ" ? "Nữ" : "Nam");
                     }
                     else
@@ -1381,11 +1387,6 @@ namespace QuanLyKhuCachLy.ViewModel
                         string[] arrListStr = xlRange.Cells[i, 11].Value2.ToString().Split(',');
                         if (arrListStr.Length < 3)
                         {
-
-                            CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
-                            var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
-                            FailNotificationVM.Content = xlRange.Cells[i, 2].Value2.ToString() + " has error in address";
-                            ErrorDialog.ShowDialog();
                             error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " sai địa chỉ";
                             xlWorkbook.Close();
                             return;
@@ -1615,8 +1616,8 @@ namespace QuanLyKhuCachLy.ViewModel
             sheet.Columns[8].ColumnWidth = 10;
             sheet.Columns[9].ColumnWidth = 12;
             sheet.Columns[10].ColumnWidth = 12;
-            sheet.Columns[11].ColumnWidth = 50;
-            sheet.Columns[12].ColumnWidth = 30;
+            sheet.Columns[11].ColumnWidth = 30;
+            sheet.Columns[12].ColumnWidth = 50;
             sheet.Range["A1"].Value = "STT";
             sheet.Range["B1"].Value = "Họ và tên";
             sheet.Range["C1"].Value = "Ngày sinh";
