@@ -11,25 +11,30 @@
     Height="150"
     DataContext="{StaticResource PersonVM}"
     mc:Ignorable="d">
-    <Border Padding="0,16,0,16" Style="{StaticResource RecommendationField}">
-        <StackPanel>
-            <Button Command="{Binding DestinationHistoryViewModel.ToEditCommand}" Style="{StaticResource MenuButton}">
-                <StackPanel Style="{StaticResource MenuStackPanel}">
-                    <materialDesign:PackIcon Kind="PencilOutline" Style="{StaticResource MenuIcon}" />
-                    <TextBlock Style="{StaticResource MenuText}">
-                        Chỉnh sửa
-                    </TextBlock>
-                </StackPanel>
-            </Button>
-            <Button Command="{Binding DestinationHistoryViewModel.DeleteOnUICommand}" Style="{StaticResource MenuButton}">
-                <StackPanel Style="{StaticResource MenuStackPanel}">
-                    <materialDesign:PackIcon Kind="DeleteOutline" Style="{StaticResource MenuIcon}" />
-                    <TextBlock Style="{StaticResource MenuText}">
-                        Xóa
-                    </TextBlock>
-                </StackPanel>
-            </Button>
+    <Viewbox>
+        <Border
+            Margin="10"
+            Padding="0,16,0,16"
+            Style="{StaticResource RecommendationField}">
+            <StackPanel>
+                <Button Command="{Binding DestinationHistoryViewModel.ToEditCommand}" Style="{StaticResource MenuButton}">
+                    <StackPanel Style="{StaticResource MenuStackPanel}">
+                        <materialDesign:PackIcon Kind="PencilOutline" Style="{StaticResource MenuIcon}" />
+                        <TextBlock Style="{StaticResource MenuText}">
+                            Chỉnh sửa
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding DestinationHistoryViewModel.DeleteOnUICommand}" Style="{StaticResource MenuButton}">
+                    <StackPanel Style="{StaticResource MenuStackPanel}">
+                        <materialDesign:PackIcon Kind="DeleteOutline" Style="{StaticResource MenuIcon}" />
+                        <TextBlock Style="{StaticResource MenuText}">
+                            Xóa
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
 
-        </StackPanel>
-    </Border>
+            </StackPanel>
+        </Border>
+    </Viewbox>
 </UserControl>

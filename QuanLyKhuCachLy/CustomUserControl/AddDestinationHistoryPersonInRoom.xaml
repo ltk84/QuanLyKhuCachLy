@@ -71,7 +71,7 @@
                             FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                             FontSize="16"
                             Foreground="#FF434A54">
-                            Ngày đến (*)
+                            Ngày đến
                         </TextBlock>
                         <DatePicker materialDesign:HintAssist.Hint="Nhập ngày đến" Style="{StaticResource DatePickerField}">
                             <DatePicker.SelectedDate>
@@ -107,7 +107,7 @@
                             FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                             FontSize="16"
                             Foreground="#FF434A54">
-                            Tỉnh/Thành phố (*)
+                            Tỉnh/Thành phố
                         </TextBlock>
                         <ComboBox
                             utility:ProtocolSettingsLayout.MVVMHasError="{Binding DestinationHistoryViewModel.ProvinceFieldHasError}"
@@ -132,7 +132,7 @@
                             FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                             FontSize="16"
                             Foreground="#FF434A54">
-                            Quận/Huyện (*)
+                            Quận/Huyện
                         </TextBlock>
                         <ComboBox
                             utility:ProtocolSettingsLayout.MVVMHasError="{Binding DestinationHistoryViewModel.DistrictFieldHasError}"
@@ -153,7 +153,7 @@
                             FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                             FontSize="16"
                             Foreground="#FF434A54">
-                            Phường/Xã (*)
+                            Phường/Xã
                         </TextBlock>
                         <ComboBox
                             utility:ProtocolSettingsLayout.MVVMHasError="{Binding DestinationHistoryViewModel.WardFieldHasError}"
@@ -190,7 +190,7 @@
                             FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                             FontSize="16"
                             Foreground="#FF434A54">
-                            Số (*)
+                            Số
                         </TextBlock>
                         <TextBox
                             materialDesign:HintAssist.Hint="Nhập số địa chỉ"

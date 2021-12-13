@@ -51,16 +51,11 @@
                         Foreground="#FF434A54">
                         Lịch sử di chuyển
                     </TextBlock>
-                    <Separator Margin="30,5,0,2">
-                        <Separator.RenderTransform>
-                            <ScaleTransform ScaleY="1" />
-                        </Separator.RenderTransform>
-                    </Separator>
                 </StackPanel>
                 <Button
                     Grid.Row="0"
                     Grid.Column="1"
-                    Margin="0,0,30,10"
+                    Margin="0,0,30,0"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
                     Background="Transparent"
@@ -73,7 +68,7 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Height="280"
-                Margin="30,15,30,0"
+                Margin="30,8,30,0"
                 materialDesign:DataGridAssist.CornerRadius="10"
                 AutoGenerateColumns="False"
                 CanUserAddRows="False"
@@ -83,27 +78,8 @@
                 ItemsSource="{Binding DestinationHistoryViewModel.DestinationHistoryList}"
                 SelectedItem="{Binding DestinationHistoryViewModel.SelectedItem}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn
-                        Width="Auto"
-                        MinWidth="70"
-                        Binding="{Binding dateArrive, StringFormat=dd-MM-yyyy}"
-                        EditingElementStyle="{StaticResource EditingDataGridElement}"
-                        ElementStyle="{StaticResource DataGridElement}"
-                        Header="Ngày"
-                        HeaderStyle="{StaticResource DataGridHeader}"
-                        IsReadOnly="True" />
-
-                    <DataGridTextColumn
-                        Width="Auto"
-                        MinWidth="250"
-                        Binding="{Binding displayAddress}"
-                        EditingElementStyle="{StaticResource EditingDataGridElement}"
-                        ElementStyle="{StaticResource DataGridElement}"
-                        Header="Địa điểm"
-                        HeaderStyle="{StaticResource DataGridHeader}" />
                     <DataGridTemplateColumn
                         Width="Auto"
-                        MinWidth="70"
                         CellStyle="{StaticResource DataGridCellElement}"
                         Header=""
                         HeaderStyle="{StaticResource DataGridHeader}">
@@ -127,6 +103,25 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="70"
+                        Binding="{Binding dateArrive, StringFormat=dd-MM-yyyy}"
+                        EditingElementStyle="{StaticResource EditingDataGridElement}"
+                        ElementStyle="{StaticResource DataGridElement}"
+                        Header="Ngày"
+                        HeaderStyle="{StaticResource DataGridHeader}"
+                        IsReadOnly="True" />
+
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="250"
+                        Binding="{Binding displayAddress}"
+                        EditingElementStyle="{StaticResource EditingDataGridElement}"
+                        ElementStyle="{StaticResource DataGridElement}"
+                        Header="Địa điểm"
+                        HeaderStyle="{StaticResource DataGridHeader}"
+                        IsReadOnly="True" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

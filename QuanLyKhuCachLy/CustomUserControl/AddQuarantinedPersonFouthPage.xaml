@@ -51,16 +51,11 @@
                         Foreground="#FF434A54">
                         Lịch sử di chuyển
                     </TextBlock>
-                    <Separator Margin="30,5,0,2">
-                        <Separator.RenderTransform>
-                            <ScaleTransform ScaleY="1" />
-                        </Separator.RenderTransform>
-                    </Separator>
                 </StackPanel>
                 <Button
                     Grid.Row="0"
                     Grid.Column="1"
-                    Margin="0,0,30,10"
+                    Margin="0,0,30,0"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
                     Background="Transparent"
@@ -73,7 +68,7 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Height="280"
-                Margin="30,15,30,0"
+                Margin="30,8,30,0"
                 materialDesign:DataGridAssist.CornerRadius="10"
                 AutoGenerateColumns="False"
                 CanUserAddRows="False"
@@ -83,6 +78,31 @@
                 ItemsSource="{Binding DestinationHistoryViewModel.DestinationHistoryList}"
                 SelectedItem="{Binding DestinationHistoryViewModel.SelectedItem}">
                 <DataGrid.Columns>
+                    <DataGridTemplateColumn
+                        Width="Auto"
+                        CellStyle="{StaticResource DataGridCellElement}"
+                        Header=""
+                        HeaderStyle="{StaticResource DataGridHeader}">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button HorizontalAlignment="Right" Style="{StaticResource DataGridButton}">
+                                    <materialDesign:PackIcon
+                                        Width="16"
+                                        Height="16"
+                                        Kind="DotsHorizontal" />
+                                    <Button.ContextMenu>
+                                        <ContextMenu>
+                                            <ContextMenu.Template>
+                                                <ControlTemplate>
+                                                    <local:DestinationHistoryFunctionMenu />
+                                                </ControlTemplate>
+                                            </ContextMenu.Template>
+                                        </ContextMenu>
+                                    </Button.ContextMenu>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridTextColumn
                         Width="Auto"
                         MinWidth="70"
@@ -100,33 +120,8 @@
                         EditingElementStyle="{StaticResource EditingDataGridElement}"
                         ElementStyle="{StaticResource DataGridElement}"
                         Header="Địa điểm"
-                        HeaderStyle="{StaticResource DataGridHeader}" />
-                    <DataGridTemplateColumn
-                        Width="Auto"
-                        MinWidth="70"
-                        CellStyle="{StaticResource DataGridCellElement}"
-                        Header=""
-                        HeaderStyle="{StaticResource DataGridHeader}">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button HorizontalAlignment="Right" Style="{StaticResource DataGridButton}">
-                                    <materialDesign:PackIcon
-                                        Width="16"
-                                        Height="16"
-                                        Kind="DotsHorizontal" />
-                                    <Button.ContextMenu>
-                                        <ContextMenu>
-                                            <ContextMenu.Template>
-                                                <ControlTemplate>
-                                                    <!--<local:DestinationHistoryFunctionMenu />-->
-                                                </ControlTemplate>
-                                            </ContextMenu.Template>
-                                        </ContextMenu>
-                                    </Button.ContextMenu>
-                                </Button>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                        HeaderStyle="{StaticResource DataGridHeader}"
+                        IsReadOnly="True" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

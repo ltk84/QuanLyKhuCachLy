@@ -266,6 +266,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 return false;
             }, (p) =>
             {
+                BufferWindow bufferWindow = new BufferWindow();
+                bufferWindow.ShowDialog();
                 DeleteDestinationHistoryUI();
             });
 
@@ -285,6 +287,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
+                BufferWindow bufferWindow = new BufferWindow();
+                bufferWindow.ShowDialog();
                 SetSelectedItemToProperty();
                 EditDestinationHistory EditScreen = new EditDestinationHistory();
                 EditScreen.ShowDialog();
