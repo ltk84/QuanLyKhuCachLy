@@ -2982,11 +2982,11 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 string[] Scopes = { SheetsService.Scope.Spreadsheets };
                 string ApplicationName = "QLKCL";
-                string linkSheet = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().googleSheetURL;
+                string linkSheet = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().googleSheetURL.ToString();
                 var ctrc = linkSheet.Split('/');
 
                 String spreadsheetId = "1R6zuZB_xFuzWrCnl4j0JLZ3da5HtprRrmjeQ3LdxW44";
-                if (ctrc[ctrc.Length - 2] != "" && ctrc[ctrc.Length - 2] != null)
+                if (ctrc.Length >= 2 && ctrc[ctrc.Length - 2] != "" && ctrc[ctrc.Length - 2] != null)
                 {
                     spreadsheetId = ctrc[ctrc.Length - 2];
                 }
