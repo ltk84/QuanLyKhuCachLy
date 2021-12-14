@@ -302,7 +302,6 @@ namespace QuanLyKhuCachLy.ViewModel
                 SetSelectedItemToProperty();
                 EditScreen.ShowDialog();
                 updateAvailableSlot();
-
             });
 
             ToViewCommand = new RelayCommand<object>((p) =>
@@ -495,7 +494,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                 for (int i = 0; i < RoomListView.Length; i++)
                 {
-                    Value[i] = RoomListView[i].displayName?.ToString() + "@@" + RoomListView[i].capacity.ToString() + "@@" + RoomListView[i].id.ToString() ;
+                    Value[i] = RoomListView[i].displayName?.ToString() + "@@" + RoomListView[i].capacity.ToString() + "@@" + RoomListView[i].id.ToString();
 
                 }
 
@@ -852,8 +851,11 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (QuarantineRoom.levelID != RoomSelectedSeverity?.id)
                     {
                         ActionConfirmation ConfirmScreen = new ActionConfirmation();
-                        var result = ConfirmScreen.ShowDialog();
                         var vm = ConfirmScreen.DataContext as ActionConfirmationViewModel;
+                        vm.Title = "Thay đổi mức độ nhóm đối tượng";
+                        vm.Content = "Bạn có muốn thay đổi nhóm đối tượng của những người trong phòng theo giá trị vừa thay đổi của phòng?";
+                        vm.IsThreeButton = true;
+                        var result = ConfirmScreen.ShowDialog();
                         if (result == true)
                         {
                             if (vm.IsYes)
