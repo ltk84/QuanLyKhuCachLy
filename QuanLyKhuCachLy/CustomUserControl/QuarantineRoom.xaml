@@ -96,7 +96,7 @@
                     Margin="0,8,0,0"
                     Padding="10,8,8,10"
                     HorizontalAlignment="Left"
-                    materialDesign:HintAssist.Hint="Tên, CMND,...."
+                    materialDesign:HintAssist.Hint="Tên, Sức chứa,...."
                     materialDesign:TextFieldAssist.HasTrailingIcon="True"
                     materialDesign:TextFieldAssist.TrailingIcon="Search"
                     MaxLength="20"

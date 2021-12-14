@@ -517,8 +517,14 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType == "Nhóm đối tượng")
             {
-                FilterProperty = RoomList.Select(room => room.Severity.description).ToArray();
+                
+                FilterProperty = RoomList.Select(room =>
+                {
+                    if (room.Severity == null) return "Chưa thiết lập";
+                    else return room.Severity?.description.ToString();
+                }).ToArray();
                 FilterProperty = FilterProperty.Distinct().ToArray();
+                
             }
             else if (SelectedFilterType == "Sức chứa")
             {
@@ -540,7 +546,13 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType == "Nhóm đối tượng")
             {
-                RoomListView = RoomList.Where(x => x.Severity.description == SelectedFilterProperty).ToArray();
+                RoomListView = RoomList.Where(x =>
+                {
+                    if (SelectedFilterProperty == "Chưa thiết lập") {
+                        return x.Severity == null;
+                    }
+                    else return x.Severity?.description == SelectedFilterProperty;
+                }).ToArray();
             }
             else if (SelectedFilterType == "Sức chứa")
             {
