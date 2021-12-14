@@ -1626,7 +1626,7 @@ namespace QuanLyKhuCachLy.ViewModel
             else
             {
 
-                
+
                 String[] Value = new string[PeopleListView.Length];
 
                 for (int i = 0; i < PeopleListView.Length; i++)
@@ -2001,7 +2001,7 @@ namespace QuanLyKhuCachLy.ViewModel
                         int t;
                         if (Int32.TryParse(xlRange.Cells[i, 10].Value2.ToString(), out t))
                         {
-                            if(xlRange.Cells[i, 10].Value2.ToString()[0] == '0')
+                            if (xlRange.Cells[i, 10].Value2.ToString()[0] == '0')
                             {
                                 quarantinePerson.phoneNumber = xlRange.Cells[i, 10].Value2.ToString();
                             }
@@ -2009,7 +2009,7 @@ namespace QuanLyKhuCachLy.ViewModel
                             {
                                 quarantinePerson.phoneNumber = "0" + xlRange.Cells[i, 10].Value2.ToString();
                             }
-                           
+
                         }
                         else
                         {
@@ -3005,6 +3005,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 }
                 String range = "Sheet1";
                 string credentialPath = Path.Combine(Environment.CurrentDirectory, ".credentials", ApplicationName);
+
                 UserCredential credential;
                 using (var stream =
                     new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
@@ -3089,9 +3090,9 @@ namespace QuanLyKhuCachLy.ViewModel
                                 }
                                 else
                                 {
-                                    personAddress.province =arrListStr[3].Trim();
-                                    personAddress.district =  arrListStr[2].Trim();
-                                    personAddress.ward =arrListStr[1].Trim();
+                                    personAddress.province = arrListStr[3].Trim();
+                                    personAddress.district = arrListStr[2].Trim();
+                                    personAddress.ward = arrListStr[1].Trim();
                                     personAddress.streetName = arrListStr[0].Trim();
                                 }
                             }

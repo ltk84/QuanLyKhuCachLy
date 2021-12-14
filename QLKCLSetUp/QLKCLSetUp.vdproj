@@ -57,7 +57,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_3A26856758E54629B4E43AD09AD09D93"
+        "MsmKey" = "8:_2B2888D4E4864A118592087EE0F25FFA"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -732,7 +732,7 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3A26856758E54629B4E43AD09AD09D93"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2B2888D4E4864A118592087EE0F25FFA"
             {
             "SourcePath" = "8:..\\QuanLyKhuCachLy\\credentials.json"
             "TargetName" = "8:credentials.json"
@@ -1429,7 +1429,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Quarantine Area Management"
         "ProductCode" = "8:{128D18D8-A931-4A5F-B1A4-D2924E9A9877}"
-        "PackageCode" = "8:{52CB007D-B0CF-4F24-A7AC-A756B092930E}"
+        "PackageCode" = "8:{62E8A20B-4B04-4CA8-8BEC-D97FC81143E4}"
         "UpgradeCode" = "8:{A00224F2-4B5C-40AF-82A7-C68FECC6A99F}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -1549,7 +1549,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_D6752CB94CC145C1B7B567A57A9ECD4F"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_A7771CC392314B8A9E036BE5AC5C0535"
             {
             "Name" = "8:QLKCL"
             "Arguments" = "8:"
@@ -1964,7 +1964,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_72E6C3422E1B494982F0C9E128D3EDE3"
             {
-            "SourcePath" = "8:"
+            "SourcePath" = "8:..\\QuanLyKhuCachLy\\obj\\Release\\QuanLyKhuCachLy.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_0E035E08045C425C910504E353F2B503"
