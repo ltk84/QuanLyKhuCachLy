@@ -341,8 +341,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 return false;
             }, (p) =>
             {
-                EditQuarantineRoom();
-                p.Close();
+                EditQuarantineRoom(p);
             });
 
             ToExportExcel = new RelayCommand<Window>((p) =>
@@ -838,7 +837,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
-        void EditQuarantineRoom()
+        void EditQuarantineRoom(Window ph)
         {
             using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
             {
@@ -878,6 +877,8 @@ namespace QuanLyKhuCachLy.ViewModel
                     DataProvider.ins.db.SaveChanges();
 
                     SelectedItem = QuarantineRoom;
+
+                    ph.Close();
 
                     transaction.Commit();
 
