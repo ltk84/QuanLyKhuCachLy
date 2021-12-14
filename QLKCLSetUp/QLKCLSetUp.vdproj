@@ -57,6 +57,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_3A26856758E54629B4E43AD09AD09D93"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_40245F9ECB81B549D4E6B33059BD8EF3"
         "OwnerKey" = "8:_72E6C3422E1B494982F0C9E128D3EDE3"
         "MsmSig" = "8:_UNDEFINED"
@@ -710,6 +716,26 @@
             {
             "SourcePath" = "8:..\\QuanLyKhuCachLy\\Resources\\logo\\logo.ico"
             "TargetName" = "8:logo.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_0E035E08045C425C910504E353F2B503"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3A26856758E54629B4E43AD09AD09D93"
+            {
+            "SourcePath" = "8:..\\QuanLyKhuCachLy\\credentials.json"
+            "TargetName" = "8:credentials.json"
             "Tag" = "8:"
             "Folder" = "8:_0E035E08045C425C910504E353F2B503"
             "Condition" = "8:"
@@ -1403,7 +1429,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Quarantine Area Management"
         "ProductCode" = "8:{128D18D8-A931-4A5F-B1A4-D2924E9A9877}"
-        "PackageCode" = "8:{1C0CA26F-AF50-4F07-906C-0CB1F1440ADF}"
+        "PackageCode" = "8:{52CB007D-B0CF-4F24-A7AC-A756B092930E}"
         "UpgradeCode" = "8:{A00224F2-4B5C-40AF-82A7-C68FECC6A99F}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -1938,7 +1964,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_72E6C3422E1B494982F0C9E128D3EDE3"
             {
-            "SourcePath" = "8:..\\QuanLyKhuCachLy\\obj\\Release\\QuanLyKhuCachLy.exe"
+            "SourcePath" = "8:"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_0E035E08045C425C910504E353F2B503"
