@@ -328,7 +328,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     DataProvider.ins.db.SaveChanges();
 
-                    RemoveFromRoomUI();
+                    QuarantinePersonList.Remove(SelectedItem);
 
                     transaction.Commit();
                 }
