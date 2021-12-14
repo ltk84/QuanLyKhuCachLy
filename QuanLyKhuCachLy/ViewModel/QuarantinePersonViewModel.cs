@@ -810,7 +810,11 @@ namespace QuanLyKhuCachLy.ViewModel
                 _NewRoomSelected = value;
                 OnPropertyChanged();
                 if (_NewRoomSelected != null)
+                {
+                    BufferWindow bufferWindow = new BufferWindow();
+                    bufferWindow.ShowDialog();
                     ChangeRoom();
+                }
 
             }
         }
@@ -1119,6 +1123,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 return false;
             }, (p) =>
             {
+                BufferWindow bufferWindow = new BufferWindow();
+                bufferWindow.ShowDialog();
                 CompleteQuarantinePerson();
             });
 
