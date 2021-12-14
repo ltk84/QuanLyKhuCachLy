@@ -3541,6 +3541,8 @@ namespace QuanLyKhuCachLy.ViewModel
                         else
                         {
                             xlRange = xlWorksheet2.UsedRange;
+                            rowCount = xlRange.Rows.Count;
+                            colCount = xlRange.Columns.Count;
                         }
                     }
                     else
@@ -3618,6 +3620,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 xlWorkbook.Close();
                 using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
                 {
+                    
                     try
                     {
                         for (int i = 0; i < listTestingResults.Count; i++)
