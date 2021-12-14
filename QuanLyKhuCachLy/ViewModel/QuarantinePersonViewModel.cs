@@ -3381,11 +3381,11 @@ namespace QuanLyKhuCachLy.ViewModel
                     ErrorDialog.ShowDialog();
                 }
             }
-            catch
+            catch (Exception e)
             {
                 CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
                 var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
-                FailNotificationVM.Content = "Tính năng chưa được đăng kí";
+                FailNotificationVM.Content = e.Message;
                 ErrorDialog.ShowDialog();
             }
         }
