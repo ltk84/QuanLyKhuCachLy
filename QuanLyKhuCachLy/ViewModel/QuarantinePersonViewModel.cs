@@ -440,9 +440,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     InjectionRecordViewModel.ins.IRQuarantinePersonID = SelectedItem.id;
                     DestinationHistoryViewModel.ins.PersonID = SelectedItem.id;
                     TestingResultViewModel.ins.PersonID = SelectedItem.id;
-                    RemainRoomList = SelectedItem.Severity == null ?
-                        new ObservableCollection<Model.QuarantineRoom>(DataProvider.ins.db.QuarantineRooms.Where(x => x.id != SelectedItem.roomID && x.QuarantinePersons.Count < x.capacity && x.Severity == null)) :
-                    new ObservableCollection<Model.QuarantineRoom>(DataProvider.ins.db.QuarantineRooms.Where(x => x.id != SelectedItem.roomID && x.QuarantinePersons.Count < x.capacity && x.Severity.id == SelectedItem.Severity.id));
+                    InitRemainRoomList();
                 }
             }
         }
@@ -810,7 +808,11 @@ namespace QuanLyKhuCachLy.ViewModel
                 _NewRoomSelected = value;
                 OnPropertyChanged();
                 if (_NewRoomSelected != null)
+                {
+                    BufferWindow bufferWindow = new BufferWindow();
+                    bufferWindow.ShowDialog();
                     ChangeRoom();
+                }
 
             }
         }
@@ -1119,6 +1121,8 @@ namespace QuanLyKhuCachLy.ViewModel
                 return false;
             }, (p) =>
             {
+                BufferWindow bufferWindow = new BufferWindow();
+                bufferWindow.ShowDialog();
                 CompleteQuarantinePerson();
             });
 
@@ -1349,6 +1353,8 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     NewRoomSelected = null;
 
+                    InitRemainRoomList();
+
                     PeopleListView = QuarantinePersonList.ToArray();
 
                     transaction.Commit();
@@ -1527,6 +1533,13 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
+        void InitRemainRoomList()
+        {
+            RemainRoomList = SelectedItem.Severity == null ?
+                        new ObservableCollection<Model.QuarantineRoom>(DataProvider.ins.db.QuarantineRooms.Where(x => x.id != SelectedItem.roomID && x.QuarantinePersons.Count < x.capacity && x.Severity == null)) :
+                    new ObservableCollection<Model.QuarantineRoom>(DataProvider.ins.db.QuarantineRooms.Where(x => x.id != SelectedItem.roomID && x.QuarantinePersons.Count < x.capacity && x.Severity.id == SelectedItem.Severity.id));
+        }
+
         void InitNationList()
         {
             foreach (var item in NationViewModel.NationList)
@@ -1669,7 +1682,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType == "Nhóm đối tượng")
             {
-                FilterProperty = QuarantinePersonList.Select(person => person.Severity?.level).ToArray();
+                FilterProperty = QuarantinePersonList.Select(person => person.Severity?.description).ToArray();
                 FilterProperty = FilterProperty.Distinct().ToArray();
             }
             else if (SelectedFilterType == "Ngày hoàn thành")
@@ -1769,7 +1782,7 @@ namespace QuanLyKhuCachLy.ViewModel
             else if (SelectedFilterType == "Nhóm đối tượng")
             {
 
-                PeopleListView = QuarantinePersonList.Where(x => x.Severity?.level == SelectedFilterProperty).ToArray();
+                PeopleListView = QuarantinePersonList.Where(x => x.Severity?.description == SelectedFilterProperty).ToArray();
             }
             else if (SelectedFilterType == "Ngày hoàn thành")
             {
@@ -2003,7 +2016,7 @@ namespace QuanLyKhuCachLy.ViewModel
                         {
                             if (xlRange.Cells[i, 10].Value2.ToString()[0] == '0')
                             {
-                                if(xlRange.Cells[i, 10].Value2.ToString().Length <= 10)
+                                if (xlRange.Cells[i, 10].Value2.ToString().Length <= 10)
                                     quarantinePerson.phoneNumber = xlRange.Cells[i, 10].Value2.ToString();
                                 else
                                 {
@@ -2021,7 +2034,7 @@ namespace QuanLyKhuCachLy.ViewModel
                                     error = "STT e" + xlRange.Cells[i, 1].Value2.ToString() + " số điện thoại không đúng";
                                     xlWorkbook.Close();
                                     return;
-                                }    
+                                }
                             }
 
                         }
@@ -2187,7 +2200,7 @@ namespace QuanLyKhuCachLy.ViewModel
                             if (xlRange2.Cells[i, 1] != null && xlRange2.Cells[i, 1].Value2 != null)
                             {
                                 bool checkSTT = false;
-                                if(ListSTTSheet1.Contains(Int32.Parse(xlRange2.Cells[i, 1].Value2.ToString())))
+                                if (ListSTTSheet1.Contains(Int32.Parse(xlRange2.Cells[i, 1].Value2.ToString())))
                                 {
                                     checkSTT = true;
                                 }
@@ -2256,9 +2269,9 @@ namespace QuanLyKhuCachLy.ViewModel
                 xlWorkbook.Close();
                 using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
                 {
-                   
+
                     List<int> ListIdPerson = new List<int>();
-                    for(int i =0; i < listSTTSheet2.Count; i++)
+                    for (int i = 0; i < listSTTSheet2.Count; i++)
                     {
                         ListIdPerson.Add(-1);
                     }
@@ -3635,7 +3648,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 xlWorkbook.Close();
                 using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
                 {
-                    
+
                     try
                     {
                         for (int i = 0; i < listTestingResults.Count; i++)
@@ -3752,7 +3765,7 @@ namespace QuanLyKhuCachLy.ViewModel
             file.Sheets.Add();
             Microsoft.Office.Interop.Excel.Worksheet sheet = file.Worksheets[1];
             Microsoft.Office.Interop.Excel.Worksheet sheet1 = file.Worksheets[2];
-            
+
             sheet.Name = "Danh sách người cách ly";
             sheet1.Name = "Lịch sử di chuyển";
             sheet.Columns[1].ColumnWidth = 5;

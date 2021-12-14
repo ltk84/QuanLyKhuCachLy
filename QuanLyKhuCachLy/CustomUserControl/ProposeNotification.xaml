@@ -78,7 +78,7 @@
                                 Height="42"
                                 Padding="10,8,8,10"
                                 HorizontalAlignment="Left"
-                                materialDesign:HintAssist.Hint="Tên, CMND,...."
+                                materialDesign:HintAssist.Hint="Tên, CCCD/CMND,...."
                                 FontSize="16"
                                 MaxLength="20"
                                 Style="{StaticResource TextInputField}">

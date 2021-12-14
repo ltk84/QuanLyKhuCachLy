@@ -328,7 +328,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     DataProvider.ins.db.SaveChanges();
 
-                    RemoveFromRoomUI();
+                    QuarantinePersonList.Remove(SelectedItem);
 
                     transaction.Commit();
                 }
@@ -879,7 +879,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             var RoomSeverity = DataProvider.ins.db.Severities.Where(x => x.id == CurrentRoom.levelID).FirstOrDefault();
             if (RoomSeverity == null)
-                PersonNotRoomList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == null && x.leaveDate > DateTime.Today));
+                PersonNotRoomList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == null && x.leaveDate > DateTime.Today && x.levelID == null));
             else
                 PersonNotRoomList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == null && x.leaveDate > DateTime.Today && x.levelID == RoomSeverity.id));
 

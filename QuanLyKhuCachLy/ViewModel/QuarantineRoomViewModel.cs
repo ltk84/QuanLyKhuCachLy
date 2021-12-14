@@ -302,7 +302,6 @@ namespace QuanLyKhuCachLy.ViewModel
                 SetSelectedItemToProperty();
                 EditScreen.ShowDialog();
                 updateAvailableSlot();
-
             });
 
             ToViewCommand = new RelayCommand<object>((p) =>
@@ -342,8 +341,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 return false;
             }, (p) =>
             {
-                EditQuarantineRoom();
-                p.Close();
+                EditQuarantineRoom(p);
             });
 
             ToExportExcel = new RelayCommand<Window>((p) =>
@@ -495,7 +493,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                 for (int i = 0; i < RoomListView.Length; i++)
                 {
-                    Value[i] = RoomListView[i].displayName?.ToString() + "@@" + RoomListView[i].capacity.ToString() + "@@" + RoomListView[i].id.ToString() ;
+                    Value[i] = RoomListView[i].displayName?.ToString() + "@@" + RoomListView[i].capacity.ToString() + "@@" + RoomListView[i].id.ToString();
 
                 }
 
@@ -519,8 +517,14 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType == "Nhóm đối tượng")
             {
-                FilterProperty = RoomList.Select(room => room.Severity.description).ToArray();
+                
+                FilterProperty = RoomList.Select(room =>
+                {
+                    if (room.Severity == null) return "Chưa thiết lập";
+                    else return room.Severity?.description.ToString();
+                }).ToArray();
                 FilterProperty = FilterProperty.Distinct().ToArray();
+                
             }
             else if (SelectedFilterType == "Sức chứa")
             {
@@ -542,7 +546,13 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType == "Nhóm đối tượng")
             {
-                RoomListView = RoomList.Where(x => x.Severity.description == SelectedFilterProperty).ToArray();
+                RoomListView = RoomList.Where(x =>
+                {
+                    if (SelectedFilterProperty == "Chưa thiết lập") {
+                        return x.Severity == null;
+                    }
+                    else return x.Severity?.description == SelectedFilterProperty;
+                }).ToArray();
             }
             else if (SelectedFilterType == "Sức chứa")
             {
@@ -839,7 +849,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
-        void EditQuarantineRoom()
+        void EditQuarantineRoom(Window ph)
         {
             using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
             {
@@ -852,8 +862,11 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (QuarantineRoom.levelID != RoomSelectedSeverity?.id)
                     {
                         ActionConfirmation ConfirmScreen = new ActionConfirmation();
-                        var result = ConfirmScreen.ShowDialog();
                         var vm = ConfirmScreen.DataContext as ActionConfirmationViewModel;
+                        vm.Title = "Thay đổi mức độ nhóm đối tượng";
+                        vm.Content = "Bạn có muốn thay đổi nhóm đối tượng của những người trong phòng theo giá trị vừa thay đổi của phòng?";
+                        vm.IsThreeButton = true;
+                        var result = ConfirmScreen.ShowDialog();
                         if (result == true)
                         {
                             if (vm.IsYes)
@@ -876,6 +889,8 @@ namespace QuanLyKhuCachLy.ViewModel
                     DataProvider.ins.db.SaveChanges();
 
                     SelectedItem = QuarantineRoom;
+
+                    ph.Close();
 
                     transaction.Commit();
 
