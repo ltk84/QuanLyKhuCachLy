@@ -1462,12 +1462,27 @@ namespace QuanLyKhuCachLy.ViewModel
                         {
                             if(xlRange.Cells[i, 7].Value2.ToString()[0] == '0')
                             {
-                                staff.phoneNumber = xlRange.Cells[i, 7].Value2.ToString();
+                                if (xlRange.Cells[i, 7].Value2.ToString().Length <= 10)
+                                    staff.phoneNumber = xlRange.Cells[i, 7].Value2.ToString();
+                                else
+                                {
+                                    error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " số điện thoại không đúng";
+                                    xlWorkbook.Close();
+                                    return;
+                                }
                             }
                             else
                             {
-                                staff.phoneNumber = "0"+xlRange.Cells[i, 7].Value2.ToString();
+                                if (xlRange.Cells[i, 7].Value2.ToString().Length <= 9)
+                                    staff.phoneNumber = "0"+xlRange.Cells[i, 7].Value2.ToString();
+                                else
+                                {
+                                    error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " số điện thoại không đúng";
+                                    xlWorkbook.Close();
+                                    return;
+                                }
                             }
+
                         }
                         else
                         {

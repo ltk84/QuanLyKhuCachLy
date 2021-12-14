@@ -2003,11 +2003,25 @@ namespace QuanLyKhuCachLy.ViewModel
                         {
                             if(xlRange.Cells[i, 10].Value2.ToString()[0] == '0')
                             {
-                                quarantinePerson.phoneNumber = xlRange.Cells[i, 10].Value2.ToString();
+                                if(xlRange.Cells[i, 10].Value2.ToString().Length <= 10)
+                                    quarantinePerson.phoneNumber = xlRange.Cells[i, 10].Value2.ToString();
+                                else
+                                {
+                                    error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " số điện thoại không đúng";
+                                    xlWorkbook.Close();
+                                    return;
+                                }
                             }
                             else
                             {
-                                quarantinePerson.phoneNumber = "0" + xlRange.Cells[i, 10].Value2.ToString();
+                                if (xlRange.Cells[i, 10].Value2.ToString().Length <= 9)
+                                    quarantinePerson.phoneNumber = "0" + xlRange.Cells[i, 10].Value2.ToString();
+                                else
+                                {
+                                    error = "STT e" + xlRange.Cells[i, 1].Value2.ToString() + " số điện thoại không đúng";
+                                    xlWorkbook.Close();
+                                    return;
+                                }    
                             }
                            
                         }
@@ -3737,6 +3751,7 @@ namespace QuanLyKhuCachLy.ViewModel
             file.Sheets.Add();
             Microsoft.Office.Interop.Excel.Worksheet sheet = file.Worksheets[1];
             Microsoft.Office.Interop.Excel.Worksheet sheet1 = file.Worksheets[2];
+            
             sheet.Name = "Danh sách người cách ly";
             sheet1.Name = "Lịch sử di chuyển";
             sheet.Columns[1].ColumnWidth = 5;
