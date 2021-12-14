@@ -2173,13 +2173,9 @@ namespace QuanLyKhuCachLy.ViewModel
                             if (xlRange2.Cells[i, 1] != null && xlRange2.Cells[i, 1].Value2 != null)
                             {
                                 bool checkSTT = false;
-                                for (int index = 1; index <= rowCount; index++)
+                                if(ListSTTSheet1.Contains(Int32.Parse(xlRange2.Cells[i, 1].Value2.ToString())))
                                 {
-                                    if (xlRange2.Cells[i, 1].Value2.ToString() == xlRange.Cells[index, 1].Value2.ToString())
-                                    {
-                                        checkSTT = true;
-                                        break;
-                                    }
+                                    checkSTT = true;
                                 }
                                 if (checkSTT)
                                 {
@@ -2246,7 +2242,12 @@ namespace QuanLyKhuCachLy.ViewModel
                 xlWorkbook.Close();
                 using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
                 {
+                   
                     List<int> ListIdPerson = new List<int>();
+                    for(int i =0; i < listSTTSheet2.Count; i++)
+                    {
+                        ListIdPerson.Add(-1);
+                    }
                     try
                     {
                         var temptQAInformation = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
@@ -2269,7 +2270,7 @@ namespace QuanLyKhuCachLy.ViewModel
                             {
                                 if (ListSTTSheet1[i] == listSTTSheet2[j])
                                 {
-                                    ListIdPerson.Add(listQuarantinePerson[i].id);
+                                    ListIdPerson[j] = listQuarantinePerson[i].id;
                                 }
                             }
                             if (listInjectionRecords[i][0].vaccineName != "Không có nhá")
