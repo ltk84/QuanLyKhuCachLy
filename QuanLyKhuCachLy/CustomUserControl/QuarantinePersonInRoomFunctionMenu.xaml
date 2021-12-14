@@ -65,6 +65,7 @@
                     <Button.ContextMenu>
                         <ContextMenu Background="White">
                             <ComboBox
+                                materialDesign:HintAssist.Hint="Chọn phòng mới"
                                 DisplayMemberPath="displayName"
                                 ItemsSource="{Binding PersonInRoomViewModel.RemainRoomList}"
                                 SelectedItem="{Binding PersonInRoomViewModel.NewRoomSelected}" />
