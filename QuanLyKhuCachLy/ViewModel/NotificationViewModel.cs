@@ -1063,7 +1063,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType1 == "Nhóm đối tượng")
             {
-                FilterProperty1 = PeopleList1.Select(person => person.Severity?.level).ToArray();
+                FilterProperty1 = PeopleList1.Select(person => person.Severity?.description).ToArray();
                 FilterProperty1 = FilterProperty1.Distinct().ToArray();
             }
             else if (SelectedFilterType1 == "Ngày hoàn thành")
@@ -1112,7 +1112,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType2 == "Nhóm đối tượng")
             {
-                FilterProperty2 = PeopleList2.Select(person => person.Severity?.level).ToArray();
+                FilterProperty2 = PeopleList2.Select(person => person.Severity?.description).ToArray();
                 FilterProperty2 = FilterProperty2.Distinct().ToArray();
             }
             else if (SelectedFilterType2 == "Ngày hoàn thành")
@@ -1152,7 +1152,7 @@ namespace QuanLyKhuCachLy.ViewModel
             else if (SelectedFilterType1 == "Nhóm đối tượng")
             {
 
-                PeopleListView1 = PeopleList1.Where(x => x.Severity?.level == SelectedFilterProperty1).ToArray();
+                PeopleListView1 = PeopleList1.Where(x => x.Severity?.description == SelectedFilterProperty1).ToArray();
             }
             else if (SelectedFilterType1 == "Ngày đi")
             {
@@ -1209,7 +1209,7 @@ namespace QuanLyKhuCachLy.ViewModel
             else if (SelectedFilterType2 == "Nhóm đối tượng")
             {
 
-                PeopleListView2 = PeopleList2.Where(x => x.Severity?.level == SelectedFilterProperty2).ToArray();
+                PeopleListView2 = PeopleList2.Where(x => x.Severity?.description == SelectedFilterProperty2).ToArray();
             }
             else if (SelectedFilterType2 == "Ngày đi")
             {
@@ -1743,14 +1743,14 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             try
             {
-                var accountSid = "AC7539332c00efcc9cdad8d5f1a343f2e7";
-                var authToken = "0a8aed860e052232416fccfb8b86380";
-                authToken += "1";
+                var accountSid = "ACa850390501246f3c3611635b002e61f0";
+                var authToken = "46e4bf0cb8e8e593d41b8a73aa5321e";
+                authToken += "a";
                 TwilioClient.Init(accountSid, authToken);
 
                 var message = MessageResource.Create(
                     body: messageContent,
-                    from: new Twilio.Types.PhoneNumber("+17622007798"),
+                    from: new Twilio.Types.PhoneNumber("+19896536427"),
                     to: new Twilio.Types.PhoneNumber(phoneNumber)
                 );
 
