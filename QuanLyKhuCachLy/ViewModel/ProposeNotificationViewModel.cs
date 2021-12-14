@@ -18,7 +18,18 @@ namespace QuanLyKhuCachLy.ViewModel
 {
     public class ProposeNotificationViewModel : BaseViewModel
     {
+
+        private List<Model.QuarantinePerson> _unsendPeopleList;
+        public List<Model.QuarantinePerson> UnsendList
+        {
+            get { return _unsendPeopleList; }
+            set { _unsendPeopleList = value; OnPropertyChanged(); }
+        }
+
+
+
         #region Property
+
 
 
         //Searching 
@@ -152,6 +163,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
         public ProposeNotificationViewModel()
         {
+            UnsendList = new List<QuarantinePerson>();
             Type = 1;
             InitData();
 
@@ -161,10 +173,11 @@ namespace QuanLyKhuCachLy.ViewModel
                 return true;
             }, (p) =>
             {
-                setListHasReceiveMessage();
                 SendMessage();
                 p.DialogResult = true;
                 p.Close();
+                setListHasReceiveMessage();
+                UnsendList.Clear();
             });
 
             CancelCommand = new RelayCommand<Window>((p) =>
@@ -174,6 +187,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }, (p) =>
             {
                 p.DialogResult = true;
+                UnsendList.Clear();
                 p.Close();
             });
         }
@@ -198,12 +212,12 @@ namespace QuanLyKhuCachLy.ViewModel
                 for (int i = 0; i < PeopleList.ToArray().Length; i++)
                 {
                     var QAName = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().name;
-                    messageContent = "Chào a/c " + PeopleList[i].name + ", đây là thông báo đền từ ban quản lý của khu cách ly " + QAName + ". " + EditableMessage + ". Xin cảm ơn.";
+                    messageContent = "Chào a/c " + PeopleList[i].name + ", đây là thông báo đến từ ban quản lý của khu cách ly " + QAName + ". " + EditableMessage + " Xin cảm ơn.";
 
 
                     if (PeopleList[i].phoneNumber != "" && PeopleList[i] != null)
                     {
-                        SendMessageWithTwillo(messageContent, fomatPhoneNumber(PeopleList[i].phoneNumber));
+                        SendMessageWithTwillo(messageContent, fomatPhoneNumber(PeopleList[i].phoneNumber), PeopleList[i]);
 
                     }
 
@@ -215,7 +229,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 // Close form nè
             });
             loadingIndicator.Close();
-            if (isSuccess)
+            if (UnsendList.Count == 0)
             {
                 Window SuccessDialog = new Window
                 {
@@ -232,12 +246,14 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else
             {
-                CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
-                var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
-                ErrorDialog.ShowDialog();
+                CannotSendPeopleList unsendPeopleList = new CannotSendPeopleList();
+                var Vm = unsendPeopleList.DataContext as CannotSendPeopleViewModel;
+                Vm.PeopleList = UnsendList;
+                unsendPeopleList.ShowDialog();
+                //UnsendList.Clear();
             }
         }
-        void SendMessageWithTwillo(string messageContent, string phoneNumber)
+        void SendMessageWithTwillo(string messageContent, string phoneNumber, QuarantinePerson current)
         {
             try
             {
@@ -259,6 +275,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 //CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
                 //var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
                 //ErrorDialog.ShowDialog();
+                UnsendList.Add(current);
             }
         }
 
@@ -277,7 +294,7 @@ namespace QuanLyKhuCachLy.ViewModel
         #region method
         void SearchWithKey()
         {
-
+            SelectFilterProperty();
 
             if (SearchKey == "" || SearchKey == null)
             {
@@ -285,7 +302,6 @@ namespace QuanLyKhuCachLy.ViewModel
             else
             {
 
-                SelectFilterProperty();
                 String[] Value = new string[PeopleListView.Length];
 
                 for (int i = 0; i < PeopleListView.Length; i++)
@@ -470,7 +486,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
            
             
-                FullMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đến từ ban quản lý khu cách ly " + QAName + ". " + EditableMessage + ". Xin cảm ơn.";
+                FullMessage = "Chào a/c " + "{Tên người nhận}" + ", đây là thông báo đến từ ban quản lý khu cách ly " + QAName + ". " + EditableMessage + " Xin cảm ơn.";
             
         }
 
@@ -522,7 +538,7 @@ namespace QuanLyKhuCachLy.ViewModel
         private void setListHasReceiveMessage()
         {
             string[] hasReceivedList = getListHasReceivedMessage();
-            string[] receivedList = PeopleListView.Select(person => person.id.ToString()).ToArray();
+            string[] receivedList = PeopleListView.Where(person => !UnsendList.Contains(person)).Select(person => person.id.ToString()).ToArray();
             var allReceivedList = new string[hasReceivedList.Length + receivedList.Length];
             hasReceivedList.CopyTo(allReceivedList, 0);
             receivedList.CopyTo(allReceivedList, hasReceivedList.Length);

@@ -52,6 +52,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Dragablz, Version=0.0.3.223, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dragablz.0.0.3.223\lib\net45\Dragablz.dll</HintPath>
@@ -187,6 +190,9 @@
     </Compile>
     <Compile Include="CustomUserControl\BufferWindow.xaml.cs">
       <DependentUpon>BufferWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControl\CannotSendPeopleList.xaml.cs">
+      <DependentUpon>CannotSendPeopleList.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomUserControl\ChangeCompleteDate.xaml.cs">
       <DependentUpon>ChangeCompleteDate.xaml</DependentUpon>
@@ -458,6 +464,7 @@
     <Compile Include="ViewModel\ActionConfirmationViewModel.cs" />
     <Compile Include="ViewModel\ArrangeRoomRecommendationViewModel.cs" />
     <Compile Include="ViewModel\AddressViewModel.cs" />
+    <Compile Include="ViewModel\CannotSendPeopleViewModel.cs" />
     <Compile Include="ViewModel\CompleteQuarantineRecommendationViewModel.cs" />
     <Compile Include="ViewModel\DashboardViewModel.cs" />
     <Compile Include="CustomUserControl\Dashboard.xaml.cs">
@@ -537,6 +544,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomUserControl\BufferWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControl\CannotSendPeopleList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -880,6 +891,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.manifest" />
     <None Include="ClassDiagram1.cd" />
     <None Include="credentials.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

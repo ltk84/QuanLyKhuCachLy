@@ -246,7 +246,7 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Số (*)
+                        Số
                     </TextBlock>
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập số địa chỉ"

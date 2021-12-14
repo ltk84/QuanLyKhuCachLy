@@ -177,7 +177,7 @@
 
         <DataGrid
             Height="430"
-            Margin="0,20,0.4,20"
+            Margin="0,20,0,20"
             materialDesign:DataGridAssist.CornerRadius="10"
             AutoGenerateColumns="False"
             CanUserAddRows="False"
@@ -191,6 +191,32 @@
             SelectionMode="Single"
             SelectionUnit="FullRow">
             <DataGrid.Columns>
+
+                <DataGridTemplateColumn
+                    Width="Auto"
+                    CanUserResize="False"
+                    HeaderStyle="{StaticResource DataGridButtonHeader}"
+                    IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button HorizontalAlignment="Right" Style="{StaticResource DataGridButton}">
+                                <materialDesign:PackIcon
+                                    Width="16"
+                                    Height="16"
+                                    Kind="DotsHorizontal" />
+                                <Button.ContextMenu>
+                                    <ContextMenu PreviewMouseUp="ContextMenu_PreviewMouseUp">
+                                        <ContextMenu.Template>
+                                            <ControlTemplate>
+                                                <local:StaffFunctionMenu />
+                                            </ControlTemplate>
+                                        </ContextMenu.Template>
+                                    </ContextMenu>
+                                </Button.ContextMenu>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <materialDesign:DataGridTextColumn
                     Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=Header}"
                     EditingElementStyle="{StaticResource EditingDataGridElement}"
@@ -234,32 +260,6 @@
                     Header="Bộ phận"
                     HeaderStyle="{StaticResource DataGridHeader}"
                     MaxLength="30" />
-
-                <DataGridTemplateColumn
-                    Width="*"
-                    HeaderStyle="{StaticResource DataGridButtonHeader}"
-                    IsReadOnly="True">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button HorizontalAlignment="Right" Style="{StaticResource DataGridButton}">
-                                <materialDesign:PackIcon
-                                    Width="16"
-                                    Height="16"
-                                    Kind="DotsHorizontal" />
-                                <Button.ContextMenu>
-
-                                    <ContextMenu PreviewMouseUp="ContextMenu_PreviewMouseUp">
-                                        <ContextMenu.Template>
-                                            <ControlTemplate>
-                                                <local:StaffFunctionMenu />
-                                            </ControlTemplate>
-                                        </ContextMenu.Template>
-                                    </ContextMenu>
-                                </Button.ContextMenu>
-                            </Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Grid>

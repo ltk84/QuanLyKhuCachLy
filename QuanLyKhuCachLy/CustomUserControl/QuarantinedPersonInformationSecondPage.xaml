@@ -119,9 +119,13 @@
                     <DataGridTemplateColumn
                         Width="Auto"
                         MinWidth="90"
-                        CellStyle="{StaticResource DataGridCellElement}"
                         Header="Kết quả"
                         HeaderStyle="{StaticResource DataGridHeader}">
+                        <DataGridTemplateColumn.CellStyle>
+                            <Style BasedOn="{StaticResource DataGridCellElement}" TargetType="DataGridCell">
+                                <Setter Property="HorizontalAlignment" Value="Left" />
+                            </Style>
+                        </DataGridTemplateColumn.CellStyle>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBox x:Name="txt" IsReadOnly="True" />

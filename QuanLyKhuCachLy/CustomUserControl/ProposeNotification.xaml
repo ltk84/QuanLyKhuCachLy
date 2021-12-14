@@ -181,6 +181,13 @@
                                     HeaderStyle="{StaticResource DataGridHeader}"
                                     MaxLength="30" />
                                 <materialDesign:DataGridTextColumn
+                                    Binding="{Binding phoneNumber}"
+                                    EditingElementStyle="{StaticResource EditingDataGridElement}"
+                                    ElementStyle="{StaticResource DataGridElement}"
+                                    Header="Số điện thoại"
+                                    HeaderStyle="{StaticResource DataGridHeader}"
+                                    MaxLength="30" />
+                                <materialDesign:DataGridTextColumn
                                     Binding="{Binding QuarantineRoom.displayName}"
                                     EditingElementStyle="{StaticResource EditingDataGridElement}"
                                     ElementStyle="{StaticResource DataGridElement}"

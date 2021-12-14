@@ -130,7 +130,10 @@ namespace QuanLyKhuCachLy.ViewModel
                AddTestingResultUI();
            });
 
-            DeleteOnUICommand = new RelayCommand<object>((p) => { if (SelectedItem != null) return true; return false; }, (p) =>
+            DeleteOnUICommand = new RelayCommand<object>((p) => {
+                return true;
+                //if (SelectedItem != null) return true; return false;
+            }, (p) =>
             {
                 DeleteTestingResultUI();
             });

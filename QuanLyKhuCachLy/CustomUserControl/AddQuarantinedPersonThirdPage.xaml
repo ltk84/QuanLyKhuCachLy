@@ -59,6 +59,7 @@
                         Grid.Row="0"
                         Grid.Column="1"
                         Margin="155,-10,0,10"
+                        HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
                         Background="Transparent"
                         Command="{Binding InjectionRecordViewModel.AddOnUICommand}"
@@ -102,18 +103,29 @@
                             MinWidth="70"
                             Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=Header}"
                             EditingElementStyle="{StaticResource EditingDataGridElement}"
-                            ElementStyle="{StaticResource DataGridElement}"
                             Header="Lần"
                             HeaderStyle="{StaticResource DataGridHeader}"
-                            IsReadOnly="True" />
+                            IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style BasedOn="{StaticResource DataGridElement}" TargetType="TextBlock">
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
                         <DataGridTextColumn
                             Width="Auto"
                             MinWidth="90"
                             Binding="{Binding vaccineName, UpdateSourceTrigger=PropertyChanged}"
                             EditingElementStyle="{StaticResource EditingDataGridElement}"
-                            ElementStyle="{StaticResource DataGridElement}"
                             Header="Tên"
-                            HeaderStyle="{StaticResource DataGridHeader}" />
+                            HeaderStyle="{StaticResource DataGridHeader}">
+
+                            <DataGridTextColumn.ElementStyle>
+                                <Style BasedOn="{StaticResource DataGridElement}" TargetType="TextBlock">
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
                         <DataGridTemplateColumn
                             Width="Auto"
                             MinWidth="70"
@@ -172,6 +184,7 @@
                         Grid.Row="0"
                         Grid.Column="1"
                         Margin="165,-10,0,10"
+                        HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
                         Command="{Binding TestingResultViewModel.AddOnUICommand}"
                         Template="{StaticResource plus-button}" />
@@ -214,10 +227,15 @@
                             MinWidth="70"
                             Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=Header}"
                             EditingElementStyle="{StaticResource EditingDataGridElement}"
-                            ElementStyle="{StaticResource DataGridElement}"
                             Header="Lần"
                             HeaderStyle="{StaticResource DataGridHeader}"
-                            IsReadOnly="True" />
+                            IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style BasedOn="{StaticResource DataGridElement}" TargetType="TextBlock">
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
                         <DataGridTemplateColumn
                             Width="Auto"
                             MinWidth="120"

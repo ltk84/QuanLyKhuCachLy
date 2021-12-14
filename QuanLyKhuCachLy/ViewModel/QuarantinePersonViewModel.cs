@@ -1618,7 +1618,7 @@ namespace QuanLyKhuCachLy.ViewModel
         // Searching
         void SearchWithKey()
         {
-
+            SelectFilterProperty();
 
             if (SearchKey == "" || SearchKey == null)
             {
@@ -1626,7 +1626,7 @@ namespace QuanLyKhuCachLy.ViewModel
             else
             {
 
-                SelectFilterProperty();
+
                 String[] Value = new string[PeopleListView.Length];
 
                 for (int i = 0; i < PeopleListView.Length; i++)
@@ -1835,28 +1835,29 @@ namespace QuanLyKhuCachLy.ViewModel
                 List<int> ListSTTSheet1 = new List<int>();
                 Excel.Application xlApp = new Excel.Application();
                 Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(path);
+                xlWorkbook.RefreshAll();
                 Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
                 Excel.Range xlRange = xlWorksheet.UsedRange;
                 int rowCount = xlRange.Rows.Count;
-                if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2 != "STT" ||
-                xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2 != "Họ và tên" ||
-                xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2 != "Ngày sinh" ||
-                xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2 != "Giới tính" ||
-                xlRange.Cells[1, 5] == null || xlRange.Cells[1, 5].Value2 != "Địa chỉ thường trú" ||
-                xlRange.Cells[1, 7] == null || xlRange.Cells[1, 7].Value2 != "CMND/CCCD" ||
-                xlRange.Cells[1, 8] == null || xlRange.Cells[1, 8].Value2 != "Mã bảo hiểm" ||
-                xlRange.Cells[1, 9] == null || xlRange.Cells[1, 9].Value2 != "Quốc tịch" ||
-                xlRange.Cells[1, 10] == null || xlRange.Cells[1, 10].Value2 != "SĐT" ||
-                xlRange.Cells[1, 11] == null || xlRange.Cells[1, 11].Value2 != "Triệu chứng" ||
-                xlRange.Cells[1, 12] == null || xlRange.Cells[1, 12].Value2 != "Nhóm đối tượng" ||
-                xlRange.Cells[1, 13] == null || xlRange.Cells[1, 13].Value2 != "Ngày đến" ||
-                xlRange.Cells[1, 14] == null || xlRange.Cells[1, 14].Value2 != "Thông tin tiêm chủng")
+                if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2.ToString().Trim().ToLower() != "stt" ||
+                xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2.ToString().Trim().ToLower() != "họ và tên" ||
+                xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2.ToString().Trim().ToLower() != "ngày sinh" ||
+                xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2.ToString().Trim().ToLower() != "giới tính" ||
+                xlRange.Cells[1, 5] == null || xlRange.Cells[1, 5].Value2.ToString().Trim().ToLower() != "địa chỉ thường trú" ||
+                xlRange.Cells[1, 7] == null || xlRange.Cells[1, 7].Value2.ToString().Trim().ToLower() != "cmnd/cccd" ||
+                xlRange.Cells[1, 8] == null || xlRange.Cells[1, 8].Value2.ToString().Trim().ToLower() != "mã bảo hiểm" ||
+                xlRange.Cells[1, 9] == null || xlRange.Cells[1, 9].Value2.ToString().Trim().ToLower() != "quốc tịch" ||
+                xlRange.Cells[1, 10] == null || xlRange.Cells[1, 10].Value2.ToString().Trim().ToLower() != "sđt" ||
+                xlRange.Cells[1, 11] == null || xlRange.Cells[1, 11].Value2.ToString().Trim().ToLower() != "triệu chứng" ||
+                xlRange.Cells[1, 12] == null || xlRange.Cells[1, 12].Value2.ToString().Trim().ToLower() != "nhóm đối tượng" ||
+                xlRange.Cells[1, 13] == null || xlRange.Cells[1, 13].Value2.ToString().Trim().ToLower() != "ngày đến" ||
+                xlRange.Cells[1, 14] == null || xlRange.Cells[1, 14].Value2.ToString().Trim().ToLower() != "thông tin tiêm chủng")
                 {
                     xlWorkbook.Close();
                     error = "Không đúng định dạng file";
                     return;
                 }
-
+                List<int> listSTT = new List<int>();
                 for (int i = 2; i <= rowCount; i++)
                 {
                     Address personAddress = new Address();
@@ -1868,12 +1869,28 @@ namespace QuanLyKhuCachLy.ViewModel
                         int t;
                         if (Int32.TryParse(xlRange.Cells[i, 1].Value2.ToString(), out t))
                         {
-                            ListSTTSheet1.Add(Int32.Parse(xlRange.Cells[i, 1].Value2.ToString()));
+                            if (t <= 0)
+                            {
+                                xlWorkbook.Close();
+                                error = "STT để bé hơn 1";
+                                return;
+                            }
+                            else
+                            {
+                                if (listSTT.Contains(t))
+                                {
+                                    xlWorkbook.Close();
+                                    error = "STT " + t.ToString() + " bị trùng";
+                                    return;
+                                }
+                                listSTT.Add(t);
+                            }
+                            ListSTTSheet1.Add(t);
                         }
                         else
                         {
                             xlWorkbook.Close();
-                            error = "Số thứ tự không phải là số";
+                            error = "STT không là số";
                             return;
                         }
                     }
@@ -1904,7 +1921,6 @@ namespace QuanLyKhuCachLy.ViewModel
                         }
                         else
                         {
-
                             error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " sai ngày sinh";
                             xlWorkbook.Close();
                             return;
@@ -1919,7 +1935,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (xlRange.Cells[i, 4] != null && xlRange.Cells[i, 4].Value2 != null)
                     {
                         string sex = xlRange.Cells[i, 4].Value2.ToString().ToLower();
-                        if(sex != "nam" || sex != "nữ")
+                        if (sex != "nam" && sex != "nữ")
                         {
                             error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " giới tính không đúng (chỉ là Nam/Nữ)";
                             xlWorkbook.Close();
@@ -1944,16 +1960,16 @@ namespace QuanLyKhuCachLy.ViewModel
                         }
                         if (arrListStr.Length == 3)
                         {
-                            personAddress.province = arrListStr[2];
-                            personAddress.district = arrListStr[1];
-                            personAddress.ward = arrListStr[0];
+                            personAddress.province = arrListStr[2].Trim();
+                            personAddress.district = arrListStr[1].Trim();
+                            personAddress.ward = arrListStr[0].Trim();
                         }
                         else
                         {
-                            personAddress.province = arrListStr[3];
-                            personAddress.district = arrListStr[2];
-                            personAddress.ward = arrListStr[1];
-                            personAddress.streetName = arrListStr[0];
+                            personAddress.province = arrListStr[3].Trim();
+                            personAddress.district = arrListStr[2].Trim();
+                            personAddress.ward = arrListStr[1].Trim();
+                            personAddress.streetName = arrListStr[0].Trim();
                         }
                     }
                     else
@@ -1972,7 +1988,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     }
                     if (xlRange.Cells[i, 9] != null && xlRange.Cells[i, 9].Value2 != null)
                     {
-                        quarantinePerson.nationality = xlRange.Cells[i, 9].Value2.ToString();
+                        quarantinePerson.nationality = xlRange.Cells[i, 9].Value2.ToString().Trim();
                     }
                     else
                     {
@@ -1982,11 +1998,49 @@ namespace QuanLyKhuCachLy.ViewModel
                     }
                     if (xlRange.Cells[i, 10] != null && xlRange.Cells[i, 10].Value2 != null)
                     {
-                        quarantinePerson.phoneNumber = xlRange.Cells[i, 10].Value2.ToString();
+                        int t;
+                        if (Int32.TryParse(xlRange.Cells[i, 10].Value2.ToString(), out t))
+                        {
+                            if (xlRange.Cells[i, 10].Value2.ToString()[0] == '0')
+                            {
+                                if(xlRange.Cells[i, 10].Value2.ToString().Length <= 10)
+                                    quarantinePerson.phoneNumber = xlRange.Cells[i, 10].Value2.ToString();
+                                else
+                                {
+                                    error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " số điện thoại không đúng";
+                                    xlWorkbook.Close();
+                                    return;
+                                }
+                            }
+                            else
+                            {
+                                if (xlRange.Cells[i, 10].Value2.ToString().Length <= 9)
+                                    quarantinePerson.phoneNumber = "0" + xlRange.Cells[i, 10].Value2.ToString();
+                                else
+                                {
+                                    error = "STT e" + xlRange.Cells[i, 1].Value2.ToString() + " số điện thoại không đúng";
+                                    xlWorkbook.Close();
+                                    return;
+                                }    
+                            }
+
+                        }
+                        else
+                        {
+                            error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " số điện thoại không đúng";
+                            xlWorkbook.Close();
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " không có số điện thoại";
+                        xlWorkbook.Close();
+                        return;
                     }
                     if (xlRange.Cells[i, 11] != null && xlRange.Cells[i, 11].Value2 != null)
                     {
-                        string health = xlRange.Cells[i, 11].Value2.ToString();
+                        string health = xlRange.Cells[i, 11].Value2.ToString().ToLower();
                         if (health.Contains("sốt") || health.Contains("Sốt"))
                         {
                             healthInformation.isFever = true;
@@ -2002,7 +2056,7 @@ namespace QuanLyKhuCachLy.ViewModel
                             healthInformation.isSoreThroat = true;
                         }
                         else healthInformation.isSoreThroat = false;
-                        if (health.Contains("mất vị giác") || health.Contains("Mất vị giác"))
+                        if (health.Contains("mất vị giác") || health.Contains("mất mùi vị"))
                         {
                             healthInformation.isLossOfTatse = true;
                         }
@@ -2024,9 +2078,9 @@ namespace QuanLyKhuCachLy.ViewModel
                         else healthInformation.isOtherSymptoms = false;
                         if (health.Contains("có bệnh nền") || health.Contains("Có bệnh nền"))
                         {
-                            healthInformation.isFever = true;
+                            healthInformation.isDisease = true;
                         }
-                        else healthInformation.isFever = false;
+                        else healthInformation.isDisease = false;
                     }
                     if (xlRange.Cells[i, 12] != null && xlRange.Cells[i, 12].Value2 != null)
                     {
@@ -2038,6 +2092,12 @@ namespace QuanLyKhuCachLy.ViewModel
                             levelId = DataProvider.ins.db.Severities.Where(x => x.description == description).FirstOrDefault().id;
                             quarantinePerson.levelID = levelId;
                         }
+                        else
+                        {
+                            error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " nhóm đối tượng không đúng";
+                            xlWorkbook.Close();
+                            return;
+                        }
                     }
                     if (xlRange.Cells[i, 13] != null && xlRange.Cells[i, 13].Value2 != null)
                     {
@@ -2045,7 +2105,7 @@ namespace QuanLyKhuCachLy.ViewModel
                         double date;
                         if (double.TryParse(xlRange.Cells[i, 13].Value2.ToString(), out date))
                         {
-                            dateTime = DateTime.FromOADate(double.Parse(xlRange.Cells[i, 3].Value2.ToString()));
+                            dateTime = DateTime.FromOADate(double.Parse(xlRange.Cells[i, 13].Value2.ToString()));
                             quarantinePerson.arrivedDate = dateTime;
                         }
                         else
@@ -2062,14 +2122,14 @@ namespace QuanLyKhuCachLy.ViewModel
                         for (int j = 0; j < records.Length; j++)
                         {
                             InjectionRecord rc = new InjectionRecord();
-                            string[] str = records[j].Split(' ');
+                            string[] str = records[j].Trim().Split(' ');
                             if (str.Length >= 2)
                             {
                                 DateTime dateTime;
-                                if (DateTime.TryParse(str[0].ToString(), out dateTime))
+                                if (DateTime.TryParse(str[0].ToString().Trim(), out dateTime))
                                 {
-                                    dateTime = Convert.ToDateTime(str[0].ToString());
-                                    quarantinePerson.arrivedDate = dateTime;
+                                    dateTime = Convert.ToDateTime(str[0].ToString().Trim());
+                                    rc.dateInjection = dateTime;
                                 }
                                 else
                                 {
@@ -2077,10 +2137,16 @@ namespace QuanLyKhuCachLy.ViewModel
                                     xlWorkbook.Close();
                                     return;
                                 }
-                                string vaccine = str[1].ToString();
+                                string vaccine = str[1].ToString().Trim();
                                 rc.dateInjection = dateTime;
                                 rc.vaccineName = vaccine;
                                 injectionRecords.Add(rc);
+                            }
+                            else
+                            {
+                                error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " sai thông tin tiêm chủng";
+                                xlWorkbook.Close();
+                                return;
                             }
                         }
                         if (injectionRecords.Count() == 0)
@@ -2100,6 +2166,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     listHealthInformation.Add(healthInformation);
                     listQuarantinePerson.Add(quarantinePerson);
                     listInjectionRecords.Add(injectionRecords);
+
                 }
                 List<DestinationHistory> ListDestinationHistories = new List<DestinationHistory>();
                 List<Address> ListAddressDestinations = new List<Address>();
@@ -2109,9 +2176,9 @@ namespace QuanLyKhuCachLy.ViewModel
                     Excel._Worksheet xlWorksheet2 = xlWorkbook.Sheets[2];
                     Excel.Range xlRange2 = xlWorksheet2.UsedRange;
                     int rowCount2 = xlRange2.Rows.Count;
-                    if (xlRange2.Cells[1, 1] != null && xlRange2.Cells[1, 1].Value2 == "STT trong DS" &&
-                xlRange2.Cells[1, 2] != null && xlRange2.Cells[1, 2].Value2 == "Ngày" &&
-                xlRange2.Cells[1, 3] != null && xlRange2.Cells[1, 3].Value2 == "Địa điểm")
+                    if (xlRange2.Cells[1, 1] != null && xlRange2.Cells[1, 1].Value2.ToString().Trim().ToLower() == "stt trong ds" &&
+                xlRange2.Cells[1, 2] != null && xlRange2.Cells[1, 2].Value2.ToString().Trim().ToLower() == "ngày" &&
+                xlRange2.Cells[1, 3] != null && xlRange2.Cells[1, 3].Value2.ToString().Trim().ToLower() == "địa điểm")
                     {
                         for (int i = 2; i <= rowCount2; i++)
                         {
@@ -2120,13 +2187,9 @@ namespace QuanLyKhuCachLy.ViewModel
                             if (xlRange2.Cells[i, 1] != null && xlRange2.Cells[i, 1].Value2 != null)
                             {
                                 bool checkSTT = false;
-                                for (int index = 1; index <= rowCount; index++)
+                                if(ListSTTSheet1.Contains(Int32.Parse(xlRange2.Cells[i, 1].Value2.ToString())))
                                 {
-                                    if (xlRange2.Cells[i, 1].Value2.ToString() == xlRange.Cells[index, 1].Value2.ToString())
-                                    {
-                                        checkSTT = true;
-                                        break;
-                                    }
+                                    checkSTT = true;
                                 }
                                 if (checkSTT)
                                 {
@@ -2163,16 +2226,16 @@ namespace QuanLyKhuCachLy.ViewModel
                                         }
                                         if (arrListStr.Length == 3)
                                         {
-                                            address.province = arrListStr[2];
-                                            address.district = arrListStr[1];
-                                            address.ward = arrListStr[0];
+                                            address.province = arrListStr[2].Trim();
+                                            address.district = arrListStr[1].Trim();
+                                            address.ward = arrListStr[0].Trim();
                                         }
                                         else
                                         {
-                                            address.province = arrListStr[3];
-                                            address.district = arrListStr[2];
-                                            address.ward = arrListStr[1];
-                                            address.streetName = arrListStr[0];
+                                            address.province = arrListStr[3].Trim();
+                                            address.district = arrListStr[2].Trim();
+                                            address.ward = arrListStr[1].Trim();
+                                            address.streetName = arrListStr[0].Trim();
                                         }
                                     }
                                     else
@@ -2193,7 +2256,12 @@ namespace QuanLyKhuCachLy.ViewModel
                 xlWorkbook.Close();
                 using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
                 {
+                   
                     List<int> ListIdPerson = new List<int>();
+                    for(int i =0; i < listSTTSheet2.Count; i++)
+                    {
+                        ListIdPerson.Add(-1);
+                    }
                     try
                     {
                         var temptQAInformation = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
@@ -2216,7 +2284,7 @@ namespace QuanLyKhuCachLy.ViewModel
                             {
                                 if (ListSTTSheet1[i] == listSTTSheet2[j])
                                 {
-                                    ListIdPerson.Add(listQuarantinePerson[i].id);
+                                    ListIdPerson[j] = listQuarantinePerson[i].id;
                                 }
                             }
                             if (listInjectionRecords[i][0].vaccineName != "Không có nhá")
@@ -2259,27 +2327,36 @@ namespace QuanLyKhuCachLy.ViewModel
                     {
                         transaction.Rollback();
                         RollBackChange();
-
+                        error = "Lỗi cơ sở dữ liệu cập nhật";
                     }
                     catch (DbEntityValidationException e)
                     {
                         transaction.Rollback();
                         RollBackChange();
+
+
+                        error = "Lỗi xác thực";
+
                     }
                     catch (NotSupportedException e)
                     {
                         transaction.Rollback();
                         RollBackChange();
+                        error = "Lỗi database không hỗ trợ";
+
                     }
                     catch (ObjectDisposedException e)
                     {
                         transaction.Rollback();
                         RollBackChange();
+                        error = "Lỗi đối tượng database bị hủy";
                     }
                     catch (InvalidOperationException e)
                     {
                         transaction.Rollback();
                         RollBackChange();
+                        error = "Lỗi thao tác không hợp lệ";
+
                     }
                 }
             });
@@ -2798,7 +2875,7 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             DBUtilityTracker.Rollback();
             InitPersonList();
-            if (SelectedItem != null) SelectedItem = QuarantinePersonList.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+            SelectedItem = null;
         }
 
         void HandleChangeTab(int index, string action, Window p)
@@ -2923,367 +3000,410 @@ namespace QuanLyKhuCachLy.ViewModel
         }
         async System.Threading.Tasks.Task ImportFileFromGoogleSheetAsync()
         {
-            string[] Scopes = { SheetsService.Scope.Spreadsheets };
-            string ApplicationName = "QLKCL";
-            string linkSheet = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().googleSheetURL;
-            var ctrc = linkSheet.Split('/');
-
-            String spreadsheetId = "1R6zuZB_xFuzWrCnl4j0JLZ3da5HtprRrmjeQ3LdxW44";
-            if (ctrc[ctrc.Length - 2] != "" && ctrc[ctrc.Length - 2] != null)
+            string error = "";
+            try
             {
-                spreadsheetId = ctrc[ctrc.Length - 2];
-            }
-            String range = "Sheet1";
-            string credentialPath = Path.Combine(Environment.CurrentDirectory, ".credentials", ApplicationName);
-            UserCredential credential;
-            using (var stream =
-                new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
-            {
-                credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
-                clientSecrets: GoogleClientSecrets.FromStream(stream).Secrets,
-                scopes: Scopes,
-                user: "user",
-                taskCancellationToken: CancellationToken.None,
-                new FileDataStore(credentialPath, true)
-                );
-            }
-            var service = new SheetsService(new Google.Apis.Services.BaseClientService.Initializer()
-            {
-                HttpClientInitializer = credential,
-                ApplicationName = ApplicationName,
-            });
-
-            var request =
-                    service.Spreadsheets.Values.Get(spreadsheetId, range);
-
-            ValueRange response = request.Execute();
-            IList<IList<Object>> values = response.Values;
-            List<Address> listAdress = new List<Address>();
-            List<QuarantinePerson> listQuarantinePerson = new List<QuarantinePerson>();
-            List<HealthInformation> listHealthInformation = new List<HealthInformation>();
-            List<List<InjectionRecord>> listInjectionRecords = new List<List<InjectionRecord>>();
-            int rowCount = values.Count();
-            if (values != null && values.Count > 0)
-            {
-
-                for (int i = 1; i < rowCount; i++)
+                string[] Scopes = { SheetsService.Scope.Spreadsheets };
+                string ApplicationName = "QLKCL";
+                string linkSheet = "https://docs.google.com/spreadsheets/d/1R6zuZB_xFuzWrCnl4j0JLZ3da5HtprRrmjeQ3LdxW44/edit#gid=0";
+                try
                 {
-
-                    List<InjectionRecord> injectionRecords = new List<InjectionRecord>();
-                    Address personAddress = new Address();
-                    QuarantinePerson quarantinePerson = new QuarantinePerson();
-                    HealthInformation healthInformation = new HealthInformation();
-                    if (values[i][1] != null)
-                    {
-                        quarantinePerson.name = values[i][1].ToString();
-                    }
-                    if (values[i][2] != null)
-                    {
-                        try
-                        {
-                            DateTime birth = Convert.ToDateTime(values[i][2].ToString());
-                            quarantinePerson.dateOfBirth = birth;
-                        }
-                        catch
-                        {
-                            CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
-                            var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
-                            FailNotificationVM.Content = values[i][1].ToString() + " has error in birthday";
-                            ErrorDialog.ShowDialog();
-                            return;
-                        }
-                    }
-
-                    if (values[i][3] != null)
-                    {
-                        quarantinePerson.sex = values[i][3].ToString();
-                    }
-
-                    if (values[i][4] != null)
-                    {
-                        string[] arrListStr = values[i][4].ToString().Split(',');
-                        if (arrListStr.Length < 3)
-                        {
-                            CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
-                            var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
-                            FailNotificationVM.Content = values[i][1].ToString() + " has error in address";
-                            ErrorDialog.ShowDialog();
-                            return;
-                        }
-                        if (arrListStr.Length == 3)
-                        {
-                            personAddress.province = arrListStr[2];
-                            personAddress.district = arrListStr[1];
-                            personAddress.ward = arrListStr[0];
-                        }
-                        else
-                        {
-                            personAddress.province = arrListStr[3];
-                            personAddress.district = arrListStr[2];
-                            personAddress.ward = arrListStr[1];
-                            personAddress.streetName = arrListStr[0];
-                        }
-                    }
-
-                    if (values[i][6] != null)
-                    {
-                        quarantinePerson.citizenID = values[i][6].ToString();
-                    }
-                    if (values[i][7] != null)
-                    {
-                        quarantinePerson.healthInsuranceID = values[i][7].ToString();
-                    }
-                    if (values[i][8] != null)
-                    {
-                        quarantinePerson.nationality = values[i][8].ToString();
-                    }
-                    if (values[i][9] != null)
-                    {
-                        quarantinePerson.phoneNumber = values[i][9].ToString();
-                    }
-                    if (values[i][10] != null)
-                    {
-                        string health = values[i][10].ToString();
-
-                        if (health.Contains("sốt") || health.Contains("Sốt"))
-                        {
-                            healthInformation.isFever = true;
-                        }
-                        else healthInformation.isFever = false;
-                        if (health.Contains("ho") || health.Contains("Ho"))
-                        {
-                            healthInformation.isCough = true;
-                        }
-                        else healthInformation.isCough = false;
-                        if (health.Contains("đau họng") || health.Contains("Đau họng"))
-                        {
-                            healthInformation.isSoreThroat = true;
-                        }
-                        else healthInformation.isSoreThroat = false;
-                        if (health.Contains("mất vị giác") || health.Contains("Mất vị giác"))
-                        {
-                            healthInformation.isLossOfTatse = true;
-                        }
-                        else healthInformation.isLossOfTatse = false;
-                        if (health.Contains("mệt mỏi") || health.Contains("Mệt mỏi"))
-                        {
-                            healthInformation.isTired = true;
-                        }
-                        else healthInformation.isTired = false;
-                        if (health.Contains("khó thở") || health.Contains("Khó thở"))
-                        {
-                            healthInformation.isShortnessOfBreath = true;
-                        }
-                        else healthInformation.isShortnessOfBreath = false;
-                        if (health.Contains("khác") || health.Contains("Khác"))
-                        {
-                            healthInformation.isOtherSymptoms = true;
-                        }
-                        else healthInformation.isOtherSymptoms = false;
-                        if (health.Contains("có bệnh nền") || health.Contains("Có bệnh nền"))
-                        {
-                            healthInformation.isFever = true;
-                        }
-                        else healthInformation.isFever = false;
-                    }
-                    if (values[i][11] != null)
-                    {
-                        string description = values[i][11].ToString();
-                        int levelId;
-                        bool checkLevel = DataProvider.ins.db.Severities.Where(x => x.description == description).Count() >= 1 ? true : false;
-                        if (checkLevel)
-                        {
-                            levelId = DataProvider.ins.db.Severities.Where(x => x.description == description).FirstOrDefault().id;
-                            quarantinePerson.levelID = levelId;
-                        }
-                    }
-                    if (values[i][12] != null)
-                    {
-                        DateTime arrivedTime = Convert.ToDateTime(values[i][12].ToString());
-                        quarantinePerson.arrivedDate = arrivedTime;
-
-                    }
-                    if (values[i][12] != null)
-                    {
-                        DateTime arrivedTime = Convert.ToDateTime(values[i][12].ToString());
-                        quarantinePerson.arrivedDate = arrivedTime;
-
-                    }
-                    if (values[i][13].ToString() != "Chưa tiêm")
-                    {
-                        var records = values[i][13].ToString().Split(',');
-                        for (int j = 0; j < records.Length; j++)
-                        {
-                            InjectionRecord rc = new InjectionRecord();
-                            var str = records[j].Split(' ');
-                            DateTime date = Convert.ToDateTime(str[0].ToString());
-                            string vaccine = str[1].ToString();
-                            rc.dateInjection = date;
-                            rc.vaccineName = vaccine;
-                            injectionRecords.Add(rc);
-                        }
-                    }
-                    else
-                    {
-                        InjectionRecord rc = new InjectionRecord();
-                        rc.vaccineName = "Không có nhá";
-                        injectionRecords.Add(rc);
-                    }
-                    listAdress.Add(personAddress);
-                    listHealthInformation.Add(healthInformation);
-                    listQuarantinePerson.Add(quarantinePerson);
-                    listInjectionRecords.Add(injectionRecords);
+                    linkSheet = DataProvider.ins.db.QuarantineAreas.FirstOrDefault().googleSheetURL.ToString();
                 }
+                catch { }
+                var ctrc = linkSheet.Split('/');
 
-                using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+                String spreadsheetId = "1R6zuZB_xFuzWrCnl4j0JLZ3da5HtprRrmjeQ3LdxW44";
+                if (ctrc.Length >= 2 && ctrc[ctrc.Length - 2] != "" && ctrc[ctrc.Length - 2] != null)
                 {
-                    try
-                    {
-                        var temptQAInformation = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
-                        if (temptQAInformation == null) return;
-                        QAInformation = temptQAInformation;
+                    spreadsheetId = ctrc[ctrc.Length - 2].ToString();
+                }
+                String range = "Sheet1";
+                string credentialPath = Path.Combine(Environment.CurrentDirectory, ".credentials", ApplicationName);
 
-                        for (int i = 0; i < listQuarantinePerson.Count; i++)
+                UserCredential credential;
+                using (var stream =
+                    new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
+                {
+                    credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
+                    clientSecrets: GoogleClientSecrets.FromStream(stream).Secrets,
+                    scopes: Scopes,
+                    user: "user",
+                    taskCancellationToken: CancellationToken.None,
+                    new FileDataStore(credentialPath, true)
+                    );
+                }
+                var service = new SheetsService(new Google.Apis.Services.BaseClientService.Initializer()
+                {
+                    HttpClientInitializer = credential,
+                    ApplicationName = ApplicationName,
+                });
+                var request =
+                        service.Spreadsheets.Values.Get(spreadsheetId, range);
+                ValueRange response = request.Execute();
+                IList<IList<Object>> values = response.Values;
+                List<Address> listAdress = new List<Address>();
+                List<QuarantinePerson> listQuarantinePerson = new List<QuarantinePerson>();
+                List<HealthInformation> listHealthInformation = new List<HealthInformation>();
+                List<List<InjectionRecord>> listInjectionRecords = new List<List<InjectionRecord>>();
+                int rowCount = values.Count();
+                if (rowCount > 1)
+                {
+
+                    if (values != null && values.Count > 0)
+                    {
+
+                        for (int i = 1; i < rowCount; i++)
                         {
 
-                            DataProvider.ins.db.Addresses.Add(listAdress[i]);
-                            DataProvider.ins.db.SaveChanges();
-                            listQuarantinePerson[i].leaveDate = listQuarantinePerson[i].arrivedDate.AddDays(QAInformation.requiredDayToFinish).Date;
-                            listQuarantinePerson[i].addressID = listAdress[i].id;
-                            DataProvider.ins.db.QuarantinePersons.Add(listQuarantinePerson[i]);
-                            DataProvider.ins.db.SaveChanges();
-                            QuarantinePersonList.Add(listQuarantinePerson[i]);
-                            listHealthInformation[i].quarantinePersonID = listQuarantinePerson[i].id;
-                            DataProvider.ins.db.HealthInformations.Add(listHealthInformation[i]);
-                            DataProvider.ins.db.SaveChanges();
-
-                            if (listInjectionRecords[i][0].vaccineName != "Không có nhá")
+                            List<InjectionRecord> injectionRecords = new List<InjectionRecord>();
+                            Address personAddress = new Address();
+                            QuarantinePerson quarantinePerson = new QuarantinePerson();
+                            HealthInformation healthInformation = new HealthInformation();
+                            if (values[i][1] != null)
                             {
-                                for (int j = 0; j < listInjectionRecords[i].Count; j++)
+                                quarantinePerson.name = values[i][1].ToString();
+                            }
+                            if (values[i][2] != null)
+                            {
+                                try
                                 {
-                                    listInjectionRecords[i][j].quarantinePersonID = listQuarantinePerson[i].id;
-                                    DataProvider.ins.db.InjectionRecords.Add(listInjectionRecords[i][j]);
+                                    DateTime birth = Convert.ToDateTime(values[i][2].ToString());
+                                    quarantinePerson.dateOfBirth = birth;
+                                }
+                                catch
+                                {
+                                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                                    FailNotificationVM.Content = values[i][1].ToString() + " ngày sinh bị lỗi \n Lưu ý: chỉnh định dạng ngày tháng của máy thành (MM/dd/yyyy)";
+                                    ErrorDialog.ShowDialog();
+                                    return;
+                                }
+                            }
+
+                            if (values[i][3] != null)
+                            {
+                                quarantinePerson.sex = values[i][3].ToString();
+                            }
+
+                            if (values[i][4] != null)
+                            {
+                                string[] arrListStr = values[i][4].ToString().Trim().Split(',');
+                                if (arrListStr.Length < 3)
+                                {
+                                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                                    FailNotificationVM.Content = values[i][1].ToString() + " has error in address";
+                                    ErrorDialog.ShowDialog();
+                                    return;
+                                }
+                                if (arrListStr.Length == 3)
+                                {
+                                    personAddress.province = arrListStr[2].Trim();
+                                    personAddress.district = arrListStr[1].Trim();
+                                    personAddress.ward = arrListStr[0].Trim();
+                                }
+                                else
+                                {
+                                    personAddress.province = arrListStr[3].Trim();
+                                    personAddress.district = arrListStr[2].Trim();
+                                    personAddress.ward = arrListStr[1].Trim();
+                                    personAddress.streetName = arrListStr[0].Trim();
+                                }
+                            }
+
+                            if (values[i][6] != null)
+                            {
+                                quarantinePerson.citizenID = values[i][6].ToString();
+                            }
+                            if (values[i][7] != null)
+                            {
+                                quarantinePerson.healthInsuranceID = values[i][7].ToString();
+                            }
+                            if (values[i][8] != null)
+                            {
+                                quarantinePerson.nationality = values[i][8].ToString().Trim();
+                            }
+                            if (values[i][9] != null)
+                            {
+                                quarantinePerson.phoneNumber = "0" + values[i][9].ToString().Trim();
+                            }
+                            if (values[i][10] != null)
+                            {
+                                string health = values[i][10].ToString().ToLower();
+
+                                if (health.Contains("sốt") || health.Contains("Sốt"))
+                                {
+                                    healthInformation.isFever = true;
+                                }
+                                else healthInformation.isFever = false;
+                                if (health.Contains("ho") || health.Contains("Ho"))
+                                {
+                                    healthInformation.isCough = true;
+                                }
+                                else healthInformation.isCough = false;
+                                if (health.Contains("đau họng") || health.Contains("Đau họng"))
+                                {
+                                    healthInformation.isSoreThroat = true;
+                                }
+                                else healthInformation.isSoreThroat = false;
+                                if (health.Contains("mất vị giác") || health.Contains("mất mùi vị"))
+                                {
+                                    healthInformation.isLossOfTatse = true;
+                                }
+                                else healthInformation.isLossOfTatse = false;
+                                if (health.Contains("mệt mỏi") || health.Contains("Mệt mỏi"))
+                                {
+                                    healthInformation.isTired = true;
+                                }
+                                else healthInformation.isTired = false;
+                                if (health.Contains("khó thở") || health.Contains("Khó thở"))
+                                {
+                                    healthInformation.isShortnessOfBreath = true;
+                                }
+                                else healthInformation.isShortnessOfBreath = false;
+                                if (health.Contains("khác") || health.Contains("Khác"))
+                                {
+                                    healthInformation.isOtherSymptoms = true;
+                                }
+                                else healthInformation.isOtherSymptoms = false;
+                                if (health.Contains("có bệnh nền") || health.Contains("Có bệnh nền"))
+                                {
+                                    healthInformation.isDisease = true;
+                                }
+                                else healthInformation.isDisease = false;
+                            }
+                            if (values[i][11] != null)
+                            {
+                                string description = values[i][11].ToString();
+                                int levelId;
+                                bool checkLevel = DataProvider.ins.db.Severities.Where(x => x.description == description).Count() >= 1 ? true : false;
+                                if (checkLevel)
+                                {
+                                    levelId = DataProvider.ins.db.Severities.Where(x => x.description == description).FirstOrDefault().id;
+                                    quarantinePerson.levelID = levelId;
+                                }
+                            }
+                            if (values[i][12] != null)
+                            {
+                                DateTime arrivedTime = Convert.ToDateTime(values[i][12].ToString());
+                                quarantinePerson.arrivedDate = arrivedTime;
+
+                            }
+                            if (values[i][12] != null)
+                            {
+                                try
+                                {
+                                    DateTime arrivedTime = Convert.ToDateTime(values[i][12].ToString());
+                                    quarantinePerson.arrivedDate = arrivedTime;
+                                }
+                                catch
+                                {
+                                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                                    FailNotificationVM.Content = values[i][1].ToString() + " bị lỗi \n Lưu ý: chỉnh định dạng ngày tháng của máy thành (MM/dd/yyyy)";
+                                    ErrorDialog.ShowDialog();
+                                    return;
+                                }
+                            }
+                            if (values[i][13].ToString() != "Chưa tiêm")
+                            {
+
+                                try
+                                {
+                                    var records = values[i][13].ToString().Split(',');
+                                    for (int j = 0; j < records.Length; j++)
+                                    {
+                                        InjectionRecord rc = new InjectionRecord();
+                                        var str = records[j].Split(' ');
+                                        DateTime date = Convert.ToDateTime(str[0].ToString());
+                                        string vaccine = str[1].ToString();
+                                        rc.dateInjection = date;
+                                        rc.vaccineName = vaccine;
+                                        injectionRecords.Add(rc);
+                                    }
+                                }
+                                catch
+                                {
+                                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                                    FailNotificationVM.Content = values[i][1].ToString() + " bị lỗi \n Lưu ý: chỉnh định dạng ngày tháng của máy thành (MM/dd/yyyy)";
+                                    ErrorDialog.ShowDialog();
+                                    return;
+                                }
+                            }
+                            else
+                            {
+                                InjectionRecord rc = new InjectionRecord();
+                                rc.vaccineName = "Không có nhá";
+                                injectionRecords.Add(rc);
+                            }
+                            listAdress.Add(personAddress);
+                            listHealthInformation.Add(healthInformation);
+                            listQuarantinePerson.Add(quarantinePerson);
+                            listInjectionRecords.Add(injectionRecords);
+                        }
+
+                        using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
+                        {
+                            try
+                            {
+                                var temptQAInformation = DataProvider.ins.db.QuarantineAreas.FirstOrDefault();
+                                if (temptQAInformation == null) return;
+                                QAInformation = temptQAInformation;
+
+                                for (int i = 0; i < listQuarantinePerson.Count; i++)
+                                {
+
+                                    DataProvider.ins.db.Addresses.Add(listAdress[i]);
                                     DataProvider.ins.db.SaveChanges();
+                                    listQuarantinePerson[i].leaveDate = listQuarantinePerson[i].arrivedDate.AddDays(QAInformation.requiredDayToFinish).Date;
+                                    listQuarantinePerson[i].addressID = listAdress[i].id;
+                                    DataProvider.ins.db.QuarantinePersons.Add(listQuarantinePerson[i]);
+                                    DataProvider.ins.db.SaveChanges();
+                                    QuarantinePersonList.Add(listQuarantinePerson[i]);
+                                    listHealthInformation[i].quarantinePersonID = listQuarantinePerson[i].id;
+                                    DataProvider.ins.db.HealthInformations.Add(listHealthInformation[i]);
+                                    DataProvider.ins.db.SaveChanges();
+
+                                    if (listInjectionRecords[i][0].vaccineName != "Không có nhá")
+                                    {
+                                        for (int j = 0; j < listInjectionRecords[i].Count; j++)
+                                        {
+                                            listInjectionRecords[i][j].quarantinePersonID = listQuarantinePerson[i].id;
+                                            DataProvider.ins.db.InjectionRecords.Add(listInjectionRecords[i][j]);
+                                            DataProvider.ins.db.SaveChanges();
+                                        }
+                                        DataProvider.ins.db.SaveChanges();
+                                    }
+
                                 }
-                                DataProvider.ins.db.SaveChanges();
-                            }
-
-                        }
-                        PeopleListView = DataProvider.ins.db.QuarantinePersons.ToArray();
-                        InitPersonList();
-                        Window SuccessDialog = new Window
-                        {
-                            AllowsTransparency = true,
-                            Background = Brushes.Transparent,
-                            Width = 600,
-                            Height = 400,
-                            ResizeMode = ResizeMode.NoResize,
-                            WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                            WindowStyle = WindowStyle.None,
-                            Content = new SuccessNotification()
-                        };
-
-
-                        DataProvider.ins.db.SaveChanges();
-
-                        transaction.Commit();
-
-                        //MessageBox.Show("Đã thêm từ file excel");
-                        BatchUpdateSpreadsheetRequest content = new BatchUpdateSpreadsheetRequest();
-                        Request RequestBody = new Request()
-                        {
-                            DeleteDimension = new DeleteDimensionRequest()
-                            {
-                                Range = new DimensionRange()
+                                PeopleListView = DataProvider.ins.db.QuarantinePersons.ToArray();
+                                InitPersonList();
+                                Window SuccessDialog = new Window
                                 {
-                                    SheetId = 0,
-                                    Dimension = "ROWS",
-                                    StartIndex = 1,
-                                    EndIndex = listQuarantinePerson.Count + 1,
+                                    AllowsTransparency = true,
+                                    Background = Brushes.Transparent,
+                                    Width = 600,
+                                    Height = 400,
+                                    ResizeMode = ResizeMode.NoResize,
+                                    WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                                    WindowStyle = WindowStyle.None,
+                                    Content = new SuccessNotification()
+                                };
+
+
+                                DataProvider.ins.db.SaveChanges();
+
+                                transaction.Commit();
+
+                                //MessageBox.Show("Đã thêm từ file excel");
+                                BatchUpdateSpreadsheetRequest content = new BatchUpdateSpreadsheetRequest();
+                                Request RequestBody = new Request()
+                                {
+                                    DeleteDimension = new DeleteDimensionRequest()
+                                    {
+                                        Range = new DimensionRange()
+                                        {
+                                            SheetId = 0,
+                                            Dimension = "ROWS",
+                                            StartIndex = 1,
+                                            EndIndex = listQuarantinePerson.Count + 1,
+                                        }
+                                    }
+                                };
+                                List<Request> requests = new List<Request>();
+                                requests.Add(RequestBody);
+                                content.Requests = requests;
+                                try
+                                {
+                                    SpreadsheetsResource.BatchUpdateRequest Deletion = new SpreadsheetsResource.BatchUpdateRequest(service, content, spreadsheetId);
+                                    Deletion.Execute();
                                 }
+                                catch
+                                {
+                                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                                    FailNotificationVM.Content = "Thao tác xóa bị lỗi";
+                                    ErrorDialog.ShowDialog();
+                                };
+
+                                SuccessDialog.ShowDialog();
+
+                                //DashboardViewModel.ins.Init();
                             }
-                        };
-                        List<Request> requests = new List<Request>();
-                        requests.Add(RequestBody);
-                        content.Requests = requests;
-                        try
-                        {
-                            SpreadsheetsResource.BatchUpdateRequest Deletion = new SpreadsheetsResource.BatchUpdateRequest(service, content, spreadsheetId);
-                            Deletion.Execute();
+                            catch (DbUpdateException e)
+                            {
+                                transaction.Rollback();
+                                RollBackChange();
+
+                                CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                                var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                                FailNotificationVM.Content = "Lỗi cơ sở dữ liệu cập nhật";
+                                ErrorDialog.ShowDialog();
+                            }
+                            catch (DbEntityValidationException e)
+                            {
+                                transaction.Rollback();
+                                RollBackChange();
+
+                                CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                                var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                                FailNotificationVM.Content = "Lỗi xác thực";
+                                ErrorDialog.ShowDialog();
+                            }
+                            catch (NotSupportedException e)
+                            {
+                                transaction.Rollback();
+                                RollBackChange();
+
+                                CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                                var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                                FailNotificationVM.Content = "Lỗi database không hỗ trợ";
+                                ErrorDialog.ShowDialog();
+                            }
+                            catch (ObjectDisposedException e)
+                            {
+                                transaction.Rollback();
+                                RollBackChange();
+
+                                CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                                var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                                FailNotificationVM.Content = "Lỗi đối tượng database bị hủy";
+                                ErrorDialog.ShowDialog();
+                            }
+                            catch (InvalidOperationException e)
+                            {
+                                transaction.Rollback();
+                                RollBackChange();
+
+                                CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                                var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                                FailNotificationVM.Content = "Lỗi thao tác không hợp lệ";
+                                ErrorDialog.ShowDialog();
+                            }
                         }
-                        catch
-                        {
-                            CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
-                            var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
-                            FailNotificationVM.Content = "Thao tác xóa bị lỗi";
-                            ErrorDialog.ShowDialog();
-                        };
-
-                        SuccessDialog.ShowDialog();
-
-                        //DashboardViewModel.ins.Init();
-                    }
-                    catch (DbUpdateException e)
-                    {
-                        transaction.Rollback();
-                        RollBackChange();
-
-                        CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
-                        var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
-                        FailNotificationVM.Content = "Lỗi cơ sở dữ liệu cập nhật";
-                        ErrorDialog.ShowDialog();
-                    }
-                    catch (DbEntityValidationException e)
-                    {
-                        transaction.Rollback();
-                        RollBackChange();
-
-                        CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
-                        var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
-                        FailNotificationVM.Content = "Lỗi xác thực";
-                        ErrorDialog.ShowDialog();
-                    }
-                    catch (NotSupportedException e)
-                    {
-                        transaction.Rollback();
-                        RollBackChange();
-
-                        CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
-                        var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
-                        FailNotificationVM.Content = "Lỗi database không hỗ trợ";
-                        ErrorDialog.ShowDialog();
-                    }
-                    catch (ObjectDisposedException e)
-                    {
-                        transaction.Rollback();
-                        RollBackChange();
-
-                        CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
-                        var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
-                        FailNotificationVM.Content = "Lỗi đối tượng database bị hủy";
-                        ErrorDialog.ShowDialog();
-                    }
-                    catch (InvalidOperationException e)
-                    {
-                        transaction.Rollback();
-                        RollBackChange();
-
-                        CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
-                        var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
-                        FailNotificationVM.Content = "Lỗi thao tác không hợp lệ";
-                        ErrorDialog.ShowDialog();
                     }
                 }
+                else
+                {
+                    //MessageBox.Show("No data found.");
+                    CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
+                    var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
+                    if (rowCount == 1)
+                    {
+                        FailNotificationVM.Content = "Không tìm thấy dữ liệu";
+                    }
+                    ErrorDialog.ShowDialog();
+                }
             }
-            else
+            catch (Exception e)
             {
-                //MessageBox.Show("No data found.");
                 CustomUserControl.FailNotification ErrorDialog = new CustomUserControl.FailNotification();
                 var FailNotificationVM = ErrorDialog.DataContext as FailNotificationViewModel;
-                FailNotificationVM.Content = "Không tìm thấy dữ liệu";
+                FailNotificationVM.Content = e.Message;
                 ErrorDialog.ShowDialog();
             }
-
         }
         void ExportExcel()
         {
@@ -3383,6 +3503,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 sheet.Range["P" + i.ToString()].Value = countInjectionRecord;
                 sheet2.Range["A" + i.ToString()].Value = PeopleListView[i - 2].id;
             }
+            file.Close();
         }
 
         async void AddTestingResutlFromExcel(bool isExecute)
@@ -3411,22 +3532,22 @@ namespace QuanLyKhuCachLy.ViewModel
                 Excel.Application xlApp = new Excel.Application();
                 Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(path);
                 Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
-                
+
                 Excel.Range xlRange = xlWorksheet.UsedRange;
                 int rowCount = xlRange.Rows.Count;
                 int colCount = xlRange.Columns.Count;
-                if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2 != "ID" ||
-                xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2 != "Kết quả" ||
-                xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2 != "Ngày xét nghiệm")
+                if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2.ToString().Trim().ToLower() != "id" ||
+                xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2.ToString().Trim().ToLower() != "kết quả" ||
+                xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2.ToString().Trim().ToLower() != "ngày xét nghiệm")
                 {
                     if (xlWorkbook.Sheets.Count > 1)
                     {
                         Excel._Worksheet xlWorksheet2 = xlWorkbook.Sheets[2];
                         Excel.Range xlRange2 = xlWorksheet2.UsedRange;
-                       
-                        if (xlRange2.Cells[1, 1] == null || xlRange2.Cells[1, 1].Value2 != "ID" ||
-                        xlRange2.Cells[1, 2] == null || xlRange2.Cells[1, 2].Value2 != "Kết quả" ||
-                        xlRange2.Cells[1, 3] == null || xlRange2.Cells[1, 3].Value2 != "Ngày xét nghiệm")
+
+                        if (xlRange2.Cells[1, 1] == null || xlRange2.Cells[1, 1].Value2.ToString().Trim().ToLower() != "id" ||
+                        xlRange2.Cells[1, 2] == null || xlRange2.Cells[1, 2].Value2.ToString().Trim().ToLower() != "kết quả" ||
+                        xlRange2.Cells[1, 3] == null || xlRange2.Cells[1, 3].Value2.ToString().Trim().ToLower() != "ngày xét nghiệm")
                         {
                             errorMessage = "Không đúng định dạng file";
                             xlWorkbook.Close();
@@ -3435,6 +3556,8 @@ namespace QuanLyKhuCachLy.ViewModel
                         else
                         {
                             xlRange = xlWorksheet2.UsedRange;
+                            rowCount = xlRange.Rows.Count;
+                            colCount = xlRange.Columns.Count;
                         }
                     }
                     else
@@ -3443,7 +3566,7 @@ namespace QuanLyKhuCachLy.ViewModel
                         xlWorkbook.Close();
                         return;
                     }
-                   
+
                 }
                 for (int i = 2; i <= rowCount; i++)
                 {
@@ -3451,7 +3574,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (xlRange.Cells[i, 1] != null && xlRange.Cells[i, 1].Value2 != null)
                     {
                         int t;
-                        if (Int32.TryParse(xlRange.Cells[i, 1].Value2.ToString(),out  t))
+                        if (Int32.TryParse(xlRange.Cells[i, 1].Value2.ToString(), out t))
                         {
                             testingResult.quarantinePersonID = Int32.Parse(xlRange.Cells[i, 1].Value2.ToString());
                         }
@@ -3471,6 +3594,12 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (xlRange.Cells[i, 2] != null && xlRange.Cells[i, 2].Value2 != null)
                     {
                         string temptResult = xlRange.Cells[i, 2].Value2.ToString().ToLower();
+                        if (temptResult != "âm tính" && temptResult != "dương tính")
+                        {
+                            xlWorkbook.Close();
+                            errorMessage = "Kết quả bị lỗi";
+                            return;
+                        }
                         testingResult.isPositive = (temptResult == "âm tính") ? false : true;
                     }
                     else
@@ -3506,6 +3635,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 xlWorkbook.Close();
                 using (var transaction = DataProvider.ins.db.Database.BeginTransaction())
                 {
+                    
                     try
                     {
                         for (int i = 0; i < listTestingResults.Count; i++)
@@ -3522,28 +3652,42 @@ namespace QuanLyKhuCachLy.ViewModel
                         transaction.Commit();
                         //MessageBox.Show("Đã thêm từ file excel");
                         isSuccess = true;
-
                         //DashboardViewModel.ins.Init();
                     }
                     catch (DbUpdateException e)
                     {
                         transaction.Rollback();
+                        RollBackChange();
+                        errorMessage = "Lỗi cơ sở dữ liệu cập nhật";
                     }
                     catch (DbEntityValidationException e)
                     {
                         transaction.Rollback();
+                        RollBackChange();
+
+
+                        errorMessage = "Lỗi xác thực";
+
                     }
                     catch (NotSupportedException e)
                     {
                         transaction.Rollback();
+                        RollBackChange();
+                        errorMessage = "Lỗi database không hỗ trợ";
+
                     }
                     catch (ObjectDisposedException e)
                     {
                         transaction.Rollback();
+                        RollBackChange();
+                        errorMessage = "Lỗi đối tượng database bị hủy";
                     }
                     catch (InvalidOperationException e)
                     {
                         transaction.Rollback();
+                        RollBackChange();
+                        errorMessage = "Lỗi thao tác không hợp lệ";
+
                     }
                 }
             });
@@ -3608,6 +3752,7 @@ namespace QuanLyKhuCachLy.ViewModel
             file.Sheets.Add();
             Microsoft.Office.Interop.Excel.Worksheet sheet = file.Worksheets[1];
             Microsoft.Office.Interop.Excel.Worksheet sheet1 = file.Worksheets[2];
+            
             sheet.Name = "Danh sách người cách ly";
             sheet1.Name = "Lịch sử di chuyển";
             sheet.Columns[1].ColumnWidth = 5;
@@ -3642,23 +3787,26 @@ namespace QuanLyKhuCachLy.ViewModel
             sheet.Range["L1"].Value = "Nhóm đối tượng";
             sheet.Range["M1"].Value = "Ngày đến";
             sheet.Range["N1"].Value = "Thông tin tiêm chủng";
-            sheet.Range["O2"].Value = "Lưu ý:Các dữ liệu về địa điểm sau dấu ',' không có khoảng trống,";
+            sheet.Range["O2"].Value = "Lưu ý:Các thành phần của điệm điểm cách nhau bởi dấu ','";
             sheet.Range["O3"].Value = "các từ chỉ địa phương ghi hoa chữ đầu.";
             sheet.Range["O4"].Value = "VD: Thôn A,Xã B,Huyện C,Tỉnh D";
             sheet.Range["O6"].Value = "CMND/CCCD, Mã BH, Triệu chứng, nhóm đối tượng,";
             sheet.Range["O7"].Value = "Thông tin tiêm chủng và di chuyển có thể để trống.";
             sheet.Range["O9"].Value = "Giới tính chỉ có thể là Nam/Nữ";
             sheet.Range["O10"].Value = "Với mỗi lần tiêm chủng, ghi theo cú pháp 'ngày vaccine' ";
-            sheet.Range["O11"].Value = "Các lần tiêm cách nhau bởi dấu ',' không có khoảng trống ở giữa ";
+            sheet.Range["O11"].Value = "Các lần tiêm cách nhau bởi dấu ','";
             sheet.Range["O12"].Value = "Vd: 1/1/2021 Astra,2/4/2021 Astra ";
-            sheet.Range["O14"].Value = "Xóa lưu ý này trước khi thêm.";
+            sheet.Range["O13"].Value = "Thêm lịch sử di chuyển ở sheet thứ 2";
+            sheet.Range["O15"].Value = "Xóa lưu ý này trước khi thêm.";
+
             sheet1.Range["A1"].Value = "STT trong DS";
             sheet1.Range["B1"].Value = "Ngày";
             sheet1.Range["C1"].Value = "Địa điểm";
-            sheet1.Range["D2"].Value = "Lưu ý:Các dữ liệu về địa điểm sau dấu ',' không có khoảng trống,";
+            sheet1.Range["D2"].Value = "Lưu ý:Các thảnh phần của điệm điểm cách nhau bởi dấu ','";
             sheet1.Range["D3"].Value = "các từ chỉ địa phương ghi hoa chữ đầu.";
             sheet1.Range["D4"].Value = "VD: Thôn A,Xã B,Huyện C,Tỉnh D";
             sheet1.Range["D6"].Value = "Xóa lưu ý này trước khi thêm.";
+            file.Close();
         }
         #endregion
     }

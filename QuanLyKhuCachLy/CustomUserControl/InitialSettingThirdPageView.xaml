@@ -163,7 +163,7 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Căn cước công dân
+                        Căn cước công dân (*)
                     </TextBlock>
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập số căn cước công dân"
@@ -238,12 +238,12 @@
                         FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                         FontSize="16"
                         Foreground="#FF434A54">
-                        Số điện thoại
+                        Số điện thoại (*)
                     </TextBlock>
                     <TextBox
-                        materialDesign:HintAssist.Hint="Nhập số điện thoại"
+                        materialDesign:HintAssist.Hint="Nhập số điện thoại (*)"
                         utility:ProtocolSettingsLayout.MVVMHasError="{Binding MPhoneNumberFieldHasError}"
-                        MaxLength="20"
+                        MaxLength="10"
                         PreviewTextInput="TextBox_PreviewTextInput"
                         Style="{StaticResource TextInputField}">
                         <TextBox.Text>

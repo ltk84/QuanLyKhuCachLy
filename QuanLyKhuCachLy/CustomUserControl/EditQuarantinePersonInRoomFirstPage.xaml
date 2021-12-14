@@ -64,7 +64,7 @@
                     FontFamily="/QuanLyKhuCachLy;component/Resources/fonts/#Noto Sans"
                     FontSize="16"
                     Foreground="#FF434A54">
-                    Họ và tên (*)
+                    Họ và tên
                 </TextBlock>
                 <TextBox
                     materialDesign:HintAssist.Hint="Nhập họ và tên"
@@ -204,7 +204,7 @@
                 </TextBlock>
                 <TextBox
                     materialDesign:HintAssist.Hint="Nhập số điện thoại"
-                    MaxLength="20"
+                    MaxLength="10"
                     PreviewTextInput="TextBox_PreviewTextInput"
                     Style="{StaticResource TextInputField}">
                     <TextBox.Text>
