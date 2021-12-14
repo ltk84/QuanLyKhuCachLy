@@ -869,7 +869,7 @@ namespace QuanLyKhuCachLy.ViewModel
             DBUtilityTracker.Rollback();
             QuarantinePersonList = new ObservableCollection<QuarantinePerson>(DataProvider.ins.db.QuarantinePersons.Where(x => x.roomID == RoomID));
             InitPersonNotRoomList();
-            if (SelectedItem != null) SelectedItem = QuarantinePersonList.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+            SelectedItem = null;
         }
 
         void InitPersonNotRoomList()

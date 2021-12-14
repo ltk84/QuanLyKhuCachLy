@@ -1129,7 +1129,7 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             DataProvider.ins.db.ChangeTracker.Entries().Where(ex => ex.Entity != null).ToList().ForEach(ex => ex.State = EntityState.Detached);
             StaffList = new ObservableCollection<Staff>(DataProvider.ins.db.Staffs);
-            if (SelectedItem != null) SelectedItem = StaffList.Where(x => x.id == SelectedItem.id).FirstOrDefault();
+            SelectedItem = null;
         }
 
 
@@ -1291,26 +1291,28 @@ namespace QuanLyKhuCachLy.ViewModel
                 List<Staff> listStaff = new List<Staff>();
                 Excel.Application xlApp = new Excel.Application();
                 Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(path);
+                xlWorkbook.RefreshAll();
                 Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
                 Excel.Range xlRange = xlWorksheet.UsedRange;
                 int rowCount = xlRange.Rows.Count;
                 int colCount = xlRange.Columns.Count;
-                if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2.ToString() != "STT" ||
-                xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2.ToString() != "Họ và tên" ||
-                xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2.ToString() != "Ngày sinh" ||
-                xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2.ToString() != "Giới tính" ||
-                xlRange.Cells[1, 5] == null || xlRange.Cells[1, 5].Value2.ToString() != "CMND/CCCD" ||
-                xlRange.Cells[1, 6] == null || xlRange.Cells[1, 6].Value2.ToString() != "Quốc tịch" ||
-                xlRange.Cells[1, 7] == null || xlRange.Cells[1, 7].Value2.ToString() != "SĐT" ||
-                xlRange.Cells[1, 8] == null || xlRange.Cells[1, 8].Value2.ToString() != "MaBH" ||
-                xlRange.Cells[1, 9] == null || xlRange.Cells[1, 9].Value2.ToString() != "Chức vụ" ||
-                xlRange.Cells[1, 10] == null || xlRange.Cells[1, 10].Value2.ToString() != "Phòng ban" ||
-                xlRange.Cells[1, 11] == null || xlRange.Cells[1, 11].Value2.ToString() != "Địa chỉ")
+                if (xlRange.Cells[1, 1] == null || xlRange.Cells[1, 1].Value2.ToString().Trim().ToLower() != "stt" ||
+                xlRange.Cells[1, 2] == null || xlRange.Cells[1, 2].Value2.ToString().Trim().ToLower() != "họ và tên" ||
+                xlRange.Cells[1, 3] == null || xlRange.Cells[1, 3].Value2.ToString().Trim().ToLower() != "ngày sinh" ||
+                xlRange.Cells[1, 4] == null || xlRange.Cells[1, 4].Value2.ToString().Trim().ToLower() != "giới tính" ||
+                xlRange.Cells[1, 5] == null || xlRange.Cells[1, 5].Value2.ToString().Trim().ToLower() != "cmnd/cccd" ||
+                xlRange.Cells[1, 6] == null || xlRange.Cells[1, 6].Value2.ToString().Trim().ToLower() != "quốc tịch" ||
+                xlRange.Cells[1, 7] == null || xlRange.Cells[1, 7].Value2.ToString().Trim().ToLower() != "sđt" ||
+                xlRange.Cells[1, 8] == null || xlRange.Cells[1, 8].Value2.ToString().Trim().ToLower() != "mabh" ||
+                xlRange.Cells[1, 9] == null || xlRange.Cells[1, 9].Value2.ToString().Trim().ToLower() != "chức vụ" ||
+                xlRange.Cells[1, 10] == null || xlRange.Cells[1, 10].Value2.ToString().Trim().ToLower() != "phòng ban" ||
+                xlRange.Cells[1, 11] == null || xlRange.Cells[1, 11].Value2.ToString().Trim().ToLower() != "địa chỉ")
                 {
                     xlWorkbook.Close();
                     error = "Không đúng định dạng file";
                     return;
                 }
+                List<int> listSTT = new List<int>();
                 for (int i = 2; i <= rowCount; i++)
                 {
                     Staff staff = new Staff();
@@ -1318,13 +1320,30 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (xlRange.Cells[i, 1] != null && xlRange.Cells[i, 1].Value2 != null)
                     {
                         int t;
+
                         if (Int32.TryParse(xlRange.Cells[i, 1].Value2.ToString(), out t))
                         {
+                            if (t <= 0)
+                            {
+                                xlWorkbook.Close();
+                                error = "STT để bé hơn 1";
+                                return;
+                            }
+                            else
+                            {
+                                if (listSTT.Contains(t))
+                                {
+                                    xlWorkbook.Close();
+                                    error = "STT " + t.ToString() + " bị trùng";
+                                    return;
+                                }
+                                listSTT.Add(t);
+                            }
                         }
                         else
                         {
                             xlWorkbook.Close();
-                            error = "Số thứ tự không phải là số";
+                            error = "STT không là số";
                             return;
                         }
                     }
@@ -1369,7 +1388,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     if (xlRange.Cells[i, 4] != null && xlRange.Cells[i, 4].Value2 != null)
                     {
                         string sex = xlRange.Cells[i, 4].Value2.ToString().ToLower();
-                        if(sex != "nam" && sex != "nữ")
+                        if (sex != "nam" && sex != "nữ")
                         {
                             error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " giới tính không đúng (chỉ là Nam/Nữ)";
                             xlWorkbook.Close();
@@ -1394,16 +1413,16 @@ namespace QuanLyKhuCachLy.ViewModel
                         }
                         if (arrListStr.Length == 3)
                         {
-                            address.province = arrListStr[2];
-                            address.district = arrListStr[1];
-                            address.ward = arrListStr[0];
+                            address.province = arrListStr[2].Trim();
+                            address.district = arrListStr[1].Trim();
+                            address.ward = arrListStr[0].Trim();
                         }
                         else
                         {
-                            address.province = arrListStr[3];
-                            address.district = arrListStr[2];
-                            address.ward = arrListStr[1];
-                            address.streetName = arrListStr[0];
+                            address.province = arrListStr[3].Trim();
+                            address.district = arrListStr[2].Trim();
+                            address.ward = arrListStr[1].Trim();
+                            address.streetName = arrListStr[0].Trim();
                         }
                     }
                     else
@@ -1438,7 +1457,31 @@ namespace QuanLyKhuCachLy.ViewModel
                     }
                     if (xlRange.Cells[i, 7] != null && xlRange.Cells[i, 7].Value2 != null)
                     {
-                        staff.phoneNumber = xlRange.Cells[i, 7].Value2.ToString();
+                        int t;
+                        if (Int32.TryParse(xlRange.Cells[i, 7].Value2.ToString(), out t))
+                        {
+                            if(xlRange.Cells[i, 7].Value2.ToString()[0] == '0')
+                            {
+                                staff.phoneNumber = xlRange.Cells[i, 7].Value2.ToString();
+                            }
+                            else
+                            {
+                                staff.phoneNumber = "0"+xlRange.Cells[i, 7].Value2.ToString();
+                            }
+                        }
+                        else
+                        {
+                            error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " lỗi số điện thoại";
+                            xlWorkbook.Close();
+                            return;
+                        }
+
+                    }
+                    else
+                    {
+                        error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " số điện thoại trống";
+                        xlWorkbook.Close();
+                        return;
                     }
                     if (xlRange.Cells[i, 9] != null && xlRange.Cells[i, 9].Value2 != null)
                     {
@@ -1484,30 +1527,35 @@ namespace QuanLyKhuCachLy.ViewModel
                     {
                         transaction.Rollback();
                         RollBackChange();
-
+                        error = "Lỗi cơ sở dữ liệu cập nhật";
                     }
                     catch (DbEntityValidationException e)
                     {
                         transaction.Rollback();
                         RollBackChange();
 
+
+                        error = "Lỗi xác thực";
+
                     }
                     catch (NotSupportedException e)
                     {
                         transaction.Rollback();
                         RollBackChange();
+                        error = "Lỗi database không hỗ trợ";
 
                     }
                     catch (ObjectDisposedException e)
                     {
                         transaction.Rollback();
                         RollBackChange();
-
+                        error = "Lỗi đối tượng database bị hủy";
                     }
                     catch (InvalidOperationException e)
                     {
                         transaction.Rollback();
                         RollBackChange();
+                        error = "Lỗi thao tác không hợp lệ";
 
                     }
                 }
@@ -1599,6 +1647,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 sheet.Range["J" + i.ToString()].Value = StaffListView[i - 2].jobTitle;
                 sheet.Range["K" + i.ToString()].Value = StaffListView[i - 2].department;
             }
+            file.Close();
         }
         void GetFormatExcel()
         {
@@ -1632,13 +1681,14 @@ namespace QuanLyKhuCachLy.ViewModel
             sheet.Range["K1"].Value = "Địa chỉ";
 
             sheet.Range["L2"].Value = "Lưu ý:";
-            sheet.Range["L3"].Value = "Các dữ liệu về địa điểm sau dấu ',' không có khoảng trống,";
+            sheet.Range["L3"].Value = "Các thảnh phần của điệm điểm cách nhau bởi dấu ',' ";
             sheet.Range["L4"].Value = "các từ chỉ địa phương ghi hoa chữ đầu.";
-            sheet.Range["L5"].Value = "VD: Thôn A,Xã B,Huyện C,Tỉnh D";
+            sheet.Range["L5"].Value = "VD: Thôn A, Xã B, Huyện C, Tỉnh D";
             sheet.Range["L6"].Value = "MaBH có thể để trống";
-            sheet.Range["L7"].Value = "Giới tính chỉ có thể là Nam/Nữ";         
+            sheet.Range["L7"].Value = "Giới tính chỉ có thể là Nam/Nữ";
 
             sheet.Range["L8"].Value = "Xóa lưu ý trước khi thêm";
+            file.Close();
         }
         #endregion
     }
