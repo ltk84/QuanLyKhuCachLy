@@ -257,14 +257,14 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             try
             {
-                var accountSid = "AC7539332c00efcc9cdad8d5f1a343f2e7";
-                var authToken = "0a8aed860e052232416fccfb8b86380";
-                authToken += "1";
+                var accountSid = "ACa850390501246f3c3611635b002e61f0";
+                var authToken = "46e4bf0cb8e8e593d41b8a73aa5321e";
+                authToken += "a";
                 TwilioClient.Init(accountSid, authToken);
 
                 var message = MessageResource.Create(
                     body: messageContent,
-                    from: new Twilio.Types.PhoneNumber("+17622007798"),
+                    from: new Twilio.Types.PhoneNumber("+19896536427"),
                     to: new Twilio.Types.PhoneNumber(phoneNumber)
                 );
 
@@ -343,7 +343,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType == "Nhóm đối tượng")
             {
-                FilterProperty = PeopleList.Select(person => person.Severity?.level).ToArray();
+                FilterProperty = PeopleList.Select(person => person.Severity?.description).ToArray();
                 FilterProperty = FilterProperty.Distinct().ToArray();
             }
             else if (SelectedFilterType == "Ngày đi")
@@ -444,7 +444,7 @@ namespace QuanLyKhuCachLy.ViewModel
             else if (SelectedFilterType == "Nhóm đối tượng")
             {
 
-                PeopleListView = PeopleList.Where(x => x.Severity?.level == SelectedFilterProperty).ToArray();
+                PeopleListView = PeopleList.Where(x => x.Severity?.description == SelectedFilterProperty).ToArray();
             }
             else if (SelectedFilterType == "Ngày đi")
             {

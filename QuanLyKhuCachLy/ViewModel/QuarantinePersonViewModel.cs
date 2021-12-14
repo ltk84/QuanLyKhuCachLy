@@ -1675,7 +1675,7 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType == "Nhóm đối tượng")
             {
-                FilterProperty = QuarantinePersonList.Select(person => person.Severity?.level).ToArray();
+                FilterProperty = QuarantinePersonList.Select(person => person.Severity?.description).ToArray();
                 FilterProperty = FilterProperty.Distinct().ToArray();
             }
             else if (SelectedFilterType == "Ngày hoàn thành")
@@ -1775,7 +1775,7 @@ namespace QuanLyKhuCachLy.ViewModel
             else if (SelectedFilterType == "Nhóm đối tượng")
             {
 
-                PeopleListView = QuarantinePersonList.Where(x => x.Severity?.level == SelectedFilterProperty).ToArray();
+                PeopleListView = QuarantinePersonList.Where(x => x.Severity?.description == SelectedFilterProperty).ToArray();
             }
             else if (SelectedFilterType == "Ngày hoàn thành")
             {
