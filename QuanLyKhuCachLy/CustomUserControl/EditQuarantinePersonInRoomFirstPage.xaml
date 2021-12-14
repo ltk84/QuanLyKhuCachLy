@@ -204,7 +204,7 @@
                 </TextBlock>
                 <TextBox
                     materialDesign:HintAssist.Hint="Nhập số điện thoại"
-                    MaxLength="20"
+                    MaxLength="10"
                     PreviewTextInput="TextBox_PreviewTextInput"
                     Style="{StaticResource TextInputField}">
                     <TextBox.Text>

@@ -243,7 +243,7 @@
                     <TextBox
                         materialDesign:HintAssist.Hint="Nhập số điện thoại (*)"
                         utility:ProtocolSettingsLayout.MVVMHasError="{Binding MPhoneNumberFieldHasError}"
-                        MaxLength="20"
+                        MaxLength="10"
                         PreviewTextInput="TextBox_PreviewTextInput"
                         Style="{StaticResource TextInputField}">
                         <TextBox.Text>
