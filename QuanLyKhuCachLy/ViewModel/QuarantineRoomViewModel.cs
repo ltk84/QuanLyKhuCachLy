@@ -15,6 +15,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 using System.Collections.Generic;
 using System.Windows.Media;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace QuanLyKhuCachLy.ViewModel
 {
@@ -145,6 +146,19 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
+        private ObservableCollection<Model.QuarantineRoom> _SelectedItemList;
+
+        public ObservableCollection<Model.QuarantineRoom> SelectedItemList
+        {
+            get { return _SelectedItemList; }
+            set
+            {
+                _SelectedItemList = value; OnPropertyChanged();
+                if (_SelectedItemList.Count == 1) SelectedItem = _SelectedItemList[0] as Model.QuarantineRoom;
+            }
+        }
+
+
         #region Room
         private int _RoomID;
         public int RoomID
@@ -245,6 +259,7 @@ namespace QuanLyKhuCachLy.ViewModel
         #endregion
 
         #region command
+        public ICommand SelectionChangeCommand { get; set; }
         public ICommand AddRoomManualCommand { get; set; }
         public ICommand AddRoomExcelCommand { get; set; }
         public ICommand EditRoomCommand { get; set; }
@@ -270,9 +285,22 @@ namespace QuanLyKhuCachLy.ViewModel
         {
             SetDefaultUI();
 
-
-
             InitBasic();
+
+            SelectionChangeCommand = new RelayCommand<IList>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                ObservableCollection<Model.QuarantineRoom> temptList = new ObservableCollection<Model.QuarantineRoom>();
+
+                foreach (var item in p)
+                {
+                    temptList.Add(item as Model.QuarantineRoom);
+                }
+
+                SelectedItemList = temptList;
+            });
 
             ToAddManualCommand = new RelayCommand<object>((p) =>
             {
@@ -352,14 +380,22 @@ namespace QuanLyKhuCachLy.ViewModel
                 ExportExcel();
             });
 
-            DeleteRoomCommand = new RelayCommand<object>((p) => { if (SelectedItem != null) return true; return false; }, (p) =>
+            DeleteRoomCommand = new RelayCommand<object>((p) =>
+            {
+                if (SelectedItemList != null && SelectedItemList.Count != 0) return true;
+                return false;
+            }, (p) =>
             {
                 BufferWindow bufferWindow = new BufferWindow();
                 bufferWindow.ShowDialog();
                 DeleteConfirmation confirmation = new DeleteConfirmation();
                 if (confirmation.ShowDialog() == true)
                 {
-                    DeleteQuarantineRoom();
+                    foreach (var r in SelectedItemList)
+                    {
+                        SelectedItem = r;
+                        DeleteQuarantineRoom();
+                    }
                     BackToListRoomTab();
                 }
             });
@@ -371,15 +407,22 @@ namespace QuanLyKhuCachLy.ViewModel
 
             CompleteQuarantineCommand = new RelayCommand<object>((p) =>
             {
-                if (PersonInRoomViewModel.QuarantinePersonList.Count > 0)
-                    return true;
+                if (SelectedItemList != null)
+                {
+                    if (SelectedItemList.Count == 1 && PersonInRoomViewModel.QuarantinePersonList.Count > 0 || SelectedItemList.Count > 1)
+                        return true;
+                }
                 return false;
             },
             (p) =>
             {
                 BufferWindow bufferWindow = new BufferWindow();
                 bufferWindow.ShowDialog();
-                CompleteQuarantine();
+                foreach (var r in SelectedItemList)
+                {
+                    SelectedItem = r;
+                    CompleteQuarantine();
+                }
             });
 
             ClearCommand = new RelayCommand<object>((p) =>
@@ -517,14 +560,14 @@ namespace QuanLyKhuCachLy.ViewModel
             }
             else if (SelectedFilterType == "Nhóm đối tượng")
             {
-                
+
                 FilterProperty = RoomList.Select(room =>
                 {
                     if (room.Severity == null) return "Chưa thiết lập";
                     else return room.Severity?.description.ToString();
                 }).ToArray();
                 FilterProperty = FilterProperty.Distinct().ToArray();
-                
+
             }
             else if (SelectedFilterType == "Sức chứa")
             {
@@ -548,7 +591,8 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 RoomListView = RoomList.Where(x =>
                 {
-                    if (SelectedFilterProperty == "Chưa thiết lập") {
+                    if (SelectedFilterProperty == "Chưa thiết lập")
+                    {
                         return x.Severity == null;
                     }
                     else return x.Severity?.description == SelectedFilterProperty;
@@ -560,10 +604,6 @@ namespace QuanLyKhuCachLy.ViewModel
             }
 
         }
-
-
-
-
 
         async void AddRoomFromExcel()
         {
@@ -1007,8 +1047,6 @@ namespace QuanLyKhuCachLy.ViewModel
 
             }
         }
-
-
 
         void ClearData()
         {

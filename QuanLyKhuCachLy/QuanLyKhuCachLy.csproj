@@ -200,6 +200,7 @@
     <Compile Include="CustomUserControl\CompleteQuarantineRecommendation.xaml.cs">
       <DependentUpon>CompleteQuarantineRecommendation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomUserControl\CustomDataGrid.cs" />
     <Compile Include="CustomUserControl\DestinationHistoryFunctionMenu.xaml.cs">
       <DependentUpon>DestinationHistoryFunctionMenu.xaml</DependentUpon>
     </Compile>
