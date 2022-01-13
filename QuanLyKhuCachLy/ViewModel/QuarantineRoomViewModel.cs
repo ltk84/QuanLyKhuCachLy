@@ -312,6 +312,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 AddRoomScreen.ShowDialog();
                 ClearData();
             });
+
             ToAddExcelCommand = new RelayCommand<object>((p) =>
             {
                 return true;
@@ -320,9 +321,10 @@ namespace QuanLyKhuCachLy.ViewModel
                 AddRoomFromExcel();
                 updateAvailableSlot();
             });
+
             ToEditCommand = new RelayCommand<Window>((p) =>
             {
-                if (SelectedItem == null) return false;
+                if (SelectedItem == null || SelectedItemList.Count != 1) return false;
                 return true;
             }, (p) =>
             {
@@ -334,6 +336,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             ToViewCommand = new RelayCommand<object>((p) =>
             {
+                if (SelectedItem == null || SelectedItemList.Count != 1) return false;
                 return true;
             }, (p) =>
             {
@@ -439,7 +442,11 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 BufferWindow bufferWindow = new BufferWindow();
                 bufferWindow.ShowDialog();
-                ClearPersonList();
+                foreach (var r in SelectedItemList)
+                {
+                    SelectedItem = r;
+                    ClearPersonList();
+                }
                 updateAvailableSlot();
             });
             ToGetFormatExcel = new RelayCommand<object>((p) =>

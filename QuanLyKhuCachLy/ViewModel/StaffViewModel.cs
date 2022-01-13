@@ -16,6 +16,7 @@ using Microsoft.Win32;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Windows.Media;
 using System.Data.Entity;
+using System.Collections;
 
 namespace QuanLyKhuCachLy.ViewModel
 {
@@ -202,8 +203,6 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
-
-
         private string _HealthInsuranceID;
         public string HealthInsuranceID
         {
@@ -276,6 +275,18 @@ namespace QuanLyKhuCachLy.ViewModel
                 {
                     SetSelectedItemToProperty();
                 }
+            }
+        }
+
+        private ObservableCollection<Staff> _SelectedItemList;
+
+        public ObservableCollection<Staff> SelectedItemList
+        {
+            get { return _SelectedItemList; }
+            set
+            {
+                _SelectedItemList = value; OnPropertyChanged();
+                if (_SelectedItemList.Count == 1) SelectedItem = _SelectedItemList[0] as Staff;
             }
         }
 
@@ -365,6 +376,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
 
         #region command
+        public ICommand SelectionChangeCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand EditCommand { get; set; }
@@ -519,6 +531,21 @@ namespace QuanLyKhuCachLy.ViewModel
                 ExportExcel();
             });
 
+            SelectionChangeCommand = new RelayCommand<IList>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                ObservableCollection<Staff> temptList = new ObservableCollection<Staff>();
+
+                foreach (var item in p)
+                {
+                    temptList.Add(item as Staff);
+                }
+
+                SelectedItemList = temptList;
+            });
+
             AddCommand = new RelayCommand<object>((p) =>
             {
                 if (!NameFieldHasError && !SexFieldHasError && !DateOfBirthFieldHasError && !CitizenIDFieldHasError && !NationalityFieldHasError && !PhoneNumberFieldHasError
@@ -546,8 +573,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             DeleteCommand = new RelayCommand<object>((p) =>
             {
-                if (SelectedItem != null)
-                    return true;
+                if (SelectedItemList != null && SelectedItemList.Count != 0) return true;
                 return false;
             }, (p) =>
             {
@@ -556,7 +582,11 @@ namespace QuanLyKhuCachLy.ViewModel
                 DeleteConfirmation confirmation = new DeleteConfirmation();
                 if (confirmation.ShowDialog() == true)
                 {
-                    DeleteStaff();
+                    foreach (var staff in SelectedItemList)
+                    {
+                        SelectedItem = staff;
+                        DeleteStaff();
+                    }
                     BackToStaffList();
                 }
             });
@@ -1148,7 +1178,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                 for (int i = 0; i < StaffListView.Length; i++)
                 {
-                    Value[i] = StaffListView[i].name?.ToString() + "@@" + StaffListView[i].citizenID?.ToString() + "@@" + StaffListView[i].id.ToString() + "@@" + StaffListView[i].healthInsuranceID?.ToString() + "@@" + StaffListView[i]?.phoneNumber.ToString() ;
+                    Value[i] = StaffListView[i].name?.ToString() + "@@" + StaffListView[i].citizenID?.ToString() + "@@" + StaffListView[i].id.ToString() + "@@" + StaffListView[i].healthInsuranceID?.ToString() + "@@" + StaffListView[i]?.phoneNumber.ToString();
 
                 }
 
@@ -1460,7 +1490,7 @@ namespace QuanLyKhuCachLy.ViewModel
                         int t;
                         if (Int32.TryParse(xlRange.Cells[i, 7].Value2.ToString(), out t))
                         {
-                            if(xlRange.Cells[i, 7].Value2.ToString()[0] == '0')
+                            if (xlRange.Cells[i, 7].Value2.ToString()[0] == '0')
                             {
                                 if (xlRange.Cells[i, 7].Value2.ToString().Length <= 10)
                                     staff.phoneNumber = xlRange.Cells[i, 7].Value2.ToString();
@@ -1474,7 +1504,7 @@ namespace QuanLyKhuCachLy.ViewModel
                             else
                             {
                                 if (xlRange.Cells[i, 7].Value2.ToString().Length <= 9)
-                                    staff.phoneNumber = "0"+xlRange.Cells[i, 7].Value2.ToString();
+                                    staff.phoneNumber = "0" + xlRange.Cells[i, 7].Value2.ToString();
                                 else
                                 {
                                     error = "STT " + xlRange.Cells[i, 1].Value2.ToString() + " số điện thoại không đúng";
