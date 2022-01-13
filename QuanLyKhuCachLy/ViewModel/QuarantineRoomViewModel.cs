@@ -428,8 +428,11 @@ namespace QuanLyKhuCachLy.ViewModel
 
             ClearCommand = new RelayCommand<object>((p) =>
             {
-                if (PersonInRoomViewModel.QuarantinePersonList.Count > 0)
-                    return true;
+                if (SelectedItemList != null)
+                {
+                    if (SelectedItemList.Count == 1 && PersonInRoomViewModel.QuarantinePersonList.Count > 0 || SelectedItemList.Count > 1)
+                        return true;
+                }
                 return false;
             }
             , (p) =>
@@ -437,6 +440,7 @@ namespace QuanLyKhuCachLy.ViewModel
                 BufferWindow bufferWindow = new BufferWindow();
                 bufferWindow.ShowDialog();
                 ClearPersonList();
+                updateAvailableSlot();
             });
             ToGetFormatExcel = new RelayCommand<object>((p) =>
             {
