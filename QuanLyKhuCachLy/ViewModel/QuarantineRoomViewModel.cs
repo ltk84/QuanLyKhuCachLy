@@ -423,6 +423,7 @@ namespace QuanLyKhuCachLy.ViewModel
                     SelectedItem = r;
                     CompleteQuarantine();
                 }
+                updateAvailableSlot();
             });
 
             ClearCommand = new RelayCommand<object>((p) =>
