@@ -189,7 +189,7 @@
             IsReadOnly="True"
             ItemsSource="{Binding StaffListView}"
             LoadingRow="DataGrid_LoadingRow"
-            SelectionMode="Single"
+            SelectionMode="Extended"
             SelectionUnit="FullRow">
             <DataGrid.Columns>
 

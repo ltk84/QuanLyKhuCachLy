@@ -626,6 +626,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             ToEditCommand = new RelayCommand<object>((p) =>
             {
+                if (SelectedItem == null || SelectedItemList.Count != 1) return false;
                 return true;
             }, (p) =>
             {
@@ -647,6 +648,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             ToViewCommand = new RelayCommand<object>((p) =>
             {
+                if (SelectedItem == null || SelectedItemList.Count != 1) return false;
                 return true;
             }, (p) =>
             {
@@ -706,8 +708,8 @@ namespace QuanLyKhuCachLy.ViewModel
         void RefeshTab()
         {
             SetDefaultUI();
-            SelectedItem = null;
             InitBasic();
+            SelectedItem = null;
         }
 
         void InitBasic()
