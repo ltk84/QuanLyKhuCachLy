@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using QuanLyKhuCachLy.CustomUserControl;
 using QuanLyKhuCachLy.Utility;
+using System.Collections;
 
 namespace QuanLyKhuCachLy.ViewModel
 {
@@ -56,6 +57,17 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
+        private ObservableCollection<DestinationHistory> _SelectedItemList;
+
+        public ObservableCollection<DestinationHistory> SelectedItemList
+        {
+            get { return _SelectedItemList; }
+            set
+            {
+                _SelectedItemList = value; OnPropertyChanged();
+                if (_SelectedItemList.Count == 1) SelectedItem = _SelectedItemList[0] as DestinationHistory;
+            }
+        }
 
 
         #region destination history
@@ -177,7 +189,10 @@ namespace QuanLyKhuCachLy.ViewModel
         public ICommand EditOnUICommand { get; set; }
 
         public ICommand DeleteOnUICommand { get; set; }
+
         public ICommand CancelCommand { get; set; }
+        public ICommand SelectionChangeCommand { get; set; }
+
 
         #endregion
 
@@ -237,6 +252,21 @@ namespace QuanLyKhuCachLy.ViewModel
 
             idForTask = 0;
 
+            SelectionChangeCommand = new RelayCommand<IList>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                ObservableCollection<DestinationHistory> temptList = new ObservableCollection<DestinationHistory>();
+
+                foreach (var item in p)
+                {
+                    temptList.Add(item as DestinationHistory);
+                }
+
+                SelectedItemList = temptList;
+            });
+
             AddOnUICommand = new RelayCommand<Window>((p) =>
             {
                 if (!DistrictFieldHasError && !ProvinceFieldHasError && !WardFieldHasError && !DateTimeFieldHasError)
@@ -268,7 +298,12 @@ namespace QuanLyKhuCachLy.ViewModel
             {
                 BufferWindow bufferWindow = new BufferWindow();
                 bufferWindow.ShowDialog();
-                DeleteDestinationHistoryUI();
+
+                foreach (var dh in SelectedItemList)
+                {
+                    SelectedItem = dh;
+                    DeleteDestinationHistoryUI();
+                }
             });
 
             ToAddCommand = new RelayCommand<object>((p) =>
@@ -284,6 +319,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             ToEditCommand = new RelayCommand<object>((p) =>
             {
+                if (SelectedItem == null || SelectedItemList.Count != 1) return false;
                 return true;
             }, (p) =>
             {
