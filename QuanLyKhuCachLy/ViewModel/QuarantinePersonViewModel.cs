@@ -23,6 +23,8 @@ using System.Data.Entity;
 using QuanLyKhuCachLy.Utility;
 
 using System.Globalization;
+using System.Collections;
+
 namespace QuanLyKhuCachLy.ViewModel
 {
     public class QuarantinePersonViewModel : BaseViewModel
@@ -445,6 +447,18 @@ namespace QuanLyKhuCachLy.ViewModel
             }
         }
 
+        private ObservableCollection<QuarantinePerson> _SelectedItemList;
+
+        public ObservableCollection<QuarantinePerson> SelectedItemList
+        {
+            get { return _SelectedItemList; }
+            set
+            {
+                _SelectedItemList = value; OnPropertyChanged();
+                if (_SelectedItemList.Count == 1) SelectedItem = _SelectedItemList[0] as QuarantinePerson;
+            }
+        }
+
         #region address
         private string _QPStreetName;
         public string QPStreetName { get => _QPStreetName; set { _QPStreetName = value; OnPropertyChanged(); } }
@@ -760,6 +774,7 @@ namespace QuanLyKhuCachLy.ViewModel
         #endregion
 
         #region command
+        public ICommand SelectionChangeCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
@@ -852,6 +867,21 @@ namespace QuanLyKhuCachLy.ViewModel
             InitNationList();
 
             InitProvinceList();
+
+            SelectionChangeCommand = new RelayCommand<IList>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                ObservableCollection<Model.QuarantinePerson> temptList = new ObservableCollection<Model.QuarantinePerson>();
+
+                foreach (var item in p)
+                {
+                    temptList.Add(item as Model.QuarantinePerson);
+                }
+
+                SelectedItemList = temptList;
+            });
 
             NextTabCommandInformation = new RelayCommand<Window>((p) =>
             {
@@ -1007,6 +1037,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             ToEditCommand = new RelayCommand<Window>((p) =>
             {
+                if (SelectedItem == null || SelectedItemList.Count != 1) return false;
                 return true;
             }, (p) =>
             {
@@ -1018,6 +1049,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             ToViewCommand = new RelayCommand<object>((p) =>
             {
+                if (SelectedItem == null || SelectedItemList.Count != 1) return false;
                 return true;
             }, (p) =>
             {
@@ -1091,14 +1123,23 @@ namespace QuanLyKhuCachLy.ViewModel
                 TabEditIndex = 1;
             });
 
-            DeleteCommand = new RelayCommand<object>((p) => { if (SelectedItem != null) return true; return false; }, (p) =>
+            DeleteCommand = new RelayCommand<object>((p) =>
+            {
+                if (SelectedItemList != null && SelectedItemList.Count != 0) return true;
+                return false;
+            }, (p) =>
             {
                 BufferWindow bufferWindow = new BufferWindow();
                 bufferWindow.ShowDialog();
                 DeleteConfirmation confirmation = new DeleteConfirmation();
                 if (confirmation.ShowDialog() == true)
                 {
-                    DeleteQuarantinePerson();
+
+                    foreach (var per in SelectedItemList)
+                    {
+                        SelectedItem = per;
+                        DeleteQuarantinePerson();
+                    }
                     BackToPersonList();
                 }
             });
@@ -1116,14 +1157,18 @@ namespace QuanLyKhuCachLy.ViewModel
 
             CompleteQuarantinePersonCommand = new RelayCommand<Window>((p) =>
             {
-                if (SelectedItem != null && SelectedItem.roomID != null)
+                if (SelectedItemList != null && SelectedItemList.Count != 0 && SelectedItem != null)
                     return true;
                 return false;
             }, (p) =>
             {
                 BufferWindow bufferWindow = new BufferWindow();
                 bufferWindow.ShowDialog();
-                CompleteQuarantinePerson();
+                foreach (var per in SelectedItemList)
+                {
+                    SelectedItem = per;
+                    CompleteQuarantinePerson();
+                }
             });
 
             RefeshCommand = new RelayCommand<Window>((p) =>
@@ -1136,7 +1181,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             ChangeRoomCommand = new RelayCommand<Window>((p) =>
             {
-                if (SelectedItem != null && SelectedItem.roomID != null && SelectedItem.leaveDate > DateTime.Today)
+                if (SelectedItemList.Count == 1 && SelectedItem != null && SelectedItem.roomID != null && SelectedItem.leaveDate > DateTime.Today)
                     return true;
                 return false;
             }, (p) =>
@@ -1414,11 +1459,6 @@ namespace QuanLyKhuCachLy.ViewModel
             InitBasic();
         }
 
-
-
-
-
-
         void InitBasic()
         {
             InitPersonList();
@@ -1475,7 +1515,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
                     if (Person.arrivedDate > DateTime.Today) { throw new InvalidOperationException(); }
                     if (Person.leaveDate > DateTime.Today) Person.leaveDate = DateTime.Today;
-                    Person.roomID = null;
+                    if (Person.roomID != null) Person.roomID = null;
 
                     DataProvider.ins.db.SaveChanges();
 

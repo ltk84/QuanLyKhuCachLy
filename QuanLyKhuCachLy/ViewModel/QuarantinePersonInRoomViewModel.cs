@@ -106,6 +106,7 @@ namespace QuanLyKhuCachLy.ViewModel
 
             ToViewCommand = new RelayCommand<object>((p) =>
             {
+                if (SelectedItem == null || SelectedItemList.Count != 1) return false;
                 return true;
             }, (p) =>
             {
@@ -124,7 +125,8 @@ namespace QuanLyKhuCachLy.ViewModel
 
             ToEditCommand = new RelayCommand<object>((p) =>
             {
-                return true;
+                if (SelectedItem == null || SelectedItemList.Count != 1) return false;
+                return true; ;
             }, (p) =>
             {
                 EditQuarantinePersonInRoom editScreen = new EditQuarantinePersonInRoom();
@@ -201,14 +203,17 @@ namespace QuanLyKhuCachLy.ViewModel
 
             RemovePersonFromRoomCommand = new RelayCommand<Window>((p) =>
             {
-                if (SelectedItem != null)
-                    return true;
+                if (SelectedItemList != null && SelectedItemList.Count != 0) return true;
                 return false;
             }, (p) =>
             {
                 BufferWindow bufferWindow = new BufferWindow();
                 bufferWindow.ShowDialog();
-                RemovePersonFromRoom();
+                foreach (var per in SelectedItemList)
+                {
+                    SelectedItem = per;
+                    RemovePersonFromRoom();
+                }
             });
 
             AddAllPersonToRoomUICommand = new RelayCommand<object>((p) =>
